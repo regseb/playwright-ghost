@@ -15,14 +15,16 @@ export default class BrowserTypeHook extends Hook {
 
     before(object, property, args) {
         if ("launch" === property) {
+            const optionsPlugins = args[0]?.plugins ?? {};
             for (const Plugin of plugins) {
                 if (Plugin.mandatory) {
                     this.plugins.push(new Plugin());
-                } else {
-                    const options = args[0]?.plugins?.[Plugin.name];
-                    if (false !== options) {
-                        this.plugins.push(new Plugin(options));
-                    }
+                } else if (Plugin.name in optionsPlugins &&
+                        false !== optionsPlugins[Plugin.name]) {
+                    this.plugins.push(new Plugin(optionsPlugins[Plugin.name]));
+                } else if (!(Plugin.name in optionsPlugins) &&
+                        false !== optionsPlugins["*"]) {
+                    this.plugins.push(new Plugin());
                 }
             }
         }

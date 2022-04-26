@@ -25,3 +25,41 @@ https://arh.antoinevastel.com/bots/areyouheadless
 https://plaperdr.github.io/morellian-canvas/Prototype/webpage/picassauth.html
 https://vytal.io/
 https://infosimples.github.io/detect-headless/
+
+
+## Différences
+
+### Plugin / MimeType
+
+<table>
+  <tr>
+    <th></th>
+    <th>Firefox</th>
+    <th>Firefox headfull with playwright</th>
+    <th>Firefox headless with playwright</th>
+  </tr>
+  <tr>
+    <td>
+      <code>Object.getOwnPropertyDescriptor(Plugin.prototype, "version")</code>
+    </td>
+    <td><code>undefined</code></td>
+    <td colspan="2">
+      <pre><code>{
+    get: version(),
+    set: undefined,
+    enumerable: true,
+    configurable: true
+}</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td><code>navigator.plugins.length</code></td>
+    <td><code>5</code></td>
+    <td colspan="2"><code>0</code></td>
+  </tr>
+  <tr>
+    <td><code>navigator.mimeTypes.length</code></td>
+    <td><code>2</code></td>
+    <td colspan="2"><code>0</code></td>
+  </tr>
+</table>

@@ -5,69 +5,62 @@ try {
 } catch (err) {
     CHAIN_CYCLE_ERROR_MESSAGE = err.message;
 }
-const TO_STRING_TO_STRING = Function.prototype.toString.toString();
+
+// FIXME A supprimer.
+let count = 10;
+
+// Faire des copies des méthodes natives pour ne pas se faire détecter par un
+// Antibot qui modifirait une méthode pour vérifier qu'elle n'est pas appelée.
 
 const Ghost = {
-    defineProperty(obj, prop, descriptor) {
+    defineProperty(obj, prop, handler, options) {
         const ownPropertyDescriptor = Object.getOwnPropertyDescriptor(
             obj,
             prop,
         );
-        const handler = {
+        const handlerEnriched = {
             ...ownPropertyDescriptor,
-            ...descriptor,
+            ...handler,
         };
 
-        if ("get" in descriptor) {
-            const nativeFn = ownPropertyDescriptor.get;
-            handler.get = function get() {
-                return descriptor.get.call(this, nativeFn.bind(this));
-            };
-            Ghost.defineProperty(handler.get, "name", {
-                value: nativeFn.name,
-            });
-            //nativeToStrings.set(handler.get, nativeFn.toString());
-            Ghost.redirectToString(handler.get, nativeFn.toString());
-        }
-
-        if ("set" in descriptor) {
-            const nativeFn = ownPropertyDescriptor.set;
-            handler.set = function set(newValue) {
-                descriptor.set.call(this, newValue, nativeFn.bind(this));
-            };
-            handler.set.name = nativeFn.name;
-            //nativeToStrings.set(handler.set, nativeFn.toString());
-            Ghost.redirectToString(handler.set, nativeFn.toString());
-        }
-
-        return Object.defineProperty(obj, prop, handler);
-    },
-
-    redirectToString(obj, originalToString) {
-        const nativeFn = Function.prototype.toString;
-        Ghost.defineProperty(Function.prototype, "toString", {
-            value: Ghost.proxify(Function.prototype.toString, {
-                apply(target, thisArg, args) {
-                    if (thisArg === Function.prototype.toString) {
-                        return TO_STRING_TO_STRING;
-                    }
-                    if (obj === thisArg) {
-                        return originalToString;
-                    }
-                    return Reflect.apply(nativeFn, thisArg, args);
+        if ("get" in handler) {
+            const nativeFn = ownPropertyDescriptor.get ?? Function;
+            handlerEnriched.get = Ghost.proxify(nativeFn, {
+                apply(target, thisArg) {
+                    return handler.get.call(thisArg, nativeFn.bind(thisArg));
                 },
-            }),
-        });
+            }, options);
+        }
+
+        if ("set" in handler) {
+            const nativeFn = ownPropertyDescriptor.set;
+            handlerEnriched.set = Ghost.proxify(nativeFn, {
+                apply(target, thisArg, args) {
+                    return handler.set.call(
+                        thisArg,
+                        args[0],
+                        nativeFn.bind(thisArg),
+                    );
+                },
+            }, ...options);
+        }
+
+        return Object.defineProperty(obj, prop, handlerEnriched);
     },
 
-    conceal(obj, proto, handler = {}) {
+    conceal(obj, proto, handler = {}, options = {}) {
         return Ghost.proxify(Object.create(proto, handler.properties), {
-            get: (target, prop) => {
-                return prop in obj ? Reflect.get(obj, prop)
-                                   : Reflect.get(target, prop);
+            get(target, prop) {
+                const props = Object.keys({
+                    ...Object.getOwnPropertyDescriptors(obj),
+                    ...Object.getOwnPropertyDescriptors(Object.getPrototypeOf(
+                                                                          obj)),
+                });
+                return props.includes(prop) ? Reflect.get(obj, prop)
+                                            : Reflect.get(target, prop);
             },
             ...handler,
-        });
+        }, options);
     },
 
     stripProxyInStack(err) {
@@ -76,7 +69,7 @@ const Ghost = {
         return err;
     },
 
-    proxify(obj, handler = {}) {
+    proxify(obj, handler = {}, options = {}) {
         const handlerEnriched = {
             ...handler,
             setPrototypeOf(target, proto) {
@@ -85,7 +78,11 @@ const Ghost = {
                     //     Object.setPrototypeOf(fn, Object.create(fn)
                     if (proto === this.proxy ||
                             Object.getPrototypeOf(proto) === this.proxy) {
-                        throw new TypeError(CHAIN_CYCLE_ERROR_MESSAGE);
+                        if (options.isReflectSetPrototypeOf) {
+                            return false;
+                        } else {
+                            throw new TypeError(CHAIN_CYCLE_ERROR_MESSAGE);
+                        }
                     }
                     return "setPrototypeOf" in handler
                                          ? handler.setPrototypeOf(...arguments)
@@ -96,34 +93,76 @@ const Ghost = {
             },
             apply(target, thisArg, args) {
                 try {
-                    return "apply" in handler ? handler.apply(...arguments)
-                                              : Reflect.apply(...arguments);
+                    // Appliquer le proxy seulement sur l'objet souhaité (pour
+                    // éviter le Navigator.prototype.plugins).
+                    return this.nativeThis === thisArg && "apply" in handler
+                                                  ? handler.apply(...arguments)
+                                                  : Reflect.apply(...arguments);
                 } catch (err) {
+                    throw err;
                     throw Ghost.stripProxyInStack(err);
                 }
             },
+            get(target, prop) {
+                if (target instanceof Function &&
+                        ["caller", "callee", "arguments"].includes(prop)) {
+                    throw new TypeError(
+                        "'caller', 'callee', and 'arguments' properties may" +
+                        " not be accessed on strict mode functions or the" +
+                        " arguments objects for calls to them",
+                    );
+                }
+                if ("toString" === prop) {
+                    return obj.toString;
+                }
+                return "get" in handler ? handler.get(...arguments)
+                                        : Reflect.get(...arguments);
+            },
         };
-
 
         const proxy = new Proxy(obj, handlerEnriched);
         handlerEnriched.proxy = proxy;
+        handlerEnriched.nativeThis = options.nativeThis ?? proxy;
 
-        if ("apply" in handler && Function.prototype.toString !== obj) {
-            Ghost.redirectToString(proxy, obj.toString());
+        if (Reflect.setPrototypeOf !== obj) {
+            Ghost.defineProperty(Reflect, "setPrototypeOf", {
+                value: Ghost.proxify(Reflect.setPrototypeOf, {
+                    apply(target, thisArg, args) {
+                        const proto = args[0];
+                        // (Object.setPrototype(fn, fn) || fn.__proto__ = fn) ||
+                        //     Object.setPrototypeOf(fn, Object.create(fn)
+                        if (proto === proxy ||
+                                Object.getPrototypeOf(proto) === proxy) {
+                            return false;
+                        }
+                        return Reflect.apply(...arguments);
+                    },
+                }, { nativeThis: Reflect, isReflectSetPrototypeOf: true }),
+            });
         }
 
         return proxy;
     },
 };
 
+/*
 Ghost.defineProperty(Reflect, "setPrototypeOf", {
     value: Ghost.proxify(Reflect.setPrototypeOf, {
         apply(target, thisArg, args) {
             try {
                 return Reflect.apply(target, thisArg, args);
-            } catch {
-                return false;
+            } catch (err) {
+                // FIXME Ce code est détectable si un bot surcharger la méthode
+                //       setPrototypeOf() et retourne une exception avec ce
+                //       message.
+                if (err instanceof TypeError &&
+                        CHAIN_CYCLE_ERROR_MESSAGE === err.message) {
+                    return false;
+                } else {
+                    throw err;
+                }
             }
         },
-    }),
+    }, Reflect),
 });
+*/

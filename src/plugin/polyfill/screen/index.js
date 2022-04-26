@@ -2,37 +2,33 @@
  * @module
  */
 
+import { fileURLToPath } from "node:url";
 import InitScriptPlugin from "../../meta/initscriptplugin.js";
 
+if (undefined === import.meta.resolve) {
+
+    /**
+     * Résous un chemin relatif à partir du module.
+     *
+     * @param {string} specifier Le chemin relatif vers un fichier ou un
+     *                           répertoire.
+     * @returns {Promise<string>} Une promesse contenant le chemin absolue vers
+     *                            le fichier ou le répertoire.
+     * @see https://nodejs.org/api/esm.html#importmetaresolvespecifier-parent
+     */
+    import.meta.resolve = (specifier) => {
+        return Promise.resolve(fileURLToPath(new URL(specifier,
+                                                     import.meta.url).href));
+    };
+}
+
 export default class Screen extends InitScriptPlugin {
-    getScript(browserContext) {
-        return Promise.resolve(() => {
-            const sizes = {
-                availTop:     27,
-                availLeft:    45,
-                borderWidth:  0,
-                borderHeight: 72,
+    async getScript(browserContext) {
+        if (browserContext.browser().isHeadless()) {
+            return {
+                path: await import.meta.resolve("./script.injected.js"),
             };
-
-            Ghost.defineProperty(window.screen, "availTop", {
-                value: sizes.availTop,
-            });
-            Ghost.defineProperty(window.screen, "availLeft", {
-                value: sizes.availLeft,
-            });
-
-            Ghost.defineProperty(window.screen, "availWidth", {
-                value: window.screen.width - window.screen.availLeft,
-            });
-            Ghost.defineProperty(window.screen, "availHeight", {
-                value: window.screen.height - window.screen.availTop,
-            });
-
-            window.outerWidth = window.screen.availWidth;
-            window.outerHeight = window.screen.availHeight;
-
-            window.innerWidtht = window.outerWidtht - sizes.borderWidth;
-            window.innerHeight = window.outerHeight - sizes.borderHeight;
-        });
+        }
+        return undefined;
     }
 }

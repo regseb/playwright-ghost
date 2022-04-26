@@ -3,7 +3,7 @@ import { chromium, firefox } from "../../src/index.js";
 
 describe("Perdu sur l'Internet ?", function () {
     describe("chromium", function () {
-        it("should open a simple page", async function () {
+        it.skip("should open a simple page", async function () {
             const browser = await chromium.launch();
             const context = await browser.newContext();
             const page = await context.newPage();

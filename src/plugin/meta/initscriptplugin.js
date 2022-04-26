@@ -52,7 +52,7 @@ export default class InitScriptPlugin {
                     }`;
                 }
             }
-            if (0 !== initScript) {
+            if (0 !== initScript.length) {
                 const ghost = await fs.readFile(
                     await import.meta.resolve("./script/ghost.injected.js"),
                     { encoding: "utf8" },

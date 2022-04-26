@@ -8,3 +8,4 @@ import BrowserTypeHook from "./hook/browsertypehook.js";
 
 export const firefox = trace(playwright.firefox, new BrowserTypeHook());
 export const chromium = trace(playwright.chromium, new BrowserTypeHook());
+export const vanilla = playwright;

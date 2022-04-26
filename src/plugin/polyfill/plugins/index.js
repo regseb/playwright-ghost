@@ -24,11 +24,6 @@ if (undefined === import.meta.resolve) {
 
 export default class Plugins extends InitScriptPlugin {
     async getScript(browserContext) {
-        if (browserContext.browser().isHeadless()) {
-            return {
-                path: await import.meta.resolve("./script.injected.js"),
-            };
-        }
-        return undefined;
+        return { path: await import.meta.resolve("./script.injected.js") };
     }
 }

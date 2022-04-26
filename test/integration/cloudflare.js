@@ -7,7 +7,7 @@ describe("Cloudflare", function () {
         const context = await browser.newContext();
         const page = await context.newPage();
 
-/*
+
         await page.goto("https://zone-telechargement.cam/");
         await page.waitForTimeout(8000);
         const title = await page.title();
@@ -16,7 +16,6 @@ describe("Cloudflare", function () {
             await page.screenshot({ path: "cloudflare.png", fullPage: true });
             await fs.writeFile("cloudflare.html", await page.content());
         }
-        */
         await browser.close();
     });
 });
