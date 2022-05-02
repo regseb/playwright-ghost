@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "http-server": "^14.1.0",
+        "node-fetch": "^3.2.4",
         "playwright": "^1.11.1"
     },
     "devDependencies": {

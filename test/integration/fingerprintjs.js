@@ -14,8 +14,8 @@ describe("FingerprintJS", function () {
                 await page.waitForTimeout(5000);
 
                 const results = await page.evaluate(() => {
-                    return Array.from(document.querySelectorAll(
-                                    `div[class^="HeroSection-module--card--"]`))
+                    const selector = `div[class^="HeroSection-module--card--"]`;
+                    return Array.from(document.querySelectorAll(selector))
                                 .map((div) => ({
                         name:   div.querySelector("h3").textContent,
                         status: div.querySelector("p").textContent,

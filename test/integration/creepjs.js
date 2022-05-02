@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import fs from "node:fs/promises";
-import { chromium, firefox } from "../../src/index.js";
+import { chromium, firefox, vanilla } from "../../src/index.js";
 
 describe("CreepJS", function () {
     describe("chromium", function () {
@@ -25,7 +25,7 @@ describe("CreepJS", function () {
 
     describe("firefox", function () {
         it("should get an A grade", async function () {
-            const browser = await firefox.launch();
+            const browser = await vanilla.firefox.launch();
             const context = await browser.newContext();
             const page = await context.newPage();
             try {

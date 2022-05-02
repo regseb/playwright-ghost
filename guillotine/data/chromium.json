@@ -1,0 +1,4614 @@
+{
+    "Object.getOwnPropertyDescriptor(Plugin.prototype, \"version\")": {
+        "returnValue": 0
+    },
+    "navigator.plugins.length": {
+        "returnValue": 5
+    },
+    "navigator.mimeTypes.length": {
+        "returnValue": 2
+    },
+    "navigator.pdfViewerEnabled": {
+        "returnValue": true
+    },
+    "new SharedArrayBuffer()": {
+        "exception": "SharedArrayBuffer is not defined"
+    },
+    "((obj) => obj())(Function.prototype)": {
+        "returnValue": 0
+    },
+    "((obj) => new obj())(Function.prototype)": {
+        "exception": "obj is not a constructor"
+    },
+    "((obj) => typeof obj)(Function.prototype)": {
+        "returnValue": "function"
+    },
+    "((obj) => obj.__proto__)(Function.prototype)": {
+        "returnValue": {}
+    },
+    "((obj) => obj.prototype)(Function.prototype)": {
+        "returnValue": 0
+    },
+    "((obj) => Object.entries(obj))(Function.prototype)": {
+        "returnValue": []
+    },
+    "((obj) => Object.getOwnPropertyDescriptors(obj))(Function.prototype)": {
+        "returnValue": {
+            "length": {
+                "value": 0,
+                "writable": false,
+                "enumerable": false,
+                "configurable": true
+            },
+            "name": {
+                "value": "",
+                "writable": false,
+                "enumerable": false,
+                "configurable": true
+            },
+            "arguments": {
+                "enumerable": false,
+                "configurable": true
+            },
+            "caller": {
+                "enumerable": false,
+                "configurable": true
+            },
+            "constructor": {
+                "writable": true,
+                "enumerable": false,
+                "configurable": true
+            },
+            "apply": {
+                "writable": true,
+                "enumerable": false,
+                "configurable": true
+            },
+            "bind": {
+                "writable": true,
+                "enumerable": false,
+                "configurable": true
+            },
+            "call": {
+                "writable": true,
+                "enumerable": false,
+                "configurable": true
+            },
+            "toString": {
+                "writable": true,
+                "enumerable": false,
+                "configurable": true
+            }
+        }
+    },
+    "((obj) => Object.getOwnPropertyNames(obj))(Function.prototype)": {
+        "returnValue": [
+            "length",
+            "name",
+            "arguments",
+            "caller",
+            "constructor",
+            "apply",
+            "bind",
+            "call",
+            "toString"
+        ]
+    },
+    "((obj) => Object.getOwnPropertySymbols(obj))(Function.prototype)": {
+        "returnValue": [
+            null
+        ]
+    },
+    "((obj) => Object.getPrototypeOf(obj))(Function.prototype)": {
+        "returnValue": {}
+    },
+    "((obj) => Object.is(obj, obj))(Function.prototype)": {
+        "returnValue": true
+    },
+    "((obj) => Object.is(obj, undefined))(Function.prototype)": {
+        "returnValue": false
+    },
+    "((obj) => Object.isExtensible(obj))(Function.prototype)": {
+        "returnValue": true
+    },
+    "((obj) => Object.isFrozen(obj))(Function.prototype)": {
+        "returnValue": false
+    },
+    "((obj) => Object.isSealed(obj))(Function.prototype)": {
+        "returnValue": false
+    },
+    "((obj) => Object.keys(obj))(Function.prototype)": {
+        "returnValue": []
+    },
+    "((obj) => Object.values(obj))(Function.prototype)": {
+        "returnValue": []
+    },
+    "((obj) => [...obj])(Function.prototype)": {
+        "exception": "obj is not iterable"
+    },
+    "((obj) => ({...obj}))(Function.prototype)": {
+        "returnValue": {}
+    },
+    "((obj) => Array.from(obj))(Function.prototype)": {
+        "returnValue": []
+    },
+    "((obj) => Array.isArray(obj))(Function.prototype)": {
+        "returnValue": false
+    },
+    "((obj) => Array.of(obj))(Function.prototype)": {
+        "returnValue": [
+            null
+        ]
+    },
+    "((obj) => JSON.stringify(obj))(Function.prototype)": {
+        "returnValue": 0
+    },
+    "((obj) => structuredClone(obj))(Function.prototype)": {
+        "exception": {
+            "code": 25,
+            "columnNumber": 0,
+            "data": 0,
+            "lineNumber": 0,
+            "message": "Failed to execute 'structuredClone' on 'Window': function () { [native code] } could not be cloned.",
+            "name": "DataCloneError",
+            "result": 0
+        }
+    },
+    "((obj) => +obj)(Function.prototype)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => \"\" + obj)(Function.prototype)": {
+        "returnValue": "function () { [native code] }"
+    },
+    "((obj) => obj + \"\")(Function.prototype)": {
+        "returnValue": "function () { [native code] }"
+    },
+    "((obj) => obj.toString())(Function.prototype)": {
+        "returnValue": "function () { [native code] }"
+    },
+    "((obj) => Number.isFinite(obj))(Function.prototype)": {
+        "returnValue": false
+    },
+    "((obj) => Number.isInteger(obj))(Function.prototype)": {
+        "returnValue": false
+    },
+    "((obj) => Number.isNaN(obj))(Function.prototype)": {
+        "returnValue": false
+    },
+    "((obj) => Number.isSafeInteger(obj))(Function.prototype)": {
+        "returnValue": false
+    },
+    "((obj) => Number.parseFloat(obj))(Function.prototype)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => Number.parseInt(obj))(Function.prototype)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => isFinite(obj))(Function.prototype)": {
+        "returnValue": false
+    },
+    "((obj) => isNaN(obj))(Function.prototype)": {
+        "returnValue": true
+    },
+    "((obj) => parseFloat(obj))(Function.prototype)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => parseInt(obj))(Function.prototype)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => obj === obj)(Function.prototype)": {
+        "returnValue": true
+    },
+    "((obj) => obj !== obj)(Function.prototype)": {
+        "returnValue": false
+    },
+    "((obj) => obj == obj)(Function.prototype)": {
+        "returnValue": true
+    },
+    "((obj) => obj != obj)(Function.prototype)": {
+        "returnValue": false
+    },
+    "((obj) => obj())(Function.prototype.toString)": {
+        "exception": "Function.prototype.toString requires that 'this' be a Function"
+    },
+    "((obj) => new obj())(Function.prototype.toString)": {
+        "exception": "obj is not a constructor"
+    },
+    "((obj) => typeof obj)(Function.prototype.toString)": {
+        "returnValue": "function"
+    },
+    "((obj) => obj.prototype)(Function.prototype.toString)": {
+        "returnValue": 0
+    },
+    "((obj) => Object.entries(obj))(Function.prototype.toString)": {
+        "returnValue": []
+    },
+    "((obj) => Object.getOwnPropertyDescriptors(obj))(Function.prototype.toString)": {
+        "returnValue": {
+            "length": {
+                "value": 0,
+                "writable": false,
+                "enumerable": false,
+                "configurable": true
+            },
+            "name": {
+                "value": "toString",
+                "writable": false,
+                "enumerable": false,
+                "configurable": true
+            }
+        }
+    },
+    "((obj) => Object.getOwnPropertyNames(obj))(Function.prototype.toString)": {
+        "returnValue": [
+            "length",
+            "name"
+        ]
+    },
+    "((obj) => Object.getOwnPropertySymbols(obj))(Function.prototype.toString)": {
+        "returnValue": []
+    },
+    "((obj) => Object.is(obj, obj))(Function.prototype.toString)": {
+        "returnValue": true
+    },
+    "((obj) => Object.is(obj, undefined))(Function.prototype.toString)": {
+        "returnValue": false
+    },
+    "((obj) => Object.isExtensible(obj))(Function.prototype.toString)": {
+        "returnValue": true
+    },
+    "((obj) => Object.isFrozen(obj))(Function.prototype.toString)": {
+        "returnValue": false
+    },
+    "((obj) => Object.isSealed(obj))(Function.prototype.toString)": {
+        "returnValue": false
+    },
+    "((obj) => Object.keys(obj))(Function.prototype.toString)": {
+        "returnValue": []
+    },
+    "((obj) => Object.values(obj))(Function.prototype.toString)": {
+        "returnValue": []
+    },
+    "((obj) => [...obj])(Function.prototype.toString)": {
+        "exception": "obj is not iterable"
+    },
+    "((obj) => ({...obj}))(Function.prototype.toString)": {
+        "returnValue": {}
+    },
+    "((obj) => Array.from(obj))(Function.prototype.toString)": {
+        "returnValue": []
+    },
+    "((obj) => Array.isArray(obj))(Function.prototype.toString)": {
+        "returnValue": false
+    },
+    "((obj) => Array.of(obj))(Function.prototype.toString)": {
+        "returnValue": [
+            null
+        ]
+    },
+    "((obj) => JSON.stringify(obj))(Function.prototype.toString)": {
+        "returnValue": 0
+    },
+    "((obj) => structuredClone(obj))(Function.prototype.toString)": {
+        "exception": {
+            "code": 25,
+            "columnNumber": 0,
+            "data": 0,
+            "lineNumber": 0,
+            "message": "Failed to execute 'structuredClone' on 'Window': function toString() { [native code] } could not be cloned.",
+            "name": "DataCloneError",
+            "result": 0
+        }
+    },
+    "((obj) => +obj)(Function.prototype.toString)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => \"\" + obj)(Function.prototype.toString)": {
+        "returnValue": "function toString() { [native code] }"
+    },
+    "((obj) => obj + \"\")(Function.prototype.toString)": {
+        "returnValue": "function toString() { [native code] }"
+    },
+    "((obj) => obj.toString())(Function.prototype.toString)": {
+        "returnValue": "function toString() { [native code] }"
+    },
+    "((obj) => Number.isFinite(obj))(Function.prototype.toString)": {
+        "returnValue": false
+    },
+    "((obj) => Number.isInteger(obj))(Function.prototype.toString)": {
+        "returnValue": false
+    },
+    "((obj) => Number.isNaN(obj))(Function.prototype.toString)": {
+        "returnValue": false
+    },
+    "((obj) => Number.isSafeInteger(obj))(Function.prototype.toString)": {
+        "returnValue": false
+    },
+    "((obj) => Number.parseFloat(obj))(Function.prototype.toString)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => Number.parseInt(obj))(Function.prototype.toString)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => isFinite(obj))(Function.prototype.toString)": {
+        "returnValue": false
+    },
+    "((obj) => isNaN(obj))(Function.prototype.toString)": {
+        "returnValue": true
+    },
+    "((obj) => parseFloat(obj))(Function.prototype.toString)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => parseInt(obj))(Function.prototype.toString)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => obj === obj)(Function.prototype.toString)": {
+        "returnValue": true
+    },
+    "((obj) => obj !== obj)(Function.prototype.toString)": {
+        "returnValue": false
+    },
+    "((obj) => obj == obj)(Function.prototype.toString)": {
+        "returnValue": true
+    },
+    "((obj) => obj != obj)(Function.prototype.toString)": {
+        "returnValue": false
+    },
+    "((obj) => obj)(navigator)": {
+        "returnValue": {}
+    },
+    "((obj) => obj())(navigator)": {
+        "exception": "obj is not a function"
+    },
+    "((obj) => new obj())(navigator)": {
+        "exception": "obj is not a constructor"
+    },
+    "((obj) => typeof obj)(navigator)": {
+        "returnValue": "object"
+    },
+    "((obj) => obj.prototype)(navigator)": {
+        "returnValue": 0
+    },
+    "((obj) => Object.entries(obj))(navigator)": {
+        "returnValue": []
+    },
+    "((obj) => Object.getOwnPropertyDescriptors(obj))(navigator)": {
+        "returnValue": {}
+    },
+    "((obj) => Object.getOwnPropertyNames(obj))(navigator)": {
+        "returnValue": []
+    },
+    "((obj) => Object.getOwnPropertySymbols(obj))(navigator)": {
+        "returnValue": []
+    },
+    "((obj) => Object.is(obj, obj))(navigator)": {
+        "returnValue": true
+    },
+    "((obj) => Object.is(obj, undefined))(navigator)": {
+        "returnValue": false
+    },
+    "((obj) => Object.isExtensible(obj))(navigator)": {
+        "returnValue": true
+    },
+    "((obj) => Object.isFrozen(obj))(navigator)": {
+        "returnValue": false
+    },
+    "((obj) => Object.isSealed(obj))(navigator)": {
+        "returnValue": false
+    },
+    "((obj) => Object.keys(obj))(navigator)": {
+        "returnValue": []
+    },
+    "((obj) => Object.values(obj))(navigator)": {
+        "returnValue": []
+    },
+    "((obj) => [...obj])(navigator)": {
+        "exception": "obj is not iterable"
+    },
+    "((obj) => ({...obj}))(navigator)": {
+        "returnValue": {}
+    },
+    "((obj) => Array.from(obj))(navigator)": {
+        "returnValue": []
+    },
+    "((obj) => Array.isArray(obj))(navigator)": {
+        "returnValue": false
+    },
+    "((obj) => Array.of(obj))(navigator)": {
+        "returnValue": [
+            {}
+        ]
+    },
+    "((obj) => JSON.stringify(obj))(navigator)": {
+        "returnValue": "{}"
+    },
+    "((obj) => structuredClone(obj))(navigator)": {
+        "exception": {
+            "code": 25,
+            "columnNumber": 0,
+            "data": 0,
+            "lineNumber": 0,
+            "message": "Failed to execute 'structuredClone' on 'Window': Navigator object could not be cloned.",
+            "name": "DataCloneError",
+            "result": 0
+        }
+    },
+    "((obj) => +obj)(navigator)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => \"\" + obj)(navigator)": {
+        "returnValue": "[object Navigator]"
+    },
+    "((obj) => obj + \"\")(navigator)": {
+        "returnValue": "[object Navigator]"
+    },
+    "((obj) => obj.toString())(navigator)": {
+        "returnValue": "[object Navigator]"
+    },
+    "((obj) => Number.isFinite(obj))(navigator)": {
+        "returnValue": false
+    },
+    "((obj) => Number.isInteger(obj))(navigator)": {
+        "returnValue": false
+    },
+    "((obj) => Number.isNaN(obj))(navigator)": {
+        "returnValue": false
+    },
+    "((obj) => Number.isSafeInteger(obj))(navigator)": {
+        "returnValue": false
+    },
+    "((obj) => Number.parseFloat(obj))(navigator)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => Number.parseInt(obj))(navigator)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => isFinite(obj))(navigator)": {
+        "returnValue": false
+    },
+    "((obj) => isNaN(obj))(navigator)": {
+        "returnValue": true
+    },
+    "((obj) => parseFloat(obj))(navigator)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => parseInt(obj))(navigator)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => obj === obj)(navigator)": {
+        "returnValue": true
+    },
+    "((obj) => obj !== obj)(navigator)": {
+        "returnValue": false
+    },
+    "((obj) => obj == obj)(navigator)": {
+        "returnValue": true
+    },
+    "((obj) => obj != obj)(navigator)": {
+        "returnValue": false
+    },
+    "((obj) => obj())(Object.getPrototypeOf(navigator))": {
+        "exception": "obj is not a function"
+    },
+    "((obj) => new obj())(Object.getPrototypeOf(navigator))": {
+        "exception": "obj is not a constructor"
+    },
+    "((obj) => typeof obj)(Object.getPrototypeOf(navigator))": {
+        "returnValue": "object"
+    },
+    "((obj) => obj.__proto__)(Object.getPrototypeOf(navigator))": {
+        "returnValue": {}
+    },
+    "((obj) => obj.prototype)(Object.getPrototypeOf(navigator))": {
+        "returnValue": 0
+    },
+    "((obj) => Object.entries(obj))(Object.getPrototypeOf(navigator))": {
+        "exception": "Illegal invocation"
+    },
+    "((obj) => Object.getOwnPropertyDescriptors(obj))(Object.getPrototypeOf(navigator))": {
+        "returnValue": {
+            "vendorSub": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "productSub": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "vendor": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "maxTouchPoints": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "userActivation": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "doNotTrack": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "geolocation": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "connection": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "plugins": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "mimeTypes": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "pdfViewerEnabled": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "webkitTemporaryStorage": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "webkitPersistentStorage": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "hardwareConcurrency": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "cookieEnabled": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "appCodeName": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "appName": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "appVersion": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "platform": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "product": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "userAgent": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "language": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "languages": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "onLine": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "webdriver": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "getBattery": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "getGamepads": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "javaEnabled": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "sendBeacon": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "vibrate": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "constructor": {
+                "writable": true,
+                "enumerable": false,
+                "configurable": true
+            },
+            "scheduling": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "clipboard": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "credentials": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "keyboard": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "managed": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "mediaDevices": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "storage": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "serviceWorker": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "wakeLock": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "deviceMemory": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "ink": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "hid": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "locks": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "mediaCapabilities": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "mediaSession": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "permissions": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "presentation": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "serial": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "virtualKeyboard": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "usb": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "xr": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "userAgentData": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "clearAppBadge": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "setAppBadge": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "getInstalledRelatedApps": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "getUserMedia": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "requestMIDIAccess": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "requestMediaKeySystemAccess": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "webkitGetUserMedia": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "registerProtocolHandler": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "unregisterProtocolHandler": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            }
+        }
+    },
+    "((obj) => Object.getOwnPropertyNames(obj))(Object.getPrototypeOf(navigator))": {
+        "returnValue": [
+            "vendorSub",
+            "productSub",
+            "vendor",
+            "maxTouchPoints",
+            "userActivation",
+            "doNotTrack",
+            "geolocation",
+            "connection",
+            "plugins",
+            "mimeTypes",
+            "pdfViewerEnabled",
+            "webkitTemporaryStorage",
+            "webkitPersistentStorage",
+            "hardwareConcurrency",
+            "cookieEnabled",
+            "appCodeName",
+            "appName",
+            "appVersion",
+            "platform",
+            "product",
+            "userAgent",
+            "language",
+            "languages",
+            "onLine",
+            "webdriver",
+            "getBattery",
+            "getGamepads",
+            "javaEnabled",
+            "sendBeacon",
+            "vibrate",
+            "constructor",
+            "scheduling",
+            "clipboard",
+            "credentials",
+            "keyboard",
+            "managed",
+            "mediaDevices",
+            "storage",
+            "serviceWorker",
+            "wakeLock",
+            "deviceMemory",
+            "ink",
+            "hid",
+            "locks",
+            "mediaCapabilities",
+            "mediaSession",
+            "permissions",
+            "presentation",
+            "serial",
+            "virtualKeyboard",
+            "usb",
+            "xr",
+            "userAgentData",
+            "clearAppBadge",
+            "setAppBadge",
+            "getInstalledRelatedApps",
+            "getUserMedia",
+            "requestMIDIAccess",
+            "requestMediaKeySystemAccess",
+            "webkitGetUserMedia",
+            "registerProtocolHandler",
+            "unregisterProtocolHandler"
+        ]
+    },
+    "((obj) => Object.getOwnPropertySymbols(obj))(Object.getPrototypeOf(navigator))": {
+        "returnValue": [
+            null
+        ]
+    },
+    "((obj) => Object.getPrototypeOf(obj))(Object.getPrototypeOf(navigator))": {
+        "returnValue": {}
+    },
+    "((obj) => Object.is(obj, obj))(Object.getPrototypeOf(navigator))": {
+        "returnValue": true
+    },
+    "((obj) => Object.is(obj, undefined))(Object.getPrototypeOf(navigator))": {
+        "returnValue": false
+    },
+    "((obj) => Object.isExtensible(obj))(Object.getPrototypeOf(navigator))": {
+        "returnValue": true
+    },
+    "((obj) => Object.isFrozen(obj))(Object.getPrototypeOf(navigator))": {
+        "returnValue": false
+    },
+    "((obj) => Object.isSealed(obj))(Object.getPrototypeOf(navigator))": {
+        "returnValue": false
+    },
+    "((obj) => Object.keys(obj))(Object.getPrototypeOf(navigator))": {
+        "returnValue": [
+            "vendorSub",
+            "productSub",
+            "vendor",
+            "maxTouchPoints",
+            "userActivation",
+            "doNotTrack",
+            "geolocation",
+            "connection",
+            "plugins",
+            "mimeTypes",
+            "pdfViewerEnabled",
+            "webkitTemporaryStorage",
+            "webkitPersistentStorage",
+            "hardwareConcurrency",
+            "cookieEnabled",
+            "appCodeName",
+            "appName",
+            "appVersion",
+            "platform",
+            "product",
+            "userAgent",
+            "language",
+            "languages",
+            "onLine",
+            "webdriver",
+            "getBattery",
+            "getGamepads",
+            "javaEnabled",
+            "sendBeacon",
+            "vibrate",
+            "scheduling",
+            "clipboard",
+            "credentials",
+            "keyboard",
+            "managed",
+            "mediaDevices",
+            "storage",
+            "serviceWorker",
+            "wakeLock",
+            "deviceMemory",
+            "ink",
+            "hid",
+            "locks",
+            "mediaCapabilities",
+            "mediaSession",
+            "permissions",
+            "presentation",
+            "serial",
+            "virtualKeyboard",
+            "usb",
+            "xr",
+            "userAgentData",
+            "clearAppBadge",
+            "setAppBadge",
+            "getInstalledRelatedApps",
+            "getUserMedia",
+            "requestMIDIAccess",
+            "requestMediaKeySystemAccess",
+            "webkitGetUserMedia",
+            "registerProtocolHandler",
+            "unregisterProtocolHandler"
+        ]
+    },
+    "((obj) => Object.values(obj))(Object.getPrototypeOf(navigator))": {
+        "exception": "Illegal invocation"
+    },
+    "((obj) => [...obj])(Object.getPrototypeOf(navigator))": {
+        "exception": "obj is not iterable"
+    },
+    "((obj) => ({...obj}))(Object.getPrototypeOf(navigator))": {
+        "exception": "Illegal invocation"
+    },
+    "((obj) => Array.from(obj))(Object.getPrototypeOf(navigator))": {
+        "returnValue": []
+    },
+    "((obj) => Array.isArray(obj))(Object.getPrototypeOf(navigator))": {
+        "returnValue": false
+    },
+    "((obj) => JSON.stringify(obj))(Object.getPrototypeOf(navigator))": {
+        "exception": "Illegal invocation"
+    },
+    "((obj) => structuredClone(obj))(Object.getPrototypeOf(navigator))": {
+        "exception": "Illegal invocation"
+    },
+    "((obj) => +obj)(Object.getPrototypeOf(navigator))": {
+        "returnValue": "NaN"
+    },
+    "((obj) => \"\" + obj)(Object.getPrototypeOf(navigator))": {
+        "returnValue": "[object Navigator]"
+    },
+    "((obj) => obj + \"\")(Object.getPrototypeOf(navigator))": {
+        "returnValue": "[object Navigator]"
+    },
+    "((obj) => obj.toString())(Object.getPrototypeOf(navigator))": {
+        "returnValue": "[object Navigator]"
+    },
+    "((obj) => Number.isFinite(obj))(Object.getPrototypeOf(navigator))": {
+        "returnValue": false
+    },
+    "((obj) => Number.isInteger(obj))(Object.getPrototypeOf(navigator))": {
+        "returnValue": false
+    },
+    "((obj) => Number.isNaN(obj))(Object.getPrototypeOf(navigator))": {
+        "returnValue": false
+    },
+    "((obj) => Number.isSafeInteger(obj))(Object.getPrototypeOf(navigator))": {
+        "returnValue": false
+    },
+    "((obj) => Number.parseFloat(obj))(Object.getPrototypeOf(navigator))": {
+        "returnValue": "NaN"
+    },
+    "((obj) => Number.parseInt(obj))(Object.getPrototypeOf(navigator))": {
+        "returnValue": "NaN"
+    },
+    "((obj) => isFinite(obj))(Object.getPrototypeOf(navigator))": {
+        "returnValue": false
+    },
+    "((obj) => isNaN(obj))(Object.getPrototypeOf(navigator))": {
+        "returnValue": true
+    },
+    "((obj) => parseFloat(obj))(Object.getPrototypeOf(navigator))": {
+        "returnValue": "NaN"
+    },
+    "((obj) => parseInt(obj))(Object.getPrototypeOf(navigator))": {
+        "returnValue": "NaN"
+    },
+    "((obj) => obj === obj)(Object.getPrototypeOf(navigator))": {
+        "returnValue": true
+    },
+    "((obj) => obj !== obj)(Object.getPrototypeOf(navigator))": {
+        "returnValue": false
+    },
+    "((obj) => obj == obj)(Object.getPrototypeOf(navigator))": {
+        "returnValue": true
+    },
+    "((obj) => obj != obj)(Object.getPrototypeOf(navigator))": {
+        "returnValue": false
+    },
+    "((obj) => obj())(Navigator)": {
+        "exception": "Illegal constructor"
+    },
+    "((obj) => new obj())(Navigator)": {
+        "exception": "Illegal constructor"
+    },
+    "((obj) => typeof obj)(Navigator)": {
+        "returnValue": "function"
+    },
+    "((obj) => Object.entries(obj))(Navigator)": {
+        "returnValue": []
+    },
+    "((obj) => Object.getOwnPropertyNames(obj))(Navigator)": {
+        "returnValue": [
+            "length",
+            "name",
+            "arguments",
+            "caller",
+            "prototype"
+        ]
+    },
+    "((obj) => Object.getOwnPropertySymbols(obj))(Navigator)": {
+        "returnValue": []
+    },
+    "((obj) => Object.is(obj, obj))(Navigator)": {
+        "returnValue": true
+    },
+    "((obj) => Object.is(obj, undefined))(Navigator)": {
+        "returnValue": false
+    },
+    "((obj) => Object.isExtensible(obj))(Navigator)": {
+        "returnValue": true
+    },
+    "((obj) => Object.isFrozen(obj))(Navigator)": {
+        "returnValue": false
+    },
+    "((obj) => Object.isSealed(obj))(Navigator)": {
+        "returnValue": false
+    },
+    "((obj) => Object.keys(obj))(Navigator)": {
+        "returnValue": []
+    },
+    "((obj) => Object.values(obj))(Navigator)": {
+        "returnValue": []
+    },
+    "((obj) => [...obj])(Navigator)": {
+        "exception": "obj is not iterable"
+    },
+    "((obj) => ({...obj}))(Navigator)": {
+        "returnValue": {}
+    },
+    "((obj) => Array.from(obj))(Navigator)": {
+        "returnValue": []
+    },
+    "((obj) => Array.isArray(obj))(Navigator)": {
+        "returnValue": false
+    },
+    "((obj) => Array.of(obj))(Navigator)": {
+        "returnValue": [
+            null
+        ]
+    },
+    "((obj) => JSON.stringify(obj))(Navigator)": {
+        "returnValue": 0
+    },
+    "((obj) => structuredClone(obj))(Navigator)": {
+        "exception": {
+            "code": 25,
+            "columnNumber": 0,
+            "data": 0,
+            "lineNumber": 0,
+            "message": "Failed to execute 'structuredClone' on 'Window': function Navigator() { [native code] } could not be cloned.",
+            "name": "DataCloneError",
+            "result": 0
+        }
+    },
+    "((obj) => +obj)(Navigator)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => \"\" + obj)(Navigator)": {
+        "returnValue": "function Navigator() { [native code] }"
+    },
+    "((obj) => obj + \"\")(Navigator)": {
+        "returnValue": "function Navigator() { [native code] }"
+    },
+    "((obj) => obj.toString())(Navigator)": {
+        "returnValue": "function Navigator() { [native code] }"
+    },
+    "((obj) => Number.isFinite(obj))(Navigator)": {
+        "returnValue": false
+    },
+    "((obj) => Number.isInteger(obj))(Navigator)": {
+        "returnValue": false
+    },
+    "((obj) => Number.isNaN(obj))(Navigator)": {
+        "returnValue": false
+    },
+    "((obj) => Number.isSafeInteger(obj))(Navigator)": {
+        "returnValue": false
+    },
+    "((obj) => Number.parseFloat(obj))(Navigator)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => Number.parseInt(obj))(Navigator)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => isFinite(obj))(Navigator)": {
+        "returnValue": false
+    },
+    "((obj) => isNaN(obj))(Navigator)": {
+        "returnValue": true
+    },
+    "((obj) => parseFloat(obj))(Navigator)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => parseInt(obj))(Navigator)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => obj === obj)(Navigator)": {
+        "returnValue": true
+    },
+    "((obj) => obj !== obj)(Navigator)": {
+        "returnValue": false
+    },
+    "((obj) => obj == obj)(Navigator)": {
+        "returnValue": true
+    },
+    "((obj) => obj != obj)(Navigator)": {
+        "returnValue": false
+    },
+    "((obj) => obj())(Navigator.prototype)": {
+        "exception": "obj is not a function"
+    },
+    "((obj) => new obj())(Navigator.prototype)": {
+        "exception": "obj is not a constructor"
+    },
+    "((obj) => typeof obj)(Navigator.prototype)": {
+        "returnValue": "object"
+    },
+    "((obj) => obj.__proto__)(Navigator.prototype)": {
+        "returnValue": {}
+    },
+    "((obj) => obj.prototype)(Navigator.prototype)": {
+        "returnValue": 0
+    },
+    "((obj) => Object.entries(obj))(Navigator.prototype)": {
+        "exception": "Illegal invocation"
+    },
+    "((obj) => Object.getOwnPropertyDescriptors(obj))(Navigator.prototype)": {
+        "returnValue": {
+            "vendorSub": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "productSub": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "vendor": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "maxTouchPoints": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "userActivation": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "doNotTrack": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "geolocation": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "connection": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "plugins": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "mimeTypes": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "pdfViewerEnabled": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "webkitTemporaryStorage": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "webkitPersistentStorage": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "hardwareConcurrency": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "cookieEnabled": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "appCodeName": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "appName": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "appVersion": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "platform": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "product": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "userAgent": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "language": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "languages": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "onLine": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "webdriver": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "getBattery": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "getGamepads": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "javaEnabled": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "sendBeacon": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "vibrate": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "constructor": {
+                "writable": true,
+                "enumerable": false,
+                "configurable": true
+            },
+            "scheduling": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "clipboard": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "credentials": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "keyboard": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "managed": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "mediaDevices": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "storage": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "serviceWorker": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "wakeLock": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "deviceMemory": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "ink": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "hid": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "locks": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "mediaCapabilities": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "mediaSession": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "permissions": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "presentation": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "serial": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "virtualKeyboard": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "usb": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "xr": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "userAgentData": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "clearAppBadge": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "setAppBadge": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "getInstalledRelatedApps": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "getUserMedia": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "requestMIDIAccess": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "requestMediaKeySystemAccess": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "webkitGetUserMedia": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "registerProtocolHandler": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "unregisterProtocolHandler": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            }
+        }
+    },
+    "((obj) => Object.getOwnPropertyNames(obj))(Navigator.prototype)": {
+        "returnValue": [
+            "vendorSub",
+            "productSub",
+            "vendor",
+            "maxTouchPoints",
+            "userActivation",
+            "doNotTrack",
+            "geolocation",
+            "connection",
+            "plugins",
+            "mimeTypes",
+            "pdfViewerEnabled",
+            "webkitTemporaryStorage",
+            "webkitPersistentStorage",
+            "hardwareConcurrency",
+            "cookieEnabled",
+            "appCodeName",
+            "appName",
+            "appVersion",
+            "platform",
+            "product",
+            "userAgent",
+            "language",
+            "languages",
+            "onLine",
+            "webdriver",
+            "getBattery",
+            "getGamepads",
+            "javaEnabled",
+            "sendBeacon",
+            "vibrate",
+            "constructor",
+            "scheduling",
+            "clipboard",
+            "credentials",
+            "keyboard",
+            "managed",
+            "mediaDevices",
+            "storage",
+            "serviceWorker",
+            "wakeLock",
+            "deviceMemory",
+            "ink",
+            "hid",
+            "locks",
+            "mediaCapabilities",
+            "mediaSession",
+            "permissions",
+            "presentation",
+            "serial",
+            "virtualKeyboard",
+            "usb",
+            "xr",
+            "userAgentData",
+            "clearAppBadge",
+            "setAppBadge",
+            "getInstalledRelatedApps",
+            "getUserMedia",
+            "requestMIDIAccess",
+            "requestMediaKeySystemAccess",
+            "webkitGetUserMedia",
+            "registerProtocolHandler",
+            "unregisterProtocolHandler"
+        ]
+    },
+    "((obj) => Object.getOwnPropertySymbols(obj))(Navigator.prototype)": {
+        "returnValue": [
+            null
+        ]
+    },
+    "((obj) => Object.getPrototypeOf(obj))(Navigator.prototype)": {
+        "returnValue": {}
+    },
+    "((obj) => Object.is(obj, obj))(Navigator.prototype)": {
+        "returnValue": true
+    },
+    "((obj) => Object.is(obj, undefined))(Navigator.prototype)": {
+        "returnValue": false
+    },
+    "((obj) => Object.isExtensible(obj))(Navigator.prototype)": {
+        "returnValue": true
+    },
+    "((obj) => Object.isFrozen(obj))(Navigator.prototype)": {
+        "returnValue": false
+    },
+    "((obj) => Object.isSealed(obj))(Navigator.prototype)": {
+        "returnValue": false
+    },
+    "((obj) => Object.keys(obj))(Navigator.prototype)": {
+        "returnValue": [
+            "vendorSub",
+            "productSub",
+            "vendor",
+            "maxTouchPoints",
+            "userActivation",
+            "doNotTrack",
+            "geolocation",
+            "connection",
+            "plugins",
+            "mimeTypes",
+            "pdfViewerEnabled",
+            "webkitTemporaryStorage",
+            "webkitPersistentStorage",
+            "hardwareConcurrency",
+            "cookieEnabled",
+            "appCodeName",
+            "appName",
+            "appVersion",
+            "platform",
+            "product",
+            "userAgent",
+            "language",
+            "languages",
+            "onLine",
+            "webdriver",
+            "getBattery",
+            "getGamepads",
+            "javaEnabled",
+            "sendBeacon",
+            "vibrate",
+            "scheduling",
+            "clipboard",
+            "credentials",
+            "keyboard",
+            "managed",
+            "mediaDevices",
+            "storage",
+            "serviceWorker",
+            "wakeLock",
+            "deviceMemory",
+            "ink",
+            "hid",
+            "locks",
+            "mediaCapabilities",
+            "mediaSession",
+            "permissions",
+            "presentation",
+            "serial",
+            "virtualKeyboard",
+            "usb",
+            "xr",
+            "userAgentData",
+            "clearAppBadge",
+            "setAppBadge",
+            "getInstalledRelatedApps",
+            "getUserMedia",
+            "requestMIDIAccess",
+            "requestMediaKeySystemAccess",
+            "webkitGetUserMedia",
+            "registerProtocolHandler",
+            "unregisterProtocolHandler"
+        ]
+    },
+    "((obj) => Object.values(obj))(Navigator.prototype)": {
+        "exception": "Illegal invocation"
+    },
+    "((obj) => [...obj])(Navigator.prototype)": {
+        "exception": "obj is not iterable"
+    },
+    "((obj) => ({...obj}))(Navigator.prototype)": {
+        "exception": "Illegal invocation"
+    },
+    "((obj) => Array.from(obj))(Navigator.prototype)": {
+        "returnValue": []
+    },
+    "((obj) => Array.isArray(obj))(Navigator.prototype)": {
+        "returnValue": false
+    },
+    "((obj) => JSON.stringify(obj))(Navigator.prototype)": {
+        "exception": "Illegal invocation"
+    },
+    "((obj) => structuredClone(obj))(Navigator.prototype)": {
+        "exception": "Illegal invocation"
+    },
+    "((obj) => +obj)(Navigator.prototype)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => \"\" + obj)(Navigator.prototype)": {
+        "returnValue": "[object Navigator]"
+    },
+    "((obj) => obj + \"\")(Navigator.prototype)": {
+        "returnValue": "[object Navigator]"
+    },
+    "((obj) => obj.toString())(Navigator.prototype)": {
+        "returnValue": "[object Navigator]"
+    },
+    "((obj) => Number.isFinite(obj))(Navigator.prototype)": {
+        "returnValue": false
+    },
+    "((obj) => Number.isInteger(obj))(Navigator.prototype)": {
+        "returnValue": false
+    },
+    "((obj) => Number.isNaN(obj))(Navigator.prototype)": {
+        "returnValue": false
+    },
+    "((obj) => Number.isSafeInteger(obj))(Navigator.prototype)": {
+        "returnValue": false
+    },
+    "((obj) => Number.parseFloat(obj))(Navigator.prototype)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => Number.parseInt(obj))(Navigator.prototype)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => isFinite(obj))(Navigator.prototype)": {
+        "returnValue": false
+    },
+    "((obj) => isNaN(obj))(Navigator.prototype)": {
+        "returnValue": true
+    },
+    "((obj) => parseFloat(obj))(Navigator.prototype)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => parseInt(obj))(Navigator.prototype)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => obj === obj)(Navigator.prototype)": {
+        "returnValue": true
+    },
+    "((obj) => obj !== obj)(Navigator.prototype)": {
+        "returnValue": false
+    },
+    "((obj) => obj == obj)(Navigator.prototype)": {
+        "returnValue": true
+    },
+    "((obj) => obj != obj)(Navigator.prototype)": {
+        "returnValue": false
+    },
+    "((obj) => obj)(navigator.plugins)": {
+        "returnValue": {
+            "0": {
+                "0": {},
+                "1": {}
+            },
+            "1": {
+                "0": {},
+                "1": {}
+            },
+            "2": {
+                "0": {},
+                "1": {}
+            },
+            "3": {
+                "0": {},
+                "1": {}
+            },
+            "4": {
+                "0": {},
+                "1": {}
+            }
+        }
+    },
+    "((obj) => obj())(navigator.plugins)": {
+        "exception": "obj is not a function"
+    },
+    "((obj) => new obj())(navigator.plugins)": {
+        "exception": "obj is not a constructor"
+    },
+    "((obj) => typeof obj)(navigator.plugins)": {
+        "returnValue": "object"
+    },
+    "((obj) => obj.prototype)(navigator.plugins)": {
+        "returnValue": 0
+    },
+    "((obj) => Object.entries(obj))(navigator.plugins)": {
+        "returnValue": [
+            [
+                "0",
+                {
+                    "0": {},
+                    "1": {}
+                }
+            ],
+            [
+                "1",
+                {
+                    "0": {},
+                    "1": {}
+                }
+            ],
+            [
+                "2",
+                {
+                    "0": {},
+                    "1": {}
+                }
+            ],
+            [
+                "3",
+                {
+                    "0": {},
+                    "1": {}
+                }
+            ],
+            [
+                "4",
+                {
+                    "0": {},
+                    "1": {}
+                }
+            ]
+        ]
+    },
+    "((obj) => Object.getOwnPropertyDescriptors(obj))(navigator.plugins)": {
+        "returnValue": {
+            "0": {
+                "value": {
+                    "0": {},
+                    "1": {}
+                },
+                "writable": false,
+                "enumerable": true,
+                "configurable": true
+            },
+            "1": {
+                "value": {
+                    "0": {},
+                    "1": {}
+                },
+                "writable": false,
+                "enumerable": true,
+                "configurable": true
+            },
+            "2": {
+                "value": {
+                    "0": {},
+                    "1": {}
+                },
+                "writable": false,
+                "enumerable": true,
+                "configurable": true
+            },
+            "3": {
+                "value": {
+                    "0": {},
+                    "1": {}
+                },
+                "writable": false,
+                "enumerable": true,
+                "configurable": true
+            },
+            "4": {
+                "value": {
+                    "0": {},
+                    "1": {}
+                },
+                "writable": false,
+                "enumerable": true,
+                "configurable": true
+            },
+            "PDF Viewer": {
+                "writable": false,
+                "enumerable": false,
+                "configurable": true,
+                "value": "#((obj) => Object~1getOwnPropertyDescriptors(obj))(navigator~1plugins).returnValue.0.value"
+            },
+            "Chrome PDF Viewer": {
+                "writable": false,
+                "enumerable": false,
+                "configurable": true,
+                "value": "#((obj) => Object~1getOwnPropertyDescriptors(obj))(navigator~1plugins).returnValue.1.value"
+            },
+            "Chromium PDF Viewer": {
+                "writable": false,
+                "enumerable": false,
+                "configurable": true,
+                "value": "#((obj) => Object~1getOwnPropertyDescriptors(obj))(navigator~1plugins).returnValue.2.value"
+            },
+            "Microsoft Edge PDF Viewer": {
+                "writable": false,
+                "enumerable": false,
+                "configurable": true,
+                "value": "#((obj) => Object~1getOwnPropertyDescriptors(obj))(navigator~1plugins).returnValue.3.value"
+            },
+            "WebKit built-in PDF": {
+                "writable": false,
+                "enumerable": false,
+                "configurable": true,
+                "value": "#((obj) => Object~1getOwnPropertyDescriptors(obj))(navigator~1plugins).returnValue.4.value"
+            }
+        }
+    },
+    "((obj) => Object.getOwnPropertyNames(obj))(navigator.plugins)": {
+        "returnValue": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "PDF Viewer",
+            "Chrome PDF Viewer",
+            "Chromium PDF Viewer",
+            "Microsoft Edge PDF Viewer",
+            "WebKit built-in PDF"
+        ]
+    },
+    "((obj) => Object.getOwnPropertySymbols(obj))(navigator.plugins)": {
+        "returnValue": []
+    },
+    "((obj) => Object.is(obj, obj))(navigator.plugins)": {
+        "returnValue": true
+    },
+    "((obj) => Object.is(obj, undefined))(navigator.plugins)": {
+        "returnValue": false
+    },
+    "((obj) => Object.isExtensible(obj))(navigator.plugins)": {
+        "returnValue": true
+    },
+    "((obj) => Object.isFrozen(obj))(navigator.plugins)": {
+        "returnValue": false
+    },
+    "((obj) => Object.isSealed(obj))(navigator.plugins)": {
+        "returnValue": false
+    },
+    "((obj) => Object.keys(obj))(navigator.plugins)": {
+        "returnValue": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4"
+        ]
+    },
+    "((obj) => Object.values(obj))(navigator.plugins)": {
+        "returnValue": [
+            {
+                "0": {},
+                "1": {}
+            },
+            {
+                "0": {},
+                "1": {}
+            },
+            {
+                "0": {},
+                "1": {}
+            },
+            {
+                "0": {},
+                "1": {}
+            },
+            {
+                "0": {},
+                "1": {}
+            }
+        ]
+    },
+    "((obj) => [...obj])(navigator.plugins)": {
+        "returnValue": [
+            {
+                "0": {},
+                "1": {}
+            },
+            {
+                "0": {},
+                "1": {}
+            },
+            {
+                "0": {},
+                "1": {}
+            },
+            {
+                "0": {},
+                "1": {}
+            },
+            {
+                "0": {},
+                "1": {}
+            }
+        ]
+    },
+    "((obj) => ({...obj}))(navigator.plugins)": {
+        "returnValue": {
+            "0": {
+                "0": {},
+                "1": {}
+            },
+            "1": {
+                "0": {},
+                "1": {}
+            },
+            "2": {
+                "0": {},
+                "1": {}
+            },
+            "3": {
+                "0": {},
+                "1": {}
+            },
+            "4": {
+                "0": {},
+                "1": {}
+            }
+        }
+    },
+    "((obj) => Array.from(obj))(navigator.plugins)": {
+        "returnValue": [
+            {
+                "0": {},
+                "1": {}
+            },
+            {
+                "0": {},
+                "1": {}
+            },
+            {
+                "0": {},
+                "1": {}
+            },
+            {
+                "0": {},
+                "1": {}
+            },
+            {
+                "0": {},
+                "1": {}
+            }
+        ]
+    },
+    "((obj) => Array.isArray(obj))(navigator.plugins)": {
+        "returnValue": false
+    },
+    "((obj) => Array.of(obj))(navigator.plugins)": {
+        "returnValue": [
+            {
+                "0": {
+                    "0": {},
+                    "1": {}
+                },
+                "1": {
+                    "0": {},
+                    "1": {}
+                },
+                "2": {
+                    "0": {},
+                    "1": {}
+                },
+                "3": {
+                    "0": {},
+                    "1": {}
+                },
+                "4": {
+                    "0": {},
+                    "1": {}
+                }
+            }
+        ]
+    },
+    "((obj) => JSON.stringify(obj))(navigator.plugins)": {
+        "returnValue": "{\"0\":{\"0\":{},\"1\":{}},\"1\":{\"0\":{},\"1\":{}},\"2\":{\"0\":{},\"1\":{}},\"3\":{\"0\":{},\"1\":{}},\"4\":{\"0\":{},\"1\":{}}}"
+    },
+    "((obj) => structuredClone(obj))(navigator.plugins)": {
+        "exception": {
+            "code": 25,
+            "columnNumber": 0,
+            "data": 0,
+            "lineNumber": 0,
+            "message": "Failed to execute 'structuredClone' on 'Window': PluginArray object could not be cloned.",
+            "name": "DataCloneError",
+            "result": 0
+        }
+    },
+    "((obj) => +obj)(navigator.plugins)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => \"\" + obj)(navigator.plugins)": {
+        "returnValue": "[object PluginArray]"
+    },
+    "((obj) => obj + \"\")(navigator.plugins)": {
+        "returnValue": "[object PluginArray]"
+    },
+    "((obj) => obj.toString())(navigator.plugins)": {
+        "returnValue": "[object PluginArray]"
+    },
+    "((obj) => Number.isFinite(obj))(navigator.plugins)": {
+        "returnValue": false
+    },
+    "((obj) => Number.isInteger(obj))(navigator.plugins)": {
+        "returnValue": false
+    },
+    "((obj) => Number.isNaN(obj))(navigator.plugins)": {
+        "returnValue": false
+    },
+    "((obj) => Number.isSafeInteger(obj))(navigator.plugins)": {
+        "returnValue": false
+    },
+    "((obj) => Number.parseFloat(obj))(navigator.plugins)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => Number.parseInt(obj))(navigator.plugins)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => isFinite(obj))(navigator.plugins)": {
+        "returnValue": false
+    },
+    "((obj) => isNaN(obj))(navigator.plugins)": {
+        "returnValue": true
+    },
+    "((obj) => parseFloat(obj))(navigator.plugins)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => parseInt(obj))(navigator.plugins)": {
+        "returnValue": "NaN"
+    },
+    "((obj) => obj === obj)(navigator.plugins)": {
+        "returnValue": true
+    },
+    "((obj) => obj !== obj)(navigator.plugins)": {
+        "returnValue": false
+    },
+    "((obj) => obj == obj)(navigator.plugins)": {
+        "returnValue": true
+    },
+    "((obj) => obj != obj)(navigator.plugins)": {
+        "returnValue": false
+    },
+    "((obj) => obj())(Object.getPrototypeOf(navigator.plugins))": {
+        "exception": "obj is not a function"
+    },
+    "((obj) => new obj())(Object.getPrototypeOf(navigator.plugins))": {
+        "exception": "obj is not a constructor"
+    },
+    "((obj) => typeof obj)(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": "object"
+    },
+    "((obj) => obj.__proto__)(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": {}
+    },
+    "((obj) => obj.prototype)(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": 0
+    },
+    "((obj) => Object.entries(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "exception": "Illegal invocation"
+    },
+    "((obj) => Object.getOwnPropertyDescriptors(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": {
+            "length": {
+                "set": 0,
+                "enumerable": true,
+                "configurable": true
+            },
+            "item": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "namedItem": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "refresh": {
+                "writable": true,
+                "enumerable": true,
+                "configurable": true
+            },
+            "constructor": {
+                "writable": true,
+                "enumerable": false,
+                "configurable": true
+            }
+        }
+    },
+    "((obj) => Object.getOwnPropertyNames(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": [
+            "length",
+            "item",
+            "namedItem",
+            "refresh",
+            "constructor"
+        ]
+    },
+    "((obj) => Object.getOwnPropertySymbols(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": [
+            null,
+            null
+        ]
+    },
+    "((obj) => Object.getPrototypeOf(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": {}
+    },
+    "((obj) => Object.is(obj, obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": true
+    },
+    "((obj) => Object.is(obj, undefined))(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": false
+    },
+    "((obj) => Object.isExtensible(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": true
+    },
+    "((obj) => Object.isFrozen(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": false
+    },
+    "((obj) => Object.isSealed(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": false
+    },
+    "((obj) => Object.keys(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": [
+            "length",
+            "item",
+            "namedItem",
+            "refresh"
+        ]
+    },
+    "((obj) => Object.values(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "exception": "Illegal invocation"
+    },
+    "((obj) => [...obj])(Object.getPrototypeOf(navigator.plugins))": {
+        "exception": "Illegal invocation"
+    },
+    "((obj) => ({...obj}))(Object.getPrototypeOf(navigator.plugins))": {
+        "exception": "Illegal invocation"
+    },
+    "((obj) => Array.from(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "exception": "Illegal invocation"
+    },
+    "((obj) => Array.isArray(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": false
+    },
+    "((obj) => JSON.stringify(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "exception": "Illegal invocation"
+    },
+    "((obj) => structuredClone(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "exception": "Illegal invocation"
+    },
+    "((obj) => +obj)(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": "NaN"
+    },
+    "((obj) => \"\" + obj)(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": "[object PluginArray]"
+    },
+    "((obj) => obj + \"\")(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": "[object PluginArray]"
+    },
+    "((obj) => obj.toString())(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": "[object PluginArray]"
+    },
+    "((obj) => Number.isFinite(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": false
+    },
+    "((obj) => Number.isInteger(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": false
+    },
+    "((obj) => Number.isNaN(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": false
+    },
+    "((obj) => Number.isSafeInteger(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": false
+    },
+    "((obj) => Number.parseFloat(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": "NaN"
+    },
+    "((obj) => Number.parseInt(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": "NaN"
+    },
+    "((obj) => isFinite(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": false
+    },
+    "((obj) => isNaN(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": true
+    },
+    "((obj) => parseFloat(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": "NaN"
+    },
+    "((obj) => parseInt(obj))(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": "NaN"
+    },
+    "((obj) => obj === obj)(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": true
+    },
+    "((obj) => obj !== obj)(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": false
+    },
+    "((obj) => obj == obj)(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": true
+    },
+    "((obj) => obj != obj)(Object.getPrototypeOf(navigator.plugins))": {
+        "returnValue": false
+    },
+    "((obj) => obj)(navigator.plugins[0])": {
+        "returnValue": {
+            "0": {},
+            "1": {}
+        }
+    },
+    "((obj) => obj())(navigator.plugins[0])": {
+        "exception": "obj is not a function"
+    },
+    "((obj) => new obj())(navigator.plugins[0])": {
+        "exception": "obj is not a constructor"
+    },
+    "((obj) => typeof obj)(navigator.plugins[0])": {
+        "returnValue": "object"
+    },
+    "((obj) => obj.prototype)(navigator.plugins[0])": {
+        "returnValue": 0
+    },
+    "((obj) => Object.entries(obj))(navigator.plugins[0])": {
+        "returnValue": [
+            [
+                "0",
+                {}
+            ],
+            [
+                "1",
+                {}
+            ]
+        ]
+    },
+    "((obj) => Object.getOwnPropertyDescriptors(obj))(navigator.plugins[0])": {
+        "returnValue": {
+            "0": {
+                "value": {},
+                "writable": false,
+                "enumerable": true,
+                "configurable": true
+            },
+            "1": {
+                "value": {},
+                "writable": false,
+                "enumerable": true,
+                "configurable": true
+            },
+            "application/pdf": {
+                "value": {},
+                "writable": false,
+                "enumerable": false,
+                "configurable": true
+            },
+            "text/pdf": {
+                "value": {},
+                "writable": false,
+                "enumerable": false,
+                "configurable": true
+            }
+        }
+    },
+    "((obj) => Object.getOwnPropertyNames(obj))(navigator.plugins[0])": {
+        "returnValue": [
+            "0",
+            "1",
+            "application/pdf",
+            "text/pdf"
+        ]
+    },
+    "((obj) => Object.getOwnPropertySymbols(obj))(navigator.plugins[0])": {
+        "returnValue": []
+    },
+    "((obj) => Object.is(obj, obj))(navigator.plugins[0])": {
+        "returnValue": true
+    },
+    "((obj) => Object.is(obj, undefined))(navigator.plugins[0])": {
+        "returnValue": false
+    },
+    "((obj) => Object.isExtensible(obj))(navigator.plugins[0])": {
+        "returnValue": true
+    },
+    "((obj) => Object.isFrozen(obj))(navigator.plugins[0])": {
+        "returnValue": false
+    },
+    "((obj) => Object.isSealed(obj))(navigator.plugins[0])": {
+        "returnValue": false
+    },
+    "((obj) => Object.keys(obj))(navigator.plugins[0])": {
+        "returnValue": [
+            "0",
+            "1"
+        ]
+    },
+    "((obj) => Object.values(obj))(navigator.plugins[0])": {
+        "returnValue": [
+            {},
+            {}
+        ]
+    },
+    "((obj) => [...obj])(navigator.plugins[0])": {
+        "returnValue": [
+            {},
+            {}
+        ]
+    },
+    "((obj) => ({...obj}))(navigator.plugins[0])": {
+        "returnValue": {
+            "0": {},
+            "1": {}
+        }
+    },
+    "((obj) => Array.from(obj))(navigator.plugins[0])": {
+        "returnValue": [
+            {},
+            {}
+        ]
+    },
+    "((obj) => Array.isArray(obj))(navigator.plugins[0])": {
+        "returnValue": false
+    },
+    "((obj) => Array.of(obj))(navigator.plugins[0])": {
+        "returnValue": [
+            {
+                "0": {},
+                "1": {}
+            }
+        ]
+    },
+    "((obj) => JSON.stringify(obj))(navigator.plugins[0])": {
+        "returnValue": "{\"0\":{},\"1\":{}}"
+    },
+    "((obj) => structuredClone(obj))(navigator.plugins[0])": {
+        "exception": {
+            "code": 25,
+            "columnNumber": 0,
+            "data": 0,
+            "lineNumber": 0,
+            "message": "Failed to execute 'structuredClone' on 'Window': Plugin object could not be cloned.",
+            "name": "DataCloneError",
+            "result": 0
+        }
+    },
+    "((obj) => +obj)(navigator.plugins[0])": {
+        "returnValue": "NaN"
+    },
+    "((obj) => \"\" + obj)(navigator.plugins[0])": {
+        "returnValue": "[object Plugin]"
+    },
+    "((obj) => obj + \"\")(navigator.plugins[0])": {
+        "returnValue": "[object Plugin]"
+    },
+    "((obj) => obj.toString())(navigator.plugins[0])": {
+        "returnValue": "[object Plugin]"
+    },
+    "((obj) => Number.isFinite(obj))(navigator.plugins[0])": {
+        "returnValue": false
+    },
+    "((obj) => Number.isInteger(obj))(navigator.plugins[0])": {
+        "returnValue": false
+    },
+    "((obj) => Number.isNaN(obj))(navigator.plugins[0])": {
+        "returnValue": false
+    },
+    "((obj) => Number.isSafeInteger(obj))(navigator.plugins[0])": {
+        "returnValue": false
+    },
+    "((obj) => Number.parseFloat(obj))(navigator.plugins[0])": {
+        "returnValue": "NaN"
+    },
+    "((obj) => Number.parseInt(obj))(navigator.plugins[0])": {
+        "returnValue": "NaN"
+    },
+    "((obj) => isFinite(obj))(navigator.plugins[0])": {
+        "returnValue": false
+    },
+    "((obj) => isNaN(obj))(navigator.plugins[0])": {
+        "returnValue": true
+    },
+    "((obj) => parseFloat(obj))(navigator.plugins[0])": {
+        "returnValue": "NaN"
+    },
+    "((obj) => parseInt(obj))(navigator.plugins[0])": {
+        "returnValue": "NaN"
+    },
+    "((obj) => obj === obj)(navigator.plugins[0])": {
+        "returnValue": true
+    },
+    "((obj) => obj !== obj)(navigator.plugins[0])": {
+        "returnValue": false
+    },
+    "((obj) => obj == obj)(navigator.plugins[0])": {
+        "returnValue": true
+    },
+    "((obj) => obj != obj)(navigator.plugins[0])": {
+        "returnValue": false
+    },
+    "navigator.plugins[5]": {
+        "returnValue": 0
+    },
+    "Navigator.prototype.plugins": {
+        "exception": "Illegal invocation"
+    },
+    "navigator.plugins[0] instanceof Plugin": {
+        "returnValue": true
+    },
+    "navigator.plugins[1].__proto__ === Plugin.prototype": {
+        "returnValue": true
+    },
+    "Object.getPrototypeOf(navigator.plugins[2]) ===  Plugin.prototype": {
+        "returnValue": true
+    },
+    "navigator.plugins[3].prototype": {
+        "returnValue": 0
+    },
+    "navigator.plugins[4].toString()": {
+        "returnValue": "[object Plugin]"
+    },
+    "\"\" + navigator.plugins[0]": {
+        "returnValue": "[object Plugin]"
+    },
+    "navigator.plugins[1] + \"\"": {
+        "returnValue": "[object Plugin]"
+    },
+    "JSON.stringify(navigator.plugins[2])": {
+        "returnValue": "{\"0\":{},\"1\":{}}"
+    },
+    "+navigator.plugins[3]": {
+        "returnValue": "NaN"
+    },
+    "[...navigator.plugins[4]].length": {
+        "returnValue": 2
+    },
+    "Object.getPrototypeOf([...navigator.plugins[0]][0]) ===\n                                                             MimeType.prototype": {
+        "returnValue": true
+    },
+    "[...navigator.plugins[1]][1].type": {
+        "returnValue": "text/pdf"
+    },
+    "({ ...navigator.plugins[2] })[0].type": {
+        "returnValue": "application/pdf"
+    },
+    "({ ...navigator.plugins[3] })[1].type": {
+        "returnValue": "text/pdf"
+    },
+    "navigator.plugins[2][0] === navigator.plugins[3][0]": {
+        "returnValue": false
+    },
+    "navigator.plugins[4][0] !== navigator.plugins[4][1]": {
+        "returnValue": true
+    },
+    "navigator.plugins[0][0] === navigator.mimeTypes[0]": {
+        "returnValue": false
+    },
+    "navigator.plugins[1][1] === navigator.mimeTypes[1]": {
+        "returnValue": false
+    },
+    "navigator.plugins[0][0].enabledPlugin ===\n                                          navigator.plugins[0][0].enabledPlugin": {
+        "returnValue": true
+    },
+    "navigator.plugins[0][0].enabledPlugin ===\n                                          navigator.plugins[0][1].enabledPlugin": {
+        "returnValue": true
+    },
+    "navigator.plugins[0][0].enabledPlugin ===\n                                          navigator.plugins[1][0].enabledPlugin": {
+        "returnValue": false
+    },
+    "navigator.plugins[0][0].enabledPlugin ===\n                                          navigator.plugins[1][1].enabledPlugin": {
+        "returnValue": false
+    },
+    "navigator.plugins[0][0].enabledPlugin ===\n                                           navigator.mimeTypes[0].enabledPlugin": {
+        "returnValue": true
+    },
+    "navigator.plugins[0][0].enabledPlugin ===\n                                           navigator.mimeTypes[1].enabledPlugin": {
+        "returnValue": true
+    },
+    "structuredClone(navigator.plugins[0])": {
+        "exception": {
+            "code": 25,
+            "columnNumber": 0,
+            "data": 0,
+            "lineNumber": 0,
+            "message": "Failed to execute 'structuredClone' on 'Window': Plugin object could not be cloned.",
+            "name": "DataCloneError",
+            "result": 0
+        }
+    },
+    "Object.getOwnPropertyNames(navigator.plugins)": {
+        "returnValue": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "PDF Viewer",
+            "Chrome PDF Viewer",
+            "Chromium PDF Viewer",
+            "Microsoft Edge PDF Viewer",
+            "WebKit built-in PDF"
+        ]
+    },
+    "Object.getOwnPropertySymbols(navigator.plugins)": {
+        "returnValue": []
+    },
+    "Object.keys(Object.getOwnPropertyDescriptors(navigator.plugins))": {
+        "returnValue": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "PDF Viewer",
+            "Chrome PDF Viewer",
+            "Chromium PDF Viewer",
+            "Microsoft Edge PDF Viewer",
+            "WebKit built-in PDF"
+        ]
+    },
+    "Object.getOwnPropertyDescriptors(navigator.plugins)[\"0\"] !==\n                        Object.getOwnPropertyDescriptor(navigator.plugins, \"0\")": {
+        "returnValue": true
+    },
+    "({\n        ...Object.getOwnPropertyDescriptors(navigator.plugins)[1],\n        value: Object.getOwnPropertyDescriptors(navigator.plugins)[0].value\n                                                              .constructor.name,\n    })": {
+        "returnValue": {
+            "value": "Plugin",
+            "writable": false,
+            "enumerable": true,
+            "configurable": true
+        }
+    },
+    "({\n        ...Object.getOwnPropertyDescriptors(navigator.plugins)[\"PDF Viewer\"],\n        value: Object.getOwnPropertyDescriptors(navigator.plugins)[\"PDF Viewer\"]\n                                                        .value.constructor.name,\n    })": {
+        "returnValue": {
+            "value": "Plugin",
+            "writable": false,
+            "enumerable": false,
+            "configurable": true
+        }
+    },
+    "navigator.plugins[1] ===\n                  Object.getOwnPropertyDescriptor(navigator.plugins, \"1\").value": {
+        "returnValue": true
+    },
+    "navigator.plugins[0].item === navigator.plugins[0].item": {
+        "returnValue": true
+    },
+    "navigator.plugins[1].namedItem === navigator.plugins[2].namedItem": {
+        "returnValue": true
+    },
+    "navigator.mimeTypes[0].item === navigator.mimeTypes[0].item": {
+        "returnValue": true
+    },
+    "navigator.mimeTypes[0].namedItem === navigator.mimeTypes[1].namedItem": {
+        "returnValue": true
+    },
+    "navigator.plugins[0].item !== navigator.mimeTypes[0].item": {
+        "returnValue": true
+    },
+    "navigator.plugins[0][0].namedItem ===\n                                               navigator.mimeTypes[0].namedItem": {
+        "returnValue": true
+    },
+    "navigator.plugins.item(0) === navigator.plugins[0]": {
+        "returnValue": true
+    },
+    "navigator.plugins.item(1) === navigator.plugins[1]": {
+        "returnValue": true
+    },
+    "navigator.plugins.item(5)": {
+        "returnValue": null
+    },
+    "navigator.plugins.item(\"foo\") === navigator.plugins[0]": {
+        "returnValue": true
+    },
+    "navigator.plugins.item(\"Chrome PDF Viewer\") === navigator.plugins[0]": {
+        "returnValue": true
+    },
+    "navigator.plugins.item(null) === navigator.plugins[0]": {
+        "returnValue": true
+    },
+    "navigator.plugins.item(undefined) === navigator.plugins[0]": {
+        "returnValue": true
+    },
+    "navigator.plugins.item(-1)": {
+        "returnValue": null
+    },
+    "navigator.plugins.item(0.9) === navigator.plugins[0]": {
+        "returnValue": true
+    },
+    "navigator.plugins.item(4.9) === navigator.plugins[4]": {
+        "returnValue": true
+    },
+    "navigator.plugins.item(5.9)": {
+        "returnValue": null
+    },
+    "navigator.plugins.item(-0.9) === navigator.plugins[0]": {
+        "returnValue": true
+    },
+    "navigator.plugins.item(-1.9)": {
+        "returnValue": null
+    },
+    "navigator.plugins.item(Infinity) === navigator.plugins[0]": {
+        "returnValue": true
+    },
+    "navigator.plugins.item(Number.EPSILON) === navigator.plugins[0]": {
+        "returnValue": true
+    },
+    "navigator.plugins.item(Number.NaN) === navigator.plugins[0]": {
+        "returnValue": true
+    },
+    "navigator.plugins.item(Number.NEGATIVE_INFINITY) ===\n                                                           navigator.plugins[0]": {
+        "returnValue": true
+    },
+    "Plugin.prototype.item(0)": {
+        "exception": "Illegal invocation"
+    },
+    "navigator.plugins.item.caller": {
+        "exception": "'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them"
+    },
+    "navigator.plugins.item.callee": {
+        "returnValue": 0
+    },
+    "navigator.plugins.item.arguments": {
+        "exception": "'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them"
+    },
+    "navigator.plugins.namedItem(\"PDF Viewer\") === navigator.plugins[0]": {
+        "returnValue": true
+    },
+    "navigator.plugins.namedItem(\"WebKit built-in PDF\") ===\n                                                           navigator.plugins[4]": {
+        "returnValue": true
+    },
+    "((index) => navigator.plugins.namedItem(index))([\"foo\"])": {
+        "returnValue": null
+    },
+    "((index) => navigator.plugins.namedItem(index))([\"\"])": {
+        "returnValue": null
+    },
+    "((index) => navigator.plugins.namedItem(index))([\"0\"])": {
+        "returnValue": null
+    },
+    "((index) => navigator.plugins.namedItem(index))([0])": {
+        "returnValue": null
+    },
+    "((index) => navigator.plugins.namedItem(index))([NaN])": {
+        "returnValue": null
+    },
+    "((index) => navigator.plugins.namedItem(index))([Infinity])": {
+        "returnValue": null
+    },
+    "navigator.plugins.item.length": {
+        "returnValue": 1
+    },
+    "navigator.plugins.item.toString()": {
+        "returnValue": "function item() { [native code] }"
+    },
+    "navigator.plugins.namedItem.length": {
+        "returnValue": 1
+    },
+    "navigator.plugins.namedItem.toString()": {
+        "returnValue": "function namedItem() { [native code] }"
+    },
+    "typeof DeviceMotionEvent": {
+        "returnValue": "function"
+    },
+    "typeof DeviceMotionEvent.requestPermission": {
+        "returnValue": "undefined"
+    },
+    "{\n        const canvas = document.createElement(\"canvas\");\n        const webGL = canvas.getContext(\"webgl\");\n        const astc = webGL.getExtension(\"WEBGL_compressed_texture_astc\");\n        return astc.getSupportedProfiles().toString();\n    }": {
+        "returnValue": "ldr"
+    },
+    "CSS.supports(\"backdrop-filter\", \"blur(2px)\")": {
+        "returnValue": true
+    },
+    "matchMedia(\"(prefers-color-scheme: dark)\").matches": {
+        "returnValue": false
+    },
+    "navigator.deviceMemory": {
+        "returnValue": 8
+    },
+    "document.documentElement.getAttributeNames()": {
+        "returnValue": [
+            "lang"
+        ]
+    },
+    "getAllPropertyNames(document)": {
+        "returnValue": [
+            "location",
+            "constructor",
+            "implementation",
+            "URL",
+            "documentURI",
+            "compatMode",
+            "characterSet",
+            "charset",
+            "inputEncoding",
+            "contentType",
+            "doctype",
+            "documentElement",
+            "xmlEncoding",
+            "xmlVersion",
+            "xmlStandalone",
+            "domain",
+            "referrer",
+            "cookie",
+            "lastModified",
+            "readyState",
+            "title",
+            "dir",
+            "body",
+            "head",
+            "images",
+            "embeds",
+            "plugins",
+            "links",
+            "forms",
+            "scripts",
+            "currentScript",
+            "defaultView",
+            "designMode",
+            "onreadystatechange",
+            "anchors",
+            "applets",
+            "fgColor",
+            "linkColor",
+            "vlinkColor",
+            "alinkColor",
+            "bgColor",
+            "all",
+            "scrollingElement",
+            "onpointerlockchange",
+            "onpointerlockerror",
+            "hidden",
+            "visibilityState",
+            "wasDiscarded",
+            "featurePolicy",
+            "webkitVisibilityState",
+            "webkitHidden",
+            "onbeforecopy",
+            "onbeforecut",
+            "onbeforepaste",
+            "onfreeze",
+            "onresume",
+            "onsearch",
+            "onvisibilitychange",
+            "fullscreenEnabled",
+            "fullscreen",
+            "onfullscreenchange",
+            "onfullscreenerror",
+            "webkitIsFullScreen",
+            "webkitCurrentFullScreenElement",
+            "webkitFullscreenEnabled",
+            "webkitFullscreenElement",
+            "onwebkitfullscreenchange",
+            "onwebkitfullscreenerror",
+            "rootElement",
+            "onbeforexrselect",
+            "onabort",
+            "onblur",
+            "oncancel",
+            "oncanplay",
+            "oncanplaythrough",
+            "onchange",
+            "onclick",
+            "onclose",
+            "oncontextlost",
+            "oncontextmenu",
+            "oncontextrestored",
+            "oncuechange",
+            "ondblclick",
+            "ondrag",
+            "ondragend",
+            "ondragenter",
+            "ondragleave",
+            "ondragover",
+            "ondragstart",
+            "ondrop",
+            "ondurationchange",
+            "onemptied",
+            "onended",
+            "onerror",
+            "onfocus",
+            "onformdata",
+            "oninput",
+            "oninvalid",
+            "onkeydown",
+            "onkeypress",
+            "onkeyup",
+            "onload",
+            "onloadeddata",
+            "onloadedmetadata",
+            "onloadstart",
+            "onmousedown",
+            "onmouseenter",
+            "onmouseleave",
+            "onmousemove",
+            "onmouseout",
+            "onmouseover",
+            "onmouseup",
+            "onmousewheel",
+            "onpause",
+            "onplay",
+            "onplaying",
+            "onprogress",
+            "onratechange",
+            "onreset",
+            "onresize",
+            "onscroll",
+            "onsecuritypolicyviolation",
+            "onseeked",
+            "onseeking",
+            "onselect",
+            "onslotchange",
+            "onstalled",
+            "onsubmit",
+            "onsuspend",
+            "ontimeupdate",
+            "ontoggle",
+            "onvolumechange",
+            "onwaiting",
+            "onwebkitanimationend",
+            "onwebkitanimationiteration",
+            "onwebkitanimationstart",
+            "onwebkittransitionend",
+            "onwheel",
+            "onauxclick",
+            "ongotpointercapture",
+            "onlostpointercapture",
+            "onpointerdown",
+            "onpointermove",
+            "onpointerup",
+            "onpointercancel",
+            "onpointerover",
+            "onpointerout",
+            "onpointerenter",
+            "onpointerleave",
+            "onselectstart",
+            "onselectionchange",
+            "onanimationend",
+            "onanimationiteration",
+            "onanimationstart",
+            "ontransitionrun",
+            "ontransitionstart",
+            "ontransitionend",
+            "ontransitioncancel",
+            "oncopy",
+            "oncut",
+            "onpaste",
+            "children",
+            "firstElementChild",
+            "lastElementChild",
+            "childElementCount",
+            "activeElement",
+            "styleSheets",
+            "pointerLockElement",
+            "fullscreenElement",
+            "adoptedStyleSheets",
+            "fonts",
+            "adoptNode",
+            "append",
+            "captureEvents",
+            "caretRangeFromPoint",
+            "clear",
+            "close",
+            "createAttribute",
+            "createAttributeNS",
+            "createCDATASection",
+            "createComment",
+            "createDocumentFragment",
+            "createElement",
+            "createElementNS",
+            "createEvent",
+            "createExpression",
+            "createNSResolver",
+            "createNodeIterator",
+            "createProcessingInstruction",
+            "createRange",
+            "createTextNode",
+            "createTreeWalker",
+            "elementFromPoint",
+            "elementsFromPoint",
+            "evaluate",
+            "execCommand",
+            "exitFullscreen",
+            "exitPointerLock",
+            "getElementById",
+            "getElementsByClassName",
+            "getElementsByName",
+            "getElementsByTagName",
+            "getElementsByTagNameNS",
+            "getSelection",
+            "hasFocus",
+            "importNode",
+            "open",
+            "prepend",
+            "queryCommandEnabled",
+            "queryCommandIndeterm",
+            "queryCommandState",
+            "queryCommandSupported",
+            "queryCommandValue",
+            "querySelector",
+            "querySelectorAll",
+            "releaseEvents",
+            "replaceChildren",
+            "webkitCancelFullScreen",
+            "webkitExitFullscreen",
+            "write",
+            "writeln",
+            "constructor",
+            "fragmentDirective",
+            "timeline",
+            "pictureInPictureEnabled",
+            "pictureInPictureElement",
+            "onpointerrawupdate",
+            "exitPictureInPicture",
+            "getAnimations",
+            "nodeType",
+            "nodeName",
+            "baseURI",
+            "isConnected",
+            "ownerDocument",
+            "parentNode",
+            "parentElement",
+            "childNodes",
+            "firstChild",
+            "lastChild",
+            "previousSibling",
+            "nextSibling",
+            "nodeValue",
+            "textContent",
+            "ELEMENT_NODE",
+            "ATTRIBUTE_NODE",
+            "TEXT_NODE",
+            "CDATA_SECTION_NODE",
+            "ENTITY_REFERENCE_NODE",
+            "ENTITY_NODE",
+            "PROCESSING_INSTRUCTION_NODE",
+            "COMMENT_NODE",
+            "DOCUMENT_NODE",
+            "DOCUMENT_TYPE_NODE",
+            "DOCUMENT_FRAGMENT_NODE",
+            "NOTATION_NODE",
+            "DOCUMENT_POSITION_DISCONNECTED",
+            "DOCUMENT_POSITION_PRECEDING",
+            "DOCUMENT_POSITION_FOLLOWING",
+            "DOCUMENT_POSITION_CONTAINS",
+            "DOCUMENT_POSITION_CONTAINED_BY",
+            "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC",
+            "appendChild",
+            "cloneNode",
+            "compareDocumentPosition",
+            "contains",
+            "getRootNode",
+            "hasChildNodes",
+            "insertBefore",
+            "isDefaultNamespace",
+            "isEqualNode",
+            "isSameNode",
+            "lookupNamespaceURI",
+            "lookupPrefix",
+            "normalize",
+            "removeChild",
+            "replaceChild",
+            "constructor",
+            "addEventListener",
+            "dispatchEvent",
+            "removeEventListener",
+            "constructor",
+            "constructor",
+            "__defineGetter__",
+            "__defineSetter__",
+            "hasOwnProperty",
+            "__lookupGetter__",
+            "__lookupSetter__",
+            "isPrototypeOf",
+            "propertyIsEnumerable",
+            "toString",
+            "valueOf",
+            "__proto__",
+            "toLocaleString"
+        ]
+    },
+    "matchMedia(\"(-webkit-min-device-pixel-ratio: 2),\" +\n                     \" (min-device-pixel-ratio: 2),\" +\n                     \" (min-resolution: 192dpi)\").matches": {
+        "returnValue": false
+    },
+    "{\n        const buf = new ArrayBuffer(4);\n        new Uint32Array(buf)[0] = 0xaa000000;\n        return new Uint8Array(buf)[0];\n    }": {
+        "returnValue": 0
+    },
+    "{\n        try {\n            throw \"foo\";\n        } catch (err) {\n            try {\n                err.toSource();\n                return true;\n            } catch {\n                return false;\n            }\n        }\n    }": {
+        "returnValue": false
+    },
+    "eval.toString()": {
+        "returnValue": "function eval() { [native code] }"
+    },
+    "{\n        const now = () => performance.now() / 1000;\n        const gcd = (a, b) => {\n            if (a < 0.00000001) {\n                return b;\n            }\n            if (a < b) {\n                return gcd(b - Math.floor(b / a) * a, a);\n            } else if (a === b) {\n                return a;\n            } else {\n                return gcd(b, a);\n            }\n        };\n\n        const x = now();\n        let g = now() - x;\n        for (let i = 0; i < 10; i++) {\n            g = gcd(g, now() - x);\n        }\n        return Math.round(1 / g);\n    }": {
+        "returnValue": 10000
+    },
+    "{\n        const div = document.createElement(\"div\");\n        div.style.border = \".5px dotted transparent\";\n        document.body.appendChild(div);\n        const offsetHeight = div.offsetHeight;\n        document.body.removeChild(div);\n        return [devicePixelRatio, offsetHeight];\n    }": {
+        "returnValue": [
+            1.25,
+            2
+        ]
+    },
+    "{\n        const concurrency = navigator.hardwareConcurrency;\n        if (typeof concurrency === \"string\") {\n            const concurrencyInt = Number.parseInt(concurrency);\n            return Number.isNaN(concurrencyInt) ? 1\n                                                : concurrencyInt;\n        }\n        return concurrency;\n    }": {
+        "returnValue": 8
+    },
+    "InstallTrigger": {
+        "exception": "InstallTrigger is not defined"
+    },
+    "Object.getPrototypeOf(navigator.mimeTypes) ===\n                                                        MimeTypeArray.prototype": {
+        "returnValue": true
+    },
+    "Array.from(navigator.mimeTypes).map((mimeType) => {\n        return Object.getPrototypeOf(mimeType) === MimeType.prototype;\n    })": {
+        "returnValue": [
+            true,
+            true
+        ]
+    },
+    "getAllPropertyNames(navigator)": {
+        "returnValue": [
+            "vendorSub",
+            "productSub",
+            "vendor",
+            "maxTouchPoints",
+            "userActivation",
+            "doNotTrack",
+            "geolocation",
+            "connection",
+            "plugins",
+            "mimeTypes",
+            "pdfViewerEnabled",
+            "webkitTemporaryStorage",
+            "webkitPersistentStorage",
+            "hardwareConcurrency",
+            "cookieEnabled",
+            "appCodeName",
+            "appName",
+            "appVersion",
+            "platform",
+            "product",
+            "userAgent",
+            "language",
+            "languages",
+            "onLine",
+            "webdriver",
+            "getBattery",
+            "getGamepads",
+            "javaEnabled",
+            "sendBeacon",
+            "vibrate",
+            "constructor",
+            "scheduling",
+            "clipboard",
+            "credentials",
+            "keyboard",
+            "managed",
+            "mediaDevices",
+            "storage",
+            "serviceWorker",
+            "wakeLock",
+            "deviceMemory",
+            "ink",
+            "hid",
+            "locks",
+            "mediaCapabilities",
+            "mediaSession",
+            "permissions",
+            "presentation",
+            "serial",
+            "virtualKeyboard",
+            "usb",
+            "xr",
+            "userAgentData",
+            "clearAppBadge",
+            "setAppBadge",
+            "getInstalledRelatedApps",
+            "getUserMedia",
+            "requestMIDIAccess",
+            "requestMediaKeySystemAccess",
+            "webkitGetUserMedia",
+            "registerProtocolHandler",
+            "unregisterProtocolHandler",
+            "constructor",
+            "__defineGetter__",
+            "__defineSetter__",
+            "hasOwnProperty",
+            "__lookupGetter__",
+            "__lookupSetter__",
+            "isPrototypeOf",
+            "propertyIsEnumerable",
+            "toString",
+            "valueOf",
+            "__proto__",
+            "toLocaleString"
+        ]
+    },
+    "async () => {\n        const permission = await navigator.permissions.query({\n            name: \"notifications\",\n        });\n        return [Notification.permission, permission.state];\n    }": {
+        "returnValue": [
+            "default",
+            "prompt"
+        ]
+    },
+    "navigator.oscpu": {
+        "returnValue": 0
+    },
+    "Object.getPrototypeOf(navigator.plugins) === PluginArray.prototype": {
+        "returnValue": true
+    },
+    "Array.from(navigator.plugins).map((plugin) => {\n        return Object.getPrototypeOf(plugin) === Plugin.prototype;\n    })": {
+        "returnValue": [
+            true,
+            true,
+            true,
+            true,
+            true
+        ]
+    },
+    "navigator.productSub": {
+        "returnValue": "20030107"
+    },
+    "navigator.connection.rtt": {
+        "returnValue": 300
+    },
+    "new SharedArrayBuffer(1).byteLength": {
+        "exception": "SharedArrayBuffer is not defined"
+    },
+    "screen.width": {
+        "returnValue": 1536
+    },
+    "screen.height": {
+        "returnValue": 864
+    },
+    "typeof SourceBuffer": {
+        "returnValue": "function"
+    },
+    "typeof SourceBufferList": {
+        "returnValue": "function"
+    },
+    "navigator.maxTouchPoints": {
+        "returnValue": 10
+    },
+    "navigator.msMaxTouchPoints": {
+        "returnValue": 0
+    },
+    "navigator.vendor": {
+        "returnValue": "Google Inc."
+    },
+    "navigator.webdriver": {
+        "returnValue": false
+    },
+    "{\n        const canvasElement = document.createElement('canvas')\n        const webGLContext = canvasElement.getContext('webgl')\n        const vendor = webGLContext.getParameter(webGLContext.VENDOR)\n        const renderer = webGLContext.getParameter(webGLContext.RENDERER)\n        const version = webGLContext.getParameter(webGLContext.VERSION)\n        if (InstallTrigger !== undefined) {\n            return [vendor, renderer, version]\n        }\n        const webGLDebugInfo = webGLContext.getExtension('WEBGL_debug_renderer_info')\n        const unmaskedVendor = webGLContext.getParameter(webGLDebugInfo.UNMASKED_VENDOR_WEBGL)\n        const unmaskedRenderer = webGLContext.getParameter(webGLDebugInfo.UNMASKED_RENDERER_WEBGL)\n        return [unmaskedVendor, unmaskedRenderer, vendor, renderer, version]\n    }": {
+        "exception": "InstallTrigger is not defined"
+    },
+    "close.toString()": {
+        "returnValue": "function close() { [native code] }"
+    },
+    "external.toString()": {
+        "returnValue": "[object External]"
+    },
+    "outerWidth": {
+        "returnValue": 1536
+    },
+    "outerHeight": {
+        "returnValue": 835
+    },
+    "getAllPropertyNames(window)": {
+        "returnValue": [
+            "Object",
+            "Function",
+            "Array",
+            "Number",
+            "parseFloat",
+            "parseInt",
+            "Infinity",
+            "NaN",
+            "undefined",
+            "Boolean",
+            "String",
+            "Symbol",
+            "Date",
+            "Promise",
+            "RegExp",
+            "Error",
+            "AggregateError",
+            "EvalError",
+            "RangeError",
+            "ReferenceError",
+            "SyntaxError",
+            "TypeError",
+            "URIError",
+            "globalThis",
+            "JSON",
+            "Math",
+            "Intl",
+            "ArrayBuffer",
+            "Uint8Array",
+            "Int8Array",
+            "Uint16Array",
+            "Int16Array",
+            "Uint32Array",
+            "Int32Array",
+            "Float32Array",
+            "Float64Array",
+            "Uint8ClampedArray",
+            "BigUint64Array",
+            "BigInt64Array",
+            "DataView",
+            "Map",
+            "BigInt",
+            "Set",
+            "WeakMap",
+            "WeakSet",
+            "Proxy",
+            "Reflect",
+            "FinalizationRegistry",
+            "WeakRef",
+            "decodeURI",
+            "decodeURIComponent",
+            "encodeURI",
+            "encodeURIComponent",
+            "escape",
+            "unescape",
+            "eval",
+            "isFinite",
+            "isNaN",
+            "console",
+            "Option",
+            "Image",
+            "Audio",
+            "webkitURL",
+            "webkitRTCPeerConnection",
+            "webkitMediaStream",
+            "WebKitMutationObserver",
+            "WebKitCSSMatrix",
+            "XPathResult",
+            "XPathExpression",
+            "XPathEvaluator",
+            "XMLSerializer",
+            "XMLHttpRequestUpload",
+            "XMLHttpRequestEventTarget",
+            "XMLHttpRequest",
+            "XMLDocument",
+            "WritableStreamDefaultWriter",
+            "WritableStreamDefaultController",
+            "WritableStream",
+            "Worker",
+            "Window",
+            "WheelEvent",
+            "WebSocket",
+            "WebGLVertexArrayObject",
+            "WebGLUniformLocation",
+            "WebGLTransformFeedback",
+            "WebGLTexture",
+            "WebGLSync",
+            "WebGLShaderPrecisionFormat",
+            "WebGLShader",
+            "WebGLSampler",
+            "WebGLRenderingContext",
+            "WebGLRenderbuffer",
+            "WebGLQuery",
+            "WebGLProgram",
+            "WebGLFramebuffer",
+            "WebGLContextEvent",
+            "WebGLBuffer",
+            "WebGLActiveInfo",
+            "WebGL2RenderingContext",
+            "WaveShaperNode",
+            "VisualViewport",
+            "ValidityState",
+            "VTTCue",
+            "UserActivation",
+            "URLSearchParams",
+            "URL",
+            "UIEvent",
+            "TreeWalker",
+            "TransitionEvent",
+            "TransformStream",
+            "TrackEvent",
+            "TouchList",
+            "TouchEvent",
+            "Touch",
+            "TimeRanges",
+            "TextTrackList",
+            "TextTrackCueList",
+            "TextTrackCue",
+            "TextTrack",
+            "TextMetrics",
+            "TextEvent",
+            "TextEncoderStream",
+            "TextEncoder",
+            "TextDecoderStream",
+            "TextDecoder",
+            "Text",
+            "TaskAttributionTiming",
+            "SyncManager",
+            "SubmitEvent",
+            "StyleSheetList",
+            "StyleSheet",
+            "StylePropertyMapReadOnly",
+            "StylePropertyMap",
+            "StorageEvent",
+            "Storage",
+            "StereoPannerNode",
+            "StaticRange",
+            "ShadowRoot",
+            "Selection",
+            "SecurityPolicyViolationEvent",
+            "ScriptProcessorNode",
+            "ScreenOrientation",
+            "Screen",
+            "SVGViewElement",
+            "SVGUseElement",
+            "SVGUnitTypes",
+            "SVGTransformList",
+            "SVGTransform",
+            "SVGTitleElement",
+            "SVGTextPositioningElement",
+            "SVGTextPathElement",
+            "SVGTextElement",
+            "SVGTextContentElement",
+            "SVGTSpanElement",
+            "SVGSymbolElement",
+            "SVGSwitchElement",
+            "SVGStyleElement",
+            "SVGStringList",
+            "SVGStopElement",
+            "SVGSetElement",
+            "SVGScriptElement",
+            "SVGSVGElement",
+            "SVGRectElement",
+            "SVGRect",
+            "SVGRadialGradientElement",
+            "SVGPreserveAspectRatio",
+            "SVGPolylineElement",
+            "SVGPolygonElement",
+            "SVGPointList",
+            "SVGPoint",
+            "SVGPatternElement",
+            "SVGPathElement",
+            "SVGNumberList",
+            "SVGNumber",
+            "SVGMetadataElement",
+            "SVGMatrix",
+            "SVGMaskElement",
+            "SVGMarkerElement",
+            "SVGMPathElement",
+            "SVGLinearGradientElement",
+            "SVGLineElement",
+            "SVGLengthList",
+            "SVGLength",
+            "SVGImageElement",
+            "SVGGraphicsElement",
+            "SVGGradientElement",
+            "SVGGeometryElement",
+            "SVGGElement",
+            "SVGForeignObjectElement",
+            "SVGFilterElement",
+            "SVGFETurbulenceElement",
+            "SVGFETileElement",
+            "SVGFESpotLightElement",
+            "SVGFESpecularLightingElement",
+            "SVGFEPointLightElement",
+            "SVGFEOffsetElement",
+            "SVGFEMorphologyElement",
+            "SVGFEMergeNodeElement",
+            "SVGFEMergeElement",
+            "SVGFEImageElement",
+            "SVGFEGaussianBlurElement",
+            "SVGFEFuncRElement",
+            "SVGFEFuncGElement",
+            "SVGFEFuncBElement",
+            "SVGFEFuncAElement",
+            "SVGFEFloodElement",
+            "SVGFEDropShadowElement",
+            "SVGFEDistantLightElement",
+            "SVGFEDisplacementMapElement",
+            "SVGFEDiffuseLightingElement",
+            "SVGFEConvolveMatrixElement",
+            "SVGFECompositeElement",
+            "SVGFEComponentTransferElement",
+            "SVGFEColorMatrixElement",
+            "SVGFEBlendElement",
+            "SVGEllipseElement",
+            "SVGElement",
+            "SVGDescElement",
+            "SVGDefsElement",
+            "SVGComponentTransferFunctionElement",
+            "SVGClipPathElement",
+            "SVGCircleElement",
+            "SVGAnimationElement",
+            "SVGAnimatedTransformList",
+            "SVGAnimatedString",
+            "SVGAnimatedRect",
+            "SVGAnimatedPreserveAspectRatio",
+            "SVGAnimatedNumberList",
+            "SVGAnimatedNumber",
+            "SVGAnimatedLengthList",
+            "SVGAnimatedLength",
+            "SVGAnimatedInteger",
+            "SVGAnimatedEnumeration",
+            "SVGAnimatedBoolean",
+            "SVGAnimatedAngle",
+            "SVGAnimateTransformElement",
+            "SVGAnimateMotionElement",
+            "SVGAnimateElement",
+            "SVGAngle",
+            "SVGAElement",
+            "Response",
+            "ResizeObserverSize",
+            "ResizeObserverEntry",
+            "ResizeObserver",
+            "Request",
+            "ReportingObserver",
+            "ReadableStreamDefaultReader",
+            "ReadableStreamDefaultController",
+            "ReadableStreamBYOBRequest",
+            "ReadableStreamBYOBReader",
+            "ReadableStream",
+            "ReadableByteStreamController",
+            "Range",
+            "RadioNodeList",
+            "RTCTrackEvent",
+            "RTCStatsReport",
+            "RTCSessionDescription",
+            "RTCSctpTransport",
+            "RTCRtpTransceiver",
+            "RTCRtpSender",
+            "RTCRtpReceiver",
+            "RTCPeerConnectionIceEvent",
+            "RTCPeerConnectionIceErrorEvent",
+            "RTCPeerConnection",
+            "RTCIceCandidate",
+            "RTCErrorEvent",
+            "RTCError",
+            "RTCEncodedVideoFrame",
+            "RTCEncodedAudioFrame",
+            "RTCDtlsTransport",
+            "RTCDataChannelEvent",
+            "RTCDataChannel",
+            "RTCDTMFToneChangeEvent",
+            "RTCDTMFSender",
+            "RTCCertificate",
+            "PromiseRejectionEvent",
+            "ProgressEvent",
+            "ProcessingInstruction",
+            "PopStateEvent",
+            "PointerEvent",
+            "PluginArray",
+            "Plugin",
+            "PeriodicWave",
+            "PerformanceTiming",
+            "PerformanceServerTiming",
+            "PerformanceResourceTiming",
+            "PerformancePaintTiming",
+            "PerformanceObserverEntryList",
+            "PerformanceObserver",
+            "PerformanceNavigationTiming",
+            "PerformanceNavigation",
+            "PerformanceMeasure",
+            "PerformanceMark",
+            "PerformanceLongTaskTiming",
+            "PerformanceEventTiming",
+            "PerformanceEntry",
+            "PerformanceElementTiming",
+            "Performance",
+            "Path2D",
+            "PannerNode",
+            "PageTransitionEvent",
+            "OverconstrainedError",
+            "OscillatorNode",
+            "OffscreenCanvasRenderingContext2D",
+            "OffscreenCanvas",
+            "OfflineAudioContext",
+            "OfflineAudioCompletionEvent",
+            "NodeList",
+            "NodeIterator",
+            "NodeFilter",
+            "Node",
+            "NetworkInformation",
+            "Navigator",
+            "NamedNodeMap",
+            "MutationRecord",
+            "MutationObserver",
+            "MutationEvent",
+            "MouseEvent",
+            "MimeTypeArray",
+            "MimeType",
+            "MessagePort",
+            "MessageEvent",
+            "MessageChannel",
+            "MediaStreamTrackEvent",
+            "MediaStreamEvent",
+            "MediaStreamAudioSourceNode",
+            "MediaStreamAudioDestinationNode",
+            "MediaStream",
+            "MediaRecorder",
+            "MediaQueryListEvent",
+            "MediaQueryList",
+            "MediaList",
+            "MediaError",
+            "MediaEncryptedEvent",
+            "MediaElementAudioSourceNode",
+            "MediaCapabilities",
+            "Location",
+            "LayoutShiftAttribution",
+            "LayoutShift",
+            "LargestContentfulPaint",
+            "KeyframeEffect",
+            "KeyboardEvent",
+            "IntersectionObserverEntry",
+            "IntersectionObserver",
+            "InputEvent",
+            "InputDeviceInfo",
+            "InputDeviceCapabilities",
+            "ImageData",
+            "ImageCapture",
+            "ImageBitmapRenderingContext",
+            "ImageBitmap",
+            "IdleDeadline",
+            "IIRFilterNode",
+            "IDBVersionChangeEvent",
+            "IDBTransaction",
+            "IDBRequest",
+            "IDBOpenDBRequest",
+            "IDBObjectStore",
+            "IDBKeyRange",
+            "IDBIndex",
+            "IDBFactory",
+            "IDBDatabase",
+            "IDBCursorWithValue",
+            "IDBCursor",
+            "History",
+            "Headers",
+            "HashChangeEvent",
+            "HTMLVideoElement",
+            "HTMLUnknownElement",
+            "HTMLUListElement",
+            "HTMLTrackElement",
+            "HTMLTitleElement",
+            "HTMLTimeElement",
+            "HTMLTextAreaElement",
+            "HTMLTemplateElement",
+            "HTMLTableSectionElement",
+            "HTMLTableRowElement",
+            "HTMLTableElement",
+            "HTMLTableColElement",
+            "HTMLTableCellElement",
+            "HTMLTableCaptionElement",
+            "HTMLStyleElement",
+            "HTMLSpanElement",
+            "HTMLSourceElement",
+            "HTMLSlotElement",
+            "HTMLSelectElement",
+            "HTMLScriptElement",
+            "HTMLQuoteElement",
+            "HTMLProgressElement",
+            "HTMLPreElement",
+            "HTMLPictureElement",
+            "HTMLParamElement",
+            "HTMLParagraphElement",
+            "HTMLOutputElement",
+            "HTMLOptionsCollection",
+            "HTMLOptionElement",
+            "HTMLOptGroupElement",
+            "HTMLObjectElement",
+            "HTMLOListElement",
+            "HTMLModElement",
+            "HTMLMeterElement",
+            "HTMLMetaElement",
+            "HTMLMenuElement",
+            "HTMLMediaElement",
+            "HTMLMarqueeElement",
+            "HTMLMapElement",
+            "HTMLLinkElement",
+            "HTMLLegendElement",
+            "HTMLLabelElement",
+            "HTMLLIElement",
+            "HTMLInputElement",
+            "HTMLImageElement",
+            "HTMLIFrameElement",
+            "HTMLHtmlElement",
+            "HTMLHeadingElement",
+            "HTMLHeadElement",
+            "HTMLHRElement",
+            "HTMLFrameSetElement",
+            "HTMLFrameElement",
+            "HTMLFormElement",
+            "HTMLFormControlsCollection",
+            "HTMLFontElement",
+            "HTMLFieldSetElement",
+            "HTMLEmbedElement",
+            "HTMLElement",
+            "HTMLDocument",
+            "HTMLDivElement",
+            "HTMLDirectoryElement",
+            "HTMLDialogElement",
+            "HTMLDetailsElement",
+            "HTMLDataListElement",
+            "HTMLDataElement",
+            "HTMLDListElement",
+            "HTMLCollection",
+            "HTMLCanvasElement",
+            "HTMLButtonElement",
+            "HTMLBodyElement",
+            "HTMLBaseElement",
+            "HTMLBRElement",
+            "HTMLAudioElement",
+            "HTMLAreaElement",
+            "HTMLAnchorElement",
+            "HTMLAllCollection",
+            "GeolocationPositionError",
+            "GeolocationPosition",
+            "GeolocationCoordinates",
+            "Geolocation",
+            "GamepadHapticActuator",
+            "GamepadEvent",
+            "GamepadButton",
+            "Gamepad",
+            "GainNode",
+            "FormDataEvent",
+            "FormData",
+            "FontFaceSetLoadEvent",
+            "FontFace",
+            "FocusEvent",
+            "FileReader",
+            "FileList",
+            "File",
+            "FeaturePolicy",
+            "External",
+            "EventTarget",
+            "EventSource",
+            "EventCounts",
+            "Event",
+            "ErrorEvent",
+            "ElementInternals",
+            "Element",
+            "DynamicsCompressorNode",
+            "DragEvent",
+            "DocumentType",
+            "DocumentFragment",
+            "Document",
+            "DelayNode",
+            "DecompressionStream",
+            "DataTransferItemList",
+            "DataTransferItem",
+            "DataTransfer",
+            "DOMTokenList",
+            "DOMStringMap",
+            "DOMStringList",
+            "DOMRectReadOnly",
+            "DOMRectList",
+            "DOMRect",
+            "DOMQuad",
+            "DOMPointReadOnly",
+            "DOMPoint",
+            "DOMParser",
+            "DOMMatrixReadOnly",
+            "DOMMatrix",
+            "DOMImplementation",
+            "DOMException",
+            "DOMError",
+            "CustomEvent",
+            "CustomElementRegistry",
+            "Crypto",
+            "CountQueuingStrategy",
+            "ConvolverNode",
+            "ConstantSourceNode",
+            "CompressionStream",
+            "CompositionEvent",
+            "Comment",
+            "CloseEvent",
+            "ClipboardEvent",
+            "CharacterData",
+            "ChannelSplitterNode",
+            "ChannelMergerNode",
+            "CanvasRenderingContext2D",
+            "CanvasPattern",
+            "CanvasGradient",
+            "CanvasFilter",
+            "CanvasCaptureMediaStreamTrack",
+            "CSSVariableReferenceValue",
+            "CSSUnparsedValue",
+            "CSSUnitValue",
+            "CSSTranslate",
+            "CSSTransformValue",
+            "CSSTransformComponent",
+            "CSSSupportsRule",
+            "CSSStyleValue",
+            "CSSStyleSheet",
+            "CSSStyleRule",
+            "CSSStyleDeclaration",
+            "CSSSkewY",
+            "CSSSkewX",
+            "CSSSkew",
+            "CSSScale",
+            "CSSRuleList",
+            "CSSRule",
+            "CSSRotate",
+            "CSSPropertyRule",
+            "CSSPositionValue",
+            "CSSPerspective",
+            "CSSPageRule",
+            "CSSNumericValue",
+            "CSSNumericArray",
+            "CSSNamespaceRule",
+            "CSSMediaRule",
+            "CSSMatrixComponent",
+            "CSSMathValue",
+            "CSSMathSum",
+            "CSSMathProduct",
+            "CSSMathNegate",
+            "CSSMathMin",
+            "CSSMathMax",
+            "CSSMathInvert",
+            "CSSMathClamp",
+            "CSSKeywordValue",
+            "CSSKeyframesRule",
+            "CSSKeyframeRule",
+            "CSSImportRule",
+            "CSSImageValue",
+            "CSSGroupingRule",
+            "CSSFontFaceRule",
+            "CSSCounterStyleRule",
+            "CSSConditionRule",
+            "CSS",
+            "CDATASection",
+            "ByteLengthQueuingStrategy",
+            "BroadcastChannel",
+            "BlobEvent",
+            "Blob",
+            "BiquadFilterNode",
+            "BeforeUnloadEvent",
+            "BeforeInstallPromptEvent",
+            "BatteryManager",
+            "BaseAudioContext",
+            "BarProp",
+            "AudioWorkletNode",
+            "AudioScheduledSourceNode",
+            "AudioProcessingEvent",
+            "AudioParamMap",
+            "AudioParam",
+            "AudioNode",
+            "AudioListener",
+            "AudioDestinationNode",
+            "AudioContext",
+            "AudioBufferSourceNode",
+            "AudioBuffer",
+            "Attr",
+            "AnimationEvent",
+            "AnimationEffect",
+            "Animation",
+            "AnalyserNode",
+            "AbstractRange",
+            "AbortSignal",
+            "AbortController",
+            "window",
+            "self",
+            "document",
+            "name",
+            "location",
+            "customElements",
+            "history",
+            "locationbar",
+            "menubar",
+            "personalbar",
+            "scrollbars",
+            "statusbar",
+            "toolbar",
+            "status",
+            "closed",
+            "frames",
+            "length",
+            "top",
+            "opener",
+            "parent",
+            "frameElement",
+            "navigator",
+            "origin",
+            "external",
+            "screen",
+            "innerWidth",
+            "innerHeight",
+            "scrollX",
+            "pageXOffset",
+            "scrollY",
+            "pageYOffset",
+            "visualViewport",
+            "screenX",
+            "screenY",
+            "outerWidth",
+            "outerHeight",
+            "devicePixelRatio",
+            "event",
+            "clientInformation",
+            "offscreenBuffering",
+            "screenLeft",
+            "screenTop",
+            "defaultStatus",
+            "defaultstatus",
+            "styleMedia",
+            "onsearch",
+            "isSecureContext",
+            "performance",
+            "onappinstalled",
+            "onbeforeinstallprompt",
+            "crypto",
+            "indexedDB",
+            "webkitStorageInfo",
+            "sessionStorage",
+            "localStorage",
+            "onbeforexrselect",
+            "onabort",
+            "onblur",
+            "oncancel",
+            "oncanplay",
+            "oncanplaythrough",
+            "onchange",
+            "onclick",
+            "onclose",
+            "oncontextlost",
+            "oncontextmenu",
+            "oncontextrestored",
+            "oncuechange",
+            "ondblclick",
+            "ondrag",
+            "ondragend",
+            "ondragenter",
+            "ondragleave",
+            "ondragover",
+            "ondragstart",
+            "ondrop",
+            "ondurationchange",
+            "onemptied",
+            "onended",
+            "onerror",
+            "onfocus",
+            "onformdata",
+            "oninput",
+            "oninvalid",
+            "onkeydown",
+            "onkeypress",
+            "onkeyup",
+            "onload",
+            "onloadeddata",
+            "onloadedmetadata",
+            "onloadstart",
+            "onmousedown",
+            "onmouseenter",
+            "onmouseleave",
+            "onmousemove",
+            "onmouseout",
+            "onmouseover",
+            "onmouseup",
+            "onmousewheel",
+            "onpause",
+            "onplay",
+            "onplaying",
+            "onprogress",
+            "onratechange",
+            "onreset",
+            "onresize",
+            "onscroll",
+            "onsecuritypolicyviolation",
+            "onseeked",
+            "onseeking",
+            "onselect",
+            "onslotchange",
+            "onstalled",
+            "onsubmit",
+            "onsuspend",
+            "ontimeupdate",
+            "ontoggle",
+            "onvolumechange",
+            "onwaiting",
+            "onwebkitanimationend",
+            "onwebkitanimationiteration",
+            "onwebkitanimationstart",
+            "onwebkittransitionend",
+            "onwheel",
+            "onauxclick",
+            "ongotpointercapture",
+            "onlostpointercapture",
+            "onpointerdown",
+            "onpointermove",
+            "onpointerup",
+            "onpointercancel",
+            "onpointerover",
+            "onpointerout",
+            "onpointerenter",
+            "onpointerleave",
+            "onselectstart",
+            "onselectionchange",
+            "onanimationend",
+            "onanimationiteration",
+            "onanimationstart",
+            "ontransitionrun",
+            "ontransitionstart",
+            "ontransitionend",
+            "ontransitioncancel",
+            "onafterprint",
+            "onbeforeprint",
+            "onbeforeunload",
+            "onhashchange",
+            "onlanguagechange",
+            "onmessage",
+            "onmessageerror",
+            "onoffline",
+            "ononline",
+            "onpagehide",
+            "onpageshow",
+            "onpopstate",
+            "onrejectionhandled",
+            "onstorage",
+            "onunhandledrejection",
+            "onunload",
+            "alert",
+            "atob",
+            "blur",
+            "btoa",
+            "cancelAnimationFrame",
+            "cancelIdleCallback",
+            "captureEvents",
+            "clearInterval",
+            "clearTimeout",
+            "close",
+            "confirm",
+            "createImageBitmap",
+            "fetch",
+            "find",
+            "focus",
+            "getComputedStyle",
+            "getSelection",
+            "matchMedia",
+            "moveBy",
+            "moveTo",
+            "open",
+            "postMessage",
+            "print",
+            "prompt",
+            "queueMicrotask",
+            "releaseEvents",
+            "reportError",
+            "requestAnimationFrame",
+            "requestIdleCallback",
+            "resizeBy",
+            "resizeTo",
+            "scroll",
+            "scrollBy",
+            "scrollTo",
+            "setInterval",
+            "setTimeout",
+            "stop",
+            "structuredClone",
+            "webkitCancelAnimationFrame",
+            "webkitRequestAnimationFrame",
+            "Atomics",
+            "chrome",
+            "WebAssembly",
+            "caches",
+            "cookieStore",
+            "ondevicemotion",
+            "ondeviceorientation",
+            "ondeviceorientationabsolute",
+            "AbsoluteOrientationSensor",
+            "Accelerometer",
+            "AudioWorklet",
+            "Cache",
+            "CacheStorage",
+            "Clipboard",
+            "ClipboardItem",
+            "CookieChangeEvent",
+            "CookieStore",
+            "CookieStoreManager",
+            "Credential",
+            "CredentialsContainer",
+            "CryptoKey",
+            "DeviceMotionEvent",
+            "DeviceMotionEventAcceleration",
+            "DeviceMotionEventRotationRate",
+            "DeviceOrientationEvent",
+            "FederatedCredential",
+            "Gyroscope",
+            "Keyboard",
+            "KeyboardLayoutMap",
+            "LinearAccelerationSensor",
+            "Lock",
+            "LockManager",
+            "MIDIAccess",
+            "MIDIConnectionEvent",
+            "MIDIInput",
+            "MIDIInputMap",
+            "MIDIMessageEvent",
+            "MIDIOutput",
+            "MIDIOutputMap",
+            "MIDIPort",
+            "MediaDeviceInfo",
+            "MediaDevices",
+            "MediaKeyMessageEvent",
+            "MediaKeySession",
+            "MediaKeyStatusMap",
+            "MediaKeySystemAccess",
+            "MediaKeys",
+            "NavigationPreloadManager",
+            "NavigatorManagedData",
+            "OrientationSensor",
+            "PasswordCredential",
+            "RTCIceTransport",
+            "RelativeOrientationSensor",
+            "Sensor",
+            "SensorErrorEvent",
+            "ServiceWorker",
+            "ServiceWorkerContainer",
+            "ServiceWorkerRegistration",
+            "StorageManager",
+            "SubtleCrypto",
+            "Worklet",
+            "XRDOMOverlayState",
+            "XRLayer",
+            "XRWebGLBinding",
+            "AudioData",
+            "EncodedAudioChunk",
+            "EncodedVideoChunk",
+            "ImageTrack",
+            "ImageTrackList",
+            "VideoColorSpace",
+            "VideoFrame",
+            "AudioDecoder",
+            "AudioEncoder",
+            "ImageDecoder",
+            "VideoDecoder",
+            "VideoEncoder",
+            "AuthenticatorAssertionResponse",
+            "AuthenticatorAttestationResponse",
+            "AuthenticatorResponse",
+            "PublicKeyCredential",
+            "EyeDropper",
+            "FileSystemDirectoryHandle",
+            "FileSystemFileHandle",
+            "FileSystemHandle",
+            "FileSystemWritableFileStream",
+            "FragmentDirective",
+            "GravitySensor",
+            "HID",
+            "HIDConnectionEvent",
+            "HIDDevice",
+            "HIDInputReportEvent",
+            "IdleDetector",
+            "MediaStreamTrackGenerator",
+            "MediaStreamTrackProcessor",
+            "OTPCredential",
+            "PaymentAddress",
+            "PaymentRequest",
+            "PaymentResponse",
+            "PaymentMethodChangeEvent",
+            "Presentation",
+            "PresentationAvailability",
+            "PresentationConnection",
+            "PresentationConnectionAvailableEvent",
+            "PresentationConnectionCloseEvent",
+            "PresentationConnectionList",
+            "PresentationReceiver",
+            "PresentationRequest",
+            "Profiler",
+            "Scheduling",
+            "ScreenDetailed",
+            "ScreenDetails",
+            "Serial",
+            "SerialPort",
+            "USB",
+            "USBAlternateInterface",
+            "USBConfiguration",
+            "USBConnectionEvent",
+            "USBDevice",
+            "USBEndpoint",
+            "USBInTransferResult",
+            "USBInterface",
+            "USBIsochronousInTransferPacket",
+            "USBIsochronousInTransferResult",
+            "USBIsochronousOutTransferPacket",
+            "USBIsochronousOutTransferResult",
+            "USBOutTransferResult",
+            "VirtualKeyboard",
+            "WakeLock",
+            "WakeLockSentinel",
+            "WebTransport",
+            "WebTransportBidirectionalStream",
+            "WebTransportDatagramDuplexStream",
+            "WebTransportError",
+            "XRAnchor",
+            "XRAnchorSet",
+            "XRBoundedReferenceSpace",
+            "XRFrame",
+            "XRInputSource",
+            "XRInputSourceArray",
+            "XRInputSourceEvent",
+            "XRInputSourcesChangeEvent",
+            "XRPose",
+            "XRReferenceSpace",
+            "XRReferenceSpaceEvent",
+            "XRRenderState",
+            "XRRigidTransform",
+            "XRSession",
+            "XRSessionEvent",
+            "XRSpace",
+            "XRSystem",
+            "XRView",
+            "XRViewerPose",
+            "XRViewport",
+            "XRWebGLLayer",
+            "XRCPUDepthInformation",
+            "XRDepthInformation",
+            "XRWebGLDepthInformation",
+            "XRHitTestResult",
+            "XRHitTestSource",
+            "XRRay",
+            "XRTransientInputHitTestResult",
+            "XRTransientInputHitTestSource",
+            "XRLightEstimate",
+            "XRLightProbe",
+            "getScreenDetails",
+            "showDirectoryPicker",
+            "showOpenFilePicker",
+            "showSaveFilePicker",
+            "originAgentCluster",
+            "trustedTypes",
+            "speechSynthesis",
+            "onpointerrawupdate",
+            "crossOriginIsolated",
+            "scheduler",
+            "AnimationPlaybackEvent",
+            "AnimationTimeline",
+            "CSSAnimation",
+            "CSSTransition",
+            "DocumentTimeline",
+            "BackgroundFetchManager",
+            "BackgroundFetchRecord",
+            "BackgroundFetchRegistration",
+            "CSSFontPaletteValuesRule",
+            "CSSLayerBlockRule",
+            "CSSLayerStatementRule",
+            "CustomStateSet",
+            "DelegatedInkTrailPresenter",
+            "Ink",
+            "MediaMetadata",
+            "MediaSession",
+            "MediaSource",
+            "SourceBuffer",
+            "SourceBufferList",
+            "MediaStreamTrack",
+            "NavigatorUAData",
+            "Notification",
+            "PaymentInstruments",
+            "PaymentManager",
+            "PaymentRequestUpdateEvent",
+            "PeriodicSyncManager",
+            "PermissionStatus",
+            "Permissions",
+            "PictureInPictureEvent",
+            "PictureInPictureWindow",
+            "PushManager",
+            "PushSubscription",
+            "PushSubscriptionOptions",
+            "RemotePlayback",
+            "Scheduler",
+            "TaskController",
+            "TaskPriorityChangeEvent",
+            "TaskSignal",
+            "SharedWorker",
+            "SpeechSynthesisErrorEvent",
+            "SpeechSynthesisEvent",
+            "SpeechSynthesisUtterance",
+            "TrustedHTML",
+            "TrustedScript",
+            "TrustedScriptURL",
+            "TrustedTypePolicy",
+            "TrustedTypePolicyFactory",
+            "URLPattern",
+            "VideoPlaybackQuality",
+            "VirtualKeyboardGeometryChangeEvent",
+            "XSLTProcessor",
+            "webkitSpeechGrammar",
+            "webkitSpeechGrammarList",
+            "webkitSpeechRecognition",
+            "webkitSpeechRecognitionError",
+            "webkitSpeechRecognitionEvent",
+            "openDatabase",
+            "webkitRequestFileSystem",
+            "webkitResolveLocalFileSystemURL",
+            "TEMPORARY",
+            "PERSISTENT",
+            "constructor",
+            "addEventListener",
+            "dispatchEvent",
+            "removeEventListener",
+            "constructor",
+            "constructor",
+            "__defineGetter__",
+            "__defineSetter__",
+            "hasOwnProperty",
+            "__lookupGetter__",
+            "__lookupSetter__",
+            "isPrototypeOf",
+            "propertyIsEnumerable",
+            "toString",
+            "valueOf",
+            "__proto__",
+            "toLocaleString"
+        ]
+    },
+    "$types": {
+        "Object~1getOwnPropertyDescriptor(Plugin~1prototype, \"version\").returnValue": "undef",
+        "new SharedArrayBuffer().exception": "referenceerror",
+        "((obj) => obj())(Function~1prototype).returnValue": "undef",
+        "((obj) => new obj())(Function~1prototype).exception": "typeerror",
+        "((obj) => obj~1prototype)(Function~1prototype).returnValue": "undef",
+        "((obj) => Object~1entries(obj))(Function~1prototype).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1getOwnPropertyNames(obj))(Function~1prototype).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1getOwnPropertySymbols(obj))(Function~1prototype).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1keys(obj))(Function~1prototype).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1values(obj))(Function~1prototype).returnValue": "arrayNonindexKeys",
+        "((obj) => [~1~1~1obj])(Function~1prototype).exception": "typeerror",
+        "((obj) => Array~1from(obj))(Function~1prototype).returnValue": "arrayNonindexKeys",
+        "((obj) => Array~1of(obj))(Function~1prototype).returnValue": "arrayNonindexKeys",
+        "((obj) => JSON~1stringify(obj))(Function~1prototype).returnValue": "undef",
+        "((obj) => structuredClone(obj))(Function~1prototype).exception": "DOMException",
+        "((obj) => structuredClone(obj))(Function~1prototype).exception.columnNumber": "undef",
+        "((obj) => structuredClone(obj))(Function~1prototype).exception.data": "undef",
+        "((obj) => structuredClone(obj))(Function~1prototype).exception.lineNumber": "undef",
+        "((obj) => structuredClone(obj))(Function~1prototype).exception.result": "undef",
+        "((obj) => +obj)(Function~1prototype).returnValue": "nan",
+        "((obj) => Number~1parseFloat(obj))(Function~1prototype).returnValue": "nan",
+        "((obj) => Number~1parseInt(obj))(Function~1prototype).returnValue": "nan",
+        "((obj) => parseFloat(obj))(Function~1prototype).returnValue": "nan",
+        "((obj) => parseInt(obj))(Function~1prototype).returnValue": "nan",
+        "((obj) => obj())(Function~1prototype~1toString).exception": "typeerror",
+        "((obj) => new obj())(Function~1prototype~1toString).exception": "typeerror",
+        "((obj) => obj~1prototype)(Function~1prototype~1toString).returnValue": "undef",
+        "((obj) => Object~1entries(obj))(Function~1prototype~1toString).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1getOwnPropertyNames(obj))(Function~1prototype~1toString).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1getOwnPropertySymbols(obj))(Function~1prototype~1toString).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1keys(obj))(Function~1prototype~1toString).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1values(obj))(Function~1prototype~1toString).returnValue": "arrayNonindexKeys",
+        "((obj) => [~1~1~1obj])(Function~1prototype~1toString).exception": "typeerror",
+        "((obj) => Array~1from(obj))(Function~1prototype~1toString).returnValue": "arrayNonindexKeys",
+        "((obj) => Array~1of(obj))(Function~1prototype~1toString).returnValue": "arrayNonindexKeys",
+        "((obj) => JSON~1stringify(obj))(Function~1prototype~1toString).returnValue": "undef",
+        "((obj) => structuredClone(obj))(Function~1prototype~1toString).exception": "DOMException",
+        "((obj) => structuredClone(obj))(Function~1prototype~1toString).exception.columnNumber": "undef",
+        "((obj) => structuredClone(obj))(Function~1prototype~1toString).exception.data": "undef",
+        "((obj) => structuredClone(obj))(Function~1prototype~1toString).exception.lineNumber": "undef",
+        "((obj) => structuredClone(obj))(Function~1prototype~1toString).exception.result": "undef",
+        "((obj) => +obj)(Function~1prototype~1toString).returnValue": "nan",
+        "((obj) => Number~1parseFloat(obj))(Function~1prototype~1toString).returnValue": "nan",
+        "((obj) => Number~1parseInt(obj))(Function~1prototype~1toString).returnValue": "nan",
+        "((obj) => parseFloat(obj))(Function~1prototype~1toString).returnValue": "nan",
+        "((obj) => parseInt(obj))(Function~1prototype~1toString).returnValue": "nan",
+        "((obj) => obj())(navigator).exception": "typeerror",
+        "((obj) => new obj())(navigator).exception": "typeerror",
+        "((obj) => obj~1prototype)(navigator).returnValue": "undef",
+        "((obj) => Object~1entries(obj))(navigator).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1getOwnPropertyNames(obj))(navigator).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1getOwnPropertySymbols(obj))(navigator).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1keys(obj))(navigator).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1values(obj))(navigator).returnValue": "arrayNonindexKeys",
+        "((obj) => [~1~1~1obj])(navigator).exception": "typeerror",
+        "((obj) => Array~1from(obj))(navigator).returnValue": "arrayNonindexKeys",
+        "((obj) => Array~1of(obj))(navigator).returnValue": "arrayNonindexKeys",
+        "((obj) => structuredClone(obj))(navigator).exception": "DOMException",
+        "((obj) => structuredClone(obj))(navigator).exception.columnNumber": "undef",
+        "((obj) => structuredClone(obj))(navigator).exception.data": "undef",
+        "((obj) => structuredClone(obj))(navigator).exception.lineNumber": "undef",
+        "((obj) => structuredClone(obj))(navigator).exception.result": "undef",
+        "((obj) => +obj)(navigator).returnValue": "nan",
+        "((obj) => Number~1parseFloat(obj))(navigator).returnValue": "nan",
+        "((obj) => Number~1parseInt(obj))(navigator).returnValue": "nan",
+        "((obj) => parseFloat(obj))(navigator).returnValue": "nan",
+        "((obj) => parseInt(obj))(navigator).returnValue": "nan",
+        "((obj) => obj())(Object~1getPrototypeOf(navigator)).exception": "typeerror",
+        "((obj) => new obj())(Object~1getPrototypeOf(navigator)).exception": "typeerror",
+        "((obj) => obj~1prototype)(Object~1getPrototypeOf(navigator)).returnValue": "undef",
+        "((obj) => Object~1entries(obj))(Object~1getPrototypeOf(navigator)).exception": "typeerror",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.vendorSub.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.productSub.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.vendor.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.maxTouchPoints.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.userActivation.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.doNotTrack.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.geolocation.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.connection.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.plugins.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.mimeTypes.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.pdfViewerEnabled.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.webkitTemporaryStorage.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.webkitPersistentStorage.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.hardwareConcurrency.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.cookieEnabled.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.appCodeName.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.appName.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.appVersion.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.platform.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.product.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.userAgent.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.language.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.languages.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.onLine.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.webdriver.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.scheduling.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.clipboard.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.credentials.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.keyboard.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.managed.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.mediaDevices.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.storage.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.serviceWorker.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.wakeLock.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.deviceMemory.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.ink.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.hid.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.locks.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.mediaCapabilities.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.mediaSession.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.permissions.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.presentation.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.serial.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.virtualKeyboard.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.usb.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.xr.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator)).returnValue.userAgentData.set": "undef",
+        "((obj) => Object~1getOwnPropertyNames(obj))(Object~1getPrototypeOf(navigator)).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1getOwnPropertySymbols(obj))(Object~1getPrototypeOf(navigator)).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1keys(obj))(Object~1getPrototypeOf(navigator)).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1values(obj))(Object~1getPrototypeOf(navigator)).exception": "typeerror",
+        "((obj) => [~1~1~1obj])(Object~1getPrototypeOf(navigator)).exception": "typeerror",
+        "((obj) => ({~1~1~1obj}))(Object~1getPrototypeOf(navigator)).exception": "typeerror",
+        "((obj) => Array~1from(obj))(Object~1getPrototypeOf(navigator)).returnValue": "arrayNonindexKeys",
+        "((obj) => JSON~1stringify(obj))(Object~1getPrototypeOf(navigator)).exception": "typeerror",
+        "((obj) => structuredClone(obj))(Object~1getPrototypeOf(navigator)).exception": "typeerror",
+        "((obj) => +obj)(Object~1getPrototypeOf(navigator)).returnValue": "nan",
+        "((obj) => Number~1parseFloat(obj))(Object~1getPrototypeOf(navigator)).returnValue": "nan",
+        "((obj) => Number~1parseInt(obj))(Object~1getPrototypeOf(navigator)).returnValue": "nan",
+        "((obj) => parseFloat(obj))(Object~1getPrototypeOf(navigator)).returnValue": "nan",
+        "((obj) => parseInt(obj))(Object~1getPrototypeOf(navigator)).returnValue": "nan",
+        "((obj) => obj())(Navigator).exception": "typeerror",
+        "((obj) => new obj())(Navigator).exception": "typeerror",
+        "((obj) => Object~1entries(obj))(Navigator).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1getOwnPropertyNames(obj))(Navigator).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1getOwnPropertySymbols(obj))(Navigator).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1keys(obj))(Navigator).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1values(obj))(Navigator).returnValue": "arrayNonindexKeys",
+        "((obj) => [~1~1~1obj])(Navigator).exception": "typeerror",
+        "((obj) => Array~1from(obj))(Navigator).returnValue": "arrayNonindexKeys",
+        "((obj) => Array~1of(obj))(Navigator).returnValue": "arrayNonindexKeys",
+        "((obj) => JSON~1stringify(obj))(Navigator).returnValue": "undef",
+        "((obj) => structuredClone(obj))(Navigator).exception": "DOMException",
+        "((obj) => structuredClone(obj))(Navigator).exception.columnNumber": "undef",
+        "((obj) => structuredClone(obj))(Navigator).exception.data": "undef",
+        "((obj) => structuredClone(obj))(Navigator).exception.lineNumber": "undef",
+        "((obj) => structuredClone(obj))(Navigator).exception.result": "undef",
+        "((obj) => +obj)(Navigator).returnValue": "nan",
+        "((obj) => Number~1parseFloat(obj))(Navigator).returnValue": "nan",
+        "((obj) => Number~1parseInt(obj))(Navigator).returnValue": "nan",
+        "((obj) => parseFloat(obj))(Navigator).returnValue": "nan",
+        "((obj) => parseInt(obj))(Navigator).returnValue": "nan",
+        "((obj) => obj())(Navigator~1prototype).exception": "typeerror",
+        "((obj) => new obj())(Navigator~1prototype).exception": "typeerror",
+        "((obj) => obj~1prototype)(Navigator~1prototype).returnValue": "undef",
+        "((obj) => Object~1entries(obj))(Navigator~1prototype).exception": "typeerror",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.vendorSub.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.productSub.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.vendor.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.maxTouchPoints.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.userActivation.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.doNotTrack.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.geolocation.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.connection.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.plugins.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.mimeTypes.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.pdfViewerEnabled.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.webkitTemporaryStorage.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.webkitPersistentStorage.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.hardwareConcurrency.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.cookieEnabled.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.appCodeName.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.appName.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.appVersion.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.platform.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.product.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.userAgent.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.language.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.languages.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.onLine.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.webdriver.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.scheduling.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.clipboard.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.credentials.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.keyboard.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.managed.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.mediaDevices.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.storage.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.serviceWorker.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.wakeLock.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.deviceMemory.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.ink.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.hid.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.locks.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.mediaCapabilities.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.mediaSession.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.permissions.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.presentation.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.serial.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.virtualKeyboard.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.usb.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.xr.set": "undef",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Navigator~1prototype).returnValue.userAgentData.set": "undef",
+        "((obj) => Object~1getOwnPropertyNames(obj))(Navigator~1prototype).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1getOwnPropertySymbols(obj))(Navigator~1prototype).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1keys(obj))(Navigator~1prototype).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1values(obj))(Navigator~1prototype).exception": "typeerror",
+        "((obj) => [~1~1~1obj])(Navigator~1prototype).exception": "typeerror",
+        "((obj) => ({~1~1~1obj}))(Navigator~1prototype).exception": "typeerror",
+        "((obj) => Array~1from(obj))(Navigator~1prototype).returnValue": "arrayNonindexKeys",
+        "((obj) => JSON~1stringify(obj))(Navigator~1prototype).exception": "typeerror",
+        "((obj) => structuredClone(obj))(Navigator~1prototype).exception": "typeerror",
+        "((obj) => +obj)(Navigator~1prototype).returnValue": "nan",
+        "((obj) => Number~1parseFloat(obj))(Navigator~1prototype).returnValue": "nan",
+        "((obj) => Number~1parseInt(obj))(Navigator~1prototype).returnValue": "nan",
+        "((obj) => parseFloat(obj))(Navigator~1prototype).returnValue": "nan",
+        "((obj) => parseInt(obj))(Navigator~1prototype).returnValue": "nan",
+        "((obj) => obj())(navigator~1plugins).exception": "typeerror",
+        "((obj) => new obj())(navigator~1plugins).exception": "typeerror",
+        "((obj) => obj~1prototype)(navigator~1plugins).returnValue": "undef",
+        "((obj) => Object~1entries(obj))(navigator~1plugins).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1entries(obj))(navigator~1plugins).returnValue.0": "arrayNonindexKeys",
+        "((obj) => Object~1entries(obj))(navigator~1plugins).returnValue.1": "arrayNonindexKeys",
+        "((obj) => Object~1entries(obj))(navigator~1plugins).returnValue.2": "arrayNonindexKeys",
+        "((obj) => Object~1entries(obj))(navigator~1plugins).returnValue.3": "arrayNonindexKeys",
+        "((obj) => Object~1entries(obj))(navigator~1plugins).returnValue.4": "arrayNonindexKeys",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(navigator~1plugins).returnValue.PDF Viewer.value": "#",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(navigator~1plugins).returnValue.Chrome PDF Viewer.value": "#",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(navigator~1plugins).returnValue.Chromium PDF Viewer.value": "#",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(navigator~1plugins).returnValue.Microsoft Edge PDF Viewer.value": "#",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(navigator~1plugins).returnValue.WebKit built-in PDF.value": "#",
+        "((obj) => Object~1getOwnPropertyNames(obj))(navigator~1plugins).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1getOwnPropertySymbols(obj))(navigator~1plugins).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1keys(obj))(navigator~1plugins).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1values(obj))(navigator~1plugins).returnValue": "arrayNonindexKeys",
+        "((obj) => [~1~1~1obj])(navigator~1plugins).returnValue": "arrayNonindexKeys",
+        "((obj) => Array~1from(obj))(navigator~1plugins).returnValue": "arrayNonindexKeys",
+        "((obj) => Array~1of(obj))(navigator~1plugins).returnValue": "arrayNonindexKeys",
+        "((obj) => structuredClone(obj))(navigator~1plugins).exception": "DOMException",
+        "((obj) => structuredClone(obj))(navigator~1plugins).exception.columnNumber": "undef",
+        "((obj) => structuredClone(obj))(navigator~1plugins).exception.data": "undef",
+        "((obj) => structuredClone(obj))(navigator~1plugins).exception.lineNumber": "undef",
+        "((obj) => structuredClone(obj))(navigator~1plugins).exception.result": "undef",
+        "((obj) => +obj)(navigator~1plugins).returnValue": "nan",
+        "((obj) => Number~1parseFloat(obj))(navigator~1plugins).returnValue": "nan",
+        "((obj) => Number~1parseInt(obj))(navigator~1plugins).returnValue": "nan",
+        "((obj) => parseFloat(obj))(navigator~1plugins).returnValue": "nan",
+        "((obj) => parseInt(obj))(navigator~1plugins).returnValue": "nan",
+        "((obj) => obj())(Object~1getPrototypeOf(navigator~1plugins)).exception": "typeerror",
+        "((obj) => new obj())(Object~1getPrototypeOf(navigator~1plugins)).exception": "typeerror",
+        "((obj) => obj~1prototype)(Object~1getPrototypeOf(navigator~1plugins)).returnValue": "undef",
+        "((obj) => Object~1entries(obj))(Object~1getPrototypeOf(navigator~1plugins)).exception": "typeerror",
+        "((obj) => Object~1getOwnPropertyDescriptors(obj))(Object~1getPrototypeOf(navigator~1plugins)).returnValue.length.set": "undef",
+        "((obj) => Object~1getOwnPropertyNames(obj))(Object~1getPrototypeOf(navigator~1plugins)).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1getOwnPropertySymbols(obj))(Object~1getPrototypeOf(navigator~1plugins)).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1keys(obj))(Object~1getPrototypeOf(navigator~1plugins)).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1values(obj))(Object~1getPrototypeOf(navigator~1plugins)).exception": "typeerror",
+        "((obj) => [~1~1~1obj])(Object~1getPrototypeOf(navigator~1plugins)).exception": "typeerror",
+        "((obj) => ({~1~1~1obj}))(Object~1getPrototypeOf(navigator~1plugins)).exception": "typeerror",
+        "((obj) => Array~1from(obj))(Object~1getPrototypeOf(navigator~1plugins)).exception": "typeerror",
+        "((obj) => JSON~1stringify(obj))(Object~1getPrototypeOf(navigator~1plugins)).exception": "typeerror",
+        "((obj) => structuredClone(obj))(Object~1getPrototypeOf(navigator~1plugins)).exception": "typeerror",
+        "((obj) => +obj)(Object~1getPrototypeOf(navigator~1plugins)).returnValue": "nan",
+        "((obj) => Number~1parseFloat(obj))(Object~1getPrototypeOf(navigator~1plugins)).returnValue": "nan",
+        "((obj) => Number~1parseInt(obj))(Object~1getPrototypeOf(navigator~1plugins)).returnValue": "nan",
+        "((obj) => parseFloat(obj))(Object~1getPrototypeOf(navigator~1plugins)).returnValue": "nan",
+        "((obj) => parseInt(obj))(Object~1getPrototypeOf(navigator~1plugins)).returnValue": "nan",
+        "((obj) => obj())(navigator~1plugins[0]).exception": "typeerror",
+        "((obj) => new obj())(navigator~1plugins[0]).exception": "typeerror",
+        "((obj) => obj~1prototype)(navigator~1plugins[0]).returnValue": "undef",
+        "((obj) => Object~1entries(obj))(navigator~1plugins[0]).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1entries(obj))(navigator~1plugins[0]).returnValue.0": "arrayNonindexKeys",
+        "((obj) => Object~1entries(obj))(navigator~1plugins[0]).returnValue.1": "arrayNonindexKeys",
+        "((obj) => Object~1getOwnPropertyNames(obj))(navigator~1plugins[0]).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1getOwnPropertySymbols(obj))(navigator~1plugins[0]).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1keys(obj))(navigator~1plugins[0]).returnValue": "arrayNonindexKeys",
+        "((obj) => Object~1values(obj))(navigator~1plugins[0]).returnValue": "arrayNonindexKeys",
+        "((obj) => [~1~1~1obj])(navigator~1plugins[0]).returnValue": "arrayNonindexKeys",
+        "((obj) => Array~1from(obj))(navigator~1plugins[0]).returnValue": "arrayNonindexKeys",
+        "((obj) => Array~1of(obj))(navigator~1plugins[0]).returnValue": "arrayNonindexKeys",
+        "((obj) => structuredClone(obj))(navigator~1plugins[0]).exception": "DOMException",
+        "((obj) => structuredClone(obj))(navigator~1plugins[0]).exception.columnNumber": "undef",
+        "((obj) => structuredClone(obj))(navigator~1plugins[0]).exception.data": "undef",
+        "((obj) => structuredClone(obj))(navigator~1plugins[0]).exception.lineNumber": "undef",
+        "((obj) => structuredClone(obj))(navigator~1plugins[0]).exception.result": "undef",
+        "((obj) => +obj)(navigator~1plugins[0]).returnValue": "nan",
+        "((obj) => Number~1parseFloat(obj))(navigator~1plugins[0]).returnValue": "nan",
+        "((obj) => Number~1parseInt(obj))(navigator~1plugins[0]).returnValue": "nan",
+        "((obj) => parseFloat(obj))(navigator~1plugins[0]).returnValue": "nan",
+        "((obj) => parseInt(obj))(navigator~1plugins[0]).returnValue": "nan",
+        "navigator~1plugins[5].returnValue": "undef",
+        "Navigator~1prototype~1plugins.exception": "typeerror",
+        "navigator~1plugins[3]~1prototype.returnValue": "undef",
+        "+navigator~1plugins[3].returnValue": "nan",
+        "structuredClone(navigator~1plugins[0]).exception": "DOMException",
+        "structuredClone(navigator~1plugins[0]).exception.columnNumber": "undef",
+        "structuredClone(navigator~1plugins[0]).exception.data": "undef",
+        "structuredClone(navigator~1plugins[0]).exception.lineNumber": "undef",
+        "structuredClone(navigator~1plugins[0]).exception.result": "undef",
+        "Object~1getOwnPropertyNames(navigator~1plugins).returnValue": "arrayNonindexKeys",
+        "Object~1getOwnPropertySymbols(navigator~1plugins).returnValue": "arrayNonindexKeys",
+        "Object~1keys(Object~1getOwnPropertyDescriptors(navigator~1plugins)).returnValue": "arrayNonindexKeys",
+        "Plugin~1prototype~1item(0).exception": "typeerror",
+        "navigator~1plugins~1item~1caller.exception": "typeerror",
+        "navigator~1plugins~1item~1callee.returnValue": "undef",
+        "navigator~1plugins~1item~1arguments.exception": "typeerror",
+        "document~1documentElement~1getAttributeNames().returnValue": "arrayNonindexKeys",
+        "getAllPropertyNames(document).returnValue": "arrayNonindexKeys",
+        "{\n        const div = document~1createElement(\"div\");\n        div~1style~1border = \"~15px dotted transparent\";\n        document~1body~1appendChild(div);\n        const offsetHeight = div~1offsetHeight;\n        document~1body~1removeChild(div);\n        return [devicePixelRatio, offsetHeight];\n    }.returnValue": "arrayNonindexKeys",
+        "InstallTrigger.exception": "referenceerror",
+        "Array~1from(navigator~1mimeTypes)~1map((mimeType) => {\n        return Object~1getPrototypeOf(mimeType) === MimeType~1prototype;\n    }).returnValue": "arrayNonindexKeys",
+        "getAllPropertyNames(navigator).returnValue": "arrayNonindexKeys",
+        "async () => {\n        const permission = await navigator~1permissions~1query({\n            name: \"notifications\",\n        });\n        return [Notification~1permission, permission~1state];\n    }.returnValue": "arrayNonindexKeys",
+        "navigator~1oscpu.returnValue": "undef",
+        "Array~1from(navigator~1plugins)~1map((plugin) => {\n        return Object~1getPrototypeOf(plugin) === Plugin~1prototype;\n    }).returnValue": "arrayNonindexKeys",
+        "new SharedArrayBuffer(1)~1byteLength.exception": "referenceerror",
+        "navigator~1msMaxTouchPoints.returnValue": "undef",
+        "{\n        const canvasElement = document~1createElement('canvas')\n        const webGLContext = canvasElement~1getContext('webgl')\n        const vendor = webGLContext~1getParameter(webGLContext~1VENDOR)\n        const renderer = webGLContext~1getParameter(webGLContext~1RENDERER)\n        const version = webGLContext~1getParameter(webGLContext~1VERSION)\n        if (InstallTrigger !== undefined) {\n            return [vendor, renderer, version]\n        }\n        const webGLDebugInfo = webGLContext~1getExtension('WEBGL_debug_renderer_info')\n        const unmaskedVendor = webGLContext~1getParameter(webGLDebugInfo~1UNMASKED_VENDOR_WEBGL)\n        const unmaskedRenderer = webGLContext~1getParameter(webGLDebugInfo~1UNMASKED_RENDERER_WEBGL)\n        return [unmaskedVendor, unmaskedRenderer, vendor, renderer, version]\n    }.exception": "referenceerror",
+        "getAllPropertyNames(window).returnValue": "arrayNonindexKeys"
+    }
+}

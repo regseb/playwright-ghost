@@ -9,7 +9,8 @@ describe("infosimples", function () {
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
-                await page.goto("https://infosimples.github.io/detect-headless/");
+                await page.goto("https://infosimples.github.io" +
+                                                           "/detect-headless/");
                 // Attendre le résultat du dernier test.
                 await page.waitForSelector("#mouse-move-result:not(:empty)");
 

@@ -5,6 +5,8 @@ export default {
         "!/jsdocs/",
         "!/node_modules/",
         "!*.swp",
+        "!/others/",
+        "!creepjs.js",
         "**",
     ],
     checkers: [

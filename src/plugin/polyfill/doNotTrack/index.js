@@ -4,6 +4,7 @@
 
 export default class DoNotTrack {
     BrowserType_launch_before(args, browserType) {
+        /*
         if ("firefox" === browserType.name()) {
             return [{
                 firefoxUserPrefs: {
@@ -13,7 +14,7 @@ export default class DoNotTrack {
                 ...args[0],
             }];
         }
-
+*/
         return args;
     }
 }

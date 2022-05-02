@@ -1,4 +1,3 @@
-import fs from "node:fs/promises";
 import firefox from "playwright";
 
 describe("FIXME Tester des trucs", function () {

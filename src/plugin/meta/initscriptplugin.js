@@ -39,6 +39,7 @@ export default class InitScriptPlugin {
         if ("content" in script) {
             return script.content;
         }
+        throw new Error("Invalid value returned by getScript");
     }
 
     static merge(plugins) {
@@ -59,13 +60,13 @@ export default class InitScriptPlugin {
                 );
 
                 browserContext.addInitScript({
-                    content: `
-                        try {
-                            ${ghost}
-                            ${initScript}
-                        } catch (err) {
-                            console.log(err);
-                        }`,
+                    content: `{
+                        const Environment = {
+                            browser: "${browserContext.browser().browserType().name()}",
+                        };
+                        ${ghost}
+                        ${initScript}
+                    }`,
                 });
             }
             return browserContext;

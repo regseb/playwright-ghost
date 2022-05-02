@@ -22,8 +22,8 @@ if (undefined === import.meta.resolve) {
     };
 }
 
-export default class Plugins extends InitScriptPlugin {
-    async getScript() {
+export default class PdfViewerEnabled extends InitScriptPlugin {
+    async getScript(browserContext) {
         return { path: await import.meta.resolve("./script.injected.js") };
     }
 }

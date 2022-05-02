@@ -11,7 +11,8 @@ describe("Sannysoft", function () {
             try {
                 await page.goto("https://bot.sannysoft.com/");
                 // Attendre le résultat du dernier test.
-                await page.waitForSelector("#broken-image-dimensions:not(:empty)");
+                await page.waitForSelector("#broken-image-dimensions" +
+                                                                ":not(:empty)");
 
                 const results = await page.evaluate(() => {
                     return Array.from(document.querySelectorAll("td.result"))

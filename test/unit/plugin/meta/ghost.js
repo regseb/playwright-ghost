@@ -1,8 +1,5 @@
-import assert from "node:assert";
-import fs from "node:fs/promises";
-import { chromium, firefox } from "../../../../src/index.js";
-
 import { fileURLToPath } from "node:url";
+import { firefox } from "../../../../src/index.js";
 
 if (undefined === import.meta.resolve) {
 
@@ -25,11 +22,14 @@ describe("plugin/meta/script/ghost.injected.js", function () {
     describe("firefox", function () {
         describe("proxify", function () {
             it("should proxy object", async function () {
-                const browser = await firefox.launch({ plugins: { "*": false } });
+                const browser = await firefox.launch({
+                    plugins: { "*": false },
+                });
                 const context = await browser.newContext();
                 context.addInitScript({
-                    path: await import.meta.resolve("../../../../src/plugin/meta" +
-                                                    "/script/ghost.injected.js"),
+                    path: await import.meta.resolve("../../../../src/plugin" +
+                                                                "/meta/script" +
+                                                          "/ghost.injected.js"),
                 });
 
                 const page = await context.newPage();

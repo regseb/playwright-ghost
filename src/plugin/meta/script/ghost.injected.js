@@ -6,11 +6,43 @@ try {
     CHAIN_CYCLE_ERROR_MESSAGE = err.message;
 }
 
-// FIXME A supprimer.
-let count = 10;
-
 // Faire des copies des méthodes natives pour ne pas se faire détecter par un
 // Antibot qui modifirait une méthode pour vérifier qu'elle n'est pas appelée.
+
+const toStringMappings = new Map();
+
+const Utils = {
+    Array: {
+        intersect(arr1, arr2) {
+            return arr1.filter((e) => arr2.includes(e));
+        },
+    },
+    Object: {
+        getAllPropertyDescriptors(obj) {
+            const proto = Object.getPrototypeOf(obj);
+            if (null === proto) {
+                return {};
+            }
+            return {
+                ...this.getAllPropertyDescriptors(proto),
+                ...Object.getOwnPropertyDescriptors(obj),
+            };
+        },
+        getAllPropertyReadableNames(obj) {
+            return Object.entries(this.getAllPropertyDescriptors(obj))
+                         .filter(([_, d]) => undefined !== d.value ||
+                                             undefined !== d.get)
+                         .map(([n]) => n);
+        },
+        getAllPropertyWritableNames(obj) {
+            return Object.entries(this.getAllPropertyDescriptors(obj))
+                         .filter(([_, d]) => (undefined !== d.value &&
+                                              d.writable) ||
+                                             undefined !== d.set)
+                         .map(([n]) => n);
+        },
+    },
+};
 
 const Ghost = {
     defineProperty(obj, prop, handler, options) {
@@ -23,17 +55,29 @@ const Ghost = {
             ...handler,
         };
 
-        if ("get" in handler) {
-            const nativeFn = ownPropertyDescriptor.get ?? Function;
+        if (undefined !== handler.get) {
+            const nativeFn = ownPropertyDescriptor?.get ?? (() => {});
             handlerEnriched.get = Ghost.proxify(nativeFn, {
                 apply(target, thisArg) {
+                    try {
+                        nativeFn.call(thisArg);
+                    } catch (err) {
+                        // Dans Chromium.
+                        if ("Illegal invocation" === err.message) {
+                            throw err;
+                        }
+                        // Dans Firefox.
+                        if ((/'[^']+' called on an object that does not implement interface [^\.]+/u).test(err.message)) {
+                            throw err;
+                        }
+                    }
                     return handler.get.call(thisArg, nativeFn.bind(thisArg));
                 },
             }, options);
         }
 
-        if ("set" in handler) {
-            const nativeFn = ownPropertyDescriptor.set;
+        if (undefined !== handler.set) {
+            const nativeFn = ownPropertyDescriptor?.set ?? (() => {});
             handlerEnriched.set = Ghost.proxify(nativeFn, {
                 apply(target, thisArg, args) {
                     return handler.set.call(
@@ -42,25 +86,45 @@ const Ghost = {
                         nativeFn.bind(thisArg),
                     );
                 },
-            }, ...options);
+            }, options);
         }
 
         return Object.defineProperty(obj, prop, handlerEnriched);
     },
 
     conceal(obj, proto, handler = {}, options = {}) {
-        return Ghost.proxify(Object.create(proto, handler.properties), {
+        const props = {
+            readable: Utils.Array.intersect(
+                Utils.Object.getAllPropertyReadableNames(obj),
+                Utils.Object.getAllPropertyReadableNames(proto),
+            ).filter((p) => "constructor" !== p),
+            writable: Utils.Array.intersect(
+                Utils.Object.getAllPropertyWritableNames(obj),
+                Utils.Object.getAllPropertyWritableNames(proto),
+            ).filter((p) => "constructor" !== p),
+        };
+
+        const propertiesEnriched = {
+            ...Object.getOwnPropertyDescriptors(obj),
+            ...handler.properties,
+        };
+        const handlerEnriched = {
+            set(target, prop, value) {
+                return props.writable.includes(prop)
+                                                 ? Reflect.set(obj, prop, value)
+                                                 : Reflect.set(...arguments);
+            },
             get(target, prop) {
-                const props = Object.keys({
-                    ...Object.getOwnPropertyDescriptors(obj),
-                    ...Object.getOwnPropertyDescriptors(Object.getPrototypeOf(
-                                                                          obj)),
-                });
-                return props.includes(prop) ? Reflect.get(obj, prop)
-                                            : Reflect.get(target, prop);
+                return props.readable.includes(prop)
+                                                    ? Reflect.get(obj, prop)
+                                                    : Reflect.get(...arguments);
             },
             ...handler,
-        }, options);
+        };
+
+        return Ghost.proxify(Object.create(proto, propertiesEnriched),
+                             handlerEnriched,
+                             options);
     },
 
     stripProxyInStack(err) {
@@ -91,11 +155,13 @@ const Ghost = {
                     throw Ghost.stripProxyInStack(err);
                 }
             },
-            apply(target, thisArg, args) {
+
+            apply(target, thisArg, args, r) {
                 try {
                     // Appliquer le proxy seulement sur l'objet souhaité (pour
                     // éviter le Navigator.prototype.plugins).
-                    return this.nativeThis === thisArg && "apply" in handler
+                    // return this.nativeThis === thisArg && "apply" in handler
+                    return "apply" in handler
                                                   ? handler.apply(...arguments)
                                                   : Reflect.apply(...arguments);
                 } catch (err) {
@@ -103,18 +169,23 @@ const Ghost = {
                     throw Ghost.stripProxyInStack(err);
                 }
             },
+
             get(target, prop) {
+                // Ne pas tester "callee" (qui est dans le message d'erreur) car
+                // les navigateurs retournent "undefined".
                 if (target instanceof Function &&
-                        ["caller", "callee", "arguments"].includes(prop)) {
+                        ["caller", "arguments"].includes(prop)) {
                     throw new TypeError(
                         "'caller', 'callee', and 'arguments' properties may" +
                         " not be accessed on strict mode functions or the" +
                         " arguments objects for calls to them",
                     );
                 }
+                /*
                 if ("toString" === prop) {
+                    console.log(obj, obj.toString());
                     return obj.toString;
-                }
+                }*/
                 return "get" in handler ? handler.get(...arguments)
                                         : Reflect.get(...arguments);
             },
@@ -123,6 +194,8 @@ const Ghost = {
         const proxy = new Proxy(obj, handlerEnriched);
         handlerEnriched.proxy = proxy;
         handlerEnriched.nativeThis = options.nativeThis ?? proxy;
+
+        toStringMappings.set(proxy, obj.toString());
 
         if (Reflect.setPrototypeOf !== obj) {
             Ghost.defineProperty(Reflect, "setPrototypeOf", {
@@ -166,3 +239,14 @@ Ghost.defineProperty(Reflect, "setPrototypeOf", {
     }, Reflect),
 });
 */
+
+Ghost.defineProperty(Function.prototype, "toString", {
+    ...Object.getOwnPropertyDescriptor(Function.prototype, "toString"),
+    value: Ghost.proxify(Function.prototype.toString, {
+        apply(target, thisArg, args) {
+            return toStringMappings.has(thisArg) ? toStringMappings.get(thisArg)
+                                                 : Reflect.apply(...arguments);
+        },
+    }),
+});
+

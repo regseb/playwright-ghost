@@ -22,8 +22,11 @@ if (undefined === import.meta.resolve) {
     };
 }
 
-export default class Plugins extends InitScriptPlugin {
-    async getScript() {
-        return { path: await import.meta.resolve("./script.injected.js") };
+export default class SharedArrayBuffer extends InitScriptPlugin {
+    async getScript(browserContext) {
+        if ("firefox" === browserContext.browser().browserType().name()) {
+            return { path: await import.meta.resolve("./script.injected.js") };
+        }
+        return Promise.resolve();
     }
 }

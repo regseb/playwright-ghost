@@ -7,7 +7,7 @@ export default class Viewport {
         if (browser.isHeadless()) {
             return [{
                 viewport: {
-                    width: 1536,
+                    width:  1536,
                     height: 864,
                     ...args[0]?.viewport,
                 },

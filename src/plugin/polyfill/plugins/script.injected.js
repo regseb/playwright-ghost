@@ -1,51 +1,46 @@
-const Collection = class extends Array {
-    static create(arr, keyProp) {
-        return Ghost.proxify(new Collection(arr, keyProp), {
-            has(target, prop) {
-                const props = Object.keys({
-                    ...Object.getOwnPropertyDescriptors(target),
-                    ...Object.getOwnPropertyDescriptors(Object.getPrototypeOf(
-                                                                       target)),
-                });
-                return props.includes(prop);
-            },
-        });
-    }
+const CollectionUtils = {
 
-    constructor(arr, keyProp) {
-        super(...arr);
-        for (const element of arr) {
-            Object.defineProperty(this, element[keyProp], {
+    constructor(thisArg, arr, keyProp) {
+        for (const [index, element] of arr.entries()) {
+            Object.defineProperty(thisArg, index, {
                 value: element,
+                writable: false,
+            });
+            Object.defineProperty(thisArg, element[keyProp], {
+                value: element,
+                configurable: true,
             });
         }
-        for (const prop of Object.getOwnPropertyNames(arr)) {
-            if ("length" !== prop && !(/^\d+$/u).test(prop)) {
-                Object.defineProperty(this, prop, { value: arr[prop] });
-            }
-        }
-    }
+    },
 
-    item(index) {
+    item(thisArg, index) {
         // Retourner le premier élément quand le paramètre n'est pas un nombre.
         // Si le paramètre est un nombre : prendre le nombre entier inférieur.
-        return isNaN(+index) ? this[0]
-                             : this[Math.trunc(+index)] ?? null;
-    }
+        return Number.isNaN(+index) || !Number.isFinite(+index)
+                                          ? thisArg[0]
+                                          : thisArg[Math.trunc(+index)] ?? null;
+    },
 
-    namedItem(key) {
-        console.log(this);
-        // Ignorer les nombres pour ne pas retourner un élément par son index ;
-        // et aussi la propriété "length".
-        return isNaN(+key) && "length" !== key ? this[key] ?? null
-                                               : null;
-    }
+    namedItem(thisArg, key) {
+        // Ignorer les nombres pour ne pas retourner un élément par son index.
+        if (!isNaN(+key)) {
+            return null;
+        }
+
+        for (const item of thisArg) {
+            if (item === thisArg[key]) {
+                return item;
+            }
+        }
+        return null;
+    },
 };
 
 const MimeTypeClass = class {
     #description;
     #suffixes;
     #type;
+    #enabledPlugin;
 
     constructor(data) {
         this.#description = data.description;
@@ -64,14 +59,116 @@ const MimeTypeClass = class {
     get type() {
         return this.#type;
     }
+
+    get enabledPlugin() {
+        return this.#enabledPlugin;
+    }
+
+    set enabledPlugin(enabledPlugin) {
+        this.#enabledPlugin = enabledPlugin;
+    }
+
+    clone() {
+        return new MimeTypeClass({
+            description: this.#description,
+            suffixes: this.#suffixes,
+            type: this.#type,
+        })
+    }
 };
 
-// Convertir une collection en MimeTypeArray ou PluginArray.
-const convert = (arr, proto, keyProp) => {
-    const names = Object.getOwnPropertyNames(arr)
-                        .filter((n) => !(/^\d+$/u).test(n));
+const PluginClass = class extends Array {
+    #description;
+    #filename;
+    #name;
 
-    const collection = Collection.create(arr, keyProp);
+    constructor(data, mimeTypes) {
+        super(...mimeTypes);
+        CollectionUtils.constructor(this, mimeTypes, "type");
+        this.#description = data.description;
+        this.#filename = data.filename;
+        this.#name = data.name;
+    }
+
+    get description() {
+        return this.#description;
+    }
+
+    get filename() {
+        return this.#filename;
+    }
+
+    get name() {
+        return this.#name;
+    }
+};
+// Déclarer les méthodes item() et namedItem() en dehors de la classe car il
+// faut les proxiées pour cacher les méthodes toString().
+Object.defineProperty(PluginClass.prototype, "item", {
+    value: Ghost.proxify(Plugin.prototype.item, {
+        apply(target, thisArg, args) {
+            return CollectionUtils.item(thisArg, ...args);
+        },
+    }),
+});
+Object.defineProperty(PluginClass.prototype, "namedItem", {
+    value: Ghost.proxify(Plugin.prototype.namedItem, {
+        apply(target, thisArg, args) {
+            return CollectionUtils.namedItem(thisArg, ...args);
+        },
+    }),
+});
+
+const PluginArrayClass = class extends Array {
+    constructor(arr) {
+        super(...arr);
+        CollectionUtils.constructor(this, arr, "name");
+    }
+};
+// Déclarer les méthodes item() et namedItem() en dehors de la classe car il
+// faut les proxiées pour cacher les méthodes toString().
+Object.defineProperty(PluginArrayClass.prototype, "item", {
+    value: Ghost.proxify(PluginArray.prototype.item, {
+        apply(target, thisArg, args) {
+            return CollectionUtils.item(thisArg, ...args);
+        },
+    }),
+});
+Object.defineProperty(PluginArrayClass.prototype, "namedItem", {
+    value: Ghost.proxify(PluginArray.prototype.namedItem, {
+        apply(target, thisArg, args) {
+            return CollectionUtils.namedItem(thisArg, ...args);
+        },
+    }),
+});
+
+const MimeTypeArrayClass = class extends Array {
+    constructor(arr) {
+        super(...arr);
+        CollectionUtils.constructor(this, arr, "type");
+    }
+};
+// Déclarer les méthodes item() et namedItem() en dehors de la classe car il
+// faut les proxiées pour cacher les méthodes toString().
+Object.defineProperty(MimeTypeArrayClass.prototype, "item", {
+    value: Ghost.proxify(MimeTypeArray.prototype.item, {
+        apply(target, thisArg, args) {
+            return CollectionUtils.item(thisArg, ...args);
+        },
+    }),
+});
+Object.defineProperty(MimeTypeArrayClass.prototype, "namedItem", {
+    value: Ghost.proxify(MimeTypeArray.prototype.namedItem, {
+        apply(target, thisArg, args) {
+            return CollectionUtils.namedItem(thisArg, ...args);
+        },
+    }),
+});
+
+// Convertir une collection en MimeTypeArray ou PluginArray.
+const convert = (collection, proto) => {
+    const names = Object.getOwnPropertyNames(collection)
+                        .filter((n) => "length" === n);//!(/^\d+$/u).test(n));
 
     const properties = Object.fromEntries(
         Object.entries(Object.getOwnPropertyDescriptors(collection))
@@ -88,16 +185,26 @@ const convert = (arr, proto, keyProp) => {
     );
 
     return Ghost.conceal(collection, proto, {
-        properties,
+        properties: {
+            // Rendre configurable la propriété "length" récupérée du tableau
+            // car il ne faut pas la retourner à l'appel de
+            // Object.getOwnPropertyNames() (sans cette configuration à true,
+            // l'erreur suivante est retournée : "proxy can't skip a
+            // non-configurable property 'length'").
+            length: {
+                ...Object.getOwnPropertyDescriptor(collection, "length"),
+                configurable: true,
+            },
+        },
         ownKeys() {
             return Object.getOwnPropertyNames(collection)
-                         .filter((n) => !names.includes(n));
+                         .filter((n) => "length" !== n);
         },
 
         getOwnPropertyDescriptor(target, prop) {
-            return names.includes(prop)
-                ? undefined
-                : Reflect.getOwnPropertyDescriptor(target, prop);
+            return "length" === prop
+                               ? undefined
+                               : Reflect.getOwnPropertyDescriptor(target, prop);
         },
     });
 };
@@ -114,8 +221,11 @@ const MIME_TYPES_DATA = [{
     description: "Portable Document Format",
     suffixes: "pdf",
     type: "text/pdf",
-}]
-const MIME_TYPES = MIME_TYPES_DATA.map((m) => Ghost.conceal(m, MimeType.prototype));
+}].map((m) => new MimeTypeClass(m));
+
+const MIME_TYPES = new MimeTypeArrayClass(MIME_TYPES_DATA.map((mimeType) => {
+    return Ghost.conceal(mimeType, MimeType.prototype);
+}));
 
 const PLUGINS_DATA = [{
     description: "Portable Document Format",
@@ -137,20 +247,21 @@ const PLUGINS_DATA = [{
     description: "Portable Document Format",
     filename: "internal-pdf-viewer",
     name: "WebKit built-in PDF",
-}];
-const PLUGINS = PLUGINS_DATA.map((pluginData) => {
-    const plugin = MIME_TYPES.slice();
-    Object.defineProperty(plugin, "description", {
-        value: pluginData.description,
-    });
-    Object.defineProperty(plugin, "filename", {
-        value: pluginData.filename,
-    });
-    Object.defineProperty(plugin, "name", {
-        value: pluginData.name,
-    });
-    return convert(plugin, Plugin.prototype, "type");
+}].map((p) => {
+    if ("chromium" === Environment.browser) {
+        const mimeTypes = new MimeTypeArrayClass(
+            MIME_TYPES_DATA.map((mimeType) => {
+                return Ghost.conceal(mimeType, MimeType.prototype);
+            }),
+        );
+        return new PluginClass(p, mimeTypes);
+    }
+    return new PluginClass(p, MIME_TYPES);
 });
+
+const PLUGINS = new PluginArrayClass(PLUGINS_DATA.map((plugin) => {
+    return convert(plugin, Plugin.prototype);
+}));
 
 for (const mimeTypeData of MIME_TYPES_DATA) {
     mimeTypeData.enabledPlugin = PLUGINS[0];
