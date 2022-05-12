@@ -11,8 +11,7 @@ describe("Guillotine", function () {
             try {
                 page.on("console", (msg) => console.log(msg));
                 page.on("pageerror", (err) => console.log(err));
-                await page.goto("http://127.0.0.1:8080/guillotine/" +
-                                                  "?ref=chromium&passed=false");
+                await page.goto("http://127.0.0.1:1789/?level=warn");
                 // Attendre toutes les résultats.
                 await page.waitForSelector("tbody:not(.running)",
                                            { state: "attached" });
@@ -52,13 +51,13 @@ describe("Guillotine", function () {
     describe("firefox", function () {
         it("should not lose your head", async function () {
             const browser = await firefox.launch();
+            console.log(browser.version());
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
                 page.on("console", (msg) => console.log(msg));
                 page.on("pageerror", (err) => console.log(err));
-                await page.goto("http://127.0.0.1:8080/guillotine/" +
-                                                   "?ref=firefox&passed=false");
+                await page.goto("http://127.0.0.1:1789/?level=warn");
                 // Attendre toutes les résultats.
                 await page.waitForSelector("tbody:not(.running)",
                                            { state: "attached" });

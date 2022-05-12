@@ -1,5 +1,6 @@
 /**
  * @module
+ * @see https://html.spec.whatwg.org/#pdf-viewing-support
  */
 
 import { fileURLToPath } from "node:url";

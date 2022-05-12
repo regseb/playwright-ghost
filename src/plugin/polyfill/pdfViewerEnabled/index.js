@@ -1,5 +1,7 @@
 /**
  * @module
+ * @see https://bugzilla.mozilla.org/show_bug.cgi?id=1720353
+ * @see https://support.mozilla.org/en-US/questions/950988#answer-409826
  */
 
 import { fileURLToPath } from "node:url";
