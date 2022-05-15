@@ -5,6 +5,7 @@ https://github.com/berstend/puppeteer-extra
 https://github.com/ulixee/secret-agent
 https://github.com/kkoooqq/fakebrowser
 
+- https://github.com/prescience-data/dark-knowledge
 - https://fingerprintjs.com/products/bot-detection/
 - https://github.com/ulixee/double-agent
 - https://abrahamjuliot.github.io/creepjs/

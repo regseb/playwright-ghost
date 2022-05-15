@@ -209,10 +209,6 @@ const convert = (collection, proto) => {
     });
 };
 
-// Quand Firefox est contrôlé par Playwright, le prototype Plugin a une
-// propriété "version" en plus.
-delete Plugin.prototype.version;
-
 const MIME_TYPES_DATA = [{
     description: "Portable Document Format",
     suffixes: "pdf",

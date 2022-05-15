@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import fs from "node:fs/promises";
-import fetch from "node-fetch";
+//import fetch from "node-fetch";
 import { firefox } from "../../src/index.js";
 
 describe("HeadlessDetectJS", function () {
