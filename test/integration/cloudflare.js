@@ -16,13 +16,12 @@ describe("Cloudflare", function () {
             assert.ok(title.startsWith("Extreme Down"),
                       `"${title}".startsWith(...)`);
         } catch (err) {
-            console.log(err);
-            await fs.writeFile("./log/cloudflare-fx.html",
-                               await page.content());
             await page.screenshot({
                 path:     "./log/cloudflare-fx.png",
                 fullPage: true,
             });
+            await fs.writeFile("./log/cloudflare-fx.html",
+                               await page.content());
 
             throw err;
         } finally {

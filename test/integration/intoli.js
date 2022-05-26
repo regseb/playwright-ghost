@@ -2,6 +2,8 @@ import assert from "node:assert";
 import fs from "node:fs/promises";
 import { chromium, firefox } from "../../src/index.js";
 
+/* global document */
+
 describe("Chrome Headless Detection (Intoli)", function () {
     describe("chromium", function () {
         it("should not failed", async function () {
@@ -28,12 +30,12 @@ describe("Chrome Headless Detection (Intoli)", function () {
                     assert.ok(result.status, `${result.name}: ${result.value}`);
                 }
             } catch (err) {
-                await fs.writeFile("./log/intoli-cr.html",
-                                   await page.content());
                 await page.screenshot({
                     path:     "./log/intoli-cr.png",
                     fullPage: true,
                 });
+                await fs.writeFile("./log/intoli-cr.html",
+                                   await page.content());
 
                 throw err;
             } finally {
@@ -72,12 +74,12 @@ describe("Chrome Headless Detection (Intoli)", function () {
                     assert.ok(result.status, `${result.name}: ${result.value}`);
                 }
             } catch (err) {
-                await fs.writeFile("./log/intoli-fx.html",
-                                   await page.content());
                 await page.screenshot({
                     path:     "./log/intoli-fx.png",
                     fullPage: true,
                 });
+                await fs.writeFile("./log/intoli-fx.html",
+                                   await page.content());
 
                 throw err;
             } finally {

@@ -2,29 +2,49 @@
  * @module
  */
 
-import BrowserType from "./api/browserType/index.js";
-import IsHeadless from "./api/isHeadless/index.js";
-import DoNotTrack from "./polyfill/doNotTrack/index.js";
-import PdfViewerEnabled from "./polyfill/pdfViewerEnabled/index.js";
-import Plugins from "./polyfill/plugins/index.js";
-import Screen from "./polyfill/screen/index.js";
-import SharedArrayBuffer from "./polyfill/sharedArrayBuffer/index.js";
-import UserAgent from "./polyfill/userAgent/index.js";
-import Viewport from "./polyfill/viewport/index.js";
-import Webdriver from "./polyfill/webdriver/index.js";
+import BrowserBrowserType from "./api/browser-browsertype.js";
+import BrowserIsHeadless from "./api/browser-isheadless.js";
+import Route from "./api/route.js";
+import Browser from "./hook/browser.js";
+import BrowserType from "./hook/browsertype.js";
+import Dialog from "./humanize/dialog.js";
+import Chrome from "./polyfill/chrome.js";
+import MaxTouchPoints from "./polyfill/maxtouchpoints.js";
+import NotificationPermission from "./polyfill/notification-permission.js";
+import PdfViewerEnabled from "./polyfill/pdfviewerenabled.js";
+import Plugins from "./polyfill/plugins.js";
+import RTT from "./polyfill/rtt.js";
+import SharedArrayBuffer from "./polyfill/sharedarraybuffer.js";
+import UserAgent from "./polyfill/useragent.js";
+import UserAgentData from "./polyfill/useragentdata.js";
+import Viewport from "./polyfill/viewport.js";
+import Webdriver from "./polyfill/webdriver.js";
+import WebGL from "./polyfill/webgl.js";
 
 export default [
-    // API.
+    // Hook.
     BrowserType,
-    IsHeadless,
+    Browser,
+
+    // API.
+    BrowserBrowserType,
+    BrowserIsHeadless,
+    Route,
 
     // Polyfill.
-    DoNotTrack,
+    Chrome,
+    MaxTouchPoints,
+    NotificationPermission,
     PdfViewerEnabled,
     Plugins,
-    Screen,
+    RTT,
     SharedArrayBuffer,
     UserAgent,
+    UserAgentData,
     Viewport,
     Webdriver,
+    WebGL,
+
+    // Humanize.
+    Dialog,
 ];

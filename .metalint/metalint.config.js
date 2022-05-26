@@ -16,7 +16,7 @@ export default {
                 eslint: ["eslint.config.js", "eslint_node.config.js"],
             },
         }, {
-            patterns: "/src/plugin/script/**/*.js",
+            patterns: "/src/**/*.injected.js",
             linters: {
                 eslint: ["eslint.config.js", "eslint_browser.config.js"],
             },

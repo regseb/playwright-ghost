@@ -1,3 +1,4 @@
+import assert from "node:assert";
 import fs from "node:fs/promises";
 import { chromium, firefox } from "../../src/index.js";
 
@@ -7,19 +8,25 @@ describe("Device Info", function () {
             const browser = await chromium.launch();
             const context = await browser.newContext();
             const page = await context.newPage();
+            try {
+                await page.goto("https://www.deviceinfo.me/");
+                await page.waitForTimeout(5000);
 
-            await page.goto("https://www.deviceinfo.me/");
-            await page.waitForTimeout(5000);
-            const span = await page.$(`span:text-is("(Spoofed)")`);
-            if (null !== span) {
-                console.log("Erreur");
+                const span = await page.$(`span:text-is("(Spoofed)")`);
+                // eslint-disable-next-line unicorn/no-null
+                assert.strictEqual(span, null);
+            } catch (err) {
                 await page.screenshot({
-                    path:     "deviceinfo.png",
+                    path:     "./log/deviceinfo-cr.png",
                     fullPage: true,
                 });
-                await fs.writeFile("deviceinfo.html", await page.content());
+                await fs.writeFile("./log/deviceinfo-cr.html",
+                                   await page.content());
+
+                throw err;
+            } finally {
+               await browser.close();
             }
-            await browser.close();
         });
     });
 
@@ -28,19 +35,25 @@ describe("Device Info", function () {
             const browser = await firefox.launch();
             const context = await browser.newContext();
             const page = await context.newPage();
+            try {
+                await page.goto("https://www.deviceinfo.me/");
+                await page.waitForTimeout(5000);
 
-            await page.goto("https://www.deviceinfo.me/");
-            await page.waitForTimeout(5000);
-            const span = await page.$(`span:text-is("(Spoofed)")`);
-            if (null !== span) {
-                console.log("Erreur");
+                const span = await page.$(`span:text-is("(Spoofed)")`);
+                // eslint-disable-next-line unicorn/no-null
+                assert.strictEqual(span, null);
+            } catch (err) {
                 await page.screenshot({
-                    path:     "deviceinfo.png",
+                    path:     "./log/deviceinfo-fx.png",
                     fullPage: true,
                 });
-                await fs.writeFile("deviceinfo.html", await page.content());
+                await fs.writeFile("./log/deviceinfo-fx.html",
+                                   await page.content());
+
+                throw err;
+            } finally {
+               await browser.close();
             }
-            await browser.close();
         });
     });
 });

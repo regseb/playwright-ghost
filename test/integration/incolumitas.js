@@ -1,6 +1,8 @@
 import assert from "node:assert";
 import fs from "node:fs/promises";
-import { firefox } from "../../src/index.js";
+import { chromium, firefox } from "../../src/index.js";
+
+/* eslint-disable */
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -32,7 +34,7 @@ async function solveChallenge(page) {
 
   // handle the dialog
   page.on('dialog', async dialog => {
-    console.log(dialog.message());
+    // console.log(dialog.message());
     await dialog.accept();
   });
 
@@ -64,36 +66,94 @@ async function solveChallenge(page) {
     return results;
   })
 
-  console.log(data)
+  // console.log(data)
 }
 
+/* eslint-enable */
+
 describe("Headless Chrome Detection Tests (incolumitas)", function () {
+    describe("chromium", function () {
+        it("should not failed", async function () {
+            const browser = await chromium.launch();
+            const context = await browser.newContext();
+            const page = await context.newPage();
+            try {
+                await page.goto("https://bot.incolumitas.com/");
+                await solveChallenge(page);
+                await page.waitForTimeout(6000);
+
+                const results = {
+                    newTests: JSON.parse(await page.textContent("#new-tests")),
+                    ...JSON.parse(await page.textContent("#detection-tests")),
+                };
+
+                for (const [test, values] of Object.entries(results)) {
+                    for (const [name, value] of Object.entries(values)) {
+                        if ("newTests" === test &&
+                                "behavioralClassificationScore" === name) {
+                            assert.ok(0.7 <= value,
+                                      `${test}/${name}: ${value}`);
+                        } else {
+                            assert.ok("OK" === value || "UNKNOWN" === value,
+                                      `${test}/${name}: ${value}`);
+                        }
+                    }
+                }
+            } catch (err) {
+                await page.screenshot({
+                    path:     "./log/incolumitas-cr.png",
+                    fullPage: true,
+                });
+                await fs.writeFile("./log/incolumitas-cr.html",
+                                   await page.content());
+
+                throw err;
+            } finally {
+                await browser.close();
+            }
+        });
+    });
+
     describe("firefox", function () {
-        it("should get an A grade", async function () {
+        it("should not failed", async function () {
             const browser = await firefox.launch();
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
-                await page.goto('https://bot.incolumitas.com/');
+                await page.goto("https://bot.incolumitas.com/");
                 await solveChallenge(page);
                 await page.waitForTimeout(6000);
 
-                const new_tests = JSON.parse(await page.$eval(
-                                           '#new-tests', el => el.textContent));
-                const old_tests = JSON.parse(await page.$eval(
-                                     '#detection-tests', el => el.textContent));
+                const results = {
+                    newTests: JSON.parse(await page.textContent("#new-tests")),
+                    ...JSON.parse(await page.textContent("#detection-tests")),
+                };
 
-                console.log(new_tests)
-                console.log(old_tests)
+                for (const [test, values] of Object.entries(results)) {
+                    for (const [name, value] of Object.entries(values)) {
+                        // Ignorer le test "intoli/webDriverAdvanced" qui
+                        // remonte un faux-positif sous Firefox.
+                        if ("intoli" === test && "webDriverAdvanced" === name) {
+                            continue;
+                        }
 
-                assert.ok(false);
+                        if ("newTests" === test &&
+                                "behavioralClassificationScore" === name) {
+                            assert.ok(0.7 <= value,
+                                      `${test}/${name}: ${value}`);
+                        } else {
+                            assert.ok("OK" === value || "UNKNOWN" === value,
+                                      `${test}/${name}: ${value}`);
+                        }
+                    }
+                }
             } catch (err) {
-                await fs.writeFile("./log/incolumitas-fx.html",
-                                   await page.content());
                 await page.screenshot({
                     path:     "./log/incolumitas-fx.png",
                     fullPage: true,
                 });
+                await fs.writeFile("./log/incolumitas-fx.html",
+                                   await page.content());
 
                 throw err;
             } finally {

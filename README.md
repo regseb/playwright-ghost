@@ -27,3 +27,4 @@ https://github.com/kkoooqq/fakebrowser
 - https://plaperdr.github.io/morellian-canvas/Prototype/webpage/picassauth.html
 - https://vytal.io/
 - https://infosimples.github.io/detect-headless/
+- https://browserleaks.com/webgl

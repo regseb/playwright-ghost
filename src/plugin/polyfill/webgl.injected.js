@@ -1,0 +1,22 @@
+const DEBUG_INFO = document.createElement("canvas")
+                           .getContext("webgl")
+                           .getExtension("WEBGL_debug_renderer_info");
+
+Ghost.defineProperty(WebGLRenderingContext, "getParameter", {
+    value(target, thisArg, args) {
+        const native = ReflectLocal.apply(target, thisArg, args);
+        if (DEBUG_INFO.UNMASKED_VENDOR_WEBGL === args[0]) {
+            return `Google Inc. (${native})`;
+        }
+        if (DEBUG_INFO.UNMASKED_RENDERER_WEBGL === args[0]) {
+            const vendor = ReflectLocal.apply(
+                target,
+                thisArg,
+                [DEBUG_INFO.UNMASKED_VENDOR_WEBGL],
+            );
+            // FIXME Voir pour OpenGL
+            return `ANGLE (${vendor}, ${native}, OpenGL 4.6)`;
+        }
+        return native;
+    },
+});
