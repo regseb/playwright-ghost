@@ -2,6 +2,7 @@
  * @module
  */
 
+import os from "node:os";
 import { fileURLToPath } from "node:url";
 import LEVELS from "../levels.js";
 import Plugin from "../meta/plugin.js";
@@ -28,23 +29,31 @@ export default class UserAgentDataPlugin extends Plugin {
 
     static level = LEVELS.ENABLED;
 
-    constructor() {
+    #version;
+
+    #platform;
+
+    constructor(options) {
         super();
+        this.#version = options?.version;
+        this.#platform = options?.platform ?? os.type();
+
         this.addListener("Browser.newContext:after",
                          this.#patchHeader.bind(this));
     }
 
-    // eslint-disable-next-line class-methods-use-this
     async #patchHeader(context) {
         if ("chromium" === context.browser().browserType().name() &&
                 context.browser().isHeadless()) {
-            const version = context.browser().version().replace(/\..*/u, "");
+            const version = this.#version ??
+                            context.browser().version().replace(/\..*/u, "");
 
             await context.route("**", (route) => {
                 const headers = {
                     ...route.request().headers,
-                    "sec-ch-ua": `" Not A;Brand";v="99",` +
-                                 `"Chromium":v="${version}"`,
+                    "sec-ch-ua":          `"Chromium":v="${version}",` +
+                                          `".Not/A)Brand";v="99"`,
+                    "sec-ch-ua-platform": `"${this.#platform}"`,
                 };
                 route.continue({ headers });
             });
@@ -53,15 +62,15 @@ export default class UserAgentDataPlugin extends Plugin {
         return context;
     }
 
-    // eslint-disable-next-line class-methods-use-this
     async addInitScript(context) {
         if ("chromium" === context.browser().browserType().name() &&
                 context.browser().isHeadless()) {
-            const version = context.browser().version().replace(/\..*/u, "");
+            const version = this.#version ??
+                            context.browser().version().replace(/\..*/u, "");
 
             return {
                 path: await import.meta.resolve("./useragentdata.injected.js"),
-                args: { version },
+                args: { version, platform: this.#platform },
             };
         }
 
