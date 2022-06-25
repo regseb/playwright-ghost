@@ -1,3 +1,5 @@
+/* global ReflectNative */
+
 let CHAIN_CYCLE_ERROR_MESSAGE;
 try {
     Object.setPrototypeOf(Object.prototype.constructor,
@@ -6,11 +8,8 @@ try {
     CHAIN_CYCLE_ERROR_MESSAGE = err.message;
 }
 
-// TODO Faire des copies des méthodes natives pour ne pas se faire détecter par
-//      un Antibot qui modifirait une méthode pour vérifier qu'elle n'est pas
-//      appelée.
-
 const toStringMappings = new Map();
+const setPrototypeOfMappings = new Map();
 
 const Utils = {
     Array: {
@@ -20,27 +19,36 @@ const Utils = {
     },
     Object: {
         getAllPropertyDescriptors(obj) {
-            const proto = ObjectLocal.getPrototypeOf(obj);
+            const proto = Object.getPrototypeOf(obj);
             if (null === proto) {
                 return {};
             }
             return {
                 ...this.getAllPropertyDescriptors(proto),
-                ...ObjectLocal.getOwnPropertyDescriptors(obj),
+                ...Object.getOwnPropertyDescriptors(obj),
             };
         },
         getAllPropertyReadableNames(obj) {
-            return ObjectLocal.entries(this.getAllPropertyDescriptors(obj))
-                              .filter(([_, d]) => undefined !== d.value ||
-                                                  undefined !== d.get)
-                              .map(([n]) => n);
+            return Object.entries(this.getAllPropertyDescriptors(obj))
+                         .filter(([_, d]) => undefined !== d.value ||
+                                             undefined !== d.get)
+                         .map(([n]) => n);
         },
         getAllPropertyWritableNames(obj) {
-            return ObjectLocal.entries(this.getAllPropertyDescriptors(obj))
-                              .filter(([_, d]) => undefined !== d.value &&
-                                                  d.writable ||
-                                                  undefined !== d.set)
-                              .map(([n]) => n);
+            return Object.entries(this.getAllPropertyDescriptors(obj))
+                         .filter(([_, d]) => undefined !== d.value &&
+                                             d.writable ||
+                                             undefined !== d.set)
+                         .map(([n]) => n);
+        },
+        getAllPrototypes(obj) {
+            const protos = [];
+            let proto = Object.getPrototypeOf(obj);
+            while (null !== proto) {
+                protos.push(proto);
+                proto = Object.getPrototypeOf(proto);
+            }
+            return protos;
         },
     },
 };
@@ -89,7 +97,7 @@ const Ghost = {
                 delete clazz[name];
             }
 
-            const result = Object.defineProperty(obj, prop, handlerEnriched);
+            result = Object.defineProperty(obj, prop, handlerEnriched);
 
             // Remettre les propriétés.
             for (const [name, subhandler] of Object.entries(backup)) {
@@ -127,13 +135,13 @@ const Ghost = {
         const handlerEnriched = {
             get(target, prop) {
                 return props.readable.includes(prop)
-                                               ? ReflectLocal.get(obj, prop)
-                                               : ReflectLocal.get(target, prop);
+                                                    ? Reflect.get(obj, prop)
+                                                    : Reflect.get(target, prop);
             },
             set(target, prop, value) {
                 return props.writable.includes(prop)
-                                        ? ReflectLocal.set(obj, prop, value)
-                                        : ReflectLocal.set(target, prop, value);
+                                             ? Reflect.set(obj, prop, value)
+                                             : Reflect.set(target, prop, value);
             },
             ...handler,
         };
@@ -152,23 +160,16 @@ const Ghost = {
     proxify(obj, handler = {}, options = {}) {
         const handlerEnriched = {
             ...handler,
-            setPrototypeOf(target, thisArg, args) {
+            setPrototypeOf(target, proto) {
                 try {
-                    // (Object.setPrototype(fn, fn) || fn.__proto__ = fn) ||
-                    //     Object.setPrototypeOf(fn, Object.create(fn)
-                    if (thisArg === this.proxy ||
-                            ObjectLocal.getPrototypeOf(thisArg) ===
-                                                                   this.proxy ||
-                            thisArg ===
-                                       ObjectLocal.getPrototypeOf(this.proxy)) {
-                        if (options.isReflectSetPrototypeOf) {
-                            return false;
-                        }
+                    if (this.proxy === proto ||
+                            Utils.Object.getAllPrototypes(proto)
+                                        .includes(this.proxy)) {
                         throw new TypeError(CHAIN_CYCLE_ERROR_MESSAGE);
                     }
                     return "setPrototypeOf" in handler
-                           ? handler.setPrototypeOf(target, thisArg, args)
-                           : ReflectLocal.setPrototypeOf(target, thisArg, args);
+                           ? handler.setPrototypeOf(target, proto)
+                           : Reflect.setPrototypeOf(target, proto);
                 } catch (err) {
                     throw Ghost.stripProxyInStack(err);
                 }
@@ -184,16 +185,15 @@ const Ghost = {
                                             thisArg instanceof this.instance)) {
                         return handler.apply(target, thisArg, args);
                     }
-                    return ReflectLocal.apply(target, thisArg, args);
+                    return Reflect.apply(target, thisArg, args);
                 } catch (err) {
                     throw Ghost.stripProxyInStack(err);
                 }
             },
 
             get(target, prop, receiver) {
-                return "get" in handler
-                                     ? handler.get(target, prop, receiver)
-                                     : ReflectLocal.get(target, prop, receiver);
+                return "get" in handler ? handler.get(target, prop, receiver)
+                                        : Reflect.get(target, prop, receiver);
             },
         };
 
@@ -202,24 +202,7 @@ const Ghost = {
         handlerEnriched.instance = options.instance;
 
         toStringMappings.set(proxy, obj.toString());
-
-        if (ReflectNative.setPrototypeOf !== obj) {
-            Ghost.defineProperty(ReflectNative, "setPrototypeOf", {
-                value(target, thisArg, args) {
-                    const proto = args[0];
-                    // (Object.setPrototype(fn, fn) || fn.__proto__ = fn) ||
-                    //     Object.setPrototypeOf(fn, Object.create(fn)
-                    if (proto === proxy ||
-                                  ObjectLocal.getPrototypeOf(proto) === proxy ||
-                                  proto === ObjectLocal.getPrototypeOf(proxy) ||
-                                  ObjectLocal.getPrototypeOf(proto) === ObjectLocal.getPrototypeOf(proxy)) {
-                        return false;
-                    }
-                    return ReflectLocal.apply(target, thisArg, args);
-                },
-            }, { prototype: false, isReflectSetPrototypeOf: true });
-        }
-
+        setPrototypeOfMappings.set(proxy, obj);
         return proxy;
     },
 
@@ -243,6 +226,24 @@ Ghost.defineProperty(Function, "toString", {
     value(target, thisArg, args) {
         return toStringMappings.has(thisArg)
                                     ? toStringMappings.get(thisArg)
-                                    : ReflectLocal.apply(target, thisArg, args);
+                                    : Reflect.apply(target, thisArg, args);
     },
 });
+
+Ghost.defineProperty(ReflectNative, "setPrototypeOf", {
+    value(target, thisArg, args) {
+        const obj = args[0];
+        const proto = args[1];
+        // FIXME Voir pourquoi cette méthode est utile.
+        if (setPrototypeOfMappings.has(obj)) {
+            const subobj = setPrototypeOfMappings.get(obj);
+            if (obj === proto ||
+                    Utils.Object.getAllPrototypes(proto)
+                                .includes(obj)) {
+                return false;
+            }
+            return Reflect.apply(target, thisArg, [obj, proto]);
+        }
+        return Reflect.apply(target, thisArg, args);
+    },
+}, { prototype: false });

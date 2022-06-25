@@ -1,6 +1,3 @@
-const NumberLocal = snapshot(Number, ["isNaN", "isFinite"]);
-const MathLocal = snapshot(Math, ["trunc"]);
-
 const CollectionUtils = {
 
     constructor(thisArg, arr, keyProp) {
@@ -21,17 +18,17 @@ const CollectionUtils = {
         // Si le paramètre est un nombre : prendre le nombre entier inférieur
         // modulo 2^32.
         /* eslint-disable no-implicit-coercion */
-        return NumberLocal.isNaN(+index) || !NumberLocal.isFinite(+index)
-                           ? thisArg[0]
-                           // eslint-disable-next-line unicorn/no-null
-                           : thisArg[MathLocal.trunc(+index) % 2 ** 32] ?? null;
+        return Number.isNaN(+index) || !Number.isFinite(+index)
+                                ? thisArg[0]
+                                // eslint-disable-next-line unicorn/no-null
+                                : thisArg[Math.trunc(+index) % 2 ** 32] ?? null;
         /* eslint-enable no-implicit-coercion */
     },
 
     namedItem(thisArg, key) {
         // Ignorer les nombres pour ne pas retourner un élément par son index.
         // eslint-disable-next-line no-implicit-coercion
-        if (!NumberLocal.isNaN(+key)) {
+        if (!Number.isNaN(+key)) {
             // eslint-disable-next-line unicorn/no-null
             return null;
         }
@@ -198,14 +195,14 @@ const convert = (collection, proto) => {
             },
         },
         ownKeys() {
-            return ObjectLocal.getOwnPropertyNames(collection)
-                              .filter((n) => "length" !== n);
+            return Object.getOwnPropertyNames(collection)
+                         .filter((n) => "length" !== n);
         },
 
         getOwnPropertyDescriptor(target, prop) {
             return "length" === prop
                           ? undefined
-                          : ReflectLocal.getOwnPropertyDescriptor(target, prop);
+                          : Reflect.getOwnPropertyDescriptor(target, prop);
         },
     });
 };

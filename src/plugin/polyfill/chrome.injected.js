@@ -8,22 +8,10 @@
  * @see https://github.com/berstend/puppeteer-extra/tree/puppeteer-extra-plugin-stealth%402.9.0/packages/puppeteer-extra-plugin-stealth/evasions/chrome.runtime
  */
 
-const MathLocal = {
-    trunc: Math.trunc.bind(Math),
-};
-
-const NumberLocal = {
-    parseFloat: Number.parseFloat.bind(Number),
-};
-
-const performanceLocal = {
-    now: window.performance.now.bind(window.performance),
-};
-
-const TIME_ORIGIN = window.performance.timeOrigin;
+const TIME_ORIGIN = performance.timeOrigin;
 
 const ENTRIES = {
-    NAVIGATION: window.performance.getEntriesByType("navigation")[0] ?? {
+    NAVIGATION: performance.getEntriesByType("navigation")[0] ?? {
         domContentLoadedEventEnd: 0,
         loadEventEnd:             0,
         nextHopProtocol:          "h2",
@@ -32,7 +20,7 @@ const ENTRIES = {
         type:                     "navigate",
     },
 
-    PAINT: window.performance.getEntriesByName("first-paint", "paint")[0] ?? {
+    PAINT: performance.getEntriesByName("first-paint", "paint")[0] ?? {
         startTime: 0,
     },
 };
@@ -53,69 +41,77 @@ const convertTypeToTran = (type) => {
     }
 };
 
-const chrome = {
-    // eslint-disable-next-line func-names, prefer-arrow-callback
-    loadTimes: Ghost.patchToString(function () {
-        return {
-            requestTime: Math.trunc(TIME_ORIGIN +
-                                    ENTRIES.NAVIGATION.startTime) / 1000,
+const LOAD_TIMES = {
+    requestTime: Math.trunc(TIME_ORIGIN + ENTRIES.NAVIGATION.startTime) / 1000,
 
-            startLoadTime: Math.trunc(TIME_ORIGIN +
-                                      ENTRIES.NAVIGATION.startTime) / 1000,
+    startLoadTime: Math.trunc(TIME_ORIGIN +
+                              ENTRIES.NAVIGATION.startTime) / 1000,
 
-            commitLoadTime: Math.trunc(TIME_ORIGIN +
-                                       ENTRIES.NAVIGATION.responseStart) / 1000,
+    commitLoadTime: Math.trunc(TIME_ORIGIN +
+                               ENTRIES.NAVIGATION.responseStart) / 1000,
 
-            finishDocumentLoadTime: Math.trunc(
-                TIME_ORIGIN + ENTRIES.NAVIGATION.domContentLoadedEventEnd,
-            ) / 1000,
+    finishDocumentLoadTime: Math.trunc(TIME_ORIGIN +
+                                       ENTRIES.NAVIGATION
+                                              .domContentLoadedEventEnd) / 1000,
 
-            finishLoadTime: Math.trunc(TIME_ORIGIN +
-                                       ENTRIES.NAVIGATION.loadEventEnd) / 1000,
+    finishLoadTime: Math.trunc(TIME_ORIGIN +
+                               ENTRIES.NAVIGATION.loadEventEnd) / 1000,
 
-            firstPaintTime: Math.trunc(TIME_ORIGIN +
-                                       ENTRIES.PAINT.startTime) / 1000,
+    firstPaintTime: Math.trunc(TIME_ORIGIN + ENTRIES.PAINT.startTime) / 1000,
 
-            firstPaintAfterLoadTime: 0,
+    firstPaintAfterLoadTime: 0,
 
-            navigationType: convertTypeToNavigationType(ENTRIES.NAVIGATION
-                                                               .type),
+    navigationType: convertTypeToNavigationType(ENTRIES.NAVIGATION.type),
 
-            wasFetchedViaSpdy: ["h2", "hq"].includes(ENTRIES.NAVIGATION
-                                                            .nextHopProtocol),
+    wasFetchedViaSpdy: ["h2", "hq"].includes(ENTRIES.NAVIGATION
+                                                    .nextHopProtocol),
 
-            wasNpnNegotiated: ["h2", "hq"].includes(ENTRIES.NAVIGATION
-                                                           .nextHopProtocol),
+    wasNpnNegotiated: ["h2", "hq"].includes(ENTRIES.NAVIGATION.nextHopProtocol),
 
-            npnNegotiatedProtocol:
-                    ["h2", "hq"].includes(ENTRIES.NAVIGATION.nextHopProtocol)
+    npnNegotiatedProtocol:
+            ["h2", "hq"].includes(ENTRIES.NAVIGATION.nextHopProtocol)
                                             ? ENTRIES.NAVIGATION.nextHopProtocol
                                             : "unknown",
 
-            wasAlternateProtocolAvailable: false,
+    wasAlternateProtocolAvailable: false,
 
-            connectionInfo: ENTRIES.NAVIGATION.nextHopProtocol,
-        };
+    connectionInfo: ENTRIES.NAVIGATION.nextHopProtocol,
+};
+
+const CSI = {
+    startE: Math.trunc(TIME_ORIGIN),
+
+    onloadT: Math.trunc(TIME_ORIGIN +
+                        ENTRIES.NAVIGATION.domContentLoadedEventEnd),
+
+    // Renseigner cette propriété à l'appel de la méthode csi() car la valeur
+    // dépend de l'heure où elle a été appelée. Mais ajouter la propriété pour
+    // qu'elle soit à la bonne position (avant "tran").
+    pageT: undefined,
+
+    tran: convertTypeToTran(ENTRIES.NAVIGATION.type),
+};
+
+const chrome = {
+    // eslint-disable-next-line func-names, prefer-arrow-callback
+    loadTimes: Ghost.patchToString(function () {
+        // Créer une copie de l'objet car la méthode loadTimes() retourne un
+        // nouvel objet à chaque appel.
+        return { ...LOAD_TIMES };
+
     }),
 
     // eslint-disable-next-line func-names, prefer-arrow-callback
     csi: Ghost.patchToString(function () {
-        const now = performanceLocal.now();
+        const now = performance.now();
 
         return {
-            startE: Math.trunc(TIME_ORIGIN),
-
-            onloadT: Math.trunc(TIME_ORIGIN +
-                                ENTRIES.NAVIGATION.domContentLoadedEventEnd),
-
+            ...CSI,
             // Récupérer deux chiffres à la fin du nombre (car performance.now()
             // retourne un nombre ayant le format "XXXX.X0000000XXXXX") pour
             // avoir trois chiffres après la virgule dans pageT.
-            pageT: NumberLocal.parseFloat(
-                now.toFixed(1) + (now * 100_000_000_000 % 100).toString(),
-            ),
-
-            tran: convertTypeToTran(ENTRIES.NAVIGATION.type),
+            pageT: Math.trunc(now * 1000 +
+                              now * 100_000_000_000 % 100) / 1000,
         };
     }),
 

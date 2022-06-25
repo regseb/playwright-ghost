@@ -4,12 +4,12 @@ const DEBUG_INFO = document.createElement("canvas")
 
 Ghost.defineProperty(WebGLRenderingContext, "getParameter", {
     value(target, thisArg, args) {
-        const native = ReflectLocal.apply(target, thisArg, args);
+        const native = Reflect.apply(target, thisArg, args);
         if (DEBUG_INFO.UNMASKED_VENDOR_WEBGL === args[0]) {
             return `Google Inc. (${native})`;
         }
         if (DEBUG_INFO.UNMASKED_RENDERER_WEBGL === args[0]) {
-            const vendor = ReflectLocal.apply(
+            const vendor = Reflect.apply(
                 target,
                 thisArg,
                 [DEBUG_INFO.UNMASKED_VENDOR_WEBGL],

@@ -1,11 +1,35 @@
+/**
+ * Faire des copies des variables globales pour ne pas utiliser de variables qui
+ * ont peut-être été modifiées.
+ *
+ * @module
+ */
+
 const snapshot = (obj, props) => {
-    return window.Object.fromEntries(props.map((prop) => {
-        return [prop, obj[prop].bind(obj)];
-    }));
+    const clone = globalThis.Object.fromEntries(
+        props.filter((p) => !p.startsWith("prototype.")).map((prop) => [
+            prop,
+            obj[prop] instanceof Function ? obj[prop].bind(obj)
+                                          : obj[prop],
+        ]),
+    );
+
+    clone.prototype = globalThis.Object.fromEntries(
+        props.filter((p) => p.startsWith("prototype.")).map((p) => p.slice(9)
+                                                       .map((prop) => {
+            const fn = obj.prototype[prop];
+            return [
+                prop,
+                (thisArg, args) => fn.apply(thisArg, args),
+            ];
+        })),
+    );
+
+    return clone;
 };
 
-// Créer des versions locales de variables globales.
-const ReflectNative = window.Reflect;
+const ReflectNative = globalThis.Reflect;
+/* exported Reflect */
 const Reflect = snapshot(ReflectNative, [
     "apply",
     "get",
@@ -13,9 +37,9 @@ const Reflect = snapshot(ReflectNative, [
     "setPrototypeOf",
     "set",
 ]);
-const ReflectLocal = Reflect;
 
-const ObjectNative = window.Object;
+const ObjectNative = globalThis.Object;
+/* exported Object */
 const Object = snapshot(ObjectNative, [
     "create",
     "defineProperty",
@@ -29,4 +53,24 @@ const Object = snapshot(ObjectNative, [
     "seal",
     "setPrototypeOf",
 ]);
-const ObjectLocal = Object;
+
+const NumberNative = globalThis.Number;
+/* exported Number */
+const Number = snapshot(NumberNative, [
+    "isNaN",
+    "isFinite",
+    "parseFloat",
+]);
+
+const MathNative = globalThis.Math;
+/* exported Math */
+const Math = snapshot(MathNative, ["trunc"]);
+
+const performanceNative = globalThis.performance;
+/* exported performance */
+const performance = snapshot(performanceNative, [
+    "getEntriesByName",
+    "getEntriesByType",
+    "now",
+    "timeOrigin",
+]);

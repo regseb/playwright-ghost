@@ -3,10 +3,7 @@ const options = importMeta.arguments;
 
 Ghost.defineProperty(NavigatorUAData, "brands", {
     get() {
-        return ObjectLocal.freeze(
-               ObjectLocal.preventExtensions(
-               ObjectLocal.seal([
-            { brand: " Not A;Brand", version: "99" },
+        return Object.freeze(Object.preventExtensions(Object.seal([
             { brand: "Chromium",     version: options.version },
         ])));
     },
