@@ -1,4 +1,4 @@
-import assert from "node:assert";
+import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { chromium, firefox } from "../../src/index.js";
 
@@ -7,7 +7,7 @@ import { chromium, firefox } from "../../src/index.js";
 describe("HeadlessDetectJS", function () {
     describe("chromium", function () {
         it("should get 0 score", async function () {
-            const browser = await chromium.launch();
+            const browser = await chromium.launch({ headless: false });
             const context = await browser.newContext();
 
             const response = await fetch("https://raw.githubusercontent.com" +
@@ -25,7 +25,7 @@ describe("HeadlessDetectJS", function () {
                     return headlessDetector.getHeadlessScore();
                 });
 
-                assert.strictEqual(score, 0);
+                assert.equal(score, 0);
             } catch (err) {
                 await page.screenshot({
                     path:     "./log/headlessdetectjs-cr.png",
@@ -36,6 +36,7 @@ describe("HeadlessDetectJS", function () {
 
                 throw err;
             } finally {
+                await context.close();
                 await browser.close();
             }
         });
@@ -43,7 +44,7 @@ describe("HeadlessDetectJS", function () {
 
     describe("firefox", function () {
         it("should get 0 score", async function () {
-            const browser = await firefox.launch();
+            const browser = await firefox.launch({ headless: false });
             const context = await browser.newContext();
 
             const response = await fetch("https://raw.githubusercontent.com" +
@@ -61,7 +62,7 @@ describe("HeadlessDetectJS", function () {
                     return headlessDetector.getHeadlessScore();
                 });
 
-                assert.strictEqual(score, 0);
+                assert.equal(score, 0);
             } catch (err) {
                 await page.screenshot({
                     path:     "./log/headlessdetectjs-fx.png",
@@ -72,6 +73,7 @@ describe("HeadlessDetectJS", function () {
 
                 throw err;
             } finally {
+                await context.close();
                 await browser.close();
             }
         });

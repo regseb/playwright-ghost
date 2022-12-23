@@ -32,7 +32,8 @@ export default class PdfViewerEnabledPlugin extends Plugin {
 
     // eslint-disable-next-line class-methods-use-this
     async addInitScript(context) {
-        if (context.browser().isHeadless()) {
+        if (context.browser().isHeadless() ||
+                "firefox" === context.browser().browserType().name()) {
             return {
                 path: await import.meta.resolve("./pdfviewerenabled.injected" +
                                                                          ".js"),

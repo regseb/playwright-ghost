@@ -1,4 +1,4 @@
-import assert from "node:assert";
+import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { chromium, firefox } from "../../src/index.js";
 
@@ -29,8 +29,8 @@ describe("HyipStats", function () {
                 await page.click("#sumbit_btn");
 
                 const href = await page.getAttribute(".alert h3 a", "href");
-                assert.strictEqual(href, "https://uptobox.com/wl6zfiruo63q" +
-                                                             "?aff_id=4521439");
+                assert.equal(href,
+                    "https://uptobox.com/wl6zfiruo63q?aff_id=4521439");
             } catch (err) {
                 await page.screenshot({
                     path:     "./log/hyipstats-cr.png",
@@ -72,8 +72,8 @@ describe("HyipStats", function () {
                 await page.click("#sumbit_btn");
 
                 const href = await page.getAttribute(".alert h3 a", "href");
-                assert.strictEqual(href, "https://uptobox.com/wl6zfiruo63q" +
-                                                             "?aff_id=4521439");
+                assert.equal(href,
+                    "https://uptobox.com/wl6zfiruo63q?aff_id=4521439");
             } catch (err) {
                 await page.screenshot({
                     path:     "./log/hyipstats-fx.png",

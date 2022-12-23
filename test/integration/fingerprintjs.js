@@ -1,21 +1,30 @@
-import assert from "node:assert";
+import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { chromium, firefox } from "../../src/index.js";
 
 describe("FingerprintJS", function () {
     describe("chromium", function () {
         it("should not be detected", async function () {
-            const browser = await chromium.launch({ plugins: { "*": false } });
+            const browser = await chromium.launch({
+                headless: false,
+                plugins:  {
+                    "util/debug": false,
+                },
+            });
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
                 await page.goto("https://fingerprintjs.com/products" +
                                 "/bot-detection/");
 
-                // Attendre le résultat du dernier test.
+                // Attendre les résultats.
                 await page.waitForSelector(
-                    `[class⁼".HeroSection-module--botType--"]` +
-                    ` h3:has-text("Virtual Machine")`,
+                    `div[class^="HeroSection-module--card--"]` +
+                    ` h3:has-text("Automation Tool")`,
+                );
+                await page.waitForSelector(
+                    `div[class^="HeroSection-module--card--"]` +
+                    ` h3:has-text("Search Engine")`,
                 );
 
                 const results = await page.evaluate(() => {
@@ -28,9 +37,7 @@ describe("FingerprintJS", function () {
                 });
 
                 for (const result of results) {
-                    assert.strictEqual(result.status,
-                                       "Not detected",
-                                       result.name);
+                    assert.equal(result.status, "Not detected", result.name);
                 }
             } catch (err) {
                 await page.screenshot({
@@ -42,6 +49,7 @@ describe("FingerprintJS", function () {
 
                 throw err;
             } finally {
+                await context.close();
                 await browser.close();
             }
         });
@@ -49,17 +57,27 @@ describe("FingerprintJS", function () {
 
     describe("firefox", function () {
         it("should not be detected", async function () {
-            const browser = await firefox.launch();
+            const browser = await firefox.launch({
+                headless: false,
+                plugins:  {
+                    "util/debug": false,
+                },
+            });
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
                 await page.goto("https://fingerprintjs.com/products" +
                                 "/bot-detection/");
 
-                // Attendre le résultat du dernier test.
+                // Attendre les résultats.
                 await page.waitForSelector(
-                                   `[class⁼".HeroSection-module--botType--"]` +
-                                   ` h3:has-text("Virtual Machine")`);
+                    `div[class^="HeroSection-module--card--"]` +
+                    ` h3:has-text("Automation Tool")`,
+                );
+                await page.waitForSelector(
+                    `div[class^="HeroSection-module--card--"]` +
+                    ` h3:has-text("Search Engine")`,
+                );
 
                 const results = await page.evaluate(() => {
                     const selector = `div[class^="HeroSection-module--card--"]`;
@@ -71,9 +89,7 @@ describe("FingerprintJS", function () {
                 });
 
                 for (const result of results) {
-                    assert.strictEqual(result.status,
-                                       "Not detected",
-                                       result.name);
+                    assert.equal(result.status, "Not detected", result.name);
                 }
             } catch (err) {
                 await page.screenshot({
@@ -85,6 +101,7 @@ describe("FingerprintJS", function () {
 
                 throw err;
             } finally {
+                await context.close();
                 await browser.close();
             }
         });

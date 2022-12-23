@@ -1,4 +1,4 @@
-import assert from "node:assert";
+import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { chromium, firefox } from "../../src/index.js";
 
@@ -7,13 +7,13 @@ import { chromium, firefox } from "../../src/index.js";
 describe("Chrome Headless Detection (Intoli)", function () {
     describe("chromium", function () {
         it("should not failed", async function () {
-            const browser = await chromium.launch();
+            const browser = await chromium.launch({ headless: false });
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
                 await page.goto("https://intoli.com/blog/not-possible-to" +
-                                                      "-block-chrome-headless" +
-                                                  "/chrome-headless-test.html");
+                                "-block-chrome-headless" +
+                                "/chrome-headless-test.html");
                 // Attendre le résultat du dernier test.
                 await page.waitForSelector("#languages-result:not(:empty)");
 
@@ -39,6 +39,7 @@ describe("Chrome Headless Detection (Intoli)", function () {
 
                 throw err;
             } finally {
+                await context.close();
                 await browser.close();
             }
         });
@@ -46,13 +47,13 @@ describe("Chrome Headless Detection (Intoli)", function () {
 
     describe("firefox", function () {
         it("should not failed", async function () {
-            const browser = await firefox.launch();
+            const browser = await firefox.launch({ headless: false });
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
                 await page.goto("https://intoli.com/blog/not-possible-to" +
-                                                      "-block-chrome-headless" +
-                                                  "/chrome-headless-test.html");
+                                "-block-chrome-headless" +
+                                "/chrome-headless-test.html");
                 // Attendre le résultat du dernier test.
                 await page.waitForSelector("#languages-result:not(:empty)");
 
@@ -83,6 +84,7 @@ describe("Chrome Headless Detection (Intoli)", function () {
 
                 throw err;
             } finally {
+                await context.close();
                 await browser.close();
             }
         });

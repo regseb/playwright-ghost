@@ -2,6 +2,9 @@
  * @module
  */
 
+// FIXME Utiliser les propriétés extraHTTPHeaders et userAgent
+//       (browser.newContext).
+
 import { fileURLToPath } from "node:url";
 import LEVELS from "../levels.js";
 import Plugin from "../meta/plugin.js";
@@ -38,13 +41,14 @@ export default class UserAgentPlugin extends Plugin {
     async #patchHeader(context) {
         if ("chromium" === context.browser().browserType().name() &&
                 context.browser().isHeadless()) {
-            await context.route("**", (route) => {
-                const headers = {
-                    ...route.request().headers,
-                    "user-agent": route.request().headers["user-agent"]
+            await context.route("**", async (route, request) => {
+                await route.fallback({
+                    headers: {
+                        ...request.headers(),
+                        "user-agent": request.headers()["user-agent"]
                                                        .replace("Headless", ""),
-                };
-                route.continue({ headers });
+                    },
+                });
             });
         }
 
@@ -53,6 +57,18 @@ export default class UserAgentPlugin extends Plugin {
 
     // eslint-disable-next-line class-methods-use-this
     async addInitScript(context) {
+        if ("chromium" === context.browser().browserType().name() &&
+                context.browser().isHeadless()) {
+            return {
+                path: await import.meta.resolve("./useragent.injected.js"),
+            };
+        }
+
+        return undefined;
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    async addInitScriptServiceWorker(context) {
         if ("chromium" === context.browser().browserType().name() &&
                 context.browser().isHeadless()) {
             return {

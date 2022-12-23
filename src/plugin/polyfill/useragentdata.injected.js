@@ -4,8 +4,8 @@ const options = importMeta.arguments;
 Ghost.defineProperty(NavigatorUAData, "brands", {
     get() {
         return Object.freeze(Object.preventExtensions(Object.seal([
-            { brand: "Chromium",     version: options.version },
-            { brand: ".Not/A)Brand", version: "99" },
+            { brand: "Not?A_Brand", version: "8" },
+            { brand: "Chromium",    version: options.version },
         ])));
     },
 });

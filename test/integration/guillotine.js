@@ -1,4 +1,4 @@
-import assert from "node:assert";
+import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { chromium, firefox } from "../../src/index.js";
 
@@ -6,13 +6,12 @@ describe("Guillotine", function () {
     describe("chromium", function () {
         it("should not lose your head", async function () {
             const browser = await chromium.launch({
+                headless:       false,
                 executablePath: "/snap/bin/chromium",
             });
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
-                page.on("console", (msg) => console.log(msg));
-                page.on("pageerror", (err) => console.log(err));
                 await page.goto("http://localhost:1789/?level=warn");
                 // Attendre tous les résultats.
                 await page.waitForSelector("tbody:not(.running)",
@@ -31,6 +30,10 @@ describe("Guillotine", function () {
                 });
 
                 for (const result of results) {
+                    assert.equal(result.actual, result.expected, result.code);
+                    // Vérifier aussi le statut dans le cas où les valeurs
+                    // actuelles et espérées sont identiques, mais que
+                    // Guillotine les considère différentes.
                     assert.ok(
                         result.status,
                         `${result.code} (${result.expected}): ${result.actual}`,
@@ -46,19 +49,20 @@ describe("Guillotine", function () {
 
                 throw err;
             } finally {
-               await browser.close();
+                await context.close();
+                await browser.close();
             }
         });
     });
 
     describe("firefox", function () {
         it("should not lose your head", async function () {
-            const browser = await firefox.launch();
+            const browser = await firefox.launch({
+                headless: false,
+            });
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
-                page.on("console", (msg) => console.log(msg));
-                page.on("pageerror", (err) => console.log(err));
                 await page.goto("http://localhost:1789/?level=warn");
                 // Attendre tous les résultats.
                 await page.waitForSelector("tbody:not(.running)",
@@ -77,21 +81,26 @@ describe("Guillotine", function () {
                 });
 
                 for (const result of results) {
+                    assert.equal(result.actual, result.expected, result.code);
+                    // Vérifier aussi le statut dans le cas où les valeurs
+                    // actuelles et espérées sont identiques, mais que
+                    // Guillotine les considère différentes.
                     assert.ok(
                         result.status,
                         `${result.code} (${result.expected}): ${result.actual}`,
                     );
                 }
             } catch (err) {
+                await fs.writeFile("./log/guillotine-fx.html",
+                                   await page.content());
                 await page.screenshot({
                     path:     "./log/guillotine-fx.png",
                     fullPage: true,
                 });
-                await fs.writeFile("./log/guillotine-fx.html",
-                                   await page.content());
 
                 throw err;
             } finally {
+                await context.close();
                 await browser.close();
             }
         });

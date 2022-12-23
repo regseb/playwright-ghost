@@ -9,6 +9,12 @@ import PLUGINS from "./plugin/index.js";
 import LEVELS from "./plugin/levels.js";
 
 const normalize = function (rotten = {}) {
+    const pluginNames = new Set(PLUGINS.map((p) => p.name));
+    const unknowns = Object.keys(rotten)
+                           .filter((r) => "*" !== r && !pluginNames.has(r));
+    if (0 !== unknowns.length) {
+        throw new Error(`Plugins unknown: ${unknowns.join(", ")}`);
+    }
     return Object.fromEntries(PLUGINS.map((Plugin) => {
         if (LEVELS.MANDATORY === Plugin.level) {
             return [Plugin.name, true];

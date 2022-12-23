@@ -18,6 +18,7 @@ export default class IsHeadlessPlugin extends Plugin {
 
     // eslint-disable-next-line class-methods-use-this
     #addIsHeadless(browser, { args }) {
+        // eslint-disable-next-line no-param-reassign
         browser.isHeadless = () => {
             return args[0]?.headless ?? true;
         };

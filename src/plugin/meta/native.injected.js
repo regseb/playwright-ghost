@@ -1,6 +1,6 @@
 /**
  * Faire des copies des variables globales pour ne pas utiliser de variables qui
- * ont peut-être été modifiées.
+ * ont (ou seront) peut-être été modifiées.
  *
  * @module
  */
@@ -29,6 +29,7 @@ const snapshot = (obj, props) => {
 };
 
 const ReflectNative = globalThis.Reflect;
+// FIXME Signaler à ESLint que la méthode exported ne fonctionne pas.
 /* exported Reflect */
 const Reflect = snapshot(ReflectNative, [
     "apply",
@@ -73,4 +74,11 @@ const performance = snapshot(performanceNative, [
     "getEntriesByType",
     "now",
     "timeOrigin",
+]);
+
+const navigatorNative = globalThis.navigator;
+/* exported performance */
+const navigator = snapshot(navigatorNative, [
+    "userAgent",
+    "vendor",
 ]);

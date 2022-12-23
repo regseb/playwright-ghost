@@ -85,8 +85,8 @@ const CSI = {
                         ENTRIES.NAVIGATION.domContentLoadedEventEnd),
 
     // Renseigner cette propriété à l'appel de la méthode csi() car la valeur
-    // dépend de l'heure où elle a été appelée. Mais ajouter la propriété pour
-    // qu'elle soit à la bonne position (avant "tran").
+    // dépend de l'heure où la méthode a été appelée. Mais ajouter la propriété
+    // pour qu'elle soit à la bonne position (avant "tran").
     pageT: undefined,
 
     tran: convertTypeToTran(ENTRIES.NAVIGATION.type),
@@ -120,7 +120,8 @@ const chrome = {
 
         getDetails: Ghost.createLambdaWithName("getDetails", (...args) => {
             if (0 !== args.length) {
-                throw new TypeError("Error in invocation of app.getDetails()");
+                throw new TypeError("Error in invocation of" +
+                                    " app.getDetails(): ");
             }
             // eslint-disable-next-line unicorn/no-null
             return null;
@@ -130,7 +131,7 @@ const chrome = {
                                                    (...args) => {
             if (0 !== args.length) {
                 throw new TypeError("Error in invocation of" +
-                                    " app.getIsInstalled()");
+                                    " app.getIsInstalled(): ");
             }
             return false;
         }),
@@ -139,7 +140,7 @@ const chrome = {
                                                  (...args) => {
             if (1 !== args.length || !(args[0] instanceof Function)) {
                 throw new TypeError("Error in invocation of" +
-                                    " app.installState(function callback)");
+                                    " app.installState(function callback): ");
             }
             return undefined;
         }),
@@ -147,7 +148,7 @@ const chrome = {
         runningState: Ghost.createLambdaWithName("runningState", (...args) => {
             if (0 !== args.length) {
                 throw new TypeError("Error in invocation of" +
-                                    " app.runningState()");
+                                    " app.runningState(): ");
             }
             return "cannot_run";
         }),
@@ -166,66 +167,6 @@ const chrome = {
 
     },
 };
-
-if ("https:" === location.protocol) {
-    // FIXME
-    chrome.runtime = {
-        id: undefined,
-
-        connect() {
-            // TODO
-        },
-
-        sendMessage() {
-            // TODO
-        },
-
-        OnInstalledReason: {
-            CHROME_UPDATE:        "chrome_update",
-            INSTALL:              "install",
-            SHARED_MODULE_UPDATE: "shared_module_update",
-            UPDATE:               "update",
-        },
-
-        OnRestartRequiredReason: {
-            APP_UPDATE: "app_update",
-            OS_UPDATE:  "os_update",
-            PERIODIC:   "periodic",
-        },
-
-        PlatformArch: {
-            ARM:    "arm",
-            ARM64:  "arm64",
-            MIPS:   "mips",
-            MIPS64: "mips64",
-            X86_32: "x86-32",
-            X86_64: "x86-64",
-        },
-
-        PlatformNaclArch: {
-            ARM:    "arm",
-            MIPS:   "mips",
-            MIPS64: "mips64",
-            X86_32: "x86-32",
-            X86_64: "x86-64",
-        },
-
-        PlatformOs: {
-            ANDROID: "android",
-            CROS:    "cros",
-            LINUX:   "linux",
-            MAC:     "mac",
-            OPENBSD: "openbsd",
-            WIN:     "win",
-        },
-
-        RequestUpdateCheckStatus: {
-            NO_UPDATE:        "no_update",
-            THROTTLED:        "throttled",
-            UPDATE_AVAILABLE: "update_available",
-        },
-    };
-}
 
 Ghost.defineProperty(window, "chrome", {
     value: chrome,

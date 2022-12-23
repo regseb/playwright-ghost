@@ -1,4 +1,4 @@
-import assert from "node:assert";
+import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { chromium, firefox } from "../../src/index.js";
 
@@ -74,7 +74,7 @@ async function solveChallenge(page) {
 describe("Headless Chrome Detection Tests (incolumitas)", function () {
     describe("chromium", function () {
         it("should not failed", async function () {
-            const browser = await chromium.launch();
+            const browser = await chromium.launch({ headless: false });
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
@@ -83,6 +83,7 @@ describe("Headless Chrome Detection Tests (incolumitas)", function () {
                 await page.waitForTimeout(6000);
 
                 const results = {
+                    // eslint-disable-next-line unicorn/no-keyword-prefix
                     newTests: JSON.parse(await page.textContent("#new-tests")),
                     ...JSON.parse(await page.textContent("#detection-tests")),
                 };
@@ -109,6 +110,7 @@ describe("Headless Chrome Detection Tests (incolumitas)", function () {
 
                 throw err;
             } finally {
+                await context.close();
                 await browser.close();
             }
         });
@@ -116,7 +118,7 @@ describe("Headless Chrome Detection Tests (incolumitas)", function () {
 
     describe("firefox", function () {
         it("should not failed", async function () {
-            const browser = await firefox.launch();
+            const browser = await firefox.launch({ headless: false });
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
@@ -125,6 +127,7 @@ describe("Headless Chrome Detection Tests (incolumitas)", function () {
                 await page.waitForTimeout(6000);
 
                 const results = {
+                    // eslint-disable-next-line unicorn/no-keyword-prefix
                     newTests: JSON.parse(await page.textContent("#new-tests")),
                     ...JSON.parse(await page.textContent("#detection-tests")),
                 };
@@ -157,6 +160,7 @@ describe("Headless Chrome Detection Tests (incolumitas)", function () {
 
                 throw err;
             } finally {
+                await context.close();
                 await browser.close();
             }
         });

@@ -2,6 +2,9 @@
  * @module
  */
 
+// FIXME Utiliser les propriétés extraHTTPHeaders et userAgent
+//       (browser.newContext).
+
 import os from "node:os";
 import { fileURLToPath } from "node:url";
 import LEVELS from "../levels.js";
@@ -48,14 +51,15 @@ export default class UserAgentDataPlugin extends Plugin {
             const version = this.#version ??
                             context.browser().version().replace(/\..*/u, "");
 
-            await context.route("**", (route) => {
-                const headers = {
-                    ...route.request().headers,
-                    "sec-ch-ua":          `"Chromium":v="${version}",` +
-                                          `".Not/A)Brand";v="99"`,
-                    "sec-ch-ua-platform": `"${this.#platform}"`,
-                };
-                route.continue({ headers });
+            await context.route("**", async (route, request) => {
+                await route.fallback({
+                    headers: {
+                        ...request.headers(),
+                        "sec-ch-ua":          `" Not A;Brand";v="99",` +
+                                              `"Chromium";v="${version}"`,
+                        "sec-ch-ua-platform": `"${this.#platform}"`,
+                    },
+                });
             });
         }
 

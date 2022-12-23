@@ -29,7 +29,7 @@ const getInitContent = async function (initScript) {
         return `(${initScript.func.toString()})(${args});`;
     }
     if ("path" in initScript) {
-        const content = await fs.readFile(initScript.path);
+        const content = await fs.readFile(initScript.path, "utf8");
         return `((importMeta) => {
             ${content}
         })({ arguments: ${args} });`;
@@ -49,36 +49,81 @@ export default class InitScriptPlugin extends Plugin {
 
     constructor(plugins) {
         super();
-        this.addListener("Browser.newContext:after",
-                         this.#addAllInitScript.bind(this));
+        this.addListener("Browser.newContext:after", async (context) => {
+            await this.#addAllInitScript(context);
+            await this.#addAllInitScriptServiceWorker(context);
+            return context;
+        });
+
         this.#plugins = plugins;
     }
 
     async #addAllInitScript(context) {
         const initScripts = [];
         for (const plugin of this.#plugins) {
-            const initScript = await plugin.addInitScript(context);
-            if (undefined !== initScript) {
-                initScripts.push(await getInitContent(initScript));
+            if ("addInitScript" in plugin) {
+                const initScript = await plugin.addInitScript(context);
+                if (undefined !== initScript) {
+                    initScripts.push(await getInitContent(initScript));
+                }
             }
         }
         if (0 !== initScripts.length) {
             const native = await fs.readFile(
                 await import.meta.resolve("./native.injected.js"),
-                { encoding: "utf8" },
+                "utf8",
             );
 
             const ghost = await fs.readFile(
                 await import.meta.resolve("./ghost.injected.js"),
-                { encoding: "utf8" },
+                "utf8",
             );
 
             context.addInitScript({
+                // Enrober le code dans des accolades pour ne pas créer de
+                // variables globales (qui altéreraient les variables globales
+                // du navigateur).
                 content: `{
                     ${native}
                     ${ghost}
                     ${initScripts.join("\n")}
                 }`,
+            });
+        }
+        return context;
+    }
+
+    async #addAllInitScriptServiceWorker(context) {
+        const initScripts = [];
+        for (const plugin of this.#plugins) {
+            if ("addInitScriptServiceWorker" in plugin) {
+                const initScript =
+                    await plugin.addInitScriptServiceWorker(context);
+                if (undefined !== initScript) {
+                    initScripts.push(await getInitContent(initScript));
+                }
+            }
+        }
+        if (0 !== initScripts.length) {
+            const native = await fs.readFile(
+                await import.meta.resolve("./native.injected.js"),
+                "utf8",
+            );
+
+            const ghost = await fs.readFile(
+                await import.meta.resolve("./ghost.injected.js"),
+                "utf8",
+            );
+
+            context.on("serviceworker", async (worker) => {
+                // Enrober le code dans des accolades pour ne pas créer de
+                // variables globales (qui altéreraient les variables globales
+                // du service worker).
+                await worker.evaluate(`{
+                    ${native}
+                    ${ghost}
+                    ${initScripts.join("\n")}
+                }`);
             });
         }
         return context;

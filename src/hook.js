@@ -2,6 +2,17 @@
  * @module
  */
 
+/**
+ * @typedef {import("./src/plugin/meta/plugin.js")} Plugin
+ */
+
+/**
+ * Accroche des plugins à un objet.
+ *
+ * @param {Object}   obj     L'objet qui sera crocheté.
+ * @param {Plugin[]} plugins Les plugins accrochés à l'objet.
+ * @returns {Object} L'objet crocheté.
+ */
 export default function hook(obj, plugins) {
     return new Proxy(obj, {
         get: (target, prop, receiver) => {

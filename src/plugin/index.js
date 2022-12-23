@@ -2,9 +2,7 @@
  * @module
  */
 
-import BrowserBrowserType from "./api/browser-browsertype.js";
 import BrowserIsHeadless from "./api/browser-isheadless.js";
-import Route from "./api/route.js";
 import Browser from "./hook/browser.js";
 import BrowserType from "./hook/browsertype.js";
 import Dialog from "./humanize/dialog.js";
@@ -20,6 +18,7 @@ import UserAgentData from "./polyfill/useragentdata.js";
 import Viewport from "./polyfill/viewport.js";
 import Webdriver from "./polyfill/webdriver.js";
 import WebGL from "./polyfill/webgl.js";
+import Debug from "./util/debug.js";
 
 export default [
     // Hook.
@@ -27,9 +26,7 @@ export default [
     Browser,
 
     // API.
-    BrowserBrowserType,
     BrowserIsHeadless,
-    Route,
 
     // Polyfill.
     Chrome,
@@ -47,4 +44,7 @@ export default [
 
     // Humanize.
     Dialog,
+
+    // Util.
+    Debug,
 ];

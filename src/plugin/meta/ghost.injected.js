@@ -152,7 +152,25 @@ const Ghost = {
     },
 
     stripProxyInStack(err) {
-        // FIXME Gérer la stackTrace qui est différente sous Chromium.
+        if ("Google Inc." === navigator.vendor) {
+            err.stack = err.stack
+                .split("\n")
+                .filter((l) => !l.includes("Object.value") &&
+                               !l.includes("Object.apply") &&
+                               !l.includes("Object.get") &&
+                               !l.includes("Reflect.get") &&
+                               !l.includes("Object.setPrototypeOf") &&
+                               !l.includes("apply@debugger eval code") &&
+                               // FIXME Ces lignes sont liées aux plugins. Voir
+                               //       pour ne gérer toutes les fonctions
+                               //       proxifiées.
+                               !l.includes("Object.item") &&
+                               !l.includes("Object.namedItem"))
+               // .map((l) => l.replace("Object.toString", "Function.toString"))
+                .join("\n");
+            return err;
+        }
+        // Sinon : gérer la stackTrace de Firefox.
         err.stack = err.stack.slice(err.stack.indexOf("\n") + 1);
         return err;
     },
@@ -192,8 +210,27 @@ const Ghost = {
             },
 
             get(target, prop, receiver) {
-                return "get" in handler ? handler.get(target, prop, receiver)
-                                        : Reflect.get(target, prop, receiver);
+                // FIXME Pourquoi l'appel à la fonction d'origine ne remonte pas
+                //       cette erreur ? (seulement sur Firefox).
+                // Ne pas tester "callee" (qui est dans le message d'erreur) car
+                // les navigateurs retournent "undefined".
+                /*
+                if (target instanceof Function &&
+                        ["caller", "arguments"].includes(prop)) {
+                    throw new TypeError(
+                        "'caller', 'callee', and 'arguments' properties may" +
+                        " not be accessed on strict mode functions or the" +
+                        " arguments objects for calls to them",
+                    );
+                }*/
+
+                try {
+                    return "get" in handler
+                        ? handler.get(target, prop, receiver)
+                        : Reflect.get(target, prop, receiver);
+                } catch (err) {
+                    throw Ghost.stripProxyInStack(err);
+                }
             },
         };
 
@@ -224,26 +261,34 @@ const Ghost = {
 
 Ghost.defineProperty(Function, "toString", {
     value(target, thisArg, args) {
-        return toStringMappings.has(thisArg)
-                                    ? toStringMappings.get(thisArg)
-                                    : Reflect.apply(target, thisArg, args);
+        try {
+            return toStringMappings.has(thisArg)
+                ? toStringMappings.get(thisArg)
+                : Reflect.apply(target, thisArg, args);
+        } catch (err) {
+            throw Ghost.stripProxyInStack(err);
+        }
     },
 });
 
 Ghost.defineProperty(ReflectNative, "setPrototypeOf", {
     value(target, thisArg, args) {
-        const obj = args[0];
-        const proto = args[1];
-        // FIXME Voir pourquoi cette méthode est utile.
-        if (setPrototypeOfMappings.has(obj)) {
-            const subobj = setPrototypeOfMappings.get(obj);
-            if (obj === proto ||
-                    Utils.Object.getAllPrototypes(proto)
-                                .includes(obj)) {
-                return false;
+        try {
+            const obj = args[0];
+            const proto = args[1];
+            // FIXME Voir pourquoi cette méthode est utile.
+            if (setPrototypeOfMappings.has(obj)) {
+                // const subobj = setPrototypeOfMappings.get(obj);
+                if (obj === proto ||
+                        Utils.Object.getAllPrototypes(proto)
+                                    .includes(obj)) {
+                    return false;
+                }
+                return Reflect.apply(target, thisArg, [obj, proto]);
             }
-            return Reflect.apply(target, thisArg, [obj, proto]);
+            return Reflect.apply(target, thisArg, args);
+        } catch (err) {
+            throw Ghost.stripProxyInStack(err);
         }
-        return Reflect.apply(target, thisArg, args);
     },
 }, { prototype: false });

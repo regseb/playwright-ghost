@@ -1,11 +1,11 @@
 import assert from "node:assert";
 import fs from "node:fs/promises";
-import { chromium, firefox, vanilla } from "../../src/index.js";
+import { chromium, firefox } from "../../src/index.js";
 
 describe("CreepJS", function () {
     describe("chromium", function () {
         it("should get an A grade", async function () {
-            const browser = await chromium.launch();
+            const browser = await chromium.launch({ headless: false });
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
@@ -18,6 +18,7 @@ describe("CreepJS", function () {
                 await fs.writeFile("./log/creepjs-cr.html",
                                    await page.content());
             } finally {
+                await context.close();
                 await browser.close();
             }
         });
@@ -25,7 +26,7 @@ describe("CreepJS", function () {
 
     describe("firefox", function () {
         it("should get an A grade", async function () {
-            const browser = await vanilla.firefox.launch();
+            const browser = await firefox.launch({ headless: false });
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
@@ -72,6 +73,7 @@ describe("CreepJS", function () {
 
                 throw err;
             } finally {
+                await context.close();
                 await browser.close();
             }
         });

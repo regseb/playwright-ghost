@@ -30,8 +30,7 @@ export default class SharedArrayBufferPlugin extends Plugin {
 
     // eslint-disable-next-line class-methods-use-this
     async addInitScript(context) {
-        if ("firefox" === context.browser().browserType().name() &&
-                context.browser().isHeadless()) {
+        if ("firefox" === context.browser().browserType().name()) {
             return {
                 path: await import.meta.resolve("./sharedarraybuffer.injected" +
                                                                          ".js"),

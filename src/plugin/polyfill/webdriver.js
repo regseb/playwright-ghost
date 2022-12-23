@@ -30,8 +30,7 @@ export default class WebdriverPlugin extends Plugin {
 
     // eslint-disable-next-line class-methods-use-this
     async addInitScript(context) {
-        if ("chromium" === context.browser().browserType().name() &&
-                context.browser().isHeadless()) {
+        if ("chromium" === context.browser().browserType().name()) {
             return {
                 path: await import.meta.resolve("./webdriver.injected.js"),
             };

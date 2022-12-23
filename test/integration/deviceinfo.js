@@ -1,11 +1,16 @@
-import assert from "node:assert";
+import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { chromium, firefox } from "../../src/index.js";
 
 describe("Device Info", function () {
     describe("chromium", function () {
-        it("should not spoofed", async function () {
-            const browser = await chromium.launch();
+        it("should not be spoofed", async function () {
+            const browser = await chromium.launch({
+                headless: false,
+                plugins:  {
+                    "util/debug": false,
+                },
+            });
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
@@ -14,7 +19,7 @@ describe("Device Info", function () {
 
                 const span = await page.$(`span:text-is("(Spoofed)")`);
                 // eslint-disable-next-line unicorn/no-null
-                assert.strictEqual(span, null);
+                assert.equal(span, null);
             } catch (err) {
                 await page.screenshot({
                     path:     "./log/deviceinfo-cr.png",
@@ -25,14 +30,20 @@ describe("Device Info", function () {
 
                 throw err;
             } finally {
-               await browser.close();
+                await context.close();
+                await browser.close();
             }
         });
     });
 
     describe("firefox", function () {
-        it("should not spoofed", async function () {
-            const browser = await firefox.launch();
+        it("should not be spoofed", async function () {
+            const browser = await firefox.launch({
+                headless: false,
+                plugins:  {
+                    "util/debug": false,
+                },
+            });
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
@@ -41,7 +52,7 @@ describe("Device Info", function () {
 
                 const span = await page.$(`span:text-is("(Spoofed)")`);
                 // eslint-disable-next-line unicorn/no-null
-                assert.strictEqual(span, null);
+                assert.equal(span, null);
             } catch (err) {
                 await page.screenshot({
                     path:     "./log/deviceinfo-fx.png",
@@ -52,7 +63,8 @@ describe("Device Info", function () {
 
                 throw err;
             } finally {
-               await browser.close();
+                await context.close();
+                await browser.close();
             }
         });
     });
