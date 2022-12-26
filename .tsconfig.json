@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "module": "ESNext",
+        "moduleResolution": "node",
+
+        "allowJs": true,
+
+        "esModuleInterop": true,
+
+        "target": "ESNext"
+    },
+    "include": [
+        "**/*",
+        "**/.*",
+        "**/.*/**/*",
+        "**/.*/**/.*"
+    ],
+    "exclude": [
+        "coverage/",
+        ".git/",
+        "jsdocs/",
+        "log/",
+        "node_modules/"
+    ]
+}

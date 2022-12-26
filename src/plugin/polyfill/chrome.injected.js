@@ -120,8 +120,8 @@ const chrome = {
 
         getDetails: Ghost.createLambdaWithName("getDetails", (...args) => {
             if (0 !== args.length) {
-                throw new TypeError("Error in invocation of" +
-                                    " app.getDetails(): ");
+                Ghost.throwError(TypeError,
+                                 "Error in invocation of app.getDetails(): ");
             }
             // eslint-disable-next-line unicorn/no-null
             return null;
@@ -130,8 +130,10 @@ const chrome = {
         getIsInstalled: Ghost.createLambdaWithName("getIsInstalled",
                                                    (...args) => {
             if (0 !== args.length) {
-                throw new TypeError("Error in invocation of" +
-                                    " app.getIsInstalled(): ");
+                Ghost.throwError(
+                    TypeError,
+                    "Error in invocation of app.getIsInstalled(): ",
+                );
             }
             return false;
         }),
@@ -139,16 +141,21 @@ const chrome = {
         installState: Ghost.createLambdaWithName("installState",
                                                  (...args) => {
             if (1 !== args.length || !(args[0] instanceof Function)) {
-                throw new TypeError("Error in invocation of" +
-                                    " app.installState(function callback): ");
+                Ghost.throwError(
+                    TypeError,
+                    "Error in invocation of" +
+                        " app.installState(function callback): ",
+                );
             }
             return undefined;
         }),
 
         runningState: Ghost.createLambdaWithName("runningState", (...args) => {
             if (0 !== args.length) {
-                throw new TypeError("Error in invocation of" +
-                                    " app.runningState(): ");
+                Ghost.throwError(
+                    TypeError,
+                    "Error in invocation of app.runningState(): ",
+                );
             }
             return "cannot_run";
         }),

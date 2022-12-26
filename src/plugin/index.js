@@ -18,6 +18,7 @@ import UserAgentData from "./polyfill/useragentdata.js";
 import Viewport from "./polyfill/viewport.js";
 import Webdriver from "./polyfill/webdriver.js";
 import WebGL from "./polyfill/webgl.js";
+import Blocker from "./util/blocker.js";
 import Debug from "./util/debug.js";
 
 export default [
@@ -46,5 +47,6 @@ export default [
     Dialog,
 
     // Util.
+    Blocker,
     Debug,
 ];

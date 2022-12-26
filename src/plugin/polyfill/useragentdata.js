@@ -2,9 +2,6 @@
  * @module
  */
 
-// FIXME Utiliser les propriétés extraHTTPHeaders et userAgent
-//       (browser.newContext).
-
 import os from "node:os";
 import { fileURLToPath } from "node:url";
 import LEVELS from "../levels.js";

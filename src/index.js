@@ -65,6 +65,6 @@ const plug = function (browserType) {
     }]);
 };
 
-export const firefox = plug(playwright.firefox);
 export const chromium = plug(playwright.chromium);
-export const vanilla = playwright;
+export const firefox = plug(playwright.firefox);
+export default { chromium, firefox };

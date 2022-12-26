@@ -153,6 +153,8 @@ const Ghost = {
 
     stripProxyInStack(err) {
         if ("Google Inc." === navigator.vendor) {
+            // FIXME Ne pas modifier directement stack, mais modifier le
+            //       prototype de la classe Error.
             err.stack = err.stack
                 .split("\n")
                 .filter((l) => !l.includes("Object.value") &&
@@ -171,6 +173,8 @@ const Ghost = {
             return err;
         }
         // Sinon : gérer la stackTrace de Firefox.
+        // FIXME Ne pas modifier directement stack, mais modifier le prototype
+        //       de la classe Error.
         err.stack = err.stack.slice(err.stack.indexOf("\n") + 1);
         return err;
     },
@@ -251,6 +255,28 @@ const Ghost = {
             configurable: true,
         });
         return Ghost.patchToString(fn, `function ${name}() { [native code] }`);
+    },
+
+    /**
+     * Lancer une erreur en nettoyant la stackTrace.
+     *
+     * @param {Object} Clazz           La classe de l'erreur.
+     * @param {string} [message]       L'éventuel message de l'erreur.
+     * @param {Object} [options]       Les éventuelles options de l'erreur.
+     * @param {Error}  [options.cause] L'éventuelle cause de l'erreur.
+     * @throws {Error} L'erreur créée à partir des paramètres.
+     */
+    throwError(Clazz, message, options) {
+        const err = new Clazz(message, options);
+        // Enlever la deuxième et la troisième lignes qui correspondent
+        // respectivement à cette méthode et la méthode qui a appelé cette
+        // méthode.
+        const stack = err.stack.split("\n");
+        stack.splice(1, 2);
+        // FIXME Ne pas modifier directement stack, mais modifier le prototype
+        //       de la classe Error.
+        err.stack = stack.join("\n");
+        throw err;
     },
 
     patchToString(fn, toString) {

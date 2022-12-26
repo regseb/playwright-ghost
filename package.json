@@ -1,11 +1,12 @@
 {
     "name": "playwright-ghost",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Rendre un Playwright identique à un navigateur.",
     "keywords": [
         "playwright",
         "ghost",
-        "polyfill"
+        "polyfill",
+        "headless"
     ],
     "homepage": "https://github.com/regseb/playwright-ghost#readme",
     "bugs": {
@@ -15,14 +16,19 @@
     "license": "MIT",
     "author": "Sébastien Règne <regseb@gmail.com> (https://github.com/regseb)",
     "funding": "https://www.paypal.me/sebastienregne",
+    "files": [
+        "src/"
+    ],
+    "main": "src/index.js",
     "repository": "regseb/playwright-ghost",
     "type": "module",
     "scripts": {
         "lint": "metalint",
         "lint:types": "tsc --project .tsconfig_lint.json",
-        "test": "c8 mocha test/unit/",
-        "test:unit": "mocha test/unit/",
-        "test:integration": "mocha -t 0 test/integration/",
+        "test": "npm run test:coverage",
+        "test:unit": "mocha --config test/unit/mocharc.json",
+        "test:integration": "mocha --config test/integration/mocharc.json",
+        "test:coverage": "c8 mocha --config test/unit/mocharc.json",
         "coverage:html": "c8 report --reporter html",
         "jsdocs": "typedoc --tsconfig .tsconfig_jsdocs.json --out jsdocs/ src/",
         "clean": "node .script/clean.js"

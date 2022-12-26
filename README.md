@@ -2,7 +2,7 @@
 
 <!-- Utiliser du HTML pour faire flotter l'image à droite. -->
 <!-- markdownlint-disable-next-line no-inline-html-->
-<img src="asset/logo.svg" align="right" alt="">
+<img src="asset/logo.svg" align="right" width="100" alt="">
 
 Playwright-ghost est une surcouche de [Playwright](https://playwright.dev/) en
 lui ajoutant une système de plugins pour corriger principalement des différences
@@ -62,10 +62,10 @@ les plugins.
     <td>💼</td>
   </tr>
   <tr>
-    <td><code>"polyfill/plugins"</code></td>
+    <td><code>"polyfill/rtt"</code></td>
     <td>
       Définir une valeur autre que <code>0</code> dans la variable
-      <code>navigator.connection.rtt<code>.
+      <code>navigator.connection.rtt</code>.
     </td>
     <td>💼</td>
   </tr>

@@ -1,0 +1,4 @@
+{
+    "spec": "test/integration/**/*.js",
+    "timeout": 0
+}

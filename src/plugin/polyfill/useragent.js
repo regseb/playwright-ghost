@@ -2,9 +2,6 @@
  * @module
  */
 
-// FIXME Utiliser les propriétés extraHTTPHeaders et userAgent
-//       (browser.newContext).
-
 import { fileURLToPath } from "node:url";
 import LEVELS from "../levels.js";
 import Plugin from "../meta/plugin.js";
@@ -33,6 +30,9 @@ export default class UserAgentPlugin extends Plugin {
 
     constructor() {
         super();
+        // Ne pas utiliser la propriété "userAgent", des options de la méthode
+        // browser.newContext(), car à la création du contexte nous ne
+        // connaissons pas le userAgent (pour lui enlever le terme "Headless").
         this.addListener("Browser.newContext:after",
                          this.#patchHeader.bind(this));
     }

@@ -1,12 +1,11 @@
 export default {
     patterns: [
-        "!/.git/",
         "!/coverage/",
+        "!/.git/",
         "!/jsdocs/",
+        "!/log/",
         "!/node_modules/",
         "!*.swp",
-        "!/others/",
-        "!creepjs.js",
         "**",
     ],
     checkers: [

@@ -1,4 +1,4 @@
-import assert from "node:assert";
+import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { chromium, firefox } from "../../src/index.js";
 
@@ -42,21 +42,22 @@ describe("CreepJS", function () {
                     return {
                         name,
                         count: Number.parseInt(
-                            text.substring(text.indexOf("(") + 1,
-                                           text.indexOf(")")),
+                            text.slice(text.indexOf("(") + 1,
+                                       text.indexOf(")")),
                             10,
                         ),
                         errors:
-                            Array.from(div.querySelectorAll("label > div > div"))
-                                 .map((d) =>
-                                    d.textContent.trim()
-                                                 .replaceAll(/[\n\t]+/gu, " ")),
+                            Array.from(div.querySelectorAll("label > div" +
+                                                            " > div"))
+                                 .map((d) => d.textContent
+                                              .trim()
+                                              .replaceAll(/[\t\n]+/gu, " ")),
                     };
                 };
 
                 for (const name of ["lies", "errors"]) {
                     const results = await page.evaluate(scrap, name);
-                    assert.strictEqual(
+                    assert.equal(
                         results.count,
                         0,
                         `${results.name}:\n${results.errors.join("\n")}`,
