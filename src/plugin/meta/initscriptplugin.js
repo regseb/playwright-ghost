@@ -82,11 +82,15 @@ export default class InitScriptPlugin extends Plugin {
             context.addInitScript({
                 // Enrober le code dans des accolades pour ne pas créer de
                 // variables globales (qui altéreraient les variables globales
-                // du navigateur).
-                content: `{
+                // du navigateur). Et afficher les erreurs dans la console car
+                // par défaut les erreurs sont ignorées et l'information n'est
+                // pas rémontée.
+                content: `try {
                     ${native}
                     ${ghost}
                     ${initScripts.join("\n")}
+                } catch (err) {
+                    console.error(err.message);
                 }`,
             });
         }

@@ -8,25 +8,44 @@ import InitScriptPlugin from "./plugin/meta/initscript.js";
 import PLUGINS from "./plugin/index.js";
 import LEVELS from "./plugin/levels.js";
 
-const normalize = function (rotten = {}) {
+const load = function (options = {}) {
     const pluginNames = new Set(PLUGINS.map((p) => p.name));
-    const unknowns = Object.keys(rotten)
-                           .filter((r) => "*" !== r && !pluginNames.has(r));
+    const unknowns = Object.keys(options)
+                           .filter((r) => "*" !== r &&
+                                          "extra" !== r &&
+                                          !pluginNames.has(r));
     if (0 !== unknowns.length) {
         throw new Error(`Plugins unknown: ${unknowns.join(", ")}`);
     }
-    return Object.fromEntries(PLUGINS.map((Plugin) => {
+
+    const plugins = PLUGINS.map((Plugin) => {
         if (LEVELS.MANDATORY === Plugin.level) {
-            return [Plugin.name, true];
+            return new Plugin();
         }
-        if (Plugin.name in rotten) {
-            return [Plugin.name, rotten[Plugin.name]];
+        if (Plugin.name in options) {
+            if (true === options[Plugin.name]) {
+                return new Plugin();
+            }
+            if (false !== options[Plugin.name]) {
+                return new Plugin(options[Plugin.name]);
+            }
+            return undefined;
         }
-        if ("*" in rotten) {
-            return [Plugin.name, rotten["*"]];
+        if ("*" in options) {
+            return options["*"] ? new Plugin()
+                                : undefined;
         }
-        return [Plugin.name, LEVELS.ENABLED === Plugin.level];
-    }));
+        return LEVELS.ENABLED === Plugin.level ? new Plugin()
+                                               : undefined;
+    }).filter((p) => undefined !== p);
+
+    // Ajouter les éventuels plugins de l'utilisateur.
+    plugins.push(...options.extra ?? []);
+
+    // Regrouper les méthodes addInitScript().
+    plugins.push(new InitScriptPlugin(plugins));
+
+    return plugins;
 };
 
 const plug = function (browserType) {
@@ -36,19 +55,7 @@ const plug = function (browserType) {
                 return args;
             }
 
-            const options = normalize(args[0]?.plugins);
-            const plugins = [];
-            for (const [name, config] of Object.entries(options)) {
-                const Plugin = PLUGINS.find((P) => name === P.name);
-                if (true === config) {
-                    plugins.push(new Plugin());
-                } else if (false !== config) {
-                    plugins.push(new Plugin(config));
-                }
-            }
-            // Regrouper les méthodes addInitScript().
-            plugins.push(new InitScriptPlugin(plugins));
-
+            const plugins = load(args[0]?.plugins);
             return plugins.reduce((a, p) => p.before(a, { obj, prop }),
                                   [{ ...args[0], plugins }]);
         },

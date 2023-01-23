@@ -28,14 +28,24 @@ export default class WebdriverPlugin extends Plugin {
 
     static level = LEVELS.ENABLED;
 
+    constructor() {
+        super();
+        this.addListener("BrowserType.launch:before",
+                         this.#disable.bind(this));
+    }
+
     // eslint-disable-next-line class-methods-use-this
-    async addInitScript(context) {
-        if ("chromium" === context.browser().browserType().name()) {
-            return {
-                path: await import.meta.resolve("./webdriver.injected.js"),
-            };
+    #disable(args, { obj: browserType }) {
+        if ("chromium" === browserType.name()) {
+            return [{
+                ...args[0],
+                args: [
+                    ...args[0]?.args ?? [],
+                    "--disable-blink-features=AutomationControlled",
+                ],
+            }];
         }
 
-        return undefined;
+        return args;
     }
 }

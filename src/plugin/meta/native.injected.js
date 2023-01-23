@@ -6,24 +6,13 @@
  */
 
 const snapshot = (obj, props) => {
-    const clone = globalThis.Object.fromEntries(
-        props.filter((p) => !p.startsWith("prototype.")).map((prop) => [
-            prop,
-            obj[prop] instanceof Function ? obj[prop].bind(obj)
-                                          : obj[prop],
-        ]),
-    );
+    const clone = obj instanceof Function ? obj.bind(obj)
+                                          : {};
 
-    clone.prototype = globalThis.Object.fromEntries(
-        props.filter((p) => p.startsWith("prototype.")).map((p) => p.slice(9)
-                                                       .map((prop) => {
-            const fn = obj.prototype[prop];
-            return [
-                prop,
-                (thisArg, args) => fn.apply(thisArg, args),
-            ];
-        })),
-    );
+    for (const prop of props.filter((p) => !p.startsWith("prototype."))) {
+        clone[prop] = obj[prop] instanceof Function ? obj[prop].bind(obj)
+                                                    : obj[prop];
+    }
 
     return clone;
 };

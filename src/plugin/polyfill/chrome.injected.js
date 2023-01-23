@@ -93,6 +93,9 @@ const CSI = {
 };
 
 const chrome = {
+    // La fonction chrome.loadTimes() est obsolète et il est prévu de la
+    // supprimer. https://crbug.com/621512
+    // https://developer.chrome.com/blog/chrome-loadtimes-deprecated/
     // eslint-disable-next-line func-names, prefer-arrow-callback
     loadTimes: Ghost.patchToString(function () {
         // Créer une copie de l'objet car la méthode loadTimes() retourne un
@@ -101,6 +104,8 @@ const chrome = {
 
     }),
 
+    // La fonction chrome.csi() est obsolète et il est prévu de la supprimer.
+    // https://crbug.com/113048
     // eslint-disable-next-line func-names, prefer-arrow-callback
     csi: Ghost.patchToString(function () {
         const now = performance.now();

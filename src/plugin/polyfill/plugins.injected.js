@@ -17,18 +17,15 @@ const CollectionUtils = {
         // Retourner le premier élément quand le paramètre n'est pas un nombre.
         // Si le paramètre est un nombre : prendre le nombre entier inférieur
         // modulo 2^32.
-        /* eslint-disable no-implicit-coercion */
-        return Number.isNaN(+index) || !Number.isFinite(+index)
-                                ? thisArg[0]
-                                // eslint-disable-next-line unicorn/no-null
-                                : thisArg[Math.trunc(+index) % 2 ** 32] ?? null;
-        /* eslint-enable no-implicit-coercion */
+        return Number.isNaN(Number(index)) || !Number.isFinite(Number(index))
+            ? thisArg[0]
+            // eslint-disable-next-line unicorn/no-null
+            : thisArg[Math.trunc(Number(index)) % 2 ** 32] ?? null;
     },
 
     namedItem(thisArg, key) {
         // Ignorer les nombres pour ne pas retourner un élément par son index.
-        // eslint-disable-next-line no-implicit-coercion
-        if (!Number.isNaN(+key)) {
+        if (!Number.isNaN(Number(key))) {
             // eslint-disable-next-line unicorn/no-null
             return null;
         }

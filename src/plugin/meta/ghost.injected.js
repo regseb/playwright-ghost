@@ -1,18 +1,31 @@
 /* global ReflectNative */
 
+/**
+ * @type {string}
+ */
 let CHAIN_CYCLE_ERROR_MESSAGE;
 try {
-    Object.setPrototypeOf(Object.prototype.constructor,
-                          Object.prototype.constructor);
+    ObjectNative.setPrototypeOf(ObjectNative.prototype.constructor,
+                                ObjectNative.prototype.constructor);
 } catch (err) {
     CHAIN_CYCLE_ERROR_MESSAGE = err.message;
 }
 
+const STACK_LINE_RE = /^[^@]*@(?<file>.+):(?<line>\d+):(?<column>\d+)$/u;
 const toStringMappings = new Map();
 const setPrototypeOfMappings = new Map();
 
 const Utils = {
     Array: {
+
+        /**
+         * Retourne les éléments présents dans les deux tableaux.
+         *
+         * @param {any[]} arr1 Le premier tableau.
+         * @param {any[]} arr2 Le deuxième tableau.
+         * @returns {any[]} Un tableau contenant les éléments dans les deux
+         *                  tableaux.
+         */
         intersect(arr1, arr2) {
             return arr1.filter((e) => arr2.includes(e));
         },
@@ -133,15 +146,15 @@ const Ghost = {
             ...handler.properties,
         };
         const handlerEnriched = {
-            get(target, prop) {
+            get(target, prop, receiver) {
                 return props.readable.includes(prop)
-                                                    ? Reflect.get(obj, prop)
-                                                    : Reflect.get(target, prop);
+                       ? Reflect.get(obj, prop)
+                       : Reflect.get(target, prop, receiver);
             },
-            set(target, prop, value) {
+            set(target, prop, value, receiver) {
                 return props.writable.includes(prop)
-                                             ? Reflect.set(obj, prop, value)
-                                             : Reflect.set(target, prop, value);
+                       ? Reflect.set(obj, prop, value)
+                       : Reflect.set(target, prop, value, receiver);
             },
             ...handler,
         };
@@ -176,11 +189,17 @@ const Ghost = {
         // FIXME Ne pas modifier directement stack, mais modifier le prototype
         //       de la classe Error.
         err.stack = err.stack.slice(err.stack.indexOf("\n") + 1);
+        // Extraire, de la première ligne de la trace d'appels : la colonne, le
+        // nom du fichier et la ligne ; pour corriger l'erreur générée.
+        const result = STACK_LINE_RE.exec(err.stack.split("\n").shift());
+        err.columnNumber = Number(result.groups.column);
+        err.fileName = result.groups.file;
+        err.lineNumber = Number(result.groups.line);
         return err;
     },
 
     proxify(obj, handler = {}, options = {}) {
-        const handlerEnriched = {
+        let handlerEnriched = {
             ...handler,
             setPrototypeOf(target, proto) {
                 try {
@@ -196,47 +215,57 @@ const Ghost = {
                     throw Ghost.stripProxyInStack(err);
                 }
             },
+        };
 
-            apply(target, thisArg, args) {
-                try {
-                    // Appliquer le proxy seulement sur les objets souhaités
-                    // pour éviter les appels sur le prototype. (par exemple :
-                    // Navigator.prototype.plugins).
-                    if ("apply" in handler &&
-                            (undefined === this.instance ||
-                                            thisArg instanceof this.instance)) {
-                        return handler.apply(target, thisArg, args);
+        if ("apply" in handler) {
+            handlerEnriched = {
+                ...handlerEnriched,
+                apply(target, thisArg, args) {
+                    if (args[0] == "foo") {
+                    console.log("APPLY", thisArg);
                     }
-                    return Reflect.apply(target, thisArg, args);
-                } catch (err) {
-                    throw Ghost.stripProxyInStack(err);
-                }
-            },
+                    try {
+                        // Appliquer le proxy seulement sur les objets souhaités
+                        // pour éviter les appels sur le prototype. (par
+                        // exemple : Navigator.prototype.plugins).
+                        if (undefined === this.instance ||
+                                thisArg instanceof this.instance) {
+                            return handler.apply(target, thisArg, args);
+                        }
+                        return Reflect.apply(target, thisArg, args);
+                    } catch (err) {
+                        throw Ghost.stripProxyInStack(err);
+                    }
+                },
+            };
+        }
 
-            get(target, prop, receiver) {
-                // FIXME Pourquoi l'appel à la fonction d'origine ne remonte pas
-                //       cette erreur ? (seulement sur Firefox).
-                // Ne pas tester "callee" (qui est dans le message d'erreur) car
-                // les navigateurs retournent "undefined".
-                /*
-                if (target instanceof Function &&
-                        ["caller", "arguments"].includes(prop)) {
-                    throw new TypeError(
+        if ("get" in handler) {
+            handlerEnriched = {
+                ...handlerEnriched,
+                get(target, prop, receiver) {
+                    // FIXME Pourquoi l'appel à la fonction d'origine ne remonte
+                    //       pas cette erreur ? (seulement sur Firefox).
+                    // Ne pas tester "callee" (qui est dans le message d'erreur)
+                    // car les navigateurs retournent "undefined".
+                    /*
+                    if (target instanceof Function &&
+                            ["caller", "arguments"].includes(prop)) {
+                        throw new TypeError(
                         "'caller', 'callee', and 'arguments' properties may" +
                         " not be accessed on strict mode functions or the" +
                         " arguments objects for calls to them",
-                    );
-                }*/
+                        );
+                    }*/
 
-                try {
-                    return "get" in handler
-                        ? handler.get(target, prop, receiver)
-                        : Reflect.get(target, prop, receiver);
-                } catch (err) {
-                    throw Ghost.stripProxyInStack(err);
-                }
-            },
-        };
+                    try {
+                        return handler.get(target, prop, receiver);
+                    } catch (err) {
+                        throw Ghost.stripProxyInStack(err);
+                    }
+                },
+            };
+        }
 
         const proxy = new Proxy(obj, handlerEnriched);
         handlerEnriched.proxy = proxy;
