@@ -48,10 +48,10 @@ describe("CreepJS", function () {
                         ),
                         errors:
                             Array.from(div.querySelectorAll("label > div" +
-                                                            " > div"))
-                                 .map((d) => d.textContent
-                                              .trim()
-                                              .replaceAll(/[\t\n]+/gu, " ")),
+                                                            " > div"),
+                                       (d) => d.textContent
+                                               .trim()
+                                               .replaceAll(/[\t\n]+/gu, " ")),
                     };
                 };
 

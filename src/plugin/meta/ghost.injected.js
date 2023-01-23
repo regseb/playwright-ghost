@@ -221,9 +221,6 @@ const Ghost = {
             handlerEnriched = {
                 ...handlerEnriched,
                 apply(target, thisArg, args) {
-                    if (args[0] == "foo") {
-                    console.log("APPLY", thisArg);
-                    }
                     try {
                         // Appliquer le proxy seulement sur les objets souhaités
                         // pour éviter les appels sur le prototype. (par

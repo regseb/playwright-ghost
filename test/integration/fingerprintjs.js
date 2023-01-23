@@ -29,8 +29,8 @@ describe("FingerprintJS", function () {
 
                 const results = await page.evaluate(() => {
                     const selector = `div[class^="HeroSection-module--card--"]`;
-                    return Array.from(document.querySelectorAll(selector))
-                                .map((div) => ({
+                    return Array.from(document.querySelectorAll(selector),
+                                      (div) => ({
                         name:   div.querySelector("h3").textContent,
                         status: div.querySelector("p").textContent,
                     }));
@@ -81,8 +81,8 @@ describe("FingerprintJS", function () {
 
                 const results = await page.evaluate(() => {
                     const selector = `div[class^="HeroSection-module--card--"]`;
-                    return Array.from(document.querySelectorAll(selector))
-                                .map((div) => ({
+                    return Array.from(document.querySelectorAll(selector),
+                                      (div) => ({
                         name:   div.querySelector("h3").textContent,
                         status: div.querySelector("p").textContent,
                     }));

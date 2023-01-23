@@ -17,8 +17,8 @@ describe("Antibot (Sannysoft)", function () {
                                            ":not(:empty)");
 
                 const results = await page.evaluate(() => {
-                    return Array.from(document.querySelectorAll("td.result"))
-                                .map((td) => ({
+                    return Array.from(document.querySelectorAll("td.result"),
+                                      (td) => ({
                         name:   td.previousElementSibling.textContent,
                         value:  td.textContent,
                         status: td.classList.contains("passed"),
@@ -56,8 +56,8 @@ describe("Antibot (Sannysoft)", function () {
                                            ":not(:empty)");
 
                 const results = await page.evaluate(() => {
-                    return Array.from(document.querySelectorAll("td.result"))
-                                .map((td) => ({
+                    return Array.from(document.querySelectorAll("td.result"),
+                                      (td) => ({
                         name:   td.previousElementSibling.textContent,
                         value:  td.textContent,
                         status: td.classList.contains("passed"),

@@ -7,8 +7,8 @@
 Playwright-ghost est une surcouche de [Playwright](https://playwright.dev/) en
 lui ajoutant une système de plugins pour corriger principalement des différences
 entre les versions normales des navigateurs et les versions
-[headless](https://fr.wikipedia.org/wiki/Navigateur_headless) contrôlées par un
-programme.
+[_headless_](https://fr.wikipedia.org/wiki/Navigateur_headless) contrôlées par
+un programme.
 
 L'API de Playwright-ghost est identique à celle de Playwright, sauf l'ajout de
 l'option `plugins` à la méthode
@@ -18,8 +18,8 @@ plugins et les valeurs :
 
 - `true` pour activer le plugin avec ses options par défaut ;
 - `false` pour désactiver le plugin ;
-- un objet pour activer le plugin et définir des options (spécifique pour chaque
-plugin).
+- un objet pour activer le plugin et définir des options (spécifiques pour
+  chaque plugin).
 
 L'objet plugins peut aussi contenir la clé `"*"` pour activer ou désactiver tous
 les plugins.

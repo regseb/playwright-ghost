@@ -4,9 +4,9 @@
 
 import playwright from "playwright";
 import hook from "./hook.js";
-import InitScriptPlugin from "./plugin/meta/initscript.js";
 import PLUGINS from "./plugin/index.js";
 import LEVELS from "./plugin/levels.js";
+import InitScriptPlugin from "./plugin/meta/initscriptplugin.js";
 
 const load = function (options = {}) {
     const pluginNames = new Set(PLUGINS.map((p) => p.name));
