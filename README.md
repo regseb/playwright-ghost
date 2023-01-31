@@ -14,15 +14,12 @@ L'API de Playwright-ghost est identique à celle de Playwright, sauf l'ajout de
 l'option `plugins` à la méthode
 [`browserType.launch([options])`](https://playwright.dev/docs/api/class-browsertype#browser-type-launch).
 La propriété `plugins` doit être un objet dont les clés sont les noms des
-plugins et les valeurs :
+plugins ; et les valeurs :
 
 - `true` pour activer le plugin avec ses options par défaut ;
 - `false` pour désactiver le plugin ;
 - un objet pour activer le plugin et définir des options (spécifiques pour
   chaque plugin).
-
-L'objet plugins peut aussi contenir la clé `"*"` pour activer ou désactiver tous
-les plugins.
 
 ## Plugins
 
@@ -120,7 +117,8 @@ les plugins.
 
 - [Playwright](https://playwright.dev/) : la bibliothèque utilisée par
   Playwright-ghost.
-- [Puppeteer](https://pptr.dev/) : la biblithèque dont Playwright est un fork.
+- [Puppeteer](https://pptr.dev/) : la bibliothèque dont Playwright s'est
+  inspiré.
 
 ### Bibliothèques pour du WebScraping
 

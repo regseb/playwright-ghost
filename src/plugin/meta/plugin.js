@@ -3,6 +3,13 @@
  */
 
 export default class Plugin {
+
+    static light(key, listener) {
+        const plugin = new Plugin();
+        plugin.addListener(key, listener);
+        return plugin;
+    }
+
     #listeners = {};
 
     addListener(key, listener) {
@@ -12,8 +19,8 @@ export default class Plugin {
     before(args, { obj, prop }) {
         const key = `${obj.constructor.name}.${prop}:before`;
         return key in this.#listeners
-                                     ? this.#listeners[key](args, { obj, prop })
-                                     : args;
+            ? this.#listeners[key](args, { obj, prop })
+            : args;
     }
 
     after(returnValue, { obj, prop, args }) {

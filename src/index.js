@@ -7,40 +7,52 @@ import hook from "./hook.js";
 import PLUGINS from "./plugin/index.js";
 import LEVELS from "./plugin/levels.js";
 import InitScriptPlugin from "./plugin/meta/initscriptplugin.js";
+import Plugin from "./plugin/meta/plugin.js";
 
 const load = function (options = {}) {
-    const pluginNames = new Set(PLUGINS.map((p) => p.name));
-    const unknowns = Object.keys(options)
-                           .filter((r) => "*" !== r &&
-                                          "extra" !== r &&
-                                          !pluginNames.has(r));
-    if (0 !== unknowns.length) {
-        throw new Error(`Plugins unknown: ${unknowns.join(", ")}`);
+    let defaultOptions = {};
+    const clazzs = new Map();
+    for (const Clazz of PLUGINS) {
+        defaultOptions = {
+            ...defaultOptions,
+            [Clazz.name]: LEVELS.ENABLED === Clazz.level,
+        };
+        clazzs.set(Clazz.name, Clazz);
+    }
+    for (const Clazz of options.import?.flat() ?? []) {
+        // TODO Vérifier qu'il n'y a pas de doublons.
+        defaultOptions = {
+            ...defaultOptions,
+            [Clazz.name]: LEVELS.ENABLED === Clazz.level,
+        };
+        clazzs.set(Clazz.name, Clazz);
     }
 
-    const plugins = PLUGINS.map((Plugin) => {
-        if (LEVELS.MANDATORY === Plugin.level) {
-            return new Plugin();
-        }
-        if (Plugin.name in options) {
-            if (true === options[Plugin.name]) {
-                return new Plugin();
-            }
-            if (false !== options[Plugin.name]) {
-                return new Plugin(options[Plugin.name]);
-            }
+    const plugins = Object.entries({ ...defaultOptions,
+                                     ...options }).map(([key, value]) => {
+        if ("import" === key) {
             return undefined;
         }
-        if ("*" in options) {
-            return options["*"] ? new Plugin()
-                                : undefined;
+        if (key.startsWith("x/")) {
+            if (!(value instanceof Plugin)) {
+                throw new TypeError("Custom plugin must extends Plugin: " +
+                                    key);
+            }
+            return value;
         }
-        return LEVELS.ENABLED === Plugin.level ? new Plugin()
-                                               : undefined;
+        const Clazz = clazzs.get(key);
+        if (undefined === Clazz) {
+            throw new Error(`Plugin unknown: ${key}`);
+        }
+        if (LEVELS.MANDATORY === Clazz.level) {
+            return new Clazz();
+        }
+        switch (value) {
+            case true:  return new Clazz();
+            case false: return undefined;
+            default:    return new Clazz(value);
+        }
     }).filter((p) => undefined !== p);
-
-    // Ajouter les éventuels plugins de l'utilisateur.
-    plugins.push(...options.extra ?? []);
 
     // Regrouper les méthodes addInitScript().
     plugins.push(new InitScriptPlugin(plugins));

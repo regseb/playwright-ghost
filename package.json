@@ -1,6 +1,6 @@
 {
     "name": "playwright-ghost",
-    "version": "0.1.2",
+    "version": "0.2.0",
     "description": "Rendre un Playwright identique à un navigateur.",
     "keywords": [
         "playwright",
@@ -22,8 +22,7 @@
     "main": "src/index.js",
     "exports": {
         ".": "./src/index.js",
-        "./plugin.js": "./src/plugin/meta/plugin.js",
-        "./initscriptplugin.js": "./src/plugin/meta/initscriptplugin.js",
+        "./plugin.js": "./src/extend.js",
         "./package.json": "./package.json"
     },
     "repository": "regseb/playwright-ghost",
@@ -40,17 +39,17 @@
         "clean": "node .script/clean.js"
     },
     "dependencies": {
-        "playwright": "1.29.2"
+        "playwright": "1.30.0"
     },
     "devDependencies": {
         "@types/mocha": "10.0.1",
         "@types/node": "18.11.18",
         "c8": "7.12.0",
-        "eslint": "8.32.0",
+        "eslint": "8.33.0",
         "eslint-plugin-array-func": "3.1.8",
         "eslint-plugin-eslint-comments": "3.2.0",
         "eslint-plugin-import": "2.27.5",
-        "eslint-plugin-jsdoc": "39.6.7",
+        "eslint-plugin-jsdoc": "39.7.4",
         "eslint-plugin-mocha": "10.1.0",
         "eslint-plugin-n": "15.6.1",
         "eslint-plugin-no-unsanitized": "4.0.2",
@@ -64,7 +63,7 @@
         "mocha": "10.2.0",
         "npm-package-json-lint": "6.4.0",
         "typedoc": "0.23.24",
-        "typescript": "4.9.4",
+        "typescript": "4.9.5",
         "yaml-lint": "1.7.0"
     },
     "engines": {

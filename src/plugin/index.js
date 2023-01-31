@@ -4,6 +4,7 @@
 
 import BrowserIsHeadless from "./api/browser-isheadless.js";
 import Browser from "./hook/browser.js";
+import BrowserContext from "./hook/browsercontext.js";
 import BrowserType from "./hook/browsertype.js";
 import Dialog from "./humanize/dialog.js";
 import Chrome from "./polyfill/chrome.js";
@@ -18,13 +19,13 @@ import UserAgentData from "./polyfill/useragentdata.js";
 import Viewport from "./polyfill/viewport.js";
 import Webdriver from "./polyfill/webdriver.js";
 import WebGL from "./polyfill/webgl.js";
-import Blocker from "./util/blocker.js";
 import Debug from "./util/debug.js";
 
 export default [
     // Hook.
     BrowserType,
     Browser,
+    BrowserContext,
 
     // API.
     BrowserIsHeadless,
@@ -47,6 +48,5 @@ export default [
     Dialog,
 
     // Util.
-    Blocker,
     Debug,
 ];
