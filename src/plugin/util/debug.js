@@ -6,14 +6,25 @@ import LEVELS from "../levels.js";
 import Plugin from "../meta/plugin.js";
 
 export default class DebugPlugin extends Plugin {
-    static name = "util/debug";
 
+    /**
+     * La clé du plugin.
+     *
+     * @type {string}
+     */
+    static key = "util/debug";
+
+    /**
+     * Le niveau du plugin.
+     *
+     * @type {string}
+     */
     static level = LEVELS.DISABLED;
 
     constructor() {
         super();
-        this.addListener("BrowserContext.newPage:after",
-                         this.#addConsole.bind(this));
+        this.addHook("BrowserContext.newPage:after",
+                     this.#addConsole.bind(this));
     }
 
     // eslint-disable-next-line class-methods-use-this

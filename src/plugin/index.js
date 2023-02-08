@@ -2,51 +2,41 @@
  * @module
  */
 
-import BrowserIsHeadless from "./api/browser-isheadless.js";
-import Browser from "./hook/browser.js";
-import BrowserContext from "./hook/browsercontext.js";
-import BrowserType from "./hook/browsertype.js";
-import Dialog from "./humanize/dialog.js";
-import Chrome from "./polyfill/chrome.js";
-import MaxTouchPoints from "./polyfill/maxtouchpoints.js";
-import NotificationPermission from "./polyfill/notification-permission.js";
-import PdfViewerEnabled from "./polyfill/pdfviewerenabled.js";
-import Plugins from "./polyfill/plugins.js";
-import RTT from "./polyfill/rtt.js";
-import SharedArrayBuffer from "./polyfill/sharedarraybuffer.js";
-import UserAgent from "./polyfill/useragent.js";
-import UserAgentData from "./polyfill/useragentdata.js";
-import Viewport from "./polyfill/viewport.js";
-import Webdriver from "./polyfill/webdriver.js";
-import WebGL from "./polyfill/webgl.js";
-import Debug from "./util/debug.js";
+import BrowserIsHeadlessPlugin from "./api/browser-isheadless.js";
+import AdblockerPlugin from "./extension/adblocker.js";
+import BrowserPlugin from "./hook/browser.js";
+import BrowserContextPlugin from "./hook/browsercontext.js";
+import PagePlugin from "./hook/page.js";
+import DialogPlugin from "./humanize/dialog.js";
+import CommonPlugin from "./polyfill/common.js";
+import ViewportPlugin from "./polyfill/viewport.js";
+import WebdriverPlugin from "./polyfill/webdriver.js";
+import WebGLPlugin from "./polyfill/webgl.js";
+import DebugPlugin from "./util/debug.js";
+import LocalePlugin from "./util/locale.js";
 
 export default [
     // Hook.
-    BrowserType,
-    Browser,
-    BrowserContext,
+    BrowserPlugin,
+    BrowserContextPlugin,
+    PagePlugin,
 
     // API.
-    BrowserIsHeadless,
+    BrowserIsHeadlessPlugin,
 
     // Polyfill.
-    Chrome,
-    MaxTouchPoints,
-    NotificationPermission,
-    PdfViewerEnabled,
-    Plugins,
-    RTT,
-    SharedArrayBuffer,
-    UserAgent,
-    UserAgentData,
-    Viewport,
-    Webdriver,
-    WebGL,
+    CommonPlugin,
+    ViewportPlugin,
+    WebdriverPlugin,
+    WebGLPlugin,
 
     // Humanize.
-    Dialog,
+    DialogPlugin,
+
+    // Extension
+    AdblockerPlugin,
 
     // Util.
-    Debug,
+    DebugPlugin,
+    LocalePlugin,
 ];

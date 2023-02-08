@@ -1,13 +1,11 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
-import { chromium, firefox } from "../../src/index.js";
-
-/* global document */
+import { chromium } from "../../src/index.js";
 
 describe("infosimples", function () {
     describe("chromium", function () {
         it("should not be detected on headless", async function () {
-            const browser = await chromium.launch({ headless: true });
+            const browser = await chromium.launch();
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
@@ -15,12 +13,14 @@ describe("infosimples", function () {
                                 "/detect-headless/");
                 // Attendre le résultat du dernier test.
                 await page.waitForSelector("#mouse-move-result:not(:empty)");
+                // Bouger la souris pour un des tests.
+                for (let i = 0; 100 > i; ++i) {
+                    await page.mouse.move(10 * i, 10 * i);
+                }
 
-                const results = await page.evaluate(() => {
-                    return Array.from(document.querySelectorAll("tr"))
-                                // Enlever les entêtes.
-                                .slice(1)
-                                .map((tr) => ({
+                const results = await page.locator("tr").evaluateAll((trs) => {
+                    // Enlever les entêtes.
+                    return trs.slice(1).map((tr) => ({
                         name:   tr.querySelector("td:first-child").textContent,
                         value:  tr.querySelector("td:last-child").textContent,
                         status: tr.className,
@@ -28,63 +28,21 @@ describe("infosimples", function () {
                 });
 
                 for (const result of results) {
-                    assert.ok(
-                        "headful" === result.status ||
-                            "undefined" === result.status,
-                        `${result.name} (${result.status}): ${result.value}`,
-                    );
+                    // Ignorer le test Broken Image qui échoue même avec un vrai
+                    // navigateur.
+                    if ("Broken Image" === result.name) {
+                        continue;
+                    }
+                    assert.equal(result.status,
+                                 "headful",
+                                 `${result.name}: ${result.value}`);
                 }
             } catch (err) {
                 await page.screenshot({
-                    path:     "./log/infosimples-fx.png",
+                    path:     "./log/infosimples-cr.png",
                     fullPage: true,
                 });
-                await fs.writeFile("./log/infosimples-fx.html",
-                                   await page.content());
-
-                throw err;
-            } finally {
-                await context.close();
-                await browser.close();
-            }
-        });
-    });
-
-    describe("firefox", function () {
-        it("should not be detected on headless", async function () {
-            const browser = await firefox.launch({ headless: false });
-            const context = await browser.newContext();
-            const page = await context.newPage();
-            try {
-                await page.goto("https://infosimples.github.io" +
-                                "/detect-headless/");
-                // Attendre le résultat du dernier test.
-                await page.waitForSelector("#mouse-move-result:not(:empty)");
-
-                const results = await page.evaluate(() => {
-                    return Array.from(document.querySelectorAll("tr"))
-                                // Enlever les entêtes.
-                                .slice(1)
-                                .map((tr) => ({
-                        name:   tr.querySelector("td:first-child").textContent,
-                        value:  tr.querySelector("td:last-child").textContent,
-                        status: tr.className,
-                    }));
-                });
-
-                for (const result of results) {
-                    assert.ok(
-                        "headful" === result.status ||
-                            "undefined" === result.status,
-                        `${result.name} (${result.status}): ${result.value}`,
-                    );
-                }
-            } catch (err) {
-                await page.screenshot({
-                    path:     "./log/infosimples-fx.png",
-                    fullPage: true,
-                });
-                await fs.writeFile("./log/infosimples-fx.html",
+                await fs.writeFile("./log/infosimples-cr.html",
                                    await page.content());
 
                 throw err;

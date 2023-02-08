@@ -1,10 +1,10 @@
 export default {
     patterns: [
-        "!/coverage/",
         "!/.git/",
         "!/jsdocs/",
         "!/log/",
         "!/node_modules/",
+        "!/.stryker/",
         "!*.swp",
         "**",
     ],

@@ -5,9 +5,9 @@
 <img src="asset/logo.svg" align="right" width="100" alt="">
 
 Playwright-ghost est une surcouche de [Playwright](https://playwright.dev/) en
-lui ajoutant une système de plugins pour corriger principalement des différences
-entre les versions normales des navigateurs et les versions
-[_headless_](https://fr.wikipedia.org/wiki/Navigateur_headless) contrôlées par
+lui ajoutant une système de plugins pour gommer les différences entre un
+navigateur utilisé par un être humain et un navigateur
+[_headless_](https://fr.wikipedia.org/wiki/Navigateur_headless) contrôlé par
 un programme.
 
 L'API de Playwright-ghost est identique à celle de Playwright, sauf l'ajout de
@@ -23,77 +23,27 @@ plugins ; et les valeurs :
 
 ## Plugins
 
-💼 : Plugin activé par défaut.
+💼 : Activé par défaut.\
+⚙️ : Possède des options.\
+📦 : Nécessite un package externe.
 
 <table>
   <tr><th>Nom</th><th>Description</th><th></th></tr>
   <tr>
-    <td><code>"polyfill/chrome"</code></td>
-    <td>Ajouter la variable global <code>chrome</code>.</td>
-    <td>💼</td>
-  </tr>
-  <tr>
-    <td><code>"polyfill/maxTouchPoints"</code></td>
-    <td>Définir une valeur dans <code>navigator.maxTouchPoints</code>.</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><code>"polyfill/notificationPermission"</code></td>
-    <td>Corriger la valeur de <code>Notification.permission</code>.</td>
-    <td>💼</td>
-  </tr>
-  <tr>
-    <td><code>"polyfill/pdfViewerEnabled"</code></td>
+    <td><code>"polyfill/common"</code></td>
     <td>
-      Passer à <code>true</code> la valeur de
-      <code>navigator.pdfViewerEnabled</code>.
-    </td>
-    <td>💼</td>
-  </tr>
-  <tr>
-    <td><code>"polyfill/plugins"</code></td>
-    <td>
-      Remplir les variables <code>navigator.mimeTypes</code> et
-      <code>navigator.plugins</code>.
-    </td>
-    <td>💼</td>
-  </tr>
-  <tr>
-    <td><code>"polyfill/rtt"</code></td>
-    <td>
-      Définir une valeur autre que <code>0</code> dans la variable
-      <code>navigator.connection.rtt</code>.
-    </td>
-    <td>💼</td>
-  </tr>
-  <tr>
-    <td><code>"polyfill/sharedArrayBuffer"</code></td>
-    <td>
-      Supprimer la classe <code>SharedArrayBuffer</code>.
-    </td>
-    <td>💼</td>
-  </tr>
-  <tr>
-    <td><code>"polyfill/userAgent"</code></td>
-    <td>
-      Enlever le terme <code>"Headless"</code> des variables
-      <code>navigator.userAgent</code> et <code>navigator.appVersion</code>.
-    </td>
-    <td>💼</td>
-  </tr>
-  <tr>
-    <td><code>"polyfill/userAgentData"</code></td>
-    <td>
-      Modifier la variable <code>navigator.userAgentData</code>.
+      Corriger des nombreuses différences dans les APIs Javascript en headless.
+      Par exemple <code>navigator.userAgent</code>,
+      <code>navigator.mimeTypes</code>...
     </td>
     <td>💼</td>
   </tr>
   <tr>
     <td><code>"polyfill/viewport"</code></td>
     <td>
-      Ajuster les valeurs dans la variable <code>screen</code>.
+      TODO Ajuster les valeurs dans la variable <code>screen</code>.
     </td>
-    <td>💼</td>
+    <td>💼 ⚙️</td>
   </tr>
   <tr>
     <td><code>"polyfill/webdriver"</code></td>
@@ -108,6 +58,25 @@ plugins ; et les valeurs :
       Modifier les valeurs des paramètres <em>WebGL</em>.
     </td>
     <td>💼</td>
+  </tr>
+  <tr>
+    <td><code>"humanize/dialog"</code></td>
+    <td>
+      Fermer les boîtes de dialogues dans un temps humainement possible, car par
+      défaut Playwright <a href="https://playwright.dev/docs/dialogs">les ferme
+      immédiatement</a>.
+    </td>
+    <td>⚙️</td>
+  </tr>
+  <tr>
+    <td><code>"extension/adblocker"</code></td>
+    <td>
+      Bloquer les publicités et les traqueurs en utilisant
+      <a
+      href="https://github.com/ghostery/adblocker/tree/master/packages/adblocker-playwright#readme">
+      Cliqz' adblocker</a>.
+    </td>
+    <td>⚙️ 📦</td>
   </tr>
 </table>
 

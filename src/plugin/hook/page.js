@@ -7,17 +7,17 @@ import LEVELS from "../levels.js";
 import Plugin from "../meta/plugin.js";
 
 /**
- * @typedef {import("playwright").BrowserContext} BrowserContext
+ * @typedef {import("playwright").Page} Page
  */
 
-export default class BrowserContextPlugin extends Plugin {
+export default class PagePlugin extends Plugin {
 
     /**
      * La clé du plugin.
      *
      * @type {string}
      */
-    static key = "hook/browserContext";
+    static key = "hook/page";
 
     /**
      * Le niveau du plugin.
@@ -40,9 +40,7 @@ export default class BrowserContextPlugin extends Plugin {
         super();
         this.addHook("BrowserType.launch:before",
                      this.#storePlugins.bind(this));
-        this.addHook("BrowserType.launchPersistentContext:before",
-                     this.#storePlugins.bind(this));
-        this.addHook("Browser.newContext:after", this.#hook.bind(this));
+        this.addHook("BrowserContext.newPage:after", this.#hook.bind(this));
     }
 
     /**
@@ -62,13 +60,12 @@ export default class BrowserContextPlugin extends Plugin {
     }
 
     /**
-     * Ajoute les plugins dans le <code>BrowserContext</code> de Playwright.
+     * Ajoute les plugins dans la <code>Page</code> de Playwright.
      *
-     * @param {BrowserContext} context Le <code>BrowserContext</code> vanilla.
-     * @returns {BrowserContext} Le <code>BrowserContext</code> avec les
-     *                           plugins.
+     * @param {Page} page Le <code>Pager</code> vanilla.
+     * @returns {Page} Le <code>Page</code> avec les plugins.
      */
-    #hook(context) {
-        return hook(context, this.#plugins);
+    #hook(page) {
+        return hook(page, this.#plugins);
     }
 }
