@@ -41,7 +41,7 @@ export default class LocalePlugin extends Plugin {
 
     constructor() {
         super();
-        this.addHook("Browser.launch:before",
+        this.addHook("BrowserType.launch:before",
                      this.#changeExecutablePath.bind(this));
     }
 
