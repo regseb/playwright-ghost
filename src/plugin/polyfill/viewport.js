@@ -6,6 +6,17 @@ import Random from "../../utils/random.js";
 import LEVELS from "../levels.js";
 import Plugin from "../meta/plugin.js";
 
+const setViewport = function (options, { width, height }) {
+    return {
+        ...options,
+        viewport: {
+            width,
+            height,
+            ...options?.viewport,
+        },
+    };
+};
+
 export default class ViewportPlugin extends Plugin {
 
     /**
@@ -26,8 +37,10 @@ export default class ViewportPlugin extends Plugin {
 
     constructor(options) {
         super();
-        this.addHook("Browser.newContext:before",
-                     this.#setViewport.bind(this));
+        this.addHook("BrowserType.launch:before",
+                     this.#setViewportOfLaunch.bind(this));
+        this.addHook("BrowserType.launchPersistentContext:before",
+                     this.#setViewportOfLaunchPersistentContext.bind(this));
 
         this.#options = {
             width:  options?.width ?? Random.getInt(1000, 1800),
@@ -35,14 +48,11 @@ export default class ViewportPlugin extends Plugin {
         };
     }
 
-    #setViewport(args) {
-        return [{
-            ...args[0],
-            viewport: {
-                width:  this.#options.width,
-                height: this.#options.height,
-                ...args[0]?.viewport,
-            },
-        }];
+    #setViewportOfLaunch(args) {
+        return [setViewport(args[0], this.#options)];
+    }
+
+    #setViewportOfLaunchPersistentContext(args) {
+        return [args[0], setViewport(args[1], this.#options)];
     }
 }
