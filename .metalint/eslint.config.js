@@ -1,3 +1,9 @@
+/**
+ * @module
+ * @license MIT
+ * @author Sébastien Règne
+ */
+
 export default {
     plugins: [
         "array-func",
@@ -310,7 +316,7 @@ export default {
         "keyword-spacing": 2,
         "line-comment-position": 2,
         "linebreak-style": 2,
-        "lines-around-comment": 2,
+        "lines-around-comment": [2, { afterHashbangComment: true }],
         "lines-between-class-members": 2,
         "max-len": 1,
         "max-statements-per-line": [2, { max: 2 }],

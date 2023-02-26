@@ -1,3 +1,9 @@
+/**
+ * @module
+ * @license MIT
+ * @author Sébastien Règne
+ */
+
 export default {
     env: {
         mocha: true,
@@ -39,15 +45,5 @@ export default {
 
         // Plugin eslint-plugin-no-unsanitized.
         "no-unsanitized/method": 0,
-
-        // Plugin eslint-plugin-eslint-comments
-        "eslint-comments/no-use": [2, {
-            allow: [
-                "eslint-disable",
-                "eslint-disable-next-line",
-                "eslint-enable",
-                "global",
-            ],
-        }],
     },
 };

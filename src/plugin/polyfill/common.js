@@ -19,6 +19,11 @@ const changeHeadless = function (options) {
     return options;
 };
 
+/**
+ * Le plugin pour utiliser le nouveau mode <em>headless</em> de Chromium.
+ *
+ * @see https://developer.chrome.com/articles/new-headless/
+ */
 export default class HeadlessNewPlugin extends Plugin {
 
     /**

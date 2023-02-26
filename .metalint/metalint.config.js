@@ -1,3 +1,9 @@
+/**
+ * @module
+ * @license MIT
+ * @author Sébastien Règne
+ */
+
 export default {
     patterns: [
         "!/.git/",
@@ -10,17 +16,12 @@ export default {
     ],
     checkers: [
         {
-            patterns: ["!**.injected.js", "/src/**/*.js"],
+            patterns: ["/.script/**/*.js", "/src/**/*.js"],
             linters: {
                 eslint: ["eslint.config.js", "eslint_node.config.js"],
             },
         }, {
-            patterns: "/src/**/*.injected.js",
-            linters: {
-                eslint: ["eslint.config.js", "eslint_browser.config.js"],
-            },
-        }, {
-            patterns: ["!/test/data/", "!/test/tool/", "/test/**/*.js"],
+            patterns: "/test/**/*.js",
             linters: {
                 eslint: [
                     "eslint.config.js",
@@ -29,17 +30,12 @@ export default {
                 ],
             },
         }, {
-            patterns: "/.script/**/*.js",
-            linters: {
-                eslint: ["eslint.config.js", "eslint_node.config.js"],
-            },
-        }, {
-            patterns: "/.metalint/**/*.js",
+            patterns: "*.config.js",
             linters: {
                 eslint: ["eslint.config.js", "eslint_config.config.js"],
             },
         }, {
-            patterns: ["!/CHANGELOG.md", "*.md"],
+            patterns: "*.md",
             linters: "markdownlint",
         }, {
             patterns: "*.json",
