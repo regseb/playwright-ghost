@@ -399,7 +399,7 @@ export default {
         "import/no-deprecated": 2,
         "import/no-empty-named-blocks": 2,
         "import/no-extraneous-dependencies": [2, {
-            devDependencies: ["test/**/*.js", ".script/**/*.js"],
+            devDependencies: [".script/**/*.js", "test/**/*.js"],
         }],
         "import/no-mutable-exports": 2,
         "import/no-named-as-default": 0,
@@ -791,7 +791,7 @@ export default {
                 exception: "throws",
                 yield: "yields",
                 linkcode: "link",
-                linkplain:" link",
+                linkplain: "link",
             },
         },
     },
