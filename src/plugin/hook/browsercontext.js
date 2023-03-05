@@ -1,5 +1,7 @@
 /**
  * @module
+ * @license MIT
+ * @author Sébastien Règne
  */
 
 import hook from "../../hook.js";
@@ -11,7 +13,6 @@ import Plugin from "../meta/plugin.js";
  */
 
 export default class BrowserContextPlugin extends Plugin {
-
     /**
      * La clé du plugin.
      *
@@ -38,10 +39,14 @@ export default class BrowserContextPlugin extends Plugin {
      */
     constructor() {
         super();
-        this.addHook("BrowserType.launch:before",
-                     this.#storePlugins.bind(this));
-        this.addHook("BrowserType.launchPersistentContext:before",
-                     this.#storePlugins.bind(this));
+        this.addHook(
+            "BrowserType.launch:before",
+            this.#storePlugins.bind(this),
+        );
+        this.addHook(
+            "BrowserType.launchPersistentContext:before",
+            this.#storePlugins.bind(this),
+        );
         this.addHook("Browser.newContext:after", this.#hook.bind(this));
     }
 
@@ -56,8 +61,8 @@ export default class BrowserContextPlugin extends Plugin {
      * @returns {T} Les mêmes paramètres.
      */
     #storePlugins(args, { method }) {
-        this.#plugins = "BrowserType.launch" === method ? args[0].plugins
-                                                        : args[1].plugins;
+        this.#plugins =
+            "BrowserType.launch" === method ? args[0].plugins : args[1].plugins;
         return args;
     }
 

@@ -1,9 +1,10 @@
 /**
  * @module
+ * @license MIT
+ * @author Sébastien Règne
  */
 
 export default class Plugin {
-
     static light(key, listener) {
         const plugin = new Plugin();
         plugin.addHook(key, listener);
@@ -20,10 +21,7 @@ export default class Plugin {
      * @param {Function} listener La fonction appelée.
      */
     addHook(key, listener) {
-        this.#hooks.set(key, [
-            ...this.#hooks.get(key) ?? [],
-            listener,
-        ]);
+        this.#hooks.set(key, [...(this.#hooks.get(key) ?? []), listener]);
     }
 
     /**

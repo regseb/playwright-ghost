@@ -1,5 +1,7 @@
 /**
  * @module
+ * @license MIT
+ * @author Sébastien Règne
  */
 
 import LEVELS from "../levels.js";
@@ -37,7 +39,6 @@ const getBlocker = async function (options) {
 };
 
 export default class AdblockerPlugin extends Plugin {
-
     /**
      * La clé du plugin.
      *
@@ -64,8 +65,10 @@ export default class AdblockerPlugin extends Plugin {
             this.#options = options;
         }
 
-        this.addHook("BrowserContext.newPage:after",
-                     this.#addAdBlocker.bind(this));
+        this.addHook(
+            "BrowserContext.newPage:after",
+            this.#addAdBlocker.bind(this),
+        );
     }
 
     /**

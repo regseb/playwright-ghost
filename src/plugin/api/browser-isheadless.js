@@ -1,5 +1,7 @@
 /**
  * @module
+ * @license MIT
+ * @author Sébastien Règne
  */
 
 import LEVELS from "../levels.js";
@@ -10,7 +12,6 @@ import Plugin from "../meta/plugin.js";
  */
 
 export default class IsHeadlessPlugin extends Plugin {
-
     /**
      * La clé du plugin.
      *
@@ -27,10 +28,14 @@ export default class IsHeadlessPlugin extends Plugin {
 
     constructor() {
         super();
-        this.addHook("BrowserType.launch:after",
-                     this.#addIsHeadless.bind(this));
-        this.addHook("BrowserType.launchPersistentContext:after",
-                     this.#addIsHeadless.bind(this));
+        this.addHook(
+            "BrowserType.launch:after",
+            this.#addIsHeadless.bind(this),
+        );
+        this.addHook(
+            "BrowserType.launchPersistentContext:after",
+            this.#addIsHeadless.bind(this),
+        );
     }
 
     /**
@@ -44,8 +49,7 @@ export default class IsHeadlessPlugin extends Plugin {
      */
     // eslint-disable-next-line class-methods-use-this
     #addIsHeadless(browser, { method, args }) {
-        const options = "BrowserType.launch" === method ? args[0]
-                                                        : args[1];
+        const options = "BrowserType.launch" === method ? args[0] : args[1];
         // eslint-disable-next-line no-param-reassign
         browser.isHeadless = () => {
             return options?.headless ?? true;

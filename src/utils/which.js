@@ -1,3 +1,9 @@
+/**
+ * @module
+ * @license MIT
+ * @author Sébastien Règne
+ */
+
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -11,8 +17,10 @@ import path from "node:path";
 export default async function which(programname) {
     for (const directory of process.env.PATH.split(":")) {
         const file = path.join(directory, programname);
-        const executable = await fs.access(file, fs.constants.X_OK)
-                                   .then(() => true, () => false);
+        const executable = await fs.access(file, fs.constants.X_OK).then(
+            () => true,
+            () => false,
+        );
         if (executable) {
             return file;
         }

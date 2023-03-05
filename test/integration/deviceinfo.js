@@ -1,3 +1,9 @@
+/**
+ * @module
+ * @license MIT
+ * @author Sébastien Règne
+ */
+
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { chromium } from "../../src/index.js";
@@ -16,11 +22,13 @@ describe("Device Info", function () {
                 assert.deepEqual(spoofeds, []);
             } catch (err) {
                 await page.screenshot({
-                    path:     "./log/deviceinfo-cr.png",
+                    path: "./log/deviceinfo-cr.png",
                     fullPage: true,
                 });
-                await fs.writeFile("./log/deviceinfo-cr.html",
-                                   await page.content());
+                await fs.writeFile(
+                    "./log/deviceinfo-cr.html",
+                    await page.content(),
+                );
 
                 throw err;
             } finally {

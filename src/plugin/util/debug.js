@@ -1,12 +1,13 @@
 /**
  * @module
+ * @license MIT
+ * @author Sébastien Règne
  */
 
 import LEVELS from "../levels.js";
 import Plugin from "../meta/plugin.js";
 
 export default class DebugPlugin extends Plugin {
-
     /**
      * La clé du plugin.
      *
@@ -23,8 +24,10 @@ export default class DebugPlugin extends Plugin {
 
     constructor() {
         super();
-        this.addHook("BrowserContext.newPage:after",
-                     this.#addConsole.bind(this));
+        this.addHook(
+            "BrowserContext.newPage:after",
+            this.#addConsole.bind(this),
+        );
     }
 
     // eslint-disable-next-line class-methods-use-this

@@ -16,11 +16,22 @@ export default {
     ],
     checkers: [
         {
+            patterns: ["*.json", "*.md", "*.svg", "*.yml"],
+            linters: "prettier",
+        },
+        {
+            patterns: ["*.js", "*.ts"],
+            linters: {
+                prettier: ["prettier.config.js", { tabWidth: 4 }],
+            },
+        },
+        {
             patterns: ["/.script/**/*.js", "/src/**/*.js"],
             linters: {
                 eslint: ["eslint.config.js", "eslint_node.config.js"],
             },
-        }, {
+        },
+        {
             patterns: "/test/**/*.js",
             linters: {
                 eslint: [
@@ -29,21 +40,26 @@ export default {
                     "eslint_test.config.js",
                 ],
             },
-        }, {
+        },
+        {
             patterns: "*.config.js",
             linters: {
                 eslint: ["eslint.config.js", "eslint_config.config.js"],
             },
-        }, {
+        },
+        {
             patterns: "*.md",
             linters: "markdownlint",
-        }, {
+        },
+        {
             patterns: "*.json",
             linters: { "jsonlint-mod": null },
-        }, {
+        },
+        {
             patterns: "/package.json",
             linters: "npm-package-json-lint",
-        }, {
+        },
+        {
             patterns: "*.yml",
             linters: { "yaml-lint": null },
         },

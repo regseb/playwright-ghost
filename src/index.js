@@ -1,5 +1,7 @@
 /**
  * @module
+ * @license MIT
+ * @author Sébastien Règne
  */
 
 import playwright from "playwright";
@@ -17,8 +19,9 @@ import BrowserTypePlugin from "./plugin/hook/browsertype.js";
  * @returns {BrowserType} Le <code>BrowserType</code> avec le plugin.
  */
 const plug = function (browserType) {
-    return /** @type {BrowserType} */ (hook(browserType,
-                                            [new BrowserTypePlugin()]));
+    return /** @type {BrowserType} */ (
+        hook(browserType, [new BrowserTypePlugin()])
+    );
 };
 
 export const chromium = plug(playwright.chromium);

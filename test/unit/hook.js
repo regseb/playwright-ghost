@@ -1,5 +1,7 @@
 /**
  * @module
+ * @license MIT
+ * @author Sébastien Règne
  */
 
 import assert from "node:assert/strict";
@@ -36,8 +38,10 @@ describe("hook.js", function () {
             assert.equal(plugin.getHooks.callCount, 1);
             assert.deepEqual(plugin.getHooks.firstCall.args, ["baz:before"]);
             assert.equal(listener.callCount, 1);
-            assert.deepEqual(listener.firstCall.args,
-                             [["foo"], { obj, method }]);
+            assert.deepEqual(listener.firstCall.args, [
+                ["foo"],
+                { obj, method },
+            ]);
         });
     });
 
@@ -49,8 +53,12 @@ describe("hook.js", function () {
             const args = ["qux"];
             const plugins = /** @type {Plugin[]} */ ([]);
 
-            const result = dispatchAfter(returnValue,
-                                         { obj, method, args, plugins });
+            const result = dispatchAfter(returnValue, {
+                obj,
+                method,
+                args,
+                plugins,
+            });
             assert.equal(result, "foo");
         });
 
@@ -63,15 +71,21 @@ describe("hook.js", function () {
             const plugin = { getHooks: sinon.fake.returns([listener]) };
             const plugins = [plugin];
 
-            const result = dispatchAfter(returnValue,
-                                         { obj, method, args, plugins });
+            const result = dispatchAfter(returnValue, {
+                obj,
+                method,
+                args,
+                plugins,
+            });
             assert.equal(result, "quux");
 
             assert.equal(plugin.getHooks.callCount, 1);
             assert.deepEqual(plugin.getHooks.firstCall.args, ["baz:after"]);
             assert.equal(listener.callCount, 1);
-            assert.deepEqual(listener.firstCall.args,
-                             ["foo", { obj, method, args }]);
+            assert.deepEqual(listener.firstCall.args, [
+                "foo",
+                { obj, method, args },
+            ]);
         });
 
         it("should support promise", async function () {
@@ -83,15 +97,21 @@ describe("hook.js", function () {
             const plugin = { getHooks: sinon.fake.returns([listener]) };
             const plugins = [plugin];
 
-            const result = await dispatchAfter(returnValue,
-                                               { obj, method, args, plugins });
+            const result = await dispatchAfter(returnValue, {
+                obj,
+                method,
+                args,
+                plugins,
+            });
             assert.equal(result, "quux");
 
             assert.equal(plugin.getHooks.callCount, 1);
             assert.deepEqual(plugin.getHooks.firstCall.args, ["baz:after"]);
             assert.equal(listener.callCount, 1);
-            assert.deepEqual(listener.firstCall.args,
-                             ["foo", { obj, method, args }]);
+            assert.deepEqual(listener.firstCall.args, [
+                "foo",
+                { obj, method, args },
+            ]);
         });
     });
 });

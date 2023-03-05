@@ -1,3 +1,9 @@
+/**
+ * @module
+ * @license MIT
+ * @author Sébastien Règne
+ */
+
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { chromium } from "../../src/index.js";
@@ -11,20 +17,24 @@ describe("Antibot (Sannysoft)", function () {
             try {
                 await page.goto("https://bot.sannysoft.com/");
                 // Attendre le résultat du dernier test.
-                await page.waitForSelector("#broken-image-dimensions" +
-                                           ":not(:empty)");
+                await page.waitForSelector(
+                    "#broken-image-dimensions:not(:empty)",
+                );
 
-                const results = await page.locator("table:first-of-type tr")
-                                          .evaluateAll((trs) => {
-                    // Enlever les entêtes.
-                    return trs.slice(1).map((tr) => ({
-                        name:   tr.querySelector("td:first-child").textContent,
-                        value:  tr.querySelector("td:last-child").textContent,
-                        status: Array.from(tr.querySelector("td:last-child")
-                                             .classList)
-                                     .find((c) => "result" !== c),
-                    }));
-                });
+                const results = await page
+                    .locator("table:first-of-type tr")
+                    .evaluateAll((trs) => {
+                        // Enlever les entêtes.
+                        return trs.slice(1).map((tr) => ({
+                            name: tr.querySelector("td:first-child")
+                                .textContent,
+                            value: tr.querySelector("td:last-child")
+                                .textContent,
+                            status: Array.from(
+                                tr.querySelector("td:last-child").classList,
+                            ).find((c) => "result" !== c),
+                        }));
+                    });
 
                 for (const result of results) {
                     // Ignorer le test Hairline vérifiant le support de la
@@ -33,17 +43,21 @@ describe("Antibot (Sannysoft)", function () {
                     if ("Hairline Feature" === result.name) {
                         continue;
                     }
-                    assert.equal(result.status,
-                                 "passed",
-                                 `${result.name}: ${result.value}`);
+                    assert.equal(
+                        result.status,
+                        "passed",
+                        `${result.name}: ${result.value}`,
+                    );
                 }
             } catch (err) {
                 await page.screenshot({
-                    path:     "./log/sannysoft-cr.png",
+                    path: "./log/sannysoft-cr.png",
                     fullPage: true,
                 });
-                await fs.writeFile("./log/sannysoft-cr.html",
-                                   await page.content());
+                await fs.writeFile(
+                    "./log/sannysoft-cr.html",
+                    await page.content(),
+                );
 
                 throw err;
             } finally {

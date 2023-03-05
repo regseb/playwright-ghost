@@ -1,3 +1,9 @@
+/**
+ * @module
+ * @license MIT
+ * @author Sébastien Règne
+ */
+
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { chromium } from "../../src/index.js";
@@ -9,38 +15,42 @@ describe("FingerprintJS", function () {
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
-                await page.goto("https://fingerprintjs.com/products" +
-                                "/bot-detection/");
+                await page.goto(
+                    "https://fingerprintjs.com/products/bot-detection/",
+                );
 
                 // Attendre les résultats.
                 await page.waitForSelector(
                     `div[class^="HeroSection-module--card--"]` +
-                    ` h3:has-text("Automation Tool")`,
+                        ` h3:has-text("Automation Tool")`,
                 );
                 await page.waitForSelector(
                     `div[class^="HeroSection-module--card--"]` +
-                    ` h3:has-text("Search Engine")`,
+                        ` h3:has-text("Search Engine")`,
                 );
 
                 const selector = `div[class^="HeroSection-module--card--"]`;
-                const results = await page.locator(selector)
-                                          .evaluateAll((divs) => {
-                    return divs.map((div) => ({
-                        name:   div.querySelector("h3").textContent,
-                        status: div.querySelector("p").textContent,
-                    }));
-                });
+                const results = await page
+                    .locator(selector)
+                    .evaluateAll((divs) => {
+                        return divs.map((div) => ({
+                            name: div.querySelector("h3").textContent,
+                            status: div.querySelector("p").textContent,
+                        }));
+                    });
 
                 for (const result of results) {
                     assert.equal(result.status, "Not detected", result.name);
                 }
             } catch (err) {
                 await page.screenshot({
-                    path:     "./log/fingerprintjs-cr.png",
+                    path: "./log/fingerprintjs-cr.png",
                     fullPage: true,
                 });
-                await fs.writeFile("./log/fingerprintjs-cr.html",
-                                   await page.content());
+                await fs.writeFile(
+                    "./log/fingerprintjs-cr.html",
+                    await page.content(),
+                );
 
                 throw err;
             } finally {

@@ -1,5 +1,7 @@
 /**
  * @module
+ * @license MIT
+ * @author Sébastien Règne
  */
 
 import LEVELS from "../levels.js";
@@ -10,13 +12,12 @@ const disable = function (options) {
         ...options,
         args: [
             "--disable-blink-features=AutomationControlled",
-            ...options?.args ?? [],
+            ...(options?.args ?? []),
         ],
     };
 };
 
 export default class WebdriverPlugin extends Plugin {
-
     /**
      * La clé du plugin.
      *
@@ -33,10 +34,14 @@ export default class WebdriverPlugin extends Plugin {
 
     constructor() {
         super();
-        this.addHook("BrowserType.launch:before",
-                     this.#disableOfLaunch.bind(this));
-        this.addHook("BrowserType.launchPersistentContext:before",
-                     this.#disableOfLaunchPersistentContext.bind(this));
+        this.addHook(
+            "BrowserType.launch:before",
+            this.#disableOfLaunch.bind(this),
+        );
+        this.addHook(
+            "BrowserType.launchPersistentContext:before",
+            this.#disableOfLaunchPersistentContext.bind(this),
+        );
     }
 
     // eslint-disable-next-line class-methods-use-this

@@ -1,5 +1,7 @@
 /**
  * @module
+ * @license MIT
+ * @author Sébastien Règne
  */
 
 import BrowserIsHeadlessPlugin from "./api/browser-isheadless.js";

@@ -1,5 +1,7 @@
 /**
  * @module
+ * @license MIT
+ * @author Sébastien Règne
  */
 
 import Random from "../../utils/random.js";
@@ -7,7 +9,6 @@ import LEVELS from "../levels.js";
 import Plugin from "../meta/plugin.js";
 
 export default class DialogPlugin extends Plugin {
-
     /**
      * La clé du plugin.
      *
@@ -26,8 +27,7 @@ export default class DialogPlugin extends Plugin {
 
     constructor(options) {
         super();
-        this.addHook("BrowserContext.newPage:after",
-                     this.#wait.bind(this));
+        this.addHook("BrowserContext.newPage:after", this.#wait.bind(this));
 
         this.#options = {
             min: options?.min ?? 1000,
@@ -37,8 +37,10 @@ export default class DialogPlugin extends Plugin {
 
     #wait(page) {
         page.on("dialog", (dialog) => {
-            setTimeout(() => dialog.accept(),
-                       Random.getInt(this.#options.min, this.#options.max));
+            setTimeout(
+                () => dialog.accept(),
+                Random.getInt(this.#options.min, this.#options.max),
+            );
         });
         return page;
     }

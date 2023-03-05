@@ -1,5 +1,7 @@
 /**
  * @module
+ * @license MIT
+ * @author Sébastien Règne
  */
 
 /**
@@ -38,17 +40,23 @@ export const dispatchBefore = function (args, { obj, method, plugins }) {
  * @param {Plugin[]} context.plugins Les plugins contenant les hooks.
  * @returns {T} Les nouveaux paramètres qui seont passés à la méthode.
  */
-export const dispatchAfter = function (returnValue,
-                                       { obj, method, args, plugins }) {
+export const dispatchAfter = function (
+    returnValue,
+    { obj, method, args, plugins },
+) {
     const hooks = plugins.flatMap((p) => {
         return p.getHooks(`${method}:after`);
     });
     if (returnValue instanceof Promise) {
-        return hooks.reduce(async (r, h) => h(await r, {
-            obj,
-            method,
-            args,
-        }), returnValue);
+        return hooks.reduce(
+            async (r, h) =>
+                h(await r, {
+                    obj,
+                    method,
+                    args,
+                }),
+            returnValue,
+        );
     }
     return hooks.reduce((r, h) => h(r, { obj, method, args }), returnValue);
 };
@@ -76,14 +84,14 @@ export default function hook(obj, plugins) {
                     const returnValue = target[prop](...argsAltered);
 
                     return dispatchAfter(returnValue, {
-                        obj:  receiver,
+                        obj: receiver,
                         method,
                         args: argsAltered,
                         plugins,
                     });
                 };
                 Object.defineProperty(wrap, "name", {
-                    value:        target[prop].name,
+                    value: target[prop].name,
                     configurable: true,
                 });
                 return wrap;

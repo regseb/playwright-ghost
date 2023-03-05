@@ -1,3 +1,9 @@
+/**
+ * @module
+ * @license MIT
+ * @author Sébastien Règne
+ */
+
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { chromium } from "../../src/index.js";
@@ -15,11 +21,13 @@ describe("Datadome", function () {
                 assert.equal(title, "Datadome test page");
             } catch (err) {
                 await page.screenshot({
-                    path:     "./log/datadome-cr.png",
+                    path: "./log/datadome-cr.png",
                     fullPage: true,
                 });
-                await fs.writeFile("./log/datadome-cr.html",
-                                   await page.content());
+                await fs.writeFile(
+                    "./log/datadome-cr.html",
+                    await page.content(),
+                );
 
                 throw err;
             } finally {

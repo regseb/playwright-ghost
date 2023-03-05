@@ -1,3 +1,12 @@
+/**
+ * @module
+ * @license MIT
+ * @author Sébastien Règne
+ */
+
+/**
+ * @type {import("@stryker-mutator/api/core").PartialStrykerOptions}
+ */
 export default {
     incremental: true,
     incrementalFile: ".stryker/stryker-incremental.json",

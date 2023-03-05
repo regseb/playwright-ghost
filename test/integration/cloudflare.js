@@ -1,3 +1,9 @@
+/**
+ * @module
+ * @license MIT
+ * @author Sébastien Règne
+ */
+
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { chromium } from "../../src/index.js";
@@ -21,11 +27,13 @@ describe("Cloudflare", function () {
                 }
             } catch (err) {
                 await page.screenshot({
-                    path:     "./log/cloudflare_managed-cr.png",
+                    path: "./log/cloudflare_managed-cr.png",
                     fullPage: true,
                 });
-                await fs.writeFile("./log/cloudflare_managed-cr.html",
-                                   await page.content());
+                await fs.writeFile(
+                    "./log/cloudflare_managed-cr.html",
+                    await page.content(),
+                );
 
                 throw err;
             } finally {
@@ -34,14 +42,16 @@ describe("Cloudflare", function () {
             }
         });
 
+        // prettier-ignore
         it("should be success with non-interactive challenge",
-                                                             async function () {
+                async function () {
             const browser = await chromium.launch();
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
-                await page.goto("https://peet.ws/turnstile-test" +
-                                "/non-interactive.html");
+                await page.goto(
+                    "https://peet.ws/turnstile-test/non-interactive.html",
+                );
                 await page.waitForTimeout(5000);
 
                 const CHALLENGES_HOST = "https://challenges.cloudflare.com/";
@@ -53,11 +63,13 @@ describe("Cloudflare", function () {
                 }
             } catch (err) {
                 await page.screenshot({
-                    path:     "./log/cloudflare_noninteractive-cr.png",
+                    path: "./log/cloudflare_noninteractive-cr.png",
                     fullPage: true,
                 });
-                await fs.writeFile("./log/cloudflare_noninteractive-cr.html",
-                                   await page.content());
+                await fs.writeFile(
+                    "./log/cloudflare_noninteractive-cr.html",
+                    await page.content(),
+                );
 
                 throw err;
             } finally {

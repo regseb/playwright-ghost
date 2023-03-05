@@ -1,5 +1,7 @@
 /**
  * @module
+ * @license MIT
+ * @author Sébastien Règne
  */
 
 import { dispatchAfter, dispatchBefore } from "../../hook.js";
@@ -30,37 +32,41 @@ const load = function (options = {}) {
         clazzs.set(Clazz.key, Clazz);
     }
 
-    const plugins = Object.entries({ ...defaultOptions,
-                                     ...options }).map(([key, value]) => {
-        if ("import" === key) {
-            return undefined;
-        }
-        if (key.startsWith("x/")) {
-            if (!(value instanceof Plugin)) {
-                throw new TypeError("Custom plugin must extends Plugin: " +
-                                    key);
+    const plugins = Object.entries({ ...defaultOptions, ...options })
+        .map(([key, value]) => {
+            if ("import" === key) {
+                return undefined;
             }
-            return value;
-        }
-        const Clazz = clazzs.get(key);
-        if (undefined === Clazz) {
-            throw new Error(`Plugin unknown: ${key}`);
-        }
-        if (LEVELS.MANDATORY === Clazz.level) {
-            return new Clazz();
-        }
-        switch (value) {
-            case true:  return new Clazz();
-            case false: return undefined;
-            default:    return new Clazz(value);
-        }
-    }).filter((p) => undefined !== p);
+            if (key.startsWith("x/")) {
+                if (!(value instanceof Plugin)) {
+                    throw new TypeError(
+                        "Custom plugin must extends Plugin: " + key,
+                    );
+                }
+                return value;
+            }
+            const Clazz = clazzs.get(key);
+            if (undefined === Clazz) {
+                throw new Error(`Plugin unknown: ${key}`);
+            }
+            if (LEVELS.MANDATORY === Clazz.level) {
+                return new Clazz();
+            }
+            switch (value) {
+                case true:
+                    return new Clazz();
+                case false:
+                    return undefined;
+                default:
+                    return new Clazz(value);
+            }
+        })
+        .filter((p) => undefined !== p);
 
     return plugins;
 };
 
 export default class BrowserTypePlugin extends Plugin {
-
     /**
      * La clé du plugin.
      *
@@ -80,21 +86,32 @@ export default class BrowserTypePlugin extends Plugin {
      */
     constructor() {
         super();
-        this.addHook("BrowserType.launch:before",
-                     this.#beforeOfLaunch.bind(this));
-        this.addHook("BrowserType.launch:after",
-                     this.#afterOfLaunch.bind(this));
-        this.addHook("BrowserType.launchPersistentContext:before",
-                     this.#beforeOfLaunchPersistentContext.bind(this));
-        this.addHook("BrowserType.launchPersistentContext:after",
-                     this.#afterOfLaunchPersistentContext.bind(this));
+        this.addHook(
+            "BrowserType.launch:before",
+            this.#beforeOfLaunch.bind(this),
+        );
+        this.addHook(
+            "BrowserType.launch:after",
+            this.#afterOfLaunch.bind(this),
+        );
+        this.addHook(
+            "BrowserType.launchPersistentContext:before",
+            this.#beforeOfLaunchPersistentContext.bind(this),
+        );
+        this.addHook(
+            "BrowserType.launchPersistentContext:after",
+            this.#afterOfLaunchPersistentContext.bind(this),
+        );
     }
 
     // eslint-disable-next-line class-methods-use-this
     #beforeOfLaunch(args, { obj, method }) {
         const plugins = load(args[0]?.plugins);
-        return dispatchBefore([{ ...args[0], plugins }],
-                              { obj, method, plugins });
+        return dispatchBefore([{ ...args[0], plugins }], {
+            obj,
+            method,
+            plugins,
+        });
     }
 
     // eslint-disable-next-line class-methods-use-this
@@ -110,8 +127,11 @@ export default class BrowserTypePlugin extends Plugin {
     // eslint-disable-next-line class-methods-use-this
     #beforeOfLaunchPersistentContext(args, { obj, method }) {
         const plugins = load(args[1]?.plugins);
-        return dispatchBefore([args[0], { ...args[1], plugins }],
-                              { obj, method, plugins });
+        return dispatchBefore([args[0], { ...args[1], plugins }], {
+            obj,
+            method,
+            plugins,
+        });
     }
 
     // eslint-disable-next-line class-methods-use-this

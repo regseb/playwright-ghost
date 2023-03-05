@@ -1,5 +1,7 @@
 /**
  * @module
+ * @license MIT
+ * @author Sébastien Règne
  */
 
 import which from "../../utils/which.js";
@@ -24,7 +26,6 @@ for (const name of ["chromium", "firefox", "webkit"]) {
 }
 
 export default class LocalePlugin extends Plugin {
-
     /**
      * La clé du plugin.
      *
@@ -41,8 +42,10 @@ export default class LocalePlugin extends Plugin {
 
     constructor() {
         super();
-        this.addHook("BrowserType.launch:before",
-                     this.#changeExecutablePath.bind(this));
+        this.addHook(
+            "BrowserType.launch:before",
+            this.#changeExecutablePath.bind(this),
+        );
     }
 
     // eslint-disable-next-line class-methods-use-this
@@ -51,9 +54,11 @@ export default class LocalePlugin extends Plugin {
         if (!EXECUTABLE_PATHS.has(name)) {
             throw new Error(`${name} not found locally`);
         }
-        return [{
-            executablePath: EXECUTABLE_PATHS.get(name),
-            ...args[0],
-        }];
+        return [
+            {
+                executablePath: EXECUTABLE_PATHS.get(name),
+                ...args[0],
+            },
+        ];
     }
 }

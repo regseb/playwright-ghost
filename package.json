@@ -1,76 +1,79 @@
 {
-    "name": "playwright-ghost",
-    "version": "0.3.1",
-    "description": "Rendre un Playwright identique à un navigateur.",
-    "keywords": [
-        "playwright",
-        "ghost",
-        "polyfill",
-        "headless"
-    ],
-    "homepage": "https://github.com/regseb/playwright-ghost#readme",
-    "bugs": {
-        "url": "https://github.com/regseb/playwright-ghost/issues",
-        "email": "regseb@gmail.com"
-    },
-    "license": "MIT",
-    "author": "Sébastien Règne <regseb@gmail.com> (https://github.com/regseb)",
-    "funding": "https://www.paypal.me/sebastienregne",
-    "files": [
-        "src/"
-    ],
-    "main": "src/index.js",
-    "exports": {
-        ".": "./src/index.js",
-        "./plugin": "./src/extend.js",
-        "./package.json": "./package.json"
-    },
-    "repository": "regseb/playwright-ghost",
-    "type": "module",
-    "scripts": {
-        "lint": "metalint",
-        "lint:types": "tsc --project .tsconfig_lint.json",
-        "test": "npm run test:coverage",
-        "test:unit": "mocha --config test/unit/mocharc.json",
-        "test:integration": "mocha --config test/integration/mocharc.json",
-        "test:coverage": "stryker run .stryker.config.js",
-        "jsdocs": "typedoc --tsconfig .tsconfig_jsdocs.json --out jsdocs/ src/",
-        "clean": "node .script/clean.js"
-    },
-    "dependencies": {
-        "playwright": "1.31.2"
-    },
-    "devDependencies": {
-        "@cliqz/adblocker-playwright": "1.26.2",
-        "@stryker-mutator/core": "6.4.1",
-        "@stryker-mutator/mocha-runner": "6.4.1",
-        "@types/mocha": "10.0.1",
-        "@types/node": "18.14.6",
-        "@types/sinon": "10.0.13",
-        "eslint": "8.35.0",
-        "eslint-plugin-array-func": "3.1.8",
-        "eslint-plugin-eslint-comments": "3.2.0",
-        "eslint-plugin-import": "2.27.5",
-        "eslint-plugin-jsdoc": "40.0.1",
-        "eslint-plugin-mocha": "10.1.0",
-        "eslint-plugin-n": "15.6.1",
-        "eslint-plugin-no-unsanitized": "4.0.2",
-        "eslint-plugin-promise": "6.1.1",
-        "eslint-plugin-regexp": "1.12.0",
-        "eslint-plugin-unicorn": "46.0.0",
-        "htmlhint": "1.1.4",
-        "jsonlint-mod": "1.7.6",
-        "markdownlint": "0.27.0",
-        "metalint": "0.11.1",
-        "mocha": "10.2.0",
-        "npm-package-json-lint": "6.4.0",
-        "sinon": "15.0.1",
-        "typedoc": "0.23.26",
-        "typescript": "4.9.5",
-        "yaml-lint": "1.7.0"
-    },
-    "engines": {
-        "node": ">=18.12.0"
-    },
-    "private": true
+  "name": "playwright-ghost",
+  "version": "0.3.1",
+  "description": "Rendre un Playwright identique à un navigateur.",
+  "keywords": [
+    "playwright",
+    "ghost",
+    "polyfill",
+    "headless"
+  ],
+  "homepage": "https://github.com/regseb/playwright-ghost#readme",
+  "bugs": {
+    "url": "https://github.com/regseb/playwright-ghost/issues",
+    "email": "regseb@gmail.com"
+  },
+  "license": "MIT",
+  "author": "Sébastien Règne <regseb@gmail.com> (https://github.com/regseb)",
+  "funding": "https://www.paypal.me/sebastienregne",
+  "files": [
+    "src/"
+  ],
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./plugin": "./src/extend.js",
+    "./package.json": "./package.json"
+  },
+  "repository": "regseb/playwright-ghost",
+  "type": "module",
+  "scripts": {
+    "lint": "metalint",
+    "lint:fix": "metalint --fix",
+    "lint:types": "tsc --project .tsconfig_lint.json",
+    "test": "npm run test:coverage",
+    "test:unit": "mocha --config test/unit/mocharc.json",
+    "test:integration": "mocha --config test/integration/mocharc.json",
+    "test:coverage": "stryker run .stryker.config.js",
+    "jsdocs": "typedoc --tsconfig .tsconfig_jsdocs.json --out jsdocs/ src/",
+    "clean": "node .script/clean.js"
+  },
+  "dependencies": {
+    "playwright": "1.31.2"
+  },
+  "devDependencies": {
+    "@cliqz/adblocker-playwright": "1.26.2",
+    "@prettier/plugin-xml": "2.2.0",
+    "@stryker-mutator/core": "6.4.1",
+    "@stryker-mutator/mocha-runner": "6.4.1",
+    "@types/mocha": "10.0.1",
+    "@types/node": "18.14.6",
+    "@types/sinon": "10.0.13",
+    "eslint": "8.35.0",
+    "eslint-plugin-array-func": "3.1.8",
+    "eslint-plugin-eslint-comments": "3.2.0",
+    "eslint-plugin-import": "2.27.5",
+    "eslint-plugin-jsdoc": "40.0.1",
+    "eslint-plugin-mocha": "10.1.0",
+    "eslint-plugin-n": "15.6.1",
+    "eslint-plugin-no-unsanitized": "4.0.2",
+    "eslint-plugin-promise": "6.1.1",
+    "eslint-plugin-regexp": "1.12.0",
+    "eslint-plugin-unicorn": "46.0.0",
+    "htmlhint": "1.1.4",
+    "jsonlint-mod": "1.7.6",
+    "markdownlint": "0.27.0",
+    "metalint": "0.11.1",
+    "mocha": "10.2.0",
+    "npm-package-json-lint": "6.4.0",
+    "prettier": "2.8.4",
+    "sinon": "15.0.1",
+    "typedoc": "0.23.26",
+    "typescript": "4.9.5",
+    "yaml-lint": "1.7.0"
+  },
+  "engines": {
+    "node": ">=18.12.0"
+  },
+  "private": true
 }

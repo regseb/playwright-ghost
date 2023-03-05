@@ -1,3 +1,9 @@
+/**
+ * @module
+ * @license MIT
+ * @author Sébastien Règne
+ */
+
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { chromium } from "../../src/index.js";
@@ -8,9 +14,11 @@ describe("HeadlessDetectJS", function () {
             const browser = await chromium.launch();
             const context = await browser.newContext();
 
-            const response = await fetch("https://raw.githubusercontent.com" +
-                                               "/LouisKlimek/HeadlessDetectJS" +
-                                                     "/main/headlessDetect.js");
+            const response = await fetch(
+                "https://raw.githubusercontent.com" +
+                    "/LouisKlimek/HeadlessDetectJS" +
+                    "/main/headlessDetect.js",
+            );
             const content = await response.text();
             context.addInitScript({ content });
 
@@ -27,11 +35,13 @@ describe("HeadlessDetectJS", function () {
                 assert.equal(score, 0);
             } catch (err) {
                 await page.screenshot({
-                    path:     "./log/headlessdetectjs-cr.png",
+                    path: "./log/headlessdetectjs-cr.png",
                     fullPage: true,
                 });
-                await fs.writeFile("./log/headlessdetectjs-cr.html",
-                                   await page.content());
+                await fs.writeFile(
+                    "./log/headlessdetectjs-cr.html",
+                    await page.content(),
+                );
 
                 throw err;
             } finally {

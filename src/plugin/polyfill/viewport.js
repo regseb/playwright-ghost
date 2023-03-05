@@ -1,5 +1,7 @@
 /**
  * @module
+ * @license MIT
+ * @author Sébastien Règne
  */
 
 import Random from "../../utils/random.js";
@@ -18,7 +20,6 @@ const setViewport = function (options, { width, height }) {
 };
 
 export default class ViewportPlugin extends Plugin {
-
     /**
      * La clé du plugin.
      *
@@ -37,13 +38,17 @@ export default class ViewportPlugin extends Plugin {
 
     constructor(options) {
         super();
-        this.addHook("BrowserType.launch:before",
-                     this.#setViewportOfLaunch.bind(this));
-        this.addHook("BrowserType.launchPersistentContext:before",
-                     this.#setViewportOfLaunchPersistentContext.bind(this));
+        this.addHook(
+            "BrowserType.launch:before",
+            this.#setViewportOfLaunch.bind(this),
+        );
+        this.addHook(
+            "BrowserType.launchPersistentContext:before",
+            this.#setViewportOfLaunchPersistentContext.bind(this),
+        );
 
         this.#options = {
-            width:  options?.width ?? Random.getInt(1000, 1800),
+            width: options?.width ?? Random.getInt(1000, 1800),
             height: options?.height ?? Random.getInt(500, 800),
         };
     }
