@@ -39,7 +39,7 @@
     "clean": "node .script/clean.js"
   },
   "dependencies": {
-    "playwright": "1.31.2"
+    "playwright": "1.32.2"
   },
   "devDependencies": {
     "@cliqz/adblocker-playwright": "1.26.2",
