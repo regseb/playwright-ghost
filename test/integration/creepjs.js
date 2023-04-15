@@ -23,7 +23,7 @@ describe("CreepJS", function () {
                 await page.waitForTimeout(5000);
                 const grade = await page
                     .getByText("trust score")
-                    .locator(`span[class^="scale-"]`)
+                    .locator('span[class^="scale-"]')
                     .textContent();
                 if (!grade.startsWith("A") && !grade.startsWith("B")) {
                     assert.fail(grade);

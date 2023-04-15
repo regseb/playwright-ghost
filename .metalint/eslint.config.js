@@ -182,7 +182,8 @@ export default {
         "no-bitwise": "off",
         "no-caller": "error",
         "no-case-declarations": "error",
-        "no-confusing-arrow": "error",
+        // Laisser Prettier gérer cette règle.
+        "no-confusing-arrow": "off",
         "no-console": "error",
         "no-continue": "off",
         "no-delete-var": "error",
@@ -197,8 +198,10 @@ export default {
         "no-extra-bind": "error",
         "no-extra-boolean-cast": "error",
         "no-extra-label": "error",
-        "no-extra-semi": "error",
-        "no-floating-decimal": "error",
+        // Laisser Prettier gérer cette règle.
+        "no-extra-semi": "off",
+        // Laisser Prettier gérer cette règle.
+        "no-floating-decimal": "off",
         "no-global-assign": "error",
         "no-implicit-coercion": ["error", { disallowTemplateShorthand: true }],
         "no-implicit-globals": "error",
@@ -289,9 +292,12 @@ export default {
         "no-with": "error",
         "object-shorthand": "error",
         "one-var": ["error", "never"],
-        "one-var-declaration-per-line": "error",
+        // Laisser Prettier gérer cette règle.
+        "one-var-declaration-per-line": "off",
         "operator-assignment": "error",
-        "prefer-arrow-callback": "error",
+        // Désactiver cette règle qui peut avoir des conflits avec Prettier.
+        // https://github.com/prettier/eslint-plugin-prettier/issues/65
+        "prefer-arrow-callback": "off",
         "prefer-const": "error",
         "prefer-destructuring": "off",
         "prefer-exponentiation-operator": "error",
@@ -305,7 +311,8 @@ export default {
         "prefer-rest-params": "error",
         "prefer-spread": "error",
         "prefer-template": "off",
-        "quote-props": ["error", "as-needed"],
+        // Laisser Prettier gérer cette règle.
+        "quote-props": "off",
         radix: "error",
         "require-await": "error",
         "require-unicode-regexp": "error",
@@ -327,70 +334,73 @@ export default {
         yoda: ["error", "always"],
 
         // Layout & Formatting.
-        "array-bracket-newline": ["error", "consistent"],
-        "array-bracket-spacing": "error",
-        "array-element-newline": ["error", "consistent"],
-        "arrow-parens": "error",
-        "arrow-spacing": "error",
-        "block-spacing": "error",
-        "brace-style": "error",
-        "comma-dangle": ["error", "always-multiline"],
-        "comma-spacing": "error",
-        "comma-style": "error",
-        "computed-property-spacing": [
-            "error",
-            "never",
-            {
-                enforceForClassMembers: true,
-            },
-        ],
-        "dot-location": ["error", "property"],
-        "eol-last": "error",
-        "func-call-spacing": ["error", "never"],
-        "function-call-argument-newline": ["error", "consistent"],
-        "function-paren-newline": ["error", "consistent"],
-        "generator-star-spacing": "error",
-        // Ne pas vérifier les retours à la ligne pour les fonctions fléchées
-        // car Prettier peut ajouter des retours à la ligne.
+        // Laisser Prettier gérer la majorité des règles de cette section.
+        // https://github.com/prettier/eslint-config-prettier
+        "array-bracket-newline": "off",
+        "array-bracket-spacing": "off",
+        "array-element-newline": "off",
+        "arrow-parens": "off",
+        "arrow-spacing": "off",
+        "block-spacing": "off",
+        "brace-style": "off",
+        "comma-dangle": "off",
+        "comma-spacing": "off",
+        "comma-style": "off",
+        "computed-property-spacing": "off",
+        "dot-location": "off",
+        "eol-last": "off",
+        "func-call-spacing": "off",
+        "function-call-argument-newline": "off",
+        "function-paren-newline": "off",
+        "generator-star-spacing": "off",
         "implicit-arrow-linebreak": "off",
         indent: "off",
         "jsx-quotes": "off",
-        "key-spacing": "error",
-        "keyword-spacing": "error",
+        "key-spacing": "off",
+        "keyword-spacing": "off",
         "line-comment-position": "error",
-        "linebreak-style": "error",
-        // Ne pas vérifier les lignes vides avant les blocs de commentaire car
-        // Prettier les enlèves.
+        "linebreak-style": "off",
         "lines-around-comment": [
             "error",
-            { afterHashbangComment: true, beforeBlockComment: false },
-        ],
-        "lines-between-class-members": "error",
-        "max-len": "warn",
-        "max-statements-per-line": ["error", { max: 2 }],
-        "multiline-ternary": "off",
-        "new-parens": "error",
-        "newline-per-chained-call": "off",
-        // Ne pas activer cette règle pour "all" car Prettier ajoute des
-        // parenthèses qui sont considérées inutiles par ESLint.
-        "no-extra-parens": ["error", "functions"],
-        "no-mixed-spaces-and-tabs": "error",
-        "no-multi-spaces": "off",
-        "no-multiple-empty-lines": ["error", { max: 2, maxEOF: 0, maxBOF: 0 }],
-        "no-tabs": "error",
-        "no-trailing-spaces": "error",
-        "no-whitespace-before-property": "error",
-        "nonblock-statement-body-position": "error",
-        "object-curly-newline": "error",
-        "object-curly-spacing": ["error", "always"],
-        "object-property-newline": [
-            "error",
             {
-                allowAllPropertiesOnSameLine: true,
+                allowBlockStart: true,
+                allowObjectStart: true,
+                allowArrayStart: true,
+                afterHashbangComment: true,
             },
         ],
-        "operator-linebreak": "error",
-        "padded-blocks": ["error", { switches: "never" }],
+        "lines-between-class-members": "error",
+        "max-len": [
+            "warn",
+            {
+                // Ignorer les imports et les déclarations de tests unitaires
+                // car Prettier n'ajoute pas de retour à la ligne pour ne pas
+                // dépasser les 80 caractères.
+                ignorePattern: '^import |^ \\* @typedef \\{import\\(|^ +it\\("',
+                // Ignorer les expressions rationnelles car il n'est pas
+                // possible de les écrire sur plusieurs lignes.
+                ignoreRegExpLiterals: true,
+            },
+        ],
+        "max-statements-per-line": ["error", { max: 2 }],
+        "multiline-ternary": "off",
+        "new-parens": "off",
+        "newline-per-chained-call": "off",
+        "no-extra-parens": "off",
+        "no-mixed-spaces-and-tabs": "off",
+        "no-multi-spaces": "off",
+        "no-multiple-empty-lines": "off",
+        // Activer cette règle car Prettier garde des tabulations (par exemple
+        // dans les chaines de caractères).
+        "no-tabs": "error",
+        "no-trailing-spaces": "off",
+        "no-whitespace-before-property": "off",
+        "nonblock-statement-body-position": "off",
+        "object-curly-newline": "off",
+        "object-curly-spacing": "off",
+        "object-property-newline": "off",
+        "operator-linebreak": "off",
+        "padded-blocks": "off",
         "padding-line-between-statements": [
             "error",
             {
@@ -399,35 +409,23 @@ export default {
                 next: "*",
             },
         ],
-        quotes: [
-            "error",
-            "double",
-            { avoidEscape: true, allowTemplateLiterals: true },
-        ],
-        "rest-spread-spacing": "error",
-        semi: "error",
-        "semi-spacing": "error",
-        "semi-style": ["error", "last"],
-        "space-before-blocks": "error",
-        "space-before-function-paren": [
-            "error",
-            {
-                anonymous: "always",
-                named: "never",
-            },
-        ],
-        "space-in-parens": "error",
-        "space-infix-ops": "error",
-        "space-unary-ops": "error",
-        "switch-colon-spacing": "error",
-        "template-curly-spacing": "error",
-        "template-tag-spacing": "error",
-        "unicode-bom": "error",
-        "wrap-iife": "error",
-        // Désactiver cette règle car Prettier enlève les parenthèses autour des
-        // expressions rationnelles.
+        quotes: ["error", "double", { avoidEscape: true }],
+        "rest-spread-spacing": "off",
+        semi: "off",
+        "semi-spacing": "off",
+        "semi-style": "off",
+        "space-before-blocks": "off",
+        "space-before-function-paren": "off",
+        "space-in-parens": "off",
+        "space-infix-ops": "off",
+        "space-unary-ops": "off",
+        "switch-colon-spacing": "off",
+        "template-curly-spacing": "off",
+        "template-tag-spacing": "off",
+        "unicode-bom": "off",
+        "wrap-iife": "off",
         "wrap-regex": "off",
-        "yield-star-spacing": "error",
+        "yield-star-spacing": "off",
 
         // Plugin eslint-plugin-array-func.
         "array-func/from-map": "error",
@@ -471,7 +469,11 @@ export default {
         "import/no-extraneous-dependencies": [
             "error",
             {
-                devDependencies: [".script/**/*.js", "test/**/*.js"],
+                devDependencies: [
+                    ".script/**/*.js",
+                    "test/**/*.js",
+                    "{.,}**/{.,}*.config.js",
+                ],
             },
         ],
         "import/no-mutable-exports": "error",
@@ -543,7 +545,7 @@ export default {
         "import/no-named-default": "error",
         "import/no-named-export": "off",
         "import/no-namespace": "off",
-        "import/no-unassigned-import": "error",
+        "import/no-unassigned-import": ["error", { allow: ["**/polyfill/**"] }],
         "import/order": [
             "error",
             {
@@ -580,11 +582,13 @@ export default {
         "jsdoc/check-values": "error",
         "jsdoc/empty-tags": "error",
         "jsdoc/implements-on-classes": "error",
+        "jsdoc/informative-docs": "error",
         "jsdoc/match-description": ["error", { matchDescription: "[A-ZÉ].*" }],
         "jsdoc/match-name": "off",
         "jsdoc/multiline-blocks": "error",
         "jsdoc/newline-after-description": "error",
         "jsdoc/no-bad-blocks": "error",
+        "jsdoc/no-blank-block-descriptions": "error",
         "jsdoc/no-defaults": "error",
         "jsdoc/no-missing-syntax": "off",
         "jsdoc/no-multi-asterisks": "error",
@@ -739,7 +743,8 @@ export default {
         "unicorn/consistent-destructuring": "error",
         "unicorn/consistent-function-scoping": "error",
         "unicorn/custom-error-definition": "error",
-        "unicorn/empty-brace-spaces": "error",
+        // Laisser Prettier gérer cette règle.
+        "unicorn/empty-brace-spaces": "off",
         "unicorn/error-message": "error",
         "unicorn/escape-case": "error",
         "unicorn/expiring-todo-comments": "off",
@@ -794,7 +799,8 @@ export default {
         "unicorn/no-useless-switch-case": "error",
         "unicorn/no-useless-undefined": "off",
         "unicorn/no-zero-fractions": "error",
-        "unicorn/number-literal-case": "error",
+        // Laisser Prettier gérer cette règle.
+        "unicorn/number-literal-case": "off",
         "unicorn/numeric-separators-style": "error",
         "unicorn/prefer-add-event-listener": "error",
         "unicorn/prefer-array-find": ["error", { checkFromLast: true }],

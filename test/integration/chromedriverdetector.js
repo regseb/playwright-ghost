@@ -10,7 +10,7 @@ import { chromium } from "../../src/index.js";
 
 describe("Chromedriver Detector", function () {
     describe("chromium", function () {
-        it.skip("should passed", async function () {
+        it("should passed", async function () {
             const browser = await chromium.launch();
             const context = await browser.newContext();
             const page = await context.newPage();

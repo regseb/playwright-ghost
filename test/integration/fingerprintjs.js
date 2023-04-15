@@ -21,15 +21,15 @@ describe("FingerprintJS", function () {
 
                 // Attendre les résultats.
                 await page.waitForSelector(
-                    `div[class^="HeroSection-module--card--"]` +
-                        ` h3:has-text("Automation Tool")`,
+                    'div[class^="HeroSection-module--card--"]' +
+                        ' h3:has-text("Automation Tool")',
                 );
                 await page.waitForSelector(
-                    `div[class^="HeroSection-module--card--"]` +
-                        ` h3:has-text("Search Engine")`,
+                    'div[class^="HeroSection-module--card--"]' +
+                        ' h3:has-text("Search Engine")',
                 );
 
-                const selector = `div[class^="HeroSection-module--card--"]`;
+                const selector = 'div[class^="HeroSection-module--card--"]';
                 const results = await page
                     .locator(selector)
                     .evaluateAll((divs) => {

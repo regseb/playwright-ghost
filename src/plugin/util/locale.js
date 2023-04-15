@@ -11,7 +11,7 @@ import Plugin from "../meta/plugin.js";
 /**
  * La liste des exécutables des navigateurs.
  *
- * @type {Object<string, string>}
+ * @type {Map<string, string>}
  */
 const EXECUTABLE_PATHS = new Map();
 for (const name of ["chromium", "firefox", "webkit"]) {

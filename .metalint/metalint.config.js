@@ -20,7 +20,7 @@ export default {
             linters: "prettier",
         },
         {
-            patterns: ["*.js", "*.ts"],
+            patterns: "*.js",
             linters: {
                 prettier: ["prettier.config.js", { tabWidth: 4 }],
             },

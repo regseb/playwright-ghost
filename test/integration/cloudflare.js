@@ -42,9 +42,7 @@ describe("Cloudflare", function () {
             }
         });
 
-        // prettier-ignore
-        it("should be success with non-interactive challenge",
-                async function () {
+        it("should be success with non-interactive challenge", async function () {
             const browser = await chromium.launch();
             const context = await browser.newContext();
             const page = await context.newPage();
