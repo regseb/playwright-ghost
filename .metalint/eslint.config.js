@@ -376,7 +376,11 @@ export default {
                 // Ignorer les imports et les déclarations de tests unitaires
                 // car Prettier n'ajoute pas de retour à la ligne pour ne pas
                 // dépasser les 80 caractères.
-                ignorePattern: '^import |^ \\* @typedef \\{import\\(|^ +it\\("',
+                ignorePattern:
+                    "^import " +
+                    "|^ +\\* @typedef \\{import\\(" +
+                    "|^ +\\* @see " +
+                    '|^ +it\\("',
                 // Ignorer les expressions rationnelles car il n'est pas
                 // possible de les écrire sur plusieurs lignes.
                 ignoreRegExpLiterals: true,
@@ -586,9 +590,9 @@ export default {
         "jsdoc/match-description": ["error", { matchDescription: "[A-ZÉ].*" }],
         "jsdoc/match-name": "off",
         "jsdoc/multiline-blocks": "error",
-        "jsdoc/newline-after-description": "error",
         "jsdoc/no-bad-blocks": "error",
         "jsdoc/no-blank-block-descriptions": "error",
+        "jsdoc/no-blank-blocks": "error",
         "jsdoc/no-defaults": "error",
         "jsdoc/no-missing-syntax": "off",
         "jsdoc/no-multi-asterisks": "error",
@@ -626,7 +630,7 @@ export default {
         "jsdoc/require-yields": "error",
         "jsdoc/require-yields-check": "error",
         "jsdoc/sort-tags": "error",
-        "jsdoc/tag-lines": "error",
+        "jsdoc/tag-lines": ["error", "never", { startLines: 1 }],
         "jsdoc/valid-types": "error",
 
         // Plugin eslint-plugin-no-unsanitized.
@@ -749,7 +753,7 @@ export default {
         "unicorn/escape-case": "error",
         "unicorn/expiring-todo-comments": "off",
         "unicorn/explicit-length-check": "off",
-        "unicorn/filename-case": ["error", { case: "kebabCase" }],
+        "unicorn/filename-case": "error",
         "unicorn/import-style": "error",
         "unicorn/new-for-builtins": "error",
         "unicorn/no-abusive-eslint-disable": "error",

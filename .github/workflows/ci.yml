@@ -30,7 +30,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        node_version: [18, 19]
+        node_version: [18, 20]
     steps:
       - name: Setup Node.js ${{ matrix.node_version }}
         uses: actions/setup-node@v3

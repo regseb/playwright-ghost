@@ -1,4 +1,15 @@
+# Ignorer les répertoires générés.
+/.stryker/
 /jsdocs/
 /log/
 /node_modules/
-/.stryker/
+
+# Ignorer les fichiers de configuration de Visual Studio Code.
+/.vscode/
+
+# Ignorer les fichiers temporaires de Vim.
+*.swp
+
+# Ignorer les autres lockfile.
+/pnpm-lock.yaml
+/yarn.lock
