@@ -17,14 +17,14 @@
   "author": "Sébastien Règne <regseb@gmail.com> (https://github.com/regseb)",
   "funding": "https://www.paypal.me/sebastienregne",
   "files": [
-    "src/"
+    "./src/"
   ],
-  "main": "src/index.js",
   "exports": {
     ".": "./src/index.js",
     "./plugin": "./src/extend.js",
     "./package.json": "./package.json"
   },
+  "main": "./src/index.js",
   "repository": "regseb/playwright-ghost",
   "type": "module",
   "scripts": {
@@ -35,11 +35,11 @@
     "test:unit": "mocha --config test/unit/mocharc.json",
     "test:integration": "mocha --config test/integration/mocharc.json",
     "test:coverage": "stryker run .stryker.config.js",
-    "jsdocs": "typedoc --tsconfig .tsconfig_jsdocs.json --out jsdocs/ src/",
+    "jsdocs": "typedoc --tsconfig .tsconfig_jsdocs.json",
     "clean": "node .script/clean.js"
   },
   "dependencies": {
-    "playwright": "1.33.0"
+    "playwright": "1.34.3"
   },
   "devDependencies": {
     "@cliqz/adblocker-playwright": "1.26.5",
@@ -48,27 +48,27 @@
     "@stryker-mutator/core": "6.4.2",
     "@stryker-mutator/mocha-runner": "6.4.2",
     "@types/mocha": "10.0.1",
-    "@types/node": "18.16.3",
-    "@types/sinon": "10.0.14",
-    "eslint": "8.39.0",
+    "@types/node": "20.2.3",
+    "@types/sinon": "10.0.15",
+    "eslint": "8.41.0",
     "eslint-plugin-array-func": "3.1.8",
     "eslint-plugin-eslint-comments": "3.2.0",
     "eslint-plugin-import": "2.27.5",
-    "eslint-plugin-jsdoc": "43.1.1",
+    "eslint-plugin-jsdoc": "44.2.5",
     "eslint-plugin-mocha": "10.1.0",
-    "eslint-plugin-n": "15.7.0",
+    "eslint-plugin-n": "16.0.0",
     "eslint-plugin-no-unsanitized": "4.0.2",
     "eslint-plugin-promise": "6.1.1",
-    "eslint-plugin-regexp": "1.14.0",
-    "eslint-plugin-unicorn": "46.0.0",
+    "eslint-plugin-regexp": "1.15.0",
+    "eslint-plugin-unicorn": "47.0.0",
     "htmlhint": "1.1.4",
     "markdownlint": "0.28.2",
     "metalint": "0.12.0",
     "mocha": "10.2.0",
     "npm-package-json-lint": "6.4.0",
     "prettier": "2.8.8",
-    "sinon": "15.0.4",
-    "typedoc": "0.24.6",
+    "sinon": "15.1.0",
+    "typedoc": "0.24.7",
     "typescript": "5.0.4",
     "yaml-lint": "1.7.0"
   },

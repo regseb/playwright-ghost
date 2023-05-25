@@ -7,17 +7,17 @@
 import fs from "node:fs/promises";
 
 /**
- * La liste des répertoires générés.
+ * La liste des répertoires à supprimer.
  *
  * @type {string[]}
  */
 const PATHS = [
-    // Ignorer les répertoires générés.
+    // Supprimer les répertoires générés.
     ".stryker/",
     "jsdocs/",
     "log/",
     "node_modules/",
-    // Ignorer les autres lockfile.
+    // Supprimer les autres lockfiles.
     "pnpm-lock.yaml",
     "yarn.lock",
 ];

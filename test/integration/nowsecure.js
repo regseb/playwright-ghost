@@ -15,7 +15,7 @@ describe("nowSecure", function () {
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
-                await page.goto("https://nowsecure.nl/");
+                await page.goto("https://nowsecure.nl/#relax");
                 await page.waitForTimeout(5000);
 
                 const title = await page.locator("h1").textContent();

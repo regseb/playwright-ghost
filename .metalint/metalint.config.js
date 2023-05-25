@@ -7,7 +7,7 @@
 export default {
     patterns: [
         "**",
-        // Ignorer les répertoires et les fichiers générés.
+        // Ignorer les répertoires générés.
         "!/.git/**",
         "!/.stryker/**",
         "!/jsdocs/**",
@@ -17,7 +17,7 @@ export default {
         "!/.vscode/**",
         // Ignorer les fichiers temporaires de Vim.
         "!*.swp",
-        // Ignorer les autres lockfile.
+        // Ignorer les autres lockfiles.
         "!/pnpm-lock.yaml",
         "!/yarn.lock",
     ],

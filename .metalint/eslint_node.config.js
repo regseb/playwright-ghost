@@ -79,10 +79,10 @@ export default {
         // https://github.com/eslint-community/eslint-plugin-n/issues/59
         "n/no-restricted-import": ["error", ["node:assert"]],
         "n/no-restricted-require": "error",
-        "n/no-sync": ["error", { allowAtRootLevel: true }],
-        "n/prefer-global/buffer": "error",
+        "n/no-sync": "error",
+        "n/prefer-global/buffer": ["error", "never"],
         "n/prefer-global/console": "error",
-        "n/prefer-global/process": "error",
+        "n/prefer-global/process": ["error", "never"],
         "n/prefer-global/text-decoder": "error",
         "n/prefer-global/text-encoder": "error",
         "n/prefer-global/url-search-params": "error",
