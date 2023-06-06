@@ -17,14 +17,19 @@
   "author": "Sébastien Règne <regseb@gmail.com> (https://github.com/regseb)",
   "funding": "https://www.paypal.me/sebastienregne",
   "files": [
-    "./src/"
+    "./src/",
+    "./types/"
   ],
   "exports": {
-    ".": "./src/index.js",
+    ".": {
+      "types": "./types/index.d.ts",
+      "default": "./src/index.js"
+    },
     "./plugin": "./src/extend.js",
     "./package.json": "./package.json"
   },
   "main": "./src/index.js",
+  "types": "./types/index.d.ts",
   "repository": "regseb/playwright-ghost",
   "type": "module",
   "scripts": {
