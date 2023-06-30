@@ -586,8 +586,7 @@ export default {
         "jsdoc/check-values": "error",
         "jsdoc/empty-tags": "error",
         "jsdoc/implements-on-classes": "error",
-        // Désactiver la règle car elle a plusieurs faux-positif.
-        // https://github.com/gajus/eslint-plugin-jsdoc/issues/1112
+        // Désactiver la règle car elle ne supporte pas la propriété "exports".
         // https://github.com/gajus/eslint-plugin-jsdoc/issues/1114
         "jsdoc/imports-as-dependencies": "off",
         "jsdoc/informative-docs": "error",

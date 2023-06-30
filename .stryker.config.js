@@ -8,6 +8,7 @@
  * @type {import("@stryker-mutator/api/core").PartialStrykerOptions}
  */
 export default {
+    disableTypeChecks: false,
     incremental: true,
     incrementalFile: ".stryker/incremental.json",
     ignoreStatic: true,
