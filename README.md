@@ -1,6 +1,7 @@
 # Playwright-ghost
 
-<!-- Utiliser du HTML pour faire flotter l'image à droite. -->
+<!-- Utiliser du HTML (avec l'attribut "align" obsolète) pour faire flotter
+     l'image à droite. -->
 <!-- markdownlint-disable-next-line no-inline-html-->
 <img src="asset/logo.svg" align="right" width="100" alt="">
 

@@ -7,7 +7,7 @@
 import fs from "node:fs/promises";
 
 /**
- * La liste des répertoires à supprimer.
+ * La liste des répertoires et des fichiers à supprimer.
  *
  * @type {string[]}
  */
@@ -23,5 +23,5 @@ const PATHS = [
 ];
 
 for (const path of PATHS) {
-    fs.rm(path, { force: true, recursive: true });
+    await fs.rm(path, { force: true, recursive: true });
 }

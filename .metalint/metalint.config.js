@@ -15,6 +15,8 @@ export default {
         "!/node_modules/**",
         // Ignorer les fichiers de configuration de Visual Studio Code.
         "!/.vscode/**",
+        // Ignorer les fichiers de configuration de IntelliJ IDEA.
+        "!/.idea/**",
         // Ignorer les fichiers temporaires de Vim.
         "!*.swp",
         // Ignorer les autres lockfiles.
