@@ -222,9 +222,9 @@ export default {
         "no-nested-ternary": "off",
         "no-new": "error",
         "no-new-func": "error",
-        "no-new-object": "error",
         "no-new-wrappers": "error",
         "no-nonoctal-decimal-escape": "error",
+        "no-object-constructor": "error",
         "no-octal": "error",
         "no-octal-escape": "error",
         "no-param-reassign": [
@@ -265,7 +265,6 @@ export default {
             "JSXText",
         ],
         "no-return-assign": "error",
-        "no-return-await": "error",
         "no-script-url": "error",
         "no-sequences": ["error", { allowInParentheses: false }],
         "no-shadow": "error",

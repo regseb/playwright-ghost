@@ -5,6 +5,8 @@
 <!-- markdownlint-disable-next-line no-inline-html-->
 <img src="asset/logo.svg" align="right" width="100" alt="">
 
+[![build][img-build]][link-build]
+
 Playwright-ghost est une surcouche de [Playwright](https://playwright.dev/) en
 lui ajoutant une système de plugins pour gommer les différences entre un
 navigateur utilisé par un être humain et un navigateur
@@ -148,3 +150,6 @@ plugins ; et les valeurs :
   par [Pixeljets](https://pixeljets.com/).
 - [How does PerimeterX Bot Defender
   work](https://www.trickster.dev/post/how-does-perimeterx-bot-defender-work/).
+
+[img-build]: https://img.shields.io/github/actions/workflow/status/regseb/playwright-ghost/ci.yml?branch=main&logo=github&logoColor=whitesmoke
+[link-build]: https://github.com/regseb/playwright-ghost/actions/workflows/ci.yml?query=branch%3Amain

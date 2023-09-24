@@ -17,8 +17,8 @@ assignees: ""
 
 ### Environment
 
-- Playwright-ghost version<!-- e.g. 0.3.8 -->:
-- Node version<!-- e.g. v20.5.0 -->:
+- Playwright-ghost version<!-- e.g. 0.3.9 -->:
+- Node version<!-- e.g. v20.6.0 -->:
 
 ### Additional context
 
