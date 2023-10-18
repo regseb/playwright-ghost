@@ -4,7 +4,6 @@
  * @author Sébastien Règne
  */
 
-import BrowserIsHeadlessPlugin from "./api/browser-isheadless.js";
 import BrowserPlugin from "./hook/browser.js";
 import BrowserContextPlugin from "./hook/browsercontext.js";
 import PagePlugin from "./hook/page.js";
@@ -23,9 +22,6 @@ export default [
     BrowserPlugin,
     BrowserContextPlugin,
     PagePlugin,
-
-    // API.
-    BrowserIsHeadlessPlugin,
 
     // Polyfill.
     CommonPlugin,
