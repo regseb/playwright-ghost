@@ -39,12 +39,12 @@ export default class ViewportPlugin extends Plugin {
     constructor(options) {
         super();
         this.addHook(
-            "BrowserType.launch:before",
-            this.#setViewportOfLaunch.bind(this),
-        );
-        this.addHook(
             "BrowserType.launchPersistentContext:before",
             this.#setViewportOfLaunchPersistentContext.bind(this),
+        );
+        this.addHook(
+            "Browser.newContext:before",
+            this.#setViewportOfNewContext.bind(this),
         );
 
         this.#options = {
@@ -53,11 +53,11 @@ export default class ViewportPlugin extends Plugin {
         };
     }
 
-    #setViewportOfLaunch(args) {
-        return [setViewport(args[0], this.#options)];
-    }
-
     #setViewportOfLaunchPersistentContext(args) {
         return [args[0], setViewport(args[1], this.#options)];
+    }
+
+    #setViewportOfNewContext(args) {
+        return [setViewport(args[0], this.#options)];
     }
 }
