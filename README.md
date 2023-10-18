@@ -42,6 +42,14 @@ plugins ; et les valeurs :
     <td>💼</td>
   </tr>
   <tr>
+    <td><code>"polyfill/screen"</code></td>
+    <td>
+      Définir une valeur réaliste pour la taille de l'écran : 1920x1080. Ces
+      valeur sont configurable avec les options `width` et `height`.
+    </td>
+    <td>💼 ⚙️</td>
+  </tr>
+  <tr>
     <td><code>"polyfill/viewport"</code></td>
     <td>
       TODO Ajuster les valeurs dans la variable <code>screen</code>.
