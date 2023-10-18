@@ -44,7 +44,6 @@
     "clean": "node .script/clean.js"
   },
   "devDependencies": {
-    "@cliqz/adblocker-playwright": "1.26.7",
     "@prantlf/jsonlint": "14.0.3",
     "@prettier/plugin-xml": "3.2.1",
     "@stryker-mutator/core": "7.1.1",

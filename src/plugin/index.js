@@ -5,7 +5,6 @@
  */
 
 import BrowserIsHeadlessPlugin from "./api/browser-isheadless.js";
-import AdblockerPlugin from "./extension/adblocker.js";
 import BrowserPlugin from "./hook/browser.js";
 import BrowserContextPlugin from "./hook/browsercontext.js";
 import PagePlugin from "./hook/page.js";
@@ -38,9 +37,6 @@ export default [
 
     // Humanize.
     DialogPlugin,
-
-    // Extension
-    AdblockerPlugin,
 
     // Util.
     DebugPlugin,
