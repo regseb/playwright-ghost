@@ -19,7 +19,7 @@ for (const name of ["chromium", "firefox", "webkit"]) {
         EXECUTABLE_PATHS.set(name, await which(name));
     } catch {
         // Ignorer les navigateurs qui n'ont pas été trouvés car c'est normal
-        // qu'ils ne sont pas tous installés. Par contre si le plugin est
+        // qu'ils ne soient pas tous installés. Par contre si le plugin est
         // utilisé avec un navigareur non-installé, le plugin remontera une
         // erreur.
     }

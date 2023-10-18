@@ -3,12 +3,10 @@
 <!-- Utiliser du HTML (avec l'attribut "align" obsolète) pour faire flotter
      l'image à droite. -->
 <!-- markdownlint-disable-next-line no-inline-html-->
-<img src="asset/logo.svg" align="right" width="100" alt="">
-
-[![build][img-build]][link-build]
+<img src="asset/logo.svg" align="right" alt="">
 
 Playwright-ghost est une surcouche de [Playwright](https://playwright.dev/) en
-lui ajoutant une système de plugins pour gommer les différences entre un
+lui ajoutant un système de plugins pour gommer les différences entre un
 navigateur utilisé par un être humain et un navigateur
 [_headless_](https://fr.wikipedia.org/wiki/Navigateur_headless) contrôlé par
 un programme.
@@ -24,20 +22,40 @@ plugins ; et les valeurs :
 - un objet pour activer le plugin et définir des options (spécifiques pour
   chaque plugin).
 
+## Installation
+
+Playwright-ghost ne fournit pas Playwright, vous devez aussi l'ajouter dans vos
+dépendances.
+
+## Utilisation
+
+```JavaScript
+import { chromium } from "playwright-ghost";
+
+const browser = await chromium.launch();
+const context = await browser.newContext();
+const page = await context.newPage();
+
+await page.goto("https://perdu.com/");
+const where = await page.locator("pre").textContent();
+console.log(where);
+
+await context.close();
+await browser.close();
+```
+
 ## Plugins
 
 💼 : Activé par défaut.\
 ⚙️ : Possède des options.\
-📦 : Nécessite un package externe.
 
 <table>
   <tr><th>Nom</th><th>Description</th><th></th></tr>
   <tr>
     <td><code>"polyfill/common"</code></td>
     <td>
-      Corriger des nombreuses différences dans les APIs Javascript en headless.
-      Par exemple <code>navigator.userAgent</code>,
-      <code>navigator.mimeTypes</code>...
+      Corriger de nombreuses différences dans les APIs Javascript en headless.
+      Par exemple <code>navigator.mimeTypes</code>...
     </td>
     <td>💼</td>
   </tr>
@@ -61,7 +79,9 @@ plugins ; et les valeurs :
   <tr>
     <td><code>"polyfill/viewport"</code></td>
     <td>
-      TODO Ajuster les valeurs dans la variable <code>screen</code>.
+      Faire varier la taille du navigateur. Par défaut les valeurs sont prises
+      aléatoirement entre 1000x500 et 1800x800. Elles sont configurable avec les
+      options `width` et `height`.
     </td>
     <td>💼 ⚙️</td>
   </tr>
@@ -82,21 +102,28 @@ plugins ; et les valeurs :
   <tr>
     <td><code>"humanize/dialog"</code></td>
     <td>
-      Fermer les boîtes de dialogues dans un temps humainement possible, car par
-      défaut Playwright <a href="https://playwright.dev/docs/dialogs">les ferme
-      immédiatement</a>.
+      Fermer les boîtes de dialogues dans un temps humainement possible (entre
+      1 et 5 secondes), car par défaut Playwright
+      <a href="https://playwright.dev/docs/dialogs">les ferme immédiatement</a>.
+      Les options `min` et `max` permettenet de définir d'autres bornes pour le
+      délais de fermeture.
     </td>
-    <td>⚙️</td>
+    <td>💼 ⚙️</td>
   </tr>
   <tr>
-    <td><code>"extension/adblocker"</code></td>
+    <td><code>"util/debug"</code></td>
     <td>
-      Bloquer les publicités et les traqueurs en utilisant
-      <a
-      href="https://github.com/ghostery/adblocker/tree/master/packages/adblocker-playwright#readme">
-      Cliqz' adblocker</a>.
+      Afficher dans la console du programme, les messages affichés dans la
+      console du navigateur.
     </td>
-    <td>⚙️ 📦</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><code>"util/locale"</code></td>
+    <td>
+      Utiliser le navigateur installé localement.
+    </td>
+    <td></td>
   </tr>
 </table>
 
@@ -167,6 +194,3 @@ plugins ; et les valeurs :
   par [Pixeljets](https://pixeljets.com/).
 - [How does PerimeterX Bot Defender
   work](https://www.trickster.dev/post/how-does-perimeterx-bot-defender-work/).
-
-[img-build]: https://img.shields.io/github/actions/workflow/status/regseb/playwright-ghost/ci.yml?branch=main&logo=github&logoColor=whitesmoke
-[link-build]: https://github.com/regseb/playwright-ghost/actions/workflows/ci.yml?query=branch%3Amain

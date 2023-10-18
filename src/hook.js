@@ -18,7 +18,7 @@
  * @param {Object}   context.obj     L'objet de la méthode.
  * @param {string}   context.method  Le nom de la méthode avec son objet.
  * @param {Plugin[]} context.plugins Les plugins contenant les hooks.
- * @returns {T} Les nouveaux paramètres qui seont passés à la méthode.
+ * @returns {T} Les nouveaux paramètres qui seront passés à la méthode.
  */
 export const dispatchBefore = function (args, { obj, method, plugins }) {
     const hooks = plugins.flatMap((p) => {
@@ -32,13 +32,13 @@ export const dispatchBefore = function (args, { obj, method, plugins }) {
  *
  * @template {any} T Le type de la valeur de retour.
  * @param {T}        returnValue     La valeur de retour qui devaient être
- *                                   retourné.
+ *                                   retournée.
  * @param {Object}   context         Le contexte de la méthode.
  * @param {Object}   context.obj     L'objet de la méthode.
  * @param {string}   context.method  Le nom de la méthode avec son objet.
  * @param {any[]}    context.args    Les paramètres de la méthode.
  * @param {Plugin[]} context.plugins Les plugins contenant les hooks.
- * @returns {T} Les nouveaux paramètres qui seont passés à la méthode.
+ * @returns {T} La nouvelle valeur de retour qui sera retournée.
  */
 export const dispatchAfter = function (
     returnValue,

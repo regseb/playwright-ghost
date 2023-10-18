@@ -16,7 +16,7 @@ export default class Plugin {
     /**
      * Ajoute un hook dans le plugin.
      *
-     * @param {string}   key      Le nom de la méthode où le listener sera
+     * @param {string}   key      Le nom de la méthode où l'écouteur sera
      *                            ajouté.
      * @param {Function} listener La fonction appelée.
      */
@@ -25,10 +25,10 @@ export default class Plugin {
     }
 
     /**
-     * Retourne les listeners associés à une méthode.
+     * Retourne les écouteurs associés à une méthode.
      *
      * @param {string} key Le nom de la méthode.
-     * @returns {Function[]} Les listeners.
+     * @returns {Function[]} Les écouteurs.
      */
     getHooks(key) {
         return this.#hooks.get(key) ?? [];
