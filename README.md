@@ -50,6 +50,15 @@ plugins ; et les valeurs :
     <td>💼 ⚙️</td>
   </tr>
   <tr>
+    <td><code>"polyfill/useragent"</code></td>
+    <td>
+      Changer l'[agent
+      utilisateur](https://developer.mozilla.org/docs/Glossary/User_agent)
+      (_user agent_) du navigateur avec l'option `userAgent`.
+    </td>
+    <td>⚙️</td>
+  </tr>
+  <tr>
     <td><code>"polyfill/viewport"</code></td>
     <td>
       TODO Ajuster les valeurs dans la variable <code>screen</code>.

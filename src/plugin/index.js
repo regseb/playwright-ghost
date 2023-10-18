@@ -12,6 +12,7 @@ import PagePlugin from "./hook/page.js";
 import DialogPlugin from "./humanize/dialog.js";
 import CommonPlugin from "./polyfill/common.js";
 import ScreenPlugin from "./polyfill/screen.js";
+import UserAgentPlugin from "./polyfill/useragent.js";
 import ViewportPlugin from "./polyfill/viewport.js";
 import WebdriverPlugin from "./polyfill/webdriver.js";
 import WebGLPlugin from "./polyfill/webgl.js";
@@ -30,6 +31,7 @@ export default [
     // Polyfill.
     CommonPlugin,
     ScreenPlugin,
+    UserAgentPlugin,
     ViewportPlugin,
     WebdriverPlugin,
     WebGLPlugin,
