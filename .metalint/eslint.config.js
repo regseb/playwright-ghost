@@ -686,6 +686,7 @@ export default {
         "regexp/control-character-escape": "error",
         "regexp/negation": "error",
         "regexp/no-dupe-characters-character-class": "error",
+        "regexp/no-empty-string-literal": "error",
         "regexp/no-extra-lookaround-assertions": "error",
         "regexp/no-invisible-character": "error",
         "regexp/no-legacy-features": "error",
@@ -701,6 +702,8 @@ export default {
         "regexp/no-useless-lazy": "error",
         "regexp/no-useless-quantifier": "error",
         "regexp/no-useless-range": "error",
+        "regexp/no-useless-set-operand": "error",
+        "regexp/no-useless-string-literal": "error",
         "regexp/no-useless-two-nums-quantifier": "error",
         "regexp/no-zero-quantifier": "error",
         "regexp/optimal-lookaround-quantifier": "error",
@@ -711,11 +714,14 @@ export default {
         "regexp/prefer-range": "error",
         "regexp/prefer-regexp-exec": "error",
         "regexp/prefer-regexp-test": "error",
+        "regexp/prefer-set-operation": "error",
         "regexp/require-unicode-regexp": "error",
+        "regexp/simplify-set-operations": "error",
         "regexp/sort-alternatives": "error",
         "regexp/use-ignore-case": "error",
 
         // Stylistic Issues.
+        "regexp/grapheme-string-literal": "error",
         "regexp/hexadecimal-escape": "off",
         "regexp/letter-case": [
             "error",

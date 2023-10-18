@@ -21,9 +21,7 @@
  * @returns {T} Les nouveaux paramètres qui seront passés à la méthode.
  */
 export const dispatchBefore = function (args, { obj, method, plugins }) {
-    const hooks = plugins.flatMap((p) => {
-        return p.getHooks(`${method}:before`);
-    });
+    const hooks = plugins.flatMap((p) => p.getHooks(`${method}:before`));
     return hooks.reduce((a, h) => h(a, { obj, method }), args);
 };
 
@@ -44,9 +42,7 @@ export const dispatchAfter = function (
     returnValue,
     { obj, method, args, plugins },
 ) {
-    const hooks = plugins.flatMap((p) => {
-        return p.getHooks(`${method}:after`);
-    });
+    const hooks = plugins.flatMap((p) => p.getHooks(`${method}:after`));
     if (returnValue instanceof Promise) {
         return hooks.reduce(
             async (r, h) =>
@@ -91,7 +87,7 @@ export default function hook(obj, plugins) {
                     });
                 };
                 Object.defineProperty(wrap, "name", {
-                    value: target[prop].name,
+                    value: prop,
                     configurable: true,
                 });
                 return wrap;

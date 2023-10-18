@@ -23,7 +23,7 @@ const changeHeadless = function (options) {
  *
  * @see https://developer.chrome.com/articles/new-headless/
  */
-export default class HeadlessNewPlugin extends Plugin {
+export default class CommonPlugin extends Plugin {
     /**
      * La clé du plugin.
      *

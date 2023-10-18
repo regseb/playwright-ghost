@@ -18,15 +18,15 @@ import BrowserTypePlugin from "./plugin/hook/browsertype.js";
  * @param {BrowserType} browserType Le <code>BrowserType</code> vanilla.
  * @returns {BrowserType} Le <code>BrowserType</code> avec le plugin.
  */
-const plug = function (browserType) {
+const ghostize = (browserType) => {
     return /** @type {BrowserType} */ (
         hook(browserType, [new BrowserTypePlugin()])
     );
 };
 
-export const chromium = plug(playwright.chromium);
-export const firefox = plug(playwright.firefox);
-export const webkit = plug(playwright.webkit);
+export const chromium = ghostize(playwright.chromium);
+export const firefox = ghostize(playwright.firefox);
+export const webkit = ghostize(playwright.webkit);
 export const selectors = playwright.selectors;
 export const devices = playwright.devices;
 export const errors = playwright.errors;
@@ -35,4 +35,4 @@ export const request = playwright.request;
 export const _electron = playwright._electron;
 // eslint-disable-next-line no-underscore-dangle
 export const _android = playwright._android;
-export default { ...playwright, chromium };
+export default { ...playwright, chromium, firefox, webkit };
