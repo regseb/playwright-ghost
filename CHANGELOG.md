@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/regseb/playwright-ghost/compare/v0.4.0...v0.5.0) (2023-12-15)
+
+
+### Features
+
+* Améliorer la documentation du README. ([d53b13a](https://github.com/regseb/playwright-ghost/commit/d53b13a2be129fa7a00890653e7134eea67cda39))
+
 ## [0.4.0](https://github.com/regseb/playwright-ghost/compare/v0.3.9...v0.4.0) (2023-10-18)
 
 
