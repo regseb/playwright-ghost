@@ -24,7 +24,7 @@ export default class WebGLPlugin extends Plugin {
      *
      * @type {string}
      */
-    static key = "polyfill/webGL";
+    static key = "polyfill/webgl";
 
     /**
      * Le niveau du plugin.

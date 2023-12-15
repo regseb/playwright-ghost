@@ -182,8 +182,6 @@ export default {
         "no-bitwise": "off",
         "no-caller": "error",
         "no-case-declarations": "error",
-        // Laisser Prettier gérer cette règle.
-        "no-confusing-arrow": "off",
         "no-console": "error",
         "no-continue": "off",
         "no-delete-var": "error",
@@ -198,10 +196,6 @@ export default {
         "no-extra-bind": "error",
         "no-extra-boolean-cast": "error",
         "no-extra-label": "error",
-        // Laisser Prettier gérer cette règle.
-        "no-extra-semi": "off",
-        // Laisser Prettier gérer cette règle.
-        "no-floating-decimal": "off",
         "no-global-assign": "error",
         "no-implicit-coercion": ["error", { disallowTemplateShorthand: true }],
         "no-implicit-globals": "error",
@@ -215,7 +209,6 @@ export default {
         "no-lonely-if": "error",
         "no-loop-func": "error",
         "no-magic-numbers": "off",
-        "no-mixed-operators": "off",
         "no-multi-assign": "error",
         "no-multi-str": "error",
         "no-negated-condition": "error",
@@ -291,8 +284,6 @@ export default {
         "no-with": "error",
         "object-shorthand": "error",
         "one-var": ["error", "never"],
-        // Laisser Prettier gérer cette règle.
-        "one-var-declaration-per-line": "off",
         "operator-assignment": "error",
         // Désactiver cette règle qui peut avoir des conflits avec Prettier.
         // https://github.com/prettier/eslint-plugin-prettier/issues/65
@@ -310,8 +301,6 @@ export default {
         "prefer-rest-params": "error",
         "prefer-spread": "error",
         "prefer-template": "off",
-        // Laisser Prettier gérer cette règle.
-        "quote-props": "off",
         radix: "error",
         "require-await": "error",
         "require-unicode-regexp": "error",
@@ -326,109 +315,14 @@ export default {
         ],
         "sort-keys": "off",
         "sort-vars": "off",
-        "spaced-comment": "error",
         strict: ["error", "never"],
         "symbol-description": "error",
         "vars-on-top": "off",
         yoda: ["error", "always"],
 
         // Layout & Formatting.
-        // Laisser Prettier gérer la majorité des règles de cette section.
-        // https://github.com/prettier/eslint-config-prettier
-        "array-bracket-newline": "off",
-        "array-bracket-spacing": "off",
-        "array-element-newline": "off",
-        "arrow-parens": "off",
-        "arrow-spacing": "off",
-        "block-spacing": "off",
-        "brace-style": "off",
-        "comma-dangle": "off",
-        "comma-spacing": "off",
-        "comma-style": "off",
-        "computed-property-spacing": "off",
-        "dot-location": "off",
-        "eol-last": "off",
-        "func-call-spacing": "off",
-        "function-call-argument-newline": "off",
-        "function-paren-newline": "off",
-        "generator-star-spacing": "off",
-        "implicit-arrow-linebreak": "off",
-        indent: "off",
-        "jsx-quotes": "off",
-        "key-spacing": "off",
-        "keyword-spacing": "off",
         "line-comment-position": "error",
-        "linebreak-style": "off",
-        "lines-around-comment": [
-            "error",
-            {
-                allowBlockStart: true,
-                allowObjectStart: true,
-                allowArrayStart: true,
-                afterHashbangComment: true,
-            },
-        ],
-        "lines-between-class-members": "error",
-        "max-len": [
-            "warn",
-            {
-                // Ignorer les imports et les déclarations de tests unitaires,
-                // car Prettier n'ajoute pas de retour à la ligne pour ne pas
-                // dépasser les 80 caractères.
-                ignorePattern:
-                    "^import " +
-                    "|^ +\\* @typedef \\{import\\(" +
-                    "|^ +\\* @see " +
-                    '|^ +it\\("',
-                // Ignorer les expressions rationnelles, car il n'est pas
-                // possible de les écrire sur plusieurs lignes.
-                ignoreRegExpLiterals: true,
-            },
-        ],
-        "max-statements-per-line": ["error", { max: 2 }],
-        "multiline-ternary": "off",
-        "new-parens": "off",
-        "newline-per-chained-call": "off",
-        "no-extra-parens": "off",
-        "no-mixed-spaces-and-tabs": "off",
-        "no-multi-spaces": "off",
-        "no-multiple-empty-lines": "off",
-        // Activer cette règle, car Prettier garde des tabulations (par exemple
-        // dans les chaines de caractères).
-        "no-tabs": "error",
-        "no-trailing-spaces": "off",
-        "no-whitespace-before-property": "off",
-        "nonblock-statement-body-position": "off",
-        "object-curly-newline": "off",
-        "object-curly-spacing": "off",
-        "object-property-newline": "off",
-        "operator-linebreak": "off",
-        "padded-blocks": "off",
-        "padding-line-between-statements": [
-            "error",
-            {
-                blankLine: "always",
-                prev: "directive",
-                next: "*",
-            },
-        ],
-        quotes: ["error", "double", { avoidEscape: true }],
-        "rest-spread-spacing": "off",
-        semi: "off",
-        "semi-spacing": "off",
-        "semi-style": "off",
-        "space-before-blocks": "off",
-        "space-before-function-paren": "off",
-        "space-in-parens": "off",
-        "space-infix-ops": "off",
-        "space-unary-ops": "off",
-        "switch-colon-spacing": "off",
-        "template-curly-spacing": "off",
-        "template-tag-spacing": "off",
-        "unicode-bom": "off",
-        "wrap-iife": "off",
-        "wrap-regex": "off",
-        "yield-star-spacing": "off",
+        "unicode-bom": "error",
 
         // Plugin eslint-plugin-array-func.
         "array-func/from-map": "error",
@@ -531,10 +425,16 @@ export default {
         "import/first": "error",
         "import/group-exports": "off",
         "import/max-dependencies": "off",
-        // Ne pas activer l'option "considerComments", car les commentaires
-        // entre les imports ne sont pas gérés.
-        // https://github.com/import-js/eslint-plugin-import/issues/2673
-        "import/newline-after-import": ["error", { considerComments: false }],
+        "import/newline-after-import": [
+            "error",
+            {
+                // Ne pas activer ces options, car les commentaires entre les
+                // imports ne sont pas gérés.
+                // https://github.com/import-js/eslint-plugin-import/issues/2673
+                exactCount: false,
+                considerComments: false,
+            },
+        ],
         "import/no-anonymous-default-export": [
             "error",
             {

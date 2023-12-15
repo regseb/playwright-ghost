@@ -7,9 +7,10 @@
 export default {
     patterns: [
         "**",
-        // Ignorer les répertoires générés.
+        // Ignorer les répertoires et les fichiers générés.
         "!/.git/**",
         "!/.stryker/**",
+        "!/CHANGELOG.md",
         "!/jsdocs/**",
         "!/log/**",
         "!/node_modules/**",
