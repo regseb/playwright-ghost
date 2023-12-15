@@ -27,6 +27,15 @@ plugins ; et les valeurs :
 Playwright-ghost ne fournit pas Playwright, vous devez aussi l'ajouter dans vos
 dépendances.
 
+```JSON
+{
+  "dependencies": {
+    "playwright": "1.40.1",
+    "playwright-ghost": "0.4.1"
+  }
+}
+```
+
 ## Utilisation
 
 ```JavaScript
@@ -47,15 +56,16 @@ await browser.close();
 ## Plugins
 
 💼 : Activé par défaut.\
-⚙️ : Possède des options.\
+⚙️ : Possède des options.
 
 <table>
   <tr><th>Nom</th><th>Description</th><th></th></tr>
   <tr>
     <td><code>"polyfill/common"</code></td>
     <td>
-      Corriger de nombreuses différences dans les APIs Javascript en headless.
-      Par exemple <code>navigator.mimeTypes</code>...
+      Corriger de nombreuses différences dans les APIs Javascript avec le
+      nouveau headless de Chromium. Par exemple :
+      <code>navigator.mimeTypes</code>...
     </td>
     <td>💼</td>
   </tr>
@@ -63,16 +73,18 @@ await browser.close();
     <td><code>"polyfill/screen"</code></td>
     <td>
       Définir une valeur réaliste pour la taille de l'écran : 1920x1080. Ces
-      valeur sont configurable avec les options `width` et `height`.
+      valeurs sont configurables avec les options <code>width</code> et
+      <code>height</code>.
     </td>
     <td>💼 ⚙️</td>
   </tr>
   <tr>
     <td><code>"polyfill/useragent"</code></td>
     <td>
-      Changer l'[agent
-      utilisateur](https://developer.mozilla.org/docs/Glossary/User_agent)
-      (_user agent_) du navigateur avec l'option `userAgent`.
+      Changer
+      l'<a href="https://developer.mozilla.org/docs/Glossary/User_agent">agent
+      utilisateur</a> (<em>user agent</em>) du navigateur avec l'option
+      <code>userAgent</code>.
     </td>
     <td>⚙️</td>
   </tr>
@@ -81,7 +93,7 @@ await browser.close();
     <td>
       Faire varier la taille du navigateur. Par défaut les valeurs sont prises
       aléatoirement entre 1000x500 et 1800x800. Elles sont configurable avec les
-      options `width` et `height`.
+      options <code>width</code> et <code>height</code>.
     </td>
     <td>💼 ⚙️</td>
   </tr>
@@ -93,7 +105,7 @@ await browser.close();
     <td>💼</td>
   </tr>
   <tr>
-    <td><code>"polyfill/webGL"</code></td>
+    <td><code>"polyfill/webgl"</code></td>
     <td>
       Modifier les valeurs des paramètres <em>WebGL</em>.
     </td>
@@ -105,8 +117,8 @@ await browser.close();
       Fermer les boîtes de dialogues dans un temps humainement possible (entre
       1 et 5 secondes), car par défaut Playwright
       <a href="https://playwright.dev/docs/dialogs">les ferme immédiatement</a>.
-      Les options `min` et `max` permettenet de définir d'autres bornes pour le
-      délais de fermeture.
+      Les options <code>min</code> et <code>max</code> permettent de définir
+      d'autres bornes pour le délais de fermeture.
     </td>
     <td>💼 ⚙️</td>
   </tr>
