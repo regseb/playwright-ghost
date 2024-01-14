@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/regseb/playwright-ghost/compare/v0.5.0...v0.5.1) (2024-01-14)
+
+
+### Bug Fixes
+
+* Formater les fichiers modifiés par la release. ([8682535](https://github.com/regseb/playwright-ghost/commit/868253591253a5155cf79f3f331f8d3cc2041032))
+
 ## [0.5.0](https://github.com/regseb/playwright-ghost/compare/v0.4.0...v0.5.0) (2023-12-15)
 
 ### Features
