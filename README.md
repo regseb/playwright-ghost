@@ -31,7 +31,7 @@ dépendances.
 {
   "dependencies": {
     "playwright": "1.40.1",
-    "playwright-ghost": "0.4.1"
+    "playwright-ghost": "0.5.1"
   }
 }
 ```
