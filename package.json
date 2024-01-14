@@ -1,6 +1,6 @@
 {
   "name": "playwright-ghost",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Rendre un Playwright identique à un navigateur.",
   "keywords": [
     "playwright",
