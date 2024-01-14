@@ -36,7 +36,7 @@ describe("Datadome", function () {
                 await page.goto("https://antoinevastel.com/bots/datadome");
 
                 const title = await page.locator("h1").textContent();
-                assert.equal(title, "Datadome test page");
+                assert.equal(title, "Bot detection test page");
             } catch (err) {
                 await page.screenshot({
                     path: "./log/datadome-cr.png",
