@@ -404,13 +404,7 @@ export default {
         "import/no-relative-parent-imports": "off",
         "import/no-restricted-paths": "off",
         "import/no-self-import": "error",
-        "import/no-unresolved": [
-            "error",
-            {
-                caseSensitive: true,
-                caseSensitiveStrict: true,
-            },
-        ],
+        "import/no-unresolved": ["error", { caseSensitiveStrict: true }],
         "import/no-useless-path-segments": "error",
         "import/no-webpack-loader-syntax": "error",
 

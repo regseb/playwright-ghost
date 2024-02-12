@@ -181,7 +181,9 @@ const browser = await chromium.launch({
 ### Bibliothèques pour du WebScraping
 
 - [Puppeteer-extra](https://github.com/berstend/puppeteer-extra) : surcouche de
-  Puppeteer et Playwright pour les rendre indétectable.
+Puppeteer et Playwright pour les rendre indétectable.
+<!-- markdownlint-disable-next-line line-length -->
+- [puppeteer-real-browser](https://github.com/zfcsoftware/puppeteer-real-browser).
 - [Ulixee Hero](https://github.com/ulixee/hero)
   (ex-[SecretAgent](https://github.com/ulixee/secret-agent)).
 - [FakeBrowser](https://github.com/kkoooqq/fakebrowser).
@@ -211,6 +213,8 @@ const browser = await chromium.launch({
   headless](https://arh.antoinevastel.com/bots/areyouheadless)
   ([API](https://antoinevastel.com/bots/areyouheadless)).
 - [Detect Headless](https://infosimples.github.io/detect-headless/).
+- [Browser
+  fingerprinting](https://github.com/niespodd/browser-fingerprinting?tab=readme-ov-file#fingerprint-test-pages).
 
 ## Fingerprint
 

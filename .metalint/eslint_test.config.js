@@ -46,5 +46,9 @@ export default {
 
         // Plugin eslint-plugin-no-unsanitized.
         "no-unsanitized/method": "off",
+
+        // Plugin eslint-plugin-unicorn.
+        // Ne pas obliger à sortir les fonctions des tests.
+        "unicorn/consistent-function-scoping": "off",
     },
 };
