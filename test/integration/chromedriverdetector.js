@@ -7,12 +7,11 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import playwright from "playwright";
-import { chromium } from "../../src/index.js";
+import { chromium, plugins } from "../../src/index.js";
 
 const getUserAgent = async () => {
     const browser = await playwright.chromium.launch({
         args: ["--headless=new"],
-        executablePath: playwright.chromium.executablePath(),
     });
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -26,9 +25,12 @@ describe("Chromedriver Detector", function () {
     describe("chromium", function () {
         it("should passed", async function () {
             const browser = await chromium.launch({
-                plugins: {
-                    "polyfill/userAgent": { userAgent: await getUserAgent() },
-                },
+                plugins: [
+                    ...plugins.recommendedPlugins(),
+                    plugins.polyfill.userAgentPlugin({
+                        userAgent: await getUserAgent(),
+                    }),
+                ],
             });
             const context = await browser.newContext();
             const page = await context.newPage();

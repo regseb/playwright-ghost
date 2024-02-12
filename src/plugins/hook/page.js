@@ -1,0 +1,26 @@
+/**
+ * @module
+ * @license MIT
+ * @author Sébastien Règne
+ */
+
+import hook from "../../hook.js";
+
+/**
+ * @typedef {import("playwright").Page} Page
+ */
+
+/**
+ * Crée un plugin pour ajouter des écouteurs dans les objets <code>Page</code>.
+ *
+ * @see https://playwright.dev/docs/api/class-page
+ */
+export default function pagePlugin() {
+    return {
+        "Page:new": (page, { metadata: { listeners } }) => {
+            return listeners.has("Page")
+                ? hook(page, listeners.get("Page"), { listeners })
+                : page;
+        },
+    };
+}

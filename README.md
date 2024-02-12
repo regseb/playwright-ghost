@@ -14,13 +14,7 @@ un programme.
 L'API de Playwright-ghost est identique à celle de Playwright, sauf l'ajout de
 l'option `plugins` à la méthode
 [`browserType.launch([options])`](https://playwright.dev/docs/api/class-browsertype#browser-type-launch).
-La propriété `plugins` doit être un objet dont les clés sont les noms des
-plugins ; et les valeurs :
-
-- `true` pour activer le plugin avec ses options par défaut ;
-- `false` pour désactiver le plugin ;
-- un objet pour activer le plugin et définir des options (spécifiques pour
-  chaque plugin).
+La propriété `plugins` est un tableau avec les plugins à ajouter.
 
 ## Installation
 
@@ -30,18 +24,22 @@ dépendances.
 ```JSON
 {
   "dependencies": {
-    "playwright": "1.40.1",
-    "playwright-ghost": "0.5.1"
+    "playwright": "1.41.2",
+    "playwright-ghost": "0.6.0"
   }
 }
 ```
 
 ## Utilisation
 
-```JavaScript
-import { chromium } from "playwright-ghost";
+Voici un exemple avec l'activation des plugins recommandés.
 
-const browser = await chromium.launch();
+```JavaScript
+import { chromium, plugins } from "playwright-ghost";
+
+const browser = await chromium.launch({
+    plugins: plugins.recommendedPlugins(),
+});
 const context = await browser.newContext();
 const page = await context.newPage();
 
@@ -53,33 +51,53 @@ await context.close();
 await browser.close();
 ```
 
+Dans cet exemple, trois plugins sont ajoutés :
+
+- `polyfill.headless` qui n'a pas d'options ;
+- `polyfill.screen` en définissant d'autres valeurs pour la taille de l'écran ;
+- ̀`util.adBlocker` en utilisant les options par défaut.
+
+```JavaScript
+import { chromium, plugins } from "playwright-ghost";
+
+const browser = await chromium.launch({
+    plugins: [
+        plugins.polyfill.headless(),
+        plugins.polyfill.screen({ width: 1280, height: 720 }),
+        plugins.util.adBlocker(),
+    ],
+});
+// ...
+```
+
 ## Plugins
 
-💼 : Activé par défaut.\
-⚙️ : Possède des options.
+⭐ : Plugin recommandé.\
+⚙️ : Possède des options.\
+📦 : Nécessite une dépendance.
 
 <table>
   <tr><th>Nom</th><th>Description</th><th></th></tr>
   <tr>
-    <td><code>"polyfill/common"</code></td>
+    <td><code>polyfill.headless</code></td>
     <td>
       Corriger de nombreuses différences dans les APIs Javascript avec le
-      nouveau headless de Chromium. Par exemple :
+      nouveau mode <em>headless</em> de Chromium. Par exemple :
       <code>navigator.mimeTypes</code>...
     </td>
-    <td>💼</td>
+    <td>⭐</td>
   </tr>
   <tr>
-    <td><code>"polyfill/screen"</code></td>
+    <td><code>polyfill.screen</code></td>
     <td>
       Définir une valeur réaliste pour la taille de l'écran : 1920x1080. Ces
       valeurs sont configurables avec les options <code>width</code> et
       <code>height</code>.
     </td>
-    <td>💼 ⚙️</td>
+    <td>⭐ ⚙️</td>
   </tr>
   <tr>
-    <td><code>"polyfill/useragent"</code></td>
+    <td><code>polyfill.userAgent</code></td>
     <td>
       Changer
       l'<a href="https://developer.mozilla.org/docs/Glossary/User_agent">agent
@@ -89,30 +107,30 @@ await browser.close();
     <td>⚙️</td>
   </tr>
   <tr>
-    <td><code>"polyfill/viewport"</code></td>
+    <td><code>polyfill.viewport</code></td>
     <td>
       Faire varier la taille du navigateur. Par défaut les valeurs sont prises
-      aléatoirement entre 1000x500 et 1800x800. Elles sont configurable avec les
-      options <code>width</code> et <code>height</code>.
+      aléatoirement entre 1000x500 et 1800x800. Elles sont configurables avec
+      les options <code>width</code> et <code>height</code>.
     </td>
-    <td>💼 ⚙️</td>
+    <td>⭐ ⚙️</td>
   </tr>
   <tr>
-    <td><code>"polyfill/webdriver"</code></td>
+    <td><code>polyfill.webdriver</code></td>
     <td>
       Passer à <code>false</code> la variable <code>navigator.webdriver</code>.
     </td>
-    <td>💼</td>
+    <td>⭐</td>
   </tr>
   <tr>
-    <td><code>"polyfill/webgl"</code></td>
+    <td><code>polyfill.webGL</code></td>
     <td>
       Modifier les valeurs des paramètres <em>WebGL</em>.
     </td>
-    <td>💼</td>
+    <td>⭐</td>
   </tr>
   <tr>
-    <td><code>"humanize/dialog"</code></td>
+    <td><code>humanize.dialog</code></td>
     <td>
       Fermer les boîtes de dialogues dans un temps humainement possible (entre
       1 et 5 secondes), car par défaut Playwright
@@ -120,10 +138,22 @@ await browser.close();
       Les options <code>min</code> et <code>max</code> permettent de définir
       d'autres bornes pour le délais de fermeture.
     </td>
-    <td>💼 ⚙️</td>
+    <td>⭐ ⚙️</td>
   </tr>
   <tr>
-    <td><code>"util/debug"</code></td>
+    <td><code>util.adBlocker</code></td>
+    <td>
+      Ajouter le bloqueur de publicité
+      <a href="https://github.com/ghostery/adblocker#readme">Cliqz'
+      adblocker</a>. Vous devez ajouter
+      <a href="https://www.npmjs.com/package/@cliqz/adblocker-playwright"
+        ><code>@cliqz/adblocker-playwright</code></a>
+      dans vos dépendances npm.
+    </td>
+    <td>⚙️ 📦</td>
+  </tr>
+  <tr>
+    <td><code>util.debug</code></td>
     <td>
       Afficher dans la console du programme, les messages affichés dans la
       console du navigateur.
@@ -131,7 +161,7 @@ await browser.close();
     <td></td>
   </tr>
   <tr>
-    <td><code>"util/locale"</code></td>
+    <td><code>util.locale</code></td>
     <td>
       Utiliser le navigateur installé localement.
     </td>

@@ -7,7 +7,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import playwright from "playwright";
-import { chromium } from "../../src/index.js";
+import { chromium, plugins } from "../../src/index.js";
 
 const getUserAgent = async () => {
     const browser = await playwright.chromium.launch({
@@ -26,11 +26,14 @@ describe("Guillotine", function () {
     describe("chromium", function () {
         it("should not lose your head in headless", async function () {
             const browser = await chromium.launch({
-                executablePath: "/snap/bin/chromium",
-                plugins: {
-                    "polyfill/userAgent": { userAgent: await getUserAgent() },
-                    "util/debug": true,
-                },
+                plugins: [
+                    ...plugins.recommendedPlugins(),
+                    plugins.polyfill.userAgentPlugin({
+                        userAgent: await getUserAgent(),
+                    }),
+                    plugins.utils.debugPlugin(),
+                    plugins.utils.localePlugin(),
+                ],
             });
             const context = await browser.newContext();
             const page = await context.newPage();
@@ -81,8 +84,10 @@ describe("Guillotine", function () {
         it("should not lose your head in headfull", async function () {
             const browser = await chromium.launch({
                 headless: false,
-                executablePath: "/snap/bin/chromium",
-                plugins: { "util/debug": true },
+                plugins: [
+                    plugins.utils.debugPlugin(),
+                    plugins.utils.localePlugin(),
+                ],
             });
             const context = await browser.newContext();
             const page = await context.newPage();

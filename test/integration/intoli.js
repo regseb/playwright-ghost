@@ -7,7 +7,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import playwright from "playwright";
-import { chromium } from "../../src/index.js";
+import { chromium, plugins } from "../../src/index.js";
 
 const getUserAgent = async () => {
     const browser = await playwright.chromium.launch({
@@ -22,13 +22,21 @@ const getUserAgent = async () => {
     return userAgent.replace("Headless", "");
 };
 
-describe("Chrome Headless Detection (Intoli)", function () {
+// """
+//  Les sites web justifient leur identité par des certificats qui ont une
+//  période de validité définie. Le certificat de intoli.com a expiré le
+//  12/11/2023.
+// """
+describe.skip("Chrome Headless Detection (Intoli)", function () {
     describe("chromium", function () {
         it("should not failed", async function () {
             const browser = await chromium.launch({
-                plugins: {
-                    "polyfill/userAgent": { userAgent: await getUserAgent() },
-                },
+                plugins: [
+                    ...plugins.recommendedPlugins(),
+                    plugins.polyfill.userAgentPlugin({
+                        userAgent: await getUserAgent(),
+                    }),
+                ],
             });
             const context = await browser.newContext();
             const page = await context.newPage();

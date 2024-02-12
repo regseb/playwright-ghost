@@ -7,7 +7,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import playwright from "playwright";
-import { chromium } from "../../src/index.js";
+import { chromium, plugins } from "../../src/index.js";
 
 const getUserAgent = async () => {
     const browser = await playwright.chromium.launch({
@@ -26,13 +26,16 @@ describe("CreepJS", function () {
     describe("chromium", function () {
         it("should get a B (or A) grade", async function () {
             const browser = await chromium.launch({
-                plugins: {
-                    "polyfill/userAgent": { userAgent: await getUserAgent() },
-                },
+                plugins: [
+                    ...plugins.recommendedPlugins(),
+                    plugins.polyfill.userAgentPlugin({
+                        userAgent: await getUserAgent(),
+                    }),
+                ],
             });
             const context = await browser.newContext({
-                // Utiliser le thème sombre car CreepJS considère que le thème
-                // claire est probablement défini par un navigateur headless.
+                // Utiliser le thème sombre, car CreepJS considère que le thème
+                // clair est probablement utilisé par un navigateur headless.
                 colorScheme: "dark",
             });
             const page = await context.newPage();

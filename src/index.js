@@ -5,28 +5,13 @@
  */
 
 import playwright from "playwright";
-import hook from "./hook.js";
-import BrowserTypePlugin from "./plugin/hook/browsertype.js";
+import Ghost from "./ghost.js";
+import plugins from "./plugins/index.js";
 
-/**
- * @typedef {import("playwright").BrowserType} BrowserType
- */
-
-/**
- * Ajoute le plugin d'entrée dans un <code>BrowserType</code> de Playwright.
- *
- * @param {BrowserType} browserType Le <code>BrowserType</code> vanilla.
- * @returns {BrowserType} Le <code>BrowserType</code> avec le plugin.
- */
-const ghostize = (browserType) => {
-    return /** @type {BrowserType} */ (
-        hook(browserType, [new BrowserTypePlugin()])
-    );
-};
-
-export const chromium = ghostize(playwright.chromium);
-export const firefox = ghostize(playwright.firefox);
-export const webkit = ghostize(playwright.webkit);
+export const chromium = new Ghost(playwright.chromium);
+export const firefox = new Ghost(playwright.firefox);
+export const webkit = new Ghost(playwright.webkit);
+export { default as plugins } from "./plugins/index.js";
 export const selectors = playwright.selectors;
 export const devices = playwright.devices;
 export const errors = playwright.errors;
@@ -35,4 +20,4 @@ export const request = playwright.request;
 export const _electron = playwright._electron;
 // eslint-disable-next-line no-underscore-dangle
 export const _android = playwright._android;
-export default { ...playwright, chromium, firefox, webkit };
+export default { ...playwright, chromium, firefox, webkit, plugins };
