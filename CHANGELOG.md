@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.6.0](https://github.com/regseb/playwright-ghost/compare/v0.5.1...v0.6.0) (2024-02-12)
+
+### Features
+
+- Simplifier les plugins. ([f5b740f](https://github.com/regseb/playwright-ghost/commit/f5b740f69223b76eccd49447819c3eee376e5213))
+
 ## [0.5.1](https://github.com/regseb/playwright-ghost/compare/v0.5.0...v0.5.1) (2024-01-14)
 
 ### Bug Fixes
