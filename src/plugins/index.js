@@ -5,6 +5,7 @@
  */
 
 import dialogPlugin from "./humanize/dialog.js";
+import automationPlugin from "./polyfill/automation.js";
 import headlessPlugin from "./polyfill/headless.js";
 import screenPlugin from "./polyfill/screen.js";
 import userAgentPlugin from "./polyfill/useragent.js";
@@ -16,28 +17,29 @@ import debugPlugin from "./utils/debug.js";
 import localePlugin from "./utils/locale.js";
 
 export default {
+    recommendeds: (options) => [
         automationPlugin(),
         dialogPlugin(options?.humanize?.dialog),
         headlessPlugin(),
         screenPlugin(options?.polyfill?.screen),
         viewportPlugin(options?.polyfill?.viewport),
         webdriverPlugin(),
-        webGLPlugin(),
     ],
     humanize: {
-        dialogPlugin,
+        dialog: dialogPlugin,
     },
     polyfill: {
-        headlessPlugin,
-        screenPlugin,
-        userAgentPlugin,
-        viewportPlugin,
-        webdriverPlugin,
-        webGLPlugin,
+        automation: automationPlugin,
+        headless: headlessPlugin,
+        screen: screenPlugin,
+        userAgent: userAgentPlugin,
+        viewport: viewportPlugin,
+        webdriver: webdriverPlugin,
+        webGL: webGLPlugin,
     },
     utils: {
-        adBlockerPlugin,
-        debugPlugin,
-        localePlugin,
+        adBlocker: adBlockerPlugin,
+        debug: debugPlugin,
+        locale: localePlugin,
     },
 };

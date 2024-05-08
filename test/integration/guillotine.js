@@ -27,12 +27,12 @@ describe("Guillotine", function () {
         it("should not lose your head in headless", async function () {
             const browser = await chromium.launch({
                 plugins: [
-                    ...plugins.recommendedPlugins(),
-                    plugins.polyfill.userAgentPlugin({
+                    ...plugins.recommendeds(),
+                    plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
-                    plugins.utils.debugPlugin(),
-                    plugins.utils.localePlugin(),
+                    plugins.utils.debug(),
+                    plugins.utils.locale(),
                 ],
             });
             const context = await browser.newContext();
@@ -84,10 +84,7 @@ describe("Guillotine", function () {
         it("should not lose your head in headfull", async function () {
             const browser = await chromium.launch({
                 headless: false,
-                plugins: [
-                    plugins.utils.debugPlugin(),
-                    plugins.utils.localePlugin(),
-                ],
+                plugins: [plugins.utils.debug(), plugins.utils.locale()],
             });
             const context = await browser.newContext();
             const page = await context.newPage();

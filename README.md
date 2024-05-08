@@ -38,7 +38,7 @@ Voici un exemple avec l'activation des plugins recommandés.
 import { chromium, plugins } from "playwright-ghost";
 
 const browser = await chromium.launch({
-    plugins: plugins.recommendedPlugins(),
+  plugins: plugins.recommendeds(),
 });
 const context = await browser.newContext();
 const page = await context.newPage();

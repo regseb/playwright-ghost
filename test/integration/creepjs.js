@@ -27,8 +27,8 @@ describe("CreepJS", function () {
         it("should get a B (or A) grade", async function () {
             const browser = await chromium.launch({
                 plugins: [
-                    ...plugins.recommendedPlugins(),
-                    plugins.polyfill.userAgentPlugin({
+                    ...plugins.recommendeds(),
+                    plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
                 ],

@@ -32,8 +32,8 @@ describe.skip("Chrome Headless Detection (Intoli)", function () {
         it("should not failed", async function () {
             const browser = await chromium.launch({
                 plugins: [
-                    ...plugins.recommendedPlugins(),
-                    plugins.polyfill.userAgentPlugin({
+                    ...plugins.recommendeds(),
+                    plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
                 ],

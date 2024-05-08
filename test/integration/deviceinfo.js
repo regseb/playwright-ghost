@@ -27,8 +27,8 @@ describe("Device Info", function () {
         it("should not be spoofed", async function () {
             const browser = await chromium.launch({
                 plugins: [
-                    ...plugins.recommendedPlugins(),
-                    plugins.polyfill.userAgentPlugin({
+                    ...plugins.recommendeds(),
+                    plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
                 ],
