@@ -22,13 +22,13 @@ const getUserAgent = async () => {
     return userAgent.replace("Headless", "");
 };
 
-describe("Cloudflare", function () {
+describe("Cloudflare turnstile demo", function () {
     describe("chromium", function () {
         it("should be success with managed challenge", async function () {
             const browser = await chromium.launch({
                 plugins: [
-                    ...plugins.recommendedPlugins(),
-                    plugins.polyfill.userAgentPlugin({
+                    ...plugins.recommendeds(),
+                    plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
                 ],
@@ -44,7 +44,7 @@ describe("Cloudflare", function () {
                     if (!frame.url().startsWith(CHALLENGES_HOST)) {
                         continue;
                     }
-                    assert.ok(await frame.getByText("Success!").isVisible());
+                    assert.ok(await frame.locator("#success").isVisible());
                 }
             } catch (err) {
                 await page.screenshot({
@@ -66,8 +66,8 @@ describe("Cloudflare", function () {
         it("should be success with non-interactive challenge", async function () {
             const browser = await chromium.launch({
                 plugins: [
-                    ...plugins.recommendedPlugins(),
-                    plugins.polyfill.userAgentPlugin({
+                    ...plugins.recommendeds(),
+                    plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
                 ],
@@ -85,7 +85,7 @@ describe("Cloudflare", function () {
                     if (!frame.url().startsWith(CHALLENGES_HOST)) {
                         continue;
                     }
-                    assert.ok(await frame.getByText("Success!").isVisible());
+                    assert.ok(await frame.locator("#success").isVisible());
                 }
             } catch (err) {
                 await page.screenshot({

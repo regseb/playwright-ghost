@@ -22,9 +22,9 @@ const getUserAgent = async () => {
     return userAgent.replace("Headless", "");
 };
 
-describe("nowsecure", function () {
+describe("BrowserScan", function () {
     describe("chromium", function () {
-        it("should be passed", async function () {
+        it("should pass", async function () {
             const browser = await chromium.launch({
                 plugins: [
                     ...plugins.recommendeds(),
@@ -36,26 +36,26 @@ describe("nowsecure", function () {
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
-                await page.goto("https://nowsecure.nl/#relax");
+                await page.goto("https://www.browserscan.net/bot-detection");
                 await page.waitForTimeout(5000);
-
-                const CHALLENGES_HOST = "https://challenges.cloudflare.com/";
-                for (const frame of page.mainFrame().childFrames()) {
-                    if (!frame.url().startsWith(CHALLENGES_HOST)) {
-                        continue;
-                    }
-                    assert.ok(await frame.locator("#success").isVisible());
+                const result = await page
+                    .locator(
+                        '*[class^="_webdriver__result_"]' +
+                            ' strong[class^="_webdriver__"]',
+                    )
+                    .textContent();
+                if ("Normal" !== result) {
+                    assert.fail(result);
                 }
             } catch (err) {
                 await page.screenshot({
-                    path: "./log/nowsecure-cr.png",
+                    path: "./log/browserscan-cr.png",
                     fullPage: true,
                 });
                 await fs.writeFile(
-                    "./log/nowsecure-cr.html",
+                    "./log/browserscan-cr.html",
                     await page.content(),
                 );
-
                 throw err;
             } finally {
                 await context.close();

@@ -22,12 +22,7 @@ const getUserAgent = async () => {
     return userAgent.replace("Headless", "");
 };
 
-// """
-//  Les sites web justifient leur identité par des certificats qui ont une
-//  période de validité définie. Le certificat de intoli.com a expiré le
-//  12/11/2023.
-// """
-describe.skip("Chrome Headless Detection (Intoli)", function () {
+describe("Chrome Headless Detection (Intoli)", function () {
     describe("chromium", function () {
         it("should not failed", async function () {
             const browser = await chromium.launch({

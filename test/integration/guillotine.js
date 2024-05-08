@@ -6,13 +6,11 @@
 
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
-import playwright from "playwright";
-import { chromium, plugins } from "../../src/index.js";
+import { chromium, firefox, plugins } from "../../src/index.js";
 
 const getUserAgent = async () => {
-    const browser = await playwright.chromium.launch({
-        args: ["--headless=new"],
-        executablePath: "/snap/bin/chromium",
+    const browser = await chromium.launch({
+        plugins: [plugins.polyfill.headless(), plugins.utils.locale()],
     });
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -24,14 +22,14 @@ const getUserAgent = async () => {
 
 describe("Guillotine", function () {
     describe("chromium", function () {
-        it("should not lose your head in headless", async function () {
+        it("should not lose your head", async function () {
             const browser = await chromium.launch({
                 plugins: [
                     ...plugins.recommendeds(),
                     plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
-                    plugins.utils.debug(),
+                    plugins.polyfill.webGL(),
                     plugins.utils.locale(),
                 ],
             });
@@ -66,11 +64,11 @@ describe("Guillotine", function () {
                 }
             } catch (err) {
                 await page.screenshot({
-                    path: "./log/guillotine-cr_headless.png",
+                    path: "./log/guillotine-cr.png",
                     fullPage: true,
                 });
                 await fs.writeFile(
-                    "./log/guillotine-cr_headless.html",
+                    "./log/guillotine-cr.html",
                     await page.content(),
                 );
 
@@ -80,11 +78,12 @@ describe("Guillotine", function () {
                 await browser.close();
             }
         });
+    });
 
-        it("should not lose your head in headfull", async function () {
-            const browser = await chromium.launch({
-                headless: false,
-                plugins: [plugins.utils.debug(), plugins.utils.locale()],
+    describe("firefox", function () {
+        it("should not lose your head", async function () {
+            const browser = await firefox.launch({
+                plugins: plugins.recommendeds(),
             });
             const context = await browser.newContext();
             const page = await context.newPage();
@@ -117,11 +116,11 @@ describe("Guillotine", function () {
                 }
             } catch (err) {
                 await page.screenshot({
-                    path: "./log/guillotine-cr_headfull.png",
+                    path: "./log/guillotine-fx.png",
                     fullPage: true,
                 });
                 await fs.writeFile(
-                    "./log/guillotine-cr_headfull.html",
+                    "./log/guillotine-fx.html",
                     await page.content(),
                 );
 
