@@ -16,7 +16,7 @@ import debugPlugin from "./utils/debug.js";
 import localePlugin from "./utils/locale.js";
 
 export default {
-    recommendedPlugins: (options) => [
+        automationPlugin(),
         dialogPlugin(options?.humanize?.dialog),
         headlessPlugin(),
         screenPlugin(options?.polyfill?.screen),

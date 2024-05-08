@@ -79,6 +79,14 @@ const browser = await chromium.launch({
 <table>
   <tr><th>Nom</th><th>Description</th><th></th></tr>
   <tr>
+    <td><code>polyfill.automation</code></td>
+    <td>
+      Désactiver la fonctionnalité <code>--enable-automation</code> dans
+      Chromium.
+    </td>
+    <td>⭐</td>
+  </tr>
+  <tr>
     <td><code>polyfill.headless</code></td>
     <td>
       Corriger de nombreuses différences dans les APIs Javascript avec le
