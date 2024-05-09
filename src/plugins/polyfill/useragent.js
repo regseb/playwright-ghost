@@ -15,7 +15,7 @@
  *                                  <code>Browser</code>.
  * @param {string}      userAgent   L'agent utilisateur à utiliser.
  * @param {BrowserType} browserType Le type de navigateur.
- * @returns {Object} Les nouvelles options.
+ * @returns {Object|undefined} Les nouvelles options.
  */
 const changeUserAgent = (options, userAgent, browserType) => {
     if ("chromium" === browserType.name()) {

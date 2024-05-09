@@ -5,9 +5,10 @@
  */
 
 /**
- * @typedef {import("playwright").Page} Page
+ * Instancie <code>PlaywrightBlocker</code> avec les options.
+ *
+ * @param {Object} options Les options de <code>PlaywrightBlocker</code>.
  */
-
 const getBlocker = async function (options) {
     const { PlaywrightBlocker } = await import("@cliqz/adblocker-playwright");
     switch (options.mode) {

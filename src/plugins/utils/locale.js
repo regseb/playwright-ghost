@@ -7,6 +7,10 @@
 import which from "../../utils/which.js";
 
 /**
+ * @typedef {import("playwright").BrowserType} BrowserType
+ */
+
+/**
  * La liste des exécutables des navigateurs.
  *
  * @type {Map<string, string>}
@@ -23,6 +27,15 @@ for (const name of ["chromium", "firefox", "webkit"]) {
     }
 }
 
+/**
+ * Définit le chemin de l'exécutable du navigateur installé localement.
+ *
+ * @param {Object}      [options]   Les options de création d'un
+ *                                  <code>Browser</code>.
+ * @param {BrowserType} browserType Le type de navigateur.
+ * @returns {Object|undefined} Les nouvelles options.
+ * @throws {Error} Si le navigateur n'est pas installé localement.
+ */
 const setExecutablePath = function (options, browserType) {
     const name = browserType.name();
     if (!EXECUTABLE_PATHS.has(name)) {

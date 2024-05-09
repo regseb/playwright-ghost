@@ -14,13 +14,17 @@
  * @param {Object}      [options]   Les options de création d'un
  *                                  <code>Browser</code>.
  * @param {BrowserType} browserType Le type de navigateur.
- * @returns {Object} Les nouvelles options.
+ * @returns {Object|undefined} Les nouvelles options.
  */
 const changeHeadless = (options, browserType) => {
     if ("chromium" === browserType.name() && (options?.headless ?? true)) {
         return {
             ...options,
             args: ["--headless=new", ...(options?.args ?? [])],
+            ignoreDefaultArgs: [
+                "--headless",
+                ...(options?.ignoreDefaultArgs ?? []),
+            ],
         };
     }
     return options;

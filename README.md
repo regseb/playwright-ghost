@@ -12,8 +12,12 @@ navigateur utilisé par un être humain et un navigateur
 un programme.
 
 L'API de Playwright-ghost est identique à celle de Playwright, sauf l'ajout de
-l'option `plugins` à la méthode
-[`browserType.launch([options])`](https://playwright.dev/docs/api/class-browsertype#browser-type-launch).
+l'option `plugins` aux méthodes
+[`browserType.launch([options])`](https://playwright.dev/docs/api/class-browsertype#browser-type-launch)
+et
+[`browserType.launchPersistentContext(userDataDir,
+[options])`](https://playwright.dev/docs/api/class-browsertype#browser-type-launch-persistent-context).
+
 La propriété `plugins` est un tableau avec les plugins à ajouter.
 
 ## Installation
@@ -21,11 +25,11 @@ La propriété `plugins` est un tableau avec les plugins à ajouter.
 Playwright-ghost ne fournit pas Playwright, vous devez aussi l'ajouter dans vos
 dépendances.
 
-```JSON
+```json
 {
   "dependencies": {
-    "playwright": "1.41.2",
-    "playwright-ghost": "0.6.0"
+    "playwright": "1.44.0",
+    "playwright-ghost": "0.7.0"
   }
 }
 ```
@@ -34,7 +38,7 @@ dépendances.
 
 Voici un exemple avec l'activation des plugins recommandés.
 
-```JavaScript
+```javascript
 import { chromium, plugins } from "playwright-ghost";
 
 const browser = await chromium.launch({
@@ -55,17 +59,17 @@ Dans cet exemple, trois plugins sont ajoutés :
 
 - `polyfill.headless` qui n'a pas d'options ;
 - `polyfill.screen` en définissant d'autres valeurs pour la taille de l'écran ;
-- ̀`util.adBlocker` en utilisant les options par défaut.
+- `util.adBlocker` en utilisant les options par défaut.
 
-```JavaScript
+```javascript
 import { chromium, plugins } from "playwright-ghost";
 
 const browser = await chromium.launch({
-    plugins: [
-        plugins.polyfill.headless(),
-        plugins.polyfill.screen({ width: 1280, height: 720 }),
-        plugins.util.adBlocker(),
-    ],
+  plugins: [
+    plugins.polyfill.headless(),
+    plugins.polyfill.screen({ width: 1280, height: 720 }),
+    plugins.util.adBlocker(),
+  ],
 });
 // ...
 ```
@@ -135,7 +139,7 @@ const browser = await chromium.launch({
     <td>
       Modifier les valeurs des paramètres <em>WebGL</em>.
     </td>
-    <td>⭐</td>
+    <td></td>
   </tr>
   <tr>
     <td><code>humanize.dialog</code></td>
@@ -198,6 +202,9 @@ Puppeteer et Playwright pour les rendre indétectable.
 - [Crawlee](https://crawlee.dev/).
 - [Playwright-Stealth](https://github.com/Granitosaurus/playwright-stealth/) en
   Python.
+- [The Imposter](https://github.com/TheGP/Imposter).
+- [Puppeteer-Humanize](https://github.com/force-adverse/puppeteer-humanize).
+- [Botright](https://github.com/Vinyzu/Botright)
 
 ### Anti-bots
 
@@ -237,6 +244,7 @@ Puppeteer et Playwright pour les rendre indétectable.
 - [Vytal](https://vytal.io/).
 - [WebGL Browser Report](https://browserleaks.com/webgl).
 - [Fingerprint Suite](https://apify.github.io/fingerprint-suite/).
+- [TrackMe - fingerprinting API](https://tls.peet.ws/).
 
 ### Autre
 
@@ -248,3 +256,4 @@ Puppeteer et Playwright pour les rendre indétectable.
   par [Pixeljets](https://pixeljets.com/).
 - [How does PerimeterX Bot Defender
   work](https://www.trickster.dev/post/how-does-perimeterx-bot-defender-work/).
+- [Curated anti-detect tools list](https://github.com/TheGP/untidetect-tools).

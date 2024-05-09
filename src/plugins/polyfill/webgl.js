@@ -4,6 +4,18 @@
  * @author Sébastien Règne
  */
 
+/**
+ * @typedef {import("playwright").BrowserType} BrowserType
+ */
+
+/**
+ * Utilise <em>Angle</em> pour <em>WebGL</em> dans Chromium.
+ *
+ * @param {Object}      [options]   Les options de création d'un
+ *                                  <code>Browser</code>.
+ * @param {BrowserType} browserType Le type de navigateur.
+ * @returns {Object|undefined} Les nouvelles options.
+ */
 const useAngle = (options, browserType) => {
     if ("chromium" === browserType.name() && (options?.headless ?? true)) {
         return {

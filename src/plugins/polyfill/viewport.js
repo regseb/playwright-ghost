@@ -13,7 +13,7 @@ import Random from "../../utils/random.js";
  *                           <code>BrowserContext</code>.
  * @param {number} width     La largeur du navigateur.
  * @param {number} height    La hauteur du navigateur.
- * @returns {Object} Les nouvelles options.
+ * @returns {Object|undefined} Les nouvelles options.
  */
 const setViewport = function (options, width, height) {
     return {

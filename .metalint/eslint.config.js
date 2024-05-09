@@ -4,6 +4,9 @@
  * @author Sébastien Règne
  */
 
+/**
+ * @type {import("eslint").Linter.Config}
+ */
 export default {
     plugins: [
         "array-func",
@@ -642,6 +645,7 @@ export default {
         "regexp/sort-character-class-elements": "error",
         "regexp/sort-flags": "error",
         "regexp/unicode-escape": "error",
+        "regexp/unicode-property": "error",
 
         // Plugin eslint-plugin-unicorn.
         "unicorn/better-regex": "error",
@@ -659,12 +663,14 @@ export default {
         "unicorn/import-style": "error",
         "unicorn/new-for-builtins": "error",
         "unicorn/no-abusive-eslint-disable": "error",
+        "unicorn/no-anonymous-default-export": "error",
         "unicorn/no-array-callback-reference": "off",
         "unicorn/no-array-for-each": "off",
         "unicorn/no-array-method-this-argument": "error",
         "unicorn/no-array-push-push": "error",
         "unicorn/no-array-reduce": "off",
         "unicorn/no-await-expression-member": "error",
+        "unicorn/no-await-in-promise-methods": "error",
         "unicorn/no-console-spaces": "error",
         "unicorn/no-document-cookie": "error",
         "unicorn/no-empty-file": "error",
@@ -683,6 +689,7 @@ export default {
         "unicorn/no-null": "error",
         "unicorn/no-object-as-default-parameter": "error",
         "unicorn/no-process-exit": "error",
+        "unicorn/no-single-promise-in-promise-methods": "error",
         "unicorn/no-static-only-class": "error",
         "unicorn/no-thenable": "error",
         "unicorn/no-this-assignment": "error",
@@ -732,7 +739,8 @@ export default {
         "unicorn/prefer-module": "error",
         "unicorn/prefer-native-coercion-functions": "error",
         "unicorn/prefer-negative-index": "error",
-        "unicorn/prefer-node-protocol": "error",
+        // Désactiver cette règle et préférer la règle "n/prefer-node-protocol".
+        "unicorn/prefer-node-protocol": "off",
         "unicorn/prefer-number-properties": "error",
         "unicorn/prefer-object-from-entries": "error",
         "unicorn/prefer-optional-catch-binding": "error",
@@ -761,7 +769,17 @@ export default {
         "unicorn/require-post-message-target-origin": "off",
         "unicorn/string-content": "off",
         "unicorn/switch-case-braces": ["error", "avoid"],
-        "unicorn/template-indent": "error",
+        "unicorn/template-indent": [
+            "error",
+            // Configurer la règle pour qu'elle soit compatible avec Prettier.
+            // https://github.com/prettier/eslint-config-prettier#unicorntemplate-indent
+            {
+                tags: ["outdent", "dedent", "sql", "styled"],
+                functions: ["dedent", "stripIndent"],
+                selectors: [],
+                comments: ["indent"],
+            },
+        ],
         "unicorn/text-encoding-identifier-case": "error",
         "unicorn/throw-new-error": "error",
     },
@@ -790,7 +808,7 @@ export default {
                 var: "member",
                 arg: "param",
                 argument: "param",
-                prop: "property",
+                property: "prop",
                 return: "returns",
                 exception: "throws",
                 yield: "yields",

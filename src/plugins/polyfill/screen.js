@@ -11,7 +11,7 @@
  *                           <code>BrowserContext</code>.
  * @param {number} width     La largeur de l'écran.
  * @param {number} height    La hauteur de l'écran.
- * @returns {Object} Les nouvelles options.
+ * @returns {Object|undefined} Les nouvelles options.
  */
 const setScreen = (options, width, height) => {
     return {
