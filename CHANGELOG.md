@@ -2,15 +2,13 @@
 
 ## [0.7.0](https://github.com/regseb/playwright-ghost/compare/v0.6.0...v0.7.0) (2024-05-09)
 
-
 ### Features
 
-* Ajouter un plugin pour "enable-automation". ([afa5c76](https://github.com/regseb/playwright-ghost/commit/afa5c761afbd7fca5e6201a7a84ef7bff68f13fe))
-
+- Ajouter un plugin pour "enable-automation". ([afa5c76](https://github.com/regseb/playwright-ghost/commit/afa5c761afbd7fca5e6201a7a84ef7bff68f13fe))
 
 ### Bug Fixes
 
-* Réduire le nom des plugins. ([47fb196](https://github.com/regseb/playwright-ghost/commit/47fb19657215e9cb777807ef1d3e5d1f009b216e))
+- Réduire le nom des plugins. ([47fb196](https://github.com/regseb/playwright-ghost/commit/47fb19657215e9cb777807ef1d3e5d1f009b216e))
 
 ## [0.6.0](https://github.com/regseb/playwright-ghost/compare/v0.5.1...v0.6.0) (2024-02-12)
 
