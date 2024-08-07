@@ -7,7 +7,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import playwright from "playwright";
-import { chromium, plugins } from "../../src/index.js";
+import { chromium, firefox, plugins } from "../../src/index.js";
 
 const getUserAgent = async () => {
     const browser = await playwright.chromium.launch({
@@ -74,6 +74,63 @@ describe("infosimples", function () {
                 });
                 await fs.writeFile(
                     "./log/infosimples-cr.html",
+                    await page.content(),
+                );
+
+                throw err;
+            } finally {
+                await context.close();
+                await browser.close();
+            }
+        });
+    });
+
+    describe("firefox", function () {
+        it("should not be detected on headless", async function () {
+            const browser = await firefox.launch({
+                plugins: plugins.recommendeds(),
+            });
+            const context = await browser.newContext();
+            const page = await context.newPage();
+            try {
+                await page.goto(
+                    "https://infosimples.github.io/detect-headless/",
+                );
+                // Attendre le résultat du dernier test.
+                await page.waitForSelector("#mouse-move-result:not(:empty)");
+                // Bouger la souris pour un des tests.
+                for (let i = 0; 100 > i; ++i) {
+                    await page.mouse.move(10 * i, 10 * i);
+                }
+
+                const results = await page.locator("tr").evaluateAll((trs) => {
+                    // Enlever les entêtes.
+                    return trs.slice(1).map((tr) => ({
+                        name: tr.querySelector("td:first-child").textContent,
+                        value: tr.querySelector("td:last-child").textContent,
+                        status: tr.className,
+                    }));
+                });
+
+                for (const result of results) {
+                    // Ignorer le test Broken Image qui échoue même avec un vrai
+                    // navigateur.
+                    if ("Broken Image" === result.name) {
+                        continue;
+                    }
+                    assert.equal(
+                        result.status,
+                        "headful",
+                        `${result.name}: ${result.value}`,
+                    );
+                }
+            } catch (err) {
+                await page.screenshot({
+                    path: "./log/infosimples-fx.png",
+                    fullPage: true,
+                });
+                await fs.writeFile(
+                    "./log/infosimples-fx.html",
                     await page.content(),
                 );
 

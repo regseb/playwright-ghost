@@ -7,7 +7,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import playwright from "playwright";
-import { chromium, plugins } from "../../src/index.js";
+import { chromium, firefox, plugins } from "../../src/index.js";
 
 const getUserAgent = async () => {
     const browser = await playwright.chromium.launch({
@@ -48,6 +48,37 @@ describe("Device Info", function () {
                 });
                 await fs.writeFile(
                     "./log/deviceinfo-cr.html",
+                    await page.content(),
+                );
+
+                throw err;
+            } finally {
+                await context.close();
+                await browser.close();
+            }
+        });
+    });
+
+    describe("firefox", function () {
+        it.skip("should not be spoofed", async function () {
+            const browser = await firefox.launch({
+                plugins: plugins.recommendeds(),
+            });
+            const context = await browser.newContext();
+            const page = await context.newPage();
+            try {
+                await page.goto("https://www.deviceinfo.me/");
+                await page.waitForTimeout(5000);
+
+                const spoofeds = await page.getByText("(Spoofed)").all();
+                assert.deepEqual(spoofeds, []);
+            } catch (err) {
+                await page.screenshot({
+                    path: "./log/deviceinfo-fx.png",
+                    fullPage: true,
+                });
+                await fs.writeFile(
+                    "./log/deviceinfo-fx.html",
                     await page.content(),
                 );
 

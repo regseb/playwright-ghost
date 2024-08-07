@@ -7,7 +7,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import playwright from "playwright";
-import { chromium, plugins } from "../../src/index.js";
+import { chromium, firefox, plugins } from "../../src/index.js";
 
 const getUserAgent = async () => {
     const browser = await playwright.chromium.launch({
@@ -41,7 +41,7 @@ describe("HeadlessDetectJS", function () {
                     "/main/headlessDetect.js",
             );
             const content = await response.text();
-            context.addInitScript({ content });
+            await context.addInitScript({ content });
 
             const page = await context.newPage();
             try {
@@ -61,6 +61,50 @@ describe("HeadlessDetectJS", function () {
                 });
                 await fs.writeFile(
                     "./log/headlessdetectjs-cr.html",
+                    await page.content(),
+                );
+
+                throw err;
+            } finally {
+                await context.close();
+                await browser.close();
+            }
+        });
+    });
+
+    describe("firefox", function () {
+        it("should get 0 score", async function () {
+            const browser = await firefox.launch({
+                plugins: plugins.recommendeds(),
+            });
+            const context = await browser.newContext();
+
+            const response = await fetch(
+                "https://raw.githubusercontent.com" +
+                    "/LouisKlimek/HeadlessDetectJS" +
+                    "/main/headlessDetect.js",
+            );
+            const content = await response.text();
+            await context.addInitScript({ content });
+
+            const page = await context.newPage();
+            try {
+                await page.goto("https://perdu.com/");
+
+                const score = await page.evaluate(() => {
+                    // eslint-disable-next-line no-undef
+                    const headlessDetector = new HeadlessDetect();
+                    return headlessDetector.getHeadlessScore();
+                });
+
+                assert.equal(score, 0);
+            } catch (err) {
+                await page.screenshot({
+                    path: "./log/headlessdetectjs-fx.png",
+                    fullPage: true,
+                });
+                await fs.writeFile(
+                    "./log/headlessdetectjs-fx.html",
                     await page.content(),
                 );
 
