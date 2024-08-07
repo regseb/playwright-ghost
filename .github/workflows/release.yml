@@ -71,7 +71,9 @@ jobs:
 
       - name: Publish in npm
         if: ${{ steps.release.outputs.release_created }}
-        run: npm publish --provenance
+        # Forcer l'access public, car la valeur par défaut n'est pas utilisée.
+        # https://github.com/npm/cli/issues/7706
+        run: npm publish --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
