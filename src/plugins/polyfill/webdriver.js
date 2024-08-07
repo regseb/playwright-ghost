@@ -5,7 +5,8 @@
  */
 
 /**
- * @typedef {import("playwright").BrowserType} BrowserType
+ * @import { BrowserType } from "playwright"
+ * @import { ContextBefore } from "../../hook.js"
  */
 
 /**
@@ -13,9 +14,10 @@
  * Le navigateur sera toujours controllable par Playwright, mais la variable
  * <code>navigator.webdriver</code> sera <code>false</code>.
  *
- * @param {Object}      [options]   Les options de création d'un <code>Browser</code>.
- * @param {BrowserType} browserType Le type de navigateur.
- * @returns {Object|undefined} Les nouvelles options.
+ * @param {Record<string, any>|undefined} options     Les options de création
+ *                                                    d'un <code>Browser</code>.
+ * @param {BrowserType}                   browserType Le type de navigateur.
+ * @returns {Record<string, any>|undefined} Les nouvelles options.
  */
 const disable = (options, browserType) => {
     if ("chromium" === browserType.name()) {
@@ -36,10 +38,26 @@ const disable = (options, browserType) => {
  */
 export default function webdriverPlugin() {
     return {
+        /**
+         * Modifie les options de lancement du navigateur.
+         *
+         * @param {any[]}                      args    Les paramètres de la
+         *                                             méthode.
+         * @param {ContextBefore<BrowserType>} context Le contexte du crochet.
+         * @returns {any[]} Les nouveaux paramètres.
+         */
         "BrowserType.launch:before": (args, { obj: browserType }) => {
             return [disable(args[0], browserType)];
         },
 
+        /**
+         * Modifie les options de lancement du navigateur.
+         *
+         * @param {any[]}                      args    Les paramètres de la
+         *                                             méthode.
+         * @param {ContextBefore<BrowserType>} context Le contexte du crochet.
+         * @returns {any[]} Les nouveaux paramètres.
+         */
         "BrowserType.launchPersistentContext:before": (
             args,
             { obj: browserType },

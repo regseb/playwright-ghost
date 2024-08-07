@@ -5,18 +5,22 @@
 <!-- markdownlint-disable-next-line no-inline-html-->
 <img src="asset/logo.svg" align="right" alt="">
 
+[![npm][img-npm]][link-npm]
+[![build][img-build]][link-build]
+[![coverage][img-coverage]][link-coverage]
+[![semver][img-semver]][link-semver]
+
 Playwright-ghost est une surcouche de [Playwright](https://playwright.dev/) en
 lui ajoutant un système de plugins pour gommer les différences entre un
 navigateur utilisé par un être humain et un navigateur
-[_headless_](https://fr.wikipedia.org/wiki/Navigateur_headless) contrôlé par
-un programme.
+[_headless_](https://fr.wikipedia.org/wiki/Navigateur_headless) contrôlé par un
+programme.
 
 L'API de Playwright-ghost est identique à celle de Playwright, sauf l'ajout de
 l'option `plugins` aux méthodes
 [`browserType.launch([options])`](https://playwright.dev/docs/api/class-browsertype#browser-type-launch)
 et
-[`browserType.launchPersistentContext(userDataDir,
-[options])`](https://playwright.dev/docs/api/class-browsertype#browser-type-launch-persistent-context).
+[`browserType.launchPersistentContext(userDataDir, [options])`](https://playwright.dev/docs/api/class-browsertype#browser-type-launch-persistent-context).
 
 La propriété `plugins` est un tableau avec les plugins à ajouter.
 
@@ -25,13 +29,8 @@ La propriété `plugins` est un tableau avec les plugins à ajouter.
 Playwright-ghost ne fournit pas Playwright, vous devez aussi l'ajouter dans vos
 dépendances.
 
-```json
-{
-  "dependencies": {
-    "playwright": "1.44.0",
-    "playwright-ghost": "0.7.0"
-  }
-}
+```shell
+npm install playwright playwright-ghost
 ```
 
 ## Utilisation
@@ -55,7 +54,7 @@ await context.close();
 await browser.close();
 ```
 
-Dans cet exemple, trois plugins sont ajoutés :
+Dans cet autre exemple, trois plugins sont ajoutés :
 
 - `polyfill.headless` qui n'a pas d'options ;
 - `polyfill.screen` en définissant d'autres valeurs pour la taille de l'écran ;
@@ -76,39 +75,40 @@ const browser = await chromium.launch({
 
 ## Plugins
 
-⭐ : Plugin recommandé.\
-⚙️ : Possède des options.\
-📦 : Nécessite une dépendance.
+⭐ : Plugin recommandé / ⚙️ : Possède des options / 📦 : Nécessite une
+dépendance
 
+<!-- markdownlint-disable no-inline-html-->
 <table>
-  <tr><th>Nom</th><th>Description</th><th></th></tr>
+  <tr><th></th><th>Nom</th><th>Description</th></tr>
   <tr>
+    <td>⭐</td>
     <td><code>polyfill.automation</code></td>
     <td>
       Désactiver la fonctionnalité <code>--enable-automation</code> dans
       Chromium.
     </td>
-    <td>⭐</td>
   </tr>
   <tr>
+    <td>⭐</td>
     <td><code>polyfill.headless</code></td>
     <td>
       Corriger de nombreuses différences dans les APIs Javascript avec le
       nouveau mode <em>headless</em> de Chromium. Par exemple :
       <code>navigator.mimeTypes</code>...
     </td>
-    <td>⭐</td>
   </tr>
   <tr>
+    <td>⭐ ⚙️</td>
     <td><code>polyfill.screen</code></td>
     <td>
       Définir une valeur réaliste pour la taille de l'écran : 1920x1080. Ces
       valeurs sont configurables avec les options <code>width</code> et
       <code>height</code>.
     </td>
-    <td>⭐ ⚙️</td>
   </tr>
   <tr>
+    <td>⚙️</td>
     <td><code>polyfill.userAgent</code></td>
     <td>
       Changer
@@ -116,32 +116,32 @@ const browser = await chromium.launch({
       utilisateur</a> (<em>user agent</em>) du navigateur avec l'option
       <code>userAgent</code>.
     </td>
-    <td>⚙️</td>
   </tr>
   <tr>
+    <td>⭐ ⚙️</td>
     <td><code>polyfill.viewport</code></td>
     <td>
       Faire varier la taille du navigateur. Par défaut les valeurs sont prises
       aléatoirement entre 1000x500 et 1800x800. Elles sont configurables avec
       les options <code>width</code> et <code>height</code>.
     </td>
-    <td>⭐ ⚙️</td>
   </tr>
   <tr>
+    <td>⭐</td>
     <td><code>polyfill.webdriver</code></td>
     <td>
       Passer à <code>false</code> la variable <code>navigator.webdriver</code>.
     </td>
-    <td>⭐</td>
   </tr>
   <tr>
+    <td></td>
     <td><code>polyfill.webGL</code></td>
     <td>
       Modifier les valeurs des paramètres <em>WebGL</em>.
     </td>
-    <td></td>
   </tr>
   <tr>
+    <td>⭐ ⚙️</td>
     <td><code>humanize.dialog</code></td>
     <td>
       Fermer les boîtes de dialogues dans un temps humainement possible (entre
@@ -150,9 +150,9 @@ const browser = await chromium.launch({
       Les options <code>min</code> et <code>max</code> permettent de définir
       d'autres bornes pour le délais de fermeture.
     </td>
-    <td>⭐ ⚙️</td>
   </tr>
   <tr>
+    <td>⚙️ 📦</td>
     <td><code>util.adBlocker</code></td>
     <td>
       Ajouter le bloqueur de publicité
@@ -162,98 +162,47 @@ const browser = await chromium.launch({
         ><code>@cliqz/adblocker-playwright</code></a>
       dans vos dépendances npm.
     </td>
-    <td>⚙️ 📦</td>
   </tr>
   <tr>
+    <td></td>
     <td><code>util.debug</code></td>
     <td>
       Afficher dans la console du programme, les messages affichés dans la
       console du navigateur.
     </td>
-    <td></td>
   </tr>
   <tr>
+    <td></td>
     <td><code>util.locale</code></td>
     <td>
       Utiliser le navigateur installé localement.
     </td>
-    <td></td>
   </tr>
 </table>
+<!-- markdownlint-enable no-inline-html-->
 
-## Bibliographie
+## Anti-bot
 
-### Bibliothèques pour contrôler un navigateur
+|                                    | Chromium            | Firefox            |
+| ---------------------------------- | ------------------- | ------------------ |
+| BrowserScan                        | ❌ CDP              | ❌ WebDriver       |
+| Chromedriver Detector              | ❌ devtools-console | ✅                 |
+| CreepJS                            | ❌ F-               | ❌ D+              |
+| Datadome                           | ✅                  | ✅                 |
+| Device Info                        | ✅                  | ❌                 |
+| FingerprintJS                      | ✅                  | ❌ Automation Tool |
+| HeadlessDetectJS                   | ✅                  | ❌ 0.2             |
+| infosimples                        | ✅                  | ❌ Webdriver       |
+| Chrome Headless Detection (Intoli) | ✅                  | ❌ WebDriver       |
+| nowsecure                          | ✅                  | ✅                 |
+| Antibot (Sannysoft)                | ✅                  | ❌ Webdriver       |
+| Cloudflare turnstile demo          | ❌                  | ❌                 |
 
-- [Playwright](https://playwright.dev/) : la bibliothèque utilisée par
-  Playwright-ghost.
-- [Puppeteer](https://pptr.dev/) : la bibliothèque dont Playwright s'est
-  inspiré.
-
-### Bibliothèques pour du WebScraping
-
-- [Puppeteer-extra](https://github.com/berstend/puppeteer-extra) : surcouche de
-Puppeteer et Playwright pour les rendre indétectable.
-<!-- markdownlint-disable-next-line line-length -->
-- [puppeteer-real-browser](https://github.com/zfcsoftware/puppeteer-real-browser).
-- [Ulixee Hero](https://github.com/ulixee/hero)
-  (ex-[SecretAgent](https://github.com/ulixee/secret-agent)).
-- [FakeBrowser](https://github.com/kkoooqq/fakebrowser).
-- [Crawlee](https://crawlee.dev/).
-- [Playwright-Stealth](https://github.com/Granitosaurus/playwright-stealth/) en
-  Python.
-- [The Imposter](https://github.com/TheGP/Imposter).
-- [Puppeteer-Humanize](https://github.com/force-adverse/puppeteer-humanize).
-- [Botright](https://github.com/Vinyzu/Botright)
-
-### Anti-bots
-
-- [CreepJS](https://abrahamjuliot.github.io/creepjs/).
-- [Fingerprint](https://fingerprintjs.com/products/bot-detection/)
-  ([FingerprintJS](https://fingerprintjs.github.io/fingerprintjs/)).
-- [DoubleAgent](https://github.com/ulixee/unblocked/tree/main/double-agent)
-  (cf. Ulixee Hero).
-- [Chrome headless
-  test](https://intoli.com/blog/not-possible-to-block-chrome-headless/chrome-headless-test.htm)
-  (cf. [article](https://intoli.com/blog/not-possible-to-block-chrome-headless/)
-  d'Intoli).
-- [Demo form for detecting reCAPTCHA 3
-  score](https://antcpt.com/eng/information/demo-form/recaptcha-3-test-score.html).
-- [Device Info](https://www.deviceinfo.me/) (si <em>Spoofed</em> apparait dans
-  la page).
-- [Intoli.com tests + additions](https://bot.sannysoft.com/) (Sannysoft).
-- [Headless Chrome Detection Tests](https://bot.incolumitas.com/) (Incolumitas).
-- [Datadome test page](https://antoinevastel.com/bots/datadome) (ex-[Your
-  browser fingerprint](https://antoinevastel.com/bots)) / [You are not Chrome
-  headless](https://arh.antoinevastel.com/bots/areyouheadless)
-  ([API](https://antoinevastel.com/bots/areyouheadless)).
-- [Detect Headless](https://infosimples.github.io/detect-headless/).
-- [Browser
-  fingerprinting](https://github.com/niespodd/browser-fingerprinting?tab=readme-ov-file#fingerprint-test-pages).
-
-## Fingerprint
-
-- [Pixelscan](https://pixelscan.net/).
-- [Mon empreinte de navigateur](https://amiunique.org/fp).
-- [tester at niespodd /
-  browser-fingerprinting](https://niespodd.github.io/browser-fingerprinting).
-- [Cover Your Tracks](https://coveryourtracks.eff.org/).
-- [Fake Vision](http://f.vision/).
-- [Rendering Engine Hackability
-  Probe](https://portswigger-labs.net/hackability/).
-- [Vytal](https://vytal.io/).
-- [WebGL Browser Report](https://browserleaks.com/webgl).
-- [Fingerprint Suite](https://apify.github.io/fingerprint-suite/).
-- [TrackMe - fingerprinting API](https://tls.peet.ws/).
-
-### Autre
-
-- [Writing bots for fun - bypassing
-  hCaptcha](https://danielazulay.hashnode.dev/writing-bots-for-fun-bypassing-hcaptcha).
-- [Dark Knowledge](https://github.com/prescience-data/dark-knowledge).
-- [Web scraping in Javascript: node-fetch vs axios vs got vs
-  superagent](https://pixeljets.com/blog/node-fetch-vs-axios-vs-got-for-web-scraping-in-node-js/)
-  par [Pixeljets](https://pixeljets.com/).
-- [How does PerimeterX Bot Defender
-  work](https://www.trickster.dev/post/how-does-perimeterx-bot-defender-work/).
-- [Curated anti-detect tools list](https://github.com/TheGP/untidetect-tools).
+[img-npm]: https://img.shields.io/npm/dm/playwright-ghost?label=npm&logo=npm&logoColor=whitesmoke
+[img-build]: https://img.shields.io/github/actions/workflow/status/regseb/playwright-ghost/ci.yml?branch=main&logo=github&logoColor=whitesmoke
+[img-coverage]: https://img.shields.io/endpoint?label=coverage&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fregseb%2Fplaywright-ghost%2Fmain
+[img-semver]: https://img.shields.io/badge/semver-2.0.0-blue?logo=semver&logoColor=whitesmoke
+[link-npm]: https://www.npmjs.com/package/playwright-ghost
+[link-build]: https://github.com/regseb/playwright-ghost/actions/workflows/ci.yml?query=branch%3Amain
+[link-coverage]: https://dashboard.stryker-mutator.io/reports/github.com/regseb/playwright-ghost/main
+[link-semver]: https://semver.org/spec/v2.0.0.html "Semantic Versioning 2.0.0"

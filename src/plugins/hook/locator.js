@@ -7,10 +7,6 @@
 import hook from "../../hook.js";
 
 /**
- * @typedef {import("playwright").Locator} Locator
- */
-
-/**
  * Crée un plugin pour ajouter des écouteurs dans les objets <code>Page</code>.
  *
  * @see https://playwright.dev/docs/api/class-locator

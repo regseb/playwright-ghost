@@ -5,8 +5,8 @@
  */
 
 /**
- * Crée un plugin pour transférer les messages dans la console du navigateur
- * dans la console de Playwright-ghost.
+ * Crée un plugin pour transférer les messages de la console du navigateur dans
+ * la console de Playwright-ghost.
  */
 export default function debugPlugin() {
     return {

@@ -11,8 +11,7 @@ import locatorPlugin from "./plugins/hook/locator.js";
 import pagePlugin from "./plugins/hook/page.js";
 
 /**
- * @typedef {import("playwright").BrowserType} BrowserType
- * @typedef {import("./plugin/meta/plugin.js")} Plugin
+ * @import { Browser, BrowserContext, BrowserType } from "playwright"
  */
 
 const REGEXP = /^(?<obj>\w+)\.(?<prop>\w+):(?<temporality>after|before)$/u;
@@ -85,14 +84,34 @@ const dispatch = (plugins) => {
 export default class Ghost {
     #browserType;
 
+    /**
+     * Crée une version fantôme d'un <code>BrowserType</code> de Playwright
+     *
+     * @param {BrowserType} browserType Le <code>BrowserType</code> vanille de Playwright.
+     */
     constructor(browserType) {
         this.#browserType = browserType;
     }
 
+    /**
+     * Récupère le chemin de l'exécutable du navigateur.
+     *
+     * @returns {string} Le chemin de l'exécutable.
+     * @see https://playwright.dev/docs/api/class-browsertype#browser-type-executable-path
+     */
     executablePath() {
         return this.#browserType.executablePath();
     }
 
+    /**
+     * Lance une version fantôme d'un <code>Browser</code> de Playwright.
+     *
+     * @param {Record<string, any>} [options] Les options de création d'un
+     *                                        <code>Browser</code>.
+     * @returns {Promise<Browser>} Une promesse contenant la version fantôme du
+     *                             <code>Browser</code>.
+     * @see https://playwright.dev/docs/api/class-browsertype#browser-type-launch
+     */
     launch(options) {
         const listeners = dispatch([
             browserPlugin(),
@@ -107,6 +126,18 @@ export default class Ghost {
         return hooked.launch(options);
     }
 
+    /**
+     * Lance une version fantôme d'un <code>BrowserContext</code> de Playwright.
+     *
+     * @param {string}              userDataDir Le chemin vers le répertoire des
+     *                                          données de session.
+     * @param {Record<string, any>} [options]   Les options de création d'un
+     *                                          <code>Browser</code> et de son
+     *                                          <code>BrowserContext</code>.
+     * @returns {Promise<BrowserContext>} Une promesse contenant la version fantôme du
+     *                             <code>BrowserContext</code>.
+     * @see https://playwright.dev/docs/api/class-browsertype#browser-type-launch-persistent-context
+     */
     launchPersistentContext(userDataDir, options) {
         const listeners = dispatch([
             browserPlugin(),
@@ -121,6 +152,13 @@ export default class Ghost {
         return hooked.launchPersistentContext(userDataDir, options);
     }
 
+    /**
+     * Retourne le nom du type de navigateur. Par exemple :
+     * <code>chromium</code>, <code>webkit</code> ou <code>firefox</code>.
+     *
+     * @returns {string} Le nom du type de navigateur.
+     * @see https://playwright.dev/docs/api/class-browsertype#browser-type-name
+     */
     name() {
         return this.#browserType.name();
     }

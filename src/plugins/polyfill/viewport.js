@@ -9,11 +9,11 @@ import Random from "../../utils/random.js";
 /**
  * Modifie la taille du navigateur.
  *
- * @param {Object} [options] Les options de création d'un
- *                           <code>BrowserContext</code>.
- * @param {number} width     La largeur du navigateur.
- * @param {number} height    La hauteur du navigateur.
- * @returns {Object|undefined} Les nouvelles options.
+ * @param {Record<string, any>|undefined} options Les options de création d'un
+ *                                                <code>Browser</code>.
+ * @param {number}                        width   La largeur du navigateur.
+ * @param {number}                        height  La hauteur du navigateur.
+ * @returns {Record<string, any>|undefined} Les nouvelles options.
  */
 const setViewport = function (options, width, height) {
     return {
@@ -36,14 +36,32 @@ export default function viewportPlugin(options) {
     const height = options?.height ?? Random.getInt(500, 800);
 
     return {
+        /**
+         * Modifie les options de lancement du navigateur.
+         *
+         * @param {any[]} args Les paramètres de la méthode.
+         * @returns {any[]} Les nouveaux paramètres.
+         */
         "BrowserType.launchPersistentContext:before": (args) => {
             return [args[0], setViewport(args[1], width, height)];
         },
 
+        /**
+         * Modifie les options de création d'un contexte.
+         *
+         * @param {any[]} args Les paramètres de la méthode.
+         * @returns {any[]} Les nouveaux paramètres.
+         */
         "Browser.newContext:before": (args) => {
             return [setViewport(args[0], width, height)];
         },
 
+        /**
+         * Modifie les options de création d'une page.
+         *
+         * @param {any[]} args Les paramètres de la méthode.
+         * @returns {any[]} Les nouveaux paramètres.
+         */
         "Browser.newPage:before": (args) => {
             return [setViewport(args[0], width, height)];
         },

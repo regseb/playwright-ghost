@@ -7,10 +7,6 @@
 import hook from "../../hook.js";
 
 /**
- * @typedef {import("playwright").BrowserContext} BrowserContext
- */
-
-/**
  * Crée un plugin pour ajouter des écouteurs dans les objets
  * <code>BrowserContext</code>.
  *

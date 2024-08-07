@@ -7,7 +7,8 @@
 import which from "../../utils/which.js";
 
 /**
- * @typedef {import("playwright").BrowserType} BrowserType
+ * @import { BrowserType } from "playwright"
+ * @import { ContextBefore } from "../../hook.js"
  */
 
 /**
@@ -30,9 +31,9 @@ for (const name of ["chromium", "firefox", "webkit"]) {
 /**
  * Définit le chemin de l'exécutable du navigateur installé localement.
  *
- * @param {Object}      [options]   Les options de création d'un
- *                                  <code>Browser</code>.
- * @param {BrowserType} browserType Le type de navigateur.
+ * @param {Object|undefined} options     Les options de création d'un
+ *                                       <code>Browser</code>.
+ * @param {BrowserType}      browserType Le type de navigateur.
  * @returns {Object|undefined} Les nouvelles options.
  * @throws {Error} Si le navigateur n'est pas installé localement.
  */
@@ -52,10 +53,26 @@ const setExecutablePath = function (options, browserType) {
  */
 export default function localePlugin() {
     return {
+        /**
+         * Modifie les options de lancement du navigateur.
+         *
+         * @param {any[]}                      args    Les paramètres de la
+         *                                             méthode.
+         * @param {ContextBefore<BrowserType>} context Le contexte du crochet.
+         * @returns {any[]} Les nouveaux paramètres.
+         */
         "BrowserType.launch:before": (args, { obj: browserType }) => {
             return [setExecutablePath(args[0], browserType)];
         },
 
+        /**
+         * Modifie les options de lancement du navigateur.
+         *
+         * @param {any[]}                      args    Les paramètres de la
+         *                                             méthode.
+         * @param {ContextBefore<BrowserType>} context Le contexte du crochet.
+         * @returns {any[]} Les nouveaux paramètres.
+         */
         "BrowserType.launchPersistentContext:before": (
             args,
             { obj: browserType },

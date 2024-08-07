@@ -7,11 +7,11 @@
 /**
  * Modifie la taille de l'écran.
  *
- * @param {Object} [options] Les options de création d'un
- *                           <code>BrowserContext</code>.
- * @param {number} width     La largeur de l'écran.
- * @param {number} height    La hauteur de l'écran.
- * @returns {Object|undefined} Les nouvelles options.
+ * @param {Record<string, any>|undefined} options Les options de création d'un
+ *                                                <code>Browser</code>.
+ * @param {number}                        width   La largeur de l'écran.
+ * @param {number}                        height  La hauteur de l'écran.
+ * @returns {Record<string, any>|undefined} Les nouvelles options.
  */
 const setScreen = (options, width, height) => {
     return {
@@ -33,14 +33,32 @@ export default function screenPlugin(options) {
     const height = options?.height ?? 1080;
 
     return {
+        /**
+         * Modifie les options de lancement du navigateur.
+         *
+         * @param {any[]} args Les paramètres de la méthode.
+         * @returns {any[]} Les nouveaux paramètres.
+         */
         "BrowserType.launchPersistentContext:before": (args) => {
             return [args[0], setScreen(args[1], width, height)];
         },
 
+        /**
+         * Modifie les options de création d'un contexte.
+         *
+         * @param {any[]} args Les paramètres de la méthode.
+         * @returns {any[]} Les nouveaux paramètres.
+         */
         "Browser.newContext:before": (args) => {
             return [setScreen(args[0], width, height)];
         },
 
+        /**
+         * Modifie les options de création d'une page.
+         *
+         * @param {any[]} args Les paramètres de la méthode.
+         * @returns {any[]} Les nouveaux paramètres.
+         */
         "Browser.newPage:before": (args) => {
             return [setScreen(args[0], width, height)];
         },

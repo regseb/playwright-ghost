@@ -1,7 +1,7 @@
 {
   "name": "playwright-ghost",
   "version": "0.7.0",
-  "description": "Rendre un Playwright identique à un navigateur.",
+  "description": "Surcouche de Playwright avec des plugins.",
   "keywords": [
     "playwright",
     "ghost",

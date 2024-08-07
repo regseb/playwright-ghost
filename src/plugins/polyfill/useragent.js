@@ -5,17 +5,19 @@
  */
 
 /**
- * @typedef {import("playwright").BrowserType} BrowserType
+ * @import { BrowserType } from "playwright"
+ * @import { ContextBefore } from "../../hook.js"
  */
 
 /**
  * Modifie l'agent utilisateur (<em>user agent</em>) du navigateur.
  *
- * @param {Object}      [options]   Les options de création d'un
- *                                  <code>Browser</code>.
- * @param {string}      userAgent   L'agent utilisateur à utiliser.
- * @param {BrowserType} browserType Le type de navigateur.
- * @returns {Object|undefined} Les nouvelles options.
+ * @param {Record<string, any>|undefined} options     Les options de création
+ *                                                    d'un <code>Browser</code>.
+ * @param {string}                        userAgent   L'agent utilisateur à
+ *                                                    utiliser.
+ * @param {BrowserType}                   browserType Le type de navigateur.
+ * @returns {Record<string, any>|undefined} Les nouvelles options.
  */
 const changeUserAgent = (options, userAgent, browserType) => {
     if ("chromium" === browserType.name()) {
@@ -41,10 +43,26 @@ export default function userAgentPlugin(options) {
     const userAgent = options.userAgent;
 
     return {
+        /**
+         * Modifie les options de lancement du navigateur.
+         *
+         * @param {any[]}                      args    Les paramètres de la
+         *                                             méthode.
+         * @param {ContextBefore<BrowserType>} context Le contexte du crochet.
+         * @returns {any[]} Les nouveaux paramètres.
+         */
         "BrowserType.launch:before": (args, { obj: browserType }) => {
             return [changeUserAgent(args[0], userAgent, browserType)];
         },
 
+        /**
+         * Modifie les options de lancement du navigateur.
+         *
+         * @param {any[]}                      args    Les paramètres de la
+         *                                             méthode.
+         * @param {ContextBefore<BrowserType>} context Le contexte du crochet.
+         * @returns {any[]} Les nouveaux paramètres.
+         */
         "BrowserType.launchPersistentContext:before": (
             args,
             { obj: browserType },

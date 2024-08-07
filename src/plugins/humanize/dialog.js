@@ -7,10 +7,6 @@
 import Random from "../../utils/random.js";
 
 /**
- * @typedef {import("playwright").Page} Page
- */
-
-/**
  * Crée un plugin pour fermer les boîtes de dialogues dans un temps humainement
  * possible. Par défaut le temps d'attente est pris aléatoirement entre
  * <code>1</code> et <code>5</code> secondes.

@@ -5,7 +5,11 @@
  */
 
 /**
- * @type {import("markdownlint").Configuration}
+ * @import { Configuration } from "markdownlint"
+ */
+
+/**
+ * @type {Configuration}
  */
 export default {
     "heading-increment": true,
