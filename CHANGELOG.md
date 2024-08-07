@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.1](https://github.com/regseb/playwright-ghost/compare/v0.7.0...v0.7.1) (2024-08-07)
+
+### Bug Fixes
+
+- Améliorer la documentation.
+  ([f32671b](https://github.com/regseb/playwright-ghost/commit/f32671b625ed59c0d00d2079fb6f7bdc5b61a091))
+
 ## [0.7.0](https://github.com/regseb/playwright-ghost/compare/v0.6.0...v0.7.0) (2024-05-09)
 
 ### Features
