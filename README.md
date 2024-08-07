@@ -5,10 +5,8 @@
 <!-- markdownlint-disable-next-line no-inline-html-->
 <img src="asset/logo.svg" align="right" alt="">
 
-[![npm][img-npm]][link-npm]
-[![build][img-build]][link-build]
-[![coverage][img-coverage]][link-coverage]
-[![semver][img-semver]][link-semver]
+[![npm][img-npm]][link-npm] [![build][img-build]][link-build]
+[![coverage][img-coverage]][link-coverage] [![semver][img-semver]][link-semver]
 
 Playwright-ghost est une surcouche de [Playwright](https://playwright.dev/) en
 lui ajoutant un système de plugins pour gommer les différences entre un
@@ -198,11 +196,17 @@ dépendance
 | Antibot (Sannysoft)                | ✅                  | ❌ Webdriver       |
 | Cloudflare turnstile demo          | ❌                  | ❌                 |
 
-[img-npm]: https://img.shields.io/npm/dm/playwright-ghost?label=npm&logo=npm&logoColor=whitesmoke
-[img-build]: https://img.shields.io/github/actions/workflow/status/regseb/playwright-ghost/ci.yml?branch=main&logo=github&logoColor=whitesmoke
-[img-coverage]: https://img.shields.io/endpoint?label=coverage&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fregseb%2Fplaywright-ghost%2Fmain
-[img-semver]: https://img.shields.io/badge/semver-2.0.0-blue?logo=semver&logoColor=whitesmoke
+[img-npm]:
+  https://img.shields.io/npm/dm/playwright-ghost?label=npm&logo=npm&logoColor=whitesmoke
+[img-build]:
+  https://img.shields.io/github/actions/workflow/status/regseb/playwright-ghost/ci.yml?branch=main&logo=github&logoColor=whitesmoke
+[img-coverage]:
+  https://img.shields.io/endpoint?label=coverage&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fregseb%2Fplaywright-ghost%2Fmain
+[img-semver]:
+  https://img.shields.io/badge/semver-2.0.0-blue?logo=semver&logoColor=whitesmoke
 [link-npm]: https://www.npmjs.com/package/playwright-ghost
-[link-build]: https://github.com/regseb/playwright-ghost/actions/workflows/ci.yml?query=branch%3Amain
-[link-coverage]: https://dashboard.stryker-mutator.io/reports/github.com/regseb/playwright-ghost/main
+[link-build]:
+  https://github.com/regseb/playwright-ghost/actions/workflows/ci.yml?query=branch%3Amain
+[link-coverage]:
+  https://dashboard.stryker-mutator.io/reports/github.com/regseb/playwright-ghost/main
 [link-semver]: https://semver.org/spec/v2.0.0.html "Semantic Versioning 2.0.0"
