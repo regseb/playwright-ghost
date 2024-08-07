@@ -18,6 +18,7 @@ import process from "node:process";
 export default async function which(programname) {
     for (const directory of process.env.PATH.split(":")) {
         const file = path.join(directory, programname);
+        // eslint-disable-next-line promise/prefer-await-to-then
         const executable = await fs.access(file, fs.constants.X_OK).then(
             () => true,
             () => false,

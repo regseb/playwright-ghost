@@ -5,7 +5,7 @@
  */
 
 import assert from "node:assert/strict";
-import sinon from "sinon";
+import { mock } from "node:test";
 import hook from "../../src/hook.js";
 
 const Foo = class {
@@ -48,7 +48,7 @@ describe("hook.js", function () {
         });
 
         it("should support listener before function", async function () {
-            const listener = sinon.fake.returns(["one"]);
+            const listener = mock.fn(() => ["one"]);
             const listeners = new Map([
                 ["baz", { before: [listener], after: [] }],
             ]);
@@ -60,15 +60,15 @@ describe("hook.js", function () {
             assert.equal(hooked.baz("three"), "two_ONE");
             assert.equal(await hooked.quux("four", "five"), "two_four_five");
 
-            assert.equal(listener.callCount, 1);
-            assert.deepEqual(listener.firstCall.args, [
+            assert.equal(listener.mock.callCount(), 1);
+            assert.deepEqual(listener.mock.calls[0].arguments, [
                 ["three"],
                 { obj: hooked, prop: "baz", metadata: {} },
             ]);
         });
 
         it("should support listener after function", async function () {
-            const listener = sinon.fake.returns("one");
+            const listener = mock.fn(() => "one");
             const listeners = new Map([
                 ["baz", { before: [], after: [listener] }],
             ]);
@@ -80,15 +80,15 @@ describe("hook.js", function () {
             assert.equal(hooked.baz("three"), "one");
             assert.equal(await hooked.quux("four", "five"), "two_four_five");
 
-            assert.equal(listener.callCount, 1);
-            assert.deepEqual(listener.firstCall.args, [
+            assert.equal(listener.mock.callCount(), 1);
+            assert.deepEqual(listener.mock.calls[0].arguments, [
                 "two_THREE",
                 { obj: hooked, prop: "baz", args: ["three"], metadata: {} },
             ]);
         });
 
         it("should support listener before async function", async function () {
-            const listener = sinon.fake.returns(["one", "two"]);
+            const listener = mock.fn(() => ["one", "two"]);
             const listeners = new Map([
                 ["quux", { before: [listener], after: [] }],
             ]);
@@ -100,15 +100,15 @@ describe("hook.js", function () {
             assert.equal(hooked.baz("four"), "three_FOUR");
             assert.equal(await hooked.quux("five", "six"), "three_one_two");
 
-            assert.equal(listener.callCount, 1);
-            assert.deepEqual(listener.firstCall.args, [
+            assert.equal(listener.mock.callCount(), 1);
+            assert.deepEqual(listener.mock.calls[0].arguments, [
                 ["five", "six"],
                 { obj: hooked, prop: "quux", metadata: {} },
             ]);
         });
 
         it("should support listener after async function", async function () {
-            const listener = sinon.fake.resolves("one");
+            const listener = mock.fn(() => "one");
             const listeners = new Map([
                 ["quux", { before: [], after: [listener] }],
             ]);
@@ -120,8 +120,8 @@ describe("hook.js", function () {
             assert.equal(hooked.baz("three"), "two_THREE");
             assert.equal(await hooked.quux("four", "five"), "one");
 
-            assert.equal(listener.callCount, 1);
-            assert.deepEqual(listener.firstCall.args, [
+            assert.equal(listener.mock.callCount(), 1);
+            assert.deepEqual(listener.mock.calls[0].arguments, [
                 Promise.resolve("two_four_five"),
                 {
                     obj: hooked,
@@ -133,7 +133,7 @@ describe("hook.js", function () {
         });
 
         it("should support listener before getter", async function () {
-            const listener = sinon.fake();
+            const listener = mock.fn();
             const listeners = new Map([
                 ["bar", { before: [listener], after: [] }],
             ]);
@@ -145,15 +145,15 @@ describe("hook.js", function () {
             assert.equal(hooked.baz("two"), "one_TWO");
             assert.equal(await hooked.quux("three", "four"), "one_three_four");
 
-            assert.equal(listener.callCount, 1);
-            assert.deepEqual(listener.firstCall.args, [
+            assert.equal(listener.mock.callCount(), 1);
+            assert.deepEqual(listener.mock.calls[0].arguments, [
                 undefined,
                 { obj: hooked, prop: "bar", metadata: {} },
             ]);
         });
 
         it("should support listener after getter", async function () {
-            const listener = sinon.fake.returns("one");
+            const listener = mock.fn(() => "one");
             const listeners = new Map([
                 ["bar", { before: [], after: [listener] }],
             ]);
@@ -165,8 +165,8 @@ describe("hook.js", function () {
             assert.equal(hooked.baz("three"), "two_THREE");
             assert.equal(await hooked.quux("four", "five"), "two_four_five");
 
-            assert.equal(listener.callCount, 1);
-            assert.deepEqual(listener.firstCall.args, [
+            assert.equal(listener.mock.callCount(), 1);
+            assert.deepEqual(listener.mock.calls[0].arguments, [
                 "two",
                 { obj: hooked, prop: "bar", metadata: {} },
             ]);

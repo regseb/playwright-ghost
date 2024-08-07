@@ -46,40 +46,38 @@
     "clean": "node .script/clean.js"
   },
   "devDependencies": {
-    "@cliqz/adblocker-playwright": "1.27.3",
+    "@cliqz/adblocker-playwright": "1.31.3",
     "@prantlf/jsonlint": "14.0.3",
     "@prettier/plugin-xml": "3.4.1",
-    "@stryker-mutator/core": "8.2.6",
-    "@stryker-mutator/mocha-runner": "8.2.6",
-    "@types/eslint": "8.56.10",
-    "@types/mocha": "10.0.6",
-    "@types/node": "20.12.11",
-    "@types/sinon": "17.0.3",
+    "@stryker-mutator/core": "8.4.0",
+    "@stryker-mutator/mocha-runner": "8.4.0",
+    "@types/eslint": "9.6.0",
+    "@types/mocha": "10.0.7",
+    "@types/node": "22.1.0",
     "eslint": "8.57.0",
     "eslint-plugin-array-func": "4.0.0",
     "eslint-plugin-eslint-comments": "3.2.0",
     "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-jsdoc": "48.2.3",
-    "eslint-plugin-mocha": "10.4.3",
-    "eslint-plugin-n": "17.5.1",
+    "eslint-plugin-jsdoc": "49.0.0",
+    "eslint-plugin-mocha": "10.5.0",
+    "eslint-plugin-n": "17.10.2",
     "eslint-plugin-no-unsanitized": "4.0.2",
-    "eslint-plugin-promise": "6.1.1",
-    "eslint-plugin-regexp": "2.5.0",
-    "eslint-plugin-unicorn": "52.0.0",
+    "eslint-plugin-promise": "7.1.0",
+    "eslint-plugin-regexp": "2.6.0",
+    "eslint-plugin-unicorn": "55.0.0",
     "markdownlint": "0.34.0",
-    "metalint": "0.16.0",
-    "mocha": "10.4.0",
-    "npm-package-json-lint": "7.1.0",
-    "playwright": "1.44.0",
-    "prettier": "3.2.5",
-    "sinon": "17.0.2",
-    "typedoc": "0.25.13",
-    "typescript": "5.4.5",
+    "metalint": "0.17.0",
+    "mocha": "10.7.0",
+    "npm-package-json-lint": "8.0.0",
+    "playwright": "1.46.0",
+    "prettier": "3.3.3",
+    "typedoc": "0.26.5",
+    "typescript": "5.5.4",
     "yaml-lint": "1.7.0"
   },
   "peerDependencies": {
-    "@cliqz/adblocker-playwright": ">=1.27.3",
-    "playwright": ">=1.44.0"
+    "@cliqz/adblocker-playwright": ">=1.31.3",
+    "playwright": ">=1.46.0"
   },
   "peerDependenciesMeta": {
     "@cliqz/adblocker-playwright": {
@@ -87,7 +85,6 @@
     }
   },
   "engines": {
-    "node": ">=20.6.0"
-  },
-  "private": true
+    "node": ">=22.1.0"
+  }
 }

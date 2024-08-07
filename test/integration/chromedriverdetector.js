@@ -51,6 +51,9 @@ describe("Chromedriver Detector", function () {
                 await page.locator("#chromedriver-test").click();
 
                 const result = await page.locator(".test-status").textContent();
+                // Le test échoue car Chromedriver Detector détecte
+                // l'utilisation des DevTools.
+                // https://issues.chromium.org/issues/40073683
                 assert.equal(result, "Passed!");
             } catch (err) {
                 await page.screenshot({
