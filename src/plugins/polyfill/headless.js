@@ -10,10 +10,10 @@
  */
 
 /**
- * Modifie le <em>headless</em> de Chromium.
+ * Modifie le _headless_ de Chromium.
  *
  * @param {Record<string, any>|undefined} options     Les options de création
- *                                                    d'un <code>Browser</code>.
+ *                                                    d'un `Browser`.
  * @param {BrowserType}                   browserType Le type de navigateur.
  * @returns {Record<string, any>|undefined} Les nouvelles options.
  */
@@ -33,7 +33,7 @@ const changeHeadless = (options, browserType) => {
 
 /**
  * Crée le plugin pour corriger de nombreuses différences dans les APIs
- * Javascript avec le nouveau mode <em>headless</em> de Chromium.
+ * Javascript avec le nouveau mode _headless_ de Chromium.
  *
  * @see https://developer.chrome.com/articles/new-headless/
  */

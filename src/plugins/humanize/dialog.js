@@ -8,8 +8,8 @@ import Random from "../../utils/random.js";
 
 /**
  * Crée un plugin pour fermer les boîtes de dialogues dans un temps humainement
- * possible. Par défaut le temps d'attente est pris aléatoirement entre
- * <code>1</code> et <code>5</code> secondes.
+ * possible. Par défaut le temps d'attente est pris aléatoirement entre `1` et
+ * `5` secondes.
  *
  * @param {Object} [options]     Les options du plugin.
  * @param {number} [options.min] Le temps d'attente minimal en millisecondes.

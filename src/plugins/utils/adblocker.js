@@ -5,9 +5,9 @@
  */
 
 /**
- * Instancie <code>PlaywrightBlocker</code> avec les options.
+ * Instancie `PlaywrightBlocker` avec les options.
  *
- * @param {Object} options Les options de <code>PlaywrightBlocker</code>.
+ * @param {Object} options Les options de `PlaywrightBlocker`.
  */
 const getBlocker = async function (options) {
     const { PlaywrightBlocker } = await import("@cliqz/adblocker-playwright");

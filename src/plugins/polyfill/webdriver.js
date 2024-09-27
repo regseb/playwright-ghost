@@ -10,12 +10,12 @@
  */
 
 /**
- * Désactive la fonctionnalité <code>AutomationControlled</code> dans Chromium.
- * Le navigateur sera toujours controllable par Playwright, mais la variable
- * <code>navigator.webdriver</code> sera <code>false</code>.
+ * Désactive la fonctionnalité `AutomationControlled` dans Chromium. Le
+ * navigateur sera toujours controllable par Playwright, mais la variable
+ * `navigator.webdriver` sera `false`.
  *
  * @param {Record<string, any>|undefined} options     Les options de création
- *                                                    d'un <code>Browser</code>.
+ *                                                    d'un `Browser`.
  * @param {BrowserType}                   browserType Le type de navigateur.
  * @returns {Record<string, any>|undefined} Les nouvelles options.
  */
@@ -33,8 +33,8 @@ const disable = (options, browserType) => {
 };
 
 /**
- * Crée un plugin pour passer à <code>false</code> la variable
- * <code>navigator.webdriver</code> dans Chromium.
+ * Crée un plugin pour passer à `false` la variable `navigator.webdriver` dans
+ * Chromium.
  */
 export default function webdriverPlugin() {
     return {

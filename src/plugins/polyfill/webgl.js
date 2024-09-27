@@ -10,10 +10,10 @@
  */
 
 /**
- * Utilise <em>Angle</em> pour <em>WebGL</em> dans Chromium.
+ * Utilise _Angle_ pour _WebGL_ dans Chromium.
  *
  * @param {Record<string, any>|undefined} options     Les options de création
- *                                                    d'un <code>Browser</code>.
+ *                                                    d'un `Browser`.
  * @param {BrowserType}                   browserType Le type de navigateur.
  * @returns {Record<string, any>|undefined} Les nouvelles options.
  */
@@ -28,8 +28,8 @@ const useAngle = (options, browserType) => {
 };
 
 /**
- * Crée un plugin pour modifier les valeurs des paramètres <em>WebGL</em> en
- * mode <em>headless</em>.
+ * Crée un plugin pour modifier les valeurs des paramètres _WebGL_ en mode
+ * _headless_.
  */
 export default function webGLPlugin() {
     return {

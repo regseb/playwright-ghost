@@ -8,7 +8,7 @@
  * Modifie la taille de l'écran.
  *
  * @param {Record<string, any>|undefined} options Les options de création d'un
- *                                                <code>Browser</code>.
+ *                                                `Browser`.
  * @param {number}                        width   La largeur de l'écran.
  * @param {number}                        height  La hauteur de l'écran.
  * @returns {Record<string, any>|undefined} Les nouvelles options.
@@ -22,7 +22,7 @@ const setScreen = (options, width, height) => {
 
 /**
  * Crée un plugin pour définir la taille de l'écran. Par défaut la valeur
- * réaliste <em>1920x1080</em> est utilisée.
+ * réaliste _1920x1080_ est utilisée.
  *
  * @param {Object} [options]        Les options du plugin.
  * @param {number} [options.width]  La largeur de l'écran.

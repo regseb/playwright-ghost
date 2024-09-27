@@ -10,10 +10,10 @@
  */
 
 /**
- * Modifie l'agent utilisateur (<em>user agent</em>) du navigateur.
+ * Modifie l'agent utilisateur (_user agent_) du navigateur.
  *
  * @param {Record<string, any>|undefined} options     Les options de création
- *                                                    d'un <code>Browser</code>.
+ *                                                    d'un `Browser`.
  * @param {string}                        userAgent   L'agent utilisateur à
  *                                                    utiliser.
  * @param {BrowserType}                   browserType Le type de navigateur.
@@ -32,11 +32,10 @@ const changeUserAgent = (options, userAgent, browserType) => {
 };
 
 /**
- * Crée un plugin pour changer l'agent utilisateur (<em>user agent</em>) du
- * navigateur.
+ * Crée un plugin pour changer l'agent utilisateur (_user agent_) du navigateur.
  *
  * @param {Object} options           Les options du plugin.
- * @param {string} options.userAgent Le <em>user agent</em> à utiliser.
+ * @param {string} options.userAgent Le _user agent_ à utiliser.
  * @see https://developer.mozilla.org/Web/HTTP/Headers/User-Agent
  */
 export default function userAgentPlugin(options) {

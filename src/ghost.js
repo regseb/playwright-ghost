@@ -82,12 +82,17 @@ const dispatch = (plugins) => {
 };
 
 export default class Ghost {
+    /**
+     * Le `BrowserType` vanille de Playwright.
+     *
+     * @type {BrowserType}
+     */
     #browserType;
 
     /**
-     * Crée une version fantôme d'un <code>BrowserType</code> de Playwright
+     * Crée une version fantôme d'un `BrowserType` de Playwright
      *
-     * @param {BrowserType} browserType Le <code>BrowserType</code> vanille de Playwright.
+     * @param {BrowserType} browserType Le `BrowserType` vanille de Playwright.
      */
     constructor(browserType) {
         this.#browserType = browserType;
@@ -104,12 +109,12 @@ export default class Ghost {
     }
 
     /**
-     * Lance une version fantôme d'un <code>Browser</code> de Playwright.
+     * Lance une version fantôme d'un `Browser` de Playwright.
      *
      * @param {Record<string, any>} [options] Les options de création d'un
-     *                                        <code>Browser</code>.
+     *                                        `Browser`.
      * @returns {Promise<Browser>} Une promesse contenant la version fantôme du
-     *                             <code>Browser</code>.
+     *                             `Browser`.
      * @see https://playwright.dev/docs/api/class-browsertype#browser-type-launch
      */
     launch(options) {
@@ -127,15 +132,15 @@ export default class Ghost {
     }
 
     /**
-     * Lance une version fantôme d'un <code>BrowserContext</code> de Playwright.
+     * Lance une version fantôme d'un `BrowserContext` de Playwright.
      *
      * @param {string}              userDataDir Le chemin vers le répertoire des
      *                                          données de session.
      * @param {Record<string, any>} [options]   Les options de création d'un
-     *                                          <code>Browser</code> et de son
-     *                                          <code>BrowserContext</code>.
-     * @returns {Promise<BrowserContext>} Une promesse contenant la version fantôme du
-     *                             <code>BrowserContext</code>.
+     *                                          `Browser` et de son
+     *                                          `BrowserContext`.
+     * @returns {Promise<BrowserContext>} Une promesse contenant la version
+     *                                    fantôme du `BrowserContext`.
      * @see https://playwright.dev/docs/api/class-browsertype#browser-type-launch-persistent-context
      */
     launchPersistentContext(userDataDir, options) {
@@ -153,8 +158,8 @@ export default class Ghost {
     }
 
     /**
-     * Retourne le nom du type de navigateur. Par exemple :
-     * <code>chromium</code>, <code>webkit</code> ou <code>firefox</code>.
+     * Retourne le nom du type de navigateur. Par exemple : `chromium`, `webkit`
+     * ou `firefox`.
      *
      * @returns {string} Le nom du type de navigateur.
      * @see https://playwright.dev/docs/api/class-browsertype#browser-type-name

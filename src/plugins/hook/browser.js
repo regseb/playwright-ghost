@@ -7,8 +7,7 @@
 import hook from "../../hook.js";
 
 /**
- * Crée un plugin pour ajouter des écouteurs dans les objets
- * <code>Browser</code>.
+ * Crée un plugin pour ajouter des écouteurs dans les objets `Browser`.
  *
  * @see https://playwright.dev/docs/api/class-browser
  */

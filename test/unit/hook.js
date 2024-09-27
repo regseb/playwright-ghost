@@ -1,5 +1,4 @@
 /**
- * @module
  * @license MIT
  * @author Sébastien Règne
  */
@@ -11,7 +10,7 @@ import hook from "../../src/hook.js";
 const Foo = class {
     #bar;
 
-    constructor(bar) {
+    constructor(/** @type {string} */ bar) {
         this.#bar = bar;
     }
 
@@ -19,16 +18,16 @@ const Foo = class {
         return this.#bar;
     }
 
-    set bar(value) {
+    set bar(/** @type {string} */ value) {
         this.#bar = value;
     }
 
-    baz(qux) {
+    baz(/** @type {string} */ qux) {
         // Tester en utilisant la variable membre privée.
         return `${this.#bar}_${qux.toUpperCase()}`;
     }
 
-    quux(corge, grault) {
+    quux(/** @type {string} */ corge, /** @type {string} */ grault) {
         // Tester en utilisant le getter.
         return Promise.resolve(`${this.bar}_${corge}_${grault}`);
     }

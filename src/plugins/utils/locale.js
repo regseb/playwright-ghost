@@ -31,8 +31,7 @@ for (const name of ["chromium", "firefox", "webkit"]) {
 /**
  * Définit le chemin de l'exécutable du navigateur installé localement.
  *
- * @param {Object|undefined} options     Les options de création d'un
- *                                       <code>Browser</code>.
+ * @param {Object|undefined} options     Les options de création d'un `Browser`.
  * @param {BrowserType}      browserType Le type de navigateur.
  * @returns {Object|undefined} Les nouvelles options.
  * @throws {Error} Si le navigateur n'est pas installé localement.

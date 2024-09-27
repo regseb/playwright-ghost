@@ -9,7 +9,7 @@ import path from "node:path";
 import process from "node:process";
 
 /**
- * Cherche un programme dans le <code>PATH</code>.
+ * Cherche un programme dans le `PATH`.
  *
  * @param {string} programname Le nom du programme cherché.
  * @returns {Promise<string>} Une promesse contenant le chemin vers le

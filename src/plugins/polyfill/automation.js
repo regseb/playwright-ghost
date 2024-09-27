@@ -10,10 +10,10 @@
  */
 
 /**
- * Enlève l'option <code>--enable-automation</code> dans Chromium.
+ * Enlève l'option `--enable-automation` dans Chromium.
  *
  * @param {Record<string, any>|undefined} options     Les options de création
- *                                                    d'un <code>Browser</code>.
+ *                                                    d'un `Browser`.
  * @param {BrowserType}                   browserType Le type de navigateur.
  * @returns {Record<string, any>|undefined} Les nouvelles options.
  */
@@ -31,8 +31,8 @@ const disable = (options, browserType) => {
 };
 
 /**
- * Crée un plugin pour désactiver la fonctionnalité
- * <code>--enable-automation</code> dans Chromium.
+ * Crée un plugin pour désactiver la fonctionnalité `--enable-automation` dans
+ * Chromium.
  */
 export default function webdriverPlugin() {
     return {

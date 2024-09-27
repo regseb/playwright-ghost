@@ -7,7 +7,7 @@
 import hook from "../../hook.js";
 
 /**
- * Crée un plugin pour ajouter des écouteurs dans les objets <code>Page</code>.
+ * Crée un plugin pour ajouter des écouteurs dans les objets `Page`.
  *
  * @see https://playwright.dev/docs/api/class-page
  */

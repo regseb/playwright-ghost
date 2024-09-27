@@ -36,7 +36,8 @@
  *
  * @template {Object} T Le type de l'objet.
  * @param {T}                     obj        L'objet qui sera crocheté.
- * @param {Map<string, Listener>} listeners  Les écouteurs à accrocher à l'objet.
+ * @param {Map<string, Listener>} listeners  Les écouteurs à accrocher à
+ *                                           l'objet.
  * @param {Object}                [metadata] Les métadonnées qui seront passées
  *                                           aux écouteurs.
  * @returns {T} L'objet crocheté.

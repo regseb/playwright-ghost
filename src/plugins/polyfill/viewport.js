@@ -10,7 +10,7 @@ import Random from "../../utils/random.js";
  * Modifie la taille du navigateur.
  *
  * @param {Record<string, any>|undefined} options Les options de création d'un
- *                                                <code>Browser</code>.
+ *                                                `Browser`.
  * @param {number}                        width   La largeur du navigateur.
  * @param {number}                        height  La hauteur du navigateur.
  * @returns {Record<string, any>|undefined} Les nouvelles options.
@@ -24,8 +24,7 @@ const setViewport = function (options, width, height) {
 
 /**
  * Crée un plugin pour faire varier la taille du navigateur. Par défaut les
- * valeurs sont prises aléatoirement entre <em>1000x500</em> et
- * <em>1800x800</em>.
+ * valeurs sont prises aléatoirement entre _1000x500_ et _1800x800_.
  *
  * @param {Object} [options]        Les options du plugin.
  * @param {number} [options.width]  La largeur du navigateur.
