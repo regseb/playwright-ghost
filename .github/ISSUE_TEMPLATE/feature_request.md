@@ -17,9 +17,12 @@ assignees: ""
 
 ### Environment
 
-- Playwright-ghost version<!-- e.g. 0.7.0 -->:
-- Playwright version<!-- e.g. 1.45.3 -->:
-- Node version<!-- e.g. v22.4.1 -->:
+- Playwright-ghost version<!-- e.g. 0.8.0 -->:
+- Dependencies version:
+  - Playwright<!-- e.g. 1.48.0, rebrowser-playwright 1.47.100 -->:
+  - others (if appropriate)<!-- e.g. ghost-cursor 1.3.0 --->:
+- Node version<!-- e.g. v22.9.0 -->:
+- npm version<!-- e.g. 10.8.3 -->:
 
 ### Additional context
 

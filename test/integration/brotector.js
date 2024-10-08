@@ -20,9 +20,9 @@ const getUserAgent = async () => {
     return userAgent.replace("Headless", "");
 };
 
-describe("BrowserScan", function () {
+describe("Brotector", function () {
     describe("chromium", function () {
-        it("should pass", async function () {
+        it("should have 0", async function () {
             const browser = await rebrowser.chromium.launch({
                 plugins: [
                     ...rebrowser.plugins.recommendeds(),
@@ -34,26 +34,23 @@ describe("BrowserScan", function () {
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
-                await page.goto("https://www.browserscan.net/bot-detection");
-                await page.waitForTimeout(5000);
-                const result = await page
-                    .getByText("Test Results:", { exact: true })
-                    .evaluate(
-                        (element) =>
-                            element.parentElement.querySelector(
-                                "strong:last-child",
-                            ).textContent,
-                    );
-                if ("Normal" !== result) {
-                    assert.fail(result);
-                }
+                // Désactiver le test qui fait crasher Chromium.
+                // https://github.com/kaliiiiiiiiii/brotector#popupcrash
+                // https://issues.chromium.org/340836884
+                await page.goto(
+                    "https://kaliiiiiiiiii.github.io/brotector/?crash=false",
+                );
+                await page.locator("#clickHere").click();
+                await page.waitForTimeout(1000);
+                const score = await page.locator("#avg-score").textContent();
+                assert.equal(score, "0");
             } finally {
                 await page.screenshot({
-                    path: "./log/browserscan-cr.png",
+                    path: "./log/brotector-cr.png",
                     fullPage: true,
                 });
                 await fs.writeFile(
-                    "./log/browserscan-cr.html",
+                    "./log/brotector-cr.html",
                     await page.content(),
                 );
 
@@ -64,33 +61,25 @@ describe("BrowserScan", function () {
     });
 
     describe("firefox", function () {
-        it("should pass", async function () {
+        it("should have 0", async function () {
             const browser = await vanilla.firefox.launch({
                 plugins: vanilla.plugins.recommendeds(),
             });
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
-                await page.goto("https://www.browserscan.net/bot-detection");
-                await page.waitForTimeout(5000);
-                const result = await page
-                    .getByText("Test Results:", { exact: true })
-                    .evaluate(
-                        (element) =>
-                            element.parentElement.querySelector(
-                                "strong:last-child",
-                            ).textContent,
-                    );
-                if ("Normal" !== result) {
-                    assert.fail(result);
-                }
+                await page.goto("https://kaliiiiiiiiii.github.io/brotector/");
+                await page.locator("#clickHere").click();
+                await page.waitForTimeout(1000);
+                const score = await page.locator("#avg-score").textContent();
+                assert.equal(score, "0");
             } finally {
                 await page.screenshot({
-                    path: "./log/browserscan-fx.png",
+                    path: "./log/brotector-fx.png",
                     fullPage: true,
                 });
                 await fs.writeFile(
-                    "./log/browserscan-fx.html",
+                    "./log/brotector-fx.html",
                     await page.content(),
                 );
 

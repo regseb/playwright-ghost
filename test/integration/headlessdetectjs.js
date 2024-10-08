@@ -5,13 +5,12 @@
 
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
-import playwright from "playwright";
-import { chromium, firefox, plugins } from "../../src/index.js";
+import vanilla from "../../src/index.js";
+import rebrowser from "../../src/rebrowser.js";
 
 const getUserAgent = async () => {
-    const browser = await playwright.chromium.launch({
+    const browser = await vanilla.chromium.launch({
         args: ["--headless=new"],
-        executablePath: playwright.chromium.executablePath(),
     });
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -24,36 +23,36 @@ const getUserAgent = async () => {
 describe("HeadlessDetectJS", function () {
     describe("chromium", function () {
         it("should get 0 score", async function () {
-            const browser = await chromium.launch({
+            const browser = await rebrowser.chromium.launch({
                 plugins: [
-                    ...plugins.recommendeds(),
-                    plugins.polyfill.userAgent({
+                    ...rebrowser.plugins.recommendeds(),
+                    rebrowser.plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
                 ],
             });
             const context = await browser.newContext();
-
-            const response = await fetch(
-                "https://raw.githubusercontent.com" +
-                    "/LouisKlimek/HeadlessDetectJS" +
-                    "/main/headlessDetect.js",
-            );
-            const content = await response.text();
-            await context.addInitScript({ content });
-
             const page = await context.newPage();
             try {
                 await page.goto("https://perdu.com/");
 
+                const response = await fetch(
+                    "https://raw.githubusercontent.com/LouisKlimek" +
+                        "/HeadlessDetectJS/main/headlessDetect.js",
+                );
+                const script = await response.text();
+                await page.evaluate(
+                    `${script}\nglobalThis.HeadlessDetect = HeadlessDetect;`,
+                );
+
                 const score = await page.evaluate(() => {
                     // eslint-disable-next-line no-undef
-                    const headlessDetector = new HeadlessDetect();
-                    return headlessDetector.getHeadlessScore();
+                    const headlessDetect = new HeadlessDetect();
+                    return headlessDetect.getHeadlessScore();
                 });
 
                 assert.equal(score, 0);
-            } catch (err) {
+            } finally {
                 await page.screenshot({
                     path: "./log/headlessdetectjs-cr.png",
                     fullPage: true,
@@ -63,8 +62,6 @@ describe("HeadlessDetectJS", function () {
                     await page.content(),
                 );
 
-                throw err;
-            } finally {
                 await context.close();
                 await browser.close();
             }
@@ -73,18 +70,19 @@ describe("HeadlessDetectJS", function () {
 
     describe("firefox", function () {
         it("should get 0 score", async function () {
-            const browser = await firefox.launch({
-                plugins: plugins.recommendeds(),
+            const browser = await vanilla.firefox.launch({
+                plugins: vanilla.plugins.recommendeds(),
             });
             const context = await browser.newContext();
 
             const response = await fetch(
-                "https://raw.githubusercontent.com" +
-                    "/LouisKlimek/HeadlessDetectJS" +
-                    "/main/headlessDetect.js",
+                "https://raw.githubusercontent.com/LouisKlimek" +
+                    "/HeadlessDetectJS/main/headlessDetect.js",
             );
-            const content = await response.text();
-            await context.addInitScript({ content });
+            const script = await response.text();
+            await context.addInitScript({
+                content: `${script}\nglobalThis.HeadlessDetect = HeadlessDetect;`,
+            });
 
             const page = await context.newPage();
             try {
@@ -92,12 +90,12 @@ describe("HeadlessDetectJS", function () {
 
                 const score = await page.evaluate(() => {
                     // eslint-disable-next-line no-undef
-                    const headlessDetector = new HeadlessDetect();
-                    return headlessDetector.getHeadlessScore();
+                    const headlessDetect = new HeadlessDetect();
+                    return headlessDetect.getHeadlessScore();
                 });
 
                 assert.equal(score, 0);
-            } catch (err) {
+            } finally {
                 await page.screenshot({
                     path: "./log/headlessdetectjs-fx.png",
                     fullPage: true,
@@ -107,8 +105,6 @@ describe("HeadlessDetectJS", function () {
                     await page.content(),
                 );
 
-                throw err;
-            } finally {
                 await context.close();
                 await browser.close();
             }

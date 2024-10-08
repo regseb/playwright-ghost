@@ -5,13 +5,12 @@
 
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
-import playwright from "playwright";
-import { chromium, firefox, plugins } from "../../src/index.js";
+import vanilla from "../../src/index.js";
+import rebrowser from "../../src/rebrowser.js";
 
 const getUserAgent = async () => {
-    const browser = await playwright.chromium.launch({
+    const browser = await vanilla.chromium.launch({
         args: ["--headless=new"],
-        executablePath: playwright.chromium.executablePath(),
     });
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -24,10 +23,10 @@ const getUserAgent = async () => {
 describe("CreepJS", function () {
     describe("chromium", function () {
         it("should get a B (or A) grade", async function () {
-            const browser = await chromium.launch({
+            const browser = await rebrowser.chromium.launch({
                 plugins: [
-                    ...plugins.recommendeds(),
-                    plugins.polyfill.userAgent({
+                    ...rebrowser.plugins.recommendeds(),
+                    rebrowser.plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
                 ],
@@ -48,7 +47,7 @@ describe("CreepJS", function () {
                 if (!grade.startsWith("A") && !grade.startsWith("B")) {
                     assert.fail(grade);
                 }
-            } catch (err) {
+            } finally {
                 await page.screenshot({
                     path: "./log/creepjs-cr.png",
                     fullPage: true,
@@ -57,8 +56,7 @@ describe("CreepJS", function () {
                     "./log/creepjs-cr.html",
                     await page.content(),
                 );
-                throw err;
-            } finally {
+
                 await context.close();
                 await browser.close();
             }
@@ -67,8 +65,8 @@ describe("CreepJS", function () {
 
     describe("firefox", function () {
         it("should get a B (or A) grade", async function () {
-            const browser = await firefox.launch({
-                plugins: plugins.recommendeds(),
+            const browser = await vanilla.firefox.launch({
+                plugins: vanilla.plugins.recommendeds(),
             });
             const context = await browser.newContext({
                 // Utiliser le thème sombre, car CreepJS considère que le thème
@@ -86,7 +84,7 @@ describe("CreepJS", function () {
                 if (!grade.startsWith("A") && !grade.startsWith("B")) {
                     assert.fail(grade);
                 }
-            } catch (err) {
+            } finally {
                 await page.screenshot({
                     path: "./log/creepjs-fx.png",
                     fullPage: true,
@@ -95,8 +93,7 @@ describe("CreepJS", function () {
                     "./log/creepjs-fx.html",
                     await page.content(),
                 );
-                throw err;
-            } finally {
+
                 await context.close();
                 await browser.close();
             }

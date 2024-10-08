@@ -5,13 +5,12 @@
 
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
-import playwright from "playwright";
-import { chromium, firefox, plugins } from "../../src/index.js";
+import vanilla from "../../src/index.js";
+import rebrowser from "../../src/rebrowser.js";
 
 const getUserAgent = async () => {
-    const browser = await playwright.chromium.launch({
+    const browser = await vanilla.chromium.launch({
         args: ["--headless=new"],
-        executablePath: playwright.chromium.executablePath(),
     });
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -24,10 +23,10 @@ const getUserAgent = async () => {
 describe("Datadome", function () {
     describe("chromium", function () {
         it("should not see CAPTCHA", async function () {
-            const browser = await chromium.launch({
+            const browser = await rebrowser.chromium.launch({
                 plugins: [
-                    ...plugins.recommendeds(),
-                    plugins.polyfill.userAgent({
+                    ...rebrowser.plugins.recommendeds(),
+                    rebrowser.plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
                 ],
@@ -39,7 +38,7 @@ describe("Datadome", function () {
 
                 const title = await page.locator("h1").textContent();
                 assert.equal(title, "Bot detection test page");
-            } catch (err) {
+            } finally {
                 await page.screenshot({
                     path: "./log/datadome-cr.png",
                     fullPage: true,
@@ -49,8 +48,6 @@ describe("Datadome", function () {
                     await page.content(),
                 );
 
-                throw err;
-            } finally {
                 await context.close();
                 await browser.close();
             }
@@ -59,8 +56,8 @@ describe("Datadome", function () {
 
     describe("firefox", function () {
         it("should not see CAPTCHA", async function () {
-            const browser = await firefox.launch({
-                plugins: plugins.recommendeds(),
+            const browser = await vanilla.firefox.launch({
+                plugins: vanilla.plugins.recommendeds(),
             });
             const context = await browser.newContext();
             const page = await context.newPage();
@@ -69,7 +66,7 @@ describe("Datadome", function () {
 
                 const title = await page.locator("h1").textContent();
                 assert.equal(title, "Bot detection test page");
-            } catch (err) {
+            } finally {
                 await page.screenshot({
                     path: "./log/datadome-fx.png",
                     fullPage: true,
@@ -79,8 +76,6 @@ describe("Datadome", function () {
                     await page.content(),
                 );
 
-                throw err;
-            } finally {
                 await context.close();
                 await browser.close();
             }

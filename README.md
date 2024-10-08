@@ -24,11 +24,19 @@ La propriété `plugins` est un tableau avec les plugins à ajouter.
 
 ## Installation
 
-Playwright-ghost ne fournit pas Playwright, vous devez aussi l'ajouter dans vos
-dépendances.
+[`playwright-ghost`](https://www.npmjs.com/package/playwright-ghost) ne fournit
+pas [`playwright`](https://www.npmjs.com/package/playwright), vous devez aussi
+l'ajouter dans vos dépendances.
 
 ```shell
 npm install playwright playwright-ghost
+```
+
+`playwright-ghost` peut aussi être utilisé avec
+[`rebrowser-playwright`](https://www.npmjs.com/package/rebrowser-playwright) :
+
+```shell
+npm install rebrowser-playwright playwright-ghost
 ```
 
 ## Utilisation
@@ -37,6 +45,8 @@ Voici un exemple avec l'activation des plugins recommandés.
 
 ```javascript
 import { chromium, plugins } from "playwright-ghost";
+// Ou pour utiliser rebrowser-playwright :
+// import { chromium, plugins } from "playwright-ghost/rebrowser";
 
 const browser = await chromium.launch({
   plugins: plugins.recommendeds(),
@@ -179,22 +189,135 @@ dépendance
 </table>
 <!-- markdownlint-enable no-inline-html-->
 
-## Anti-bot
+## Anti-bots
 
-|                                    | Chromium            | Firefox            |
-| ---------------------------------- | ------------------- | ------------------ |
-| BrowserScan                        | ❌ CDP              | ❌ WebDriver       |
-| Chromedriver Detector              | ❌ devtools-console | ✅                 |
-| CreepJS                            | ❌ F-               | ❌ D+              |
-| Datadome                           | ✅                  | ✅                 |
-| Device Info                        | ✅                  | ❌                 |
-| FingerprintJS                      | ✅                  | ❌ Automation Tool |
-| HeadlessDetectJS                   | ✅                  | ❌ 0.2             |
-| infosimples                        | ✅                  | ❌ Webdriver       |
-| Chrome Headless Detection (Intoli) | ✅                  | ❌ WebDriver       |
-| nowsecure                          | ✅                  | ✅                 |
-| Antibot (Sannysoft)                | ✅                  | ❌ Webdriver       |
-| Cloudflare turnstile demo          | ❌                  | ❌                 |
+<!-- markdownlint-disable no-inline-html-->
+<table>
+  <tr>
+    <th></th>
+    <th>Chromium¹</th>
+    <th>Firefox²</th>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://kaliiiiiiiiii.github.io/brotector/?crash=false"
+        >Brotector</a
+      >
+    </td>
+    <td>❌ <em>0.98</em></td>
+    <td>❌ <em>1.00</em></td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://www.browserscan.net/bot-detection">BrowserScan</a>
+    </td>
+    <td>✅</td>
+    <td>❌ <em>WebDriver</em></td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://hmaker.github.io/selenium-detector/"
+        >Chromedriver Detector<a
+      >
+    </td>
+    <td>✅</td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://abrahamjuliot.github.io/creepjs/">CreepJS</a>
+    </td>
+    <td>✅ <em>F-</em></td>
+    <td>❌ <em>F+-</em></td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://antoinevastel.com/bots/datadome">Datadome</a>
+    </td>
+    <td>✅</td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://deviceandbrowserinfo.com/are_you_a_bot"
+        >Deviceandbrowserinfo</a
+      >
+    </td>
+    <td>❌ <em>GPU</em></td>
+    <td>❌ <em>Webdriver</em></td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://www.deviceinfo.me/">Device Info</a>
+    </td>
+    <td>✅</td>
+    <td>❌</td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://fingerprint.com/products/bot-detection/"
+        >FingerprintJS</a
+      >
+    </td>
+    <td>✅</td>
+    <td>❌ <em>Automation Tool</em></td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://github.com/LouisKlimek/HeadlessDetectJS"
+        >HeadlessDetectJS</a
+      >
+    </td>
+    <td>✅</td>
+    <td>❌ <em>0.2</em></td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://infosimples.github.io/detect-headless/">infosimples</a>
+    </td>
+    <td>✅</td>
+    <td>❌ <em>Webdriver & Plugins</em></td>
+  </tr>
+  <tr>
+    <td>
+      <a
+        href="https://intoli.com/blog/not-possible-to-block-chrome-headless/chrome-headless-test.html"
+        >Chrome Headless Detection (Intoli)</a
+      >
+    </td>
+    <td>✅</td>
+    <td>❌ <em>WebDriver & Plugins</em></td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://rebrowser.github.io/rebrowser-bot-detector/"
+        >rebrowser-bot-detector</a
+      >
+    </td>
+    <td>✅</td>
+    <td>❌ <em>navigatorWebdriver</em></td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://bot.sannysoft.com/">Antibot (Sannysoft)</a>
+    </td>
+    <td>✅</td>
+    <td>❌ <em>Webdriver & Plugins</em></td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://peet.ws/turnstile-test/non-interactive.html"
+        >Cloudflare turnstile demo</a
+      >
+    </td>
+    <td>✅</td>
+    <td>✅</td>
+  </tr>
+</table>
+
+¹ Chromium avec `rebrowser-playwright`, les plugins recommandés et le plugin
+`polyfill.userAgent` (pour enlever _Headless_).\
+² Firefox avec `playwright` et les plugins recommandés.
 
 [img-npm]:
   https://img.shields.io/npm/dm/playwright-ghost?label=npm&logo=npm&logoColor=whitesmoke

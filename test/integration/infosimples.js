@@ -5,13 +5,12 @@
 
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
-import playwright from "playwright";
-import { chromium, firefox, plugins } from "../../src/index.js";
+import vanilla from "../../src/index.js";
+import rebrowser from "../../src/rebrowser.js";
 
 const getUserAgent = async () => {
-    const browser = await playwright.chromium.launch({
+    const browser = await vanilla.chromium.launch({
         args: ["--headless=new"],
-        executablePath: playwright.chromium.executablePath(),
     });
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -24,10 +23,10 @@ const getUserAgent = async () => {
 describe("infosimples", function () {
     describe("chromium", function () {
         it("should not be detected on headless", async function () {
-            const browser = await chromium.launch({
+            const browser = await rebrowser.chromium.launch({
                 plugins: [
-                    ...plugins.recommendeds(),
-                    plugins.polyfill.userAgent({
+                    ...rebrowser.plugins.recommendeds(),
+                    rebrowser.plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
                 ],
@@ -66,7 +65,7 @@ describe("infosimples", function () {
                         `${result.name}: ${result.value}`,
                     );
                 }
-            } catch (err) {
+            } finally {
                 await page.screenshot({
                     path: "./log/infosimples-cr.png",
                     fullPage: true,
@@ -76,8 +75,6 @@ describe("infosimples", function () {
                     await page.content(),
                 );
 
-                throw err;
-            } finally {
                 await context.close();
                 await browser.close();
             }
@@ -86,8 +83,8 @@ describe("infosimples", function () {
 
     describe("firefox", function () {
         it("should not be detected on headless", async function () {
-            const browser = await firefox.launch({
-                plugins: plugins.recommendeds(),
+            const browser = await vanilla.firefox.launch({
+                plugins: vanilla.plugins.recommendeds(),
             });
             const context = await browser.newContext();
             const page = await context.newPage();
@@ -123,7 +120,7 @@ describe("infosimples", function () {
                         `${result.name}: ${result.value}`,
                     );
                 }
-            } catch (err) {
+            } finally {
                 await page.screenshot({
                     path: "./log/infosimples-fx.png",
                     fullPage: true,
@@ -133,8 +130,6 @@ describe("infosimples", function () {
                     await page.content(),
                 );
 
-                throw err;
-            } finally {
                 await context.close();
                 await browser.close();
             }

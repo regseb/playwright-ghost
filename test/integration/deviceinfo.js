@@ -5,13 +5,12 @@
 
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
-import playwright from "playwright";
-import { chromium, firefox, plugins } from "../../src/index.js";
+import vanilla from "../../src/index.js";
+import rebrowser from "../../src/rebrowser.js";
 
 const getUserAgent = async () => {
-    const browser = await playwright.chromium.launch({
+    const browser = await vanilla.chromium.launch({
         args: ["--headless=new"],
-        executablePath: playwright.chromium.executablePath(),
     });
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -24,10 +23,10 @@ const getUserAgent = async () => {
 describe("Device Info", function () {
     describe("chromium", function () {
         it("should not be spoofed", async function () {
-            const browser = await chromium.launch({
+            const browser = await rebrowser.chromium.launch({
                 plugins: [
-                    ...plugins.recommendeds(),
-                    plugins.polyfill.userAgent({
+                    ...rebrowser.plugins.recommendeds(),
+                    rebrowser.plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
                 ],
@@ -40,7 +39,7 @@ describe("Device Info", function () {
 
                 const spoofeds = await page.getByText("(Spoofed)").all();
                 assert.deepEqual(spoofeds, []);
-            } catch (err) {
+            } finally {
                 await page.screenshot({
                     path: "./log/deviceinfo-cr.png",
                     fullPage: true,
@@ -50,8 +49,6 @@ describe("Device Info", function () {
                     await page.content(),
                 );
 
-                throw err;
-            } finally {
                 await context.close();
                 await browser.close();
             }
@@ -59,9 +56,12 @@ describe("Device Info", function () {
     });
 
     describe("firefox", function () {
+        // Désactiver le test car il provoque une saturation de la mémoire.
+        // "FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap
+        //  out of memory"
         it.skip("should not be spoofed", async function () {
-            const browser = await firefox.launch({
-                plugins: plugins.recommendeds(),
+            const browser = await vanilla.firefox.launch({
+                plugins: vanilla.plugins.recommendeds(),
             });
             const context = await browser.newContext();
             const page = await context.newPage();
@@ -71,7 +71,7 @@ describe("Device Info", function () {
 
                 const spoofeds = await page.getByText("(Spoofed)").all();
                 assert.deepEqual(spoofeds, []);
-            } catch (err) {
+            } finally {
                 await page.screenshot({
                     path: "./log/deviceinfo-fx.png",
                     fullPage: true,
@@ -81,8 +81,6 @@ describe("Device Info", function () {
                     await page.content(),
                 );
 
-                throw err;
-            } finally {
                 await context.close();
                 await browser.close();
             }

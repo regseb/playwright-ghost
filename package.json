@@ -28,6 +28,10 @@
       "types": "./types/index.d.ts",
       "default": "./src/index.js"
     },
+    "./rebrowser": {
+      "types": "./types/index.d.ts",
+      "default": "./src/rebrowser.js"
+    },
     "./package.json": "./package.json"
   },
   "main": "./src/index.js",
@@ -71,16 +75,24 @@
     "npm-package-json-lint": "8.0.0",
     "playwright": "1.46.0",
     "prettier": "3.3.3",
+    "rebrowser-playwright": "1.47.100",
     "typedoc": "0.26.5",
     "typescript": "5.5.4",
     "yaml-lint": "1.7.0"
   },
   "peerDependencies": {
     "@cliqz/adblocker-playwright": ">=1.31.3",
-    "playwright": ">=1.46.0"
+    "playwright": ">=1.46.0",
+    "rebrowser-playwright": ">=1.47.100"
   },
   "peerDependenciesMeta": {
     "@cliqz/adblocker-playwright": {
+      "optional": true
+    },
+    "playwright": {
+      "optional": true
+    },
+    "rebrowser-playwright": {
       "optional": true
     }
   },

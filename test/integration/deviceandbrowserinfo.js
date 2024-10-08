@@ -20,9 +20,9 @@ const getUserAgent = async () => {
     return userAgent.replace("Headless", "");
 };
 
-describe("BrowserScan", function () {
+describe("Deviceandbrowserinfo", function () {
     describe("chromium", function () {
-        it("should pass", async function () {
+        it("should be human", async function () {
             const browser = await rebrowser.chromium.launch({
                 plugins: [
                     ...rebrowser.plugins.recommendeds(),
@@ -34,26 +34,23 @@ describe("BrowserScan", function () {
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
-                await page.goto("https://www.browserscan.net/bot-detection");
+                await page.goto(
+                    "https://deviceandbrowserinfo.com/are_you_a_bot",
+                );
                 await page.waitForTimeout(5000);
                 const result = await page
-                    .getByText("Test Results:", { exact: true })
-                    .evaluate(
-                        (element) =>
-                            element.parentElement.querySelector(
-                                "strong:last-child",
-                            ).textContent,
-                    );
-                if ("Normal" !== result) {
+                    .locator("#resultsBotTest")
+                    .textContent();
+                if ("You are human!" !== result) {
                     assert.fail(result);
                 }
             } finally {
                 await page.screenshot({
-                    path: "./log/browserscan-cr.png",
+                    path: "./log/deviceandbrowserinfo-cr.png",
                     fullPage: true,
                 });
                 await fs.writeFile(
-                    "./log/browserscan-cr.html",
+                    "./log/deviceandbrowserinfo-cr.html",
                     await page.content(),
                 );
 
@@ -64,33 +61,30 @@ describe("BrowserScan", function () {
     });
 
     describe("firefox", function () {
-        it("should pass", async function () {
+        it("should be human", async function () {
             const browser = await vanilla.firefox.launch({
                 plugins: vanilla.plugins.recommendeds(),
             });
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
-                await page.goto("https://www.browserscan.net/bot-detection");
+                await page.goto(
+                    "https://deviceandbrowserinfo.com/are_you_a_bot",
+                );
                 await page.waitForTimeout(5000);
                 const result = await page
-                    .getByText("Test Results:", { exact: true })
-                    .evaluate(
-                        (element) =>
-                            element.parentElement.querySelector(
-                                "strong:last-child",
-                            ).textContent,
-                    );
-                if ("Normal" !== result) {
+                    .locator("#resultsBotTest")
+                    .textContent();
+                if ("You are human!" !== result) {
                     assert.fail(result);
                 }
             } finally {
                 await page.screenshot({
-                    path: "./log/browserscan-fx.png",
+                    path: "./log/deviceandbrowserinfo-fx.png",
                     fullPage: true,
                 });
                 await fs.writeFile(
-                    "./log/browserscan-fx.html",
+                    "./log/deviceandbrowserinfo-fx.html",
                     await page.content(),
                 );
 
