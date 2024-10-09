@@ -1,6 +1,6 @@
 {
   "name": "playwright-ghost",
-  "version": "0.7.2",
+  "version": "0.8.0",
   "description": "Surcouche de Playwright avec des plugins.",
   "keywords": [
     "playwright",
