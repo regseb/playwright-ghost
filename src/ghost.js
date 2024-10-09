@@ -14,7 +14,7 @@ import pagePlugin from "./plugins/hook/page.js";
  * @import { Browser, BrowserContext, BrowserType } from "playwright"
  */
 
-const REGEXP = /^(?<obj>\w+)\.(?<prop>\w+):(?<temporality>after|before)$/u;
+const REGEXP = /^(?<obj>\w+)\.(?<prop>\w+):(?<temporality>after|before)$/v;
 
 const NEW_MAPPINGS = {
     "Browser:new": Object.entries({

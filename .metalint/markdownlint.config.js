@@ -4,11 +4,11 @@
  */
 
 /**
- * @import { Configuration } from "markdownlint"
+ * @import { ConfigurationStrict } from "markdownlint"
  */
 
 /**
- * @type {Configuration}
+ * @type {ConfigurationStrict}
  */
 export default {
     "heading-increment": true,
@@ -80,4 +80,5 @@ export default {
     "link-image-style": { shortcut: false, url_inline: false },
     "table-pipe-style": { style: "leading_and_trailing" },
     "table-column-count": true,
+    "blanks-around-tables": false,
 };

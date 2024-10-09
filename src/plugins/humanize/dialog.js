@@ -5,6 +5,7 @@
  */
 
 import Random from "../../utils/random.js";
+import wait from "../../utils/wait.js";
 
 /**
  * Crée un plugin pour fermer les boîtes de dialogues dans un temps humainement
@@ -21,8 +22,9 @@ export default function dialogPlugin(options) {
 
     return {
         "Page:new": (page) => {
-            page.on("dialog", (dialog) => {
-                setTimeout(() => dialog.accept(), Random.getInt(min, max));
+            page.on("dialog", async (dialog) => {
+                await wait(Random.getInt(min, max));
+                await dialog.accept();
             });
             return page;
         },

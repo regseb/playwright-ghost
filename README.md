@@ -81,6 +81,18 @@ const browser = await chromium.launch({
 // ...
 ```
 
+Et pour cet exemple, les plugins recommandés et le plugin `util.locale` sont
+ajoutés.
+
+```javascript
+import { chromium, plugins } from "playwright-ghost";
+
+const browser = await chromium.launch({
+  plugins: [...plugins.recommendeds(), plugins.util.locale()],
+});
+// ...
+```
+
 ## Plugins
 
 ⭐ : Plugin recommandé / ⚙️ : Possède des options / 📦 : Nécessite une

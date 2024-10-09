@@ -50,39 +50,40 @@
     "clean": "node .script/clean.js"
   },
   "devDependencies": {
-    "@cliqz/adblocker-playwright": "1.31.3",
-    "@prantlf/jsonlint": "14.0.3",
+    "@cliqz/adblocker-playwright": "1.33.2",
+    "@prantlf/jsonlint": "16.0.0",
     "@prettier/plugin-xml": "3.4.1",
-    "@stryker-mutator/core": "8.4.0",
-    "@stryker-mutator/mocha-runner": "8.4.0",
-    "@types/eslint": "9.6.0",
-    "@types/mocha": "10.0.7",
-    "@types/node": "22.1.0",
-    "eslint": "8.57.0",
-    "eslint-plugin-array-func": "4.0.0",
+    "@stryker-mutator/core": "8.6.0",
+    "@stryker-mutator/mocha-runner": "8.6.0",
+    "@types/mocha": "10.0.9",
+    "@types/node": "22.7.5",
+    "eslint": "9.12.0",
+    "eslint-plugin-array-func": "5.0.2",
     "eslint-plugin-eslint-comments": "3.2.0",
-    "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-jsdoc": "49.0.0",
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-jsdoc": "50.3.1",
     "eslint-plugin-mocha": "10.5.0",
-    "eslint-plugin-n": "17.10.2",
-    "eslint-plugin-no-unsanitized": "4.0.2",
+    "eslint-plugin-n": "17.11.1",
+    "eslint-plugin-no-unsanitized": "4.1.2",
     "eslint-plugin-promise": "7.1.0",
     "eslint-plugin-regexp": "2.6.0",
-    "eslint-plugin-unicorn": "55.0.0",
-    "markdownlint": "0.34.0",
-    "metalint": "0.17.0",
-    "mocha": "10.7.0",
+    "eslint-plugin-unicorn": "56.0.0",
+    "globals": "15.11.0",
+    "markdownlint": "0.35.0",
+    "metalint": "0.18.0",
+    "mocha": "10.7.3",
     "npm-package-json-lint": "8.0.0",
-    "playwright": "1.46.0",
+    "playwright": "1.48.0",
     "prettier": "3.3.3",
+    "publint": "0.2.11",
     "rebrowser-playwright": "1.47.100",
-    "typedoc": "0.26.5",
-    "typescript": "5.5.4",
+    "typedoc": "0.26.8",
+    "typescript": "5.6.3",
     "yaml-lint": "1.7.0"
   },
   "peerDependencies": {
-    "@cliqz/adblocker-playwright": ">=1.31.3",
-    "playwright": ">=1.46.0",
+    "@cliqz/adblocker-playwright": ">=1.33.2",
+    "playwright": ">=1.48.0",
     "rebrowser-playwright": ">=1.47.100"
   },
   "peerDependenciesMeta": {
@@ -97,6 +98,6 @@
     }
   },
   "engines": {
-    "node": ">=22.1.0"
+    "node": ">=22.9.0"
   }
 }

@@ -3,6 +3,9 @@
  * @author Sébastien Règne
  */
 
+import mocha from "eslint-plugin-mocha";
+import globals from "globals";
+
 /**
  * @import { Linter } from "eslint"
  */
@@ -11,9 +14,15 @@
  * @type {Linter.Config}
  */
 export default {
-    env: {
-        mocha: true,
+    languageOptions: {
+        globals: {
+            ...globals.browser,
+            ...globals.mocha,
+            ...globals.webextensions,
+        },
     },
+
+    plugins: { mocha },
 
     rules: {
         // Suggestions.
