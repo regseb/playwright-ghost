@@ -2,11 +2,12 @@
 
 ## [0.8.0](https://github.com/regseb/playwright-ghost/compare/v0.7.2...v0.8.0) (2024-10-09)
 
-
 ### Features
 
-* Ajouter le support de rebrowser. ([050aad5](https://github.com/regseb/playwright-ghost/commit/050aad5229707ec936330d4de009b68ff69315ab))
-* Supporter les plugins asynchrones. ([ca3799b](https://github.com/regseb/playwright-ghost/commit/ca3799b771d62623d083bed2328a6eabc1edf9d3))
+- Ajouter le support de rebrowser.
+  ([050aad5](https://github.com/regseb/playwright-ghost/commit/050aad5229707ec936330d4de009b68ff69315ab))
+- Supporter les plugins asynchrones.
+  ([ca3799b](https://github.com/regseb/playwright-ghost/commit/ca3799b771d62623d083bed2328a6eabc1edf9d3))
 
 ## [0.7.2](https://github.com/regseb/playwright-ghost/compare/v0.7.1...v0.7.2) (2024-08-07)
 
