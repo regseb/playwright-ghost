@@ -18,16 +18,15 @@ const REGEXP = /^(?<obj>\w+)\.(?<prop>\w+):(?<temporality>after|before)$/u;
 
 const NEW_MAPPINGS = {
     "Browser:new": Object.entries({
-        "BrowserType.launch:after": (l) => async (r, c) => l(await r, c),
+        "BrowserType.launch:after": (l) => l,
     }),
     "BrowserContext:new": Object.entries({
-        "BrowserType.launchPersistentContext:after": (l) => async (r, c) =>
-            l(await r, c),
-        "Browser.newContext:after": (l) => async (r, c) => l(await r, c),
+        "BrowserType.launchPersistentContext:after": (l) => l,
+        "Browser.newContext:after": (l) => l,
     }),
     "Page:new": Object.entries({
-        "Browser.newPage:after": (l) => async (r, c) => l(await r, c),
-        "BrowserContext.newPage:after": (l) => async (r, c) => l(await r, c),
+        "Browser.newPage:after": (l) => l,
+        "BrowserContext.newPage:after": (l) => l,
     }),
     "Locator:new": Object.entries({
         "Page.getByRole:after": (l) => l,
@@ -38,9 +37,7 @@ const NEW_MAPPINGS = {
         "Page.getByTitle:after": (l) => l,
         "Page.getByTestId:after": (l) => l,
         "Page.locator:after": (l) => l,
-        "Locator.all:after": (l) => async (r, c) =>
-            // eslint-disable-next-line unicorn/no-await-expression-member
-            (await r).map((s) => l(s, c)),
+        "Locator.all:after": (l) => (r, c) => r.map((s) => l(s, c)),
         "Locator.and:after": (l) => l,
         "Locator.filter:after": (l) => l,
         "Locator.first:after": (l) => l,
@@ -58,8 +55,9 @@ const NEW_MAPPINGS = {
     }),
 };
 
-const dispatch = (plugins) => {
+const dispatch = async (pluginss) => {
     const listeners = new Map();
+    const plugins = await Promise.all(pluginss.flat(Infinity));
     plugins
         .flatMap((p) => Object.entries(p))
         .flatMap(([key, listener]) => {
@@ -117,8 +115,8 @@ export default class Ghost {
      *                             `Browser`.
      * @see https://playwright.dev/docs/api/class-browsertype#browser-type-launch
      */
-    launch(options) {
-        const listeners = dispatch([
+    async launch(options) {
+        const listeners = await dispatch([
             browserPlugin(),
             browserContextPlugin(),
             pagePlugin(),
@@ -143,8 +141,8 @@ export default class Ghost {
      *                                    fantôme du `BrowserContext`.
      * @see https://playwright.dev/docs/api/class-browsertype#browser-type-launch-persistent-context
      */
-    launchPersistentContext(userDataDir, options) {
-        const listeners = dispatch([
+    async launchPersistentContext(userDataDir, options) {
+        const listeners = await dispatch([
             browserPlugin(),
             browserContextPlugin(),
             pagePlugin(),
