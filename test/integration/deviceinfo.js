@@ -25,7 +25,7 @@ describe("Device Info", function () {
         it("should not be spoofed", async function () {
             const browser = await rebrowser.chromium.launch({
                 plugins: [
-                    ...rebrowser.plugins.recommendeds(),
+                    ...rebrowser.plugins.recommended(),
                     rebrowser.plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
@@ -61,7 +61,7 @@ describe("Device Info", function () {
         //  out of memory"
         it.skip("should not be spoofed", async function () {
             const browser = await vanilla.firefox.launch({
-                plugins: vanilla.plugins.recommendeds(),
+                plugins: vanilla.plugins.recommended(),
             });
             const context = await browser.newContext();
             const page = await context.newPage();

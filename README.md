@@ -49,7 +49,7 @@ import { chromium, plugins } from "playwright-ghost";
 // import { chromium, plugins } from "playwright-ghost/rebrowser";
 
 const browser = await chromium.launch({
-  plugins: plugins.recommendeds(),
+  plugins: plugins.recommended(),
 });
 const context = await browser.newContext();
 const page = await context.newPage();
@@ -88,7 +88,7 @@ ajoutés.
 import { chromium, plugins } from "playwright-ghost";
 
 const browser = await chromium.launch({
-  plugins: [...plugins.recommendeds(), plugins.util.locale()],
+  plugins: [...plugins.recommended(), plugins.utils.locale()],
 });
 // ...
 ```

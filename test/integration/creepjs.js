@@ -25,7 +25,7 @@ describe("CreepJS", function () {
         it("should get a B (or A) grade", async function () {
             const browser = await rebrowser.chromium.launch({
                 plugins: [
-                    ...rebrowser.plugins.recommendeds(),
+                    ...rebrowser.plugins.recommended(),
                     rebrowser.plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
@@ -66,7 +66,7 @@ describe("CreepJS", function () {
     describe("firefox", function () {
         it("should get a B (or A) grade", async function () {
             const browser = await vanilla.firefox.launch({
-                plugins: vanilla.plugins.recommendeds(),
+                plugins: vanilla.plugins.recommended(),
             });
             const context = await browser.newContext({
                 // Utiliser le thème sombre, car CreepJS considère que le thème

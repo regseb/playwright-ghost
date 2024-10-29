@@ -25,7 +25,7 @@ describe("Cloudflare turnstile demo", function () {
         it.skip("should be success with managed challenge", async function () {
             const browser = await rebrowser.chromium.launch({
                 plugins: [
-                    ...rebrowser.plugins.recommendeds(),
+                    ...rebrowser.plugins.recommended(),
                     rebrowser.plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
@@ -63,7 +63,7 @@ describe("Cloudflare turnstile demo", function () {
         it("should be success with non-interactive challenge", async function () {
             const browser = await rebrowser.chromium.launch({
                 plugins: [
-                    ...rebrowser.plugins.recommendeds(),
+                    ...rebrowser.plugins.recommended(),
                     rebrowser.plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
@@ -103,7 +103,7 @@ describe("Cloudflare turnstile demo", function () {
     describe("firefox", function () {
         it.skip("should be success with managed challenge", async function () {
             const browser = await vanilla.firefox.launch({
-                plugins: vanilla.plugins.recommendeds(),
+                plugins: vanilla.plugins.recommended(),
             });
             const context = await browser.newContext();
             const page = await context.newPage();
@@ -136,7 +136,7 @@ describe("Cloudflare turnstile demo", function () {
 
         it("should be success with non-interactive challenge", async function () {
             const browser = await vanilla.firefox.launch({
-                plugins: vanilla.plugins.recommendeds(),
+                plugins: vanilla.plugins.recommended(),
             });
             const context = await browser.newContext();
             const page = await context.newPage();

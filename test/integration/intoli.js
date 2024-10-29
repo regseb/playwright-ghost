@@ -25,7 +25,7 @@ describe("Chrome Headless Detection (Intoli)", function () {
         it("should not failed", async function () {
             const browser = await rebrowser.chromium.launch({
                 plugins: [
-                    ...rebrowser.plugins.recommendeds(),
+                    ...rebrowser.plugins.recommended(),
                     rebrowser.plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
@@ -78,7 +78,7 @@ describe("Chrome Headless Detection (Intoli)", function () {
     describe("firefox", function () {
         it("should not failed", async function () {
             const browser = await vanilla.firefox.launch({
-                plugins: vanilla.plugins.recommendeds(),
+                plugins: vanilla.plugins.recommended(),
             });
             const context = await browser.newContext();
             const page = await context.newPage();
