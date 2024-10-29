@@ -9,57 +9,80 @@ import browserPlugin from "./plugins/hook/browser.js";
 import browserContextPlugin from "./plugins/hook/browsercontext.js";
 import locatorPlugin from "./plugins/hook/locator.js";
 import pagePlugin from "./plugins/hook/page.js";
+import flatAwait from "./utils/flatawait.js";
 
 /**
- * @import { Browser, BrowserContext, BrowserType } from "playwright"
+ * @import { Browser, BrowserContext, BrowserType, Locator } from "playwright"
+ * @import { ContextAfter } from "./hook.js"
  */
 
 const REGEXP = /^(?<obj>\w+)\.(?<prop>\w+):(?<temporality>after|before)$/v;
 
+/**
+ * Renvoie l'objet passé en argument.
+ *
+ * @template T
+ * @param {T} x Un objet quelconque.
+ * @returns {T} Le même objet quelconque.
+ */
+const identity = (x) => x;
+
 const NEW_MAPPINGS = {
     "Browser:new": Object.entries({
-        "BrowserType.launch:after": (l) => l,
+        "BrowserType.launch:after": identity,
     }),
     "BrowserContext:new": Object.entries({
-        "BrowserType.launchPersistentContext:after": (l) => l,
-        "Browser.newContext:after": (l) => l,
+        "BrowserType.launchPersistentContext:after": identity,
+        "Browser.newContext:after": identity,
     }),
     "Page:new": Object.entries({
-        "Browser.newPage:after": (l) => l,
-        "BrowserContext.newPage:after": (l) => l,
+        "Browser.newPage:after": identity,
+        "BrowserContext.newPage:after": identity,
     }),
     "Locator:new": Object.entries({
-        "Page.getByRole:after": (l) => l,
-        "Page.getByText:after": (l) => l,
-        "Page.getByLabel:after": (l) => l,
-        "Page.getByPlaceholder:after": (l) => l,
-        "Page.getByAltText:after": (l) => l,
-        "Page.getByTitle:after": (l) => l,
-        "Page.getByTestId:after": (l) => l,
-        "Page.locator:after": (l) => l,
-        "Locator.all:after": (l) => (r, c) => r.map((s) => l(s, c)),
-        "Locator.and:after": (l) => l,
-        "Locator.filter:after": (l) => l,
-        "Locator.first:after": (l) => l,
-        "Locator.getByRole:after": (l) => l,
-        "Locator.getByText:after": (l) => l,
-        "Locator.getByLabel:after": (l) => l,
-        "Locator.getByPlaceholder:after": (l) => l,
-        "Locator.getByAltText:after": (l) => l,
-        "Locator.getByTitle:after": (l) => l,
-        "Locator.getByTestId:after": (l) => l,
-        "Locator.last:after": (l) => l,
-        "Locator.locator:after": (l) => l,
-        "Locator.nth:after": (l) => l,
-        "Locator.or:after": (l) => l,
+        "Page.getByRole:after": identity,
+        "Page.getByText:after": identity,
+        "Page.getByLabel:after": identity,
+        "Page.getByPlaceholder:after": identity,
+        "Page.getByAltText:after": identity,
+        "Page.getByTitle:after": identity,
+        "Page.getByTestId:after": identity,
+        "Page.locator:after": identity,
+        "Locator.all:after":
+            (/** @type {Function} */ listener) =>
+            (
+                /** @type {Locator[]} */ locators,
+                /** @type {ContextAfter<Locator>} */ context,
+            ) =>
+                locators.map((l) => listener(l, context)),
+        "Locator.and:after": identity,
+        "Locator.filter:after": identity,
+        "Locator.first:after": identity,
+        "Locator.getByRole:after": identity,
+        "Locator.getByText:after": identity,
+        "Locator.getByLabel:after": identity,
+        "Locator.getByPlaceholder:after": identity,
+        "Locator.getByAltText:after": identity,
+        "Locator.getByTitle:after": identity,
+        "Locator.getByTestId:after": identity,
+        "Locator.last:after": identity,
+        "Locator.locator:after": identity,
+        "Locator.nth:after": identity,
+        "Locator.or:after": identity,
     }),
 };
 
-const dispatch = async (pluginss) => {
+/**
+ * Répartit les crochets pour le regroupés par objet, propriété et temporalité.
+ *
+ * @param {Record<string, Function>[]} hooks La liste des crochets.
+ * @returns {Map<string, Map<string, Object>>} Les écouteurs regroupés par
+ *                                             objet, propriété et temporalité.
+ */
+const dispatch = (hooks) => {
     const listeners = new Map();
-    const plugins = await Promise.all(pluginss.flat(Infinity));
-    plugins
-        .flatMap((p) => Object.entries(p))
+    hooks
+        .flatMap((h) => Object.entries(h))
         .flatMap(([key, listener]) => {
             return key in NEW_MAPPINGS
                 ? NEW_MAPPINGS[key].map(([k, f]) => [k, f(listener)])
@@ -116,12 +139,12 @@ export default class Ghost {
      * @see https://playwright.dev/docs/api/class-browsertype#browser-type-launch
      */
     async launch(options) {
-        const listeners = await dispatch([
+        const listeners = dispatch([
             browserPlugin(),
             browserContextPlugin(),
             pagePlugin(),
             locatorPlugin(),
-            ...(options?.plugins ?? []),
+            ...(await flatAwait(options?.plugins ?? [])),
         ]);
         const hooked = hook(this.#browserType, listeners.get("BrowserType"), {
             listeners,
@@ -142,12 +165,12 @@ export default class Ghost {
      * @see https://playwright.dev/docs/api/class-browsertype#browser-type-launch-persistent-context
      */
     async launchPersistentContext(userDataDir, options) {
-        const listeners = await dispatch([
+        const listeners = dispatch([
             browserPlugin(),
             browserContextPlugin(),
             pagePlugin(),
             locatorPlugin(),
-            ...(options?.plugins ?? []),
+            ...(await flatAwait(options?.plugins ?? [])),
         ]);
         const hooked = hook(this.#browserType, listeners.get("BrowserType"), {
             listeners,
