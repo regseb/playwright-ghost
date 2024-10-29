@@ -12,7 +12,7 @@ import userAgentPlugin from "./polyfill/useragent.js";
 import viewportPlugin from "./polyfill/viewport.js";
 import webdriverPlugin from "./polyfill/webdriver.js";
 import webGLPlugin from "./polyfill/webgl.js";
-import adBlockerPlugin from "./utils/adblocker.js";
+import adblockerPlugin from "./utils/adblocker.js";
 import debugPlugin from "./utils/debug.js";
 import localePlugin from "./utils/locale.js";
 
@@ -64,7 +64,7 @@ export default {
         webGL: webGLPlugin,
     },
     utils: {
-        adBlocker: adBlockerPlugin,
+        adblocker: adblockerPlugin,
         debug: debugPlugin,
         locale: localePlugin,
     },
