@@ -8,44 +8,49 @@
 [![npm][img-npm]][link-npm] [![build][img-build]][link-build]
 [![coverage][img-coverage]][link-coverage] [![semver][img-semver]][link-semver]
 
-Playwright-ghost est une surcouche de [Playwright](https://playwright.dev/) en
-lui ajoutant un système de plugins pour gommer les différences entre un
-navigateur utilisé par un être humain et un navigateur
-[_headless_](https://fr.wikipedia.org/wiki/Navigateur_headless) contrôlé par un
-programme.
+> [!NOTE]
+>
+> This project is not officially commissioned or supported by Microsoft and
+> Playwright.
 
-L'API de Playwright-ghost est identique à celle de Playwright, sauf l'ajout de
-l'option `plugins` aux méthodes
+Playwright-ghost is an overlay on [Playwright](https://playwright.dev/), adding
+plugins to conceal the differences between a browser used by a human being and a
+[headless browser](https://en.wikipedia.org/wiki/Headless_browser) controlled by
+a program.
+
+The Playwright-ghost API is identical to that of Playwright, except for the
+addition of the `plugins` option to the
 [`browserType.launch([options])`](https://playwright.dev/docs/api/class-browsertype#browser-type-launch)
-et
-[`browserType.launchPersistentContext(userDataDir, [options])`](https://playwright.dev/docs/api/class-browsertype#browser-type-launch-persistent-context).
+and
+[`browserType.launchPersistentContext(userDataDir, [options])`](https://playwright.dev/docs/api/class-browsertype#browser-type-launch-persistent-context)
+methods.
 
-La propriété `plugins` est un tableau avec les plugins à ajouter.
+The `plugins` property is an array containing the plugins to be added.
 
-## Installation
+## Install
 
-[`playwright-ghost`](https://www.npmjs.com/package/playwright-ghost) ne fournit
-pas [`playwright`](https://www.npmjs.com/package/playwright), vous devez aussi
-l'ajouter dans vos dépendances.
+[`playwright-ghost`](https://www.npmjs.com/package/playwright-ghost) doesn't
+provide [`playwright`](https://www.npmjs.com/package/playwright), so you need to
+add it to your dependencies.
 
 ```shell
 npm install playwright playwright-ghost
 ```
 
-`playwright-ghost` peut aussi être utilisé avec
-[`rebrowser-playwright`](https://www.npmjs.com/package/rebrowser-playwright) :
+`playwright-ghost` can also be used with
+[`rebrowser-playwright`](https://www.npmjs.com/package/rebrowser-playwright).
 
 ```shell
 npm install rebrowser-playwright playwright-ghost
 ```
 
-## Utilisation
+## Use
 
-Voici un exemple avec l'activation des plugins recommandés.
+Here's an example with the recommended plugins.
 
 ```javascript
 import { chromium, plugins } from "playwright-ghost";
-// Ou pour utiliser rebrowser-playwright :
+// Or to use rebrowser-playwright:
 // import { chromium, plugins } from "playwright-ghost/rebrowser";
 
 const browser = await chromium.launch({
@@ -54,19 +59,19 @@ const browser = await chromium.launch({
 const context = await browser.newContext();
 const page = await context.newPage();
 
-await page.goto("https://perdu.com/");
-const where = await page.locator("pre").textContent();
-console.log(where);
+await page.goto("https://example.com/");
+const title = await page.locator("h1").textContent();
+console.log(title);
 
 await context.close();
 await browser.close();
 ```
 
-Dans cet autre exemple, trois plugins sont ajoutés :
+In this other example, three plugins are added:
 
-- `polyfill.headless` qui n'a pas d'options ;
-- `polyfill.screen` en définissant d'autres valeurs pour la taille de l'écran ;
-- `util.adBlocker` en utilisant les options par défaut.
+- `polyfill.headless` has no options;
+- `polyfill.screen` sets other values for screen size;
+- `utils.adblocker` uses default options.
 
 ```javascript
 import { chromium, plugins } from "playwright-ghost";
@@ -74,15 +79,15 @@ import { chromium, plugins } from "playwright-ghost";
 const browser = await chromium.launch({
   plugins: [
     plugins.polyfill.headless(),
-    plugins.polyfill.screen({ width: 1280, height: 720 }),
-    plugins.util.adBlocker(),
+    plugins.polyfill.screen({ width: 2560, height: 1440 }),
+    plugins.utils.adblocker(),
   ],
 });
 // ...
 ```
 
-Et pour cet exemple, les plugins recommandés et le plugin `util.locale` sont
-ajoutés.
+And for this example, the recommended plugins and the `utils.locale` plugin are
+added.
 
 ```javascript
 import { chromium, plugins } from "playwright-ghost";
@@ -95,107 +100,116 @@ const browser = await chromium.launch({
 
 ## Plugins
 
-⭐ : Plugin recommandé / ⚙️ : Possède des options / 📦 : Nécessite une
-dépendance
+⭐ is in `recommended` / ⚙️ has options / 📦 requires dependency
 
 <!-- markdownlint-disable no-inline-html-->
 <table>
-  <tr><th></th><th>Nom</th><th>Description</th></tr>
+  <tr><th></th><th>Name</th><th>Description</th></tr>
   <tr>
     <td>⭐</td>
-    <td><code>polyfill.automation</code></td>
     <td>
-      Désactiver la fonctionnalité <code>--enable-automation</code> dans
-      Chromium.
+      <a href="./docs/plugins/polyfill/automation.md"
+        ><code>polyfill.automation</code></a>
     </td>
+    <td>Disable <code>--enable-automation</code> in Chromium.</td>
   </tr>
   <tr>
     <td>⭐</td>
-    <td><code>polyfill.headless</code></td>
     <td>
-      Corriger de nombreuses différences dans les APIs Javascript avec le
-      nouveau mode <em>headless</em> de Chromium. Par exemple :
-      <code>navigator.mimeTypes</code>...
+      <a href="./docs/plugins/polyfill/headless.md"
+        ><code>polyfill.headless</code></a>
+    </td>
+    <td>
+      Correct many differences in Javascript APIs between the headful and
+      headless versions of Chromium.
     </td>
   </tr>
   <tr>
     <td>⭐ ⚙️</td>
-    <td><code>polyfill.screen</code></td>
     <td>
-      Définir une valeur réaliste pour la taille de l'écran : 1920x1080. Ces
-      valeurs sont configurables avec les options <code>width</code> et
-      <code>height</code>.
+      <a href="./docs/plugins/polyfill/screen.md"
+        ><code>polyfill.screen</code></a>
+    </td>
+    <td>
+      Set a realistic value for screen size: 1920x1080.
     </td>
   </tr>
   <tr>
     <td>⚙️</td>
-    <td><code>polyfill.userAgent</code></td>
     <td>
-      Changer
-      l'<a href="https://developer.mozilla.org/docs/Glossary/User_agent">agent
-      utilisateur</a> (<em>user agent</em>) du navigateur avec l'option
-      <code>userAgent</code>.
+      <a href="./docs/plugins/polyfill/useragent.md"
+        ><code>polyfill.userAgent</code></a>
+    </td>
+    <td>
+      Change the browser's user agent.
     </td>
   </tr>
   <tr>
     <td>⭐ ⚙️</td>
-    <td><code>polyfill.viewport</code></td>
     <td>
-      Faire varier la taille du navigateur. Par défaut les valeurs sont prises
-      aléatoirement entre 1000x500 et 1800x800. Elles sont configurables avec
-      les options <code>width</code> et <code>height</code>.
+      <a href="./docs/plugins/polyfill/viewport.md"
+        ><code>polyfill.viewport</code></a>
+    </td>
+    <td>
+      Vary viewport size with random values between 1000x500 and 1800x800.
     </td>
   </tr>
   <tr>
     <td>⭐</td>
-    <td><code>polyfill.webdriver</code></td>
     <td>
-      Passer à <code>false</code> la variable <code>navigator.webdriver</code>.
+      <a href="./docs/plugins/polyfill/webdriver.md"
+        ><code>polyfill.webdriver</code></a>
+    </td>
+    <td>
+      Set <code>navigator.webdriver</code> to <code>false</code>.
     </td>
   </tr>
   <tr>
     <td></td>
-    <td><code>polyfill.webGL</code></td>
     <td>
-      Modifier les valeurs des paramètres <em>WebGL</em>.
+      <a href="./docs/plugins/polyfill/webgl.md"><code>polyfill.webGL</code></a>
+    </td>
+    <td>
+      Modify WebGL parameter values.
     </td>
   </tr>
   <tr>
     <td>⭐ ⚙️</td>
-    <td><code>humanize.dialog</code></td>
     <td>
-      Fermer les boîtes de dialogues dans un temps humainement possible (entre
-      1 et 5 secondes), car par défaut Playwright
-      <a href="https://playwright.dev/docs/dialogs">les ferme immédiatement</a>.
-      Les options <code>min</code> et <code>max</code> permettent de définir
-      d'autres bornes pour le délais de fermeture.
+      <a href="./docs/plugins/humanize/dialog.md"
+        ><code>humanize.dialog</code></a>
+    </td>
+    <td>
+      Close <code>&lt;dialog&gt;</code> within a humanly possible time (between
+      1 and 5 seconds).
     </td>
   </tr>
   <tr>
     <td>⚙️ 📦</td>
-    <td><code>util.adBlocker</code></td>
     <td>
-      Ajouter le bloqueur de publicité
-      <a href="https://github.com/ghostery/adblocker#readme">Cliqz'
-      adblocker</a>. Vous devez ajouter
-      <a href="https://www.npmjs.com/package/@cliqz/adblocker-playwright"
-        ><code>@cliqz/adblocker-playwright</code></a>
-      dans vos dépendances npm.
+      <a href="./docs/plugins/utils/adblocker.md"
+        ><code>utils.adblocker</code></a>
+    </td>
+    <td>
+      Add Ghostery adblocker.
     </td>
   </tr>
   <tr>
     <td></td>
-    <td><code>util.debug</code></td>
     <td>
-      Afficher dans la console du programme, les messages affichés dans la
-      console du navigateur.
+      <a href="./docs/plugins/utils/debug.md"><code>utils.debug</code></a>
+    </td>
+    <td>
+      Display messages from the browser console in the program console.
     </td>
   </tr>
   <tr>
     <td></td>
-    <td><code>util.locale</code></td>
     <td>
-      Utiliser le navigateur installé localement.
+      <a href="./docs/plugins/utils/locale.md"><code>utils.locale</code></a>
+    </td>
+    <td>
+      Use the locally installed browser.
     </td>
   </tr>
 </table>
@@ -207,8 +221,8 @@ dépendance
 <table>
   <tr>
     <th></th>
-    <th>Chromium¹</th>
-    <th>Firefox²</th>
+    <th>Chromiumᵃ</th>
+    <th>Firefoxᵇ</th>
   </tr>
   <tr>
     <td>
@@ -216,8 +230,12 @@ dépendance
         >Brotector</a
       >
     </td>
-    <td>❌ <em>0.98</em></td>
-    <td>❌ <em>1.00</em></td>
+    <td>
+      ❌¹ <em>0.98</em> (<em>UA_Override</em> & <em>Input.cordinatesLeak</em>)
+    </td>
+    <td>
+      ❌ <em>1.00</em> (<em>navigator.webdriver</em> & <em>PWinitScript</em>)
+    </td>
   </tr>
   <tr>
     <td>
@@ -239,8 +257,8 @@ dépendance
     <td>
       <a href="https://abrahamjuliot.github.io/creepjs/">CreepJS</a>
     </td>
-    <td>✅ <em>F-</em></td>
-    <td>❌ <em>F+-</em></td>
+    <td>✅ <em>B-</em></td>
+    <td>❌ <em>F+</em></td>
   </tr>
   <tr>
     <td>
@@ -288,7 +306,7 @@ dépendance
       <a href="https://infosimples.github.io/detect-headless/">infosimples</a>
     </td>
     <td>✅</td>
-    <td>❌ <em>Webdriver & Plugins</em></td>
+    <td>❌ <em>Webdriver</em> & <em>Plugins</em></td>
   </tr>
   <tr>
     <td>
@@ -298,7 +316,7 @@ dépendance
       >
     </td>
     <td>✅</td>
-    <td>❌ <em>WebDriver & Plugins</em></td>
+    <td>❌ <em>WebDriver</em> & <em>Plugins</em></td>
   </tr>
   <tr>
     <td>
@@ -306,7 +324,7 @@ dépendance
         >rebrowser-bot-detector</a
       >
     </td>
-    <td>✅</td>
+    <td>❌ <em>pwInitScripts</em></td>
     <td>❌ <em>navigatorWebdriver</em></td>
   </tr>
   <tr>
@@ -314,7 +332,7 @@ dépendance
       <a href="https://bot.sannysoft.com/">Antibot (Sannysoft)</a>
     </td>
     <td>✅</td>
-    <td>❌ <em>Webdriver & Plugins</em></td>
+    <td>❌ <em>Webdriver</em> & <em>Plugins</em></td>
   </tr>
   <tr>
     <td>
@@ -327,9 +345,10 @@ dépendance
   </tr>
 </table>
 
-¹ Chromium avec `rebrowser-playwright`, les plugins recommandés et le plugin
-`polyfill.userAgent` (pour enlever _Headless_).\
-² Firefox avec `playwright` et les plugins recommandés.
+ᵃ Chromium with `rebrowser-playwright`, recommended plugins and the
+`polyfill.userAgent` plugin (to remove _Headless_).\
+ᵇ Firefox with `playwright` and recommended plugins.\
+¹ Without [_popupCrash_](https://github.com/kaliiiiiiiiii/brotector#popupcrash).
 
 [img-npm]:
   https://img.shields.io/npm/dm/playwright-ghost?label=npm&logo=npm&logoColor=whitesmoke
