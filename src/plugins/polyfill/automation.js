@@ -33,8 +33,10 @@ const disable = (options, browserType) => {
 /**
  * Crée un plugin pour désactiver la fonctionnalité `--enable-automation` dans
  * Chromium.
+ *
+ * @returns {Record<string, Function>} Les crochets du plugin.
  */
-export default function webdriverPlugin() {
+export default function automationPlugin() {
     return {
         /**
          * Modifie les options de lancement du navigateur.

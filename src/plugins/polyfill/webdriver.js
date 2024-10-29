@@ -35,6 +35,8 @@ const disable = (options, browserType) => {
 /**
  * Crée un plugin pour passer à `false` la variable `navigator.webdriver` dans
  * Chromium.
+ *
+ * @returns {Record<string, Function>} Les crochets du plugin.
  */
 export default function webdriverPlugin() {
     return {

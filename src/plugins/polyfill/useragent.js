@@ -36,6 +36,7 @@ const changeUserAgent = (options, userAgent, browserType) => {
  *
  * @param {Object} options           Les options du plugin.
  * @param {string} options.userAgent Le _user agent_ à utiliser.
+ * @returns {Record<string, Function>} Les crochets du plugin.
  * @see https://developer.mozilla.org/Web/HTTP/Headers/User-Agent
  */
 export default function userAgentPlugin(options) {

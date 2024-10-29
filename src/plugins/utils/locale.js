@@ -31,9 +31,10 @@ for (const name of ["chromium", "firefox", "webkit"]) {
 /**
  * Définit le chemin de l'exécutable du navigateur installé localement.
  *
- * @param {Object|undefined} options     Les options de création d'un `Browser`.
- * @param {BrowserType}      browserType Le type de navigateur.
- * @returns {Object|undefined} Les nouvelles options.
+ * @param {Record<string, any>|undefined} options     Les options de création
+ *                                                    d'un `Browser`.
+ * @param {BrowserType}                   browserType Le type de navigateur.
+ * @returns {Record<string, any>|undefined} Les nouvelles options.
  * @throws {Error} Si le navigateur n'est pas installé localement.
  */
 const setExecutablePath = function (options, browserType) {
@@ -49,6 +50,8 @@ const setExecutablePath = function (options, browserType) {
 
 /**
  * Crée un plugin pour utiliser le navigateur installé localement.
+ *
+ * @returns {Record<string, Function>} Les crochets du plugin.
  */
 export default function localePlugin() {
     return {

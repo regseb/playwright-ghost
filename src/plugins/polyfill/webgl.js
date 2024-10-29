@@ -30,6 +30,8 @@ const useAngle = (options, browserType) => {
 /**
  * Crée un plugin pour modifier les valeurs des paramètres _WebGL_ en mode
  * _headless_.
+ *
+ * @returns {Record<string, Function>} Les crochets du plugin.
  */
 export default function webGLPlugin() {
     return {

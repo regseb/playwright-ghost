@@ -9,6 +9,7 @@ import hook from "../../hook.js";
 /**
  * Crée un plugin pour ajouter des écouteurs dans les objets `Page`.
  *
+ * @returns {Record<string, Function>} Le crochet du plugin.
  * @see https://playwright.dev/docs/api/class-page
  */
 export default function pagePlugin() {

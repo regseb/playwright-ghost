@@ -11,7 +11,7 @@
  *                                                `Browser`.
  * @param {number}                        width   La largeur de l'écran.
  * @param {number}                        height  La hauteur de l'écran.
- * @returns {Record<string, any>|undefined} Les nouvelles options.
+ * @returns {Record<string, any>} Les nouvelles options.
  */
 const setScreen = (options, width, height) => {
     return {
@@ -27,6 +27,7 @@ const setScreen = (options, width, height) => {
  * @param {Object} [options]        Les options du plugin.
  * @param {number} [options.width]  La largeur de l'écran.
  * @param {number} [options.height] La hauteur de l'écran.
+ * @returns {Record<string, Function>} Les crochets du plugin.
  */
 export default function screenPlugin(options) {
     const width = options?.width ?? 1920;
@@ -34,7 +35,7 @@ export default function screenPlugin(options) {
 
     return {
         /**
-         * Modifie les options de lancement du navigateur.
+         * Modifie les options de lancement d'un contexte (et du navigateur).
          *
          * @param {any[]} args Les paramètres de la méthode.
          * @returns {any[]} Les nouveaux paramètres.
@@ -54,7 +55,7 @@ export default function screenPlugin(options) {
         },
 
         /**
-         * Modifie les options de création d'une page.
+         * Modifie les options de création d'une page (et de son contexte).
          *
          * @param {any[]} args Les paramètres de la méthode.
          * @returns {any[]} Les nouveaux paramètres.
