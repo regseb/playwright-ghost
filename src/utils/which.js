@@ -16,15 +16,16 @@ import process from "node:process";
  *                            programme.
  */
 export default async function which(programname) {
-    for (const directory of process.env.PATH.split(":")) {
+    for (const directory of process.env.PATH?.split(path.delimiter) ?? []) {
         const file = path.join(directory, programname);
-        // eslint-disable-next-line promise/prefer-await-to-then
-        const executable = await fs.access(file, fs.constants.X_OK).then(
-            () => true,
-            () => false,
-        );
-        if (executable) {
+        try {
+            await fs.access(file, fs.constants.X_OK);
+            // Si la méthode n'a pas échoué, c'est que le fichier est
+            // exécutable : retourner le fichier.
             return file;
+        } catch {
+            // Si la méthode remonte une erreur, c'est que le fichier n'existe
+            // pas ou n'est pas exécutable : passer au prochain répertoire.
         }
     }
     throw new Error(`${programname} not found`);
