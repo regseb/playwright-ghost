@@ -2,16 +2,17 @@
 
 ## [0.9.0](https://github.com/regseb/playwright-ghost/compare/v0.8.0...v0.9.0) (2024-10-30)
 
-
 ### Features
 
-* Migrate adblocker to Ghostery. ([5602d31](https://github.com/regseb/playwright-ghost/commit/5602d317a80534e6941a73bcd085724134e7115e))
-
+- Migrate adblocker to Ghostery.
+  ([5602d31](https://github.com/regseb/playwright-ghost/commit/5602d317a80534e6941a73bcd085724134e7115e))
 
 ### Bug Fixes
 
-* Remove 's' of 'recommendeds' list plugins. ([ff8199c](https://github.com/regseb/playwright-ghost/commit/ff8199c37681b5f36e547dc47ed3ac97b0ca962e))
-* Standardize random options. ([a292d25](https://github.com/regseb/playwright-ghost/commit/a292d2577d4fec6fdef4d38f8649c7775e82e9ea))
+- Remove 's' of 'recommendeds' list plugins.
+  ([ff8199c](https://github.com/regseb/playwright-ghost/commit/ff8199c37681b5f36e547dc47ed3ac97b0ca962e))
+- Standardize random options.
+  ([a292d25](https://github.com/regseb/playwright-ghost/commit/a292d2577d4fec6fdef4d38f8649c7775e82e9ea))
 
 ## [0.8.0](https://github.com/regseb/playwright-ghost/compare/v0.7.2...v0.8.0) (2024-10-09)
 
