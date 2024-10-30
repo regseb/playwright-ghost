@@ -37,6 +37,9 @@ describe("Deviceandbrowserinfo", function () {
                 await page.goto(
                     "https://deviceandbrowserinfo.com/are_you_a_bot",
                 );
+                // Fermer la popup cookies, car elle cache les résultats dans la
+                // capture d'écran.
+                await page.locator("#declineCookies").click();
                 await page.waitForTimeout(5000);
                 const result = await page
                     .locator("#resultsBotTest")
@@ -71,6 +74,9 @@ describe("Deviceandbrowserinfo", function () {
                 await page.goto(
                     "https://deviceandbrowserinfo.com/are_you_a_bot",
                 );
+                // Fermer la popup cookies, car elle cache les résultats dans la
+                // capture d'écran.
+                await page.locator("#declineCookies").click();
                 await page.waitForTimeout(5000);
                 const result = await page
                     .locator("#resultsBotTest")

@@ -103,6 +103,11 @@ describe("Chrome Headless Detection (Intoli)", function () {
                 });
 
                 for (const result of results) {
+                    // Ignorer le test "Chrome" qui s'applique seulement au
+                    // navigateur Chromium.
+                    if ("Chrome (New)" === result.name) {
+                        continue;
+                    }
                     assert.ok(
                         result.status.includes("passed"),
                         `${result.name}: ${result.value}`,

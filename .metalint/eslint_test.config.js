@@ -3,6 +3,7 @@
  * @author Sébastien Règne
  */
 
+// @ts-expect-error -- Le plugin mocha ne fournit pas de types.
 import mocha from "eslint-plugin-mocha";
 import globals from "globals";
 
@@ -43,8 +44,13 @@ export default {
         "mocha/no-exclusive-tests": "error",
         "mocha/no-exports": "error",
         "mocha/no-global-tests": "error",
-        "mocha/no-hooks": "error",
-        "mocha/no-hooks-for-single-case": "error",
+        // Autoriser les hooks "afterEach", car ils sont toujours exécuter après
+        // les tests (pour nettoyer l'environnement) même si les tests ont
+        // échoués.
+        "mocha/no-hooks": ["error", { allow: ["afterEach"] }],
+        // Désactiver cette règle, car il n'y a pas de condition différente avec
+        // la règle "no-hook".
+        "mocha/no-hooks-for-single-case": "off",
         "mocha/no-identical-title": "error",
         "mocha/no-mocha-arrows": "error",
         "mocha/no-nested-tests": "error",

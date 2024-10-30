@@ -50,44 +50,44 @@
     "clean": "node .script/clean.js"
   },
   "devDependencies": {
-    "@cliqz/adblocker-playwright": "1.33.2",
+    "@ghostery/adblocker-playwright": "2.0.3",
     "@prantlf/jsonlint": "16.0.0",
     "@prettier/plugin-xml": "3.4.1",
     "@stryker-mutator/core": "8.6.0",
     "@stryker-mutator/mocha-runner": "8.6.0",
     "@types/mocha": "10.0.9",
-    "@types/node": "22.7.5",
-    "eslint": "9.12.0",
+    "@types/node": "22.8.4",
+    "eslint": "9.13.0",
     "eslint-plugin-array-func": "5.0.2",
     "eslint-plugin-eslint-comments": "3.2.0",
     "eslint-plugin-import": "2.31.0",
-    "eslint-plugin-jsdoc": "50.3.1",
+    "eslint-plugin-jsdoc": "50.4.3",
     "eslint-plugin-mocha": "10.5.0",
-    "eslint-plugin-n": "17.11.1",
+    "eslint-plugin-n": "17.12.0",
     "eslint-plugin-no-unsanitized": "4.1.2",
     "eslint-plugin-promise": "7.1.0",
     "eslint-plugin-regexp": "2.6.0",
     "eslint-plugin-unicorn": "56.0.0",
     "globals": "15.11.0",
-    "markdownlint": "0.35.0",
+    "markdownlint": "0.36.1",
     "metalint": "0.18.0",
-    "mocha": "10.7.3",
+    "mocha": "10.8.2",
     "npm-package-json-lint": "8.0.0",
-    "playwright": "1.48.0",
+    "playwright": "1.48.1",
     "prettier": "3.3.3",
-    "publint": "0.2.11",
-    "rebrowser-playwright": "1.47.100",
-    "typedoc": "0.26.8",
+    "publint": "0.2.12",
+    "rebrowser-playwright": "1.48.2",
+    "typedoc": "0.26.10",
     "typescript": "5.6.3",
     "yaml-lint": "1.7.0"
   },
   "peerDependencies": {
-    "@cliqz/adblocker-playwright": ">=1.33.2",
-    "playwright": ">=1.48.0",
-    "rebrowser-playwright": ">=1.47.100"
+    "@ghostery/adblocker-playwright": ">=2.0",
+    "playwright": ">=1.48",
+    "rebrowser-playwright": ">=1.48"
   },
   "peerDependenciesMeta": {
-    "@cliqz/adblocker-playwright": {
+    "@ghostery/adblocker-playwright": {
       "optional": true
     },
     "playwright": {
@@ -98,6 +98,6 @@
     }
   },
   "engines": {
-    "node": ">=22.9.0"
+    "node": ">=22.10"
   }
 }

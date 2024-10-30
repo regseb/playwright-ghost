@@ -62,12 +62,18 @@ jobs:
         if: ${{ steps.release.outputs.release_created }}
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
         if: ${{ steps.release.outputs.release_created }}
         run: npm ci
+
+      - name: Env package name
+        if: ${{ steps.release.outputs.release_created }}
+        # Enlever les guillemets qui entourent le nom du paquet.
+        # https://github.com/npm/cli/issues/5508
+        run: echo "NPM_NAME=$(npm pkg get name | tr -d \")" >> $GITHUB_ENV
 
       - name: Publish in npm
         if: ${{ steps.release.outputs.release_created }}
@@ -79,12 +85,12 @@ jobs:
 
       - name: Download tarball from npm
         if: ${{ steps.release.outputs.release_created }}
-        run: npm pack playwright-ghost
+        run: npm pack ${{ env.NPM_NAME }}
 
       - name: Upload tarball to release
         if: ${{ steps.release.outputs.release_created }}
-        run:
-          gh release upload ${{ steps.release.outputs.tag_name }}
-          playwright-ghost-*.tgz
+        run: >
+          gh release upload ${{ steps.release.outputs.tag_name }} ${{
+          env.NPM_NAME }}-*.tgz
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

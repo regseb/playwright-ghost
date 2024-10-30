@@ -5,6 +5,7 @@
 
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
+import process from "node:process";
 import vanilla from "../../src/index.js";
 import rebrowser from "../../src/rebrowser.js";
 
@@ -51,12 +52,21 @@ describe("rebrowser-bot-detector", function () {
 
                 await page.goto("https://bot-detector.rebrowser.net/");
 
+                process.env.REBROWSER_PATCHES_RUNTIME_FIX_MODE =
+                    "alwaysIsolated";
                 await page.evaluate(() => {
                     globalThis.postMessage("call");
                     // Exécuter la ligne suivante dans ce monde qui est isolé.
                     // eslint-disable-next-line unicorn/prefer-query-selector
                     document.getElementsByClassName("div");
                 });
+                delete process.env.REBROWSER_PATCHES_RUNTIME_FIX_MODE;
+
+                // "You're using unpatched Playwright and method
+                // `page.exposeFunction()`. No fix available."
+                // await page.exposeFunction("exposedFn", () => {
+                //     console.log("exposedFn call");
+                // });
 
                 const results = await page
                     .locator("#detections-json")
