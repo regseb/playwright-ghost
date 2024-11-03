@@ -4,6 +4,7 @@
  * @author Sébastien Règne
  */
 
+import clickPlugin from "./humanize/click.js";
 import dialogPlugin from "./humanize/dialog.js";
 import automationPlugin from "./polyfill/automation.js";
 import headlessPlugin from "./polyfill/headless.js";
@@ -44,14 +45,18 @@ export default {
      *                                       recommandés.
      */
     recommended: (options) => [
+        // Ajouter les plugins `polyfill`.
         automationPlugin(),
-        dialogPlugin(options?.humanize?.dialog),
         headlessPlugin(),
         screenPlugin(options?.polyfill?.screen),
         viewportPlugin(options?.polyfill?.viewport),
         webdriverPlugin(),
+        // Ajouter les plugins `humanize`.
+        clickPlugin(options?.humanize?.click),
+        dialogPlugin(options?.humanize?.dialog),
     ],
     humanize: {
+        click: clickPlugin,
         dialog: dialogPlugin,
     },
     polyfill: {

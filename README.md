@@ -176,6 +176,16 @@ const browser = await chromium.launch({
   <tr>
     <td>⭐ ⚙️</td>
     <td>
+      <a href="./docs/plugins/humanize/click.md"><code>humanize.click</code></a>
+    </td>
+    <td>
+      Add delay between <code>mousedown</code> and <code>mouseup</code> for
+      clicks and double-clicks.
+    </td>
+  </tr>
+  <tr>
+    <td>⭐ ⚙️</td>
+    <td>
       <a href="./docs/plugins/humanize/dialog.md"
         ><code>humanize.dialog</code></a>
     </td>

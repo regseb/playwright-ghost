@@ -11,7 +11,7 @@ describe("plugins/index.js", function () {
         it("should support no option", function () {
             const recommended = plugins.recommended();
 
-            assert.equal(recommended.length, 6);
+            assert.equal(recommended.length, 7);
             for (const plugin of recommended) {
                 assert.equal(typeof plugin, "object");
                 for (const listener of Object.values(plugin)) {
@@ -23,7 +23,7 @@ describe("plugins/index.js", function () {
         it("should support empty option", function () {
             const recommended = plugins.recommended({});
 
-            assert.equal(recommended.length, 6);
+            assert.equal(recommended.length, 7);
             for (const plugin of recommended) {
                 assert.equal(typeof plugin, "object");
                 for (const listener of Object.values(plugin)) {
