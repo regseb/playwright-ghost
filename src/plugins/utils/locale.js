@@ -12,38 +12,27 @@ import which from "../../utils/which.js";
  */
 
 /**
- * La liste des exécutables des navigateurs.
+ * Le cache de la liste des exécutables des navigateurs.
  *
  * @type {Map<string, string>}
  */
-const EXECUTABLE_PATHS = new Map();
-for (const name of ["chromium", "firefox", "webkit"]) {
-    try {
-        EXECUTABLE_PATHS.set(name, await which(name));
-    } catch {
-        // Ignorer les navigateurs qui n'ont pas été trouvés, car c'est normal
-        // qu'ils ne soient pas tous installés. Par contre si le plugin est
-        // utilisé avec un navigateur non-installé, le plugin remontera une
-        // erreur.
-    }
-}
+const cache = new Map();
 
 /**
  * Définit le chemin de l'exécutable du navigateur installé localement.
  *
- * @param {Record<string, any>|undefined} options     Les options de création
- *                                                    d'un `Browser`.
- * @param {BrowserType}                   browserType Le type de navigateur.
- * @returns {Record<string, any>|undefined} Les nouvelles options.
- * @throws {Error} Si le navigateur n'est pas installé localement.
+ * @param {Record<string, any>|undefined} options Les options de création d'un
+ *                                                `Browser`.
+ * @param {string}                        name    Le nom du navigateur.
+ * @returns {Promise<Record<string, any>>} Les nouvelles options.
  */
-const setExecutablePath = function (options, browserType) {
-    const name = browserType.name();
-    if (!EXECUTABLE_PATHS.has(name)) {
-        throw new Error(`${name} not found locally`);
+const setExecutablePath = async function (options, name) {
+    if (!cache.has(name)) {
+        cache.set(name, await which(name));
     }
+
     return {
-        executablePath: EXECUTABLE_PATHS.get(name),
+        executablePath: cache.get(name),
         ...options,
     };
 };
@@ -51,9 +40,13 @@ const setExecutablePath = function (options, browserType) {
 /**
  * Crée un plugin pour utiliser le navigateur installé localement.
  *
+ * @param {Object} [options]      Les options du plugin.
+ * @param {string} [options.name] Le nom du navigateur.
  * @returns {Record<string, Function>} Les crochets du plugin.
  */
-export default function localePlugin() {
+export default function localePlugin(options) {
+    const name = options?.name;
+
     return {
         /**
          * Modifie les options de lancement du navigateur.
@@ -61,10 +54,13 @@ export default function localePlugin() {
          * @param {any[]}                      args    Les paramètres de la
          *                                             méthode.
          * @param {ContextBefore<BrowserType>} context Le contexte du crochet.
-         * @returns {any[]} Les nouveaux paramètres.
+         * @returns {Promise<any[]>} Une promesse contenant les nouveaux
+         *                           paramètres.
          */
-        "BrowserType.launch:before": (args, { obj: browserType }) => {
-            return [setExecutablePath(args[0], browserType)];
+        "BrowserType.launch:before": async (args, { obj: browserType }) => {
+            return [
+                await setExecutablePath(args[0], name ?? browserType.name()),
+            ];
         },
 
         /**
@@ -73,13 +69,17 @@ export default function localePlugin() {
          * @param {any[]}                      args    Les paramètres de la
          *                                             méthode.
          * @param {ContextBefore<BrowserType>} context Le contexte du crochet.
-         * @returns {any[]} Les nouveaux paramètres.
+         * @returns {Promise<any[]>} Une promesse contenant les nouveaux
+         *                           paramètres.
          */
-        "BrowserType.launchPersistentContext:before": (
+        "BrowserType.launchPersistentContext:before": async (
             args,
             { obj: browserType },
         ) => {
-            return [args[0], setExecutablePath(args[1], browserType)];
+            return [
+                args[0],
+                await setExecutablePath(args[1], name ?? browserType.name()),
+            ];
         },
     };
 }

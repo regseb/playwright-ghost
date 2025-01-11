@@ -7,7 +7,7 @@ import assert from "node:assert/strict";
 import { mock } from "node:test";
 import localePlugin from "../../../../src/plugins/utils/locale.js";
 
-describe("plugins/utils/debug.js", function () {
+describe("plugins/utils/locale.js", function () {
     describe("localePlugin()", function () {
         describe("BrowserType.launch:before", function () {
             it("should throw error when not found", function () {
@@ -17,7 +17,7 @@ describe("plugins/utils/debug.js", function () {
                 const plugin = localePlugin();
                 const listener = plugin["BrowserType.launch:before"];
 
-                assert.throws(() => listener([], { obj: browserType }), {
+                assert.rejects(() => listener([], { obj: browserType }), {
                     name: "Error",
                     message: "iexplore not found locally",
                 });
@@ -35,7 +35,7 @@ describe("plugins/utils/debug.js", function () {
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
 
-                assert.throws(
+                assert.rejects(
                     () => listener(["./foo/"], { obj: browserType }),
                     {
                         name: "Error",
