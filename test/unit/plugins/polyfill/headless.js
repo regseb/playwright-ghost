@@ -18,12 +18,7 @@ describe("plugins/polyfill/headless.js", function () {
                 const listener = plugin["BrowserType.launch:before"];
                 const args = listener([], { obj: browserType });
 
-                assert.deepEqual(args, [
-                    {
-                        args: ["--headless=new"],
-                        ignoreDefaultArgs: ["--headless"],
-                    },
-                ]);
+                assert.deepEqual(args, [{ channel: "chromium" }]);
 
                 assert.equal(name.mock.callCount(), 1);
             });
@@ -38,54 +33,22 @@ describe("plugins/polyfill/headless.js", function () {
                     obj: browserType,
                 });
 
-                assert.deepEqual(args, [
-                    {
-                        slowMo: 200,
-                        args: ["--headless=new"],
-                        ignoreDefaultArgs: ["--headless"],
-                    },
-                ]);
+                assert.deepEqual(args, [{ channel: "chromium", slowMo: 200 }]);
 
                 assert.equal(name.mock.callCount(), 1);
             });
 
-            it("should support 'args' option", function () {
+            it("should support channel option", function () {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
                 const plugin = headlessPlugin();
                 const listener = plugin["BrowserType.launch:before"];
-                const args = listener([{ args: ["--disable-gpu"] }], {
+                const args = listener([{ channel: "chrome" }], {
                     obj: browserType,
                 });
 
-                assert.deepEqual(args, [
-                    {
-                        args: ["--headless=new", "--disable-gpu"],
-                        ignoreDefaultArgs: ["--headless"],
-                    },
-                ]);
-
-                assert.equal(name.mock.callCount(), 1);
-            });
-
-            it("should support 'ignoreDefaultArgs' option", function () {
-                const name = mock.fn(() => "chromium");
-                const browserType = { name };
-
-                const plugin = headlessPlugin();
-                const listener = plugin["BrowserType.launch:before"];
-                const args = listener(
-                    [{ ignoreDefaultArgs: ["--mute-audio"] }],
-                    { obj: browserType },
-                );
-
-                assert.deepEqual(args, [
-                    {
-                        args: ["--headless=new"],
-                        ignoreDefaultArgs: ["--headless", "--mute-audio"],
-                    },
-                ]);
+                assert.deepEqual(args, [{ channel: "chrome" }]);
 
                 assert.equal(name.mock.callCount(), 1);
             });
@@ -131,13 +94,7 @@ describe("plugins/polyfill/headless.js", function () {
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener(["./foo/"], { obj: browserType });
 
-                assert.deepEqual(args, [
-                    "./foo/",
-                    {
-                        args: ["--headless=new"],
-                        ignoreDefaultArgs: ["--headless"],
-                    },
-                ]);
+                assert.deepEqual(args, ["./foo/", { channel: "chromium" }]);
 
                 assert.equal(name.mock.callCount(), 1);
             });
@@ -155,57 +112,24 @@ describe("plugins/polyfill/headless.js", function () {
 
                 assert.deepEqual(args, [
                     "./foo/",
-                    {
-                        slowMo: 200,
-                        args: ["--headless=new"],
-                        ignoreDefaultArgs: ["--headless"],
-                    },
+                    { channel: "chromium", slowMo: 200 },
                 ]);
 
                 assert.equal(name.mock.callCount(), 1);
             });
 
-            it("should support 'args' option", function () {
+            it("should support channel option", function () {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
                 const plugin = headlessPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
-                const args = listener(["./foo/", { args: ["--disable-gpu"] }], {
+                const args = listener(["./foo/", { channel: "chrome" }], {
                     obj: browserType,
                 });
 
-                assert.deepEqual(args, [
-                    "./foo/",
-                    {
-                        args: ["--headless=new", "--disable-gpu"],
-                        ignoreDefaultArgs: ["--headless"],
-                    },
-                ]);
-
-                assert.equal(name.mock.callCount(), 1);
-            });
-
-            it("should support 'ignoreDefaultArgs' option", function () {
-                const name = mock.fn(() => "chromium");
-                const browserType = { name };
-
-                const plugin = headlessPlugin();
-                const listener =
-                    plugin["BrowserType.launchPersistentContext:before"];
-                const args = listener(
-                    ["./foo/", { ignoreDefaultArgs: ["--mute-audio"] }],
-                    { obj: browserType },
-                );
-
-                assert.deepEqual(args, [
-                    "./foo/",
-                    {
-                        args: ["--headless=new"],
-                        ignoreDefaultArgs: ["--headless", "--mute-audio"],
-                    },
-                ]);
+                assert.deepEqual(args, ["./foo/", { channel: "chrome" }]);
 
                 assert.equal(name.mock.callCount(), 1);
             });

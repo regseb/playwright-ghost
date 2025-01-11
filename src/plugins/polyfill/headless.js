@@ -10,22 +10,19 @@
  */
 
 /**
- * Modifie le _headless_ de Chromium.
+ * Modifie le `channel` du navigateur Chromium.
  *
  * @param {Record<string, any>|undefined} options     Les options de création
  *                                                    d'un `Browser`.
  * @param {BrowserType}                   browserType Le type de navigateur.
  * @returns {Record<string, any>|undefined} Les nouvelles options.
+ * @see https://playwright.dev/docs/browsers#opt-in-to-new-headless-mode
  */
 const changeHeadless = (options, browserType) => {
     if ("chromium" === browserType.name() && (options?.headless ?? true)) {
         return {
+            channel: "chromium",
             ...options,
-            args: ["--headless=new", ...(options?.args ?? [])],
-            ignoreDefaultArgs: [
-                "--headless",
-                ...(options?.ignoreDefaultArgs ?? []),
-            ],
         };
     }
     return options;

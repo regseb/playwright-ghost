@@ -77,9 +77,9 @@
     "metalint": "0.18.0",
     "mocha": "10.8.2",
     "npm-package-json-lint": "8.0.0",
-    "playwright": "1.48.1",
-    "prettier": "3.3.3",
     "patchright": "1.49.1",
+    "playwright": "1.49.1",
+    "prettier": "3.4.2",
     "publint": "0.2.12",
     "rebrowser-playwright": "1.48.2",
     "typedoc": "0.26.10",
@@ -87,10 +87,10 @@
     "yaml-lint": "1.7.0"
   },
   "peerDependencies": {
-    "@ghostery/adblocker-playwright": ">=2.0",
-    "playwright": ">=1.48",
-    "rebrowser-playwright": ">=1.48"
+    "@ghostery/adblocker-playwright": ">=2.3",
     "patchright": ">=1.49",
+    "playwright": ">=1.49",
+    "rebrowser-playwright": ">=1.49"
   },
   "peerDependenciesMeta": {
     "@ghostery/adblocker-playwright": {
