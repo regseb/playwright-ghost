@@ -7,6 +7,11 @@
 import hook from "../../hook.js";
 
 /**
+ * @import { BrowserContext } from "playwright"
+ * @import { ContextAfter } from "../../hook.js"
+ */
+
+/**
  * Crée un plugin pour ajouter des écouteurs dans les objets `BrowserContext`.
  *
  * @returns {Record<string, Function>} Le crochet du plugin.
@@ -14,10 +19,20 @@ import hook from "../../hook.js";
  */
 export default function browserContextPlugin() {
     return {
-        "BrowserContext:new": (context, { metadata: { listeners } }) => {
+        /**
+         * Ajoute les plugins dans un nouveau contexte de navigateur.
+         *
+         * @param {BrowserContext}    browserContext Le contexte du navigateur
+         *                                           nouvellement créé.
+         * @param {ContextAfter<any>} context        Le contexte du crochet.
+         * @returns {BrowserContext} Le contexte du navigateur avec les plugins.
+         */
+        "BrowserContext:new": (browserContext, { metadata: { listeners } }) => {
             return listeners.has("BrowserContext")
-                ? hook(context, listeners.get("BrowserContext"), { listeners })
-                : context;
+                ? hook(browserContext, listeners.get("BrowserContext"), {
+                      listeners,
+                  })
+                : browserContext;
         },
     };
 }

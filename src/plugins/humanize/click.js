@@ -28,7 +28,7 @@ const setDelay = function (options, delay) {
  * Crée un plugin pour humaniser les clics.
  *
  * @param {Object} [options]           Les options du plugin.
- * @param {Object} [options.delay]     Le délai.
+ * @param {Object} [options.delay]     Le délai entre `mousedown` et `mouseup`.
  * @param {number} [options.delay.min] Le délai minimum en millisecondes.
  * @param {number} [options.delay.max] Le délai maximum en millisecondes.
  * @returns {Record<string, Function>} Les crochets du plugin.

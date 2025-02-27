@@ -37,7 +37,7 @@ describe("utils/wait.js", function () {
 
             mock.timers.tick(41);
             // Passer au prochain cycle pour laisser la fonction, après le wait
-            // de 42 ms, s'exécuter (ici ce n'est pas le cas car le temps
+            // de 42 ms, s'exécuter (ici ce n'est pas le cas, car le temps
             // d'attente de 41 ms est trop court).
             await nextEventLoopTick();
             assert.equal(fn.mock.callCount(), 0);

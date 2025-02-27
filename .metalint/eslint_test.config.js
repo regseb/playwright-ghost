@@ -44,9 +44,9 @@ export default {
         "mocha/no-exclusive-tests": "error",
         "mocha/no-exports": "error",
         "mocha/no-global-tests": "error",
-        // Autoriser les hooks "afterEach", car ils sont toujours exécuter après
+        // Autoriser les hooks "afterEach", car ils sont toujours exécutés après
         // les tests (pour nettoyer l'environnement) même si les tests ont
-        // échoués.
+        // échoué.
         "mocha/no-hooks": ["error", { allow: ["afterEach"] }],
         // Désactiver cette règle, car il n'y a pas de condition différente avec
         // la règle "no-hook".

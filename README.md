@@ -8,11 +8,6 @@
 [![npm][img-npm]][link-npm] [![build][img-build]][link-build]
 [![coverage][img-coverage]][link-coverage] [![semver][img-semver]][link-semver]
 
-> [!NOTE]
->
-> This project is not officially commissioned or supported by Microsoft and
-> Playwright.
-
 Playwright-ghost is an overlay on [Playwright](https://playwright.dev/), adding
 plugins to conceal the differences between a browser used by a human being and a
 [headless browser](https://en.wikipedia.org/wiki/Headless_browser) controlled by
@@ -26,6 +21,11 @@ and
 methods.
 
 The `plugins` property is an array containing the plugins to be added.
+
+## Disclaimer
+
+This project is not officially commissioned or supported by Microsoft and
+Playwright.
 
 ## Install
 
@@ -103,44 +103,45 @@ const browser = await chromium.launch({
 
 ## Plugins
 
-⭐ is in `recommended` / ⚙️ has options / 📦 requires dependency
+⭐ is in [`recommended`](docs/plugins/recommended.md) /
+⚙️ has options /
+📦 requires external tool
 
 <!-- markdownlint-disable no-inline-html-->
 <table>
   <tr><th></th><th>Name</th><th>Description</th></tr>
   <tr>
-    <td>⭐</td>
+    <td align="center">⭐</td>
     <td>
-      <a href="./docs/plugins/polyfill/automation.md"
+      <a href="docs/plugins/polyfill/automation.md"
         ><code>polyfill.automation</code></a>
     </td>
     <td>Disable <code>--enable-automation</code> in Chromium.</td>
   </tr>
   <tr>
-    <td>⭐</td>
+    <td align="center">⭐</td>
     <td>
-      <a href="./docs/plugins/polyfill/headless.md"
+      <a href="docs/plugins/polyfill/headless.md"
         ><code>polyfill.headless</code></a>
     </td>
     <td>
-      Correct many differences in Javascript APIs between the headful and
+      Correct many differences in JavaScript APIs between the headful and
       headless versions of Chromium.
     </td>
   </tr>
   <tr>
-    <td>⭐ ⚙️</td>
+    <td align="center">⭐ ⚙️</td>
     <td>
-      <a href="./docs/plugins/polyfill/screen.md"
-        ><code>polyfill.screen</code></a>
+      <a href="docs/plugins/polyfill/screen.md"><code>polyfill.screen</code></a>
     </td>
     <td>
       Set a realistic value for screen size: 1920x1080.
     </td>
   </tr>
   <tr>
-    <td>⚙️</td>
+    <td align="center">⚙️</td>
     <td>
-      <a href="./docs/plugins/polyfill/useragent.md"
+      <a href="docs/plugins/polyfill/useragent.md"
         ><code>polyfill.userAgent</code></a>
     </td>
     <td>
@@ -148,9 +149,9 @@ const browser = await chromium.launch({
     </td>
   </tr>
   <tr>
-    <td>⭐ ⚙️</td>
+    <td align="center">⭐ ⚙️</td>
     <td>
-      <a href="./docs/plugins/polyfill/viewport.md"
+      <a href="docs/plugins/polyfill/viewport.md"
         ><code>polyfill.viewport</code></a>
     </td>
     <td>
@@ -158,9 +159,9 @@ const browser = await chromium.launch({
     </td>
   </tr>
   <tr>
-    <td>⭐</td>
+    <td align="center">⭐</td>
     <td>
-      <a href="./docs/plugins/polyfill/webdriver.md"
+      <a href="docs/plugins/polyfill/webdriver.md"
         ><code>polyfill.webdriver</code></a>
     </td>
     <td>
@@ -168,18 +169,18 @@ const browser = await chromium.launch({
     </td>
   </tr>
   <tr>
-    <td></td>
+    <td align="center"></td>
     <td>
-      <a href="./docs/plugins/polyfill/webgl.md"><code>polyfill.webGL</code></a>
+      <a href="docs/plugins/polyfill/webgl.md"><code>polyfill.webGL</code></a>
     </td>
     <td>
       Modify WebGL parameter values.
     </td>
   </tr>
   <tr>
-    <td>⭐ ⚙️</td>
+    <td align="center">⭐ ⚙️</td>
     <td>
-      <a href="./docs/plugins/humanize/click.md"><code>humanize.click</code></a>
+      <a href="docs/plugins/humanize/click.md"><code>humanize.click</code></a>
     </td>
     <td>
       Add delay between <code>mousedown</code> and <code>mouseup</code> for
@@ -187,18 +188,18 @@ const browser = await chromium.launch({
     </td>
   </tr>
   <tr>
-    <td>⭐ ⚙️</td>
+    <td align="center">⭐ ⚙️</td>
     <td>
-      <a href="./docs/plugins/humanize/cursor.md"><code>humanize.cursor</code></a>
+      <a href="docs/plugins/humanize/cursor.md"><code>humanize.cursor</code></a>
     </td>
     <td>
       Move the cursor with human-like movements.
     </td>
   </tr>
   <tr>
-    <td>⭐ ⚙️</td>
+    <td align="center">⭐ ⚙️</td>
     <td>
-      <a href="./docs/plugins/humanize/dialog.md"
+      <a href="docs/plugins/humanize/dialog.md"
         ><code>humanize.dialog</code></a>
     </td>
     <td>
@@ -207,9 +208,9 @@ const browser = await chromium.launch({
     </td>
   </tr>
   <tr>
-    <td>⚙️ 📦</td>
+    <td align="center">⚙️ 📦</td>
     <td>
-      <a href="./docs/plugins/utils/adblocker.md"
+      <a href="docs/plugins/utils/adblocker.md"
         ><code>utils.adblocker</code></a>
     </td>
     <td>
@@ -217,18 +218,18 @@ const browser = await chromium.launch({
     </td>
   </tr>
   <tr>
-    <td></td>
+    <td align="center"></td>
     <td>
-      <a href="./docs/plugins/utils/debug.md"><code>utils.debug</code></a>
+      <a href="docs/plugins/utils/debug.md"><code>utils.debug</code></a>
     </td>
     <td>
       Display messages from the browser console in the program console.
     </td>
   </tr>
   <tr>
-    <td></td>
+    <td align="center">⚙</td>
     <td>
-      <a href="./docs/plugins/utils/locale.md"><code>utils.locale</code></a>
+      <a href="docs/plugins/utils/locale.md"><code>utils.locale</code></a>
     </td>
     <td>
       Use the locally installed browser.

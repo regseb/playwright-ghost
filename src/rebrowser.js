@@ -1,6 +1,7 @@
 /**
  * @module
  * @license MIT
+ * @see https://github.com/rebrowser/rebrowser-playwright
  * @author Sébastien Règne
  */
 

@@ -30,7 +30,7 @@ const changeHeadless = (options, browserType) => {
 
 /**
  * Crée le plugin pour corriger de nombreuses différences dans les APIs
- * Javascript avec le nouveau mode _headless_ de Chromium.
+ * JavaScript avec le nouveau mode _headless_ de Chromium.
  *
  * @returns {Record<string, Function>} Les crochets du plugin.
  * @see https://developer.chrome.com/articles/new-headless/

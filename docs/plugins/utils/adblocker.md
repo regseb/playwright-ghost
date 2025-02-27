@@ -1,17 +1,13 @@
 # `utils/adblocker`
 
-> [!TIP]
->
-> This plugin is enabled in the ⭐ recommended.
-
 > [!IMPORTANT]
 >
-> You need add 📦
+> You need to add 📦
 > [`@ghostery/adblocker-playwright`](https://www.npmjs.com/package/@ghostery/adblocker-playwright)
 > to your npm dependencies.
 
 Add
-[Ghostery adblocker](https://github.com/ghostery/adblocker/tree/master/packages/adblocker-playwright#readme).
+[Ghostery adblocker](https://github.com/ghostery/adblocker/tree/master/packages/adblocker-playwright#readme) in browser.
 
 ## Options
 

@@ -34,9 +34,7 @@ Use the plugin and specify the current Chromium user agent without `"Headless"`.
 import { chromium, plugins } from "playwright-ghost";
 
 const getUserAgent = async () => {
-  const browser = await chromium.launch({
-    args: ["--headless=new"],
-  });
+  const browser = await chromium.launch({ channel: "chromium" });
   const context = await browser.newContext();
   const page = await context.newPage();
   const userAgent = await page.evaluate("navigator.userAgent");

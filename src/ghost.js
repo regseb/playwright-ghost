@@ -96,7 +96,7 @@ const NEW_MAPPINGS = {
 };
 
 /**
- * Répartit les crochets pour le regroupés par objet, propriété et temporalité.
+ * Répartit les crochets pour les regrouper par objet, propriété et temporalité.
  *
  * @param {Record<string, Function>[]} hooks La liste des crochets.
  * @returns {Map<string, Map<string, Object>>} Les écouteurs regroupés par

@@ -56,11 +56,11 @@ const reduce = (fns, value, context) => {
  * Accroche des écouteurs à un objet.
  *
  * @template {Object} T Le type de l'objet.
- * @param {T}                     obj        L'objet qui sera crocheté.
- * @param {Map<string, Listener>} listeners  Les écouteurs à accrocher à
- *                                           l'objet.
- * @param {Object}                [metadata] Les métadonnées qui seront passées
- *                                           aux écouteurs.
+ * @param {T}                            obj        L'objet qui sera crocheté.
+ * @param {Map<string|symbol, Listener>} listeners  Les écouteurs à accrocher à
+ *                                                  l'objet.
+ * @param {Object}                       [metadata] Les métadonnées qui seront
+ *                                                  passées aux écouteurs.
  * @returns {T} L'objet crocheté.
  */
 export default function hook(obj, listeners, metadata = {}) {

@@ -11,11 +11,21 @@
 /**
  * Crée un plugin pour ajouter un bloqueur de publicités dans le navigateur.
  *
- * @param {Object} [options]      Les options du plugin.
- * @param {string} [options.mode] Le mode de chargement des règles : `"parse"`,
- *                                `"fromLists"`, `"fromPrebuiltAdsOnly"`,
- *                                `"fromPrebuiltAdsAndTracking"`,
- *                                `"fromPrebuiltFull"`.
+ * @param {Object}   [options]         Les options du plugin.
+ * @param {string}   [options.mode]    Le mode de chargement des règles :
+ *                                     `"parse"`, `"fromLists"`,
+ *                                     `"fromPrebuiltAdsOnly"`,
+ *                                     `"fromPrebuiltAdsAndTracking"`,
+ *                                     `"fromPrebuiltFull"`.
+ * @param {string}   [options.filters] Les filtres du mode `"parse"`.
+ * @param {Object}   [options.config]  La configuration des modes `"parse"` et
+ *                                     `"fromLists"`.
+ * @param {fetch}    [options.fetch]   La fonction pour faire des requêtes des
+ *                                     modes `"fromLists"`,
+ *                                     `"fromPrebuiltAdsOnly"`,
+ *                                     `"fromPrebuiltAdsAndTracking"` et
+ *                                     `"fromPrebuiltFull"`.
+ * @param {string[]} [options.urls]    Les URLs du mode `"fromLists"`.
  * @returns {Promise<Record<string, Function>>} Une promesse contenant le
  *                                              crochet du plugin.
  */

@@ -8,7 +8,7 @@
 >
 > This plugin is enabled in the ⭐ recommended.
 
-Correct many differences in Javascript APIs between the headful and headless
+Correct many differences in JavaScript APIs between the headful and headless
 versions of Chromium. This plugin activates Chromium's new headless mode.
 
 ## Options
