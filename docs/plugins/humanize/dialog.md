@@ -12,7 +12,7 @@ a humanly possible time (between 1 and 5 seconds). By default Playwright
 
 This plugin supports the following option:
 
-- `timeout`:
+- `delay`:
   - `min` (default `1000`): Minimum waiting time in milliseconds.
   - `max` (default `5000`): Maximum waiting time in milliseconds.
 
@@ -29,13 +29,13 @@ const browser = await chromium.launch({
 // ...
 ```
 
-Use the plugin and specify a wait time between 500 milliseconds and 2 seconds.
+Use the plugin and specify a delay between 500 milliseconds and 2 seconds.
 
 ```javascript
 import { chromium, plugins } from "playwright-ghost";
 
 const browser = await chromium.launch({
-  plugins: [plugins.humanize.dialog({ timeout: { min: 500, max: 2000 } })],
+  plugins: [plugins.humanize.dialog({ delay: { min: 500, max: 2000 } })],
 });
 // ...
 ```

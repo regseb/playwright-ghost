@@ -96,7 +96,7 @@ describe("plugins/humanize/dialog.js", function () {
                 const accept = mock.fn(() => Promise.resolve());
                 const page = new PageMock();
 
-                const plugin = dialogPlugin({ timeout: { min: 10, max: 50 } });
+                const plugin = dialogPlugin({ delay: { min: 10, max: 50 } });
                 const listener = plugin["Page:new"];
                 const pageAltered = listener(page);
                 page.mock.dispatch("dialog", { accept });
