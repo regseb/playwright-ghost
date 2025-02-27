@@ -234,6 +234,15 @@ const browser = await chromium.launch({
       Use the locally installed browser.
     </td>
   </tr>
+  <tr>
+    <td align="center">⚙️ 📦</td>
+    <td>
+      <a href="docs/plugins/utils/xvfb.md"><code>utils.xvfb</code></a>
+    </td>
+    <td>
+      Run browser in <code>Xvfb</code> (<em>X Virtual Frame Buffer</em>).
+    </td>
+  </tr>
 </table>
 <!-- markdownlint-enable no-inline-html-->
 

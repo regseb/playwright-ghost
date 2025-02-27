@@ -17,6 +17,7 @@ import webGLPlugin from "./polyfill/webgl.js";
 import adblockerPlugin from "./utils/adblocker.js";
 import debugPlugin from "./utils/debug.js";
 import localePlugin from "./utils/locale.js";
+import xvfbPlugin from "./utils/xvfb.js";
 
 /**
  * Les plugins pour gommer des différences entre un navigateur utilisé par un
@@ -93,6 +94,7 @@ const utils = {
     adblocker: adblockerPlugin,
     debug: debugPlugin,
     locale: localePlugin,
+    xvfb: xvfbPlugin,
 };
 
 /**
