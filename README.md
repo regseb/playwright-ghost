@@ -189,6 +189,15 @@ const browser = await chromium.launch({
   <tr>
     <td>⭐ ⚙️</td>
     <td>
+      <a href="./docs/plugins/humanize/cursor.md"><code>humanize.cursor</code></a>
+    </td>
+    <td>
+      Move the cursor with human-like movements.
+    </td>
+  </tr>
+  <tr>
+    <td>⭐ ⚙️</td>
+    <td>
       <a href="./docs/plugins/humanize/dialog.md"
         ><code>humanize.dialog</code></a>
     </td>

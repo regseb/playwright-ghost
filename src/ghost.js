@@ -8,11 +8,12 @@ import hook from "./hook.js";
 import browserPlugin from "./plugins/hook/browser.js";
 import browserContextPlugin from "./plugins/hook/browsercontext.js";
 import locatorPlugin from "./plugins/hook/locator.js";
+import mousePlugin from "./plugins/hook/mouse.js";
 import pagePlugin from "./plugins/hook/page.js";
 import flatAwait from "./utils/flatawait.js";
 
 /**
- * @import { Browser, BrowserContext, BrowserType, Locator } from "playwright"
+ * @import { Browser, BrowserContext, BrowserType, Page, Locator } from "playwright"
  * @import { ContextAfter } from "./hook.js"
  */
 
@@ -69,6 +70,28 @@ const NEW_MAPPINGS = {
         "Locator.locator:after": identity,
         "Locator.nth:after": identity,
         "Locator.or:after": identity,
+    }),
+    "Mouse:new": Object.entries({
+        "Browser.newPage:after":
+            (/** @type {Function} */ listener) =>
+            (
+                /** @type {Page} */ page,
+                /** @type {ContextAfter<Browser>} */ context,
+            ) => {
+                // eslint-disable-next-line no-param-reassign
+                page.mouse = listener(page.mouse, context);
+                return page;
+            },
+        "BrowserContext.newPage:after":
+            (/** @type {Function} */ listener) =>
+            (
+                /** @type {Page} */ page,
+                /** @type {ContextAfter<BrowserContext>} */ context,
+            ) => {
+                // eslint-disable-next-line no-param-reassign
+                page.mouse = listener(page.mouse, context);
+                return page;
+            },
     }),
 };
 
@@ -144,6 +167,7 @@ export default class Ghost {
             browserContextPlugin(),
             pagePlugin(),
             locatorPlugin(),
+            mousePlugin(),
             ...(await flatAwait(options?.plugins ?? [])),
         ]);
         const hooked = hook(this.#browserType, listeners.get("BrowserType"), {
