@@ -252,52 +252,33 @@ const browser = await chromium.launch({
 <!-- markdownlint-disable no-inline-html-->
 <table>
   <tr>
-    <th></th>
-    <th>Chromiumᵃ</th>
-    <th>Firefoxᵇ</th>
-  </tr>
-  <tr>
-    <td>
-      <a href="https://kaliiiiiiiiii.github.io/brotector/?crash=false"
-        >Brotector</a
-      >
-    </td>
-    <td>
-      ❌¹ <em>0.98</em> (<em>UA_Override</em> & <em>Input.cordinatesLeak</em>)
-    </td>
-    <td>
-      ❌ <em>1.00</em> (<em>navigator.webdriver</em> & <em>PWinitScript</em>)
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href="https://www.browserscan.net/bot-detection">BrowserScan</a>
-    </td>
+    <td><a href="https://kaliiiiiiiiii.github.io/brotector/">Brotector</a></td>
     <td>✅</td>
-    <td>❌ <em>WebDriver</em></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><a href="https://www.browserscan.net/bot-detection">BrowserScan</a></td>
+    <td>✅</td>
+    <td></td>
   </tr>
   <tr>
     <td>
       <a href="https://hmaker.github.io/selenium-detector/"
-        >Chromedriver Detector<a
+        >Chromedriver Detector</a
       >
     </td>
     <td>✅</td>
-    <td>✅</td>
+    <td></td>
   </tr>
   <tr>
-    <td>
-      <a href="https://abrahamjuliot.github.io/creepjs/">CreepJS</a>
-    </td>
-    <td>✅ <em>B-</em></td>
-    <td>❌ <em>F+</em></td>
+    <td><a href="https://abrahamjuliot.github.io/creepjs/">CreepJS</a></td>
+    <td>❌</td>
+    <td><em>F+</em></td>
   </tr>
   <tr>
-    <td>
-      <a href="https://antoinevastel.com/bots/datadome">Datadome</a>
-    </td>
+    <td><a href="https://antoinevastel.com/bots/datadome">Datadome</a></td>
     <td>✅</td>
-    <td>✅</td>
+    <td></td>
   </tr>
   <tr>
     <td>
@@ -305,24 +286,36 @@ const browser = await chromium.launch({
         >Deviceandbrowserinfo</a
       >
     </td>
-    <td>❌ <em>GPU</em></td>
-    <td>❌ <em>Webdriver</em></td>
+    <td>✅</td>
+    <td></td>
   </tr>
   <tr>
-    <td>
-      <a href="https://www.deviceinfo.me/">Device Info</a>
-    </td>
+    <td><a href="https://www.deviceinfo.me/">Device Info</a></td>
     <td>✅</td>
-    <td>❌</td>
+    <td></td>
   </tr>
   <tr>
     <td>
       <a href="https://fingerprint.com/products/bot-detection/"
-        >FingerprintJS</a
+        >Fingerprint</a
       >
     </td>
     <td>✅</td>
-    <td>❌ <em>Automation Tool</em></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://fingerprint.com/products/bot-detection/"
+        >Fingerprint Pro Playground</a
+      >
+    </td>
+    <td>✅</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><a href="https://fingerprint-scan.com/">Fingerprint-Scan</a></td>
+    <td>❌</td>
+    <td>20</td>
   </tr>
   <tr>
     <td>
@@ -331,14 +324,14 @@ const browser = await chromium.launch({
       >
     </td>
     <td>✅</td>
-    <td>❌ <em>0.2</em></td>
+    <td></td>
   </tr>
   <tr>
     <td>
       <a href="https://infosimples.github.io/detect-headless/">infosimples</a>
     </td>
     <td>✅</td>
-    <td>❌ <em>Webdriver</em> & <em>Plugins</em></td>
+    <td></td>
   </tr>
   <tr>
     <td>
@@ -348,23 +341,54 @@ const browser = await chromium.launch({
       >
     </td>
     <td>✅</td>
-    <td>❌ <em>WebDriver</em> & <em>Plugins</em></td>
+    <td></td>
   </tr>
   <tr>
     <td>
-      <a href="https://rebrowser.github.io/rebrowser-bot-detector/"
+      <a href="https://overpoweredjs.com/demo.html"
+        >OverpoweredJS Fingerprinting Demo</a
+      >
+    </td>
+    <td>❌</td>
+    <td><em>Bot (4)</em></td>
+  </tr>
+  <tr>
+    <td><a href="https://pixelscan.net/">Pixelscan</a></td>
+    <td>✅</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://bot-detector.rebrowser.net/"
         >rebrowser-bot-detector</a
       >
     </td>
-    <td>❌ <em>pwInitScripts</em></td>
-    <td>❌ <em>navigatorWebdriver</em></td>
+    <td>❌</td>
+    <td>
+      <em>mainWorldExecution</em>, <em>runtimeEnableLeak</em> &amp;
+      <em>pwInitScripts</em>
+    </td>
+  </tr>
+  <tr>
+    <td><a href="https://bot.sannysoft.com/">Antibot (Sannysoft)</a></td>
+    <td>✅</td>
+    <td></td>
   </tr>
   <tr>
     <td>
-      <a href="https://bot.sannysoft.com/">Antibot (Sannysoft)</a>
+      <a href="https://mihneamanolache.github.io/simple-sw-test/">Simple Service Workers Fingerprinting Leaks Test</a>
     </td>
     <td>✅</td>
-    <td>❌ <em>Webdriver</em> & <em>Plugins</em></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://antcpt.com/score_detector/"
+        >Score detector (reCAPTCHA v3)</a
+      >
+    </td>
+    <td>✅</td>
+    <td></td>
   </tr>
   <tr>
     <td>
@@ -373,14 +397,12 @@ const browser = await chromium.launch({
       >
     </td>
     <td>✅</td>
-    <td>✅</td>
+    <td></td>
   </tr>
 </table>
 
-ᵃ Chromium with `rebrowser-playwright`, recommended plugins and the
-`polyfill.userAgent` plugin (to remove _Headless_).\
-ᵇ Firefox with `playwright` and recommended plugins.\
-¹ Without [_popupCrash_](https://github.com/kaliiiiiiiiii/brotector#popupcrash).
+To find out which plugins are used, see the
+[anti-bots integration tests](test/integration/antibots).
 
 [img-npm]:
   https://img.shields.io/npm/dm/playwright-ghost?label=npm&logo=npm&logoColor=whitesmoke

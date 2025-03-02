@@ -5,13 +5,10 @@
 
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
-import vanilla from "../../src/index.js";
-import rebrowser from "../../src/rebrowser.js";
+import vanilla from "../../../src/index.js";
 
 const getUserAgent = async () => {
-    const browser = await vanilla.chromium.launch({
-        args: ["--headless=new"],
-    });
+    const browser = await vanilla.chromium.launch({ channel: "chromium" });
     const context = await browser.newContext();
     const page = await context.newPage();
     const userAgent = await page.evaluate("navigator.userAgent");
@@ -20,13 +17,13 @@ const getUserAgent = async () => {
     return userAgent.replace("Headless", "");
 };
 
-describe("FingerprintJS", function () {
+describe("Anti-bot: Fingerprint", function () {
     describe("chromium", function () {
         it("should not be detected", async function () {
-            const browser = await rebrowser.chromium.launch({
+            const browser = await vanilla.chromium.launch({
                 plugins: [
-                    ...rebrowser.plugins.recommended(),
-                    rebrowser.plugins.polyfill.userAgent({
+                    ...vanilla.plugins.recommended(),
+                    vanilla.plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
                 ],
@@ -35,7 +32,7 @@ describe("FingerprintJS", function () {
             const page = await context.newPage();
             try {
                 await page.goto(
-                    "https://fingerprintjs.com/products/bot-detection/",
+                    "https://fingerprint.com/products/bot-detection/",
                 );
 
                 // Attendre les résultats.
@@ -63,11 +60,11 @@ describe("FingerprintJS", function () {
                 }
             } finally {
                 await page.screenshot({
-                    path: "./log/fingerprintjs-cr.png",
+                    path: "./log/fingerprint-cr.png",
                     fullPage: true,
                 });
                 await fs.writeFile(
-                    "./log/fingerprintjs-cr.html",
+                    "./log/fingerprint-cr.html",
                     await page.content(),
                 );
 
@@ -75,50 +72,33 @@ describe("FingerprintJS", function () {
                 await browser.close();
             }
         });
-    });
 
-    describe("firefox", function () {
-        it("should not be detected", async function () {
-            const browser = await vanilla.firefox.launch({
-                plugins: vanilla.plugins.recommended(),
+        it("should not be detected in playground", async function () {
+            const browser = await vanilla.chromium.launch({
+                plugins: [
+                    ...vanilla.plugins.recommended(),
+                    vanilla.plugins.polyfill.userAgent({
+                        userAgent: await getUserAgent(),
+                    }),
+                ],
             });
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
-                await page.goto(
-                    "https://fingerprintjs.com/products/bot-detection/",
-                );
+                await page.goto("https://demo.fingerprint.com/playground");
 
-                // Attendre les résultats.
-                await page.waitForSelector(
-                    'div[class^="HeroSection-module--card--"]' +
-                        ' h3:has-text("Automation Tool")',
-                );
-                await page.waitForSelector(
-                    'div[class^="HeroSection-module--card--"]' +
-                        ' h3:has-text("Search Engine")',
-                );
+                const result = await page
+                    .locator('div[data-test-property-name="botd"]')
+                    .textContent();
 
-                const selector = 'div[class^="HeroSection-module--card--"]';
-                const results = await page
-                    .locator(selector)
-                    .evaluateAll((divs) => {
-                        return divs.map((div) => ({
-                            name: div.querySelector("h3").textContent,
-                            status: div.querySelector("p").textContent,
-                        }));
-                    });
-
-                for (const result of results) {
-                    assert.equal(result.status, "Not detected", result.name);
-                }
+                assert.equal(result, "Not detected");
             } finally {
                 await page.screenshot({
-                    path: "./log/fingerprintjs-fx.png",
+                    path: "./log/fingerprintplayground-cr.png",
                     fullPage: true,
                 });
                 await fs.writeFile(
-                    "./log/fingerprintjs-fx.html",
+                    "./log/fingerprintplayground-cr.html",
                     await page.content(),
                 );
 

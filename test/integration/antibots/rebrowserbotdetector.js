@@ -6,13 +6,10 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import process from "node:process";
-import vanilla from "../../src/index.js";
-import rebrowser from "../../src/rebrowser.js";
+import rebrowser from "../../../src/rebrowser.js";
 
 const getUserAgent = async () => {
-    const browser = await vanilla.chromium.launch({
-        args: ["--headless=new"],
-    });
+    const browser = await rebrowser.chromium.launch({ channel: "chromium" });
     const context = await browser.newContext();
     const page = await context.newPage();
     const userAgent = await page.evaluate("navigator.userAgent");
@@ -21,7 +18,7 @@ const getUserAgent = async () => {
     return userAgent.replace("Headless", "");
 };
 
-describe("rebrowser-bot-detector", function () {
+describe("Anti-bot: rebrowser-bot-detector", function () {
     describe("chromium", function () {
         it("should not be detected", async function () {
             const browser = await rebrowser.chromium.launch({
@@ -41,7 +38,7 @@ describe("rebrowser-bot-detector", function () {
                     globalThis.addEventListener("message", (event) => {
                         if ("call" === event.data) {
                             globalThis.dummyFn();
-                            // eslint-disable-next-line unicorn/prefer-query-selector
+                            // eslint-disable-next-line no-undef, unicorn/prefer-query-selector
                             document.getElementById("detections-json");
                             // Ne pas exécuter la ligne suivante dans ce monde
                             // pour ne pas être détecté.
@@ -57,7 +54,7 @@ describe("rebrowser-bot-detector", function () {
                 await page.evaluate(() => {
                     globalThis.postMessage("call");
                     // Exécuter la ligne suivante dans ce monde qui est isolé.
-                    // eslint-disable-next-line unicorn/prefer-query-selector
+                    // eslint-disable-next-line no-undef, unicorn/prefer-query-selector
                     document.getElementsByClassName("div");
                 });
                 delete process.env.REBROWSER_PATCHES_RUNTIME_FIX_MODE;
@@ -95,63 +92,6 @@ describe("rebrowser-bot-detector", function () {
                 });
                 await fs.writeFile(
                     "./log/rebrowserbotdetector-cr.html",
-                    await page.content(),
-                );
-
-                await context.close();
-                await browser.close();
-            }
-        });
-    });
-
-    describe("firefox", function () {
-        it("should not be detected", async function () {
-            const browser = await vanilla.firefox.launch({
-                plugins: vanilla.plugins.recommended(),
-            });
-            const context = await browser.newContext();
-            const page = await context.newPage();
-            try {
-                await page.goto("https://bot-detector.rebrowser.net/");
-
-                await page.evaluate(() => {
-                    globalThis.dummyFn();
-                    // eslint-disable-next-line unicorn/prefer-query-selector
-                    document.getElementById("detections-json");
-                    // Ne pas exécuter la ligne suivante qui est détectée, mais
-                    // il est possible d'utiliser la méthode locator() de
-                    // Playwright.
-                    // document.getElementsByClassName("div");
-                });
-                page.locator(".div");
-
-                const results = await page
-                    .locator("#detections-json")
-                    .inputValue();
-
-                for (const result of JSON.parse(results)) {
-                    // https://github.com/rebrowser/rebrowser-patches/issues/10#issuecomment-2397629630
-                    if ("mainWorldExecution" === result.type) {
-                        assert.equal(
-                            result.rating,
-                            0,
-                            `${result.type}: ${result.note}`,
-                        );
-                    } else {
-                        assert.equal(
-                            result.rating,
-                            -1,
-                            `${result.type}: ${result.note}`,
-                        );
-                    }
-                }
-            } finally {
-                await page.screenshot({
-                    path: "./log/rebrowserbotdetector-fx.png",
-                    fullPage: true,
-                });
-                await fs.writeFile(
-                    "./log/rebrowserbotdetector-fx.html",
                     await page.content(),
                 );
 
