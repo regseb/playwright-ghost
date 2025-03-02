@@ -1,0 +1,116 @@
+{
+  "name": "playwright-ghost",
+  "version": "0.10.0",
+  "description": "Playwright overlay with plugins.",
+  "keywords": [
+    "playwright",
+    "ghost",
+    "polyfill",
+    "headless"
+  ],
+  "homepage": "https://github.com/regseb/playwright-ghost#readme",
+  "bugs": {
+    "url": "https://github.com/regseb/playwright-ghost/issues",
+    "email": "regseb@gmail.com"
+  },
+  "license": "MIT",
+  "author": "Sébastien Règne <regseb@gmail.com> (https://github.com/regseb)",
+  "funding": [
+    "https://buymeacoffee.com/regseb",
+    "https://www.paypal.me/sebastienregne"
+  ],
+  "files": [
+    "./src/",
+    "./types/"
+  ],
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./patchright": {
+      "types": "./types/index.d.ts",
+      "default": "./src/patchright.js"
+    },
+    "./rebrowser": {
+      "types": "./types/index.d.ts",
+      "default": "./src/rebrowser.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./src/index.js",
+  "types": "./types/index.d.ts",
+  "repository": "regseb/playwright-ghost",
+  "type": "module",
+  "scripts": {
+    "lint": "metalint",
+    "lint:fix": "metalint --fix",
+    "lint:types": "tsc --project .tsconfig_lint.json",
+    "test": "npm run test:coverage",
+    "test:unit": "mocha --config test/unit/mocharc.json",
+    "test:integration": "mocha --config test/integration/mocharc.json",
+    "test:coverage": "stryker run",
+    "jsdocs": "typedoc --tsconfig .tsconfig_jsdocs.json",
+    "clean": "node .script/clean.js"
+  },
+  "dependencies": {
+    "ghost-cursor": "1.3.0"
+  },
+  "devDependencies": {
+    "@ghostery/adblocker-playwright": "2.5.0",
+    "@prantlf/jsonlint": "16.0.0",
+    "@prettier/plugin-xml": "3.4.1",
+    "@stryker-mutator/core": "8.7.1",
+    "@stryker-mutator/mocha-runner": "8.7.1",
+    "@types/eslint-plugin-mocha": "10.4.0",
+    "@types/mocha": "10.0.10",
+    "@types/node": "22.13.8",
+    "eslint": "9.21.0",
+    "eslint-plugin-array-func": "5.0.2",
+    "eslint-plugin-eslint-comments": "3.2.0",
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-jsdoc": "50.6.3",
+    "eslint-plugin-mocha": "10.5.0",
+    "eslint-plugin-n": "17.16.1",
+    "eslint-plugin-no-unsanitized": "4.1.2",
+    "eslint-plugin-promise": "7.2.1",
+    "eslint-plugin-regexp": "2.7.0",
+    "eslint-plugin-unicorn": "57.0.0",
+    "globals": "16.0.0",
+    "markdownlint": "0.37.4",
+    "metalint": "0.19.0",
+    "mocha": "11.1.0",
+    "npm-package-json-lint": "8.0.0",
+    "patchright": "1.50.1",
+    "playwright": "1.50.1",
+    "prettier": "3.5.2",
+    "publint": "0.3.7",
+    "rebrowser-playwright": "1.49.1",
+    "typedoc": "0.27.9",
+    "typescript": "5.8.2",
+    "yaml-lint": "1.7.0"
+  },
+  "peerDependencies": {
+    "@ghostery/adblocker-playwright": ">=2.5",
+    "patchright": ">=1.50",
+    "playwright": ">=1.50",
+    "rebrowser-playwright": ">=1.49"
+  },
+  "peerDependenciesMeta": {
+    "@ghostery/adblocker-playwright": {
+      "optional": true
+    },
+    "patchright": {
+      "optional": true
+    },
+    "playwright": {
+      "optional": true
+    },
+    "rebrowser-playwright": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=22.14"
+  }
+}

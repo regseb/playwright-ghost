@@ -1,0 +1,99 @@
+name: Release
+on:
+  push:
+    branches: [main]
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - name: Run Release Please
+        uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          config-file: .release-please/config.json
+          manifest-file: .release-please/manifest.json
+
+      # Si la PR (pull request) a été créée ou modifiée : formatter les fichiers
+      # modifiés par release-please, car ils ne respectent plus le formatage de
+      # Prettier (via Metalint).
+      # https://github.com/googleapis/release-please/issues/1802
+      - name: Checkout repository
+        if: ${{ steps.release.outputs.pr }}
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ fromJson(steps.release.outputs.pr).headBranchName }}
+
+      - name: Configure Git user
+        if: ${{ steps.release.outputs.pr }}
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+
+      - name: Setup Node.js
+        if: ${{ steps.release.outputs.pr }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        if: ${{ steps.release.outputs.pr }}
+        run: npm ci
+
+      - name: Format files
+        if: ${{ steps.release.outputs.pr }}
+        run: >
+          npm run lint:fix -- .release-please/manifest.json CHANGELOG.md
+          package.json package-lock.json
+
+      - name: Commit and push
+        if: ${{ steps.release.outputs.pr }}
+        run: |
+          git commit --all --amend --no-edit
+          git push --force
+
+      # Si la release a été créée : publier le paquet dans npm.
+      - name: Checkout repository
+        if: ${{ steps.release.outputs.release_created }}
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        if: ${{ steps.release.outputs.release_created }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        if: ${{ steps.release.outputs.release_created }}
+        run: npm ci
+
+      - name: Publish in npm
+        if: ${{ steps.release.outputs.release_created }}
+        # Forcer l'accès public, car la valeur par défaut n'est pas utilisée.
+        # https://github.com/npm/cli/issues/7706
+        run: npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Env package name
+        if: ${{ steps.release.outputs.release_created }}
+        # Enlever les guillemets qui entourent le nom du paquet.
+        # https://github.com/npm/cli/issues/5508
+        run: echo "NPM_NAME=$(npm pkg get name | tr -d \")" >> $GITHUB_ENV
+
+      - name: Download tarball from npm
+        if: ${{ steps.release.outputs.release_created }}
+        run: npm pack ${{ env.NPM_NAME }}@${{ steps.release.outputs.tag_name }}
+
+      - name: Upload tarball to release
+        if: ${{ steps.release.outputs.release_created }}
+        run: >
+          gh release upload ${{ steps.release.outputs.tag_name }} ${{
+          env.NPM_NAME }}-*.tgz
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
