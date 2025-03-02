@@ -4,9 +4,9 @@
  */
 
 import assert from "node:assert/strict";
+import crypto from "node:crypto";
 import { mock } from "node:test";
 import viewportPlugin from "../../../../src/plugins/polyfill/viewport.js";
-import Random from "../../../../src/utils/random.js";
 
 describe("plugins/polyfill/viewport.js", function () {
     describe("viewportPlugin()", function () {
@@ -16,8 +16,8 @@ describe("plugins/polyfill/viewport.js", function () {
             });
 
             it("should support no option", function () {
-                const getInt = mock.method(Random, "getInt", () => {
-                    switch (getInt.mock.callCount()) {
+                const randomInt = mock.method(crypto, "randomInt", () => {
+                    switch (randomInt.mock.callCount()) {
                         case 0:
                             return 1500;
                         case 1:
@@ -37,14 +37,17 @@ describe("plugins/polyfill/viewport.js", function () {
                     { viewport: { width: 1500, height: 600 } },
                 ]);
 
-                assert.equal(getInt.mock.callCount(), 2);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [1000, 1800]);
-                assert.deepEqual(getInt.mock.calls[1].arguments, [500, 800]);
+                assert.equal(randomInt.mock.callCount(), 2);
+                assert.deepEqual(
+                    randomInt.mock.calls[0].arguments,
+                    [1000, 1801],
+                );
+                assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 801]);
             });
 
             it("should support empty option", function () {
-                const getInt = mock.method(Random, "getInt", () => {
-                    switch (getInt.mock.callCount()) {
+                const randomInt = mock.method(crypto, "randomInt", () => {
+                    switch (randomInt.mock.callCount()) {
                         case 0:
                             return 1500;
                         case 1:
@@ -64,14 +67,17 @@ describe("plugins/polyfill/viewport.js", function () {
                     { viewport: { width: 1500, height: 600 } },
                 ]);
 
-                assert.equal(getInt.mock.callCount(), 2);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [1000, 1800]);
-                assert.deepEqual(getInt.mock.calls[1].arguments, [500, 800]);
+                assert.equal(randomInt.mock.callCount(), 2);
+                assert.deepEqual(
+                    randomInt.mock.calls[0].arguments,
+                    [1000, 1801],
+                );
+                assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 801]);
             });
 
             it("should support option", function () {
-                const getInt = mock.method(Random, "getInt", () => {
-                    switch (getInt.mock.callCount()) {
+                const randomInt = mock.method(crypto, "randomInt", () => {
+                    switch (randomInt.mock.callCount()) {
                         case 0:
                             return 1500;
                         case 1:
@@ -91,13 +97,16 @@ describe("plugins/polyfill/viewport.js", function () {
                     { slowMo: 200, viewport: { width: 1500, height: 600 } },
                 ]);
 
-                assert.equal(getInt.mock.callCount(), 2);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [1000, 1800]);
-                assert.deepEqual(getInt.mock.calls[1].arguments, [500, 800]);
+                assert.equal(randomInt.mock.callCount(), 2);
+                assert.deepEqual(
+                    randomInt.mock.calls[0].arguments,
+                    [1000, 1801],
+                );
+                assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 801]);
             });
 
             it("should support 'viewport' option", function () {
-                const getInt = mock.method(Random, "getInt", () => 0);
+                const randomInt = mock.method(crypto, "randomInt", () => 0);
 
                 const plugin = viewportPlugin();
                 const listener =
@@ -112,14 +121,17 @@ describe("plugins/polyfill/viewport.js", function () {
                     { viewport: { width: 1600, height: 700 } },
                 ]);
 
-                assert.equal(getInt.mock.callCount(), 2);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [1000, 1800]);
-                assert.deepEqual(getInt.mock.calls[1].arguments, [500, 800]);
+                assert.equal(randomInt.mock.callCount(), 2);
+                assert.deepEqual(
+                    randomInt.mock.calls[0].arguments,
+                    [1000, 1801],
+                );
+                assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 801]);
             });
 
             it("should support options", function () {
-                const getInt = mock.method(Random, "getInt", () => {
-                    switch (getInt.mock.callCount()) {
+                const randomInt = mock.method(crypto, "randomInt", () => {
+                    switch (randomInt.mock.callCount()) {
                         case 0:
                             return 350;
                         case 1:
@@ -142,9 +154,9 @@ describe("plugins/polyfill/viewport.js", function () {
                     { viewport: { width: 350, height: 150 } },
                 ]);
 
-                assert.equal(getInt.mock.callCount(), 2);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [300, 400]);
-                assert.deepEqual(getInt.mock.calls[1].arguments, [100, 200]);
+                assert.equal(randomInt.mock.callCount(), 2);
+                assert.deepEqual(randomInt.mock.calls[0].arguments, [300, 401]);
+                assert.deepEqual(randomInt.mock.calls[1].arguments, [100, 201]);
             });
         });
 
@@ -154,8 +166,8 @@ describe("plugins/polyfill/viewport.js", function () {
             });
 
             it("should support no option", function () {
-                const getInt = mock.method(Random, "getInt", () => {
-                    switch (getInt.mock.callCount()) {
+                const randomInt = mock.method(crypto, "randomInt", () => {
+                    switch (randomInt.mock.callCount()) {
                         case 0:
                             return 1500;
                         case 1:
@@ -173,14 +185,17 @@ describe("plugins/polyfill/viewport.js", function () {
                     { viewport: { width: 1500, height: 600 } },
                 ]);
 
-                assert.equal(getInt.mock.callCount(), 2);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [1000, 1800]);
-                assert.deepEqual(getInt.mock.calls[1].arguments, [500, 800]);
+                assert.equal(randomInt.mock.callCount(), 2);
+                assert.deepEqual(
+                    randomInt.mock.calls[0].arguments,
+                    [1000, 1801],
+                );
+                assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 801]);
             });
 
             it("should support empty option", function () {
-                const getInt = mock.method(Random, "getInt", () => {
-                    switch (getInt.mock.callCount()) {
+                const randomInt = mock.method(crypto, "randomInt", () => {
+                    switch (randomInt.mock.callCount()) {
                         case 0:
                             return 1500;
                         case 1:
@@ -198,14 +213,17 @@ describe("plugins/polyfill/viewport.js", function () {
                     { viewport: { width: 1500, height: 600 } },
                 ]);
 
-                assert.equal(getInt.mock.callCount(), 2);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [1000, 1800]);
-                assert.deepEqual(getInt.mock.calls[1].arguments, [500, 800]);
+                assert.equal(randomInt.mock.callCount(), 2);
+                assert.deepEqual(
+                    randomInt.mock.calls[0].arguments,
+                    [1000, 1801],
+                );
+                assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 801]);
             });
 
             it("should support option", function () {
-                const getInt = mock.method(Random, "getInt", () => {
-                    switch (getInt.mock.callCount()) {
+                const randomInt = mock.method(crypto, "randomInt", () => {
+                    switch (randomInt.mock.callCount()) {
                         case 0:
                             return 1500;
                         case 1:
@@ -223,13 +241,16 @@ describe("plugins/polyfill/viewport.js", function () {
                     { slowMo: 200, viewport: { width: 1500, height: 600 } },
                 ]);
 
-                assert.equal(getInt.mock.callCount(), 2);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [1000, 1800]);
-                assert.deepEqual(getInt.mock.calls[1].arguments, [500, 800]);
+                assert.equal(randomInt.mock.callCount(), 2);
+                assert.deepEqual(
+                    randomInt.mock.calls[0].arguments,
+                    [1000, 1801],
+                );
+                assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 801]);
             });
 
             it("should support 'viewport' option", function () {
-                const getInt = mock.method(Random, "getInt", () => 0);
+                const randomInt = mock.method(crypto, "randomInt", () => 0);
 
                 const plugin = viewportPlugin();
                 const listener = plugin["Browser.newContext:before"];
@@ -241,14 +262,17 @@ describe("plugins/polyfill/viewport.js", function () {
                     { viewport: { width: 1600, height: 700 } },
                 ]);
 
-                assert.equal(getInt.mock.callCount(), 2);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [1000, 1800]);
-                assert.deepEqual(getInt.mock.calls[1].arguments, [500, 800]);
+                assert.equal(randomInt.mock.callCount(), 2);
+                assert.deepEqual(
+                    randomInt.mock.calls[0].arguments,
+                    [1000, 1801],
+                );
+                assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 801]);
             });
 
             it("should support options", function () {
-                const getInt = mock.method(Random, "getInt", () => {
-                    switch (getInt.mock.callCount()) {
+                const randomInt = mock.method(crypto, "randomInt", () => {
+                    switch (randomInt.mock.callCount()) {
                         case 0:
                             return 350;
                         case 1:
@@ -269,9 +293,9 @@ describe("plugins/polyfill/viewport.js", function () {
                     { viewport: { width: 350, height: 150 } },
                 ]);
 
-                assert.equal(getInt.mock.callCount(), 2);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [300, 400]);
-                assert.deepEqual(getInt.mock.calls[1].arguments, [100, 200]);
+                assert.equal(randomInt.mock.callCount(), 2);
+                assert.deepEqual(randomInt.mock.calls[0].arguments, [300, 401]);
+                assert.deepEqual(randomInt.mock.calls[1].arguments, [100, 201]);
             });
         });
 
@@ -281,8 +305,8 @@ describe("plugins/polyfill/viewport.js", function () {
             });
 
             it("should support no option", function () {
-                const getInt = mock.method(Random, "getInt", () => {
-                    switch (getInt.mock.callCount()) {
+                const randomInt = mock.method(crypto, "randomInt", () => {
+                    switch (randomInt.mock.callCount()) {
                         case 0:
                             return 1500;
                         case 1:
@@ -300,14 +324,17 @@ describe("plugins/polyfill/viewport.js", function () {
                     { viewport: { width: 1500, height: 600 } },
                 ]);
 
-                assert.equal(getInt.mock.callCount(), 2);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [1000, 1800]);
-                assert.deepEqual(getInt.mock.calls[1].arguments, [500, 800]);
+                assert.equal(randomInt.mock.callCount(), 2);
+                assert.deepEqual(
+                    randomInt.mock.calls[0].arguments,
+                    [1000, 1801],
+                );
+                assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 801]);
             });
 
             it("should support empty option", function () {
-                const getInt = mock.method(Random, "getInt", () => {
-                    switch (getInt.mock.callCount()) {
+                const randomInt = mock.method(crypto, "randomInt", () => {
+                    switch (randomInt.mock.callCount()) {
                         case 0:
                             return 1500;
                         case 1:
@@ -325,14 +352,17 @@ describe("plugins/polyfill/viewport.js", function () {
                     { viewport: { width: 1500, height: 600 } },
                 ]);
 
-                assert.equal(getInt.mock.callCount(), 2);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [1000, 1800]);
-                assert.deepEqual(getInt.mock.calls[1].arguments, [500, 800]);
+                assert.equal(randomInt.mock.callCount(), 2);
+                assert.deepEqual(
+                    randomInt.mock.calls[0].arguments,
+                    [1000, 1801],
+                );
+                assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 801]);
             });
 
             it("should support option", function () {
-                const getInt = mock.method(Random, "getInt", () => {
-                    switch (getInt.mock.callCount()) {
+                const randomInt = mock.method(crypto, "randomInt", () => {
+                    switch (randomInt.mock.callCount()) {
                         case 0:
                             return 1500;
                         case 1:
@@ -350,13 +380,16 @@ describe("plugins/polyfill/viewport.js", function () {
                     { slowMo: 200, viewport: { width: 1500, height: 600 } },
                 ]);
 
-                assert.equal(getInt.mock.callCount(), 2);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [1000, 1800]);
-                assert.deepEqual(getInt.mock.calls[1].arguments, [500, 800]);
+                assert.equal(randomInt.mock.callCount(), 2);
+                assert.deepEqual(
+                    randomInt.mock.calls[0].arguments,
+                    [1000, 1801],
+                );
+                assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 801]);
             });
 
             it("should support 'viewport' option", function () {
-                const getInt = mock.method(Random, "getInt", () => 0);
+                const randomInt = mock.method(crypto, "randomInt", () => 0);
 
                 const plugin = viewportPlugin();
                 const listener = plugin["Browser.newPage:before"];
@@ -368,14 +401,17 @@ describe("plugins/polyfill/viewport.js", function () {
                     { viewport: { width: 1600, height: 700 } },
                 ]);
 
-                assert.equal(getInt.mock.callCount(), 2);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [1000, 1800]);
-                assert.deepEqual(getInt.mock.calls[1].arguments, [500, 800]);
+                assert.equal(randomInt.mock.callCount(), 2);
+                assert.deepEqual(
+                    randomInt.mock.calls[0].arguments,
+                    [1000, 1801],
+                );
+                assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 801]);
             });
 
             it("should support options", function () {
-                const getInt = mock.method(Random, "getInt", () => {
-                    switch (getInt.mock.callCount()) {
+                const randomInt = mock.method(crypto, "randomInt", () => {
+                    switch (randomInt.mock.callCount()) {
                         case 0:
                             return 350;
                         case 1:
@@ -396,9 +432,9 @@ describe("plugins/polyfill/viewport.js", function () {
                     { viewport: { width: 350, height: 150 } },
                 ]);
 
-                assert.equal(getInt.mock.callCount(), 2);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [300, 400]);
-                assert.deepEqual(getInt.mock.calls[1].arguments, [100, 200]);
+                assert.equal(randomInt.mock.callCount(), 2);
+                assert.deepEqual(randomInt.mock.calls[0].arguments, [300, 401]);
+                assert.deepEqual(randomInt.mock.calls[1].arguments, [100, 201]);
             });
         });
     });

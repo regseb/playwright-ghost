@@ -9,8 +9,26 @@ import locatorPlugin from "../../../../src/plugins/hook/locator.js";
 describe("plugins/hook/locator.js", function () {
     describe("locatorPlugin()", function () {
         describe("Locator:new", function () {
-            // Ajouter des tests quand l'import de module pourra être mocké.
-            // https://nodejs.org/api/test.html#mockmodulespecifier-options
+            it("should add plugin", function () {
+                const locator = {};
+                const listeners = new Map([
+                    [
+                        "Locator",
+                        new Map([
+                            ["foo", { before: [], after: [() => "bar"] }],
+                        ]),
+                    ],
+                ]);
+
+                const plugin = locatorPlugin();
+                const listener = plugin["Locator:new"];
+                const locatorAltered = listener(locator, {
+                    metadata: { listeners },
+                });
+
+                assert.notEqual(locatorAltered, locator);
+                assert.equal(locatorAltered.foo, "bar");
+            });
 
             it("should do nothing when no listener", function () {
                 const locator = {};
@@ -23,7 +41,7 @@ describe("plugins/hook/locator.js", function () {
                 });
 
                 // Vérifier que le locator retourné est la même instance que
-                // celui en paramètre.
+                // celle en paramètre.
                 assert.equal(locatorAltered, locator);
             });
         });

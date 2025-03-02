@@ -4,9 +4,9 @@
  */
 
 import assert from "node:assert/strict";
+import crypto from "node:crypto";
 import { mock } from "node:test";
 import dialogPlugin from "../../../../src/plugins/humanize/dialog.js";
-import Random from "../../../../src/utils/random.js";
 
 /**
  * Passe au prochain cycle de la boucle d'événements.
@@ -44,7 +44,7 @@ describe("plugins/humanize/dialog.js", function () {
 
             it("should support no option", async function () {
                 mock.timers.enable({ apis: ["setTimeout"] });
-                const getInt = mock.method(Random, "getInt", () => 2000);
+                const randomInt = mock.method(crypto, "randomInt", () => 2000);
                 const accept = mock.fn(() => Promise.resolve());
                 const page = new PageMock();
 
@@ -61,14 +61,17 @@ describe("plugins/humanize/dialog.js", function () {
                 // en paramètre.
                 assert.equal(pageAltered, page);
 
-                assert.equal(getInt.mock.callCount(), 1);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [1000, 5000]);
+                assert.equal(randomInt.mock.callCount(), 1);
+                assert.deepEqual(
+                    randomInt.mock.calls[0].arguments,
+                    [1000, 5000],
+                );
                 assert.equal(accept.mock.callCount(), 1);
             });
 
             it("should support empty option", async function () {
                 mock.timers.enable({ apis: ["setTimeout"] });
-                const getInt = mock.method(Random, "getInt", () => 3000);
+                const randomInt = mock.method(crypto, "randomInt", () => 3000);
                 const accept = mock.fn(() => Promise.resolve());
                 const page = new PageMock();
 
@@ -85,14 +88,17 @@ describe("plugins/humanize/dialog.js", function () {
                 // en paramètre.
                 assert.equal(pageAltered, page);
 
-                assert.equal(getInt.mock.callCount(), 1);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [1000, 5000]);
+                assert.equal(randomInt.mock.callCount(), 1);
+                assert.deepEqual(
+                    randomInt.mock.calls[0].arguments,
+                    [1000, 5000],
+                );
                 assert.equal(accept.mock.callCount(), 1);
             });
 
             it("should support option", async function () {
                 mock.timers.enable({ apis: ["setTimeout"] });
-                const getInt = mock.method(Random, "getInt", () => 40);
+                const randomInt = mock.method(crypto, "randomInt", () => 40);
                 const accept = mock.fn(() => Promise.resolve());
                 const page = new PageMock();
 
@@ -109,8 +115,8 @@ describe("plugins/humanize/dialog.js", function () {
                 // en paramètre.
                 assert.equal(pageAltered, page);
 
-                assert.equal(getInt.mock.callCount(), 1);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [10, 50]);
+                assert.equal(randomInt.mock.callCount(), 1);
+                assert.deepEqual(randomInt.mock.calls[0].arguments, [10, 50]);
                 assert.equal(accept.mock.callCount(), 1);
             });
         });

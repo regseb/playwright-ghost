@@ -9,8 +9,26 @@ import pagePlugin from "../../../../src/plugins/hook/page.js";
 describe("plugins/hook/page.js", function () {
     describe("pagePlugin()", function () {
         describe("Page:new", function () {
-            // Ajouter des tests quand l'import de module pourra être mocké.
-            // https://nodejs.org/api/test.html#mockmodulespecifier-options
+            it("should add plugin", function () {
+                const page = {};
+                const listeners = new Map([
+                    [
+                        "Page",
+                        new Map([
+                            ["foo", { before: [], after: [() => "bar"] }],
+                        ]),
+                    ],
+                ]);
+
+                const plugin = pagePlugin();
+                const listener = plugin["Page:new"];
+                const pageAltered = listener(page, {
+                    metadata: { listeners },
+                });
+
+                assert.notEqual(pageAltered, page);
+                assert.equal(pageAltered.foo, "bar");
+            });
 
             it("should do nothing when no listener", function () {
                 const page = {};
@@ -23,7 +41,7 @@ describe("plugins/hook/page.js", function () {
                 });
 
                 // Vérifier que la page retournée est la même instance que
-                // celui en paramètre.
+                // celle en paramètre.
                 assert.equal(pageAltered, page);
             });
         });

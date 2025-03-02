@@ -4,9 +4,9 @@
  */
 
 import assert from "node:assert/strict";
+import crypto from "node:crypto";
 import { mock } from "node:test";
 import clickPlugin from "../../../../src/plugins/humanize/click.js";
-import Random from "../../../../src/utils/random.js";
 
 describe("plugins/humanize/click.js", function () {
     describe("clickPlugin()", function () {
@@ -16,7 +16,7 @@ describe("plugins/humanize/click.js", function () {
             });
 
             it("should support no option", function () {
-                const getInt = mock.method(Random, "getInt", () => 200);
+                const randomInt = mock.method(crypto, "randomInt", () => 200);
 
                 const plugin = clickPlugin();
                 const listener = plugin["Locator.click:before"];
@@ -24,12 +24,12 @@ describe("plugins/humanize/click.js", function () {
 
                 assert.deepEqual(args, [{ delay: 200 }]);
 
-                assert.equal(getInt.mock.callCount(), 1);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [100, 500]);
+                assert.equal(randomInt.mock.callCount(), 1);
+                assert.deepEqual(randomInt.mock.calls[0].arguments, [100, 501]);
             });
 
             it("should support empty option", function () {
-                const getInt = mock.method(Random, "getInt", () => 250);
+                const randomInt = mock.method(crypto, "randomInt", () => 250);
 
                 const plugin = clickPlugin({});
                 const listener = plugin["Locator.click:before"];
@@ -37,12 +37,12 @@ describe("plugins/humanize/click.js", function () {
 
                 assert.deepEqual(args, [{ delay: 250 }]);
 
-                assert.equal(getInt.mock.callCount(), 1);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [100, 500]);
+                assert.equal(randomInt.mock.callCount(), 1);
+                assert.deepEqual(randomInt.mock.calls[0].arguments, [100, 501]);
             });
 
             it("should support option", function () {
-                const getInt = mock.method(Random, "getInt", () => 300);
+                const randomInt = mock.method(crypto, "randomInt", () => 300);
 
                 const plugin = clickPlugin();
                 const listener = plugin["Locator.click:before"];
@@ -50,12 +50,12 @@ describe("plugins/humanize/click.js", function () {
 
                 assert.deepEqual(args, [{ button: "right", delay: 300 }]);
 
-                assert.equal(getInt.mock.callCount(), 1);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [100, 500]);
+                assert.equal(randomInt.mock.callCount(), 1);
+                assert.deepEqual(randomInt.mock.calls[0].arguments, [100, 501]);
             });
 
             it("should support 'delay' option", function () {
-                const getInt = mock.method(Random, "getInt", () => 350);
+                const randomInt = mock.method(crypto, "randomInt", () => 350);
 
                 const plugin = clickPlugin();
                 const listener = plugin["Locator.click:before"];
@@ -63,7 +63,7 @@ describe("plugins/humanize/click.js", function () {
 
                 assert.deepEqual(args, [{ button: "middle", delay: 1000 }]);
 
-                assert.equal(getInt.mock.callCount(), 0);
+                assert.equal(randomInt.mock.callCount(), 0);
             });
         });
 
@@ -73,7 +73,7 @@ describe("plugins/humanize/click.js", function () {
             });
 
             it("should support no option", function () {
-                const getInt = mock.method(Random, "getInt", () => 200);
+                const randomInt = mock.method(crypto, "randomInt", () => 200);
 
                 const plugin = clickPlugin();
                 const listener = plugin["Locator.dblclick:before"];
@@ -81,12 +81,12 @@ describe("plugins/humanize/click.js", function () {
 
                 assert.deepEqual(args, [{ delay: 200 }]);
 
-                assert.equal(getInt.mock.callCount(), 1);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [100, 500]);
+                assert.equal(randomInt.mock.callCount(), 1);
+                assert.deepEqual(randomInt.mock.calls[0].arguments, [100, 501]);
             });
 
             it("should support empty option", function () {
-                const getInt = mock.method(Random, "getInt", () => 250);
+                const randomInt = mock.method(crypto, "randomInt", () => 250);
 
                 const plugin = clickPlugin({});
                 const listener = plugin["Locator.dblclick:before"];
@@ -94,12 +94,12 @@ describe("plugins/humanize/click.js", function () {
 
                 assert.deepEqual(args, [{ delay: 250 }]);
 
-                assert.equal(getInt.mock.callCount(), 1);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [100, 500]);
+                assert.equal(randomInt.mock.callCount(), 1);
+                assert.deepEqual(randomInt.mock.calls[0].arguments, [100, 501]);
             });
 
             it("should support option", function () {
-                const getInt = mock.method(Random, "getInt", () => 300);
+                const randomInt = mock.method(crypto, "randomInt", () => 300);
 
                 const plugin = clickPlugin();
                 const listener = plugin["Locator.dblclick:before"];
@@ -107,12 +107,12 @@ describe("plugins/humanize/click.js", function () {
 
                 assert.deepEqual(args, [{ button: "right", delay: 300 }]);
 
-                assert.equal(getInt.mock.callCount(), 1);
-                assert.deepEqual(getInt.mock.calls[0].arguments, [100, 500]);
+                assert.equal(randomInt.mock.callCount(), 1);
+                assert.deepEqual(randomInt.mock.calls[0].arguments, [100, 501]);
             });
 
             it("should support 'delay' option", function () {
-                const getInt = mock.method(Random, "getInt", () => 350);
+                const randomInt = mock.method(crypto, "randomInt", () => 350);
 
                 const plugin = clickPlugin();
                 const listener = plugin["Locator.dblclick:before"];
@@ -120,7 +120,7 @@ describe("plugins/humanize/click.js", function () {
 
                 assert.deepEqual(args, [{ button: "middle", delay: 1000 }]);
 
-                assert.equal(getInt.mock.callCount(), 0);
+                assert.equal(randomInt.mock.callCount(), 0);
             });
         });
     });

@@ -9,8 +9,26 @@ import browserPlugin from "../../../../src/plugins/hook/browser.js";
 describe("plugins/hook/browser.js", function () {
     describe("browserPlugin()", function () {
         describe("Browser:new", function () {
-            // Ajouter des tests quand l'import de module pourra être mocké.
-            // https://nodejs.org/api/test.html#mockmodulespecifier-options
+            it("should add plugin", function () {
+                const browser = {};
+                const listeners = new Map([
+                    [
+                        "Browser",
+                        new Map([
+                            ["foo", { before: [], after: [() => "bar"] }],
+                        ]),
+                    ],
+                ]);
+
+                const plugin = browserPlugin();
+                const listener = plugin["Browser:new"];
+                const browserAltered = listener(browser, {
+                    metadata: { listeners },
+                });
+
+                assert.notEqual(browserAltered, browser);
+                assert.equal(browserAltered.foo, "bar");
+            });
 
             it("should do nothing when no listener", function () {
                 const browser = {};
@@ -23,7 +41,7 @@ describe("plugins/hook/browser.js", function () {
                 });
 
                 // Vérifier que le browser retourné est la même instance que
-                // celui en paramètre.
+                // celle en paramètre.
                 assert.equal(browserAltered, browser);
             });
         });
