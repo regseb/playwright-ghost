@@ -103,9 +103,8 @@ const browser = await chromium.launch({
 
 ## Plugins
 
-⭐ is in [`recommended`](docs/plugins/recommended.md) /
-⚙️ has options /
-📦 requires external tool
+⭐ is in [`recommended`](docs/plugins/recommended.md) / ⚙️ has options / 📦
+requires external tool
 
 <!-- markdownlint-disable no-inline-html-->
 <table>

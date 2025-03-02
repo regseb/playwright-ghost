@@ -65,7 +65,18 @@ export default {
         "n/no-unpublished-require": "off",
         "n/no-unsupported-features/es-builtins": "error",
         "n/no-unsupported-features/es-syntax": "error",
-        "n/no-unsupported-features/node-builtins": "error",
+        "n/no-unsupported-features/node-builtins": [
+            "error",
+            {
+                // Ignorer les vérifications de test.mock.timers qui est en
+                // expérimental dans Node v22.
+                ignores: [
+                    "test.mock.timers",
+                    "test.mock.timers.tick",
+                    "test.mock.timers.enable",
+                ],
+            },
+        ],
         "n/process-exit-as-throw": "error",
 
         // Best Practices.

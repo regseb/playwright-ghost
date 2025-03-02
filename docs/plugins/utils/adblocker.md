@@ -7,7 +7,8 @@
 > to your npm dependencies.
 
 Add
-[Ghostery adblocker](https://github.com/ghostery/adblocker/tree/master/packages/adblocker-playwright#readme) in browser.
+[Ghostery adblocker](https://github.com/ghostery/adblocker/tree/master/packages/adblocker-playwright#readme)
+in browser.
 
 ## Options
 

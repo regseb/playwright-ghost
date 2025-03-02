@@ -4,7 +4,7 @@
  * @author Sébastien Règne
  */
 
-import Random from "../../utils/random.js";
+import crypto from "node:crypto";
 
 /**
  * Modifie la taille de la zone d'affichage du navigateur.
@@ -30,8 +30,8 @@ const setViewport = function (options, width, height) {
     return {
         ...options,
         viewport: {
-            width: Random.getInt(width.min, width.max),
-            height: Random.getInt(height.min, height.max),
+            width: crypto.randomInt(width.min, width.max + 1),
+            height: crypto.randomInt(height.min, height.max + 1),
             ...options?.viewport,
         },
     };

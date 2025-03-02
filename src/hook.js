@@ -68,11 +68,11 @@ export default function hook(obj, listeners, metadata = {}) {
         get: (target, prop, receiver) => {
             const value = target[prop];
             if (!listeners.has(prop)) {
-                return value instanceof Function ? value.bind(target) : value;
+                return "function" === typeof value ? value.bind(target) : value;
             }
             const { before, after } = listeners.get(prop);
 
-            if (value instanceof Function) {
+            if ("function" === typeof value) {
                 return (/** @type {any[]} */ ...args) => {
                     const argsAltered = reduce(before, args, {
                         // Utiliser le récepteur pour ne pas modifier l'objet

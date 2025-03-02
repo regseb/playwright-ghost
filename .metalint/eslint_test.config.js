@@ -3,7 +3,6 @@
  * @author Sébastien Règne
  */
 
-// @ts-expect-error -- Le plugin mocha ne fournit pas de types.
 import mocha from "eslint-plugin-mocha";
 import globals from "globals";
 
@@ -16,11 +15,7 @@ import globals from "globals";
  */
 export default {
     languageOptions: {
-        globals: {
-            ...globals.browser,
-            ...globals.mocha,
-            ...globals.webextensions,
-        },
+        globals: { ...globals.mocha },
     },
 
     plugins: { mocha },
