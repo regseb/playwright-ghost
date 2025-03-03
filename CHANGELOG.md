@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.10.0](https://github.com/regseb/playwright-ghost/compare/v0.9.0...v0.10.0) (2025-03-03)
+
+### Features
+
+- Add a cursor plugin (with ghost-cursor).
+  ([5ac413b](https://github.com/regseb/playwright-ghost/commit/5ac413b19ed75d88073de231dce8ea6903949431))
+- Add patchright support.
+  ([844bee2](https://github.com/regseb/playwright-ghost/commit/844bee21e99456b36f054192303135ef9c971353))
+- Add plugin to humanize click.
+  ([6c68e92](https://github.com/regseb/playwright-ghost/commit/6c68e920412df9659b10816ab033b240776b20b5))
+- Add plugin to Xvfb.
+  ([d8f8789](https://github.com/regseb/playwright-ghost/commit/d8f8789cc21d3bc0909edfd27d75580dfe977387))
+- **plugin/utils.locales:** Be able to specify the browser name.
+  ([8f6bee4](https://github.com/regseb/playwright-ghost/commit/8f6bee4e316d5aa6fc65d15d43bbf355a643523a))
+
+### Bug Fixes
+
+- **plugin/dialog:** Rename option timeout to delay.
+  ([4a9ffd8](https://github.com/regseb/playwright-ghost/commit/4a9ffd8c9662e6ebdfc03d4446820e14f398feda))
+- **plugin/polyfill.headless:** Support new headless in Playwright 1.29.
+  ([97e885e](https://github.com/regseb/playwright-ghost/commit/97e885ebcb43052dac66f99fecae766720ed842a))
+
 ## [0.9.0](https://github.com/regseb/playwright-ghost/compare/v0.8.0...v0.9.0) (2024-10-30)
 
 ### Features
