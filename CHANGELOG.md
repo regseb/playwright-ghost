@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.11.0](https://github.com/regseb/playwright-ghost/compare/v0.10.0...v0.11.0) (2025-03-05)
+
+### Features
+
+- Enable deactivation of recommended plugins.
+  ([8fb6f0d](https://github.com/regseb/playwright-ghost/commit/8fb6f0d6c31e1f8ff5b691f06ff2441dd60242db))
+
+### Bug Fixes
+
+- **plugin/cursor:** Support click on inaccessible locator.
+  ([0e5fed7](https://github.com/regseb/playwright-ghost/commit/0e5fed710c8c3c34ad1df0747e6814115feb3829))
+
 ## [0.10.0](https://github.com/regseb/playwright-ghost/compare/v0.9.0...v0.10.0) (2025-03-03)
 
 ### Features
