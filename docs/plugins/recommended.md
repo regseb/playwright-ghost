@@ -25,6 +25,8 @@ Plugin options can be provided:
   - `cursor`: `humanize/cursor` plugins options.
   - `dialog`: `humanize/dialog` plugins options.
 
+Plugins can be disabled by passing the value to `false`.
+
 ## Examples
 
 Use the preset with default options.
@@ -52,6 +54,21 @@ const browser = await chromium.launch({
     humanize: {
       click: { delay: { min: 50, max: 200 } },
       cursor: { start: { x: 100, y: 100 } },
+    },
+  ),
+});
+// ...
+```
+
+Use all recommended plugins except `humanize/cursor`.
+
+```javascript
+import { chromium, plugins } from "playwright-ghost";
+
+const browser = await chromium.launch({
+  plugins: plugins.recommended({
+    humanize: {
+      cursor: false,
     },
   ),
 });

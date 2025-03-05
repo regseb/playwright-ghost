@@ -2,7 +2,7 @@
 
 > [!TIP]
 >
-> This plugin is enabled in the ⭐ recommended.
+> This plugin is enabled in the ⭐ [`recommended`](../recommended.md).
 
 Set a realistic value for screen size: 1920x1080.
 

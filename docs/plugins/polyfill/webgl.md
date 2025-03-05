@@ -6,7 +6,7 @@
 
 > [!TIP]
 >
-> This plugin is enabled in the ⭐ recommended.
+> This plugin is enabled in the ⭐ [`recommended`](../recommended.md).
 
 Modify WebGL parameter values.
 

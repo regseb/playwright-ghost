@@ -2,7 +2,7 @@
 
 > [!TIP]
 >
-> This plugin is enabled in the ⭐ recommended.
+> This plugin is enabled in the ⭐ [`recommended`](../recommended.md).
 
 Vary viewport size with random values between 1000x500 and 1800x800.
 

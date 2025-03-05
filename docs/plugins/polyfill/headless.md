@@ -6,7 +6,7 @@
 
 > [!TIP]
 >
-> This plugin is enabled in the ⭐ recommended.
+> This plugin is enabled in the ⭐ [`recommended`](../recommended.md).
 
 Correct many differences in JavaScript APIs between the headful and headless
 versions of Chromium. This plugin activates Chromium's new headless mode.

@@ -2,7 +2,7 @@
 
 > [!TIP]
 >
-> This plugin is enabled in the ⭐ recommended.
+> This plugin is enabled in the ⭐ [`recommended`](../recommended.md).
 
 Add delay between `mousedown` and `mouseup` for
 [clicks](https://playwright.dev/docs/api/class-locator#locator-click) and

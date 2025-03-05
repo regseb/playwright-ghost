@@ -2,7 +2,7 @@
 
 > [!TIP]
 >
-> This plugin is enabled in the ⭐ recommended.
+> This plugin is enabled in the ⭐ [`recommended`](../recommended.md).
 
 Move the cursor with human-like movements. This plugin uses
 [`ghost-cursor`](https://www.npmjs.com/package/ghost-cursor) to generate the
