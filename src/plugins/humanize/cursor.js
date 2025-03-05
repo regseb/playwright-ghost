@@ -119,6 +119,10 @@ export default function cursorPlugin(options) {
          *                           paramètres.
          */
         "Locator.check:before": async (args, { obj: locator }) => {
+            if (args[0]?.trial) {
+                return args;
+            }
+            await locator.check({ ...args[0], trial: true });
             return [await moveCursor(args[0], locator)];
         },
 
@@ -131,6 +135,10 @@ export default function cursorPlugin(options) {
          *                           paramètres.
          */
         "Locator.click:before": async (args, { obj: locator }) => {
+            if (args[0]?.trial) {
+                return args;
+            }
+            await locator.click({ ...args[0], trial: true });
             return [await moveCursor(args[0], locator)];
         },
 
@@ -143,6 +151,10 @@ export default function cursorPlugin(options) {
          *                           paramètres.
          */
         "Locator.dblclick:before": async (args, { obj: locator }) => {
+            if (args[0]?.trial) {
+                return args;
+            }
+            await locator.dbclick({ ...args[0], trial: true });
             return [await moveCursor(args[0], locator)];
         },
 
@@ -155,6 +167,10 @@ export default function cursorPlugin(options) {
          *                           paramètres.
          */
         "Locator.hover:before": async (args, { obj: locator }) => {
+            if (args[0]?.trial) {
+                return args;
+            }
+            await locator.hover({ ...args[0], trial: true });
             return [await moveCursor(args[0], locator)];
         },
 
@@ -167,6 +183,10 @@ export default function cursorPlugin(options) {
          *                           paramètres.
          */
         "Locator.setChecked:before": async (args, { obj: locator }) => {
+            if (args[1]?.trial) {
+                return args;
+            }
+            await locator.setChecked(args[0], { ...args[1], trial: true });
             return [args[0], await moveCursor(args[1], locator)];
         },
 
@@ -179,6 +199,10 @@ export default function cursorPlugin(options) {
          *                           paramètres.
          */
         "Locator.uncheck:before": async (args, { obj: locator }) => {
+            if (args[0]?.trial) {
+                return args;
+            }
+            await locator.uncheck({ ...args[0], trial: true });
             return [await moveCursor(args[0], locator)];
         },
 
