@@ -54,7 +54,7 @@
     "clean": "node .script/clean.js"
   },
   "dependencies": {
-    "ghost-cursor": "1.4.0"
+    "ghost-cursor": "1.4.1"
   },
   "devDependencies": {
     "@ghostery/adblocker-playwright": "2.5.0",
