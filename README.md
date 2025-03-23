@@ -106,11 +106,21 @@ const browser = await chromium.launch({
 ⭐ is in [`recommended`](docs/plugins/recommended.md) / ⚙️ has options / 📦
 requires external tool
 
+### Polyfill
+
 <!-- markdownlint-disable no-inline-html-->
 <table>
-  <tr><th></th><th>Name</th><th>Description</th></tr>
   <tr>
-    <td align="center">⭐</td>
+    <td>⭐</td>
+    <td>⚙️</td>
+    <td>📦</td>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>⭐</td>
+    <td></td>
+    <td></td>
     <td>
       <a href="docs/plugins/polyfill/automation.md"
         ><code>polyfill.automation</code></a>
@@ -118,7 +128,9 @@ requires external tool
     <td>Disable <code>--enable-automation</code> in Chromium.</td>
   </tr>
   <tr>
-    <td align="center">⭐</td>
+    <td>⭐</td>
+    <td></td>
+    <td></td>
     <td>
       <a href="docs/plugins/polyfill/headless.md"
         ><code>polyfill.headless</code></a>
@@ -129,7 +141,9 @@ requires external tool
     </td>
   </tr>
   <tr>
-    <td align="center">⭐ ⚙️</td>
+    <td>⭐️</td>
+    <td>⚙️</td>
+    <td></td>
     <td>
       <a href="docs/plugins/polyfill/screen.md"><code>polyfill.screen</code></a>
     </td>
@@ -138,7 +152,9 @@ requires external tool
     </td>
   </tr>
   <tr>
-    <td align="center">⚙️</td>
+    <td>️</td>
+    <td>⚙️</td>
+    <td></td>
     <td>
       <a href="docs/plugins/polyfill/useragent.md"
         ><code>polyfill.userAgent</code></a>
@@ -148,7 +164,9 @@ requires external tool
     </td>
   </tr>
   <tr>
-    <td align="center">⭐ ⚙️</td>
+    <td>⭐️</td>
+    <td>⚙️</td>
+    <td></td>
     <td>
       <a href="docs/plugins/polyfill/viewport.md"
         ><code>polyfill.viewport</code></a>
@@ -158,7 +176,9 @@ requires external tool
     </td>
   </tr>
   <tr>
-    <td align="center">⭐</td>
+    <td>⭐</td>
+    <td></td>
+    <td></td>
     <td>
       <a href="docs/plugins/polyfill/webdriver.md"
         ><code>polyfill.webdriver</code></a>
@@ -168,7 +188,9 @@ requires external tool
     </td>
   </tr>
   <tr>
-    <td align="center"></td>
+    <td></td>
+    <td></td>
+    <td></td>
     <td>
       <a href="docs/plugins/polyfill/webgl.md"><code>polyfill.webGL</code></a>
     </td>
@@ -176,8 +198,23 @@ requires external tool
       Modify WebGL parameter values.
     </td>
   </tr>
+</table>
+
+### Humanize
+
+<!-- markdownlint-disable no-inline-html-->
+<table>
   <tr>
-    <td align="center">⭐ ⚙️</td>
+    <td>⭐</td>
+    <td>⚙️</td>
+    <td>📦</td>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>⭐️</td>
+    <td>⚙️</td>
+    <td></td>
     <td>
       <a href="docs/plugins/humanize/click.md"><code>humanize.click</code></a>
     </td>
@@ -187,7 +224,9 @@ requires external tool
     </td>
   </tr>
   <tr>
-    <td align="center">⭐ ⚙️</td>
+    <td>⭐️</td>
+    <td>⚙️</td>
+    <td></td>
     <td>
       <a href="docs/plugins/humanize/cursor.md"><code>humanize.cursor</code></a>
     </td>
@@ -196,7 +235,9 @@ requires external tool
     </td>
   </tr>
   <tr>
-    <td align="center">⭐ ⚙️</td>
+    <td>⭐️</td>
+    <td>⚙️</td>
+    <td></td>
     <td>
       <a href="docs/plugins/humanize/dialog.md"
         ><code>humanize.dialog</code></a>
@@ -206,8 +247,23 @@ requires external tool
       1 and 5 seconds).
     </td>
   </tr>
+</table>
+
+### Utils
+
+<!-- markdownlint-disable no-inline-html-->
+<table>
   <tr>
-    <td align="center">⚙️ 📦</td>
+    <td>⭐</td>
+    <td>⚙️</td>
+    <td>📦</td>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td></td>
+    <td>️⚙️</td>
+    <td>📦</td>
     <td>
       <a href="docs/plugins/utils/adblocker.md"
         ><code>utils.adblocker</code></a>
@@ -217,7 +273,9 @@ requires external tool
     </td>
   </tr>
   <tr>
-    <td align="center"></td>
+    <td></td>
+    <td></td>
+    <td></td>
     <td>
       <a href="docs/plugins/utils/debug.md"><code>utils.debug</code></a>
     </td>
@@ -226,7 +284,9 @@ requires external tool
     </td>
   </tr>
   <tr>
-    <td align="center">⚙</td>
+    <td></td>
+    <td>⚙️</td>
+    <td></td>
     <td>
       <a href="docs/plugins/utils/locale.md"><code>utils.locale</code></a>
     </td>
@@ -235,7 +295,9 @@ requires external tool
     </td>
   </tr>
   <tr>
-    <td align="center">⚙️ 📦</td>
+    <td></td>
+    <td>⚙️</td>
+    <td>📦</td>
     <td>
       <a href="docs/plugins/utils/xvfb.md"><code>utils.xvfb</code></a>
     </td>
