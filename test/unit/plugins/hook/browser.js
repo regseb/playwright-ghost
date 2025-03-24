@@ -20,11 +20,9 @@ describe("plugins/hook/browser.js", function () {
                     ],
                 ]);
 
-                const plugin = browserPlugin();
+                const plugin = browserPlugin(listeners);
                 const listener = plugin["Browser:new"];
-                const browserAltered = listener(browser, {
-                    metadata: { listeners },
-                });
+                const browserAltered = listener(browser);
 
                 assert.notEqual(browserAltered, browser);
                 assert.equal(browserAltered.foo, "bar");
@@ -32,13 +30,18 @@ describe("plugins/hook/browser.js", function () {
 
             it("should do nothing when no listener", function () {
                 const browser = {};
-                const listeners = new Map([["BrowserType", "foo"]]);
+                const listeners = new Map([
+                    [
+                        "BrowserType",
+                        new Map([
+                            ["foo", { before: [], after: [() => "bar"] }],
+                        ]),
+                    ],
+                ]);
 
-                const plugin = browserPlugin();
+                const plugin = browserPlugin(listeners);
                 const listener = plugin["Browser:new"];
-                const browserAltered = listener(browser, {
-                    metadata: { listeners },
-                });
+                const browserAltered = listener(browser);
 
                 // Vérifier que le browser retourné est la même instance que
                 // celle en paramètre.

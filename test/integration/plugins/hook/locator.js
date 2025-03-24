@@ -6,12 +6,16 @@
 import assert from "node:assert/strict";
 import vanilla from "../../../../src/index.js";
 
+/**
+ * @import { Locator } from "playwright";
+ */
+
 describe("Plugin: hook.locator", function () {
     it("should add plugin in Locator", async function () {
         const browser = await vanilla.chromium.launch({
             plugins: [
                 {
-                    "Locator:new": (locator) => {
+                    "Locator:new": (/** @type {Locator} */ locator) => {
                         // eslint-disable-next-line no-param-reassign
                         locator.foo = "bar";
                         return locator;

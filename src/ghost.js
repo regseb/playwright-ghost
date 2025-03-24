@@ -13,8 +13,8 @@ import pagePlugin from "./plugins/hook/page.js";
 import flatAwait from "./utils/flatawait.js";
 
 /**
- * @import { Browser, BrowserContext, BrowserType, Page, Locator } from "playwright"
- * @import { ContextAfter } from "./hook.js"
+ * @import { Browser, BrowserContext, BrowserType, Frame, Page, Locator } from "playwright"
+ * @import { ContextAfter, Listener } from "./hook.js"
  */
 
 const REGEXP = /^(?<obj>\w+)\.(?<prop>\w+):(?<temporality>after|before)$/v;
@@ -99,8 +99,9 @@ const NEW_MAPPINGS = {
  * Répartit les crochets pour les regrouper par objet, propriété et temporalité.
  *
  * @param {Record<string, Function>[]} hooks La liste des crochets.
- * @returns {Map<string, Map<string, Object>>} Les écouteurs regroupés par
- *                                             objet, propriété et temporalité.
+ * @returns {Map<string, Map<string, Listener>>} Les écouteurs regroupés par
+ *                                               objet, propriété et
+ *                                               temporalité.
  */
 const dispatch = (hooks) => {
     const listeners = new Map();
@@ -162,17 +163,17 @@ export default class Ghost {
      * @see https://playwright.dev/docs/api/class-browsertype#browser-type-launch
      */
     async launch(options) {
-        const listeners = dispatch([
-            browserPlugin(),
-            browserContextPlugin(),
-            pagePlugin(),
-            locatorPlugin(),
-            mousePlugin(),
+        const listeners = new Map();
+        dispatch([
+            browserPlugin(listeners),
+            browserContextPlugin(listeners),
+            pagePlugin(listeners),
+            locatorPlugin(listeners),
+            mousePlugin(listeners),
             ...(await flatAwait(options?.plugins ?? [])),
-        ]);
-        const hooked = hook(this.#browserType, listeners.get("BrowserType"), {
-            listeners,
-        });
+        ]).forEach((v, k) => listeners.set(k, v));
+
+        const hooked = hook(this.#browserType, listeners.get("BrowserType"));
         return hooked.launch(options);
     }
 
@@ -189,16 +190,17 @@ export default class Ghost {
      * @see https://playwright.dev/docs/api/class-browsertype#browser-type-launch-persistent-context
      */
     async launchPersistentContext(userDataDir, options) {
-        const listeners = dispatch([
-            browserPlugin(),
-            browserContextPlugin(),
-            pagePlugin(),
-            locatorPlugin(),
+        const listeners = new Map();
+        dispatch([
+            browserPlugin(listeners),
+            browserContextPlugin(listeners),
+            pagePlugin(listeners),
+            locatorPlugin(listeners),
+            mousePlugin(listeners),
             ...(await flatAwait(options?.plugins ?? [])),
-        ]);
-        const hooked = hook(this.#browserType, listeners.get("BrowserType"), {
-            listeners,
-        });
+        ]).forEach((v, k) => listeners.set(k, v));
+
+        const hooked = hook(this.#browserType, listeners.get("BrowserType"));
         return hooked.launchPersistentContext(userDataDir, options);
     }
 

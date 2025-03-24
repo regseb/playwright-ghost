@@ -8,27 +8,29 @@ import hook from "../../hook.js";
 
 /**
  * @import { Page } from "playwright"
- * @import { ContextAfter } from "../../hook.js"
+ * @import { Listener } from "../../hook.js"
  */
 
 /**
  * Crée un plugin pour ajouter des écouteurs dans les objets `Page`.
  *
+ * @param {Map<string, Map<string, Listener>>} listeners Les écouteurs regroupés
+ *                                                       par objet, propriété et
+ *                                                       temporalité.
  * @returns {Record<string, Function>} Le crochet du plugin.
  * @see https://playwright.dev/docs/api/class-page
  */
-export default function pagePlugin() {
+export default function pagePlugin(listeners) {
     return {
         /**
          * Ajoute les plugins dans une nouvelle page.
          *
-         * @param {Page}              page    La page nouvellement créée.
-         * @param {ContextAfter<any>} context Le contexte du crochet.
+         * @param {Page} page La page nouvellement créée.
          * @returns {Page} La page avec les plugins.
          */
-        "Page:new": (page, { metadata: { listeners } }) => {
+        "Page:new": (page) => {
             return listeners.has("Page")
-                ? hook(page, listeners.get("Page"), { listeners })
+                ? hook(page, listeners.get("Page"))
                 : page;
         },
     };

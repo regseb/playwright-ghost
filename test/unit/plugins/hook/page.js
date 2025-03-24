@@ -20,11 +20,9 @@ describe("plugins/hook/page.js", function () {
                     ],
                 ]);
 
-                const plugin = pagePlugin();
+                const plugin = pagePlugin(listeners);
                 const listener = plugin["Page:new"];
-                const pageAltered = listener(page, {
-                    metadata: { listeners },
-                });
+                const pageAltered = listener(page);
 
                 assert.notEqual(pageAltered, page);
                 assert.equal(pageAltered.foo, "bar");
@@ -32,13 +30,18 @@ describe("plugins/hook/page.js", function () {
 
             it("should do nothing when no listener", function () {
                 const page = {};
-                const listeners = new Map([["BrowserContext", "foo"]]);
+                const listeners = new Map([
+                    [
+                        "BrowserContext",
+                        new Map([
+                            ["foo", { before: [], after: [() => "bar"] }],
+                        ]),
+                    ],
+                ]);
 
-                const plugin = pagePlugin();
+                const plugin = pagePlugin(listeners);
                 const listener = plugin["Page:new"];
-                const pageAltered = listener(page, {
-                    metadata: { listeners },
-                });
+                const pageAltered = listener(page);
 
                 // Vérifier que la page retournée est la même instance que
                 // celle en paramètre.

@@ -20,11 +20,9 @@ describe("plugins/hook/mouse.js", function () {
                     ],
                 ]);
 
-                const plugin = mousePlugin();
+                const plugin = mousePlugin(listeners);
                 const listener = plugin["Mouse:new"];
-                const mouseAltered = listener(mouse, {
-                    metadata: { listeners },
-                });
+                const mouseAltered = listener(mouse);
 
                 assert.notEqual(mouseAltered, mouse);
                 assert.equal(mouseAltered.foo, "bar");
@@ -32,13 +30,18 @@ describe("plugins/hook/mouse.js", function () {
 
             it("should do nothing when no listener", function () {
                 const mouse = {};
-                const listeners = new Map([["Page", "foo"]]);
+                const listeners = new Map([
+                    [
+                        "Page",
+                        new Map([
+                            ["foo", { before: [], after: [() => "bar"] }],
+                        ]),
+                    ],
+                ]);
 
-                const plugin = mousePlugin();
+                const plugin = mousePlugin(listeners);
                 const listener = plugin["Mouse:new"];
-                const mouseAltered = listener(mouse, {
-                    metadata: { listeners },
-                });
+                const mouseAltered = listener(mouse);
 
                 // Vérifier que la souris retournée est la même instance que
                 // celle en paramètre.

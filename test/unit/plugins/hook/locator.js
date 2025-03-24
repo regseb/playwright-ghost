@@ -20,11 +20,9 @@ describe("plugins/hook/locator.js", function () {
                     ],
                 ]);
 
-                const plugin = locatorPlugin();
+                const plugin = locatorPlugin(listeners);
                 const listener = plugin["Locator:new"];
-                const locatorAltered = listener(locator, {
-                    metadata: { listeners },
-                });
+                const locatorAltered = listener(locator);
 
                 assert.notEqual(locatorAltered, locator);
                 assert.equal(locatorAltered.foo, "bar");
@@ -32,13 +30,18 @@ describe("plugins/hook/locator.js", function () {
 
             it("should do nothing when no listener", function () {
                 const locator = {};
-                const listeners = new Map([["Page", "foo"]]);
+                const listeners = new Map([
+                    [
+                        "Page",
+                        new Map([
+                            ["foo", { before: [], after: [() => "bar"] }],
+                        ]),
+                    ],
+                ]);
 
-                const plugin = locatorPlugin();
+                const plugin = locatorPlugin(listeners);
                 const listener = plugin["Locator:new"];
-                const locatorAltered = listener(locator, {
-                    metadata: { listeners },
-                });
+                const locatorAltered = listener(locator);
 
                 // Vérifier que le locator retourné est la même instance que
                 // celle en paramètre.

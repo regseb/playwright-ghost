@@ -8,20 +8,22 @@
  * @template {Object} T Le type de l'objet.
  * @typedef {Object} ContextBefore Le contexte pour un crochetage avant l'appel
  *                                 d'une méthode ou d'un getter.
- * @prop {T}      obj      L'objet crocheté.
- * @prop {string} prop     La méthode crocheté.
- * @prop {Object} metadata Les métadonnées du crochet.
+ * @prop {T}      obj   L'objet crocheté.
+ * @prop {string} prop  La méthode crocheté.
+ * @prop {Object} store Des données échangées entre les crochets d'avant et
+ *                      d'après.
  */
 
 /**
  * @template {Object} T Le type de l'objet.
  * @typedef {Object} ContextAfter Le contexte pour un crochetage après l'appel
  *                                d'une méthode ou d'un getter.
- * @prop {T}               obj      L'objet crocheté.
- * @prop {string}          prop     La méthode crocheté.
- * @prop {any[]|undefined} args     Les paramètres de la méthode crocheté ou
- *                                  possiblement `undefined` pour les getter.
- * @prop {Object}          metadata Les métadonnées du crochet.
+ * @prop {T}               obj   L'objet crocheté.
+ * @prop {string}          prop  La méthode crocheté.
+ * @prop {any[]|undefined} args  Les paramètres de la méthode crocheté ou
+ *                               possiblement `undefined` pour les getter.
+ * @prop {Object}          store Des données échangées entre les crochets
+ *                               d'avant et d'après.
  */
 
 /**
@@ -56,14 +58,12 @@ const reduce = (fns, value, context) => {
  * Accroche des écouteurs à un objet.
  *
  * @template {Object} T Le type de l'objet.
- * @param {T}                            obj        L'objet qui sera crocheté.
- * @param {Map<string|symbol, Listener>} listeners  Les écouteurs à accrocher à
- *                                                  l'objet.
- * @param {Object}                       [metadata] Les métadonnées qui seront
- *                                                  passées aux écouteurs.
+ * @param {T}                            obj       L'objet qui sera crocheté.
+ * @param {Map<string|symbol, Listener>} listeners Les écouteurs à accrocher à
+ *                                                 l'objet.
  * @returns {T} L'objet crocheté.
  */
-export default function hook(obj, listeners, metadata = {}) {
+export default function hook(obj, listeners) {
     return new Proxy(obj, {
         get: (target, prop, receiver) => {
             const value = target[prop];
@@ -74,12 +74,13 @@ export default function hook(obj, listeners, metadata = {}) {
 
             if ("function" === typeof value) {
                 return (/** @type {any[]} */ ...args) => {
+                    const store = {};
                     const argsAltered = reduce(before, args, {
                         // Utiliser le récepteur pour ne pas modifier l'objet
                         // cible.
                         obj: receiver,
                         prop,
-                        metadata,
+                        store,
                     });
 
                     // Ne pas utiliser await pour ne pas rendre toute la méthode
@@ -96,21 +97,22 @@ export default function hook(obj, listeners, metadata = {}) {
                         obj: receiver,
                         prop,
                         args: argsAltered,
-                        metadata,
+                        store,
                     });
                 };
             }
 
+            const store = {};
             const argsAltered = reduce(before, undefined, {
                 obj: receiver,
                 prop,
-                metadata,
+                store,
             });
             return reduce(after, value, {
                 obj: receiver,
                 prop,
                 args: argsAltered,
-                metadata,
+                store,
             });
         },
     });

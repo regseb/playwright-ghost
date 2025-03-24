@@ -20,11 +20,9 @@ describe("plugins/hook/browsercontext.js", function () {
                     ],
                 ]);
 
-                const plugin = browserContextPlugin();
+                const plugin = browserContextPlugin(listeners);
                 const listener = plugin["BrowserContext:new"];
-                const browserContextAltered = listener(browserContext, {
-                    metadata: { listeners },
-                });
+                const browserContextAltered = listener(browserContext);
 
                 assert.notEqual(browserContextAltered, browserContext);
                 assert.equal(browserContextAltered.foo, "bar");
@@ -32,13 +30,18 @@ describe("plugins/hook/browsercontext.js", function () {
 
             it("should do nothing when no listener", function () {
                 const browserContext = {};
-                const listeners = new Map([["Browser", "foo"]]);
+                const listeners = new Map([
+                    [
+                        "Browser",
+                        new Map([
+                            ["foo", { before: [], after: [() => "bar"] }],
+                        ]),
+                    ],
+                ]);
 
-                const plugin = browserContextPlugin();
+                const plugin = browserContextPlugin(listeners);
                 const listener = plugin["BrowserContext:new"];
-                const browserContextAltered = listener(browserContext, {
-                    metadata: { listeners },
-                });
+                const browserContextAltered = listener(browserContext);
 
                 // Vérifier que le contexte retourné est la même instance que
                 // celle en paramètre.

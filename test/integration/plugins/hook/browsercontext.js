@@ -6,15 +6,21 @@
 import assert from "node:assert/strict";
 import vanilla from "../../../../src/index.js";
 
+/**
+ * @import { BrowserContext } from "playwright";
+ */
+
 describe("Plugin: hook.browserContext", function () {
     it("should add plugin in BrowserContext", async function () {
         const browser = await vanilla.chromium.launch({
             plugins: [
                 {
-                    "BrowserContext:new": (vanillaBrowserContext) => {
+                    "BrowserContext:new": (
+                        /** @type {BrowserContext} */ browserContext,
+                    ) => {
                         // eslint-disable-next-line no-param-reassign
-                        vanillaBrowserContext.foo = "bar";
-                        return vanillaBrowserContext;
+                        browserContext.foo = "bar";
+                        return browserContext;
                     },
                 },
             ],

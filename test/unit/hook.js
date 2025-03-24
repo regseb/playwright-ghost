@@ -62,7 +62,7 @@ describe("hook.js", function () {
             assert.equal(listener.mock.callCount(), 1);
             assert.deepEqual(listener.mock.calls[0].arguments, [
                 ["three"],
-                { obj: hooked, prop: "baz", metadata: {} },
+                { obj: hooked, prop: "baz", store: {} },
             ]);
         });
 
@@ -82,7 +82,7 @@ describe("hook.js", function () {
             assert.equal(listener.mock.callCount(), 1);
             assert.deepEqual(listener.mock.calls[0].arguments, [
                 "two_THREE",
-                { obj: hooked, prop: "baz", args: ["three"], metadata: {} },
+                { obj: hooked, prop: "baz", args: ["three"], store: {} },
             ]);
         });
 
@@ -102,7 +102,7 @@ describe("hook.js", function () {
             assert.equal(listener.mock.callCount(), 1);
             assert.deepEqual(listener.mock.calls[0].arguments, [
                 ["five", "six"],
-                { obj: hooked, prop: "quux", metadata: {} },
+                { obj: hooked, prop: "quux", store: {} },
             ]);
         });
 
@@ -122,7 +122,7 @@ describe("hook.js", function () {
             assert.equal(listener.mock.callCount(), 1);
             assert.deepEqual(listener.mock.calls[0].arguments, [
                 ["five", "six"],
-                { obj: hooked, prop: "quux", metadata: {} },
+                { obj: hooked, prop: "quux", store: {} },
             ]);
         });
 
@@ -146,7 +146,7 @@ describe("hook.js", function () {
                     obj: hooked,
                     prop: "quux",
                     args: ["four", "five"],
-                    metadata: {},
+                    store: {},
                 },
             ]);
         });
@@ -171,7 +171,7 @@ describe("hook.js", function () {
                     obj: hooked,
                     prop: "quux",
                     args: ["four", "five"],
-                    metadata: {},
+                    store: {},
                 },
             ]);
         });
@@ -192,7 +192,7 @@ describe("hook.js", function () {
             assert.equal(listener.mock.callCount(), 1);
             assert.deepEqual(listener.mock.calls[0].arguments, [
                 undefined,
-                { obj: hooked, prop: "bar", metadata: {} },
+                { obj: hooked, prop: "bar", store: {} },
             ]);
         });
 
@@ -212,7 +212,7 @@ describe("hook.js", function () {
             assert.equal(listener.mock.callCount(), 1);
             assert.deepEqual(listener.mock.calls[0].arguments, [
                 "two",
-                { obj: hooked, prop: "bar", args: undefined, metadata: {} },
+                { obj: hooked, prop: "bar", args: undefined, store: {} },
             ]);
         });
     });

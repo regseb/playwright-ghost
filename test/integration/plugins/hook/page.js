@@ -6,12 +6,16 @@
 import assert from "node:assert/strict";
 import vanilla from "../../../../src/index.js";
 
+/**
+ * @import { Page } from "playwright";
+ */
+
 describe("Plugin: hook.page", function () {
     it("should add plugin in Page", async function () {
         const browser = await vanilla.chromium.launch({
             plugins: [
                 {
-                    "Page:new": (page) => {
+                    "Page:new": (/** @type {Page} */ page) => {
                         // eslint-disable-next-line no-param-reassign
                         page.foo = "bar";
                         return page;
