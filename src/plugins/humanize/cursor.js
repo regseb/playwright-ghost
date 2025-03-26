@@ -4,38 +4,39 @@
  * @author Sébastien Règne
  */
 
-import crypto from "node:crypto";
 import timers from "node:timers/promises";
 import ghostCursor from "ghost-cursor";
 
 /**
- * @import { Locator, Mouse, Page } from "playwright"
+ * @import { Locator, Mouse } from "playwright"
  * @import { ContextBefore } from "../../hook.js"
  */
 
 /**
- * Le symbole pour stocker la position du curseur dans la Page.
+ * Le symbole pour stocker la position du curseur dans la souris.
  *
  * @type {symbol}
  */
-const SYMBOL = Symbol("cursor");
+const CURSOR_SYMBOL = Symbol("cursor");
 
 /**
  * Déplace le curseur.
  *
- * @param {Object} to    Les coordonnées où déplacer le curseur.
- * @param {number} to.x  La coordonnées _x_ où déplacer le curseur.
- * @param {number} to.y  La coordonnées _y_ où déplacer le curseur.
- * @param {Mouse}  mouse Le curseur de la page.
+ * @param {Object} to    La position où déplacer le curseur.
+ * @param {number} to.x  La position _x_ où déplacer le curseur.
+ * @param {number} to.y  La position _y_ où déplacer le curseur.
+ * @param {Mouse}  mouse La souris de la page.
  */
 const move = async (to, mouse) => {
     // Vérifier que le curseur n'est pas déjà à la position demandée.
     // https://github.com/Xetera/ghost-cursor/issues/159
-    if (mouse[SYMBOL].x === to.x && mouse[SYMBOL].y === to.y) {
+    if (mouse[CURSOR_SYMBOL].x === to.x && mouse[CURSOR_SYMBOL].y === to.y) {
         return;
     }
 
-    const path = ghostCursor.path(mouse[SYMBOL], to, { useTimestamps: true });
+    const path = ghostCursor.path(mouse[CURSOR_SYMBOL], to, {
+        useTimestamps: true,
+    });
 
     // Déplacer le curseur.
     for (const step of path) {
@@ -48,31 +49,40 @@ const move = async (to, mouse) => {
     // Enregistrer la nouvelle position du curseur, pour l'utiliser comme point
     // de départ lors du prochain déplacement.
     // eslint-disable-next-line no-param-reassign
-    mouse[SYMBOL] = to;
+    mouse[CURSOR_SYMBOL] = to;
 };
 
 /**
  * Déplace le curseur avant d'effectuer une action (par exemple cliquer).
  *
- * @param {Object}  options Les options de l'action.
- * @param {Locator} locator Le `Locator` de l'élément où l'action sera
- *                          effectuée.
+ * @param {Locator} locator            Le `Locator` de l'élément où l'action
+ *                                     sera effectuée.
+ * @param {Object}  [options]          Les options de l'action.
+ * @param {Object}  [options.position] La position où faire l'action.
+ * @param {number}  options.position.x La position _x_ où faire l'action.
+ * @param {number}  options.position.y La position _y_ où faire l'action.
  * @returns {Promise<Object>} Les nouvelles options de l'action.
  */
-const moveCursor = async (options, locator) => {
-    // Déterminer où cliquer dans l'élément.
+const moveCursor = async (locator, options) => {
     const box = await locator.boundingBox();
-    const position = {
-        x: options?.position?.x ?? crypto.randomInt(0, Math.trunc(box.width)),
-        y: options?.position?.y ?? crypto.randomInt(0, Math.trunc(box.height)),
+    // Déterminer où cliquer dans l'élément. Trouver un point aléatoire dans
+    // l'ellipse (délimitée par le rectangle de l'élément) en favorisant les
+    // points proches du centre (ce n'est pas la racine carrée de rho qui est
+    // utilisée contrairement à la réponse :
+    // https://stackoverflow.com/a/5529199).
+    const phi = Math.random() * 2 * Math.PI;
+    const rho = Math.random();
+    const position = options?.position ?? {
+        x: (rho * Math.cos(phi) * box.width) / 2 + box.width / 2,
+        y: (rho * Math.sin(phi) * box.height) / 2 + box.height / 2,
     };
-
-    // Calculer le chemin entre la position actuelle du curseur et l'élément.
     const to = {
         x: box.x + position.x,
         y: box.y + position.y,
     };
 
+    // Déplacer le curseur entre la position actuelle et le point dans
+    // l'élément.
     await move(to, locator.page().mouse);
 
     return {
@@ -86,9 +96,9 @@ const moveCursor = async (options, locator) => {
  * humain.
  *
  * @param {Object} [options]         Les options du plugin.
- * @param {Object} [options.start]   Le position de départ du curseur.
- * @param {number} [options.start.x] Le position _x_ de départ du curseur.
- * @param {number} [options.start.y] Le position _y_ de départ du curseur.
+ * @param {Object} [options.start]   La position de départ du curseur.
+ * @param {number} [options.start.x] La position _x_ de départ du curseur.
+ * @param {number} [options.start.y] La position _y_ de départ du curseur.
  * @returns {Record<string, Function>} Les crochets du plugin.
  */
 export default function cursorPlugin(options) {
@@ -99,15 +109,15 @@ export default function cursorPlugin(options) {
 
     return {
         /**
-         * Ajoute la position du curseur à la page.
+         * Ajoute la position du curseur à la souris.
          *
-         * @param {Page} page La page nouvellement créée.
-         * @returns {Page} La page avec la position du curseur.
+         * @param {Mouse} mouse La souris nouvellement créée dans une page.
+         * @returns {Mouse} La souris avec la position du curseur.
          */
-        "Page:new": (page) => {
+        "Mouse:new": (mouse) => {
             // eslint-disable-next-line no-param-reassign
-            page.mouse[SYMBOL] = start;
-            return page;
+            mouse[CURSOR_SYMBOL] = start;
+            return mouse;
         },
 
         /**
@@ -123,7 +133,7 @@ export default function cursorPlugin(options) {
                 return args;
             }
             await locator.check({ ...args[0], trial: true });
-            return [await moveCursor(args[0], locator)];
+            return [await moveCursor(locator, args[0])];
         },
 
         /**
@@ -139,7 +149,7 @@ export default function cursorPlugin(options) {
                 return args;
             }
             await locator.click({ ...args[0], trial: true });
-            return [await moveCursor(args[0], locator)];
+            return [await moveCursor(locator, args[0])];
         },
 
         /**
@@ -154,8 +164,8 @@ export default function cursorPlugin(options) {
             if (args[0]?.trial) {
                 return args;
             }
-            await locator.dbclick({ ...args[0], trial: true });
-            return [await moveCursor(args[0], locator)];
+            await locator.dblclick({ ...args[0], trial: true });
+            return [await moveCursor(locator, args[0])];
         },
 
         /**
@@ -171,7 +181,7 @@ export default function cursorPlugin(options) {
                 return args;
             }
             await locator.hover({ ...args[0], trial: true });
-            return [await moveCursor(args[0], locator)];
+            return [await moveCursor(locator, args[0])];
         },
 
         /**
@@ -187,7 +197,7 @@ export default function cursorPlugin(options) {
                 return args;
             }
             await locator.setChecked(args[0], { ...args[1], trial: true });
-            return [args[0], await moveCursor(args[1], locator)];
+            return [args[0], await moveCursor(locator, args[1])];
         },
 
         /**
@@ -203,7 +213,7 @@ export default function cursorPlugin(options) {
                 return args;
             }
             await locator.uncheck({ ...args[0], trial: true });
-            return [await moveCursor(args[0], locator)];
+            return [await moveCursor(locator, args[0])];
         },
 
         /**

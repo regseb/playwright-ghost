@@ -24,50 +24,50 @@ describe("plugins/humanize/cursor.js", function () {
     describe("cursorPlugin()", function () {
         describe("Page:new", function () {
             it("should support no option", function () {
-                const page = { mouse: {} };
+                const mouse = {};
 
                 const plugin = cursorPlugin();
-                const listener = plugin["Page:new"];
-                const pageAltered = listener(page);
+                const listener = plugin["Mouse:new"];
+                const mouseAltered = listener(mouse);
 
-                // Vérifier que la page retournée est la même instance que celle
-                // en paramètre.
-                assert.equal(pageAltered, page);
-                const symbols = Object.getOwnPropertySymbols(pageAltered.mouse);
+                // Vérifier que la souris retournée est la même instance que
+                // celle en paramètre.
+                assert.equal(mouseAltered, mouse);
+                const symbols = Object.getOwnPropertySymbols(mouse);
                 assert.equal(symbols.length, 1);
-                const start = pageAltered.mouse[symbols[0]];
+                const start = mouse[symbols[0]];
                 assert.deepEqual(start, { x: 0, y: 0 });
             });
 
             it("should support empty option", function () {
-                const page = { mouse: {} };
+                const mouse = {};
 
                 const plugin = cursorPlugin({});
-                const listener = plugin["Page:new"];
-                const pageAltered = listener(page);
+                const listener = plugin["Mouse:new"];
+                const mouseAltered = listener(mouse);
 
-                // Vérifier que la page retournée est la même instance que celle
-                // en paramètre.
-                assert.equal(pageAltered, page);
-                const symbols = Object.getOwnPropertySymbols(pageAltered.mouse);
+                // Vérifier que la souris retournée est la même instance que
+                // celle en paramètre.
+                assert.equal(mouseAltered, mouse);
+                const symbols = Object.getOwnPropertySymbols(mouse);
                 assert.equal(symbols.length, 1);
-                const start = pageAltered.mouse[symbols[0]];
+                const start = mouse[symbols[0]];
                 assert.deepEqual(start, { x: 0, y: 0 });
             });
 
             it("should support option", function () {
-                const page = { mouse: {} };
+                const mouse = {};
 
                 const plugin = cursorPlugin({ start: { x: 42, y: 43 } });
-                const listener = plugin["Page:new"];
-                const pageAltered = listener(page);
+                const listener = plugin["Mouse:new"];
+                const mouseAltered = listener(mouse);
 
-                // Vérifier que la page retournée est la même instance que celle
-                // en paramètre.
-                assert.equal(pageAltered, page);
-                const symbols = Object.getOwnPropertySymbols(pageAltered.mouse);
+                // Vérifier que la souris retournée est la même instance que
+                // celle en paramètre.
+                assert.equal(mouseAltered, mouse);
+                const symbols = Object.getOwnPropertySymbols(mouse);
                 assert.equal(symbols.length, 1);
-                const start = pageAltered.mouse[symbols[0]];
+                const start = mouse[symbols[0]];
                 assert.deepEqual(start, { x: 42, y: 43 });
             });
         });
