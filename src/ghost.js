@@ -7,6 +7,8 @@
 import hook from "./hook.js";
 import browserPlugin from "./plugins/hook/browser.js";
 import browserContextPlugin from "./plugins/hook/browsercontext.js";
+import framePlugin from "./plugins/hook/frame.js";
+import frameLocatorPlugin from "./plugins/hook/framelocator.js";
 import locatorPlugin from "./plugins/hook/locator.js";
 import mousePlugin from "./plugins/hook/mouse.js";
 import pagePlugin from "./plugins/hook/page.js";
@@ -40,15 +42,33 @@ const NEW_MAPPINGS = {
         "Browser.newPage:after": identity,
         "BrowserContext.newPage:after": identity,
     }),
+    "Frame:new": Object.entries({
+        "Page.mainFrame:after": identity,
+        "Page.childFrames:after":
+            (/** @type {Function} */ listener) =>
+            (
+                /** @type {Frame[]} */ frames,
+                /** @type {ContextAfter<Page>} */ context,
+            ) =>
+                frames.map((f) => listener(f, context)),
+    }),
     "Locator:new": Object.entries({
-        "Page.getByRole:after": identity,
-        "Page.getByText:after": identity,
+        "Page.getByAltText:after": identity,
         "Page.getByLabel:after": identity,
         "Page.getByPlaceholder:after": identity,
-        "Page.getByAltText:after": identity,
-        "Page.getByTitle:after": identity,
+        "Page.getByRole:after": identity,
         "Page.getByTestId:after": identity,
+        "Page.getByText:after": identity,
+        "Page.getByTitle:after": identity,
         "Page.locator:after": identity,
+        "Frame.getByAltText:after": identity,
+        "Frame.getByLabel:after": identity,
+        "Frame.getByPlaceholder:after": identity,
+        "Frame.getByRole:after": identity,
+        "Frame.getByTestId:after": identity,
+        "Frame.getByText:after": identity,
+        "Frame.getByTitle:after": identity,
+        "Frame.locator:after": identity,
         "Locator.all:after":
             (/** @type {Function} */ listener) =>
             (
@@ -59,17 +79,31 @@ const NEW_MAPPINGS = {
         "Locator.and:after": identity,
         "Locator.filter:after": identity,
         "Locator.first:after": identity,
-        "Locator.getByRole:after": identity,
-        "Locator.getByText:after": identity,
+        "Locator.getByAltText:after": identity,
         "Locator.getByLabel:after": identity,
         "Locator.getByPlaceholder:after": identity,
-        "Locator.getByAltText:after": identity,
-        "Locator.getByTitle:after": identity,
+        "Locator.getByRole:after": identity,
         "Locator.getByTestId:after": identity,
+        "Locator.getByText:after": identity,
+        "Locator.getByTitle:after": identity,
         "Locator.last:after": identity,
         "Locator.locator:after": identity,
         "Locator.nth:after": identity,
         "Locator.or:after": identity,
+        "FrameLocator.getByAltText:after": identity,
+        "FrameLocator.getByLabel:after": identity,
+        "FrameLocator.getByPlaceholder:after": identity,
+        "FrameLocator.getByRole:after": identity,
+        "FrameLocator.getByTestId:after": identity,
+        "FrameLocator.getByText:after": identity,
+        "FrameLocator.getByTitle:after": identity,
+        "FrameLocator.locator:after": identity,
+    }),
+    "FrameLocator:new": Object.entries({
+        "Page.frameLocator:after": identity,
+        "Locator.contentFrame:after": identity,
+        "Locator.frameLocator:after": identity,
+        "FrameLocator.frameLocator:after": identity,
     }),
     "Mouse:new": Object.entries({
         "Browser.newPage:after":
@@ -168,7 +202,9 @@ export default class Ghost {
             browserPlugin(listeners),
             browserContextPlugin(listeners),
             pagePlugin(listeners),
+            framePlugin(listeners),
             locatorPlugin(listeners),
+            frameLocatorPlugin(listeners),
             mousePlugin(listeners),
             ...(await flatAwait(options?.plugins ?? [])),
         ]).forEach((v, k) => listeners.set(k, v));
@@ -195,7 +231,9 @@ export default class Ghost {
             browserPlugin(listeners),
             browserContextPlugin(listeners),
             pagePlugin(listeners),
+            framePlugin(listeners),
             locatorPlugin(listeners),
+            frameLocatorPlugin(listeners),
             mousePlugin(listeners),
             ...(await flatAwait(options?.plugins ?? [])),
         ]).forEach((v, k) => listeners.set(k, v));
