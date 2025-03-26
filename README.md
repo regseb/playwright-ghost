@@ -286,6 +286,17 @@ requires external tool
   <tr>
     <td></td>
     <td>⚙️</td>
+    <td>📦</td>
+    <td>
+      <a href="docs/plugins/utils/fingerprint.md"><code>utils.fingerprint</code></a>
+    </td>
+    <td>
+      Change the browser fingerprint.
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>⚙️</td>
     <td></td>
     <td>
       <a href="docs/plugins/utils/locale.md"><code>utils.locale</code></a>

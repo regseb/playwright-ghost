@@ -16,6 +16,7 @@ import webdriverPlugin from "./polyfill/webdriver.js";
 import webGLPlugin from "./polyfill/webgl.js";
 import adblockerPlugin from "./utils/adblocker.js";
 import debugPlugin from "./utils/debug.js";
+import fingerprintPlugin from "./utils/fingerprint.js";
 import localePlugin from "./utils/locale.js";
 import xvfbPlugin from "./utils/xvfb.js";
 
@@ -130,6 +131,7 @@ const humanize = {
 const utils = {
     adblocker: adblockerPlugin,
     debug: debugPlugin,
+    fingerprint: fingerprintPlugin,
     locale: localePlugin,
     xvfb: xvfbPlugin,
 };
