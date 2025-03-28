@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.0](https://github.com/regseb/playwright-ghost/compare/v0.11.0...v0.12.0) (2025-03-28)
+
+### Features
+
+- Add plugin to fingerprint.
+  ([0484e2f](https://github.com/regseb/playwright-ghost/commit/0484e2fef20639e52bd3bb58ac2fec5c485ae904))
+- **plugin/cursor:** Click in the element's ellipse.
+  ([284e7d7](https://github.com/regseb/playwright-ghost/commit/284e7d7430fa891d4ccc59361cdaeb51007d0353))
+- Support hook on Frame.
+  ([3a5e13e](https://github.com/regseb/playwright-ghost/commit/3a5e13e41714be5941613d082dc7ce9a1022f6ed))
+
 ## [0.11.0](https://github.com/regseb/playwright-ghost/compare/v0.10.0...v0.11.0) (2025-03-05)
 
 ### Features
