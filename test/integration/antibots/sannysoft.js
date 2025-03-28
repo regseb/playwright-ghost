@@ -44,9 +44,9 @@ describe("Anti-bot: Antibot (Sannysoft)", function () {
                         // Enlever les entêtes.
                         return trs.slice(1).map((tr) => ({
                             name: tr.querySelector("td:first-child")
-                                .textContent,
+                                ?.textContent,
                             value: tr.querySelector("td:last-child")
-                                .textContent,
+                                ?.textContent,
                             status: Array.from(
                                 tr.querySelector("td:last-child").classList,
                             ).find((c) => "result" !== c),

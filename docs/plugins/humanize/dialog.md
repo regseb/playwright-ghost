@@ -5,7 +5,7 @@
 > This plugin is enabled in the ⭐ [`recommended`](../recommended.md).
 
 Close [`<dialog>`](https://developer.mozilla.org/Web/HTML/Element/dialog) within
-a humanly possible time (between 1 and 5 seconds). By default Playwright
+a humanly possible time (between 1 and 5 seconds). By default, Playwright
 [closes them immediately](https://playwright.dev/docs/dialogs).
 
 ## Options

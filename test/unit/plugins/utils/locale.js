@@ -10,16 +10,16 @@ import localePlugin from "../../../../src/plugins/utils/locale.js";
 describe("plugins/utils/locale.js", function () {
     describe("localePlugin()", function () {
         describe("BrowserType.launch:before", function () {
-            it("should throw error when not found", function () {
+            it("should throw error when not found", async function () {
                 const name = mock.fn(() => "iexplore");
                 const browserType = { name };
 
                 const plugin = localePlugin();
                 const listener = plugin["BrowserType.launch:before"];
 
-                assert.rejects(() => listener([], { obj: browserType }), {
+                await assert.rejects(() => listener([], { obj: browserType }), {
                     name: "Error",
-                    message: "iexplore not found locally",
+                    message: "iexplore not found",
                 });
 
                 assert.equal(name.mock.callCount(), 1);
@@ -27,7 +27,7 @@ describe("plugins/utils/locale.js", function () {
         });
 
         describe("BrowserType.launchPersistentContext:before", function () {
-            it("should throw error when not found", function () {
+            it("should throw error when not found", async function () {
                 const name = mock.fn(() => "iexplore");
                 const browserType = { name };
 
@@ -35,11 +35,11 @@ describe("plugins/utils/locale.js", function () {
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
 
-                assert.rejects(
+                await assert.rejects(
                     () => listener(["./foo/"], { obj: browserType }),
                     {
                         name: "Error",
-                        message: "iexplore not found locally",
+                        message: "iexplore not found",
                     },
                 );
 

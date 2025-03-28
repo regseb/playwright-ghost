@@ -36,7 +36,7 @@ describe("Anti-bot: Fingerprint-Scan", function () {
                 const score = await page
                     .locator("#fingerprintScore")
                     .textContent();
-                const value = score.slice(
+                const value = score?.slice(
                     score.indexOf(": ") + 2,
                     score.indexOf("/"),
                 );

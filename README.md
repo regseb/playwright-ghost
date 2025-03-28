@@ -345,7 +345,7 @@ requires external tool
   <tr>
     <td><a href="https://abrahamjuliot.github.io/creepjs/">CreepJS</a></td>
     <td>❌</td>
-    <td><em>F+</em></td>
+    <td><em>F</em></td>
   </tr>
   <tr>
     <td><a href="https://antoinevastel.com/bots/datadome">Datadome</a></td>
@@ -422,7 +422,7 @@ requires external tool
       >
     </td>
     <td>❌</td>
-    <td><em>Bot (4)</em></td>
+    <td><em>Bot (5)</em></td>
   </tr>
   <tr>
     <td><a href="https://pixelscan.net/">Pixelscan</a></td>
@@ -459,8 +459,8 @@ requires external tool
         >Score detector (reCAPTCHA v3)</a
       >
     </td>
-    <td>✅</td>
-    <td></td>
+    <td>❌</td>
+    <td><em>0.3</em></td>
   </tr>
   <tr>
     <td>

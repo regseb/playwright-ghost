@@ -29,7 +29,7 @@ Use the plugin and replace `chromium` by `chrome` (locally installed).
 import { chromium, plugins } from "playwright-ghost";
 
 const browser = await chromium.launch({
-  plugins: [plugins.utils.locale("chrome")],
+  plugins: [plugins.utils.locale({ name: "chrome" })],
 });
 // ...
 ```

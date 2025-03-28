@@ -55,7 +55,7 @@ const browser = await chromium.launch({
       click: { delay: { min: 50, max: 200 } },
       cursor: { start: { x: 100, y: 100 } },
     },
-  ),
+  }),
 });
 // ...
 ```
@@ -70,7 +70,7 @@ const browser = await chromium.launch({
     humanize: {
       cursor: false,
     },
-  ),
+  }),
 });
 // ...
 ```

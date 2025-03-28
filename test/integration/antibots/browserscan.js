@@ -37,13 +37,11 @@ describe("Anti-bot: BrowserScan", function () {
                     .getByText("Test Results:", { exact: true })
                     .evaluate(
                         (element) =>
-                            element.parentElement.querySelector(
+                            element.parentElement?.querySelector(
                                 "strong:last-child",
-                            ).textContent,
+                            )?.textContent,
                     );
-                if ("Normal" !== result) {
-                    assert.fail(result);
-                }
+                assert.equal(result, "Normal");
             } finally {
                 await page.screenshot({
                     path: "./log/browserscan-cr.png",

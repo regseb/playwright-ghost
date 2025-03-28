@@ -33,10 +33,14 @@ describe("Anti-bot: Chromedriver Detector", function () {
             try {
                 await page.goto("https://hmaker.github.io/selenium-detector/");
                 // Récupérer les tokens.
-                const tokens = await page.evaluate(async () => ({
-                    token: globalThis.token,
-                    asyncToken: await globalThis.getAsyncToken(),
-                }));
+                const tokens = await page.evaluate(
+                    async () => ({
+                        token: globalThis.token,
+                        asyncToken: await globalThis.getAsyncToken(),
+                    }),
+                    [],
+                    false,
+                );
 
                 await page.locator("#chromedriver-token").fill(tokens.token);
                 await page

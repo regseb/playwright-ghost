@@ -53,21 +53,6 @@ describe("plugins/polyfill/headless.js", function () {
                 assert.equal(name.mock.callCount(), 1);
             });
 
-            it("should ignore headful", function () {
-                const name = mock.fn(() => "chromium");
-                const browserType = { name };
-
-                const plugin = headlessPlugin();
-                const listener = plugin["BrowserType.launch:before"];
-                const args = listener([{ headless: false }], {
-                    obj: browserType,
-                });
-
-                assert.deepEqual(args, [{ headless: false }]);
-
-                assert.equal(name.mock.callCount(), 1);
-            });
-
             it("should ignore Firefox", function () {
                 const name = mock.fn(() => "firefox");
                 const browserType = { name };
@@ -130,22 +115,6 @@ describe("plugins/polyfill/headless.js", function () {
                 });
 
                 assert.deepEqual(args, ["./foo/", { channel: "chrome" }]);
-
-                assert.equal(name.mock.callCount(), 1);
-            });
-
-            it("should ignore headful", function () {
-                const name = mock.fn(() => "chromium");
-                const browserType = { name };
-
-                const plugin = headlessPlugin();
-                const listener =
-                    plugin["BrowserType.launchPersistentContext:before"];
-                const args = listener(["./foo/", { headless: false }], {
-                    obj: browserType,
-                });
-
-                assert.deepEqual(args, ["./foo/", { headless: false }]);
 
                 assert.equal(name.mock.callCount(), 1);
             });

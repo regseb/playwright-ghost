@@ -17,9 +17,9 @@ assignees: ""
 
 ### Environment
 
-- Playwright-ghost version<!-- e.g. 0.11.0 -->:
+- Playwright-ghost version<!-- e.g. 0.12.0 -->:
 - Dependencies version:
-  - Playwright (or fork)<!-- e.g. 1.50.1, patchright 1.50.1 -->:
+  - Playwright (or fork)<!-- e.g. 1.51.1, patchright 1.51.2 -->:
   - others (if appropriate)<!-- e.g. @ghostery/adblocker-playwright 2.5.0 -->:
 - Node version<!-- e.g. v22.14.0 -->:
 - npm version<!-- e.g. 10.9.2 -->:

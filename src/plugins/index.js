@@ -26,7 +26,7 @@ import xvfbPlugin from "./utils/xvfb.js";
  * @param {Function}       plugin    La fonction pour créer le plugin.
  * @param {Object|boolean} [options] Les éventuelles options du plugin ; ou un
  *                                   booléen pour activer / déactiver le plugin.
- * @returns {Record<string, Function>} Les crochets des plugins ; ou une objet
+ * @returns {Record<string, Function>} Les crochets des plugins ; ou un objet
  *                                     vide si le plugin est désactivé.
  */
 const init = (plugin, options) => {

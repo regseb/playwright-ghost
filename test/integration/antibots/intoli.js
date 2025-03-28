@@ -42,8 +42,8 @@ describe("Anti-bot: Chrome Headless Detection (Intoli)", function () {
                 const results = await page.locator("tr").evaluateAll((trs) => {
                     // Enlever les entêtes.
                     return trs.slice(1).map((tr) => ({
-                        name: tr.querySelector("td:first-child").textContent,
-                        value: tr.querySelector("td:last-child").textContent,
+                        name: tr.querySelector("td:first-child")?.textContent,
+                        value: tr.querySelector("td:last-child")?.textContent,
                         status: Array.from(
                             tr.querySelector("td:last-child").classList,
                         ),

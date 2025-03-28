@@ -43,7 +43,7 @@
 
 ### Bug Fixes
 
-- Remove 's' of 'recommendeds' list plugins.
+- Remove 's' of 'recommended' list plugins.
   ([ff8199c](https://github.com/regseb/playwright-ghost/commit/ff8199c37681b5f36e547dc47ed3ac97b0ca962e))
 - Standardize random options.
   ([a292d25](https://github.com/regseb/playwright-ghost/commit/a292d2577d4fec6fdef4d38f8649c7775e82e9ea))
@@ -110,7 +110,7 @@
 
 - Ajouter un plugin pour le "screen".
   ([7a443a2](https://github.com/regseb/playwright-ghost/commit/7a443a21467720ccf779ea8bb33a2cab547964a3))
-- Ajouter un plugin pour le user agent.
+- Ajouter un plugin pour l'agent utilisateur.
   ([561b7aa](https://github.com/regseb/playwright-ghost/commit/561b7aa12ceed8fe52920b6bb75d5b2ec133f8e3))
 
 ### Bug Fixes

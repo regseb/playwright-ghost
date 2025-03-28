@@ -9,7 +9,7 @@
  * @typedef {Object} ContextBefore Le contexte pour un crochetage avant l'appel
  *                                 d'une méthode ou d'un getter.
  * @prop {T}      obj   L'objet crocheté.
- * @prop {string} prop  La méthode crocheté.
+ * @prop {string} prop  La méthode crochetée.
  * @prop {Object} store Des données échangées entre les crochets d'avant et
  *                      d'après.
  */
@@ -19,9 +19,9 @@
  * @typedef {Object} ContextAfter Le contexte pour un crochetage après l'appel
  *                                d'une méthode ou d'un getter.
  * @prop {T}               obj   L'objet crocheté.
- * @prop {string}          prop  La méthode crocheté.
- * @prop {any[]|undefined} args  Les paramètres de la méthode crocheté ou
- *                               possiblement `undefined` pour les getter.
+ * @prop {string}          prop  La méthode crochetée.
+ * @prop {any[]|undefined} args  Les paramètres de la méthode crochetée ou
+ *                               possiblement `undefined` pour les getters.
  * @prop {Object}          store Des données échangées entre les crochets
  *                               d'avant et d'après.
  */

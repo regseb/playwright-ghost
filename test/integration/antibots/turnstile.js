@@ -5,10 +5,10 @@
 
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
-import vanilla from "../../../src/index.js";
+import patchright from "../../../src/patchright.js";
 
 const getUserAgent = async () => {
-    const browser = await vanilla.chromium.launch({ channel: "chromium" });
+    const browser = await patchright.chromium.launch({ channel: "chromium" });
     const context = await browser.newContext();
     const page = await context.newPage();
     const userAgent = await page.evaluate("navigator.userAgent");
@@ -19,11 +19,13 @@ const getUserAgent = async () => {
 
 describe("Anti-bot: Cloudflare turnstile demo", function () {
     describe("chromium", function () {
-        it.skip("should be success with managed challenge", async function () {
-            const browser = await vanilla.chromium.launch({
+        it("should be success with managed challenge", async function () {
+            // Utiliser Patchright pour avoir accès aux shadow DOM fermés.
+            // https://github.com/microsoft/playwright/issues/23047#issuecomment-2737175518
+            const browser = await patchright.chromium.launch({
                 plugins: [
-                    ...vanilla.plugins.recommended(),
-                    vanilla.plugins.polyfill.userAgent({
+                    ...patchright.plugins.recommended(),
+                    patchright.plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
                 ],
@@ -32,16 +34,17 @@ describe("Anti-bot: Cloudflare turnstile demo", function () {
             const page = await context.newPage();
             try {
                 await page.goto("https://peet.ws/turnstile-test/managed.html");
-                await page.waitForTimeout(5000);
 
-                const CHALLENGES_HOST = "https://challenges.cloudflare.com/";
-                for (const frame of page.mainFrame().childFrames()) {
-                    if (!frame.url().startsWith(CHALLENGES_HOST)) {
-                        continue;
-                    }
-                    await frame.click('input[type="checkbox"]');
-                    assert.ok(await frame.locator("#success").isVisible());
-                }
+                const frame = page.frame({
+                    url: "https://challenges.cloudflare.com/**",
+                });
+                await frame.locator('input[type="checkbox"]').check();
+                // Attendre que la vérification commence et se termine.
+                const verifying = frame.locator("#verifying");
+                await verifying.waitFor({ state: "visible" });
+                await verifying.waitFor({ state: "hidden" });
+
+                assert.ok(await frame.locator("#success").isVisible());
             } finally {
                 await page.screenshot({
                     path: "./log/turnstile_managed-cr.png",
@@ -58,10 +61,12 @@ describe("Anti-bot: Cloudflare turnstile demo", function () {
         });
 
         it("should be success with non-interactive challenge", async function () {
-            const browser = await vanilla.chromium.launch({
+            // Utiliser Patchright pour avoir accès aux shadow DOM fermés.
+            // https://github.com/microsoft/playwright/issues/23047#issuecomment-2737175518
+            const browser = await patchright.chromium.launch({
                 plugins: [
-                    ...vanilla.plugins.recommended(),
-                    vanilla.plugins.polyfill.userAgent({
+                    ...patchright.plugins.recommended(),
+                    patchright.plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
                 ],
@@ -72,15 +77,16 @@ describe("Anti-bot: Cloudflare turnstile demo", function () {
                 await page.goto(
                     "https://peet.ws/turnstile-test/non-interactive.html",
                 );
-                await page.waitForTimeout(5000);
 
-                const CHALLENGES_HOST = "https://challenges.cloudflare.com/";
-                for (const frame of page.mainFrame().childFrames()) {
-                    if (!frame.url().startsWith(CHALLENGES_HOST)) {
-                        continue;
-                    }
-                    assert.ok(await frame.locator("#success").isVisible());
-                }
+                const frame = page.frame({
+                    url: "https://challenges.cloudflare.com/**",
+                });
+                // Attendre que la vérification commence et se termine.
+                const verifying = frame.locator("#verifying");
+                await verifying.waitFor({ state: "visible" });
+                await verifying.waitFor({ state: "hidden" });
+
+                assert.ok(await frame.locator("#success").isVisible());
             } finally {
                 await page.screenshot({
                     path: "./log/turnstile_noninteractive-cr.png",

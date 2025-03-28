@@ -153,7 +153,7 @@ export default function xvfbPlugin(options) {
          */
         "BrowserType.launch:before": async (args) => {
             const display = await spawnXvfb(xvfbArgs, keepalive);
-            return [await setDisplay(args[0], display)];
+            return [setDisplay(args[0], display)];
         },
 
         /**
@@ -165,7 +165,7 @@ export default function xvfbPlugin(options) {
          */
         "BrowserType.launchPersistentContext:before": async (args) => {
             const display = await spawnXvfb(xvfbArgs, keepalive);
-            return [args[0], await setDisplay(args[1], display)];
+            return [args[0], setDisplay(args[1], display)];
         },
 
         /**

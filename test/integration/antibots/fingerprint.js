@@ -50,8 +50,8 @@ describe("Anti-bot: Fingerprint", function () {
                     .locator(selector)
                     .evaluateAll((divs) => {
                         return divs.map((div) => ({
-                            name: div.querySelector("h3").textContent,
-                            status: div.querySelector("p").textContent,
+                            name: div.querySelector("h3")?.textContent,
+                            status: div.querySelector("p")?.textContent,
                         }));
                     });
 

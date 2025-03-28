@@ -36,7 +36,10 @@ describe("Anti-bot: Pixelscan", function () {
                 const result = await page
                     .locator("pxlscn-bot-detection span")
                     .textContent();
-                assert.equal(result.trim(), "No automation framework detected");
+                assert.equal(
+                    result?.trim(),
+                    "No automation framework detected",
+                );
             } finally {
                 await page.screenshot({
                     path: "./log/pixelscan-cr.png",

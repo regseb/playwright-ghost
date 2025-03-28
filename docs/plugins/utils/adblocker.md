@@ -31,7 +31,7 @@ const browser = await chromium.launch({
 // ...
 ```
 
-Use the plugin and specify `"fromPrebuiltFull` mode.
+Use the plugin and specify `"fromPrebuiltFull"` mode.
 
 ```javascript
 import { chromium, plugins } from "playwright-ghost";

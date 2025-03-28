@@ -18,8 +18,8 @@
  * @returns {Record<string, any>|undefined} Les nouvelles options.
  * @see https://playwright.dev/docs/browsers#opt-in-to-new-headless-mode
  */
-const changeHeadless = (options, browserType) => {
-    if ("chromium" === browserType.name() && (options?.headless ?? true)) {
+const changeChannel = (options, browserType) => {
+    if ("chromium" === browserType.name()) {
         return {
             channel: "chromium",
             ...options,
@@ -46,7 +46,7 @@ export default function headlessPlugin() {
          * @returns {any[]} Les nouveaux paramètres.
          */
         "BrowserType.launch:before": (args, { obj: browserType }) => {
-            return [changeHeadless(args[0], browserType)];
+            return [changeChannel(args[0], browserType)];
         },
 
         /**
@@ -61,7 +61,7 @@ export default function headlessPlugin() {
             args,
             { obj: browserType },
         ) => {
-            return [args[0], changeHeadless(args[1], browserType)];
+            return [args[0], changeChannel(args[1], browserType)];
         },
     };
 }

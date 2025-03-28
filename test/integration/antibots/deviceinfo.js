@@ -34,8 +34,8 @@ describe("Anti-bot: Device Info", function () {
                 await page.goto("https://www.deviceinfo.me/");
                 await page.waitForTimeout(5000);
 
-                const spoofeds = await page.getByText("(Spoofed)").all();
-                assert.deepEqual(spoofeds, []);
+                const spoofed = await page.getByText("(Spoofed)").all();
+                assert.deepEqual(spoofed, []);
             } finally {
                 await page.screenshot({
                     path: "./log/deviceinfo-cr.png",

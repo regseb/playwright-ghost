@@ -36,9 +36,11 @@ Use the plugin and set options for fingerprint generation.
 import { chromium, plugins } from "playwright-ghost";
 
 const browser = await chromium.launch({
-  plugins: [plugins.utils.fingerprint({
-    fingerprintOptions: { devices: ["mobile"], operatingSystems: ["ios"] },
-  }),
+  plugins: [
+    plugins.utils.fingerprint({
+      fingerprintOptions: { devices: ["mobile"], operatingSystems: ["ios"] },
+    }),
+  ],
 });
 // ...
 ```
