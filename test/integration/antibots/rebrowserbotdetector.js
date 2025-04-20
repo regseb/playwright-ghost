@@ -6,6 +6,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import process from "node:process";
+import { describe, it } from "node:test";
 import rebrowser from "../../../src/rebrowser.js";
 
 const getUserAgent = async () => {
@@ -18,9 +19,9 @@ const getUserAgent = async () => {
     return userAgent.replace("Headless", "");
 };
 
-describe("Anti-bot: rebrowser-bot-detector", function () {
-    describe("chromium", function () {
-        it("should not be detected", async function () {
+describe("Anti-bot: rebrowser-bot-detector", () => {
+    describe("chromium", () => {
+        it("should not be detected", async () => {
             const browser = await rebrowser.chromium.launch({
                 plugins: [
                     ...rebrowser.plugins.recommended(),

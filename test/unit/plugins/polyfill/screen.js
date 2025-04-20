@@ -4,12 +4,13 @@
  */
 
 import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 import screenPlugin from "../../../../src/plugins/polyfill/screen.js";
 
-describe("plugins/polyfill/screen.js", function () {
-    describe("screenPlugin()", function () {
-        describe("BrowserType.launchPersistentContext:before", function () {
-            it("should support no option", function () {
+describe("plugins/polyfill/screen.js", () => {
+    describe("screenPlugin()", () => {
+        describe("BrowserType.launchPersistentContext:before", () => {
+            it("should support no option", () => {
                 const plugin = screenPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
@@ -21,7 +22,7 @@ describe("plugins/polyfill/screen.js", function () {
                 ]);
             });
 
-            it("should support option", function () {
+            it("should support option", () => {
                 const plugin = screenPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
@@ -33,7 +34,7 @@ describe("plugins/polyfill/screen.js", function () {
                 ]);
             });
 
-            it("should support 'screen' option", function () {
+            it("should support 'screen' option", () => {
                 const plugin = screenPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
@@ -49,8 +50,8 @@ describe("plugins/polyfill/screen.js", function () {
             });
         });
 
-        describe("Browser.newContext:before", function () {
-            it("should support no option", function () {
+        describe("Browser.newContext:before", () => {
+            it("should support no option", () => {
                 const plugin = screenPlugin();
                 const listener = plugin["Browser.newContext:before"];
                 const args = listener([]);
@@ -60,7 +61,7 @@ describe("plugins/polyfill/screen.js", function () {
                 ]);
             });
 
-            it("should support option", function () {
+            it("should support option", () => {
                 const plugin = screenPlugin();
                 const listener = plugin["Browser.newContext:before"];
                 const args = listener([{ slowMo: 200 }]);
@@ -70,7 +71,7 @@ describe("plugins/polyfill/screen.js", function () {
                 ]);
             });
 
-            it("should support 'screen' option", function () {
+            it("should support 'screen' option", () => {
                 const plugin = screenPlugin();
                 const listener = plugin["Browser.newContext:before"];
                 const args = listener([{ screen: { width: 42, height: 43 } }]);
@@ -79,8 +80,8 @@ describe("plugins/polyfill/screen.js", function () {
             });
         });
 
-        describe("Browser.newPage", function () {
-            it("should support no option", function () {
+        describe("Browser.newPage", () => {
+            it("should support no option", () => {
                 const plugin = screenPlugin();
                 const listener = plugin["Browser.newPage:before"];
                 const args = listener([]);
@@ -90,7 +91,7 @@ describe("plugins/polyfill/screen.js", function () {
                 ]);
             });
 
-            it("should support option", function () {
+            it("should support option", () => {
                 const plugin = screenPlugin();
                 const listener = plugin["Browser.newPage:before"];
                 const args = listener([{ slowMo: 200 }]);
@@ -100,7 +101,7 @@ describe("plugins/polyfill/screen.js", function () {
                 ]);
             });
 
-            it("should support 'screen' option", function () {
+            it("should support 'screen' option", () => {
                 const plugin = screenPlugin();
                 const listener = plugin["Browser.newPage:before"];
                 const args = listener([{ screen: { width: 42, height: 43 } }]);

@@ -4,7 +4,7 @@
  */
 
 import assert from "node:assert/strict";
-import { mock } from "node:test";
+import { afterEach, describe, it, mock } from "node:test";
 import debugPlugin from "../../../../src/plugins/utils/debug.js";
 
 const PageMock = class {
@@ -23,14 +23,14 @@ const PageMock = class {
     }
 };
 
-describe("plugins/utils/debug.js", function () {
-    describe("debugPlugin()", function () {
-        describe("Page:new", function () {
-            afterEach(function () {
+describe("plugins/utils/debug.js", () => {
+    describe("debugPlugin()", () => {
+        describe("Page:new", () => {
+            afterEach(() => {
                 mock.reset();
             });
 
-            it("should transfer 'console'", function () {
+            it("should transfer 'console'", () => {
                 const log = mock.method(console, "log", () => {});
                 const error = mock.method(console, "error", () => {});
                 const page = new PageMock();
@@ -49,7 +49,7 @@ describe("plugins/utils/debug.js", function () {
                 assert.equal(error.mock.callCount(), 0);
             });
 
-            it("should transfer 'pageerror'", function () {
+            it("should transfer 'pageerror'", () => {
                 const log = mock.method(console, "log", () => {});
                 const error = mock.method(console, "error", () => {});
                 const page = new PageMock();

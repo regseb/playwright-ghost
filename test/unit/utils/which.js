@@ -7,7 +7,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
-import { mock } from "node:test";
+import { afterEach, describe, it, mock } from "node:test";
 import which from "../../../src/utils/which.js";
 
 const ORIGINAL_PATH = process.env.PATH;
@@ -22,13 +22,13 @@ const localize = (PATH) => {
     return PATH.replaceAll(":", path.delimiter).replaceAll("/", path.sep);
 };
 
-describe("utils/which.js", function () {
-    describe("which()", function () {
-        afterEach(function () {
+describe("utils/which.js", () => {
+    describe("which()", () => {
+        afterEach(() => {
             process.env.PATH = ORIGINAL_PATH;
         });
 
-        it("should support no PATH", async function () {
+        it("should support no PATH", async () => {
             delete process.env.PATH;
 
             await assert.rejects(() => which("firefox"), {
@@ -37,7 +37,7 @@ describe("utils/which.js", function () {
             });
         });
 
-        it("should return file", async function () {
+        it("should return file", async () => {
             process.env.PATH = localize("/usr/local/bin:/usr/bin:/bin");
             const access = mock.method(
                 fs,
@@ -68,7 +68,7 @@ describe("utils/which.js", function () {
             ]);
         });
 
-        it("should throw error when not found", async function () {
+        it("should throw error when not found", async () => {
             process.env.PATH = localize("/usr/local/bin:/usr/bin:/bin");
             const access = mock.method(
                 fs,

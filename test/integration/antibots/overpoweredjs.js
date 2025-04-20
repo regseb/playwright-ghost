@@ -1,10 +1,12 @@
 /**
  * @license MIT
+ * @see https://github.com/Joe12387/overpoweredjs
  * @author Sébastien Règne
  */
 
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
+import { describe, it } from "node:test";
 import patchright from "../../../src/patchright.js";
 
 const getUserAgent = async () => {
@@ -17,9 +19,9 @@ const getUserAgent = async () => {
     return userAgent.replace("Headless", "");
 };
 
-describe("Anti-bot: OverpoweredJS Fingerprinting Demo", function () {
-    describe("chromium", function () {
-        it("should be probably a human", async function () {
+describe("Anti-bot: OverpoweredJS Fingerprinting Demo", () => {
+    describe("chromium", () => {
+        it("should be probably a human", async () => {
             const browser = await patchright.chromium.launch({
                 plugins: [
                     ...patchright.plugins.recommended(),

@@ -4,13 +4,13 @@
  */
 
 import assert from "node:assert/strict";
-import { mock } from "node:test";
+import { describe, it, mock } from "node:test";
 import webdriverPlugin from "../../../../src/plugins/polyfill/webdriver.js";
 
-describe("plugins/polyfill/webdriver.js", function () {
-    describe("webdriver()", function () {
-        describe("BrowserType.launch:before", function () {
-            it("should support no option", function () {
+describe("plugins/polyfill/webdriver.js", () => {
+    describe("webdriver()", () => {
+        describe("BrowserType.launch:before", () => {
+            it("should support no option", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
@@ -25,7 +25,7 @@ describe("plugins/polyfill/webdriver.js", function () {
                 assert.equal(name.mock.callCount(), 1);
             });
 
-            it("should support option", function () {
+            it("should support option", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
@@ -43,7 +43,7 @@ describe("plugins/polyfill/webdriver.js", function () {
                 assert.equal(name.mock.callCount(), 1);
             });
 
-            it("should support 'args' option", function () {
+            it("should support 'args' option", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
@@ -65,7 +65,7 @@ describe("plugins/polyfill/webdriver.js", function () {
                 assert.equal(name.mock.callCount(), 1);
             });
 
-            it("should ignore Firefox", function () {
+            it("should ignore Firefox", () => {
                 const name = mock.fn(() => "firefox");
                 const browserType = { name };
 
@@ -81,8 +81,8 @@ describe("plugins/polyfill/webdriver.js", function () {
             });
         });
 
-        describe("BrowserType.launchPersistentContext:before", function () {
-            it("should support no option", function () {
+        describe("BrowserType.launchPersistentContext:before", () => {
+            it("should support no option", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
@@ -99,7 +99,7 @@ describe("plugins/polyfill/webdriver.js", function () {
                 assert.equal(name.mock.callCount(), 1);
             });
 
-            it("should support option", function () {
+            it("should support option", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
@@ -121,7 +121,7 @@ describe("plugins/polyfill/webdriver.js", function () {
                 assert.equal(name.mock.callCount(), 1);
             });
 
-            it("should support 'args' option", function () {
+            it("should support 'args' option", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
@@ -145,7 +145,7 @@ describe("plugins/polyfill/webdriver.js", function () {
                 assert.equal(name.mock.callCount(), 1);
             });
 
-            it("should ignore Firefox", function () {
+            it("should ignore Firefox", () => {
                 const name = mock.fn(() => "firefox");
                 const browserType = { name };
 

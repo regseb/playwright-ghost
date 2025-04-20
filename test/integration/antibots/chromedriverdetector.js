@@ -5,6 +5,7 @@
 
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
+import { describe, it } from "node:test";
 import patchright from "../../../src/patchright.js";
 
 const getUserAgent = async () => {
@@ -17,9 +18,9 @@ const getUserAgent = async () => {
     return userAgent.replace("Headless", "");
 };
 
-describe("Anti-bot: Chromedriver Detector", function () {
-    describe("chromium", function () {
-        it("should passed", async function () {
+describe("Anti-bot: Chromedriver Detector", () => {
+    describe("chromium", () => {
+        it("should passed", async () => {
             const browser = await patchright.chromium.launch({
                 plugins: [
                     ...patchright.plugins.recommended(),

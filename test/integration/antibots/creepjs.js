@@ -5,6 +5,7 @@
 
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
+import { describe, it } from "node:test";
 import vanilla from "../../../src/index.js";
 
 const getUserAgent = async () => {
@@ -17,9 +18,9 @@ const getUserAgent = async () => {
     return userAgent.replace("Headless", "");
 };
 
-describe("Anti-bot: CreepJS", function () {
-    describe("chromium", function () {
-        it("should get a B (or A) grade", async function () {
+describe("Anti-bot: CreepJS", () => {
+    describe("chromium", () => {
+        it("should get a B (or A) grade", async () => {
             const browser = await vanilla.chromium.launch({
                 plugins: [
                     ...vanilla.plugins.recommended(),

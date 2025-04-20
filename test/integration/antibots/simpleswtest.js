@@ -5,11 +5,12 @@
 
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
+import { describe, it } from "node:test";
 import vanilla from "../../../src/index.js";
 
-describe("Anti-bot: Simple Service Workers Fingerprinting Leaks Test", function () {
-    describe("chromium", function () {
-        it("should not be detected", async function () {
+describe("Anti-bot: Simple Service Workers Fingerprinting Leaks Test", () => {
+    describe("chromium", () => {
+        it("should not be detected", async () => {
             const browser = await vanilla.chromium.launch({
                 plugins: vanilla.plugins.recommended(),
             });

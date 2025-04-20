@@ -4,14 +4,15 @@
  */
 
 import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 import vanilla from "../../../../src/index.js";
 
 /**
  * @import { Page } from "playwright";
  */
 
-describe("Plugin: hook.page", function () {
-    it("should add plugin in Page", async function () {
+describe("Plugin: hook.page", () => {
+    it("should add plugin in Page", async () => {
         const browser = await vanilla.chromium.launch({
             plugins: [
                 {

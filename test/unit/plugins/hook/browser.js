@@ -4,12 +4,13 @@
  */
 
 import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 import browserPlugin from "../../../../src/plugins/hook/browser.js";
 
-describe("plugins/hook/browser.js", function () {
-    describe("browserPlugin()", function () {
-        describe("Browser:new", function () {
-            it("should add plugin", function () {
+describe("plugins/hook/browser.js", () => {
+    describe("browserPlugin()", () => {
+        describe("Browser:new", () => {
+            it("should add plugin", () => {
                 const browser = {};
                 const listeners = new Map([
                     [
@@ -28,7 +29,7 @@ describe("plugins/hook/browser.js", function () {
                 assert.equal(browserAltered.foo, "bar");
             });
 
-            it("should do nothing when no listener", function () {
+            it("should do nothing when no listener", () => {
                 const browser = {};
                 const listeners = new Map([
                     [

@@ -4,10 +4,11 @@
  */
 
 import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 import vanilla from "../../../../src/index.js";
 
-describe("Plugin: polyfill.webdriver", function () {
-    it("should return false", async function () {
+describe("Plugin: polyfill.webdriver", () => {
+    it("should return false", async () => {
         const browser = await vanilla.chromium.launch({
             channel: "chromium",
             plugins: [vanilla.plugins.polyfill.webdriver()],

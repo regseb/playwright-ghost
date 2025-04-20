@@ -4,12 +4,13 @@
  */
 
 import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 import framePlugin from "../../../../src/plugins/hook/frame.js";
 
-describe("plugins/hook/frame.js", function () {
-    describe("framePlugin()", function () {
-        describe("Frame:new", function () {
-            it("should add plugin", function () {
+describe("plugins/hook/frame.js", () => {
+    describe("framePlugin()", () => {
+        describe("Frame:new", () => {
+            it("should add plugin", () => {
                 const frame = {};
                 const listeners = new Map([
                     [
@@ -28,7 +29,7 @@ describe("plugins/hook/frame.js", function () {
                 assert.equal(frameAltered.foo, "bar");
             });
 
-            it("should do nothing when no listener", function () {
+            it("should do nothing when no listener", () => {
                 const frame = {};
                 const listeners = new Map([
                     [

@@ -4,7 +4,7 @@
  */
 
 import assert from "node:assert/strict";
-import { mock } from "node:test";
+import { describe, it, mock } from "node:test";
 import hook from "../../src/hook.js";
 
 const Foo = class {
@@ -33,9 +33,9 @@ const Foo = class {
     }
 };
 
-describe("hook.js", function () {
-    describe("hook()", function () {
-        it("should do nothing with no listener", async function () {
+describe("hook.js", () => {
+    describe("hook()", () => {
+        it("should do nothing with no listener", async () => {
             const listeners = new Map();
             const foo = new Foo("one");
 
@@ -46,7 +46,7 @@ describe("hook.js", function () {
             assert.equal(await hooked.quux("three", "four"), "one_three_four");
         });
 
-        it("should support listener before function", async function () {
+        it("should support listener before function", async () => {
             const listener = mock.fn(() => ["one"]);
             const listeners = new Map([
                 ["baz", { before: [listener], after: [] }],
@@ -66,7 +66,7 @@ describe("hook.js", function () {
             ]);
         });
 
-        it("should support listener after function", async function () {
+        it("should support listener after function", async () => {
             const listener = mock.fn(() => "one");
             const listeners = new Map([
                 ["baz", { before: [], after: [listener] }],
@@ -86,7 +86,7 @@ describe("hook.js", function () {
             ]);
         });
 
-        it("should support listener before async function", async function () {
+        it("should support listener before async function", async () => {
             const listener = mock.fn(() => ["one", "two"]);
             const listeners = new Map([
                 ["quux", { before: [listener], after: [] }],
@@ -106,7 +106,7 @@ describe("hook.js", function () {
             ]);
         });
 
-        it("should support listener async before function", async function () {
+        it("should support listener async before function", async () => {
             const listener = mock.fn(() => Promise.resolve(["one", "two"]));
             const listeners = new Map([
                 ["quux", { before: [listener], after: [] }],
@@ -126,7 +126,7 @@ describe("hook.js", function () {
             ]);
         });
 
-        it("should support listener after async function", async function () {
+        it("should support listener after async function", async () => {
             const listener = mock.fn(() => "one");
             const listeners = new Map([
                 ["quux", { before: [], after: [listener] }],
@@ -151,7 +151,7 @@ describe("hook.js", function () {
             ]);
         });
 
-        it("should support listener async after function", async function () {
+        it("should support listener async after function", async () => {
             const listener = mock.fn(() => Promise.resolve("one"));
             const listeners = new Map([
                 ["quux", { before: [], after: [listener] }],
@@ -176,7 +176,7 @@ describe("hook.js", function () {
             ]);
         });
 
-        it("should support listener before getter", async function () {
+        it("should support listener before getter", async () => {
             const listener = mock.fn();
             const listeners = new Map([
                 ["bar", { before: [listener], after: [] }],
@@ -196,7 +196,7 @@ describe("hook.js", function () {
             ]);
         });
 
-        it("should support listener after getter", async function () {
+        it("should support listener after getter", async () => {
             const listener = mock.fn(() => "one");
             const listeners = new Map([
                 ["bar", { before: [], after: [listener] }],

@@ -4,10 +4,11 @@
  */
 
 import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 import vanilla from "../../../../src/index.js";
 
-describe("Plugin: polyfill.screen", function () {
-    it("should set screen size", async function () {
+describe("Plugin: polyfill.screen", () => {
+    it("should set screen size", async () => {
         const browser = await vanilla.chromium.launch({
             channel: "chromium",
             plugins: [vanilla.plugins.polyfill.screen()],

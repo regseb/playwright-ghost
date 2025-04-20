@@ -4,10 +4,11 @@
  */
 
 import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 import vanilla from "../../../../src/index.js";
 
-describe("Plugin: polyfill.headless", function () {
-    it("should use new headless", async function () {
+describe("Plugin: polyfill.headless", () => {
+    it("should use new headless", async () => {
         const browser = await vanilla.chromium.launch({
             plugins: [vanilla.plugins.polyfill.headless()],
         });

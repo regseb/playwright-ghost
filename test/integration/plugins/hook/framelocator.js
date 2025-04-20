@@ -4,14 +4,15 @@
  */
 
 import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 import vanilla from "../../../../src/index.js";
 
 /**
  * @import { FrameLocator } from "playwright";
  */
 
-describe("Plugin: hook.frameLocator", function () {
-    it("should add plugin in FrameLocator", async function () {
+describe("Plugin: hook.frameLocator", () => {
+    it("should add plugin in FrameLocator", async () => {
         const browser = await vanilla.chromium.launch({
             plugins: [
                 {

@@ -5,7 +5,7 @@
 
 import assert from "node:assert/strict";
 import crypto from "node:crypto";
-import { mock } from "node:test";
+import { afterEach, describe, it, mock } from "node:test";
 import dialogPlugin from "../../../../src/plugins/humanize/dialog.js";
 
 /**
@@ -35,14 +35,14 @@ const PageMock = class {
     }
 };
 
-describe("plugins/humanize/dialog.js", function () {
-    describe("dialogPlugin()", function () {
-        describe("Page:new", function () {
-            afterEach(function () {
+describe("plugins/humanize/dialog.js", () => {
+    describe("dialogPlugin()", () => {
+        describe("Page:new", () => {
+            afterEach(() => {
                 mock.reset();
             });
 
-            it("should support no option", async function () {
+            it("should support no option", async () => {
                 mock.timers.enable({ apis: ["setTimeout"] });
                 const randomInt = mock.method(crypto, "randomInt", () => 2000);
                 const accept = mock.fn(() => Promise.resolve());
@@ -69,7 +69,7 @@ describe("plugins/humanize/dialog.js", function () {
                 assert.equal(accept.mock.callCount(), 1);
             });
 
-            it("should support empty option", async function () {
+            it("should support empty option", async () => {
                 mock.timers.enable({ apis: ["setTimeout"] });
                 const randomInt = mock.method(crypto, "randomInt", () => 3000);
                 const accept = mock.fn(() => Promise.resolve());
@@ -96,7 +96,7 @@ describe("plugins/humanize/dialog.js", function () {
                 assert.equal(accept.mock.callCount(), 1);
             });
 
-            it("should support option", async function () {
+            it("should support option", async () => {
                 mock.timers.enable({ apis: ["setTimeout"] });
                 const randomInt = mock.method(crypto, "randomInt", () => 40);
                 const accept = mock.fn(() => Promise.resolve());

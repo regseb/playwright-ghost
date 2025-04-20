@@ -5,6 +5,7 @@
 
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
+import { describe, it } from "node:test";
 import vanilla from "../../../src/index.js";
 
 const getUserAgent = async () => {
@@ -17,9 +18,9 @@ const getUserAgent = async () => {
     return userAgent.replace("Headless", "");
 };
 
-describe("Anti-bot: Fingerprint", function () {
-    describe("chromium", function () {
-        it("should not be detected", async function () {
+describe("Anti-bot: Fingerprint", () => {
+    describe("chromium", () => {
+        it("should not be detected", async () => {
             const browser = await vanilla.chromium.launch({
                 plugins: [
                     ...vanilla.plugins.recommended(),
@@ -73,7 +74,7 @@ describe("Anti-bot: Fingerprint", function () {
             }
         });
 
-        it("should not be detected in playground", async function () {
+        it("should not be detected in playground", async () => {
             const browser = await vanilla.chromium.launch({
                 plugins: [
                     ...vanilla.plugins.recommended(),

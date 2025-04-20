@@ -4,12 +4,13 @@
  */
 
 import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 import mousePlugin from "../../../../src/plugins/hook/mouse.js";
 
-describe("plugins/hook/mouse.js", function () {
-    describe("mousePlugin()", function () {
-        describe("Mouse:new", function () {
-            it("should add plugin", function () {
+describe("plugins/hook/mouse.js", () => {
+    describe("mousePlugin()", () => {
+        describe("Mouse:new", () => {
+            it("should add plugin", () => {
                 const mouse = {};
                 const listeners = new Map([
                     [
@@ -28,7 +29,7 @@ describe("plugins/hook/mouse.js", function () {
                 assert.equal(mouseAltered.foo, "bar");
             });
 
-            it("should do nothing when no listener", function () {
+            it("should do nothing when no listener", () => {
                 const mouse = {};
                 const listeners = new Map([
                     [

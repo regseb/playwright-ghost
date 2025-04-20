@@ -4,7 +4,6 @@
  */
 
 import mocha from "eslint-plugin-mocha";
-import globals from "globals";
 
 /**
  * @import { Linter } from "eslint"
@@ -14,10 +13,6 @@ import globals from "globals";
  * @type {Linter.Config}
  */
 export default {
-    languageOptions: {
-        globals: { ...globals.mocha },
-    },
-
     plugins: { mocha },
 
     rules: {
@@ -30,7 +25,8 @@ export default {
         "max-statements": "off",
         "prefer-arrow-callback": "off",
 
-        // Plugin eslint-plugin-mocha.
+        // Plugin eslint-plugin-mocha. Utiliser le plugin pour Mocha, car il
+        // peut s'appliquer aussi sur les tests natifs de Node.js.
         "mocha/consistent-spacing-between-blocks": "error",
         "mocha/handle-done-callback": "error",
         "mocha/max-top-level-suites": "error",

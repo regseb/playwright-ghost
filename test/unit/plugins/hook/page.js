@@ -4,12 +4,13 @@
  */
 
 import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 import pagePlugin from "../../../../src/plugins/hook/page.js";
 
-describe("plugins/hook/page.js", function () {
-    describe("pagePlugin()", function () {
-        describe("Page:new", function () {
-            it("should add plugin", function () {
+describe("plugins/hook/page.js", () => {
+    describe("pagePlugin()", () => {
+        describe("Page:new", () => {
+            it("should add plugin", () => {
                 const page = {};
                 const listeners = new Map([
                     [
@@ -28,7 +29,7 @@ describe("plugins/hook/page.js", function () {
                 assert.equal(pageAltered.foo, "bar");
             });
 
-            it("should do nothing when no listener", function () {
+            it("should do nothing when no listener", () => {
                 const page = {};
                 const listeners = new Map([
                     [

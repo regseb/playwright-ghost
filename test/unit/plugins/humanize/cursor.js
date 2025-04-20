@@ -4,7 +4,7 @@
  */
 
 import assert from "node:assert/strict";
-import { mock } from "node:test";
+import { afterEach, describe, it, mock } from "node:test";
 import cursorPlugin from "../../../../src/plugins/humanize/cursor.js";
 
 const LocatorMock = class {
@@ -20,11 +20,11 @@ const MouseMock = class {
     move = mock.fn();
 };
 
-describe("plugins/humanize/cursor.js", function () {
-    describe("cursorPlugin()", function () {
-        describe("Page:new", function () {
-            it("should support no option", function () {
                 const mouse = {};
+describe("plugins/humanize/cursor.js", () => {
+    describe("cursorPlugin()", () => {
+        describe("Page:new", () => {
+            it("should support no option", () => {
 
                 const plugin = cursorPlugin();
                 const listener = plugin["Mouse:new"];
@@ -39,8 +39,8 @@ describe("plugins/humanize/cursor.js", function () {
                 assert.deepEqual(start, { x: 0, y: 0 });
             });
 
-            it("should support empty option", function () {
                 const mouse = {};
+            it("should support empty option", () => {
 
                 const plugin = cursorPlugin({});
                 const listener = plugin["Mouse:new"];
@@ -55,8 +55,8 @@ describe("plugins/humanize/cursor.js", function () {
                 assert.deepEqual(start, { x: 0, y: 0 });
             });
 
-            it("should support option", function () {
                 const mouse = {};
+            it("should support option", () => {
 
                 const plugin = cursorPlugin({ start: { x: 42, y: 43 } });
                 const listener = plugin["Mouse:new"];
@@ -72,12 +72,12 @@ describe("plugins/humanize/cursor.js", function () {
             });
         });
 
-        describe("Locator.check:before", function () {
-            afterEach(function () {
+        describe("Locator.check:before", () => {
+            afterEach(() => {
                 mock.reset();
             });
 
-            it("should do nothing when 'trial'", async function () {
+            it("should do nothing when 'trial'", async () => {
                 const locator = new LocatorMock();
 
                 const plugin = cursorPlugin();
@@ -91,12 +91,12 @@ describe("plugins/humanize/cursor.js", function () {
             });
         });
 
-        describe("Locator.click:before", function () {
-            afterEach(function () {
+        describe("Locator.click:before", () => {
+            afterEach(() => {
                 mock.reset();
             });
 
-            it("should do nothing when 'trial'", async function () {
+            it("should do nothing when 'trial'", async () => {
                 const locator = new LocatorMock();
 
                 const plugin = cursorPlugin();
@@ -110,12 +110,12 @@ describe("plugins/humanize/cursor.js", function () {
             });
         });
 
-        describe("Locator.dblclick:before", function () {
-            afterEach(function () {
+        describe("Locator.dblclick:before", () => {
+            afterEach(() => {
                 mock.reset();
             });
 
-            it("should do nothing when 'trial'", async function () {
+            it("should do nothing when 'trial'", async () => {
                 const locator = new LocatorMock();
 
                 const plugin = cursorPlugin();
@@ -129,12 +129,12 @@ describe("plugins/humanize/cursor.js", function () {
             });
         });
 
-        describe("Locator.hover:before", function () {
-            afterEach(function () {
+        describe("Locator.hover:before", () => {
+            afterEach(() => {
                 mock.reset();
             });
 
-            it("should do nothing when 'trial'", async function () {
+            it("should do nothing when 'trial'", async () => {
                 const locator = new LocatorMock();
 
                 const plugin = cursorPlugin();
@@ -148,12 +148,12 @@ describe("plugins/humanize/cursor.js", function () {
             });
         });
 
-        describe("Locator.setChecked:before", function () {
-            afterEach(function () {
+        describe("Locator.setChecked:before", () => {
+            afterEach(() => {
                 mock.reset();
             });
 
-            it("should do nothing when 'trial'", async function () {
+            it("should do nothing when 'trial'", async () => {
                 const locator = new LocatorMock();
 
                 const plugin = cursorPlugin();
@@ -172,7 +172,7 @@ describe("plugins/humanize/cursor.js", function () {
                 mock.reset();
             });
 
-            it("should do nothing when 'trial'", async function () {
+            it("should do nothing when 'trial'", async () => {
                 const locator = new LocatorMock();
 
                 const plugin = cursorPlugin();
@@ -186,12 +186,12 @@ describe("plugins/humanize/cursor.js", function () {
             });
         });
 
-        describe("Mouse.click:before", function () {
-            afterEach(function () {
+        describe("Mouse.click:before", () => {
+            afterEach(() => {
                 mock.reset();
             });
 
-            it("should do nothing when 'steps'", async function () {
+            it("should do nothing when 'steps'", async () => {
                 const mouse = new MouseMock();
 
                 const plugin = cursorPlugin();
@@ -205,12 +205,12 @@ describe("plugins/humanize/cursor.js", function () {
             });
         });
 
-        describe("Mouse.dblclick:before", function () {
-            afterEach(function () {
+        describe("Mouse.dblclick:before", () => {
+            afterEach(() => {
                 mock.reset();
             });
 
-            it("should do nothing when 'steps'", async function () {
+            it("should do nothing when 'steps'", async () => {
                 const mouse = new MouseMock();
 
                 const plugin = cursorPlugin();
@@ -224,12 +224,12 @@ describe("plugins/humanize/cursor.js", function () {
             });
         });
 
-        describe("Mouse.move:before", function () {
-            afterEach(function () {
+        describe("Mouse.move:before", () => {
+            afterEach(() => {
                 mock.reset();
             });
 
-            it("should do nothing when 'steps'", async function () {
+            it("should do nothing when 'steps'", async () => {
                 const mouse = new MouseMock();
 
                 const plugin = cursorPlugin();

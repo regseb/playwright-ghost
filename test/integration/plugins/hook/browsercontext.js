@@ -4,14 +4,15 @@
  */
 
 import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 import vanilla from "../../../../src/index.js";
 
 /**
  * @import { BrowserContext } from "playwright";
  */
 
-describe("Plugin: hook.browserContext", function () {
-    it("should add plugin in BrowserContext", async function () {
+describe("Plugin: hook.browserContext", () => {
+    it("should add plugin in BrowserContext", async () => {
         const browser = await vanilla.chromium.launch({
             plugins: [
                 {

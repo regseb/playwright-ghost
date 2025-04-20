@@ -5,6 +5,7 @@
 
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
+import { describe, it } from "node:test";
 import vanilla from "../../../src/index.js";
 
 const getUserAgent = async () => {
@@ -17,9 +18,9 @@ const getUserAgent = async () => {
     return userAgent.replace("Headless", "");
 };
 
-describe("Anti-bot: Score detector (reCAPTCHA v3)", function () {
-    describe("chromium", function () {
-        it("should be 0.7 (or plus)", async function () {
+describe("Anti-bot: Score detector (reCAPTCHA v3)", () => {
+    describe("chromium", () => {
+        it("should be 0.7 (or plus)", async () => {
             const browser = await vanilla.chromium.launch({
                 plugins: [
                     ...vanilla.plugins.recommended(),

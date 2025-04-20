@@ -5,6 +5,7 @@
 
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
+import { describe, it } from "node:test";
 import vanilla from "../../../src/index.js";
 
 const getUserAgent = async () => {
@@ -17,9 +18,9 @@ const getUserAgent = async () => {
     return userAgent.replace("Headless", "");
 };
 
-describe("Anti-bot: HeadlessDetectJS", function () {
-    describe("chromium", function () {
-        it("should get 0 score", async function () {
+describe("Anti-bot: HeadlessDetectJS", () => {
+    describe("chromium", () => {
+        it("should get 0 score", async () => {
             const browser = await vanilla.chromium.launch({
                 plugins: [
                     ...vanilla.plugins.recommended(),
@@ -31,7 +32,7 @@ describe("Anti-bot: HeadlessDetectJS", function () {
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
-                await page.goto("https://perdu.com/");
+                await page.goto("https://example.com/");
 
                 const response = await fetch(
                     "https://raw.githubusercontent.com/LouisKlimek" +

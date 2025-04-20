@@ -4,10 +4,11 @@
  */
 
 import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 import vanilla from "../../../../src/index.js";
 
-describe("Plugin: polyfill.viewport", function () {
-    it("should set viewport size", async function () {
+describe("Plugin: polyfill.viewport", () => {
+    it("should set viewport size", async () => {
         const browser = await vanilla.chromium.launch({
             channel: "chromium",
             plugins: [

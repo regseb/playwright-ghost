@@ -4,12 +4,13 @@
  */
 
 import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 import locatorPlugin from "../../../../src/plugins/hook/locator.js";
 
-describe("plugins/hook/locator.js", function () {
-    describe("locatorPlugin()", function () {
-        describe("Locator:new", function () {
-            it("should add plugin", function () {
+describe("plugins/hook/locator.js", () => {
+    describe("locatorPlugin()", () => {
+        describe("Locator:new", () => {
+            it("should add plugin", () => {
                 const locator = {};
                 const listeners = new Map([
                     [
@@ -28,7 +29,7 @@ describe("plugins/hook/locator.js", function () {
                 assert.equal(locatorAltered.foo, "bar");
             });
 
-            it("should do nothing when no listener", function () {
+            it("should do nothing when no listener", () => {
                 const locator = {};
                 const listeners = new Map([
                     [

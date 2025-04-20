@@ -4,14 +4,15 @@
  */
 
 import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 import vanilla from "../../../../src/index.js";
 
 /**
  * @import { Locator } from "playwright";
  */
 
-describe("Plugin: hook.locator", function () {
-    it("should add plugin in Locator", async function () {
+describe("Plugin: hook.locator", () => {
+    it("should add plugin in Locator", async () => {
         const browser = await vanilla.chromium.launch({
             plugins: [
                 {

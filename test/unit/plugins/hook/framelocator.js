@@ -4,12 +4,13 @@
  */
 
 import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 import frameLocatorPlugin from "../../../../src/plugins/hook/framelocator.js";
 
-describe("plugins/hook/framelocator.js", function () {
-    describe("frameLocatorPlugin()", function () {
-        describe("FrameLocator:new", function () {
-            it("should add plugin", function () {
+describe("plugins/hook/framelocator.js", () => {
+    describe("frameLocatorPlugin()", () => {
+        describe("FrameLocator:new", () => {
+            it("should add plugin", () => {
                 const frameLocator = {};
                 const listeners = new Map([
                     [
@@ -28,7 +29,7 @@ describe("plugins/hook/framelocator.js", function () {
                 assert.equal(frameLocatorAltered.foo, "bar");
             });
 
-            it("should do nothing when no listener", function () {
+            it("should do nothing when no listener", () => {
                 const frameLocator = {};
                 const listeners = new Map([
                     [

@@ -5,6 +5,7 @@
 
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
+import { describe, it } from "node:test";
 import patchright from "../../../src/patchright.js";
 
 const getUserAgent = async () => {
@@ -17,9 +18,9 @@ const getUserAgent = async () => {
     return userAgent.replace("Headless", "");
 };
 
-describe("Anti-bot: Cloudflare turnstile demo", function () {
-    describe("chromium", function () {
-        it("should be success with managed challenge", async function () {
+describe("Anti-bot: Cloudflare turnstile demo", () => {
+    describe("chromium", () => {
+        it("should be success with managed challenge", async () => {
             // Utiliser Patchright pour avoir accès aux shadow DOM fermés.
             // https://github.com/microsoft/playwright/issues/23047#issuecomment-2737175518
             const browser = await patchright.chromium.launch({
@@ -60,7 +61,7 @@ describe("Anti-bot: Cloudflare turnstile demo", function () {
             }
         });
 
-        it("should be success with non-interactive challenge", async function () {
+        it("should be success with non-interactive challenge", async () => {
             // Utiliser Patchright pour avoir accès aux shadow DOM fermés.
             // https://github.com/microsoft/playwright/issues/23047#issuecomment-2737175518
             const browser = await patchright.chromium.launch({

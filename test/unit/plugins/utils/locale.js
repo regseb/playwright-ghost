@@ -4,13 +4,13 @@
  */
 
 import assert from "node:assert/strict";
-import { mock } from "node:test";
+import { describe, it, mock } from "node:test";
 import localePlugin from "../../../../src/plugins/utils/locale.js";
 
-describe("plugins/utils/locale.js", function () {
-    describe("localePlugin()", function () {
-        describe("BrowserType.launch:before", function () {
-            it("should throw error when not found", async function () {
+describe("plugins/utils/locale.js", () => {
+    describe("localePlugin()", () => {
+        describe("BrowserType.launch:before", () => {
+            it("should throw error when not found", async () => {
                 const name = mock.fn(() => "iexplore");
                 const browserType = { name };
 
@@ -26,8 +26,8 @@ describe("plugins/utils/locale.js", function () {
             });
         });
 
-        describe("BrowserType.launchPersistentContext:before", function () {
-            it("should throw error when not found", async function () {
+        describe("BrowserType.launchPersistentContext:before", () => {
+            it("should throw error when not found", async () => {
                 const name = mock.fn(() => "iexplore");
                 const browserType = { name };
 

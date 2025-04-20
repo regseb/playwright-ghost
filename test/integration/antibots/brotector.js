@@ -5,11 +5,12 @@
 
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
+import { describe, it } from "node:test";
 import patchright from "../../../src/patchright.js";
 
-describe("Anti-bot: Brotector", function () {
-    describe("chromium", function () {
-        it("should have 0", async function () {
+describe("Anti-bot: Brotector", () => {
+    describe("chromium", () => {
+        it("should have 0", async () => {
             const browser = await patchright.chromium.launch({
                 plugins: patchright.plugins.recommended(),
             });

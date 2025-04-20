@@ -4,12 +4,13 @@
  */
 
 import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 import browserContextPlugin from "../../../../src/plugins/hook/browsercontext.js";
 
-describe("plugins/hook/browsercontext.js", function () {
-    describe("browserContextPlugin()", function () {
-        describe("BrowserContext:new", function () {
-            it("should add plugin", function () {
+describe("plugins/hook/browsercontext.js", () => {
+    describe("browserContextPlugin()", () => {
+        describe("BrowserContext:new", () => {
+            it("should add plugin", () => {
                 const browserContext = {};
                 const listeners = new Map([
                     [
@@ -28,7 +29,7 @@ describe("plugins/hook/browsercontext.js", function () {
                 assert.equal(browserContextAltered.foo, "bar");
             });
 
-            it("should do nothing when no listener", function () {
+            it("should do nothing when no listener", () => {
                 const browserContext = {};
                 const listeners = new Map([
                     [
