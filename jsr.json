@@ -1,0 +1,13 @@
+{
+  "name": "@regseb/playwright-ghost",
+  "version": "0.12.0",
+  "license": "MIT",
+  "exports": {
+    ".": "./src/index.js",
+    "./patchright": "./src/patchright.js",
+    "./rebrowser": "./src/rebrowser.js"
+  },
+  "publish": {
+    "include": ["src/", "types/", "LICENSE", "README.md", "package.json"]
+  }
+}

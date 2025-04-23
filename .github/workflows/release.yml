@@ -52,7 +52,7 @@ jobs:
         if: ${{ steps.release.outputs.pr }}
         run: >
           npm run lint:fix -- .release-please/manifest.json CHANGELOG.md
-          package.json package-lock.json
+          jsr.json package.json package-lock.json
 
       - name: Commit and push
         if: ${{ steps.release.outputs.pr }}
@@ -60,7 +60,7 @@ jobs:
           git commit --all --amend --no-edit
           git push --force
 
-      # Si la release a été créée : publier le paquet dans npm.
+      # Si la release a été créée : publier le paquet dans npm et JSR.
       - name: Checkout repository
         if: ${{ steps.release.outputs.release_created }}
         uses: actions/checkout@v4
@@ -83,6 +83,10 @@ jobs:
         run: npm publish --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish in JSR
+        if: ${{ steps.release.outputs.release_created }}
+        run: npx jsr publish
 
       - name: Env package name
         if: ${{ steps.release.outputs.release_created }}
