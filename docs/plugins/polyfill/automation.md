@@ -1,4 +1,4 @@
-# `polyfill/automation`
+# `polyfill.automation`
 
 > [!NOTE]
 >

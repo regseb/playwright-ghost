@@ -1,4 +1,4 @@
-# `utils/locale`
+# `utils.locale`
 
 Use the locally installed browser.
 

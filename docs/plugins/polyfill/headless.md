@@ -1,4 +1,4 @@
-# `polyfill/headless`
+# `polyfill.headless`
 
 > [!NOTE]
 >

@@ -1,4 +1,4 @@
-# `polyfill/viewport`
+# `polyfill.viewport`
 
 > [!TIP]
 >

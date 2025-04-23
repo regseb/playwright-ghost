@@ -1,4 +1,4 @@
-# `polyfill/screen`
+# `polyfill.screen`
 
 > [!TIP]
 >

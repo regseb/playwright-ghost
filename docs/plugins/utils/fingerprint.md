@@ -1,4 +1,4 @@
-# `utils/fingerprint`
+# `utils.fingerprint`
 
 > [!IMPORTANT]
 >
@@ -13,9 +13,10 @@ Change the browser fingerprint with
 
 This plugin supports the following option:
 
-- `fingerprintOptions`: `fingerprintOptions` properties of the method
+- `fingerprintOptions`: `fingerprintOptions` properties of the function
   `newInjectedContext()`.
-- `fingerprint`: `fingerprint` properties of the method `newInjectedContext()`.
+- `fingerprint`: `fingerprint` properties of the function
+  `newInjectedContext()`.
 
 ## Examples
 

@@ -1,4 +1,4 @@
-# `polyfill/userAgent`
+# `polyfill.userAgent`
 
 Change the browser's
 [user agent](https://developer.mozilla.org/docs/Glossary/User_agent).

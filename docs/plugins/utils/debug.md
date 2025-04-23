@@ -1,4 +1,4 @@
-# `utils/debug`
+# `utils.debug`
 
 Display messages from the browser console in the program console.
 

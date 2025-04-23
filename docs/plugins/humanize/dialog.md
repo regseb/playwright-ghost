@@ -1,4 +1,4 @@
-# `humanize/dialog`
+# `humanize.dialog`
 
 > [!TIP]
 >

@@ -1,16 +1,18 @@
-# `humanize/click`
+# `humanize.click`
 
 > [!TIP]
 >
 > This plugin is enabled in the ⭐ [`recommended`](../recommended.md).
 
 Add delay between `mousedown` and `mouseup` for
-[clicks](https://playwright.dev/docs/api/class-locator#locator-click) and
-[double-clicks](https://playwright.dev/docs/api/class-locator#locator-dblclick).
+[`Locator.click()`](https://playwright.dev/docs/api/class-locator#locator-click),
+[`Locator.dblclick()`](https://playwright.dev/docs/api/class-locator#locator-dblclick),
+[`Mouse.click()`](https://playwright.dev/docs/api/class-mouse#mouse-click) and
+[`Mouse.dblclick()`](https://playwright.dev/docs/api/class-mouse#mouse-dblclick).
 Deprecated methods (ex: `Page.click()`) class are not modified.
 
-If you set the `delay` property when you call the `Locator.click()` or
-`Locator.dblclick()` methods, your value will be used.
+If you set the `delay` property when you call the method, your value will be
+used.
 
 ## Options
 

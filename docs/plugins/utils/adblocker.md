@@ -1,4 +1,4 @@
-# `utils/adblocker`
+# `utils.adblocker`
 
 > [!IMPORTANT]
 >

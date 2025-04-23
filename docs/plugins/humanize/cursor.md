@@ -1,4 +1,4 @@
-# `humanize/cursor`
+# `humanize.cursor`
 
 > [!TIP]
 >

@@ -1,4 +1,4 @@
-# `polyfill/webdriver`
+# `polyfill.webdriver`
 
 > [!NOTE]
 >
