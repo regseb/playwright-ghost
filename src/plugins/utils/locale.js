@@ -38,10 +38,15 @@ const setExecutablePath = async function (options, name) {
 };
 
 /**
+ * @typedef {Object} LocaleOptions Les options du plugin `utils.locale`.
+ * @prop {string} [name] Le nom du navigateur.
+ */
+
+/**
  * Crée un plugin pour utiliser le navigateur installé localement.
  *
- * @param {Object} [options]      Les options du plugin.
- * @param {string} [options.name] Le nom du navigateur.
+ * @param {LocaleOptions} [options] Les éventuelles options du plugin
+ *                                  `utils.locale`.
  * @returns {Record<string, Function>} Les crochets du plugin.
  */
 export default function localePlugin(options) {

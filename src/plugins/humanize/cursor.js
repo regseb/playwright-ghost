@@ -92,13 +92,18 @@ const moveCursor = async (locator, options) => {
 };
 
 /**
+ * @typedef {Object} CursorOptions Les options du plugin `humanize.cursor`.
+ * @prop {Object} [start]   La position de départ du curseur.
+ * @prop {number} [start.x] La position _x_ de départ du curseur.
+ * @prop {number} [start.y] La position _y_ de départ du curseur.
+ */
+
+/**
  * Crée un plugin pour déplacer le curseur en imitant les mouvements d'un être
  * humain.
  *
- * @param {Object} [options]         Les options du plugin.
- * @param {Object} [options.start]   La position de départ du curseur.
- * @param {number} [options.start.x] La position _x_ de départ du curseur.
- * @param {number} [options.start.y] La position _y_ de départ du curseur.
+ * @param {CursorOptions} [options] Les éventuelles options du plugin
+ *                                  `humanize.cursor`.
  * @returns {Record<string, Function>} Les crochets du plugin.
  */
 export default function cursorPlugin(options) {

@@ -75,3 +75,17 @@ const browser = await chromium.launch({
 });
 // ...
 ```
+
+Use all recommended plugins except `humanize` plugins (`click`, `cursor` and
+`dialog`).
+
+```javascript
+import { chromium, plugins } from "playwright-ghost";
+
+const browser = await chromium.launch({
+  plugins: plugins.recommended({
+    humanize: false,
+  }),
+});
+// ...
+```

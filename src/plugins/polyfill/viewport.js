@@ -38,21 +38,22 @@ const setViewport = function (options, width, height) {
 };
 
 /**
+ * @typedef {Object} ViewportOptions Les options du plugin `polyfill.viewport`.
+ * @prop {Object} [width]      La largeur de la zone d'affichage.
+ * @prop {number} [width.min]  La largeur minimum de la zone d'affichage.
+ * @prop {number} [width.max]  La largeur maximum de la zone d'affichage.
+ * @prop {Object} [height]     La hauteur de la zone d'affichage.
+ * @prop {number} [height.min] La hauteur minimum de la zone d'affichage.
+ * @prop {number} [height.max] La hauteur maximum de la zone d'affichage.
+ */
+
+/**
  * Crée un plugin pour faire varier la taille de la zone d'affichage du
  * navigateur. Par défaut les valeurs sont prises aléatoirement entre
  * _1000x500_ et _1800x800_.
  *
- * @param {Object} [options]            Les options du plugin.
- * @param {Object} [options.width]      La largeur de la zone d'affichage.
- * @param {number} [options.width.min]  La largeur minimum de la zone
- *                                      d'affichage.
- * @param {number} [options.width.max]  La largeur maximum de la zone
- *                                      d'affichage.
- * @param {Object} [options.height]     La hauteur de la zone d'affichage.
- * @param {number} [options.height.min] La hauteur minimum de la zone
- *                                      d'affichage.
- * @param {number} [options.height.max] La hauteur maximum de la zone
- *                                      d'affichage.
+ * @param {ViewportOptions} [options] Les éventuelles options du plugin
+ *                                    `polyfill.viewport`.
  * @returns {Record<string, Function>} Les crochets du plugin.
  */
 export default function viewportPlugin(options) {

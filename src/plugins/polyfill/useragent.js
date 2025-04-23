@@ -32,10 +32,15 @@ const changeUserAgent = (options, userAgent, browserType) => {
 };
 
 /**
+ * @typedef {Object} UserAgentOptions Les options du plugin
+ *                                    `polyfill.userAgent`.
+ * @prop {string} userAgent Le _user agent_ à utiliser.
+ */
+
+/**
  * Crée un plugin pour changer l'agent utilisateur (_user agent_) du navigateur.
  *
- * @param {Object} options           Les options du plugin.
- * @param {string} options.userAgent Le _user agent_ à utiliser.
+ * @param {UserAgentOptions} options Les options du plugin `polyfill.userAgent`.
  * @returns {Record<string, Function>} Les crochets du plugin.
  * @see https://developer.mozilla.org/Web/HTTP/Headers/User-Agent
  */

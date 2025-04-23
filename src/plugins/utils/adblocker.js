@@ -9,23 +9,26 @@
  */
 
 /**
+ * @typedef {Object} AdblockOptions Les options du plugin `utils.adblocker`.
+ * @prop {string}   [mode]    Le mode de chargement des règles : `"parse"`,
+ *                            `"fromLists"`, `"fromPrebuiltAdsOnly"`,
+ *                            `"fromPrebuiltAdsAndTracking"`,
+ *                            `"fromPrebuiltFull"`.
+ * @prop {string}   [filters] Les filtres du mode `"parse"`.
+ * @prop {Object}   [config]  La configuration des modes `"parse"` et
+ *                            `"fromLists"`.
+ * @prop {fetch}    [fetch]   La fonction pour faire des requêtes des modes
+ *                            `"fromLists"`, `"fromPrebuiltAdsOnly"`,
+ *                            `"fromPrebuiltAdsAndTracking"` et
+ *                            `"fromPrebuiltFull"`.
+ * @prop {string[]} [urls]    Les URLs du mode `"fromLists"`.
+ */
+
+/**
  * Crée un plugin pour ajouter un bloqueur de publicités dans le navigateur.
  *
- * @param {Object}   [options]         Les options du plugin.
- * @param {string}   [options.mode]    Le mode de chargement des règles :
- *                                     `"parse"`, `"fromLists"`,
- *                                     `"fromPrebuiltAdsOnly"`,
- *                                     `"fromPrebuiltAdsAndTracking"`,
- *                                     `"fromPrebuiltFull"`.
- * @param {string}   [options.filters] Les filtres du mode `"parse"`.
- * @param {Object}   [options.config]  La configuration des modes `"parse"` et
- *                                     `"fromLists"`.
- * @param {fetch}    [options.fetch]   La fonction pour faire des requêtes des
- *                                     modes `"fromLists"`,
- *                                     `"fromPrebuiltAdsOnly"`,
- *                                     `"fromPrebuiltAdsAndTracking"` et
- *                                     `"fromPrebuiltFull"`.
- * @param {string[]} [options.urls]    Les URLs du mode `"fromLists"`.
+ * @param {AdblockOptions} [options] Les éventuelles options du plugin
+ *                                   `utils.adblocker`.
  * @returns {Promise<Record<string, Function>>} Une promesse contenant le
  *                                              crochet du plugin.
  */

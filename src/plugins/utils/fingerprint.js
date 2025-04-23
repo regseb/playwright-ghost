@@ -60,11 +60,19 @@ const setFingerprint = (options, { fingerprint, headers }) => {
 };
 
 /**
+ * @typedef {Object} FingerprintOptions Les options du plugin
+ *                                      `utils.fingerprint`.
+ * @prop {Object} [fingerprint]        La propriété `fingerprint` de la fonction
+ *                                     `newInjectedContext()`.
+ * @prop {Object} [fingerprintOptions] La propriété `fingerprintOptions` de la
+ *                                     fonction `newInjectedContext()`.
+ */
+
+/**
  * Crée un plugin pour modifier le _fingerprint_ du navigateur.
  *
- * @param {Object} [options]                    Les options du plugin.
- * @param {Object} [options.fingerprint]        TODO
- * @param {Object} [options.fingerprintOptions] TODO
+ * @param {FingerprintOptions} [options] Les éventuelles options du plugin
+ *                                       `utils.fingerprint`.
  * @returns {Promise<Record<string, Function>>} Une promesse contenant le
  *                                              crochet du plugin.
  */

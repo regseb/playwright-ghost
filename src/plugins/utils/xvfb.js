@@ -100,16 +100,18 @@ const setDisplay = function (options, display) {
 };
 
 /**
+ * @typedef {Object} XvfbOptions Les options du plugin `utils.xvfb`.
+ * @prop {string[]}    [args]      Les arguments passés de l'exécutable `Xvfb`.
+ * @prop {boolean}     [keepalive] La marque pour ne pas arrêter l'exécutable de
+ *                                 `Xvfb` après la fermeture du navigateur.
+ * @prop {AbortSignal} [signal]    Le signal pour tuer l'exécutable de `Xvfb`.
+ */
+
+/**
  * Crée un plugin pour exécuter le navigateur avec `Xvfb`.
  *
- * @param {Object}      [options]           Les options du plugin.
- * @param {string[]}    [options.args]      Les arguments passés de l'exécutable
- *                                          `Xvfb`.
- * @param {boolean}     [options.keepalive] La marque pour ne pas arrêter
- *                                          l'exécutable de `Xvfb` après la
- *                                          fermeture du navigateur.
- * @param {AbortSignal} [options.signal]    Le signal pour tuer l'exécutable de
- *                                          `Xvfb`.
+ * @param {XvfbOptions} [options] Les éventuelles options du plugin
+ *                                `utils.xvfb`.
  * @returns {Record<string, Function>} Les crochets du plugin.
  */
 export default function xvfbPlugin(options) {
