@@ -46,7 +46,7 @@ export default function clickPlugin(options) {
 
     return {
         /**
-         * Ajoute du délai dans les options du clic.
+         * Ajoute du délai dans les options du clic sur un `Locator`.
          *
          * @param {any[]} args Les paramètres de la méthode.
          * @returns {any[]} Les nouveaux paramètres.
@@ -56,13 +56,33 @@ export default function clickPlugin(options) {
         },
 
         /**
-         * Ajoute du délai dans les options du double-clic.
+         * Ajoute du délai dans les options du double-clic sur un `Locator`.
          *
          * @param {any[]} args Les paramètres de la méthode.
          * @returns {any[]} Les nouveaux paramètres.
          */
         "Locator.dblclick:before": (args) => {
             return [setDelay(args[0], delay)];
+        },
+
+        /**
+         * Ajoute du délai dans les options du clic à des coordonnées.
+         *
+         * @param {any[]} args Les paramètres de la méthode.
+         * @returns {any[]} Les nouveaux paramètres.
+         */
+        "Mouse.click:before": (args) => {
+            return [args[0], args[1], setDelay(args[2], delay)];
+        },
+
+        /**
+         * Ajoute du délai dans les options du double-clic à des coordonnées.
+         *
+         * @param {any[]} args Les paramètres de la méthode.
+         * @returns {any[]} Les nouveaux paramètres.
+         */
+        "Mouse.dblclick:before": (args) => {
+            return [args[0], args[1], setDelay(args[2], delay)];
         },
     };
 }
