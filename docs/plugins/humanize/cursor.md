@@ -4,9 +4,7 @@
 >
 > This plugin is enabled in the ⭐ [`recommended`](../recommended.md).
 
-Move the cursor with human-like movements. This plugin uses
-[`ghost-cursor`](https://www.npmjs.com/package/ghost-cursor) to generate the
-path.
+Move the cursor with human-like movements.
 
 The following methods have been modified to add human-like movements:
 [`Locator.check()`](https://playwright.dev/docs/api/class-locator#locator-check),
@@ -25,12 +23,12 @@ Deprecated methods (ex: `Page.click()`) are not modified.
 This plugin supports the following option:
 
 - `start`:
-  - `x` (default `0`): Start position _x_ of cursor.
-  - `y` (default `0`): Start position _y_ of cursor.
+  - `x` (default to a random position): Start position _x_ of cursor.
+  - `y` (default to a random position): Start position _y_ of cursor.
 
 ## Examples
 
-Use the plugin with default options.
+Use the plugin with default options: random position in viewport.
 
 ```javascript
 import { chromium, plugins } from "playwright-ghost";

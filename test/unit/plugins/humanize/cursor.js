@@ -4,6 +4,7 @@
  */
 
 import assert from "node:assert/strict";
+import crypto from "node:crypto";
 import { afterEach, describe, it, mock } from "node:test";
 import cursorPlugin from "../../../../src/plugins/humanize/cursor.js";
 
@@ -20,55 +21,102 @@ const MouseMock = class {
     move = mock.fn();
 };
 
-                const mouse = {};
 describe("plugins/humanize/cursor.js", () => {
     describe("cursorPlugin()", () => {
         describe("Page:new", () => {
+            afterEach(() => {
+                mock.reset();
+            });
+
             it("should support no option", () => {
+                const randomInt = mock.method(crypto, "randomInt", () => {
+                    switch (randomInt.mock.callCount()) {
+                        case 0:
+                            return 200;
+                        case 1:
+                            return 300;
+                        default:
+                            return 0;
+                    }
+                });
+
+                const page = {
+                    viewportSize: () => ({ width: 123, height: 456 }),
+                    mouse: {},
+                };
 
                 const plugin = cursorPlugin();
-                const listener = plugin["Mouse:new"];
-                const mouseAltered = listener(mouse);
+                const listener = plugin["Page:new"];
+                const pageAltered = listener(page);
 
-                // Vérifier que la souris retournée est la même instance que
-                // celle en paramètre.
-                assert.equal(mouseAltered, mouse);
-                const symbols = Object.getOwnPropertySymbols(mouse);
+                // Vérifier que la page retournée est la même instance que celle
+                // en paramètre.
+                assert.equal(pageAltered, page);
+                const symbols = Object.getOwnPropertySymbols(page.mouse);
                 assert.equal(symbols.length, 1);
-                const start = mouse[symbols[0]];
-                assert.deepEqual(start, { x: 0, y: 0 });
+                const start = page.mouse[symbols[0]];
+                assert.deepEqual(start, { x: 200, y: 300 });
+
+                assert.equal(randomInt.mock.callCount(), 2);
+                assert.deepEqual(randomInt.mock.calls[0].arguments, [0, 123]);
+                assert.deepEqual(randomInt.mock.calls[1].arguments, [0, 456]);
             });
 
-                const mouse = {};
             it("should support empty option", () => {
+                const randomInt = mock.method(crypto, "randomInt", () => {
+                    switch (randomInt.mock.callCount()) {
+                        case 0:
+                            return 200;
+                        case 1:
+                            return 300;
+                        default:
+                            return 0;
+                    }
+                });
+
+                const page = {
+                    viewportSize: () => ({ width: 123, height: 456 }),
+                    mouse: {},
+                };
 
                 const plugin = cursorPlugin({});
-                const listener = plugin["Mouse:new"];
-                const mouseAltered = listener(mouse);
+                const listener = plugin["Page:new"];
+                const pageAltered = listener(page);
 
-                // Vérifier que la souris retournée est la même instance que
-                // celle en paramètre.
-                assert.equal(mouseAltered, mouse);
-                const symbols = Object.getOwnPropertySymbols(mouse);
+                // Vérifier que la page retournée est la même instance que celle
+                // en paramètre.
+                assert.equal(pageAltered, page);
+                const symbols = Object.getOwnPropertySymbols(page.mouse);
                 assert.equal(symbols.length, 1);
-                const start = mouse[symbols[0]];
-                assert.deepEqual(start, { x: 0, y: 0 });
+                const start = page.mouse[symbols[0]];
+                assert.deepEqual(start, { x: 200, y: 300 });
+
+                assert.equal(randomInt.mock.callCount(), 2);
+                assert.deepEqual(randomInt.mock.calls[0].arguments, [0, 123]);
+                assert.deepEqual(randomInt.mock.calls[1].arguments, [0, 456]);
             });
 
-                const mouse = {};
             it("should support option", () => {
+                const randomInt = mock.method(crypto, "randomInt");
+
+                const page = {
+                    viewportSize: () => ({ width: 123, height: 456 }),
+                    mouse: {},
+                };
 
                 const plugin = cursorPlugin({ start: { x: 42, y: 43 } });
-                const listener = plugin["Mouse:new"];
-                const mouseAltered = listener(mouse);
+                const listener = plugin["Page:new"];
+                const pageAltered = listener(page);
 
-                // Vérifier que la souris retournée est la même instance que
-                // celle en paramètre.
-                assert.equal(mouseAltered, mouse);
-                const symbols = Object.getOwnPropertySymbols(mouse);
+                // Vérifier que la page retournée est la même instance que celle
+                // en paramètre.
+                assert.equal(pageAltered, page);
+                const symbols = Object.getOwnPropertySymbols(page.mouse);
                 assert.equal(symbols.length, 1);
-                const start = mouse[symbols[0]];
+                const start = page.mouse[symbols[0]];
                 assert.deepEqual(start, { x: 42, y: 43 });
+
+                assert.equal(randomInt.mock.callCount(), 0);
             });
         });
 
@@ -167,8 +215,8 @@ describe("plugins/humanize/cursor.js", () => {
             });
         });
 
-        describe("Locator.uncheck:before", function () {
-            afterEach(function () {
+        describe("Locator.uncheck:before", () => {
+            afterEach(() => {
                 mock.reset();
             });
 

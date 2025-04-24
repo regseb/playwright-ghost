@@ -4,11 +4,12 @@
  * @author Sébastien Règne
  */
 
+import crypto from "node:crypto";
 import timers from "node:timers/promises";
 import ghostCursor from "ghost-cursor";
 
 /**
- * @import { Locator, Mouse } from "playwright"
+ * @import { Locator, Mouse, Page } from "playwright"
  * @import { ContextBefore } from "../../hook.js"
  */
 
@@ -38,8 +39,9 @@ const move = async (to, mouse) => {
         useTimestamps: true,
     });
 
-    // Déplacer le curseur.
-    for (const step of path) {
+    // Déplacer le curseur. Enlever le premier et le dernier élément du chemin
+    // qui sont la position actuelle et la position finale du curseur.
+    for (const step of path.slice(1, -1)) {
         // Forcer le nombre d'étapes à 1 pour utiliser la méthode native de
         // déplacement.
         await mouse.move(step.x, step.y, { steps: 1 });
@@ -108,21 +110,25 @@ const moveCursor = async (locator, options) => {
  */
 export default function cursorPlugin(options) {
     const start = {
-        x: options?.start?.x ?? 0,
-        y: options?.start?.y ?? 0,
+        x: options?.start?.x,
+        y: options?.start?.y,
     };
 
     return {
         /**
          * Ajoute la position du curseur à la souris.
          *
-         * @param {Mouse} mouse La souris nouvellement créée dans une page.
-         * @returns {Mouse} La souris avec la position du curseur.
+         * @param {Page} page La page nouvellement créée avec sa souris.
+         * @returns {Page} La page avec la position du curseur.
          */
-        "Mouse:new": (mouse) => {
+        "Page:new": (page) => {
+            const viewportSize = page.viewportSize();
             // eslint-disable-next-line no-param-reassign
-            mouse[CURSOR_SYMBOL] = start;
-            return mouse;
+            page.mouse[CURSOR_SYMBOL] = {
+                x: start.x ?? crypto.randomInt(0, viewportSize.width),
+                y: start.y ?? crypto.randomInt(0, viewportSize.height),
+            };
+            return page;
         },
 
         /**
