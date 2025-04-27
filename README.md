@@ -329,6 +329,11 @@ requires external tool
     <td></td>
   </tr>
   <tr>
+    <td><a href="https://anubis.techaro.lol/">Anubis</a></td>
+    <td>✅</td>
+    <td></td>
+  </tr>
+  <tr>
     <td><a href="https://www.browserscan.net/bot-detection">BrowserScan</a></td>
     <td>✅</td>
     <td></td>
