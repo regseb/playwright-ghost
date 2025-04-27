@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.13.0](https://github.com/regseb/playwright-ghost/compare/v0.12.0...v0.13.0) (2025-04-27)
+
+### Features
+
+- Can disable plugins recommended.
+  ([329b1b0](https://github.com/regseb/playwright-ghost/commit/329b1b096a8ba3637a256b66b5b971e39d866c2d))
+- **plugin/cursor:** Starts at a random position.
+  ([f8b9c78](https://github.com/regseb/playwright-ghost/commit/f8b9c785e0fe314910802e9be90cc17a6a70128b))
+
+### Bug Fixes
+
+- **plugin/click:** Hook Mouse functions.
+  ([fba09f9](https://github.com/regseb/playwright-ghost/commit/fba09f9ab1c2d6ea666f5e4cfc5141ee166299b2))
+
 ## [0.12.0](https://github.com/regseb/playwright-ghost/compare/v0.11.0...v0.12.0) (2025-03-28)
 
 ### Features
