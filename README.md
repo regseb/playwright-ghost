@@ -481,6 +481,69 @@ requires external tool
 To find out which plugins are used, see the
 [anti-bots integration tests](test/integration/antibots).
 
+## Customize
+
+You can write your own plugins. A plugin is a function that returns an object
+containing the hooks. The keys of this object are made up of the class, method
+and hook type. For example:
+
+- `"BrowserType.launch:before"`: modify the input arguments of the `launch()`
+  method of the `BrowserType` class.
+- `"BrowserContext.newPage:after"`: modify the return parameter of the
+  `newPage()` method of the `BrowserContext` class.
+- The values of the object are functions applying the modifications.
+
+- For `"before"` types, the function receives an array containing the arguments
+  of the hooked method. And it must return a new array containing the modified
+  arguments.
+- For `"after"` types, the function receives the return value of the hooked
+  method. And it must return the modified return value.
+
+```javascript
+/// rickrollPlugin.js
+export default function rickrollPlugin() {
+  return {
+    "BrowserType.launch:before": (args) => {
+      return [
+        {
+          ...args[0],
+          args: ["--disable-volume-adjust-sound"],
+        },
+      ];
+    },
+
+    "BrowserContext.newPage:after": (page) => {
+      page.addInitScript(() => {
+        // Execute script only in main frame.
+        if (window !== top) {
+          return;
+        }
+        addEventListener("load", () => {
+          const iframe = document.createElement("iframe");
+          iframe.src = "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ";
+          document.body.replaceChildren(iframe);
+        });
+      });
+      return page;
+    },
+  };
+}
+```
+
+To use your plugin, add it to the `plugins` option.
+
+```javascript
+import { chromium, plugins } from "playwright-ghost";
+import rickrollPlugin from "./rickrollPlugin.js";
+
+const browser = await chromium.launch({
+  plugins: [...plugins.recommended(), rickrollPlugin()],
+});
+// ...
+```
+
+This plugin has some problems, [go to fix them](docs/customize.md).
+
 [img-npm]:
   https://img.shields.io/npm/dm/playwright-ghost?label=npm&logo=npm&logoColor=whitesmoke
 [img-build]:
