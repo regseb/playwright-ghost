@@ -14,8 +14,8 @@ describe("plugins/utils/fingerprint.js", () => {
                 const plugin = await fingerprintPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
-                const store = {};
-                const argsAltered = listener(["./foo/"], { store });
+                const id = 42;
+                const argsAltered = listener(["./foo/"], { id });
 
                 assert.equal(argsAltered[0], "./foo/");
                 assert.equal(argsAltered[1].colorScheme, "dark");
@@ -26,15 +26,6 @@ describe("plugins/utils/fingerprint.js", () => {
                 assert.equal(typeof argsAltered[1].userAgent, "string");
                 assert.equal(typeof argsAltered[1].viewport.height, "number");
                 assert.equal(typeof argsAltered[1].viewport.width, "number");
-
-                const symbols = Object.getOwnPropertySymbols(store);
-                assert.equal(symbols.length, 1);
-                const fingerprintWithHeaders = store[symbols[0]];
-                assert.equal(
-                    typeof fingerprintWithHeaders.fingerprint,
-                    "object",
-                );
-                assert.equal(typeof fingerprintWithHeaders.headers, "object");
             });
         });
 
@@ -42,8 +33,8 @@ describe("plugins/utils/fingerprint.js", () => {
             it("should add fingerprint in options", async () => {
                 const plugin = await fingerprintPlugin();
                 const listener = plugin["Browser.newContext:before"];
-                const store = {};
-                const argsAltered = listener([], { store });
+                const id = 42;
+                const argsAltered = listener([], { id });
 
                 assert.equal(argsAltered[0].colorScheme, "dark");
                 assert.equal(
@@ -53,15 +44,6 @@ describe("plugins/utils/fingerprint.js", () => {
                 assert.equal(typeof argsAltered[0].userAgent, "string");
                 assert.equal(typeof argsAltered[0].viewport.height, "number");
                 assert.equal(typeof argsAltered[0].viewport.width, "number");
-
-                const symbols = Object.getOwnPropertySymbols(store);
-                assert.equal(symbols.length, 1);
-                const fingerprintWithHeaders = store[symbols[0]];
-                assert.equal(
-                    typeof fingerprintWithHeaders.fingerprint,
-                    "object",
-                );
-                assert.equal(typeof fingerprintWithHeaders.headers, "object");
             });
         });
     });

@@ -8,22 +8,23 @@
  * @template {Object} T Le type de l'objet.
  * @typedef {Object} ContextBefore Le contexte pour un crochetage avant l'appel
  *                                 d'une méthode ou d'un getter.
- * @prop {T}      obj   L'objet crocheté.
- * @prop {string} prop  La méthode crochetée.
- * @prop {Object} store Des données échangées entre les crochets d'avant et
- *                      d'après.
+ * @prop {T}      obj  L'objet crocheté.
+ * @prop {string} prop La méthode crochetée.
+ * @prop {string} id   L'identifiant de l'exécution d'un crochet. Cette valeur
+ *                     est identique dans les crochets d'avant et d'après.
  */
 
 /**
  * @template {Object} T Le type de l'objet.
  * @typedef {Object} ContextAfter Le contexte pour un crochetage après l'appel
  *                                d'une méthode ou d'un getter.
- * @prop {T}               obj   L'objet crocheté.
- * @prop {string}          prop  La méthode crochetée.
- * @prop {any[]|undefined} args  Les paramètres de la méthode crochetée ou
- *                               possiblement `undefined` pour les getters.
- * @prop {Object}          store Des données échangées entre les crochets
- *                               d'avant et d'après.
+ * @prop {T}               obj  L'objet crocheté.
+ * @prop {string}          prop La méthode crochetée.
+ * @prop {any[]|undefined} args Les paramètres de la méthode crochetée ou
+ *                              possiblement `undefined` pour les getters.
+ * @prop {string}          id   L'identifiant de l'exécution d'un crochet. Cette
+ *                              valeur est identique dans les crochets d'avant
+ *                              et d'après.
  */
 
 /**
@@ -33,6 +34,13 @@
  * @prop {Function[]} after  Les fonctions à exécuter après l'appel de la
  *                           méthode.
  */
+
+/**
+ * L'incrément des identifiants pour chaque appel de crochet.
+ *
+ * @type {number}
+ */
+let serial = 0;
 
 /**
  * Exécute des fonctions sur une valeur.
@@ -71,16 +79,16 @@ export default function hook(obj, listeners) {
                 return "function" === typeof value ? value.bind(target) : value;
             }
             const { before, after } = listeners.get(prop);
+            const id = (++serial).toString();
 
             if ("function" === typeof value) {
                 return (/** @type {any[]} */ ...args) => {
-                    const store = {};
                     const argsAltered = reduce(before, args, {
                         // Utiliser le récepteur pour ne pas modifier l'objet
                         // cible.
                         obj: receiver,
                         prop,
-                        store,
+                        id,
                     });
 
                     // Ne pas utiliser await pour ne pas rendre toute la méthode
@@ -97,22 +105,21 @@ export default function hook(obj, listeners) {
                         obj: receiver,
                         prop,
                         args: argsAltered,
-                        store,
+                        id,
                     });
                 };
             }
 
-            const store = {};
             const argsAltered = reduce(before, undefined, {
                 obj: receiver,
                 prop,
-                store,
+                id,
             });
             return reduce(after, value, {
                 obj: receiver,
                 prop,
                 args: argsAltered,
-                store,
+                id,
             });
         },
     });
