@@ -17,7 +17,7 @@ import crypto from "node:crypto";
  *                                                  millisecondes.
  * @returns {Record<string, any>} Les nouvelles options.
  */
-const setDelay = function (options, delay) {
+const setDelay = (options, delay) => {
     return {
         ...options,
         delay: options?.delay ?? crypto.randomInt(delay.min, delay.max + 1),

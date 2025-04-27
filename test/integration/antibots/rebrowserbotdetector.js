@@ -1,5 +1,6 @@
 /**
  * @license MIT
+ * @see https://bot-detector.rebrowser.net/
  * @author Sébastien Règne
  */
 

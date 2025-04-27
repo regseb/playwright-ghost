@@ -1,5 +1,6 @@
 /**
  * @license MIT
+ * @see https://antcpt.com/score_detector/
  * @author Sébastien Règne
  */
 

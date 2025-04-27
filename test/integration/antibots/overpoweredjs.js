@@ -1,5 +1,6 @@
 /**
  * @license MIT
+ * @see https://overpoweredjs.com/demo.html
  * @see https://github.com/Joe12387/overpoweredjs
  * @author Sébastien Règne
  */

@@ -1,5 +1,6 @@
 /**
  * @license MIT
+ * @see https://www.browserscan.net/bot-detection
  * @author Sébastien Règne
  */
 

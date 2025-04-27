@@ -1,5 +1,6 @@
 /**
  * @license MIT
+ * @see https://www.deviceinfo.me/
  * @author Sébastien Règne
  */
 

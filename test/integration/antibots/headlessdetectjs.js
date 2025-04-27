@@ -1,5 +1,6 @@
 /**
  * @license MIT
+ * @see https://github.com/LouisKlimek/HeadlessDetectJS
  * @author Sébastien Règne
  */
 

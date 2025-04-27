@@ -1,5 +1,6 @@
 /**
  * @license MIT
+ * @see https://kaliiiiiiiiii.github.io/brotector/
  * @author Sébastien Règne
  */
 

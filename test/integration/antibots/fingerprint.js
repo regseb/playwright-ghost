@@ -1,5 +1,7 @@
 /**
  * @license MIT
+ * @see https://fingerprint.com/products/bot-detection/
+ * @see https://demo.fingerprint.com/playground
  * @author Sébastien Règne
  */
 

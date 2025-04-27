@@ -1,5 +1,6 @@
 /**
  * @license MIT
+ * @see https://infosimples.github.io/detect-headless/
  * @author Sébastien Règne
  */
 

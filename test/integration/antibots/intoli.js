@@ -1,5 +1,6 @@
 /**
  * @license MIT
+ * @see https://intoli.com/blog/not-possible-to-block-chrome-headless/chrome-headless-test.html
  * @author Sébastien Règne
  */
 

@@ -1,5 +1,6 @@
 /**
  * @license MIT
+ * @see https://fingerprint-scan.com/
  * @author Sébastien Règne
  */
 

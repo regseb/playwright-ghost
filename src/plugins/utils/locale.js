@@ -26,7 +26,7 @@ const cache = new Map();
  * @param {string}                        name    Le nom du navigateur.
  * @returns {Promise<Record<string, any>>} Les nouvelles options.
  */
-const setExecutablePath = async function (options, name) {
+const setExecutablePath = async (options, name) => {
     if (!cache.has(name)) {
         cache.set(name, await which(name));
     }

@@ -26,7 +26,7 @@ import crypto from "node:crypto";
  *                                                   zone d'affichage.
  * @returns {Record<string, any>} Les nouvelles options.
  */
-const setViewport = function (options, width, height) {
+const setViewport = (options, width, height) => {
     return {
         ...options,
         viewport: {

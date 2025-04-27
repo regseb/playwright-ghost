@@ -1,5 +1,6 @@
 /**
  * @license MIT
+ * @see https://bot.sannysoft.com/
  * @author Sébastien Règne
  */
 

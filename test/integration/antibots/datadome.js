@@ -1,5 +1,6 @@
 /**
  * @license MIT
+ * @see https://antoinevastel.com/bots/datadome
  * @author Sébastien Règne
  */
 

@@ -1,5 +1,6 @@
 /**
  * @license MIT
+ * @see https://deviceandbrowserinfo.com/are_you_a_bot
  * @author Sébastien Règne
  */
 

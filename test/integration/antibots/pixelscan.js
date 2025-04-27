@@ -1,5 +1,6 @@
 /**
  * @license MIT
+ * @see https://pixelscan.net/
  * @author Sébastien Règne
  */
 

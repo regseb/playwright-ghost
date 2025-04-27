@@ -22,12 +22,24 @@ const nextEventLoopTick = () => {
 const PageMock = class {
     #listeners = new Map();
 
+    /**
+     * Enregistre un écouteur d'événement.
+     *
+     * @param {string}   type     Le type de l'événement.
+     * @param {Function} listener La fonction à appeler lorsque l'événement est émis.
+     */
     on(type, listener) {
         this.#listeners.set(type, listener);
     }
 
     get mock() {
         return {
+            /**
+             * Émets un événement à la page.
+             *
+             * @param {string} type  Le type de l'événement.
+             * @param {any}    event L'événement à émettre.
+             */
             dispatch: (type, event) => {
                 this.#listeners.get(type)(event);
             },

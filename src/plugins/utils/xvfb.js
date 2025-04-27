@@ -36,7 +36,7 @@ const xvfbs = new Map();
  * @returns {Promise<boolean>} Une promesse avec `true` si le fichier existe ;
  *                             sinon `false`.
  */
-export const exists = async function (path) {
+export const exists = async (path) => {
     try {
         await fs.access(path, fs.constants.F_OK);
         return true;
@@ -89,7 +89,7 @@ const spawnXvfb = async (args, keepalive) => {
  *                                                `Xvfb` (par exemple : `:99`).
  * @returns {Record<string, any>} Les nouvelles options.
  */
-const setDisplay = function (options, display) {
+const setDisplay = (options, display) => {
     return {
         ...options,
         env:

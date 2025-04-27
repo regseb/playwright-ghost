@@ -1,5 +1,6 @@
 /**
  * @license MIT
+ * @see https://mihneamanolache.github.io/simple-sw-test/
  * @author Sébastien Règne
  */
 
