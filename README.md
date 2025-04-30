@@ -373,6 +373,13 @@ requires external tool
   </tr>
   <tr>
     <td>
+      <a href="https://theajack.github.io/disable-devtool/">Disable-devtool</a>
+    </td>
+    <td>✅</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>
       <a href="https://fingerprint.com/products/bot-detection/"
         >Fingerprint</a
       >
