@@ -15,9 +15,9 @@ a program.
 
 The Playwright-ghost API is identical to that of Playwright, except for the
 addition of the `plugins` option to the
-[`browserType.launch([options])`](https://playwright.dev/docs/api/class-browsertype#browser-type-launch)
+[`BrowserType.launch([options])`](https://playwright.dev/docs/api/class-browsertype#browser-type-launch)
 and
-[`browserType.launchPersistentContext(userDataDir, [options])`](https://playwright.dev/docs/api/class-browsertype#browser-type-launch-persistent-context)
+[`BrowserType.launchPersistentContext(userDataDir, [options])`](https://playwright.dev/docs/api/class-browsertype#browser-type-launch-persistent-context)
 methods.
 
 The `plugins` property is an array containing the plugins to be added.
@@ -321,172 +321,44 @@ requires external tool
 
 ## Anti-bots
 
-<!-- markdownlint-disable no-inline-html-->
-<table>
-  <tr>
-    <td><a href="https://kaliiiiiiiiii.github.io/brotector/">Brotector</a></td>
-    <td>✅</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><a href="https://anubis.techaro.lol/">Anubis</a></td>
-    <td>✅</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><a href="https://www.browserscan.net/bot-detection">BrowserScan</a></td>
-    <td>✅</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>
-      <a href="https://hmaker.github.io/selenium-detector/"
-        >Chromedriver Detector</a
-      >
-    </td>
-    <td>✅</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><a href="https://abrahamjuliot.github.io/creepjs/">CreepJS</a></td>
-    <td>❌</td>
-    <td><em>F</em></td>
-  </tr>
-  <tr>
-    <td><a href="https://antoinevastel.com/bots/datadome">Datadome</a></td>
-    <td>✅</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>
-      <a href="https://deviceandbrowserinfo.com/are_you_a_bot"
-        >Deviceandbrowserinfo</a
-      >
-    </td>
-    <td>✅</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><a href="https://www.deviceinfo.me/">Device Info</a></td>
-    <td>✅</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>
-      <a href="https://theajack.github.io/disable-devtool/">Disable-devtool</a>
-    </td>
-    <td>✅</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>
-      <a href="https://fingerprint.com/products/bot-detection/"
-        >Fingerprint</a
-      >
-    </td>
-    <td>✅</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>
-      <a href="https://fingerprint.com/products/bot-detection/"
-        >Fingerprint Pro Playground</a
-      >
-    </td>
-    <td>✅</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><a href="https://fingerprint-scan.com/">Fingerprint-Scan</a></td>
-    <td>❌</td>
-    <td>20</td>
-  </tr>
-  <tr>
-    <td>
-      <a href="https://github.com/LouisKlimek/HeadlessDetectJS"
-        >HeadlessDetectJS</a
-      >
-    </td>
-    <td>✅</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>
-      <a href="https://infosimples.github.io/detect-headless/">infosimples</a>
-    </td>
-    <td>✅</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>
-      <a
-        href="https://intoli.com/blog/not-possible-to-block-chrome-headless/chrome-headless-test.html"
-        >Chrome Headless Detection (Intoli)</a
-      >
-    </td>
-    <td>✅</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>
-      <a href="https://overpoweredjs.com/demo.html"
-        >OverpoweredJS Fingerprinting Demo</a
-      >
-    </td>
-    <td>❌</td>
-    <td><em>Bot (5)</em></td>
-  </tr>
-  <tr>
-    <td><a href="https://pixelscan.net/">Pixelscan</a></td>
-    <td>✅</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>
-      <a href="https://bot-detector.rebrowser.net/"
-        >rebrowser-bot-detector</a
-      >
-    </td>
-    <td>❌</td>
-    <td>
-      <em>mainWorldExecution</em>, <em>runtimeEnableLeak</em> &amp;
-      <em>pwInitScripts</em>
-    </td>
-  </tr>
-  <tr>
-    <td><a href="https://bot.sannysoft.com/">Antibot (Sannysoft)</a></td>
-    <td>✅</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>
-      <a href="https://mihneamanolache.github.io/simple-sw-test/">Simple Service Workers Fingerprinting Leaks Test</a>
-    </td>
-    <td>✅</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>
-      <a href="https://antcpt.com/score_detector/"
-        >Score detector (reCAPTCHA v3)</a
-      >
-    </td>
-    <td>❌</td>
-    <td><em>0.3</em></td>
-  </tr>
-  <tr>
-    <td>
-      <a href="https://peet.ws/turnstile-test/non-interactive.html"
-        >Cloudflare turnstile demo</a
-      >
-    </td>
-    <td>✅</td>
-    <td></td>
-  </tr>
-</table>
+### Pass
+
+This 18 anti-bots don't detect Playwright-ghost:
+[Anubis](https://anubis.techaro.lol),
+[Brotector](https://kaliiiiiiiiii.github.io/brotector/),
+[BrowserScan](https://www.browserscan.net/bot-detection),
+[Chromedriver Detector](https://hmaker.github.io/selenium-detector/),
+[Datadome](https://antoinevastel.com/bots/datadome),
+[Deviceandbrowserinfo](https://deviceandbrowserinfo.com/are_you_a_bot),
+[Device Info](https://www.deviceinfo.me/)
+[Disable-devtool](https://theajack.github.io/disable-devtool/),
+[Fingerprint](https://fingerprint.com/products/bot-detection/),
+[Fingerprint Pro Playground](https://demo.fingerprint.com/playground),
+[Fingerprint-Scan](https://fingerprint-scan.com/),
+[HeadlessDetectJS](https://github.com/LouisKlimek/HeadlessDetectJS),
+[infosimples](https://infosimples.github.io/detect-headless/),
+[Chrome Headless Detection (Intoli)](https://intoli.com/blog/not-possible-to-block-chrome-headless/chrome-headless-test.html),
+[Pixelscan](https://pixelscan.net/),
+[Antibot (Sannysoft)](https://bot.sannysoft.com/),
+[Simple Service Workers Fingerprinting Leaks Test](https://mihneamanolache.github.io/simple-sw-test/)
+and
+[Cloudflare turnstile demo](https://peet.ws/turnstile-test/non-interactive.html).
 
 To find out which plugins are used, see the
 [anti-bots integration tests](test/integration/antibots).
+
+### Fail
+
+This 4 anti-bots detect Playwright-ghost:
+
+- [CreepJS](https://abrahamjuliot.github.io/creepjs/): _F_
+- [OverpoweredJS Fingerprinting Demo](https://overpoweredjs.com/demo.html): _Bot
+  (5)_
+- [rebrowser-bot-detector](https://bot-detector.rebrowser.net/):
+  _mainWorldExecution_, _runtimeEnableLeak_ and _pwInitScripts_
+- [Score detector (reCAPTCHA v3)](https://antcpt.com/score_detector/): _0.3_
+
+Contributions are welcome to fix these defects.
 
 ## Customize
 
@@ -498,7 +370,8 @@ and hook type. For example:
   method of the `BrowserType` class.
 - `"BrowserContext.newPage:after"`: modify the return parameter of the
   `newPage()` method of the `BrowserContext` class.
-- The values of the object are functions applying the modifications.
+
+The values of the object are functions applying the modifications.
 
 - For `"before"` types, the function receives an array containing the arguments
   of the hooked method. And it must return a new array containing the modified
@@ -549,7 +422,9 @@ const browser = await chromium.launch({
 // ...
 ```
 
-This plugin has some problems, [go to fix them](docs/customize.md).
+This plugin isn't perfect, so
+[let's see how we can improve it](docs/customize.md) (and also discover other
+features).
 
 [img-npm]:
   https://img.shields.io/npm/dm/playwright-ghost?label=npm&logo=npm&logoColor=whitesmoke

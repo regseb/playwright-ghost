@@ -121,7 +121,7 @@ hooks, it contains the following properties:
 
 - `obj`: the object on which the hook is called (`BrowserType`, `Page`...).
 - `prop`: the name of the method on which the hook is called (`"launch"`,
-  `""newPage"`...).
+  `"newPage"`...).
 
 In our case, we'll use
 [`BrowserType.name()`](https://playwright.dev/docs/api/class-browsertype#browser-type-name)
