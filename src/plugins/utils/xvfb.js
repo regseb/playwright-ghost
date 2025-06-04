@@ -36,7 +36,7 @@ const xvfbs = new Map();
  * @returns {Promise<boolean>} Une promesse avec `true` si le fichier existe ;
  *                             sinon `false`.
  */
-export const exists = async (path) => {
+const exists = async (path) => {
     try {
         await fs.access(path, fs.constants.F_OK);
         return true;
@@ -77,6 +77,24 @@ const spawnXvfb = async (args, keepalive) => {
         keepalive,
     });
     return display;
+};
+
+/**
+ * Arrête éventuellement l'exécutable de `Xvfb` si l'option `keepalive` n'est
+ * pas activée et si plus aucun navigateur ne l'utilise.
+ *
+ * @param {string[]} args Les arguments passés à l'exécutable `Xvfb` (pour
+ *                        retrouver son instance).
+ */
+const killXvfb = (args) => {
+    const xvfb = xvfbs.get(args);
+    if (undefined !== xvfb) {
+        --xvfb.count;
+        if (!xvfb.keepalive && 0 === xvfb.count) {
+            xvfb.process.kill();
+            xvfbs.delete(args);
+        }
+    }
 };
 
 /**
@@ -171,22 +189,31 @@ export default function xvfbPlugin(options) {
         },
 
         /**
-         * Tue éventuellement l'exécutable de `Xvfb` à la fermeture du
+         * Arrête éventuellement l'exécutable de `Xvfb` à la fermeture du
          * navigateur.
          *
          * @param {any} returnValue _Void_
          * @returns {any} _Void_
          */
         "Browser.close:after": (returnValue) => {
-            const xvfb = xvfbs.get(xvfbArgs);
-            if (undefined !== xvfb) {
-                --xvfb.count;
-                if (!xvfb.keepalive && 0 === xvfb.count) {
-                    xvfb.process.kill();
-                    xvfbs.delete(xvfbArgs);
-                }
-            }
+            killXvfb(xvfbArgs);
             return returnValue;
+        },
+
+        Browser: {
+            [Symbol.asyncDispose]: {
+                /**
+                 * Arrête éventuellement l'exécutable de `Xvfb` à la fermeture
+                 * automatique du navigateur.
+                 *
+                 * @param {any} returnValue _Void_
+                 * @returns {any} _Void_
+                 */
+                after: (returnValue) => {
+                    killXvfb(xvfbArgs);
+                    return returnValue;
+                },
+            },
         },
     };
 }
