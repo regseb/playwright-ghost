@@ -39,7 +39,10 @@ describe("ghost.js", () => {
         describe("launchPersistentContext()", () => {
             it("should return browser", async () => {
                 const launchPersistentContext = mock.fn(() =>
-                    Promise.resolve({ foo: "bar" }),
+                    Promise.resolve({
+                        pages: () => [],
+                        foo: "bar",
+                    }),
                 );
                 const browserType = new Ghost({ launchPersistentContext });
 

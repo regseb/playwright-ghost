@@ -5,31 +5,30 @@
 
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import vanilla from "../../../../src/index.js";
+import vanilla from "../../../src/index.js";
 
 /**
- * @import { Locator } from "playwright";
+ * @import { BrowserContext } from "playwright";
  */
 
-describe("Plugin: hook.locator", () => {
-    it("should add plugin in Locator", async () => {
+describe("Hooker: browserContext", () => {
+    it("should add plugin in BrowserContext", async () => {
         const browser = await vanilla.chromium.launch({
             plugins: [
                 {
-                    "Locator:new": (/** @type {Locator} */ locator) => {
+                    "BrowserContext:new": (
+                        /** @type {BrowserContext} */ browserContext,
+                    ) => {
                         // eslint-disable-next-line no-param-reassign
-                        locator.foo = "bar";
-                        return locator;
+                        browserContext.foo = "bar";
+                        return browserContext;
                     },
                 },
             ],
         });
         const context = await browser.newContext();
         try {
-            const page = await context.newPage();
-            await page.goto("about:blank");
-            const locator = page.locator("html");
-            assert.equal(locator.foo, "bar");
+            assert.equal(context.foo, "bar");
         } finally {
             await context.close();
             await browser.close();

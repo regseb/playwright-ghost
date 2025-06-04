@@ -5,30 +5,29 @@
 
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import vanilla from "../../../../src/index.js";
+import vanilla from "../../../src/index.js";
 
 /**
- * @import { BrowserContext } from "playwright";
+ * @import { Mouse } from "playwright";
  */
 
-describe("Plugin: hook.browserContext", () => {
-    it("should add plugin in BrowserContext", async () => {
+describe("Hooker: mouse", () => {
+    it("should add plugin in Mouse", async () => {
         const browser = await vanilla.chromium.launch({
             plugins: [
                 {
-                    "BrowserContext:new": (
-                        /** @type {BrowserContext} */ browserContext,
-                    ) => {
+                    "Mouse:new": (/** @type {Mouse} */ mouse) => {
                         // eslint-disable-next-line no-param-reassign
-                        browserContext.foo = "bar";
-                        return browserContext;
+                        mouse.foo = "bar";
+                        return mouse;
                     },
                 },
             ],
         });
         const context = await browser.newContext();
         try {
-            assert.equal(context.foo, "bar");
+            const page = await context.newPage();
+            assert.equal(page.mouse.foo, "bar");
         } finally {
             await context.close();
             await browser.close();

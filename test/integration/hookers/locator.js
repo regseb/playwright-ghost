@@ -5,21 +5,21 @@
 
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import vanilla from "../../../../src/index.js";
+import vanilla from "../../../src/index.js";
 
 /**
- * @import { Frame } from "playwright";
+ * @import { Locator } from "playwright";
  */
 
-describe("Plugin: hook.frame", () => {
-    it("should add plugin in Frame", async () => {
+describe("Hooker: locator", () => {
+    it("should add plugin in Locator", async () => {
         const browser = await vanilla.chromium.launch({
             plugins: [
                 {
-                    "Frame:new": (/** @type {Frame} */ frame) => {
+                    "Locator:new": (/** @type {Locator} */ locator) => {
                         // eslint-disable-next-line no-param-reassign
-                        frame.foo = "bar";
-                        return frame;
+                        locator.foo = "bar";
+                        return locator;
                     },
                 },
             ],
@@ -27,8 +27,9 @@ describe("Plugin: hook.frame", () => {
         const context = await browser.newContext();
         try {
             const page = await context.newPage();
-            const frame = page.mainFrame();
-            assert.equal(frame.foo, "bar");
+            await page.goto("about:blank");
+            const locator = page.locator("html");
+            assert.equal(locator.foo, "bar");
         } finally {
             await context.close();
             await browser.close();

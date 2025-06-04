@@ -5,145 +5,46 @@
  */
 
 import hook from "./hook.js";
-import browserPlugin from "./plugins/hook/browser.js";
-import browserContextPlugin from "./plugins/hook/browsercontext.js";
-import framePlugin from "./plugins/hook/frame.js";
-import frameLocatorPlugin from "./plugins/hook/framelocator.js";
-import locatorPlugin from "./plugins/hook/locator.js";
-import mousePlugin from "./plugins/hook/mouse.js";
-import pagePlugin from "./plugins/hook/page.js";
+import BrowserHooker from "./hookers/browser.js";
+import BrowserContextHooker from "./hookers/browsercontext.js";
+import FrameHooker from "./hookers/frame.js";
+import FrameLocatorHooker from "./hookers/framelocator.js";
+import LocatorHooker from "./hookers/locator.js";
+import MouseHooker from "./hookers/mouse.js";
+import PageHooker from "./hookers/page.js";
 import flatAwait from "./utils/flatawait.js";
 
 /**
- * @import { Browser, BrowserContext, BrowserType, Frame, Page, Locator } from "playwright"
- * @import { ContextAfter, Listener } from "./hook.js"
+ * @import { Browser, BrowserContext, BrowserType } from "playwright"
+ * @import { Listener } from "./hook.js"
  */
 
 const REGEXP = /^(?<obj>\w+)\.(?<prop>\w+):(?<temporality>after|before)$/v;
 
-/**
- * Renvoie l'objet passé en argument.
- *
- * @template T
- * @param {T} x Un objet quelconque.
- * @returns {T} Le même objet quelconque.
- */
-const identity = (x) => x;
-
-const NEW_MAPPINGS = {
-    "Browser:new": Object.entries({
-        "BrowserType.launch:after": identity,
-    }),
-    "BrowserContext:new": Object.entries({
-        "BrowserType.launchPersistentContext:after": identity,
-        "Browser.newContext:after": identity,
-    }),
-    "Page:new": Object.entries({
-        "Browser.newPage:after": identity,
-        "BrowserContext.newPage:after": identity,
-    }),
-    "Frame:new": Object.entries({
-        "Page.mainFrame:after": identity,
-        "Page.childFrames:after":
-            (/** @type {Function} */ listener) =>
-            (
-                /** @type {Frame[]} */ frames,
-                /** @type {ContextAfter<Page>} */ context,
-            ) =>
-                frames.map((f) => listener(f, context)),
-    }),
-    "Locator:new": Object.entries({
-        "Page.getByAltText:after": identity,
-        "Page.getByLabel:after": identity,
-        "Page.getByPlaceholder:after": identity,
-        "Page.getByRole:after": identity,
-        "Page.getByTestId:after": identity,
-        "Page.getByText:after": identity,
-        "Page.getByTitle:after": identity,
-        "Page.locator:after": identity,
-        "Frame.getByAltText:after": identity,
-        "Frame.getByLabel:after": identity,
-        "Frame.getByPlaceholder:after": identity,
-        "Frame.getByRole:after": identity,
-        "Frame.getByTestId:after": identity,
-        "Frame.getByText:after": identity,
-        "Frame.getByTitle:after": identity,
-        "Frame.locator:after": identity,
-        "Locator.all:after":
-            (/** @type {Function} */ listener) =>
-            (
-                /** @type {Locator[]} */ locators,
-                /** @type {ContextAfter<Locator>} */ context,
-            ) =>
-                locators.map((l) => listener(l, context)),
-        "Locator.and:after": identity,
-        "Locator.filter:after": identity,
-        "Locator.first:after": identity,
-        "Locator.getByAltText:after": identity,
-        "Locator.getByLabel:after": identity,
-        "Locator.getByPlaceholder:after": identity,
-        "Locator.getByRole:after": identity,
-        "Locator.getByTestId:after": identity,
-        "Locator.getByText:after": identity,
-        "Locator.getByTitle:after": identity,
-        "Locator.last:after": identity,
-        "Locator.locator:after": identity,
-        "Locator.nth:after": identity,
-        "Locator.or:after": identity,
-        "FrameLocator.getByAltText:after": identity,
-        "FrameLocator.getByLabel:after": identity,
-        "FrameLocator.getByPlaceholder:after": identity,
-        "FrameLocator.getByRole:after": identity,
-        "FrameLocator.getByTestId:after": identity,
-        "FrameLocator.getByText:after": identity,
-        "FrameLocator.getByTitle:after": identity,
-        "FrameLocator.locator:after": identity,
-    }),
-    "FrameLocator:new": Object.entries({
-        "Page.frameLocator:after": identity,
-        "Locator.contentFrame:after": identity,
-        "Locator.frameLocator:after": identity,
-        "FrameLocator.frameLocator:after": identity,
-    }),
-    "Mouse:new": Object.entries({
-        "Browser.newPage:after":
-            (/** @type {Function} */ listener) =>
-            (
-                /** @type {Page} */ page,
-                /** @type {ContextAfter<Browser>} */ context,
-            ) => {
-                // eslint-disable-next-line no-param-reassign
-                page.mouse = listener(page.mouse, context);
-                return page;
-            },
-        "BrowserContext.newPage:after":
-            (/** @type {Function} */ listener) =>
-            (
-                /** @type {Page} */ page,
-                /** @type {ContextAfter<BrowserContext>} */ context,
-            ) => {
-                // eslint-disable-next-line no-param-reassign
-                page.mouse = listener(page.mouse, context);
-                return page;
-            },
-    }),
+const PRESETS = {
+    "Browser:new": Object.entries(BrowserHooker.PRESETS),
+    "BrowserContext:new": Object.entries(BrowserContextHooker.PRESETS),
+    "Page:new": Object.entries(PageHooker.PRESETS),
+    "Frame:new": Object.entries(FrameHooker.PRESETS),
+    "Locator:new": Object.entries(LocatorHooker.PRESETS),
+    "FrameLocator:new": Object.entries(FrameLocatorHooker.PRESETS),
+    "Mouse:new": Object.entries(MouseHooker.PRESETS),
 };
 
 /**
  * Répartit les crochets pour les regrouper par objet, propriété et temporalité.
  *
- * @param {Record<string, Function>[]} hooks La liste des crochets.
- * @returns {Map<string, Map<string, Listener>>} Les écouteurs regroupés par
- *                                               objet, propriété et
- *                                               temporalité.
+ * @param {Record<string, Function>[]}         hooks     La liste des crochets.
+ * @param {Map<string, Map<string, Listener>>} listeners Les écouteurs regroupés
+ *                                                       par objet, propriété et
+ *                                                       temporalité.
  */
-const dispatch = (hooks) => {
-    const listeners = new Map();
+const dispatch = (hooks, listeners) => {
     hooks
         .flatMap((h) => Object.entries(h))
         .flatMap(([key, listener]) => {
-            return key in NEW_MAPPINGS
-                ? NEW_MAPPINGS[key].map(([k, f]) => [k, f(listener)])
+            return key in PRESETS
+                ? PRESETS[key].map(([k, f]) => [k, f(listener)])
                 : [[key, listener]];
         })
         .forEach(([key, listener]) => {
@@ -157,7 +58,6 @@ const dispatch = (hooks) => {
             }
             listeners.get(obj).get(prop)[temporality].push(listener);
         });
-    return listeners;
 };
 
 export default class Ghost {
@@ -198,16 +98,33 @@ export default class Ghost {
      */
     async launch(options) {
         const listeners = new Map();
-        dispatch([
-            browserPlugin(listeners),
-            browserContextPlugin(listeners),
-            pagePlugin(listeners),
-            framePlugin(listeners),
-            locatorPlugin(listeners),
-            frameLocatorPlugin(listeners),
-            mousePlugin(listeners),
-            ...(await flatAwait(options?.plugins ?? [])),
-        ]).forEach((v, k) => listeners.set(k, v));
+        const browser = new BrowserHooker(listeners);
+        const browserContext = new BrowserContextHooker(listeners);
+        const page = new PageHooker(listeners);
+        const frame = new FrameHooker(listeners);
+        const locator = new LocatorHooker(listeners);
+        const frameLocator = new FrameLocatorHooker(listeners);
+        const mouse = new MouseHooker(listeners);
+        dispatch(
+            [
+                browser.first(),
+                browserContext.first(),
+                page.first(),
+                frame.first(),
+                locator.first(),
+                frameLocator.first(),
+                mouse.first(),
+                ...(await flatAwait(options?.plugins ?? [])),
+                mouse.last(),
+                frameLocator.last(),
+                locator.last(),
+                frame.last(),
+                page.last(),
+                browserContext.last(),
+                browser.last(),
+            ],
+            listeners,
+        );
 
         const hooked = hook(this.#browserType, listeners.get("BrowserType"));
         return hooked.launch(options);
@@ -227,16 +144,33 @@ export default class Ghost {
      */
     async launchPersistentContext(userDataDir, options) {
         const listeners = new Map();
-        dispatch([
-            browserPlugin(listeners),
-            browserContextPlugin(listeners),
-            pagePlugin(listeners),
-            framePlugin(listeners),
-            locatorPlugin(listeners),
-            frameLocatorPlugin(listeners),
-            mousePlugin(listeners),
-            ...(await flatAwait(options?.plugins ?? [])),
-        ]).forEach((v, k) => listeners.set(k, v));
+        const browser = new BrowserHooker(listeners);
+        const browserContext = new BrowserContextHooker(listeners);
+        const page = new PageHooker(listeners);
+        const frame = new FrameHooker(listeners);
+        const locator = new LocatorHooker(listeners);
+        const frameLocator = new FrameLocatorHooker(listeners);
+        const mouse = new MouseHooker(listeners);
+        dispatch(
+            [
+                browser.first(),
+                browserContext.first(),
+                page.first(),
+                frame.first(),
+                locator.first(),
+                frameLocator.first(),
+                mouse.first(),
+                ...(await flatAwait(options?.plugins ?? [])),
+                mouse.last(),
+                frameLocator.last(),
+                locator.last(),
+                frame.last(),
+                page.last(),
+                browserContext.last(),
+                browser.last(),
+            ],
+            listeners,
+        );
 
         const hooked = hook(this.#browserType, listeners.get("BrowserType"));
         return hooked.launchPersistentContext(userDataDir, options);
