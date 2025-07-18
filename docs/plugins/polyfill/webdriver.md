@@ -6,7 +6,7 @@
 
 > [!TIP]
 >
-> This plugin is enabled in the ⭐ [`recommended`](../recommended.md).
+> This plugin is enabled in the ⭐️ [`recommended`](../recommended.md).
 
 Set `navigator.webdriver` to `false`.
 
@@ -19,10 +19,28 @@ This plugin has no option.
 Use the plugin.
 
 ```javascript
-import { chromium, plugins } from "playwright-ghost";
+import { chromium } from "playwright-ghost";
+import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
   plugins: [plugins.polyfill.webdriver()],
+});
+// ...
+```
+
+## Advanced
+
+### Import
+
+If you want to import only this plugin, you can use the
+`"playwright-ghost/plugins/polyfill/webdriver"` path in the import.
+
+```javascript
+import { chromium } from "playwright-ghost";
+import webdriverPlugin from "playwright-ghost/plugins/polyfill/webdriver";
+
+const browser = await chromium.launch({
+  plugins: [webdriverPlugin()],
 });
 // ...
 ```

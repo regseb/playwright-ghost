@@ -5,12 +5,13 @@
 
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import vanilla from "../../../../src/index.js";
+import playwright from "../../../../src/index.js";
+import cursorPlugin from "../../../../src/plugins/humanize/cursor.js";
 
 describe("Plugin: humanize.cursor", () => {
     it("should not move in the same position", async () => {
-        const browser = await vanilla.chromium.launch({
-            plugins: [vanilla.plugins.humanize.cursor()],
+        const browser = await playwright.chromium.launch({
+            plugins: [cursorPlugin()],
         });
         const context = await browser.newContext();
         try {

@@ -36,7 +36,7 @@ const disable = (options, browserType) => {
  *
  * @returns {Record<string, Function>} Les crochets du plugin.
  */
-export default function automationPlugin() {
+export default function polyfillAutomationPlugin() {
     return {
         /**
          * Modifie les options de lancement du navigateur.

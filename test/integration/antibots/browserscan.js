@@ -8,9 +8,12 @@ import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { describe, it } from "node:test";
 import patchright from "../../../src/patchright.js";
+import plugins from "../../../src/plugins/index.js";
 
 const getUserAgent = async () => {
-    const browser = await patchright.chromium.launch({ channel: "chromium" });
+    const browser = await patchright.chromium.launch({
+        plugins: plugins.recommended(),
+    });
     const context = await browser.newContext();
     const page = await context.newPage();
     const userAgent = await page.evaluate("navigator.userAgent");
@@ -24,8 +27,8 @@ describe("Anti-bot: BrowserScan", () => {
         it("should pass", async () => {
             const browser = await patchright.chromium.launch({
                 plugins: [
-                    ...patchright.plugins.recommended(),
-                    patchright.plugins.polyfill.userAgent({
+                    ...plugins.recommended(),
+                    plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
                 ],

@@ -2,7 +2,7 @@
 
 > [!TIP]
 >
-> This plugin is enabled in the ⭐ [`recommended`](../recommended.md).
+> This plugin is enabled in the ⭐️ [`recommended`](../recommended.md).
 
 Move the cursor with human-like movements.
 
@@ -31,7 +31,8 @@ This plugin supports the following option:
 Use the plugin with default options: random position in viewport.
 
 ```javascript
-import { chromium, plugins } from "playwright-ghost";
+import { chromium } from "playwright-ghost";
+import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
   plugins: [plugins.humanize.cursor()],
@@ -42,10 +43,28 @@ const browser = await chromium.launch({
 Use the plugin and specify a start position of cursor.
 
 ```javascript
-import { chromium, plugins } from "playwright-ghost";
+import { chromium } from "playwright-ghost";
+import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
   plugins: [plugins.humanize.cursor({ start: { x: 100, y: 100 } })],
+});
+// ...
+```
+
+## Advanced
+
+### Import
+
+If you want to import only this plugin, you can use the
+`"playwright-ghost/plugins/humanize/cursor"` path in the import.
+
+```javascript
+import { chromium } from "playwright-ghost";
+import cursorPlugin from "playwright-ghost/plugins/humanize/cursor";
+
+const browser = await chromium.launch({
+  plugins: [cursorPlugin()],
 });
 // ...
 ```

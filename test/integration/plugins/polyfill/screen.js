@@ -5,13 +5,13 @@
 
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import vanilla from "../../../../src/index.js";
+import playwright from "../../../../src/index.js";
+import screenPlugin from "../../../../src/plugins/polyfill/screen.js";
 
 describe("Plugin: polyfill.screen", () => {
     it("should set screen size", async () => {
-        const browser = await vanilla.chromium.launch({
-            channel: "chromium",
-            plugins: [vanilla.plugins.polyfill.screen()],
+        const browser = await playwright.chromium.launch({
+            plugins: [screenPlugin()],
         });
         const context = await browser.newContext();
         try {

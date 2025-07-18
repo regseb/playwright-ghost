@@ -5,13 +5,13 @@
 
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import vanilla from "../../../../src/index.js";
+import playwright from "../../../../src/index.js";
+import userAgentPlugin from "../../../../src/plugins/polyfill/useragent.js";
 
 describe("Plugin: polyfill.userAgent", () => {
     it("should return new user agent", async () => {
-        const browser = await vanilla.chromium.launch({
-            channel: "chromium",
-            plugins: [vanilla.plugins.polyfill.userAgent({ userAgent: "foo" })],
+        const browser = await playwright.chromium.launch({
+            plugins: [userAgentPlugin({ userAgent: "foo" })],
         });
         const context = await browser.newContext();
         try {

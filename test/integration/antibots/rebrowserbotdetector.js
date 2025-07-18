@@ -8,10 +8,13 @@ import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import process from "node:process";
 import { describe, it } from "node:test";
+import plugins from "../../../src/plugins/index.js";
 import rebrowser from "../../../src/rebrowser.js";
 
 const getUserAgent = async () => {
-    const browser = await rebrowser.chromium.launch({ channel: "chromium" });
+    const browser = await rebrowser.chromium.launch({
+        plugins: plugins.recommended(),
+    });
     const context = await browser.newContext();
     const page = await context.newPage();
     const userAgent = await page.evaluate("navigator.userAgent");
@@ -25,8 +28,8 @@ describe("Anti-bot: rebrowser-bot-detector", () => {
         it("should not be detected", async () => {
             const browser = await rebrowser.chromium.launch({
                 plugins: [
-                    ...rebrowser.plugins.recommended(),
-                    rebrowser.plugins.polyfill.userAgent({
+                    ...plugins.recommended(),
+                    plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
                 ],

@@ -38,7 +38,7 @@ const disable = (options, browserType) => {
  *
  * @returns {Record<string, Function>} Les crochets du plugin.
  */
-export default function webdriverPlugin() {
+export default function polyfillWebdriverPlugin() {
     return {
         /**
          * Modifie les options de lancement du navigateur.

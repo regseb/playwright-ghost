@@ -2,12 +2,15 @@
 
 > [!IMPORTANT]
 >
-> You need to install 📦
-> [`Xvfb`](https://www.x.org/archive/X11R7.7/doc/man/man1/Xvfb.1.xhtml) package
-> in your Linux : `sudo apt-get install xvfb` (on Debian/Ubuntu).
+> You need to install
+> [`Xvfb`](https://www.x.org/archive/X11R7.7/doc/man/man1/Xvfb.1.xhtml) in your
+> Linux:
+>
+> - `sudo apt-get install xvfb` (on Debian/Ubuntu)
+> - `sudo yum install xorg-x11-server-Xvfb` (on Fedora/RHEL/CentOS)
 
-Start an instance of `Xvfb` and launches the browser in this virtual
-framebuffer.
+Start an instance of `Xvfb` (_X Virtual Frame Buffer_) and launches the browser
+in this virtual framebuffer.
 
 ## Options
 
@@ -28,7 +31,8 @@ This plugin supports the following option:
 Use the plugin with default options.
 
 ```javascript
-import { chromium, plugins } from "playwright-ghost";
+import { chromium } from "playwright-ghost";
+import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
   plugins: [plugins.utils.xvfb()],
@@ -39,7 +43,8 @@ const browser = await chromium.launch({
 Use the plugin and specify arguments for a 2K screen.
 
 ```javascript
-import { chromium, plugins } from "playwright-ghost";
+import { chromium } from "playwright-ghost";
+import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
   plugins: [plugins.utils.xvfb({ args: ["-screen", "0", "2560x1440x24"] })],
@@ -50,7 +55,8 @@ const browser = await chromium.launch({
 Use the plugin with `keepalive` and `signal`.
 
 ```javascript
-import { chromium, plugins } from "playwright-ghost";
+import { chromium } from "playwright-ghost";
+import plugins from "playwright-ghost/plugins";
 
 const controller = new AbortController();
 
@@ -82,4 +88,21 @@ otherBrowser.close();
 
 // Stop Xvfb.
 controller.abort();
+```
+
+## Advanced
+
+### Import
+
+If you want to import only this plugin, you can use the
+`"playwright-ghost/plugins/utils/xvfb"` path in the import.
+
+```javascript
+import { chromium } from "playwright-ghost";
+import xvfbPlugin from "playwright-ghost/plugins/utils/xvfb";
+
+const browser = await chromium.launch({
+  plugins: [xvfbPlugin()],
+});
+// ...
 ```

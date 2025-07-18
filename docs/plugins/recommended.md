@@ -33,7 +33,8 @@ Plugins can be disabled by passing the value to `false`.
 Use the preset with default options.
 
 ```javascript
-import { chromium, plugins } from "playwright-ghost";
+import { chromium } from "playwright-ghost";
+import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
   plugins: plugins.recommended(),
@@ -45,7 +46,8 @@ Use the preset and specify `polyfill.screen`, `humanize.click` and
 `humanize.cursor` plugin options.
 
 ```javascript
-import { chromium, plugins } from "playwright-ghost";
+import { chromium } from "playwright-ghost";
+import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
   plugins: plugins.recommended({
@@ -64,7 +66,8 @@ const browser = await chromium.launch({
 Use all recommended plugins except `polyfill.headless`.
 
 ```javascript
-import { chromium, plugins } from "playwright-ghost";
+import { chromium } from "playwright-ghost";
+import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
   plugins: plugins.recommended({
@@ -80,12 +83,30 @@ Use all recommended plugins except `humanize` plugins (`click`, `cursor` and
 `dialog`).
 
 ```javascript
-import { chromium, plugins } from "playwright-ghost";
+import { chromium } from "playwright-ghost";
+import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
   plugins: plugins.recommended({
     humanize: false,
   }),
+});
+// ...
+```
+
+## Advanced
+
+### Import
+
+If you want to import only this preset, you can use the
+`"playwright-ghost/plugins/recommended"` path in the import.
+
+```javascript
+import { chromium } from "playwright-ghost";
+import recommendedPlugins from "playwright-ghost/plugins/recommended";
+
+const browser = await chromium.launch({
+  plugins: recommendedPlugins(),
 });
 // ...
 ```

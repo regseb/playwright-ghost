@@ -38,7 +38,8 @@ const setViewport = (options, width, height) => {
 };
 
 /**
- * @typedef {Object} ViewportOptions Les options du plugin `polyfill.viewport`.
+ * @typedef {Object} PolyfillViewportOptions Les options du plugin
+ *                                           `polyfill.viewport`.
  * @prop {Object} [width]      La largeur de la zone d'affichage.
  * @prop {number} [width.min]  La largeur minimum de la zone d'affichage.
  * @prop {number} [width.max]  La largeur maximum de la zone d'affichage.
@@ -52,11 +53,11 @@ const setViewport = (options, width, height) => {
  * navigateur. Par défaut les valeurs sont prises aléatoirement entre
  * _1000x500_ et _1800x800_.
  *
- * @param {ViewportOptions} [options] Les éventuelles options du plugin
- *                                    `polyfill.viewport`.
+ * @param {PolyfillViewportOptions} [options] Les éventuelles options du plugin
+ *                                            `polyfill.viewport`.
  * @returns {Record<string, Function>} Les crochets du plugin.
  */
-export default function viewportPlugin(options) {
+export default function polyfillViewportPlugin(options) {
     const width = {
         min: options?.width?.min ?? 1000,
         max: options?.width?.max ?? 1800,

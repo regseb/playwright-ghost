@@ -7,13 +7,14 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { describe, it } from "node:test";
-import vanilla from "../../../src/index.js";
+import playwright from "../../../src/index.js";
+import plugins from "../../../src/plugins/index.js";
 
 describe("Anti-bot: Simple Service Workers Fingerprinting Leaks Test", () => {
     describe("chromium", () => {
         it("should not be detected", async () => {
-            const browser = await vanilla.chromium.launch({
-                plugins: vanilla.plugins.recommended(),
+            const browser = await playwright.chromium.launch({
+                plugins: plugins.recommended(),
             });
             const context = await browser.newContext();
             const page = await context.newPage();

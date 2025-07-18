@@ -33,7 +33,7 @@ const useAngle = (options, browserType) => {
  *
  * @returns {Record<string, Function>} Les crochets du plugin.
  */
-export default function webGLPlugin() {
+export default function polyfillWebGLPlugin() {
     return {
         /**
          * Modifie les options de lancement du navigateur.

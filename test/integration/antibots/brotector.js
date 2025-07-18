@@ -8,12 +8,13 @@ import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { describe, it } from "node:test";
 import patchright from "../../../src/patchright.js";
+import plugins from "../../../src/plugins/index.js";
 
 describe("Anti-bot: Brotector", () => {
     describe("chromium", () => {
         it("should have 0", async () => {
             const browser = await patchright.chromium.launch({
-                plugins: patchright.plugins.recommended(),
+                plugins: plugins.recommended(),
             });
             const context = await browser.newContext();
             const page = await context.newPage();

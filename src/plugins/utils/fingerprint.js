@@ -1,10 +1,18 @@
 /**
  * @module
  * @license MIT
+ * @see https://github.com/apify/fingerprint-suite
  * @author Sébastien Règne
  */
 
+import { FingerprintGenerator } from "fingerprint-generator";
+import { FingerprintInjector } from "fingerprint-injector";
+
 /**
+ * @import {
+ *     BrowserFingerprintWithHeaders,
+ *     FingerprintGeneratorOptions,
+ * } from "fingerprint-generator"
  * @import { Browser, BrowserContext, BrowserType } from "playwright"
  * @import { ContextAfter, ContextBefore } from "../../hook.js"
  */
@@ -13,29 +21,20 @@
  * Modifie les informations dans les options pour le _fingerprint_ et les
  * entêtes.
  *
- * @param {Record<string, any>|undefined} options                            Les
- *                                                                           options
- *                                                                           de
- *                                                                           création
- *                                                                           d'un
- *                                                                           `BrowserContext`.
- * @param {Object}                        fingerprintWithHeaders             Le
- *                                                                           _fingerprint_
- *                                                                           et
- *                                                                           les
- *                                                                           entêtes.
- * @param {Object}                        fingerprintWithHeaders.fingerprint Le
- *                                                                           _fingerprint_.
- * @param {Object}                        fingerprintWithHeaders.headers     Les
- *                                                                           entêtes.
+ * @param {Record<string, any>|undefined} options                Les options de
+ *                                                               création d'un
+ *                                                               `BrowserContext`.
+ * @param {BrowserFingerprintWithHeaders} fingerprintWithHeaders Le
+ *                                                               _fingerprint_
+ *                                                               et les entêtes.
  * @returns {Record<string, any>} Les nouvelles options.
  */
 const setFingerprint = (options, { fingerprint, headers }) => {
     // Reprendre le code source de la fonction newInjectedContext. On ne peut
-    // utiliser cette fonction, car elle remplace la méthode
+    // pas utiliser cette fonction, car elle remplace la méthode
     // Browser.newContext(). Les plugins permettent seulement de modifier les
-    // arguments et le retour.
-    // https://github.com/apify/fingerprint-suite/blob/v2.1.63/packages/fingerprint-injector/src/fingerprint-injector.ts#L322
+    // arguments et la valeur de retour.
+    // https://github.com/apify/fingerprint-suite/blob/v2.1.69/packages/fingerprint-injector/src/fingerprint-injector.ts#L331
     return {
         userAgent: fingerprint.navigator.userAgent,
         colorScheme: "dark",
@@ -53,34 +52,38 @@ const setFingerprint = (options, { fingerprint, headers }) => {
 };
 
 /**
- * @typedef {Object} FingerprintOptions Les options du plugin
- *                                      `utils.fingerprint`.
- * @prop {Object} [fingerprint]        La propriété `fingerprint` de la fonction
- *                                     `newInjectedContext()`.
- * @prop {Object} [fingerprintOptions] La propriété `fingerprintOptions` de la
- *                                     fonction `newInjectedContext()`.
+ * @typedef {Object} UtilsFingerprintOptions Les options du plugin
+ *                                           `utils.fingerprint`.
+ * @prop {BrowserFingerprintWithHeaders}        [fingerprint]        La
+ *                                                                   propriété
+ *                                                                   `fingerprint`
+ *                                                                   de la
+ *                                                                   fonction
+ *                                                                   `newInjectedContext()`.
+ * @prop {Partial<FingerprintGeneratorOptions>} [fingerprintOptions] La
+ *                                                                   propriété
+ *                                                                   `fingerprintOptions`
+ *                                                                   de la
+ *                                                                   fonction
+ *                                                                   `newInjectedContext()`.
  */
 
 /**
  * Crée un plugin pour modifier le _fingerprint_ du navigateur.
  *
- * @param {FingerprintOptions} [options] Les éventuelles options du plugin
- *                                       `utils.fingerprint`.
- * @returns {Promise<Record<string, Function>>} Une promesse contenant le
- *                                              crochet du plugin.
+ * @param {UtilsFingerprintOptions} [options] Les éventuelles options du plugin
+ *                                            `utils.fingerprint`.
+ * @returns {Record<string, Function>} Les crochets du plugin.
  */
-export default async function fingerprintPlugin(options) {
-    const { FingerprintGenerator } = await import("fingerprint-generator");
-    const { FingerprintInjector } = await import("fingerprint-injector");
-
+export default function utilsFingerprintPlugin(options) {
     const fingerprint = options?.fingerprint;
-    const fingerprintOptions = options?.fingerprintOptions ?? {};
+    const fingerprintOptions = options?.fingerprintOptions;
 
     /**
      * Le magasin des _fingerprints_ et des entêtes échangés entre le crochet
      * d'avant et d'après.
      *
-     * @type {Map<string, any>}
+     * @type {Map<string, BrowserFingerprintWithHeaders>}
      */
     const store = new Map();
 
@@ -114,7 +117,8 @@ export default async function fingerprintPlugin(options) {
             browserContext,
             { id },
         ) => {
-            const fingerprintWithHeaders = store.get(id);
+            const fingerprintWithHeaders =
+                /** @type {BrowserFingerprintWithHeaders} */ (store.get(id));
             store.delete(id);
             await new FingerprintInjector().attachFingerprintToPlaywright(
                 browserContext,
@@ -147,7 +151,8 @@ export default async function fingerprintPlugin(options) {
          * @returns {Promise<BrowserContext>} Le contexte modifié.
          */
         "Browser.newContext:after": async (browserContext, { id }) => {
-            const fingerprintWithHeaders = store.get(id);
+            const fingerprintWithHeaders =
+                /** @type {BrowserFingerprintWithHeaders} */ (store.get(id));
             store.delete(id);
             await new FingerprintInjector().attachFingerprintToPlaywright(
                 browserContext,

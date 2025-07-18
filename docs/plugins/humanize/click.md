@@ -2,7 +2,7 @@
 
 > [!TIP]
 >
-> This plugin is enabled in the ⭐ [`recommended`](../recommended.md).
+> This plugin is enabled in the ⭐️ [`recommended`](../recommended.md).
 
 Add delay between `mousedown` and `mouseup` for
 [`Locator.click()`](https://playwright.dev/docs/api/class-locator#locator-click),
@@ -27,7 +27,8 @@ This plugin supports the following options:
 Use the plugin with default options.
 
 ```javascript
-import { chromium, plugins } from "playwright-ghost";
+import { chromium } from "playwright-ghost";
+import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
   plugins: [plugins.humanize.click()],
@@ -38,10 +39,28 @@ const browser = await chromium.launch({
 Use the plugin and specify the delay between `50` and `200` milliseconds.
 
 ```javascript
-import { chromium, plugins } from "playwright-ghost";
+import { chromium } from "playwright-ghost";
+import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
   plugins: [plugins.humanize.click({ delay: { min: 50, max: 200 } })],
+});
+// ...
+```
+
+## Advanced
+
+### Import
+
+If you want to import only this plugin, you can use the
+`"playwright-ghost/plugins/humanize/click"` path in the import.
+
+```javascript
+import { chromium } from "playwright-ghost";
+import clickPlugin from "playwright-ghost/plugins/humanize/click";
+
+const browser = await chromium.launch({
+  plugins: [clickPlugin()],
 });
 // ...
 ```

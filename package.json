@@ -29,12 +29,100 @@
       "default": "./src/index.js"
     },
     "./patchright": {
-      "types": "./types/index.d.ts",
+      "types": "./types/patchright.d.ts",
       "default": "./src/patchright.js"
     },
     "./rebrowser": {
-      "types": "./types/index.d.ts",
+      "types": "./types/rebrowser.d.ts",
       "default": "./src/rebrowser.js"
+    },
+    "./plugins": {
+      "types": "./types/plugins/index.d.ts",
+      "default": "./src/plugins/index.js"
+    },
+    "./plugins/recommended": {
+      "types": "./types/plugins/recommended.d.ts",
+      "default": "./src/plugins/recommended.js"
+    },
+    "./plugins/polyfill": {
+      "types": "./types/plugins/polyfill/index.d.ts",
+      "default": "./src/plugins/polyfill/index.js"
+    },
+    "./plugins/polyfill/recommended": {
+      "types": "./types/plugins/polyfill/recommended.d.ts",
+      "default": "./src/plugins/polyfill/recommended.js"
+    },
+    "./plugins/polyfill/automation": {
+      "types": "./types/plugins/polyfill/automation.d.ts",
+      "default": "./src/plugins/polyfill/automation.js"
+    },
+    "./plugins/polyfill/headless": {
+      "types": "./types/plugins/polyfill/headless.d.ts",
+      "default": "./src/plugins/polyfill/headless.js"
+    },
+    "./plugins/polyfill/screen": {
+      "types": "./types/plugins/polyfill/screen.d.ts",
+      "default": "./src/plugins/polyfill/screen.js"
+    },
+    "./plugins/polyfill/useragent": {
+      "types": "./types/plugins/polyfill/useragent.d.ts",
+      "default": "./src/plugins/polyfill/useragent.js"
+    },
+    "./plugins/polyfill/viewport": {
+      "types": "./types/plugins/polyfill/viewport.d.ts",
+      "default": "./src/plugins/polyfill/viewport.js"
+    },
+    "./plugins/polyfill/webdriver": {
+      "types": "./types/plugins/polyfill/webdriver.d.ts",
+      "default": "./src/plugins/polyfill/webdriver.js"
+    },
+    "./plugins/polyfill/webgl": {
+      "types": "./types/plugins/polyfill/webgl.d.ts",
+      "default": "./src/plugins/polyfill/webgl.js"
+    },
+    "./plugins/humanize": {
+      "types": "./types/plugins/humanize/index.d.ts",
+      "default": "./src/plugins/humanize/index.js"
+    },
+    "./plugins/humanize/recommended": {
+      "types": "./types/plugins/humanize/recommended.d.ts",
+      "default": "./src/plugins/humanize/recommended.js"
+    },
+    "./plugins/humanize/click": {
+      "types": "./types/plugins/humanize/click.d.ts",
+      "default": "./src/plugins/humanize/click.js"
+    },
+    "./plugins/humanize/cursor": {
+      "types": "./types/plugins/humanize/cursor.d.ts",
+      "default": "./src/plugins/humanize/cursor.js"
+    },
+    "./plugins/humanize/dialog": {
+      "types": "./types/plugins/humanize/dialog.d.ts",
+      "default": "./src/plugins/humanize/dialog.js"
+    },
+    "./plugins/utils": {
+      "types": "./types/plugins/utils/index.d.ts",
+      "default": "./src/plugins/utils/index.js"
+    },
+    "./plugins/utils/adblocker": {
+      "types": "./types/plugins/utils/adblocker.d.ts",
+      "default": "./src/plugins/utils/adblocker.js"
+    },
+    "./plugins/utils/debug": {
+      "types": "./types/plugins/utils/debug.d.ts",
+      "default": "./src/plugins/utils/debug.js"
+    },
+    "./plugins/utils/fingerprint": {
+      "types": "./types/plugins/utils/fingerprint.d.ts",
+      "default": "./src/plugins/utils/fingerprint.js"
+    },
+    "./plugins/utils/locale": {
+      "types": "./types/plugins/utils/locale.d.ts",
+      "default": "./src/plugins/utils/locale.js"
+    },
+    "./plugins/utils/xvfb": {
+      "types": "./types/plugins/utils/xvfb.d.ts",
+      "default": "./src/plugins/utils/xvfb.js"
     },
     "./package.json": "./package.json"
   },
@@ -43,6 +131,7 @@
   "repository": "regseb/playwright-ghost",
   "type": "module",
   "scripts": {
+    "prepare": "tsc --project .tsconfig_types.json",
     "lint": "metalint",
     "lint:fix": "metalint --fix",
     "lint:types": "tsc --project .tsconfig_lint.json",
@@ -54,10 +143,12 @@
     "clean": "node .script/clean.js"
   },
   "dependencies": {
+    "@ghostery/adblocker-playwright": ">=2.11.3",
+    "fingerprint-generator": ">=2.1.69",
+    "fingerprint-injector": ">=2.1.69",
     "ghost-cursor": "1.4.1"
   },
   "devDependencies": {
-    "@ghostery/adblocker-playwright": "2.5.1",
     "@prantlf/jsonlint": "16.0.0",
     "@prettier/plugin-xml": "3.4.1",
     "@stryker-mutator/core": "8.7.1",
@@ -75,8 +166,6 @@
     "eslint-plugin-promise": "7.2.1",
     "eslint-plugin-regexp": "2.7.0",
     "eslint-plugin-unicorn": "59.0.0",
-    "fingerprint-generator": "2.1.66",
-    "fingerprint-injector": "2.1.66",
     "globals": "16.0.0",
     "markdownlint": "0.37.4",
     "metalint": "0.20.0",
@@ -85,29 +174,18 @@
     "playwright": "1.52.0",
     "prettier": "3.5.3",
     "publint": "0.3.12",
+    "puppeteer": "24.14.0",
     "rebrowser-playwright": "1.49.1",
     "typedoc": "0.28.3",
     "typescript": "5.8.3",
     "yaml-lint": "1.7.0"
   },
   "peerDependencies": {
-    "@ghostery/adblocker-playwright": ">=2.5",
-    "fingerprint-generator": ">=2.1",
-    "fingerprint-injector": ">=2.1",
-    "patchright": ">=1.50",
-    "playwright": ">=1.50",
-    "rebrowser-playwright": ">=1.49"
+    "patchright": ">=1.50.0",
+    "playwright": ">=1.50.0",
+    "rebrowser-playwright": ">=1.49.0"
   },
   "peerDependenciesMeta": {
-    "@ghostery/adblocker-playwright": {
-      "optional": true
-    },
-    "fingerprint-generator": {
-      "optional": true
-    },
-    "fingerprint-injector": {
-      "optional": true
-    },
     "patchright": {
       "optional": true
     },
@@ -119,6 +197,6 @@
     }
   },
   "engines": {
-    "node": ">=22.14"
+    "node": ">=22.14.0"
   }
 }

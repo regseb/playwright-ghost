@@ -51,10 +51,11 @@ npm install rebrowser-playwright playwright-ghost
 Here's an example with the recommended plugins.
 
 ```javascript
-import { chromium, plugins } from "playwright-ghost";
+import { chromium } from "playwright-ghost";
 // Or to use patchright or rebrowser-playwright:
-// import { chromium, plugins } from "playwright-ghost/patchright";
-// import { chromium, plugins } from "playwright-ghost/rebrowser";
+// import { chromium } from "playwright-ghost/patchright";
+// import { chromium } from "playwright-ghost/rebrowser";
+import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
   plugins: plugins.recommended(),
@@ -77,7 +78,8 @@ In this other example, three plugins are added:
 - `utils.adblocker` uses default options.
 
 ```javascript
-import { chromium, plugins } from "playwright-ghost";
+import { chromium } from "playwright-ghost";
+import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
   plugins: [
@@ -93,7 +95,8 @@ And for this example, the recommended plugins and the `utils.locale` plugin are
 added.
 
 ```javascript
-import { chromium, plugins } from "playwright-ghost";
+import { chromium } from "playwright-ghost";
+import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
   plugins: [...plugins.recommended(), plugins.utils.locale()],
@@ -103,37 +106,35 @@ const browser = await chromium.launch({
 
 ## Plugins
 
-⭐ is in [`recommended`](docs/plugins/recommended.md) / ⚙️ has options / 📦
-requires external tool
+⭐️ is in [`recommended`](docs/plugins/recommended.md) / ⚙️ has options
 
 ### Polyfill
 
 <!-- markdownlint-disable no-inline-html-->
 <table>
   <tr>
-    <td>⭐</td>
+    <td>⭐️</td>
     <td>⚙️</td>
-    <td>📦</td>
     <th>Name</th>
     <th>Description</th>
   </tr>
   <tr>
-    <td>⭐</td>
-    <td></td>
+    <td>⭐️</td>
     <td></td>
     <td>
-      <a href="docs/plugins/polyfill/automation.md"
-        ><code>polyfill.automation</code></a>
+      <a href="docs/plugins/polyfill/automation.md">
+        <code>polyfill.automation</code>
+      </a>
     </td>
     <td>Disable <code>--enable-automation</code> in Chromium.</td>
   </tr>
   <tr>
-    <td>⭐</td>
-    <td></td>
+    <td>⭐️</td>
     <td></td>
     <td>
-      <a href="docs/plugins/polyfill/headless.md"
-        ><code>polyfill.headless</code></a>
+      <a href="docs/plugins/polyfill/headless.md">
+        <code>polyfill.headless</code>
+      </a>
     </td>
     <td>
       Correct many differences in JavaScript APIs between the headful and
@@ -143,60 +144,50 @@ requires external tool
   <tr>
     <td>⭐️</td>
     <td>⚙️</td>
-    <td></td>
     <td>
       <a href="docs/plugins/polyfill/screen.md"><code>polyfill.screen</code></a>
     </td>
-    <td>
-      Set a realistic value for screen size: 1920x1080.
-    </td>
+    <td>Set a realistic value for screen size: 1920x1080.</td>
   </tr>
   <tr>
     <td>️</td>
     <td>⚙️</td>
-    <td></td>
     <td>
-      <a href="docs/plugins/polyfill/useragent.md"
-        ><code>polyfill.userAgent</code></a>
+      <a href="docs/plugins/polyfill/useragent.md">
+        <code>polyfill.userAgent</code>
+      </a>
     </td>
-    <td>
-      Change the browser's user agent.
-    </td>
+    <td>Change the browser's user agent.</td>
   </tr>
   <tr>
     <td>⭐️</td>
     <td>⚙️</td>
-    <td></td>
     <td>
-      <a href="docs/plugins/polyfill/viewport.md"
-        ><code>polyfill.viewport</code></a>
+      <a href="docs/plugins/polyfill/viewport.md">
+        <code>polyfill.viewport</code>
+      </a>
     </td>
     <td>
       Vary viewport size with random values between 1000x500 and 1800x800.
     </td>
   </tr>
   <tr>
-    <td>⭐</td>
-    <td></td>
+    <td>⭐️</td>
     <td></td>
     <td>
-      <a href="docs/plugins/polyfill/webdriver.md"
-        ><code>polyfill.webdriver</code></a>
+      <a href="docs/plugins/polyfill/webdriver.md">
+        <code>polyfill.webdriver</code>
+      </a>
     </td>
-    <td>
-      Set <code>navigator.webdriver</code> to <code>false</code>.
-    </td>
+    <td>Set <code>navigator.webdriver</code> to <code>false</code>.</td>
   </tr>
   <tr>
-    <td></td>
     <td></td>
     <td></td>
     <td>
       <a href="docs/plugins/polyfill/webgl.md"><code>polyfill.webGL</code></a>
     </td>
-    <td>
-      Modify WebGL parameter values.
-    </td>
+    <td>Modify WebGL parameter values.</td>
   </tr>
 </table>
 
@@ -205,16 +196,14 @@ requires external tool
 <!-- markdownlint-disable no-inline-html-->
 <table>
   <tr>
-    <td>⭐</td>
+    <td>⭐️</td>
     <td>⚙️</td>
-    <td>📦</td>
     <th>Name</th>
     <th>Description</th>
   </tr>
   <tr>
     <td>⭐️</td>
     <td>⚙️</td>
-    <td></td>
     <td>
       <a href="docs/plugins/humanize/click.md"><code>humanize.click</code></a>
     </td>
@@ -226,21 +215,16 @@ requires external tool
   <tr>
     <td>⭐️</td>
     <td>⚙️</td>
-    <td></td>
     <td>
       <a href="docs/plugins/humanize/cursor.md"><code>humanize.cursor</code></a>
     </td>
-    <td>
-      Move the cursor with human-like movements.
-    </td>
+    <td>Move the cursor with human-like movements.</td>
   </tr>
   <tr>
     <td>⭐️</td>
     <td>⚙️</td>
-    <td></td>
     <td>
-      <a href="docs/plugins/humanize/dialog.md"
-        ><code>humanize.dialog</code></a>
+      <a href="docs/plugins/humanize/dialog.md"><code>humanize.dialog</code></a>
     </td>
     <td>
       Close <code>&lt;dialog&gt;</code> within a humanly possible time (between
@@ -254,70 +238,54 @@ requires external tool
 <!-- markdownlint-disable no-inline-html-->
 <table>
   <tr>
-    <td>⭐</td>
+    <td>⭐️</td>
     <td>⚙️</td>
-    <td>📦</td>
     <th>Name</th>
     <th>Description</th>
   </tr>
   <tr>
     <td></td>
     <td>️⚙️</td>
-    <td>📦</td>
     <td>
-      <a href="docs/plugins/utils/adblocker.md"
-        ><code>utils.adblocker</code></a>
+      <a href="docs/plugins/utils/adblocker.md"><code>utils.adblocker</code></a>
     </td>
-    <td>
-      Add Ghostery adblocker.
-    </td>
+    <td>Add Ghostery adblocker.</td>
   </tr>
   <tr>
-    <td></td>
     <td></td>
     <td></td>
     <td>
       <a href="docs/plugins/utils/debug.md"><code>utils.debug</code></a>
     </td>
-    <td>
-      Display messages from the browser console in the program console.
-    </td>
+    <td>Display messages from the browser console in the program console.</td>
   </tr>
   <tr>
     <td></td>
     <td>⚙️</td>
-    <td>📦</td>
     <td>
-      <a href="docs/plugins/utils/fingerprint.md"><code>utils.fingerprint</code></a>
+      <a href="docs/plugins/utils/fingerprint.md">
+        <code>utils.fingerprint</code>
+      </a>
     </td>
-    <td>
-      Change the browser fingerprint.
-    </td>
+    <td>Change the browser fingerprint.</td>
   </tr>
   <tr>
     <td></td>
     <td>⚙️</td>
-    <td></td>
     <td>
       <a href="docs/plugins/utils/locale.md"><code>utils.locale</code></a>
     </td>
-    <td>
-      Use the locally installed browser.
-    </td>
+    <td>Use the locally installed browser.</td>
   </tr>
   <tr>
     <td></td>
     <td>⚙️</td>
-    <td>📦</td>
     <td>
       <a href="docs/plugins/utils/xvfb.md"><code>utils.xvfb</code></a>
     </td>
-    <td>
-      Run browser in <code>Xvfb</code> (<em>X Virtual Frame Buffer</em>).
-    </td>
+    <td>Run browser in <code>Xvfb</code> (<em>X Virtual Frame Buffer</em>).</td>
   </tr>
 </table>
-<!-- markdownlint-enable no-inline-html-->
 
 ## Anti-bots
 
@@ -413,7 +381,8 @@ export default function rickrollPlugin() {
 To use your plugin, add it to the `plugins` option.
 
 ```javascript
-import { chromium, plugins } from "playwright-ghost";
+import { chromium } from "playwright-ghost";
+import plugins from "playwright-ghost/plugins";
 import rickrollPlugin from "./rickrollPlugin.js";
 
 const browser = await chromium.launch({

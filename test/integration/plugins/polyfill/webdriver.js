@@ -5,13 +5,13 @@
 
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import vanilla from "../../../../src/index.js";
+import playwright from "../../../../src/index.js";
+import webdriverPlugin from "../../../../src/plugins/polyfill/webdriver.js";
 
 describe("Plugin: polyfill.webdriver", () => {
     it("should return false", async () => {
-        const browser = await vanilla.chromium.launch({
-            channel: "chromium",
-            plugins: [vanilla.plugins.polyfill.webdriver()],
+        const browser = await playwright.chromium.launch({
+            plugins: [webdriverPlugin()],
         });
         const context = await browser.newContext();
         try {

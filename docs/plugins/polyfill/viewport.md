@@ -2,7 +2,7 @@
 
 > [!TIP]
 >
-> This plugin is enabled in the ⭐ [`recommended`](../recommended.md).
+> This plugin is enabled in the ⭐️ [`recommended`](../recommended.md).
 
 Vary viewport size with random values between 1000x500 and 1800x800.
 
@@ -22,7 +22,8 @@ This plugin supports the following options:
 Use the plugin with default options.
 
 ```javascript
-import { chromium, plugins } from "playwright-ghost";
+import { chromium } from "playwright-ghost";
+import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
   plugins: [plugins.polyfill.viewport()],
@@ -33,7 +34,8 @@ const browser = await chromium.launch({
 Use the plugin and specify a viewport between 1400x600 and 1800x800.
 
 ```javascript
-import { chromium, plugins } from "playwright-ghost";
+import { chromium } from "playwright-ghost";
+import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
   plugins: [
@@ -42,6 +44,23 @@ const browser = await chromium.launch({
       height: { min: 600, max: 800 },
     }),
   ],
+});
+// ...
+```
+
+## Advanced
+
+### Import
+
+If you want to import only this plugin, you can use the
+`"playwright-ghost/plugins/polyfill/viewport"` path in the import.
+
+```javascript
+import { chromium } from "playwright-ghost";
+import viewportPlugin from "playwright-ghost/plugins/polyfill/viewport";
+
+const browser = await chromium.launch({
+  plugins: [viewportPlugin()],
 });
 // ...
 ```

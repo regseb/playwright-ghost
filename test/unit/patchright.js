@@ -6,12 +6,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import Ghost from "../../src/ghost.js";
-import patchright, {
-    chromium,
-    firefox,
-    plugins,
-    webkit,
-} from "../../src/patchright.js";
+import patchright, { chromium, firefox, webkit } from "../../src/patchright.js";
 
 describe("patchright.js", () => {
     describe("default", () => {
@@ -19,7 +14,6 @@ describe("patchright.js", () => {
             assert.ok(patchright.chromium instanceof Ghost);
             assert.ok(patchright.firefox instanceof Ghost);
             assert.ok(patchright.webkit instanceof Ghost);
-            assert.equal(typeof patchright.plugins, "object");
         });
 
         it("should export chromium", () => {
@@ -32,10 +26,6 @@ describe("patchright.js", () => {
 
         it("should export webkit", () => {
             assert.ok(webkit instanceof Ghost);
-        });
-
-        it("should export plugins", () => {
-            assert.equal(typeof plugins, "object");
         });
     });
 });

@@ -5,12 +5,13 @@
 
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import vanilla from "../../../../src/index.js";
+import playwright from "../../../../src/index.js";
+import adblockerPlugin from "../../../../src/plugins/utils/adblocker.js";
 
 describe("Plugin: utils.adblocker", () => {
     it("should remove ads", async () => {
-        const browser = await vanilla.chromium.launch({
-            plugins: [vanilla.plugins.utils.adblocker()],
+        const browser = await playwright.chromium.launch({
+            plugins: [adblockerPlugin()],
         });
         const context = await browser.newContext();
         try {

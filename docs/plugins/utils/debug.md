@@ -11,10 +11,28 @@ This plugin has no option.
 Use the plugin.
 
 ```javascript
-import { chromium, plugins } from "playwright-ghost";
+import { chromium } from "playwright-ghost";
+import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
   plugins: [plugins.utils.debug()],
+});
+// ...
+```
+
+## Advanced
+
+### Import
+
+If you want to import only this plugin, you can use the
+`"playwright-ghost/plugins/utils/debug"` path in the import.
+
+```javascript
+import { chromium } from "playwright-ghost";
+import debugPlugin from "playwright-ghost/plugins/utils/debug";
+
+const browser = await chromium.launch({
+  plugins: [debugPlugin()],
 });
 // ...
 ```

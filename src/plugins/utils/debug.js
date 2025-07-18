@@ -14,7 +14,7 @@
  *
  * @returns {Record<string, Function>} Le crochet du plugin.
  */
-export default function debugPlugin() {
+export default function utilsDebugPlugin() {
     return {
         /**
          * Ajoute des écouteurs aux évènements `console` et `pageerror` de la

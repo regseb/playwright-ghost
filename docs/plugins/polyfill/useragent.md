@@ -14,7 +14,8 @@ This plugin supports the following option:
 Use the plugin and specify a Chrome user agent on Windows.
 
 ```javascript
-import { chromium, plugins } from "playwright-ghost";
+import { chromium } from "playwright-ghost";
+import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
   plugins: [
@@ -31,10 +32,11 @@ const browser = await chromium.launch({
 Use the plugin and specify the current Chromium user agent without `"Headless"`.
 
 ```javascript
-import { chromium, plugins } from "playwright-ghost";
+import { chromium } from "playwright-ghost";
+import plugins from "playwright-ghost/plugins";
 
 const getUserAgent = async () => {
-  const browser = await chromium.launch({ channel: "chromium" });
+  const browser = await chromium.launch();
   const context = await browser.newContext();
   const page = await context.newPage();
   const userAgent = await page.evaluate("navigator.userAgent");
@@ -48,6 +50,28 @@ const browser = await chromium.launch({
     plugins.polyfill.userAgent({
       userAgent: await getUserAgent(),
     }),
+  ],
+});
+// ...
+```
+
+## Advanced
+
+### Import
+
+If you want to import only this plugin, you can use the
+`"playwright-ghost/plugins/polyfill/useragent"` path in the import.
+
+```javascript
+import { chromium } from "playwright-ghost";
+import userAgentPlugin from "playwright-ghost/plugins/polyfill/useragent";
+
+const browser = await chromium.launch({
+  plugins: [
+    userAgentPlugin(
+      "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like" +
+        " Gecko) Chrome/138.0.7204.64 Mobile Safari/537.36",
+    ),
   ],
 });
 // ...

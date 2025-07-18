@@ -35,7 +35,7 @@ const changeChannel = (options, browserType) => {
  * @returns {Record<string, Function>} Les crochets du plugin.
  * @see https://developer.chrome.com/articles/new-headless/
  */
-export default function headlessPlugin() {
+export default function polyfillHeadlessPlugin() {
     return {
         /**
          * Modifie les options de lancement du navigateur.

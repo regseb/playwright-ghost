@@ -21,7 +21,7 @@ const setScreen = (options, width, height) => {
 };
 
 /**
- * @typedef {Object} ScreenOptions Les options du plugin `polyfill.screen`.
+ * @typedef {Object} PolyfillScreenOptions Les options du plugin `polyfill.screen`.
  * @prop {number} [width]  La largeur de l'écran.
  * @prop {number} [height] La hauteur de l'écran.
  */
@@ -30,11 +30,11 @@ const setScreen = (options, width, height) => {
  * Crée un plugin pour définir la taille de l'écran. Par défaut la valeur
  * réaliste _1920x1080_ est utilisée.
  *
- * @param {ScreenOptions} [options] Les éventuelles options du plugin
- *                                  `polyfill.screen`.
+ * @param {PolyfillScreenOptions} [options] Les éventuelles options du plugin
+ *                                          `polyfill.screen`.
  * @returns {Record<string, Function>} Les crochets du plugin.
  */
-export default function screenPlugin(options) {
+export default function polyfillScreenPlugin(options) {
     const width = options?.width ?? 1920;
     const height = options?.height ?? 1080;
 

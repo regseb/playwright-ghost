@@ -5,12 +5,13 @@
 
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import vanilla from "../../../../src/index.js";
+import playwright from "../../../../src/index.js";
+import headlessPlugin from "../../../../src/plugins/polyfill/headless.js";
 
 describe("Plugin: polyfill.headless", () => {
     it("should use new headless", async () => {
-        const browser = await vanilla.chromium.launch({
-            plugins: [vanilla.plugins.polyfill.headless()],
+        const browser = await playwright.chromium.launch({
+            plugins: [headlessPlugin()],
         });
         const context = await browser.newContext();
         try {

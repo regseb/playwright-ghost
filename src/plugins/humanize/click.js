@@ -25,7 +25,7 @@ const setDelay = (options, delay) => {
 };
 
 /**
- * @typedef {Object} ClickOptions Les options du plugin `humanize.click`.
+ * @typedef {Object} HumanizeClickOptions Les options du plugin `humanize.click`.
  * @prop {Object} [delay]     Le délai entre `mousedown` et `mouseup`.
  * @prop {number} [delay.min] Le délai minimum en millisecondes.
  * @prop {number} [delay.max] Le délai maximum en millisecondes.
@@ -34,11 +34,11 @@ const setDelay = (options, delay) => {
 /**
  * Crée un plugin pour humaniser les clics.
  *
- * @param {ClickOptions} [options] Les éventuelles options du plugin
- *                                 `humanize.click`.
+ * @param {HumanizeClickOptions} [options] Les éventuelles options du plugin
+ *                                         `humanize.click`.
  * @returns {Record<string, Function>} Les crochets du plugin.
  */
-export default function clickPlugin(options) {
+export default function humanizeClickPlugin(options) {
     const delay = {
         min: options?.delay?.min ?? 100,
         max: options?.delay?.max ?? 500,

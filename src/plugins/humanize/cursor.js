@@ -1,11 +1,15 @@
 /**
  * @module
  * @license MIT
+ * @see https://github.com/Xetera/ghost-cursor
  * @author Sébastien Règne
  */
 
 import crypto from "node:crypto";
 import timers from "node:timers/promises";
+// Ajouter la dépendance "puppeteer" dans le package.json, car l'import de
+// "ghost-cursor" a besoin des types de Puppeteer.
+// https://github.com/Xetera/ghost-cursor/pull/171
 import ghostCursor from "ghost-cursor";
 
 /**
@@ -94,7 +98,8 @@ const moveCursor = async (locator, options) => {
 };
 
 /**
- * @typedef {Object} CursorOptions Les options du plugin `humanize.cursor`.
+ * @typedef {Object} HumanizeCursorOptions Les options du plugin
+ *                                         `humanize.cursor`.
  * @prop {Object} [start]   La position de départ du curseur.
  * @prop {number} [start.x] La position _x_ de départ du curseur.
  * @prop {number} [start.y] La position _y_ de départ du curseur.
@@ -104,11 +109,11 @@ const moveCursor = async (locator, options) => {
  * Crée un plugin pour déplacer le curseur en imitant les mouvements d'un être
  * humain.
  *
- * @param {CursorOptions} [options] Les éventuelles options du plugin
- *                                  `humanize.cursor`.
+ * @param {HumanizeCursorOptions} [options] Les éventuelles options du plugin
+ *                                          `humanize.cursor`.
  * @returns {Record<string, Function>} Les crochets du plugin.
  */
-export default function cursorPlugin(options) {
+export default function humanizeCursorPlugin(options) {
     const start = {
         x: options?.start?.x,
         y: options?.start?.y,
@@ -125,8 +130,8 @@ export default function cursorPlugin(options) {
             const viewportSize = page.viewportSize();
             // eslint-disable-next-line no-param-reassign
             page.mouse[CURSOR_SYMBOL] = {
-                x: start.x ?? crypto.randomInt(0, viewportSize.width),
-                y: start.y ?? crypto.randomInt(0, viewportSize.height),
+                x: start.x ?? crypto.randomInt(0, viewportSize?.width ?? 0),
+                y: start.y ?? crypto.randomInt(0, viewportSize?.height ?? 0),
             };
             return page;
         },

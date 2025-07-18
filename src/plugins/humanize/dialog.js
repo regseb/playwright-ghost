@@ -12,7 +12,8 @@ import timers from "node:timers/promises";
  */
 
 /**
- * @typedef {Object} DialogOptions Les options du plugin `humanize.dialog`.
+ * @typedef {Object} HumanizeDialogOptions Les options du plugin
+ *                                         `humanize.dialog`.
  * @prop {Object} [delay]     Le délai avant la fermeture.
  * @prop {number} [delay.min] Le délai minimum en millisecondes.
  * @prop {number} [delay.max] Le délai maximum en millisecondes.
@@ -23,11 +24,11 @@ import timers from "node:timers/promises";
  * possible. Par défaut le temps d'attente est pris aléatoirement entre `1` et
  * `5` secondes.
  *
- * @param {DialogOptions} [options] Les éventuelles options du plugin
- *                                  `humanize.dialog`.
+ * @param {HumanizeDialogOptions} [options] Les éventuelles options du plugin
+ *                                          `humanize.dialog`.
  * @returns {Record<string, Function>} Le crochet du plugin.
  */
-export default function dialogPlugin(options) {
+export default function humanizeDialogPlugin(options) {
     const delay = {
         min: options?.delay?.min ?? 1000,
         max: options?.delay?.max ?? 5000,

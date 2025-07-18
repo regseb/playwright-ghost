@@ -7,10 +7,13 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { describe, it } from "node:test";
-import vanilla from "../../../src/index.js";
+import playwright from "../../../src/index.js";
+import plugins from "../../../src/plugins/index.js";
 
 const getUserAgent = async () => {
-    const browser = await vanilla.chromium.launch({ channel: "chromium" });
+    const browser = await playwright.chromium.launch({
+        plugins: plugins.recommended(),
+    });
     const context = await browser.newContext();
     const page = await context.newPage();
     const userAgent = await page.evaluate("navigator.userAgent");
@@ -22,10 +25,10 @@ const getUserAgent = async () => {
 describe("Anti-bot: Anubis", () => {
     describe("chromium", () => {
         it("should be redirect to home", async () => {
-            const browser = await vanilla.chromium.launch({
+            const browser = await playwright.chromium.launch({
                 plugins: [
-                    ...vanilla.plugins.recommended(),
-                    vanilla.plugins.polyfill.userAgent({
+                    ...plugins.recommended(),
+                    plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
                 ],

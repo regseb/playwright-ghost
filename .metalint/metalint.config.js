@@ -20,6 +20,7 @@ export default {
         "!/log/**",
         "!/node_modules/**",
         "!/stryker.log",
+        "!/types/**",
         // Ignorer les fichiers de configuration de Visual Studio Code.
         "!/.vscode/**",
         // Ignorer les fichiers de configuration des IDEs de JetBrains :

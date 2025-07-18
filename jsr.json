@@ -5,7 +5,29 @@
   "exports": {
     ".": "./src/index.js",
     "./patchright": "./src/patchright.js",
-    "./rebrowser": "./src/rebrowser.js"
+    "./rebrowser": "./src/rebrowser.js",
+    "./plugins": "./src/plugins/index.js",
+    "./plugins/recommended": "./src/plugins/recommended.js",
+    "./plugins/polyfill": "./src/plugins/polyfill/index.js",
+    "./plugins/polyfill/recommended": "./src/plugins/polyfill/recommended.js",
+    "./plugins/polyfill/automation": "./src/plugins/polyfill/automation.js",
+    "./plugins/polyfill/headless": "./src/plugins/polyfill/headless.js",
+    "./plugins/polyfill/screen": "./src/plugins/polyfill/screen.js",
+    "./plugins/polyfill/useragent": "./src/plugins/polyfill/useragent.js",
+    "./plugins/polyfill/viewport": "./src/plugins/polyfill/viewport.js",
+    "./plugins/polyfill/webdriver": "./src/plugins/polyfill/webdriver.js",
+    "./plugins/polyfill/webgl": "./src/plugins/polyfill/webgl.js",
+    "./plugins/humanize": "./src/plugins/humanize/index.js",
+    "./plugins/humanize/recommended": "./src/plugins/humanize/recommended.js",
+    "./plugins/humanize/click": "./src/plugins/humanize/click.js",
+    "./plugins/humanize/cursor": "./src/plugins/humanize/cursor.js",
+    "./plugins/humanize/dialog": "./src/plugins/humanize/dialog.js",
+    "./plugins/utils": "./src/plugins/utils/index.js",
+    "./plugins/utils/adblocker": "./src/plugins/utils/adblocker.js",
+    "./plugins/utils/debug": "./src/plugins/utils/debug.js",
+    "./plugins/utils/fingerprint": "./src/plugins/utils/fingerprint.js",
+    "./plugins/utils/locale": "./src/plugins/utils/locale.js",
+    "./plugins/utils/xvfb": "./src/plugins/utils/xvfb.js"
   },
   "publish": {
     "include": ["src/", "types/", "LICENSE", "README.md", "package.json"]

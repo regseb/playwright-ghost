@@ -6,7 +6,7 @@
 
 > [!TIP]
 >
-> This plugin is enabled in the ⭐ [`recommended`](../recommended.md).
+> This plugin is enabled in the ⭐️ [`recommended`](../recommended.md).
 
 Disable `--enable-automation` in Chromium.
 
@@ -19,10 +19,28 @@ This plugin has no option.
 Use the plugin.
 
 ```javascript
-import { chromium, plugins } from "playwright-ghost";
+import { chromium } from "playwright-ghost";
+import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
   plugins: [plugins.polyfill.automation()],
+});
+// ...
+```
+
+## Advanced
+
+### Import
+
+If you want to import only this plugin, you can use the
+`"playwright-ghost/plugins/polyfill/automation"` path in the import.
+
+```javascript
+import { chromium } from "playwright-ghost";
+import automationPlugin from "playwright-ghost/plugins/polyfill/automation";
+
+const browser = await chromium.launch({
+  plugins: [automationPlugin()],
 });
 // ...
 ```

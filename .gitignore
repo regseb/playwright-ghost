@@ -4,6 +4,7 @@
 /log/
 /node_modules/
 /stryker.log
+/types/
 
 # Ignorer les fichiers de configuration de Visual Studio Code.
 /.vscode/
