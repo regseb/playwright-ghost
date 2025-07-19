@@ -57,4 +57,33 @@ describe("Anti-bot: Anubis", () => {
             }
         });
     });
+
+    describe("firefox", () => {
+        it("should be redirect to home", async () => {
+            const browser = await playwright.firefox.launch({
+                plugins: plugins.recommended(),
+            });
+            const context = await browser.newContext();
+            const page = await context.newPage();
+            try {
+                await page.goto("https://anubis.techaro.lol/");
+                // Attendre le résultat du dernier test.
+                const title = await page.locator(".hero__title").textContent();
+
+                assert.equal(title, "Anubis");
+            } finally {
+                await page.screenshot({
+                    path: "./log/anubis-fx.png",
+                    fullPage: true,
+                });
+                await fs.writeFile(
+                    "./log/anubis-fx.html",
+                    await page.content(),
+                );
+
+                await context.close();
+                await browser.close();
+            }
+        });
+    });
 });

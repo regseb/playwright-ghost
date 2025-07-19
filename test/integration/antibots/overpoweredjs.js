@@ -63,4 +63,35 @@ describe("Anti-bot: OverpoweredJS Fingerprinting Demo", () => {
             }
         });
     });
+
+    describe("firefox", () => {
+        it("should be probably a human", async () => {
+            const browser = await playwright.firefox.launch({
+                plugins: plugins.recommended(),
+            });
+            const context = await browser.newContext();
+            const page = await context.newPage();
+            try {
+                await page.goto("https://overpoweredjs.com/demo.html");
+                await page.waitForTimeout(5000);
+
+                const result = await page
+                    .locator("h2", { hasText: /Bot|Human/v })
+                    .textContent();
+                assert.equal(result, "Human");
+            } finally {
+                await page.screenshot({
+                    path: "./log/overpoweredjs-fx.png",
+                    fullPage: true,
+                });
+                await fs.writeFile(
+                    "./log/overpoweredjs-fx.html",
+                    await page.content(),
+                );
+
+                await context.close();
+                await browser.close();
+            }
+        });
+    });
 });

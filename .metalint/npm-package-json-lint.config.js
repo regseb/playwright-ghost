@@ -103,6 +103,7 @@ export default {
             {
                 exceptions: [
                     "@ghostery/adblocker-playwright",
+                    "camoufox-js",
                     "fingerprint-generator",
                     "fingerprint-injector",
                 ],

@@ -253,6 +253,14 @@ const browser = await chromium.launch({
   </tr>
   <tr>
     <td></td>
+    <td>️⚙️</td>
+    <td>
+      <a href="docs/plugins/utils/camoufox.md"><code>utils.camoufox</code></a>
+    </td>
+    <td>Replace Firefox by Camoufox.</td>
+  </tr>
+  <tr>
+    <td></td>
     <td></td>
     <td>
       <a href="docs/plugins/utils/debug.md"><code>utils.debug</code></a>

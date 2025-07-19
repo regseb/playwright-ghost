@@ -108,6 +108,10 @@
       "types": "./types/plugins/utils/adblocker.d.ts",
       "default": "./src/plugins/utils/adblocker.js"
     },
+    "./plugins/utils/camoufox": {
+      "types": "./types/plugins/utils/camoufox.d.ts",
+      "default": "./src/plugins/utils/camoufox.js"
+    },
     "./plugins/utils/debug": {
       "types": "./types/plugins/utils/debug.d.ts",
       "default": "./src/plugins/utils/debug.js"
@@ -144,6 +148,7 @@
   },
   "dependencies": {
     "@ghostery/adblocker-playwright": ">=2.11.3",
+    "camoufox-js": ">=0.6.2",
     "fingerprint-generator": ">=2.1.69",
     "fingerprint-injector": ">=2.1.69",
     "ghost-cursor": "1.4.1"

@@ -60,4 +60,40 @@ describe("Anti-bot: Pixelscan", () => {
             }
         });
     });
+
+    describe("firefox", () => {
+        it("should not detected", async () => {
+            const browser = await playwright.firefox.launch({
+                plugins: [
+                    ...plugins.recommended(),
+                    plugins.utils.camoufox({ headless: true }),
+                ],
+            });
+            const context = await browser.newContext();
+            const page = await context.newPage();
+            try {
+                await page.goto("https://pixelscan.net/fingerprint-check");
+
+                const result = await page
+                    .locator("pxlscn-bot-detection span")
+                    .textContent();
+                assert.equal(
+                    result?.trim(),
+                    "No automation framework detected",
+                );
+            } finally {
+                await page.screenshot({
+                    path: "./log/pixelscan-fx.png",
+                    fullPage: true,
+                });
+                await fs.writeFile(
+                    "./log/pixelscan-fx.html",
+                    await page.content(),
+                );
+
+                await context.close();
+                await browser.close();
+            }
+        });
+    });
 });

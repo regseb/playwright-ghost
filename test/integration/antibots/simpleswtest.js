@@ -45,4 +45,38 @@ describe("Anti-bot: Simple Service Workers Fingerprinting Leaks Test", () => {
             }
         });
     });
+
+    describe("firefox", () => {
+        it("should not be detected", async () => {
+            const browser = await playwright.firefox.launch({
+                plugins: plugins.recommended(),
+            });
+            const context = await browser.newContext();
+            const page = await context.newPage();
+            try {
+                await page.goto(
+                    "https://mihneamanolache.github.io/simple-sw-test/",
+                );
+                await page.waitForTimeout(2000);
+
+                const consistent = await page
+                    .locator("#consisency")
+                    .textContent();
+
+                assert.equal(consistent, "True");
+            } finally {
+                await page.screenshot({
+                    path: "./log/simpleswtest-fx.png",
+                    fullPage: true,
+                });
+                await fs.writeFile(
+                    "./log/simpleswtest-fx.html",
+                    await page.content(),
+                );
+
+                await context.close();
+                await browser.close();
+            }
+        });
+    });
 });

@@ -24,6 +24,7 @@
     "./plugins/humanize/dialog": "./src/plugins/humanize/dialog.js",
     "./plugins/utils": "./src/plugins/utils/index.js",
     "./plugins/utils/adblocker": "./src/plugins/utils/adblocker.js",
+    "./plugins/utils/camoufox": "./src/plugins/utils/camoufox.js",
     "./plugins/utils/debug": "./src/plugins/utils/debug.js",
     "./plugins/utils/fingerprint": "./src/plugins/utils/fingerprint.js",
     "./plugins/utils/locale": "./src/plugins/utils/locale.js",

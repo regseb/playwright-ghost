@@ -84,4 +84,67 @@ describe("Anti-bot: infosimples", () => {
             }
         });
     });
+
+    describe("firefox", () => {
+        it("should not be detected", async () => {
+            const browser = await playwright.firefox.launch({
+                plugins: [
+                    ...plugins.recommended(),
+                    plugins.utils.camoufox({ headless: true }),
+                ],
+            });
+            const context = await browser.newContext();
+            const page = await context.newPage();
+            try {
+                await page.goto(
+                    "https://infosimples.github.io/detect-headless/",
+                );
+                // Attendre le résultat du dernier test.
+                await page.waitForSelector("#mouse-move-result:not(:empty)");
+                // Bouger la souris pour un des tests.
+                await page.mouse.move(100, 100);
+                for (let i = 0; 5 > i; ++i) {
+                    await page.mouse.move(10 * i, 10 * i);
+                }
+
+                const results = await page.locator("tr").evaluateAll((trs) => {
+                    // Enlever les entêtes.
+                    return trs.slice(1).map((tr) => ({
+                        name: tr.querySelector("td:first-child")?.textContent,
+                        value: tr.querySelector("td:last-child")?.textContent,
+                        status: tr.className,
+                    }));
+                });
+
+                for (const result of results) {
+                    // Ignorer les tests Chrome, Broken Image et Connection Rtt
+                    // qui échouent même avec le vrai Firefox.
+                    if (
+                        "Chrome" === result.name ||
+                        "Broken Image" === result.name ||
+                        "Connection Rtt" === result.name
+                    ) {
+                        continue;
+                    }
+                    assert.equal(
+                        result.status,
+                        "headful",
+                        `${result.name}: ${result.value}`,
+                    );
+                }
+            } finally {
+                await page.screenshot({
+                    path: "./log/infosimples-fx.png",
+                    fullPage: true,
+                });
+                await fs.writeFile(
+                    "./log/infosimples-fx.html",
+                    await page.content(),
+                );
+
+                await context.close();
+                await browser.close();
+            }
+        });
+    });
 });

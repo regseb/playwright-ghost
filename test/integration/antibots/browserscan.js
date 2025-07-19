@@ -7,6 +7,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { describe, it } from "node:test";
+import playwright from "../../../src/index.js";
 import patchright from "../../../src/patchright.js";
 import plugins from "../../../src/plugins/index.js";
 
@@ -54,6 +55,44 @@ describe("Anti-bot: BrowserScan", () => {
                 });
                 await fs.writeFile(
                     "./log/browserscan-cr.html",
+                    await page.content(),
+                );
+
+                await context.close();
+                await browser.close();
+            }
+        });
+    });
+
+    describe("firefox", () => {
+        it("should pass", async () => {
+            const browser = await playwright.firefox.launch({
+                plugins: [
+                    ...plugins.recommended(),
+                    plugins.utils.camoufox({ headless: true }),
+                ],
+            });
+            const context = await browser.newContext();
+            const page = await context.newPage();
+            try {
+                await page.goto("https://www.browserscan.net/bot-detection");
+                await page.waitForTimeout(5000);
+                const result = await page
+                    .getByText("Test Results:", { exact: true })
+                    .evaluate(
+                        (element) =>
+                            element.parentElement?.querySelector(
+                                "strong:last-child",
+                            )?.textContent,
+                    );
+                assert.equal(result, "Normal");
+            } finally {
+                await page.screenshot({
+                    path: "./log/browserscan-fx.png",
+                    fullPage: true,
+                });
+                await fs.writeFile(
+                    "./log/browserscan-fx.html",
                     await page.content(),
                 );
 
