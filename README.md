@@ -291,12 +291,12 @@ const browser = await chromium.launch({
 
 ### Pass
 
-This 18 anti-bots don't detect Playwright-ghost:
+This 20 anti-bots don't detect Playwright-ghost:
 [Anubis](https://anubis.techaro.lol),
 [Brotector](https://kaliiiiiiiiii.github.io/brotector/),
 [BrowserScan](https://www.browserscan.net/bot-detection),
 [Chromedriver Detector](https://hmaker.github.io/selenium-detector/),
-[Datadome](https://antoinevastel.com/bots/datadome),
+[Detect CDP](https://bypassantibot.github.io/detectCDP/),
 [Deviceandbrowserinfo](https://deviceandbrowserinfo.com/are_you_a_bot),
 [Device Info](https://www.deviceinfo.me/)
 [Disable-devtool](https://theajack.github.io/disable-devtool/),
@@ -306,7 +306,9 @@ This 18 anti-bots don't detect Playwright-ghost:
 [HeadlessDetectJS](https://github.com/LouisKlimek/HeadlessDetectJS),
 [infosimples](https://infosimples.github.io/detect-headless/),
 [Chrome Headless Detection (Intoli)](https://intoli.com/blog/not-possible-to-block-chrome-headless/chrome-headless-test.html),
-[Pixelscan](https://pixelscan.net/),
+[Check browser fingerprints (iphey)](https://iphey.com/),
+[OverpoweredJS Fingerprinting Demo](https://overpoweredjs.com/demo.html),
+[Pixelscan](https://pixelscan.net/fingerprint-check),
 [Antibot (Sannysoft)](https://bot.sannysoft.com/),
 [Simple Service Workers Fingerprinting Leaks Test](https://mihneamanolache.github.io/simple-sw-test/)
 and
@@ -317,13 +319,11 @@ To find out which plugins are used, see the
 
 ### Fail
 
-This 4 anti-bots detect Playwright-ghost:
+This 3 anti-bots detect Playwright-ghost:
 
 - [CreepJS](https://abrahamjuliot.github.io/creepjs/): _F_
-- [OverpoweredJS Fingerprinting Demo](https://overpoweredjs.com/demo.html): _Bot
-  (5)_
 - [rebrowser-bot-detector](https://bot-detector.rebrowser.net/):
-  _mainWorldExecution_, _runtimeEnableLeak_ and _pwInitScripts_
+  _mainWorldExecution_, _pwInitScripts_ and _useragent_
 - [Score detector (reCAPTCHA v3)](https://antcpt.com/score_detector/): _0.3_
 
 Contributions are welcome to fix these defects.

@@ -16,7 +16,7 @@ import mapArrayOrScalar from "../utils/maparrayorscalar.js";
  *
  * @typedef {Object} Pointers
  * @prop {string[]} create Liste des pointeurs vers les méthodes créant un objet.
- * @prop {string[]} getter Liste des pointers  vers les méthodes récupérant un objet.
+ * @prop {string[]} getter Liste des pointers vers les méthodes récupérant un objet.
  */
 
 /**
@@ -27,11 +27,35 @@ import mapArrayOrScalar from "../utils/maparrayorscalar.js";
 const VANILLA_SYMBOL = Symbol("VANILLA");
 
 export default class Hooker {
+    /**
+     * Crée des crochets qui appellent simplement les écouteurs.
+     *
+     * @param {string[]} hooks Pointeurs des crochets.
+     * @returns {Record<string, Function>} Crochets qui appellent les écouteurs.
+     */
     static presets(hooks) {
         return Object.fromEntries(hooks.map((h) => [h, Hooker.modify]));
     }
 
+    /**
+     * Crée une fonction qui modifie un objet vanille (en gérant un objet ou une
+     * liste d'objets).
+     *
+     * @param {Function} listener L'écouteur qui sera appeler pour modifier
+     *                            l'objet vanille.
+     * @returns {Function} La fonction qui modifie l'objet vanille.
+     */
     static modify(listener) {
+        /**
+         * Fonction qui modifie un objet.
+         *
+         * @template {any|any[]} T Le type de l'objet.
+         * @param {T}                 objs    L'objet ou liste d'objets à
+         *                                    modifier.
+         * @param {ContextAfter<any>} context Le contexte d'exécution de
+         *                                    l'écouteur.
+         * @returns {T} L'objet ou liste d'objets modifiés.
+         */
         return (objs, context) => {
             return mapArrayOrScalar(objs, (obj) =>
                 undefined === obj[VANILLA_SYMBOL]

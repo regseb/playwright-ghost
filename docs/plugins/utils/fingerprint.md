@@ -77,7 +77,7 @@ property in your _package.json_. In this example, dependency versions are set to
 {
   "name": "your-awesome-project",
   "dependencies": {
-    "playwright-ghost": "0.13.0"
+    "playwright-ghost": "0.14.0"
   },
   "overrides": {
     "playwright-ghost": {

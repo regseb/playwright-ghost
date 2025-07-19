@@ -7,7 +7,6 @@
 import arrayFunc from "eslint-plugin-array-func";
 // @ts-expect-error -- Le plugin eslint-comments ne fournit pas de types.
 import eslintComments from "eslint-plugin-eslint-comments";
-// @ts-expect-error -- Le plugin import ne fournit pas de types.
 import importPlugin from "eslint-plugin-import";
 import jsdoc from "eslint-plugin-jsdoc";
 // @ts-expect-error -- Le plugin no-unsanitized ne fournit pas de types.
@@ -27,7 +26,7 @@ import globals from "globals";
  */
 export default {
     languageOptions: {
-        globals: { ...globals["shared-node-browser"] },
+        globals: globals["shared-node-browser"],
     },
 
     linterOptions: {
@@ -98,6 +97,7 @@ export default {
         "no-sparse-arrays": "error",
         "no-template-curly-in-string": "error",
         "no-this-before-super": "error",
+        "no-unassigned-vars": "error",
         "no-undef": "error",
         "no-unexpected-multiline": "error",
         "no-unmodified-loop-condition": "error",
@@ -410,6 +410,8 @@ export default {
 
         // Static analysis.
         "import/default": "error",
+        // Préférer la règle n/prefer-node-protocol.
+        "import/enforce-node-protocol-usage": "off",
         "import/named": "error",
         "import/namespace": "error",
         "import/no-absolute-path": "error",
@@ -698,6 +700,7 @@ export default {
         "unicorn/no-array-for-each": "off",
         "unicorn/no-array-method-this-argument": "error",
         "unicorn/no-array-reduce": "off",
+        "unicorn/no-array-reverse": "error",
         "unicorn/no-await-expression-member": "error",
         "unicorn/no-await-in-promise-methods": "error",
         "unicorn/no-console-spaces": "error",
@@ -738,6 +741,7 @@ export default {
         "unicorn/no-unreadable-array-destructuring": "error",
         "unicorn/no-unreadable-iife": "error",
         "unicorn/no-unused-properties": "error",
+        "unicorn/no-useless-error-capture-stack-trace": "error",
         "unicorn/no-useless-fallback-in-spread": "error",
         "unicorn/no-useless-length-check": "error",
         "unicorn/no-useless-promise-resolve-reject": "error",
@@ -756,6 +760,7 @@ export default {
         "unicorn/prefer-array-some": "error",
         "unicorn/prefer-at": "error",
         "unicorn/prefer-blob-reading-methods": "error",
+        "unicorn/prefer-class-fields": "error",
         "unicorn/prefer-code-point": "error",
         "unicorn/prefer-date-now": "error",
         "unicorn/prefer-default-parameters": "error",
@@ -804,6 +809,7 @@ export default {
         "unicorn/prevent-abbreviations": "off",
         "unicorn/relative-url-style": "error",
         "unicorn/require-array-join-separator": "off",
+        "unicorn/require-module-specifiers": "error",
         "unicorn/require-number-to-fixed-digits-argument": "off",
         // Désactiver cette règle, car il y a des faux-positifs avec la méthode
         // port.postMessage() des WebExtensions.

@@ -1,6 +1,7 @@
 /**
  * @license MIT
  * @see https://hmaker.github.io/selenium-detector/
+ * @see https://github.com/HMaker/HMaker.github.io/tree/HEAD/selenium-detector
  * @author Sébastien Règne
  */
 

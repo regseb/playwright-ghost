@@ -1,6 +1,6 @@
 /**
  * @license MIT
- * @see https://pixelscan.net/
+ * @see https://pixelscan.net/fingerprint-check
  * @author Sébastien Règne
  */
 
@@ -36,7 +36,7 @@ describe("Anti-bot: Pixelscan", () => {
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
-                await page.goto("https://pixelscan.net/");
+                await page.goto("https://pixelscan.net/fingerprint-check");
 
                 const result = await page
                     .locator("pxlscn-bot-detection span")

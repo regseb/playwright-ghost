@@ -1,6 +1,7 @@
 /**
  * @license MIT
  * @see https://abrahamjuliot.github.io/creepjs/
+ * @see https://github.com/abrahamjuliot/creepjs
  * @author Sébastien Règne
  */
 

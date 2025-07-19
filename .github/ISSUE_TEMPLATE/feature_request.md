@@ -17,12 +17,12 @@ assignees: ""
 
 ### Environment
 
-- Playwright-ghost version<!-- e.g. 0.13.0 -->:
+- Playwright-ghost version<!-- e.g. 0.14.0 -->:
 - Dependencies version:
-  - Playwright (or fork)<!-- e.g. 1.52.0, patchright 1.52.0 -->:
-  - others (if appropriate)<!-- e.g. @ghostery/adblocker-playwright 2.5.1 -->:
-- Node version<!-- e.g. v22.14.0 -->:
-- npm version<!-- e.g. 11.3.0 -->:
+  - Playwright (or fork)<!-- e.g. 1.54.1, patchright 1.52.5 -->:
+  - others (if appropriate)<!-- e.g. @ghostery/adblocker-playwright 2.11.3 -->:
+- Node version<!-- e.g. v22.17.1 -->:
+- npm version<!-- e.g. 11.4.2 -->:
 
 ### Additional context
 

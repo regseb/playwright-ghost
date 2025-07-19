@@ -36,6 +36,7 @@ const POINTERS = {
         "Frame.locator:after",
         "Locator.all:after",
         "Locator.and:after",
+        "Locator.describe:after",
         "Locator.filter:after",
         "Locator.first:after",
         "Locator.getByAltText:after",

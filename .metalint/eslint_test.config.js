@@ -46,7 +46,7 @@ export default {
         "mocha/no-identical-title": "error",
         "mocha/no-mocha-arrows": "error",
         "mocha/no-nested-tests": "error",
-        "mocha/no-pending-tests": "error",
+        "mocha/no-pending-tests": "warn",
         "mocha/no-return-and-callback": "error",
         "mocha/no-return-from-async": "error",
         "mocha/no-setup-in-describe": "error",

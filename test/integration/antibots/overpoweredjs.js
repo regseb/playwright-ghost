@@ -8,12 +8,13 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { describe, it } from "node:test";
-import patchright from "../../../src/patchright.js";
+import playwright from "../../../src/index.js";
 import plugins from "../../../src/plugins/index.js";
 
 const getUserAgent = async () => {
-    const browser = await patchright.chromium.launch({
+    const browser = await playwright.chromium.launch({
         plugins: plugins.recommended(),
+        channel: "chrome",
     });
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -26,13 +27,16 @@ const getUserAgent = async () => {
 describe("Anti-bot: OverpoweredJS Fingerprinting Demo", () => {
     describe("chromium", () => {
         it("should be probably a human", async () => {
-            const browser = await patchright.chromium.launch({
+            const browser = await playwright.chromium.launch({
                 plugins: [
                     ...plugins.recommended(),
                     plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
                 ],
+                // Utiliser Chrome, car OverpoweredJS détecte que c'est un bot
+                // quand Playwright est utilisé avec le navigateur Chromium.
+                channel: "chrome",
             });
             const context = await browser.newContext();
             const page = await context.newPage();

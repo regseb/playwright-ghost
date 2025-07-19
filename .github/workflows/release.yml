@@ -26,7 +26,7 @@ jobs:
         if: ${{ steps.release.outputs.pr }}
         uses: actions/checkout@v4
         with:
-          ref: ${{ fromJson(steps.release.outputs.pr).headBranchName }}
+          ref: ${{ fromJSON(steps.release.outputs.pr).headBranchName }}
           # Récupérer deux commits sinon la réparation du commit (pour le
           # formatage) rompt le lien entre la branche de la release et la
           # branche main.

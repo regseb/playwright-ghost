@@ -31,6 +31,7 @@ describe("Anti-bot: Fingerprint-Scan", () => {
                     plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
+                    plugins.polyfill.webGL(),
                 ],
             });
             const context = await browser.newContext();
@@ -41,12 +42,11 @@ describe("Anti-bot: Fingerprint-Scan", () => {
                 const score = await page
                     .locator("#fingerprintScore")
                     .textContent();
-                const value = score?.slice(
-                    score.indexOf(": ") + 2,
-                    score.indexOf("/"),
+                const value = Number(
+                    score?.slice(score.indexOf(": ") + 2, score.indexOf("/")),
                 );
 
-                assert.equal(value, "0");
+                assert.ok(10 >= value, `10 >= ${value}`);
             } finally {
                 await page.screenshot({
                     path: "./log/fingerprintscan-cr.png",

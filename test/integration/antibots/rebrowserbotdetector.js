@@ -1,6 +1,7 @@
 /**
  * @license MIT
  * @see https://bot-detector.rebrowser.net/
+ * @see https://github.com/rebrowser/rebrowser-bot-detector
  * @author Sébastien Règne
  */
 

@@ -1,6 +1,7 @@
 /**
  * @license MIT
  * @see https://anubis.techaro.lol/
+ * @see https://github.com/TecharoHQ/anubis
  * @author Sébastien Règne
  */
 

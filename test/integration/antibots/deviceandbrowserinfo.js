@@ -39,16 +39,10 @@ describe("Anti-bot: Deviceandbrowserinfo", () => {
                 await page.goto(
                     "https://deviceandbrowserinfo.com/are_you_a_bot",
                 );
-                // Fermer le popup cookies, car elle cache les résultats dans la
-                // capture d'écran.
-                await page.locator("#declineCookies").click();
-                await page.waitForTimeout(5000);
-                const result = /** @type {string} */ (
-                    await page.locator("#resultsBotTest").textContent()
-                );
-                if ("You are human!" !== result) {
-                    assert.fail(result);
-                }
+                const result = await page
+                    .locator("#resultsBotTest:has(span)")
+                    .textContent();
+                assert.equal(result, "✅ You are human!");
             } finally {
                 await page.screenshot({
                     path: "./log/deviceandbrowserinfo-cr.png",

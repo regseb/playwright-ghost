@@ -1,6 +1,7 @@
 /**
  * @license MIT
  * @see https://theajack.github.io/disable-devtool/
+ * @see https://github.com/theajack/disable-devtool
  * @author Sébastien Règne
  */
 
