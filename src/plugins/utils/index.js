@@ -14,6 +14,7 @@ import utilsXvfbPlugin from "./xvfb.js";
 /**
  * @typedef {import("./adblocker.js").UtilsAdblockerOptions} UtilsAdblockerOptions
  * @typedef {import("./camoufox.js").UtilsCamoufoxOptions} UtilsCamoufoxOptions
+ * @typedef {import("./debug.js").UtilsDebugOptions} UtilsDebugOptions
  * @typedef {import("./fingerprint.js").UtilsFingerprintOptions} UtilsFingerprintOptions
  * @typedef {import("./locale.js").UtilsLocaleOptions} UtilsLocaleOptions
  * @typedef {import("./xvfb.js").UtilsXvfbOptions} UtilsXvfbOptions

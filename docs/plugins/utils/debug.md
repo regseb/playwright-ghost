@@ -1,14 +1,24 @@
 # `utils.debug`
 
-Display messages from the browser console in the program console.
+Add debugging to a page :
+
+- Display messages from the browser console in the program console.
+- Display error from the browser in the program console.
+- Show cursor in page.
+
+This plugin isn't recommended for use in production.
 
 ## Options
 
-This plugin has no option.
+This plugin supports the following option:
+
+- `console` (default `true`): Flag to activate console messages.
+- `pageerror` (default `true`): Flag to activate error from the browser.
+- `cursor` (default `true`): Flag to show cursor.
 
 ## Example
 
-Use the plugin.
+Use the plugin with default options (all activated).
 
 ```javascript
 import { chromium } from "playwright-ghost";
@@ -16,6 +26,18 @@ import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
   plugins: [plugins.utils.debug()],
+});
+// ...
+```
+
+Use the plugin and active only cursor.
+
+```javascript
+import { chromium } from "playwright-ghost";
+import plugins from "playwright-ghost/plugins";
+
+const browser = await chromium.launch({
+  plugins: [plugins.utils.debug({ console: false, pageerror: false })],
 });
 // ...
 ```

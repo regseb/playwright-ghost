@@ -265,7 +265,7 @@ const browser = await chromium.launch({
     <td>
       <a href="docs/plugins/utils/debug.md"><code>utils.debug</code></a>
     </td>
-    <td>Display messages from the browser console in the program console.</td>
+    <td>Add debugging to a page (transfer error; display cursor).</td>
   </tr>
   <tr>
     <td></td>
