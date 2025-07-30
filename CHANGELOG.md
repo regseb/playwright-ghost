@@ -1,5 +1,60 @@
 # Changelog
 
+## [0.14.0](https://github.com/regseb/playwright-ghost/compare/v0.13.0...v0.14.0) (2025-07-30)
+
+### ⚠ BREAKING CHANGES
+
+Plugin import has changed:
+
+- before `<=0.13.0`:
+
+  ```javascript
+  import { plugins } from "playwright-ghost";
+  ```
+
+- after `>=0.14.0`:
+
+  ```javascript
+  import plugins from "playwright-ghost/plugins";
+  ```
+
+npm dependencies of plugins
+([`utils.adblocker`](docs/plugins/utils/adblocker.md) and
+[`utils.fingerprint`](docs/plugins/utils/fingerprint.md)) are now integrated
+into Playwright-ghost. You no longer need to add them
+([`@ghostery/adblocker-playwright`](https://www.npmjs.com/package/@ghostery/adblocker-playwright),
+[`fingerprint-generator`](https://www.npmjs.com/package/fingerprint-generator)
+or [`fingerprint-injector`](https://www.npmjs.com/package/fingerprint-injector))
+to your dependencies.
+
+You can now import just one plugin. For example, with
+[`utils.camoufox`](docs/plugins/utils/camoufox.md):
+
+```javascript
+import { chromium } from "playwright-ghost";
+import camoufoxPlugin from "playwright-ghost/plugins/utils/camoufox";
+
+const browser = await chromium.launch({
+  plugins: [camoufoxPlugin()],
+});
+// ...
+```
+
+### Features
+
+- Add a plugin for Camoufox.
+  ([1777fc3](https://github.com/regseb/playwright-ghost/commit/1777fc3572bce176cb40cdb5cf4ed30d4676edd1))
+- Optimize plugins.
+  ([#20](https://github.com/regseb/playwright-ghost/issues/20))
+  ([0f2ce8c](https://github.com/regseb/playwright-ghost/commit/0f2ce8ca577a43e7cc1b1984b668d585122e3beb))
+- **plugin/debug:** Show cursor.
+  ([f008a8f](https://github.com/regseb/playwright-ghost/commit/f008a8f92d9ba61e825866b919d09129e3fde5ca))
+
+### Bug Fixes
+
+- **plugin/xvfb:** Support Explicit Resource Management.
+  ([16a6259](https://github.com/regseb/playwright-ghost/commit/16a6259d6e377297279f80abb2e60f704c0602d3))
+
 ## [0.13.0](https://github.com/regseb/playwright-ghost/compare/v0.12.0...v0.13.0) (2025-04-27)
 
 ### Features
