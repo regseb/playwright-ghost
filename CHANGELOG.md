@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.1](https://github.com/regseb/playwright-ghost/compare/v0.14.0...v0.14.1) (2025-07-30)
+
+### Bug Fixes
+
+- Use caret range for JSR.
+  ([51936a0](https://github.com/regseb/playwright-ghost/commit/51936a00ba81ccb399c355811ab5239696e0799c))
+
 ## [0.14.0](https://github.com/regseb/playwright-ghost/compare/v0.13.0...v0.14.0) (2025-07-30)
 
 ### ⚠ BREAKING CHANGES
