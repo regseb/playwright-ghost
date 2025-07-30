@@ -147,10 +147,10 @@
     "clean": "node .script/clean.js"
   },
   "dependencies": {
-    "@ghostery/adblocker-playwright": ">=2.11.3",
-    "camoufox-js": ">=0.6.2",
-    "fingerprint-generator": ">=2.1.69",
-    "fingerprint-injector": ">=2.1.69",
+    "@ghostery/adblocker-playwright": "^2.11.3",
+    "camoufox-js": "^0.6.2",
+    "fingerprint-generator": "^2.1.69",
+    "fingerprint-injector": "^2.1.69",
     "ghost-cursor": "1.4.1"
   },
   "devDependencies": {
