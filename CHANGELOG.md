@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.14.2](https://github.com/regseb/playwright-ghost/compare/v0.14.1...v0.14.2) (2025-08-02)
+
+### Bug Fixes
+
+- Fix plugin utils.xvfb.
+  ([9ec63c8](https://github.com/regseb/playwright-ghost/commit/9ec63c85a9a5af0cb036f409f976c668ffec5455))
+- Re-export Playwright types.
+  ([3fa21f4](https://github.com/regseb/playwright-ghost/commit/3fa21f4983f325aa127864844dbb55a332a39a79))
+
 ## [0.14.1](https://github.com/regseb/playwright-ghost/compare/v0.14.0...v0.14.1) (2025-07-30)
 
 ### Bug Fixes
