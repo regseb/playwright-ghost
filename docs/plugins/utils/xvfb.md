@@ -8,6 +8,7 @@
 >
 > - `sudo apt-get install xvfb` (on Debian/Ubuntu)
 > - `sudo yum install xorg-x11-server-Xvfb` (on Fedora/RHEL/CentOS)
+> - `sudo pacman -S xorg-server-xvfb` (on Arch)
 
 Start an instance of `Xvfb` (_X Virtual Frame Buffer_) and launches the browser
 in this virtual framebuffer.
@@ -35,6 +36,7 @@ import { chromium } from "playwright-ghost";
 import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
+  headless: false,
   plugins: [plugins.utils.xvfb()],
 });
 // ...
@@ -47,6 +49,7 @@ import { chromium } from "playwright-ghost";
 import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
+  headless: false,
   plugins: [plugins.utils.xvfb({ args: ["-screen", "0", "2560x1440x24"] })],
 });
 // ...
@@ -62,6 +65,7 @@ const controller = new AbortController();
 
 // Launch a browser and start Xvfb.
 const browser = await chromium.launch({
+  headless: false,
   plugins: [
     plugins.utils.xvfb({
       keepalive: true,
@@ -75,6 +79,7 @@ browser.close();
 
 // Launch an other browser and reuse Xvfb.
 const otherBrowser = await chromium.launch({
+  headless: false,
   plugins: [
     plugins.utils.xvfb({
       keepalive: true,
@@ -102,6 +107,7 @@ import { chromium } from "playwright-ghost";
 import xvfbPlugin from "playwright-ghost/plugins/utils/xvfb";
 
 const browser = await chromium.launch({
+  headless: false,
   plugins: [xvfbPlugin()],
 });
 // ...

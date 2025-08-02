@@ -47,16 +47,30 @@ const dispatch = (hooks, listeners) => {
                 ? PRESETS[key].map(([k, f]) => [k, f(listener)])
                 : [[key, listener]];
         })
-        .forEach(([key, listener]) => {
-            const result = REGEXP.exec(key);
-            const { obj, prop, temporality } = result.groups;
+        .map(([key, value]) => {
+            if ("function" === typeof value) {
+                const result = REGEXP.exec(key);
+                const { obj, prop, temporality } = result.groups;
+                return [obj, { [prop]: { [temporality]: value } }];
+            }
+            return [key, value];
+        })
+        .forEach(([obj, propTemporalityListener]) => {
             if (!listeners.has(obj)) {
                 listeners.set(obj, new Map());
             }
-            if (!listeners.get(obj).has(prop)) {
-                listeners.get(obj).set(prop, { before: [], after: [] });
+            for (const [prop, temporalityListener] of Object.entries(
+                propTemporalityListener,
+            )) {
+                if (!listeners.get(obj).has(prop)) {
+                    listeners.get(obj).set(prop, { before: [], after: [] });
+                }
+                for (const [temporality, listener] of Object.entries(
+                    temporalityListener,
+                )) {
+                    listeners.get(obj).get(prop)[temporality].push(listener);
+                }
             }
-            listeners.get(obj).get(prop)[temporality].push(listener);
         });
 };
 

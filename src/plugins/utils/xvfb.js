@@ -19,7 +19,7 @@ import process from "node:process";
  *                                exemple : `:99`).
  * @prop {number}       count     Le nombre de navigateurs utilisant l'instance.
  * @prop {boolean}      keepalive La marque pour ne pas arrêter l'exécutable de
- *                                `Xvfb` après la fermeture navigateur.
+ *                                `Xvfb` après la fermeture du navigateur.
  */
 
 /**
@@ -50,7 +50,7 @@ const exists = async (path) => {
  *
  * @param {string[]} args      Les arguments passés à l'exécutable `Xvfb`.
  * @param {boolean}  keepalive La marque pour ne pas arrêter l'exécutable de
- *                             `Xvfb` après la fermeture navigateur.
+ *                             `Xvfb` après la fermeture du navigateur.
  * @returns {Promise<string>} Le `DISPLAY` du serveur de `Xvfb` (par exemple :
  *                            `:99`).
  */
