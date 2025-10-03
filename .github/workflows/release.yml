@@ -9,6 +9,8 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      # Ajouter cette permission pour le OpenID Connect (OIDC).
+      # https://docs.npmjs.com/trusted-publishers
       id-token: write
     steps:
       - name: Run Release Please
@@ -72,6 +74,11 @@ jobs:
           node-version: 22
           registry-url: https://registry.npmjs.org
 
+      # Mettre à jour npm pour avoir a minima la version 11.5.1.
+      # https://docs.npmjs.com/trusted-publishers
+      - name: Update npm
+        run: npm install -g npm@latest
+
       - name: Install dependencies
         if: ${{ steps.release.outputs.release_created }}
         run: npm ci
@@ -80,9 +87,7 @@ jobs:
         if: ${{ steps.release.outputs.release_created }}
         # Forcer l'accès public, car la valeur par défaut n'est pas utilisée.
         # https://github.com/npm/cli/issues/7706
-        run: npm publish --access public --provenance
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public
 
       - name: Publish in JSR
         if: ${{ steps.release.outputs.release_created }}
