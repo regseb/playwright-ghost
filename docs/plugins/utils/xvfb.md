@@ -6,12 +6,12 @@
 > [`Xvfb`](https://www.x.org/archive/X11R7.7/doc/man/man1/Xvfb.1.xhtml) in your
 > Linux:
 >
-> - `sudo apt-get install xvfb` (on Debian/Ubuntu)
-> - `sudo yum install xorg-x11-server-Xvfb` (on Fedora/RHEL/CentOS)
-> - `sudo pacman -S xorg-server-xvfb` (on Arch)
+> - Debian/Ubuntu: `sudo apt-get install xvfb`
+> - Fedora/RHEL/CentOS: `sudo yum install xorg-x11-server-Xvfb`
+> - Arch: `sudo pacman -S xorg-server-xvfb`
 
 Start an instance of `Xvfb` (_X Virtual Frame Buffer_) and launches the browser
-in this virtual framebuffer.
+in this virtual framebuffer. This plugin is only useful in headful mode.
 
 ## Options
 

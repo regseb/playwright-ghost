@@ -10,6 +10,8 @@ import process from "node:process";
 
 /**
  * @import { ChildProcess } from "node:child_process"
+ * @import { BrowserType } from "playwright"
+ * @import { ContextBefore } from "../../hook.js"
  */
 
 /**
@@ -101,16 +103,38 @@ const killXvfb = (args) => {
  * Définit le `DISPLAY` (du serveur de `Xvfb`) dans les options de création d'un
  * `Browser`.
  *
- * @param {Record<string, any>|undefined} options Les options de création d'un
- *                                                `Browser`.
- * @param {string}                        display Le `DISPLAY` du serveur de
- *                                                `Xvfb` (par exemple : `:99`).
+ * @param {Record<string, any>|undefined} options     Les options de création
+ *                                                    d'un `Browser`.
+ * @param {string}                        display     Le `DISPLAY` du serveur de
+ *                                                    `Xvfb` (par exemple :
+ *                                                    `:99`).
+ * @param {BrowserType}                   browserType Le type de navigateur.
  * @returns {Record<string, any>} Les nouvelles options.
  */
-const setDisplay = (options, display) => {
+const setDisplay = (options, display, browserType) => {
+    if ("chromium" === browserType.name()) {
+        return {
+            ...options,
+            // Forcer l'utilisation de la plateforme X11, car Chromium 140 est
+            // passé à Wayland par défaut sous Linux.
+            // https://github.com/microsoft/playwright/issues/37236
+            args: ["--ozone-platform=x11", ...(options?.args ?? [])],
+            env:
+                // Utilise `process.env` par défaut, car c'est la valeur
+                // utilisée par Playwright.
+                // https://playwright.dev/docs/api/class-browsertype#browser-type-launch-option-env
+                undefined === options?.env
+                    ? { ...process.env, DISPLAY: display }
+                    : { ...options.env, DISPLAY: display },
+        };
+    }
+
     return {
         ...options,
         env:
+            // Utilise `process.env` par défaut, car c'est la valeur utilisée
+            // par Playwright.
+            // https://playwright.dev/docs/api/class-browsertype#browser-type-launch-option-env
             undefined === options?.env
                 ? { ...process.env, DISPLAY: display }
                 : { ...options.env, DISPLAY: display },
@@ -170,25 +194,32 @@ export default function utilsXvfbPlugin(options) {
         /**
          * Modifie les options de lancement du navigateur.
          *
-         * @param {any[]} args Les paramètres de la méthode.
+         * @param {any[]}                      args    Les paramètres de la
+         *                                             méthode.
+         * @param {ContextBefore<BrowserType>} context Le contexte du crochet.
          * @returns {Promise<any[]>} Une promesse contenant les nouveaux
          *                           paramètres.
          */
-        "BrowserType.launch:before": async (args) => {
+        "BrowserType.launch:before": async (args, { obj: browserType }) => {
             const display = await spawnXvfb(xvfbArgs, keepalive);
-            return [setDisplay(args[0], display)];
+            return [setDisplay(args[0], display, browserType)];
         },
 
         /**
          * Modifie les options de lancement du navigateur.
          *
-         * @param {any[]} args Les paramètres de la méthode.
+         * @param {any[]}                      args    Les paramètres de la
+         *                                             méthode.
+         * @param {ContextBefore<BrowserType>} context Le contexte du crochet.
          * @returns {Promise<any[]>} Une promesse contenant les nouveaux
          *                           paramètres.
          */
-        "BrowserType.launchPersistentContext:before": async (args) => {
+        "BrowserType.launchPersistentContext:before": async (
+            args,
+            { obj: browserType },
+        ) => {
             const display = await spawnXvfb(xvfbArgs, keepalive);
-            return [args[0], setDisplay(args[1], display)];
+            return [args[0], setDisplay(args[1], display, browserType)];
         },
 
         /**
