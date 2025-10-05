@@ -6,7 +6,6 @@
 
 import playwright from "playwright";
 import Ghost from "./ghost.js";
-import deprecatedPlugins from "./plugins/index.js";
 
 /**
  * @typedef {import("playwright").Page} Page
@@ -73,12 +72,6 @@ import deprecatedPlugins from "./plugins/index.js";
  * @typedef {import("playwright").ChromiumCoverage} ChromiumCoverage
  */
 
-/**
- * @deprecated As of release 0.14.0, replaced by
- *             `import plugins from "playwright-ghost/plugins";`
- */
-export const plugins = deprecatedPlugins;
-
 export const chromium = new Ghost(playwright.chromium);
 export const firefox = new Ghost(playwright.firefox);
 export const webkit = new Ghost(playwright.webkit);
@@ -95,10 +88,4 @@ export default {
     chromium,
     firefox,
     webkit,
-
-    /**
-     * @deprecated As of release 0.14.0, replaced by
-     *             `import plugins from "playwright-ghost/plugins";`
-     */
-    plugins,
 };
