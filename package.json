@@ -1,6 +1,6 @@
 {
   "name": "playwright-ghost",
-  "version": "0.14.2",
+  "version": "0.15.0",
   "description": "Playwright with plugins to be a ghost.",
   "keywords": [
     "playwright",

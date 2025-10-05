@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.15.0](https://github.com/regseb/playwright-ghost/compare/v0.14.2...v0.15.0) (2025-10-05)
+
+### ⚠ BREAKING CHANGES
+
+- Remove deprecated plugin export from `"playwright-ghost"`. Now plugins are
+  only available from `"playwright-ghost/plugins"`:
+
+  ```javascript
+  import plugins from "playwright-ghost/plugins";
+  ```
+
+### Bug Fixes
+
+- **plugin/userAgent:** Change user agent with Firefox.
+  ([dfbfd5f](https://github.com/regseb/playwright-ghost/commit/dfbfd5f5990bdd500ae91dc9dbefae992ff85e1b))
+- **plugin/xvfb:** Support Chromium 140 (with use Wayland).
+  ([4c8d50b](https://github.com/regseb/playwright-ghost/commit/4c8d50b29be6ec08926d7e3d7066ca53e11e442d))
+- Remove deprecated plugins.
+  ([0d12cff](https://github.com/regseb/playwright-ghost/commit/0d12cff41fdd5e5402e1cbf2c549310b909a4b4c))
+
 ## [0.14.2](https://github.com/regseb/playwright-ghost/compare/v0.14.1...v0.14.2) (2025-08-02)
 
 ### Bug Fixes
