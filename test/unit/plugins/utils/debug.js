@@ -8,15 +8,31 @@ import { afterEach, describe, it, mock } from "node:test";
 import debugPlugin from "../../../../src/plugins/utils/debug.js";
 
 const PageMock = class {
+    /**
+     * Liste des fonctions d'initialisation.
+     *
+     * @type {Function[]}
+     */
     #initScrips = [];
+
+    /**
+     * Liste des écouteurs d'événements.
+     *
+     * @type {Map<string, Function>}
+     */
     #listeners = new Map();
 
+    /**
+     * Simule l'ajout d'une fonction d'initialisation.
+     *
+     * @param {Function} fn La fonction d'initialisation.
+     */
     addInitScript(fn) {
         this.#initScrips.push(fn);
     }
 
     /**
-     * Enregistre un écouteur d'événement.
+     * Simule l'enregistrement d'un écouteur d'événement.
      *
      * @param {string}   type     Le type de l'événement.
      * @param {Function} listener La fonction à appeler lorsque l'événement est émis.
@@ -25,6 +41,11 @@ const PageMock = class {
         this.#listeners.set(type, listener);
     }
 
+    /**
+     * Renvoie un objet pour contrôler des valeurs et simuler des actions.
+     *
+     * @returns {Object<string, Function>} L'objet pour contrôler et simuler.
+     */
     get mock() {
         return {
             initScripts: () => this.#initScrips,
@@ -51,8 +72,8 @@ describe("plugins/utils/debug.js", () => {
             });
 
             it("should transfer 'console'", async () => {
-                const log = mock.method(console, "log", () => {});
-                const error = mock.method(console, "error", () => {});
+                const log = mock.method(console, "log", () => undefined);
+                const error = mock.method(console, "error", () => undefined);
                 const page = new PageMock();
 
                 const plugin = debugPlugin();
@@ -83,8 +104,8 @@ describe("plugins/utils/debug.js", () => {
             });
 
             it("should transfer 'pageerror'", async () => {
-                const log = mock.method(console, "log", () => {});
-                const error = mock.method(console, "error", () => {});
+                const log = mock.method(console, "log", () => undefined);
+                const error = mock.method(console, "error", () => undefined);
                 const page = new PageMock();
 
                 const plugin = debugPlugin();

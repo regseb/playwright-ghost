@@ -10,6 +10,10 @@ import { describe, it } from "node:test";
 import patchright from "../../../src/patchright.js";
 import plugins from "../../../src/plugins/index.js";
 
+/**
+ * @import { Frame } from "playwright";
+ */
+
 const getUserAgent = async () => {
     const browser = await patchright.chromium.launch({
         plugins: plugins.recommended(),
@@ -40,9 +44,9 @@ describe("Anti-bot: Cloudflare turnstile demo", () => {
             try {
                 await page.goto("https://peet.ws/turnstile-test/managed.html");
 
-                const frame = page.frame({
-                    url: "https://challenges.cloudflare.com/**",
-                });
+                const frame = /** @type {Frame} */ (
+                    page.frame({ url: "https://challenges.cloudflare.com/**" })
+                );
                 await frame.locator('input[type="checkbox"]').check();
                 // Attendre que la vérification commence et se termine.
                 const verifying = frame.locator("#verifying");
@@ -83,9 +87,9 @@ describe("Anti-bot: Cloudflare turnstile demo", () => {
                     "https://peet.ws/turnstile-test/non-interactive.html",
                 );
 
-                const frame = page.frame({
-                    url: "https://challenges.cloudflare.com/**",
-                });
+                const frame = /** @type {Frame} */ (
+                    page.frame({ url: "https://challenges.cloudflare.com/**" })
+                );
                 // Attendre que la vérification commence et se termine.
                 const verifying = frame.locator("#verifying");
                 await verifying.waitFor({ state: "visible" });

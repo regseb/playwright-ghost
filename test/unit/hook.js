@@ -60,10 +60,12 @@ describe("hook.js", () => {
             assert.equal(await hooked.quux("four", "five"), "two_four_five");
 
             assert.equal(listener.mock.callCount(), 1);
-            assert.equal(listener.mock.calls[0].arguments.length, 2);
-            assert.deepEqual(listener.mock.calls[0].arguments[0], ["three"]);
-            assert.equal(listener.mock.calls[0].arguments[1].obj, hooked);
-            assert.equal(listener.mock.calls[0].arguments[1].prop, "baz");
+            const args = listener.mock.calls[0].arguments;
+            assert.equal(args.length, 2);
+            assert.deepEqual(args[0], ["three"]);
+            assert.equal(args[1].obj, hooked);
+            assert.equal(args[1].prop, "baz");
+            assert.equal(typeof args[1].id, "string");
         });
 
         it("should support listener after function", async () => {
@@ -80,13 +82,13 @@ describe("hook.js", () => {
             assert.equal(await hooked.quux("four", "five"), "two_four_five");
 
             assert.equal(listener.mock.callCount(), 1);
-            assert.equal(listener.mock.calls[0].arguments.length, 2);
-            assert.equal(listener.mock.calls[0].arguments[0], "two_THREE");
-            assert.equal(listener.mock.calls[0].arguments[1].obj, hooked);
-            assert.equal(listener.mock.calls[0].arguments[1].prop, "baz");
-            assert.deepEqual(listener.mock.calls[0].arguments[1].args, [
-                "three",
-            ]);
+            const args = listener.mock.calls[0].arguments;
+            assert.equal(args.length, 2);
+            assert.equal(args[0], "two_THREE");
+            assert.equal(args[1].obj, hooked);
+            assert.equal(args[1].prop, "baz");
+            assert.deepEqual(args[1].args, ["three"]);
+            assert.equal(typeof args[1].id, "string");
         });
 
         it("should support listener before async function", async () => {
@@ -103,13 +105,12 @@ describe("hook.js", () => {
             assert.equal(await hooked.quux("five", "six"), "three_one_two");
 
             assert.equal(listener.mock.callCount(), 1);
-            assert.equal(listener.mock.calls[0].arguments.length, 2);
-            assert.deepEqual(listener.mock.calls[0].arguments[0], [
-                "five",
-                "six",
-            ]);
-            assert.equal(listener.mock.calls[0].arguments[1].obj, hooked);
-            assert.equal(listener.mock.calls[0].arguments[1].prop, "quux");
+            const args = listener.mock.calls[0].arguments;
+            assert.equal(args.length, 2);
+            assert.deepEqual(args[0], ["five", "six"]);
+            assert.equal(args[1].obj, hooked);
+            assert.equal(args[1].prop, "quux");
+            assert.equal(typeof args[1].id, "string");
         });
 
         it("should support listener async before function", async () => {
@@ -126,13 +127,12 @@ describe("hook.js", () => {
             assert.equal(await hooked.quux("five", "six"), "three_one_two");
 
             assert.equal(listener.mock.callCount(), 1);
-            assert.equal(listener.mock.calls[0].arguments.length, 2);
-            assert.deepEqual(listener.mock.calls[0].arguments[0], [
-                "five",
-                "six",
-            ]);
-            assert.equal(listener.mock.calls[0].arguments[1].obj, hooked);
-            assert.equal(listener.mock.calls[0].arguments[1].prop, "quux");
+            const args = listener.mock.calls[0].arguments;
+            assert.equal(args.length, 2);
+            assert.deepEqual(args[0], ["five", "six"]);
+            assert.equal(args[1].obj, hooked);
+            assert.equal(args[1].prop, "quux");
+            assert.equal(typeof args[1].id, "string");
         });
 
         it("should support listener after async function", async () => {
@@ -149,14 +149,13 @@ describe("hook.js", () => {
             assert.equal(await hooked.quux("four", "five"), "one");
 
             assert.equal(listener.mock.callCount(), 1);
-            assert.equal(listener.mock.calls[0].arguments.length, 2);
-            assert.equal(listener.mock.calls[0].arguments[0], "two_four_five");
-            assert.equal(listener.mock.calls[0].arguments[1].obj, hooked);
-            assert.equal(listener.mock.calls[0].arguments[1].prop, "quux");
-            assert.deepEqual(listener.mock.calls[0].arguments[1].args, [
-                "four",
-                "five",
-            ]);
+            const args = listener.mock.calls[0].arguments;
+            assert.equal(args.length, 2);
+            assert.equal(args[0], "two_four_five");
+            assert.equal(args[1].obj, hooked);
+            assert.equal(args[1].prop, "quux");
+            assert.deepEqual(args[1].args, ["four", "five"]);
+            assert.equal(typeof args[1].id, "string");
         });
 
         it("should support listener async after function", async () => {
@@ -173,14 +172,13 @@ describe("hook.js", () => {
             assert.equal(await hooked.quux("four", "five"), "one");
 
             assert.equal(listener.mock.callCount(), 1);
-            assert.equal(listener.mock.calls[0].arguments.length, 2);
-            assert.equal(listener.mock.calls[0].arguments[0], "two_four_five");
-            assert.equal(listener.mock.calls[0].arguments[1].obj, hooked);
-            assert.equal(listener.mock.calls[0].arguments[1].prop, "quux");
-            assert.deepEqual(listener.mock.calls[0].arguments[1].args, [
-                "four",
-                "five",
-            ]);
+            const args = listener.mock.calls[0].arguments;
+            assert.equal(args.length, 2);
+            assert.equal(args[0], "two_four_five");
+            assert.equal(args[1].obj, hooked);
+            assert.equal(args[1].prop, "quux");
+            assert.deepEqual(args[1].args, ["four", "five"]);
+            assert.equal(typeof args[1].id, "string");
         });
 
         it("should support listener before getter", async () => {
@@ -197,10 +195,12 @@ describe("hook.js", () => {
             assert.equal(await hooked.quux("three", "four"), "one_three_four");
 
             assert.equal(listener.mock.callCount(), 1);
-            assert.equal(listener.mock.calls[0].arguments.length, 2);
-            assert.equal(listener.mock.calls[0].arguments[0], undefined);
-            assert.equal(listener.mock.calls[0].arguments[1].obj, hooked);
-            assert.equal(listener.mock.calls[0].arguments[1].prop, "bar");
+            const args = listener.mock.calls[0].arguments;
+            assert.equal(args.length, 2);
+            assert.equal(args[0], undefined);
+            assert.equal(args[1].obj, hooked);
+            assert.equal(args[1].prop, "bar");
+            assert.equal(typeof args[1].id, "string");
         });
 
         it("should support listener after getter", async () => {
@@ -217,11 +217,13 @@ describe("hook.js", () => {
             assert.equal(await hooked.quux("four", "five"), "two_four_five");
 
             assert.equal(listener.mock.callCount(), 1);
-            assert.equal(listener.mock.calls[0].arguments.length, 2);
-            assert.equal(listener.mock.calls[0].arguments[0], "two");
-            assert.equal(listener.mock.calls[0].arguments[1].obj, hooked);
-            assert.equal(listener.mock.calls[0].arguments[1].prop, "bar");
-            assert.equal(listener.mock.calls[0].arguments[1].args, undefined);
+            const args = listener.mock.calls[0].arguments;
+            assert.equal(args.length, 2);
+            assert.equal(args[0], "two");
+            assert.equal(args[1].obj, hooked);
+            assert.equal(args[1].prop, "bar");
+            assert.equal(args[1].args, undefined);
+            assert.equal(typeof args[1].id, "string");
         });
     });
 });

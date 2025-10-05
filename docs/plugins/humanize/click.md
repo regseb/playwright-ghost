@@ -19,8 +19,8 @@ used.
 This plugin supports the following options:
 
 - `delay`:
-  - `min`: (default `100`): Minimum delay in milliseconds.
-  - `max`: (default `500`): Maximum delay in milliseconds.
+  - `min` (default `100`): Minimum delay in milliseconds.
+  - `max` (default `500`): Maximum delay in milliseconds.
 
 ## Examples
 

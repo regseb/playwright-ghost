@@ -1,7 +1,7 @@
 # `utils.camoufox`
 
 Replace Firefox by [Camoufox](https://camoufox.com/) (using
-[`camoufox-js`](https://www.npmjs.com/package/camoufox-js)).
+[`camoufox-js`](https://www.npmjs.com/package/camoufox-js) package).
 
 ## Options
 
@@ -32,10 +32,10 @@ This plugin supports the following option (from Camoufox):
 Use the plugin with default options.
 
 ```javascript
-import { chromium } from "playwright-ghost";
+import { firefox } from "playwright-ghost";
 import { plugins } from "playwright-ghost/plugins";
 
-const browser = await chromium.launch({
+const browser = await firefox.launch({
   plugins: [plugins.utils.camoufox()],
 });
 // ...
@@ -45,10 +45,10 @@ Use the plugin and set options for fingerprint generation randomly from a list
 of OS.
 
 ```javascript
-import { chromium } from "playwright-ghost";
+import { firefox } from "playwright-ghost";
 import { plugins } from "playwright-ghost/plugins";
 
-const browser = await chromium.launch({
+const browser = await firefox.launch({
   plugins: [plugins.utils.camoufox({ os: ["macos", "linux"] })],
 });
 // ...
@@ -62,10 +62,10 @@ If you want to import only this plugin, you can use the
 `"playwright-ghost/plugins/utils/camoufox"` path in the import.
 
 ```javascript
-import { chromium } from "playwright-ghost";
+import { firefox } from "playwright-ghost";
 import camoufoxPlugin from "playwright-ghost/plugins/utils/camoufox";
 
-const browser = await chromium.launch({
+const browser = await firefox.launch({
   plugins: [camoufoxPlugin()],
 });
 // ...
@@ -74,7 +74,7 @@ const browser = await chromium.launch({
 ### Version
 
 If you want to use a specific version of
-[`camoufox-js`](https://www.npmjs.com/package/camoufox-js)), you can use the
+[`camoufox-js`](https://www.npmjs.com/package/camoufox-js), you can use the
 [`overrides`](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#overrides)
 property in your _package.json_. In this example, the dependency version is set
 to `0.6.1`.

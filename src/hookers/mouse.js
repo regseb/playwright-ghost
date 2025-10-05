@@ -88,12 +88,26 @@ export default class MouseHooker extends Hooker {
         return {
             ...super.first(),
 
+            /**
+             * Prépare le crochetage de la `Mouse` lors de la création d'une
+             * `Page`.
+             *
+             * @param {Page} page La `Page` créé.
+             * @returns {Page} La `Page` avec la `Mouse` prête.
+             */
             "Browser.newPage:after": (page) => {
                 // eslint-disable-next-line no-param-reassign
                 page[HOOKED_SYMBOL] = super.prepare(page.mouse);
                 return page;
             },
 
+            /**
+             * Prépare le crochetage de la `Mouse` lors de la création d'une
+             * `Page`.
+             *
+             * @param {Page} page La `Page` créé.
+             * @returns {Page} La `Page` avec la `Mouse` prête.
+             */
             "BrowserContext.newPage:after": (page) => {
                 // eslint-disable-next-line no-param-reassign
                 page[HOOKED_SYMBOL] = super.prepare(page.mouse);
@@ -106,6 +120,13 @@ export default class MouseHooker extends Hooker {
         return {
             ...super.last(),
 
+            /**
+             * Finalise le crochetage de la `Mouse` lors de la création d'une
+             * `Page`.
+             *
+             * @param {Page} page La `Page` créé.
+             * @returns {Page} La `Page` avec la `Mouse` finalisée.
+             */
             "Browser.newPage:after": (page) => {
                 super.finalize(page[HOOKED_SYMBOL]);
                 // eslint-disable-next-line no-param-reassign
@@ -113,6 +134,13 @@ export default class MouseHooker extends Hooker {
                 return page;
             },
 
+            /**
+             * Finalise le crochetage de la `Mouse` lors de la création d'une
+             * `Page`.
+             *
+             * @param {Page} page La `Page` créé.
+             * @returns {Page} La `Page` avec la `Mouse` finalisée.
+             */
             "BrowserContext.newPage:after": (page) => {
                 super.finalize(page[HOOKED_SYMBOL]);
                 // eslint-disable-next-line no-param-reassign

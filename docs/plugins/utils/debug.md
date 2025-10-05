@@ -1,6 +1,6 @@
 # `utils.debug`
 
-Add debugging to a page :
+Add debugging to a page:
 
 - Display messages from the browser console in the program console.
 - Display error from the browser in the program console.

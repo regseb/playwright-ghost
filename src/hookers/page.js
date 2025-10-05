@@ -78,6 +78,13 @@ export default class PageHooker extends Hooker {
         return {
             ...super.first(),
 
+            /**
+             * Prépare le crochetage de la `Page` par défaut d'un
+             * `BrowserContext`.
+             *
+             * @param {BrowserContext} browserContext Le `BrowserContext` créé.
+             * @returns {BrowserContext} Le `BrowserContext` avec la `Page` prête.
+             */
             "BrowserType.launchPersistentContext:after": (browserContext) => {
                 // eslint-disable-next-line no-param-reassign
                 browserContext[HOOKED_SYMBOL] = super.prepare(
@@ -92,6 +99,13 @@ export default class PageHooker extends Hooker {
         return {
             ...super.last(),
 
+            /**
+             * Finalise le crochetage de la `Page` par défaut d'un
+             * `BrowserContext`.
+             *
+             * @param {BrowserContext} browserContext Le `BrowserContext` créé.
+             * @returns {BrowserContext} Le `BrowserContext` avec la `Page` finalisée.
+             */
             "BrowserType.launchPersistentContext:after": (browserContext) => {
                 super.finalize(browserContext[HOOKED_SYMBOL]);
                 // eslint-disable-next-line no-param-reassign

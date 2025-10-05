@@ -8,7 +8,7 @@ This plugin supports the following option:
 
 - `name` (default
   [`BrowserType.name()`](https://playwright.dev/docs/api/class-browsertype#browser-type-name)):
-  Navigator name.
+  Executable name.
 
 ## Example
 
@@ -24,14 +24,14 @@ const browser = await chromium.launch({
 // ...
 ```
 
-Use the plugin and replace `chromium` by `chrome` (locally installed).
+Use the plugin and replace Chromium by Chrome (locally installed).
 
 ```javascript
 import { chromium } from "playwright-ghost";
 import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
-  plugins: [plugins.utils.locale({ name: "chrome" })],
+  plugins: [plugins.utils.locale({ name: "google-chrome" })],
 });
 // ...
 ```

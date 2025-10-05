@@ -57,7 +57,7 @@ export default class Hooker {
          * @returns {T} L'objet ou liste d'objets modifiés.
          */
         return (objs, context) => {
-            return mapArrayOrScalar(objs, (obj) =>
+            return mapArrayOrScalar(objs, (/** @type {any} */ obj) =>
                 undefined === obj[VANILLA_SYMBOL]
                     ? obj
                     : listener(obj, context),
@@ -138,7 +138,7 @@ export default class Hooker {
      * @returns {any|any[]} Objet ou liste d'objets crochetables.
      */
     prepare(vanillas) {
-        return mapArrayOrScalar(vanillas, (vanilla) => {
+        return mapArrayOrScalar(vanillas, (/** @type {any} */ vanilla) => {
             if (this.#mappings.has(vanilla)) {
                 return this.#mappings.get(vanilla);
             }
@@ -159,13 +159,14 @@ export default class Hooker {
      * @returns {any|any[]} Objet ou liste d'objets crochetés.
      */
     finalize(hookeds) {
-        return mapArrayOrScalar(hookeds, (hooked) => {
+        return mapArrayOrScalar(hookeds, (/** @type {any} */ hooked) => {
             if (undefined === hooked[VANILLA_SYMBOL]) {
                 return hooked;
             }
 
             const vanilla = hooked[VANILLA_SYMBOL];
-            delete vanilla[VANILLA_SYMBOL];
+            // eslint-disable-next-line no-param-reassign
+            delete hooked[VANILLA_SYMBOL];
             this.#mappings.set(vanilla, hooked);
             return hooked;
         });
@@ -179,7 +180,7 @@ export default class Hooker {
      *                      vanille.
      */
     get(vanillas) {
-        return mapArrayOrScalar(vanillas, (vanilla) => {
+        return mapArrayOrScalar(vanillas, (/** @type {any} */ vanilla) => {
             return this.#mappings.get(vanilla) ?? vanilla;
         });
     }

@@ -74,7 +74,7 @@ const reduce = (fns, value, context) => {
 export default function hook(obj, listeners) {
     return new Proxy(obj, {
         get: (target, prop, receiver) => {
-            const value = target[prop];
+            const value = /** @type {any} */ (target[prop]);
             if (!listeners.has(prop)) {
                 return "function" === typeof value ? value.bind(target) : value;
             }

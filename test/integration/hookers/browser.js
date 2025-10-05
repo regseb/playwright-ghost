@@ -37,7 +37,7 @@ describe("Hooker: browser", () => {
         });
         const context = await browser.newContext();
         try {
-            assert.equal(context.browser().version(), "1.2.3");
+            assert.equal(context.browser()?.version(), "1.2.3");
         } finally {
             await context.close();
             await browser.close();

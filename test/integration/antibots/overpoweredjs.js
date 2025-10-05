@@ -28,15 +28,15 @@ describe("Anti-bot: OverpoweredJS Fingerprinting Demo", () => {
     describe("chromium", () => {
         it("should be probably a human", async () => {
             const browser = await playwright.chromium.launch({
+                // Utiliser Chrome, car OverpoweredJS détecte que c'est un bot
+                // quand Playwright est utilisé avec le navigateur Chromium.
+                channel: "chrome",
                 plugins: [
                     ...plugins.recommended(),
                     plugins.polyfill.userAgent({
                         userAgent: await getUserAgent(),
                     }),
                 ],
-                // Utiliser Chrome, car OverpoweredJS détecte que c'est un bot
-                // quand Playwright est utilisé avec le navigateur Chromium.
-                channel: "chrome",
             });
             const context = await browser.newContext();
             const page = await context.newPage();
@@ -64,7 +64,9 @@ describe("Anti-bot: OverpoweredJS Fingerprinting Demo", () => {
         });
     });
 
-    describe("firefox", () => {
+    // Désactiver le test, car la démo ne fonctionne pas sous Firefox.
+    // https://github.com/Joe12387/overpoweredjs/issues/3
+    describe.skip("firefox", () => {
         it("should be probably a human", async () => {
             const browser = await playwright.firefox.launch({
                 plugins: plugins.recommended(),

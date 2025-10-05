@@ -12,7 +12,7 @@ import playwright from "../../../src/index.js";
 import plugins from "../../../src/plugins/index.js";
 
 describe("Anti-bot: Check browser fingerprints (iphey)", () => {
-    describe.skip("chromium", () => {
+    describe("chromium", () => {
         it("should be Trustworthy", async () => {
             const browser = await playwright.chromium.launch({
                 plugins: plugins.recommended(),
@@ -24,11 +24,18 @@ describe("Anti-bot: Check browser fingerprints (iphey)", () => {
                 await page
                     .locator(".loader.hide")
                     .waitFor({ state: "attached" });
+                // Ne pas vérifier le statut général (comme avec Firefox), car
+                // il y a un faux-positif avec le HARDWARE "It seems you are
+                // masking your fingerprint" qui est aussi en consultant le site
+                // avec le navigateur Chromium.
                 const status = await page
-                    .locator(".identity-status__status:not(.hide) span")
+                    .locator(
+                        ".identity-check__item" +
+                            `[onclick="window.location='#browser'"] strong`,
+                    )
                     .textContent();
 
-                assert.equal(status, "Trustworthy");
+                assert.equal(status, "as real");
             } finally {
                 await page.screenshot({
                     path: "./log/iphey-cr.png",

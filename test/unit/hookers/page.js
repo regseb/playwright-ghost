@@ -4,12 +4,17 @@
  */
 
 import assert from "node:assert/strict";
-import { describe, it } from "node:test";
+import { afterEach, describe, it, mock } from "node:test";
+import Hooker from "../../../src/hookers/hooker.js";
 import PageHooker from "../../../src/hookers/page.js";
 
 describe("hookers/page.js", () => {
     describe("PageHooker", () => {
         describe("PRESETS", () => {
+            afterEach(() => {
+                mock.reset();
+            });
+
             it("should have presets", () => {
                 const pointers = Object.keys(PageHooker.PRESETS);
                 assert.deepEqual(pointers, [
@@ -22,6 +27,36 @@ describe("hookers/page.js", () => {
                 for (const listener of listeners) {
                     assert.equal(typeof listener, "function");
                 }
+            });
+
+            it("should modify when 'BrowserType.launchPersistentContext:after'", () => {
+                const modifier = mock.fn(() => "foo");
+                const modify = mock.method(Hooker, "modify", () => modifier);
+
+                const listener = () => undefined;
+                const browserContext = {};
+                const context = {};
+
+                const hook =
+                    PageHooker.PRESETS[
+                        // eslint-disable-next-line new-cap
+                        "BrowserType.launchPersistentContext:after"
+                    ](listener);
+                const browserContextAltered = hook(browserContext, context);
+
+                assert.equal(browserContextAltered, browserContext);
+                const symbols = Object.getOwnPropertySymbols(
+                    browserContextAltered,
+                );
+                assert.equal(browserContextAltered[symbols[0]], "foo");
+
+                assert.equal(modify.mock.calls.length, 1);
+                assert.deepEqual(modify.mock.calls[0].arguments, [listener]);
+                assert.equal(modifier.mock.calls.length, 1);
+                assert.deepEqual(modifier.mock.calls[0].arguments, [
+                    undefined,
+                    context,
+                ]);
             });
         });
 

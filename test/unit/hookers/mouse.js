@@ -4,12 +4,17 @@
  */
 
 import assert from "node:assert/strict";
-import { describe, it } from "node:test";
+import { afterEach, describe, it, mock } from "node:test";
+import Hooker from "../../../src/hookers/hooker.js";
 import MouseHooker from "../../../src/hookers/mouse.js";
 
 describe("hookers/mouse.js", () => {
     describe("MouseHooker", () => {
         describe("PRESETS", () => {
+            afterEach(() => {
+                mock.reset();
+            });
+
             it("should have presets", () => {
                 const pointers = Object.keys(MouseHooker.PRESETS);
                 assert.deepEqual(pointers, [
@@ -21,6 +26,60 @@ describe("hookers/mouse.js", () => {
                 for (const listener of listeners) {
                     assert.equal(typeof listener, "function");
                 }
+            });
+
+            it("should modify when 'Browser.newPage:after", () => {
+                const modifier = mock.fn(() => "foo");
+                const modify = mock.method(Hooker, "modify", () => modifier);
+
+                const listener = () => undefined;
+                const page = {};
+                const context = {};
+
+                const hook =
+                    // eslint-disable-next-line new-cap
+                    MouseHooker.PRESETS["Browser.newPage:after"](listener);
+                const pageAltered = hook(page, context);
+
+                assert.equal(pageAltered, page);
+                const symbols = Object.getOwnPropertySymbols(page);
+                assert.equal(pageAltered[symbols[0]], "foo");
+
+                assert.equal(modify.mock.calls.length, 1);
+                assert.deepEqual(modify.mock.calls[0].arguments, [listener]);
+                assert.equal(modifier.mock.calls.length, 1);
+                assert.deepEqual(modifier.mock.calls[0].arguments, [
+                    undefined,
+                    context,
+                ]);
+            });
+
+            it("should modify when 'BrowserContext.newPage:after", () => {
+                const modifier = mock.fn(() => "foo");
+                const modify = mock.method(Hooker, "modify", () => modifier);
+
+                const listener = () => undefined;
+                const page = {};
+                const context = {};
+
+                const hook =
+                    // eslint-disable-next-line new-cap
+                    MouseHooker.PRESETS["BrowserContext.newPage:after"](
+                        listener,
+                    );
+                const pageAltered = hook(page, context);
+
+                assert.equal(pageAltered, page);
+                const symbols = Object.getOwnPropertySymbols(page);
+                assert.equal(pageAltered[symbols[0]], "foo");
+
+                assert.equal(modify.mock.calls.length, 1);
+                assert.deepEqual(modify.mock.calls[0].arguments, [listener]);
+                assert.equal(modifier.mock.calls.length, 1);
+                assert.deepEqual(modifier.mock.calls[0].arguments, [
+                    undefined,
+                    context,
+                ]);
             });
         });
 

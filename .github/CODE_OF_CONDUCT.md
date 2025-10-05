@@ -1,4 +1,4 @@
-# Contributor Covenant 3.0
+# Contributor Covenant 3.0 Code of Conduct
 
 ## Our Pledge
 
@@ -72,7 +72,7 @@ and this Code of Conduct reinforces encouraged behaviors and norms that can help
 avoid conflicts and minimize harm.
 
 When an incident does occur, it is important to report it promptly. To report a
-possible violation, send an email to <regseb@gmail.com>
+possible violation, send an email to <regseb@gmail.com>.
 
 Community Moderators take reports of violations seriously and will make every
 effort to respond in a timely manner. They will investigate all reports of code

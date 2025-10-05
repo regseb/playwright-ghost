@@ -9,6 +9,7 @@ import { launchOptions } from "camoufox-js";
 
 /**
  * @import { BrowserType } from "playwright"
+ * @import { LaunchOptions } from "camoufox-js"
  * @import { ContextBefore } from "../../hook.js"
  */
 
@@ -32,14 +33,11 @@ const override = (options, camoufoxOptions, browserType) => {
     return options;
 };
 
-// Ne pas utiliser le type LaunchOptions, car camoufox-js ne l'exporte pas.
-// https://github.com/apify/camoufox-js/pull/80
 /**
- * @typedef {Record<string, any>} UtilsCamoufoxOptions Les options du plugin
- *                                                     `utils.camoufox` qui sont
- *                                                     les options de Camoufox
- *                                                     (passées à la fonction
- *                                                     `launchOptions()`.
+ * @typedef {LaunchOptions} UtilsCamoufoxOptions Les options du plugin
+ *                                               `utils.camoufox` qui sont les
+ *                                               options de Camoufox (passées à
+ *                                               la fonction `launchOptions()`).
  */
 
 /**

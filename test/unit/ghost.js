@@ -12,6 +12,8 @@ describe("ghost.js", () => {
         describe("executablePath()", () => {
             it("should return executable path", () => {
                 const executablePath = mock.fn(() => "/usr/bin/firefox");
+                // @ts-expect-error -- Seule la méthode `executablePath` est
+                //                     testée.
                 const browserType = new Ghost({ executablePath });
 
                 const result = browserType.executablePath();
@@ -25,6 +27,7 @@ describe("ghost.js", () => {
         describe("launch()", () => {
             it("should return browser", async () => {
                 const launch = mock.fn(() => Promise.resolve({ foo: "bar" }));
+                // @ts-expect-error -- Seule la méthode `launch` est testée.
                 const browserType = new Ghost({ launch });
 
                 const browser = await browserType.launch();
@@ -44,6 +47,8 @@ describe("ghost.js", () => {
                         foo: "bar",
                     }),
                 );
+                // @ts-expect-error -- Seule la méthode
+                //                     `launchPersistentContext` est testée.
                 const browserType = new Ghost({ launchPersistentContext });
 
                 const browser =
@@ -62,6 +67,7 @@ describe("ghost.js", () => {
         describe("name()", () => {
             it("should return name", () => {
                 const name = mock.fn(() => "chromium");
+                // @ts-expect-error -- Seule la méthode `name` est testée.
                 const browserType = new Ghost({ name });
 
                 const result = browserType.name();

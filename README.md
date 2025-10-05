@@ -3,7 +3,7 @@
 <!-- Utiliser du HTML (avec l'attribut "align" obsolète) pour faire flotter
      l'image à droite. -->
 <!-- markdownlint-disable-next-line no-inline-html-->
-<img src="asset/logo.svg" align="right" alt="">
+<img src="asset/logo.svg" align="right" width="100" height="100" alt="">
 
 [![npm][img-npm]][link-npm] [![build][img-build]][link-build]
 [![coverage][img-coverage]][link-coverage] [![semver][img-semver]][link-semver]
@@ -261,7 +261,7 @@ const browser = await chromium.launch({
   </tr>
   <tr>
     <td></td>
-    <td></td>
+    <td>️⚙️</td>
     <td>
       <a href="docs/plugins/utils/debug.md"><code>utils.debug</code></a>
     </td>

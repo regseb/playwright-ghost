@@ -10,15 +10,18 @@ import mapArrayOrScalar from "../../../src/utils/maparrayorscalar.js";
 describe("utils/maparrayorscalar.js", () => {
     describe("mapArrayOrScalar()", () => {
         it("should support array", () => {
-            const values = mapArrayOrScalar(["foo", "bar"], (e) =>
-                e.toUpperCase(),
+            const values = mapArrayOrScalar(
+                ["foo", "bar"],
+                (/** @type {string} */ e) => e.toUpperCase(),
             );
 
             assert.deepEqual(values, ["FOO", "BAR"]);
         });
 
         it("should support scalar", () => {
-            const value = mapArrayOrScalar("foo", (e) => e.toUpperCase());
+            const value = mapArrayOrScalar("foo", (/** @type {string} */ e) =>
+                e.toUpperCase(),
+            );
 
             assert.equal(value, "FOO");
         });

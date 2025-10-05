@@ -43,10 +43,12 @@ describe("Anti-bot: CreepJS", () => {
             try {
                 await page.goto("https://abrahamjuliot.github.io/creepjs/");
                 await page.waitForTimeout(5000);
-                const grade = await page
-                    .getByText("trust score")
-                    .locator('span[class^="scale-"]')
-                    .textContent();
+                const grade = /** @type {string} */ (
+                    await page
+                        .getByText("trust score")
+                        .locator('span[class^="scale-"]')
+                        .textContent()
+                );
                 if (!grade.startsWith("A") && !grade.startsWith("B")) {
                     assert.fail(grade);
                 }
