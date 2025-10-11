@@ -147,6 +147,7 @@ describe("plugins/index.js", () => {
         it("should export debug plugins", () => {
             assert.equal(typeof plugins.debug.console, "function");
             assert.equal(typeof plugins.debug.cursor, "function");
+            assert.equal(typeof plugins.debug.sniffer, "function");
         });
     });
 

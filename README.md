@@ -316,6 +316,14 @@ const browser = await chromium.launch({
     </td>
     <td>Show cursor in page.</td>
   </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>
+      <a href="docs/plugins/debug/sniffer.md"><code>debug.sniffer</code></a>
+    </td>
+    <td>Monitor all JavaScript properties used in a page.</td>
+  </tr>
 </table>
 
 ## Anti-bots

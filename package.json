@@ -140,6 +140,10 @@
       "types": "./types/plugins/debug/cursor.d.ts",
       "default": "./src/plugins/debug/cursor.js"
     },
+    "./plugins/debug/sniffer": {
+      "types": "./types/plugins/debug/sniffer.d.ts",
+      "default": "./src/plugins/debug/sniffer.js"
+    },
     "./package.json": "./package.json"
   },
   "main": "./src/index.js",
@@ -166,7 +170,8 @@
     "camoufox-js": "^0.7.0",
     "fingerprint-generator": "^2.1.74",
     "fingerprint-injector": "^2.1.74",
-    "ghost-cursor": "1.4.1"
+    "ghost-cursor": "1.4.1",
+    "ws": "8.18.3"
   },
   "devDependencies": {
     "@prantlf/jsonlint": "16.0.0",
@@ -174,6 +179,7 @@
     "@stryker-mutator/core": "9.2.0",
     "@stryker-mutator/tap-runner": "9.2.0",
     "@types/node": "24.6.2",
+    "@types/ws": "8.18.1",
     "eslint": "9.37.0",
     "eslint-plugin-array-func": "5.1.0",
     "eslint-plugin-eslint-comments": "3.2.0",

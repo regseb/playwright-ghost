@@ -6,6 +6,7 @@
 
 import debugConsolePlugin from "./console.js";
 import debugCursorPlugin from "./cursor.js";
+import debugSnifferPlugin from "./sniffer.js";
 
 /**
  * @typedef {import("./console.js").DebugConsoleOptions} DebugConsoleOptions
@@ -17,4 +18,5 @@ import debugCursorPlugin from "./cursor.js";
 export default {
     console: debugConsolePlugin,
     cursor: debugCursorPlugin,
+    sniffer: debugSnifferPlugin,
 };
