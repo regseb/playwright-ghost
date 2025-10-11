@@ -26,6 +26,9 @@ import utilsXvfbPlugin from "./xvfb.js";
 export default {
     adblocker: utilsAdblockerPlugin,
     camoufox: utilsCamoufoxPlugin,
+    /**
+     * @deprecated Since version 0.16, debugging plugins are located in debug.
+     */
     debug: utilsDebugPlugin,
     fingerprint: utilsFingerprintPlugin,
     locale: utilsLocalePlugin,

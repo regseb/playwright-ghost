@@ -18,6 +18,8 @@
  *                             Playwright-ghost. `true` par défaut.
  * @prop {boolean} [cursor]    La marque indiquant si le curseur est affiché
  *                             dans la page. `true` par défaut.
+ * @deprecated Since version 0.16.0, debugging plugins are located in `debug`
+ *             (`debug.console`, `debug.cursor`).
  */
 
 /**
@@ -26,6 +28,8 @@
  * @param {UtilsDebugOptions} [options] Les éventuelles options du plugin
  *                                      `utils.debug`.
  * @returns {Record<string, Function>} Le crochet du plugin.
+ * @deprecated Since version 0.16.0, debugging plugins are located in `debug`
+ *             (`debug.console`, `debug.cursor`).
  */
 export default function utilsDebugPlugin(options) {
     const debugConsole = options?.console ?? true;

@@ -143,6 +143,13 @@ describe("plugins/index.js", () => {
         });
     });
 
+    describe("plugins.debug", () => {
+        it("should export debug plugins", () => {
+            assert.equal(typeof plugins.debug.console, "function");
+            assert.equal(typeof plugins.debug.cursor, "function");
+        });
+    });
+
     describe("plugins.recommended()", () => {
         it("should support no options", () => {
             const recommended = plugins.recommended();

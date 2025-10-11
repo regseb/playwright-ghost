@@ -5,31 +5,15 @@
 
 import assert from "node:assert/strict";
 import { afterEach, describe, it, mock } from "node:test";
-import utilsDebugPlugin from "../../../../src/plugins/utils/debug.js";
+import debugConsolePlugin from "../../../../src/plugins/debug/console.js";
 
 const PageMock = class {
-    /**
-     * Liste des fonctions d'initialisation.
-     *
-     * @type {Function[]}
-     */
-    #initScrips = [];
-
     /**
      * Liste des écouteurs d'événements.
      *
      * @type {Map<string, Function>}
      */
     #listeners = new Map();
-
-    /**
-     * Simule l'ajout d'une fonction d'initialisation.
-     *
-     * @param {Function} fn La fonction d'initialisation.
-     */
-    addInitScript(fn) {
-        this.#initScrips.push(fn);
-    }
 
     /**
      * Simule l'enregistrement d'un écouteur d'événement.
@@ -49,7 +33,6 @@ const PageMock = class {
      */
     get mock() {
         return {
-            initScripts: () => this.#initScrips,
             listeners: () => this.#listeners,
 
             /**
@@ -65,8 +48,8 @@ const PageMock = class {
     }
 };
 
-describe("plugins/utils/debug.js", () => {
-    describe("utilsDebugPlugin()", () => {
+describe("plugins/debug/console.js", () => {
+    describe("debugConsolePlugin()", () => {
         describe("Page:new", () => {
             afterEach(() => {
                 mock.reset();
@@ -77,7 +60,7 @@ describe("plugins/utils/debug.js", () => {
                 const error = mock.method(console, "error", () => undefined);
                 const page = new PageMock();
 
-                const plugin = utilsDebugPlugin();
+                const plugin = debugConsolePlugin();
                 const listener = plugin["Page:new"];
                 const pageAltered = await listener(page);
                 page.mock.dispatch("console", "foo");
@@ -94,7 +77,7 @@ describe("plugins/utils/debug.js", () => {
             it("should not transfer 'console'", async () => {
                 const page = new PageMock();
 
-                const plugin = utilsDebugPlugin({ console: false });
+                const plugin = debugConsolePlugin({ console: false });
                 const listener = plugin["Page:new"];
                 const pageAltered = await listener(page);
 
@@ -109,7 +92,7 @@ describe("plugins/utils/debug.js", () => {
                 const error = mock.method(console, "error", () => undefined);
                 const page = new PageMock();
 
-                const plugin = utilsDebugPlugin();
+                const plugin = debugConsolePlugin();
                 const listener = plugin["Page:new"];
                 const pageAltered = await listener(page);
                 page.mock.dispatch("pageerror", "foo");
@@ -126,40 +109,11 @@ describe("plugins/utils/debug.js", () => {
             it("should not transfer 'pageerror'", async () => {
                 const page = new PageMock();
 
-                const plugin = utilsDebugPlugin({ pageerror: false });
+                const plugin = debugConsolePlugin({ pageError: false });
                 const listener = plugin["Page:new"];
                 const pageAltered = await listener(page);
 
-                assert.equal(
-                    page.mock.listeners().get("pageerrore"),
-                    undefined,
-                );
-                // Vérifier que la page retournée est la même instance que celle
-                // en paramètre.
-                assert.equal(pageAltered, page);
-            });
-
-            it("should add init script", async () => {
-                const page = new PageMock();
-
-                const plugin = utilsDebugPlugin();
-                const listener = plugin["Page:new"];
-                const pageAltered = await listener(page);
-
-                assert.equal(page.mock.initScripts().length, 1);
-                // Vérifier que la page retournée est la même instance que celle
-                // en paramètre.
-                assert.equal(pageAltered, page);
-            });
-
-            it("should not add init script", async () => {
-                const page = new PageMock();
-
-                const plugin = utilsDebugPlugin({ cursor: false });
-                const listener = plugin["Page:new"];
-                const pageAltered = await listener(page);
-
-                assert.equal(page.mock.initScripts().length, 0);
+                assert.equal(page.mock.listeners().get("pageerror"), undefined);
                 // Vérifier que la page retournée est la même instance que celle
                 // en paramètre.
                 assert.equal(pageAltered, page);

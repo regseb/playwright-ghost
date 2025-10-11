@@ -128,6 +128,18 @@
       "types": "./types/plugins/utils/xvfb.d.ts",
       "default": "./src/plugins/utils/xvfb.js"
     },
+    "./plugins/debug": {
+      "types": "./types/plugins/debug/index.d.ts",
+      "default": "./src/plugins/debug/index.js"
+    },
+    "./plugins/debug/console": {
+      "types": "./types/plugins/debug/console.d.ts",
+      "default": "./src/plugins/debug/console.js"
+    },
+    "./plugins/debug/cursor": {
+      "types": "./types/plugins/debug/cursor.d.ts",
+      "default": "./src/plugins/debug/cursor.js"
+    },
     "./package.json": "./package.json"
   },
   "main": "./src/index.js",

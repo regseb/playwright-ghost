@@ -261,14 +261,6 @@ const browser = await chromium.launch({
   </tr>
   <tr>
     <td></td>
-    <td>️⚙️</td>
-    <td>
-      <a href="docs/plugins/utils/debug.md"><code>utils.debug</code></a>
-    </td>
-    <td>Add debugging to a page (transfer error; display cursor).</td>
-  </tr>
-  <tr>
-    <td></td>
     <td>⚙️</td>
     <td>
       <a href="docs/plugins/utils/fingerprint.md">
@@ -292,6 +284,37 @@ const browser = await chromium.launch({
       <a href="docs/plugins/utils/xvfb.md"><code>utils.xvfb</code></a>
     </td>
     <td>Run browser in <code>Xvfb</code> (<em>X Virtual Frame Buffer</em>).</td>
+  </tr>
+</table>
+
+### Debug
+
+<!-- markdownlint-disable no-inline-html-->
+<table>
+  <tr>
+    <td>⭐️</td>
+    <td>⚙️</td>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td></td>
+    <td>️⚙️</td>
+    <td>
+      <a href="docs/plugins/debug/console.md"><code>debug.console</code></a>
+    </td>
+    <td>
+      Display console messages and error from the browser in the program
+      console.
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>
+      <a href="docs/plugins/debug/cursor.md"><code>debug.cursor</code></a>
+    </td>
+    <td>Show cursor in page.</td>
   </tr>
 </table>
 
