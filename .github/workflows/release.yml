@@ -99,6 +99,10 @@ jobs:
         # https://github.com/npm/cli/issues/5508
         run: echo "NPM_NAME=$(npm pkg get name | tr -d \")" >> $GITHUB_ENV
 
+      - name: Wait for the npm package to be published
+        if: ${{ steps.release.outputs.release_created }}
+        run: node .script/wait.js
+
       - name: Download tarball from npm
         if: ${{ steps.release.outputs.release_created }}
         run: npm pack ${{ env.NPM_NAME }}@${{ steps.release.outputs.tag_name }}
