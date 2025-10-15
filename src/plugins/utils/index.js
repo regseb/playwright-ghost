@@ -9,6 +9,7 @@ import utilsCamoufoxPlugin from "./camoufox.js";
 import utilsDebugPlugin from "./debug.js";
 import utilsFingerprintPlugin from "./fingerprint.js";
 import utilsLocalePlugin from "./locale.js";
+import utilsWestonPlugin from "./weston.js";
 import utilsXvfbPlugin from "./xvfb.js";
 
 /**
@@ -17,6 +18,7 @@ import utilsXvfbPlugin from "./xvfb.js";
  * @typedef {import("./debug.js").UtilsDebugOptions} UtilsDebugOptions
  * @typedef {import("./fingerprint.js").UtilsFingerprintOptions} UtilsFingerprintOptions
  * @typedef {import("./locale.js").UtilsLocaleOptions} UtilsLocaleOptions
+ * @typedef {import("./weston.js").UtilsWestonOptions} UtilsWestonOptions
  * @typedef {import("./xvfb.js").UtilsXvfbOptions} UtilsXvfbOptions
  */
 
@@ -32,5 +34,6 @@ export default {
     debug: utilsDebugPlugin,
     fingerprint: utilsFingerprintPlugin,
     locale: utilsLocalePlugin,
+    weston: utilsWestonPlugin,
     xvfb: utilsXvfbPlugin,
 };

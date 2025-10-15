@@ -139,6 +139,7 @@ describe("plugins/index.js", () => {
             assert.equal(typeof plugins.utils.debug, "function");
             assert.equal(typeof plugins.utils.fingerprint, "function");
             assert.equal(typeof plugins.utils.locale, "function");
+            assert.equal(typeof plugins.utils.weston, "function");
             assert.equal(typeof plugins.utils.xvfb, "function");
         });
     });

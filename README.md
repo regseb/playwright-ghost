@@ -281,6 +281,14 @@ const browser = await chromium.launch({
     <td></td>
     <td>⚙️</td>
     <td>
+      <a href="docs/plugins/utils/weston.md"><code>utils.weston</code></a>
+    </td>
+    <td>Run browser in <code>weston</code> (a Wayland compositor).</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>⚙️</td>
+    <td>
       <a href="docs/plugins/utils/xvfb.md"><code>utils.xvfb</code></a>
     </td>
     <td>Run browser in <code>Xvfb</code> (<em>X Virtual Frame Buffer</em>).</td>

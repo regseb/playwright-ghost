@@ -124,6 +124,10 @@
       "types": "./types/plugins/utils/locale.d.ts",
       "default": "./src/plugins/utils/locale.js"
     },
+    "./plugins/utils/weston": {
+      "types": "./types/plugins/utils/weston.d.ts",
+      "default": "./src/plugins/utils/weston.js"
+    },
     "./plugins/utils/xvfb": {
       "types": "./types/plugins/utils/xvfb.d.ts",
       "default": "./src/plugins/utils/xvfb.js"
