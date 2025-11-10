@@ -151,7 +151,7 @@
   },
   "dependencies": {
     "@ghostery/adblocker-playwright": "^2.12.1",
-    "camoufox-js": "^0.7.0",
+    "camoufox-js": "^0.8.0",
     "fingerprint-generator": "^2.1.74",
     "fingerprint-injector": "^2.1.74",
     "ghost-cursor": "1.4.1"
