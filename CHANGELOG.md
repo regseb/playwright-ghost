@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.16.0](https://github.com/regseb/playwright-ghost/compare/v0.15.0...v0.16.0) (2025-11-16)
+
+### Features
+
+- Add plugin to run browser in weston (Wayland).
+  ([4d2abe6](https://github.com/regseb/playwright-ghost/commit/4d2abe619ace3575906ff00d939017d3c2a30c1f))
+- Add plugin to sniff JavaScript properties used.
+  ([1c9f663](https://github.com/regseb/playwright-ghost/commit/1c9f663973f124f4261709f0dd9b2c5753d31835))
+- Move debug plugin in debug group.
+  ([8e94f85](https://github.com/regseb/playwright-ghost/commit/8e94f85449d5a1d469fe8fe915b90b9a5c98cf92))
+
 ## [0.15.0](https://github.com/regseb/playwright-ghost/compare/v0.14.2...v0.15.0) (2025-10-05)
 
 ### ⚠ BREAKING CHANGES
