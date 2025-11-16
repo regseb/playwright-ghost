@@ -6,7 +6,7 @@
 import assert from "node:assert/strict";
 import crypto from "node:crypto";
 import { afterEach, describe, it, mock } from "node:test";
-import dialogPlugin from "../../../../src/plugins/humanize/dialog.js";
+import humanizeDialogPlugin from "../../../../src/plugins/humanize/dialog.js";
 
 /**
  * Passe au prochain cycle de la boucle d'événements.
@@ -48,7 +48,7 @@ const PageMock = class {
 };
 
 describe("plugins/humanize/dialog.js", () => {
-    describe("dialogPlugin()", () => {
+    describe("humanizeDialogPlugin()", () => {
         describe("Page:new", () => {
             afterEach(() => {
                 mock.reset();
@@ -60,7 +60,7 @@ describe("plugins/humanize/dialog.js", () => {
                 const accept = mock.fn(() => Promise.resolve());
                 const page = new PageMock();
 
-                const plugin = dialogPlugin();
+                const plugin = humanizeDialogPlugin();
                 const listener = plugin["Page:new"];
                 const pageAltered = listener(page);
                 page.mock.dispatch("dialog", { accept });
@@ -87,7 +87,7 @@ describe("plugins/humanize/dialog.js", () => {
                 const accept = mock.fn(() => Promise.resolve());
                 const page = new PageMock();
 
-                const plugin = dialogPlugin({});
+                const plugin = humanizeDialogPlugin({});
                 const listener = plugin["Page:new"];
                 const pageAltered = listener(page);
                 page.mock.dispatch("dialog", { accept });
@@ -114,7 +114,9 @@ describe("plugins/humanize/dialog.js", () => {
                 const accept = mock.fn(() => Promise.resolve());
                 const page = new PageMock();
 
-                const plugin = dialogPlugin({ delay: { min: 10, max: 50 } });
+                const plugin = humanizeDialogPlugin({
+                    delay: { min: 10, max: 50 },
+                });
                 const listener = plugin["Page:new"];
                 const pageAltered = listener(page);
                 page.mock.dispatch("dialog", { accept });

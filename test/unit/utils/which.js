@@ -10,8 +10,6 @@ import process from "node:process";
 import { afterEach, describe, it, mock } from "node:test";
 import which from "../../../src/utils/which.js";
 
-const ORIGINAL_PATH = process.env.PATH;
-
 /**
  * Localise un `PATH` au format de la machine.
  *
@@ -25,11 +23,11 @@ const localize = (PATH) => {
 describe("utils/which.js", () => {
     describe("which()", () => {
         afterEach(() => {
-            process.env.PATH = ORIGINAL_PATH;
+            mock.reset();
         });
 
         it("should support no PATH", async () => {
-            delete process.env.PATH;
+            mock.property(process, "env", {});
 
             await assert.rejects(() => which("firefox"), {
                 name: "Error",
@@ -38,7 +36,12 @@ describe("utils/which.js", () => {
         });
 
         it("should return file", async () => {
-            process.env.PATH = localize("/usr/local/bin:/usr/bin:/bin");
+            // Ne pas remplacer seulement le PATH, car mock.property() ne
+            // fonctionne pas sur les propriétés de process.env.
+            // https://github.com/nodejs/node/issues/60486
+            mock.property(process, "env", {
+                PATH: localize("/usr/local/bin:/usr/bin:/bin"),
+            });
             const access = mock.method(
                 fs,
                 "access",
@@ -69,7 +72,12 @@ describe("utils/which.js", () => {
         });
 
         it("should throw error when not found", async () => {
-            process.env.PATH = localize("/usr/local/bin:/usr/bin:/bin");
+            // Ne pas remplacer seulement le PATH, car mock.property() ne
+            // fonctionne pas sur les propriétés de process.env.
+            // https://github.com/nodejs/node/issues/60486
+            mock.property(process, "env", {
+                PATH: localize("/usr/local/bin:/usr/bin:/bin"),
+            });
             const access = mock.method(
                 fs,
                 "access",

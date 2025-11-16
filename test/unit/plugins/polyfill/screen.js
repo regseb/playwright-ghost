@@ -5,13 +5,13 @@
 
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import screenPlugin from "../../../../src/plugins/polyfill/screen.js";
+import polyfillScreenPlugin from "../../../../src/plugins/polyfill/screen.js";
 
 describe("plugins/polyfill/screen.js", () => {
-    describe("screenPlugin()", () => {
+    describe("polyfillScreenPlugin()", () => {
         describe("BrowserType.launchPersistentContext:before", () => {
             it("should support no option", () => {
-                const plugin = screenPlugin();
+                const plugin = polyfillScreenPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener(["./foo/"]);
@@ -23,7 +23,7 @@ describe("plugins/polyfill/screen.js", () => {
             });
 
             it("should support option", () => {
-                const plugin = screenPlugin();
+                const plugin = polyfillScreenPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener(["./foo/", { slowMo: 200 }]);
@@ -35,7 +35,7 @@ describe("plugins/polyfill/screen.js", () => {
             });
 
             it("should support 'screen' option", () => {
-                const plugin = screenPlugin();
+                const plugin = polyfillScreenPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener([
@@ -52,7 +52,7 @@ describe("plugins/polyfill/screen.js", () => {
 
         describe("Browser.newContext:before", () => {
             it("should support no option", () => {
-                const plugin = screenPlugin();
+                const plugin = polyfillScreenPlugin();
                 const listener = plugin["Browser.newContext:before"];
                 const args = listener([]);
 
@@ -62,7 +62,7 @@ describe("plugins/polyfill/screen.js", () => {
             });
 
             it("should support option", () => {
-                const plugin = screenPlugin();
+                const plugin = polyfillScreenPlugin();
                 const listener = plugin["Browser.newContext:before"];
                 const args = listener([{ slowMo: 200 }]);
 
@@ -72,7 +72,7 @@ describe("plugins/polyfill/screen.js", () => {
             });
 
             it("should support 'screen' option", () => {
-                const plugin = screenPlugin();
+                const plugin = polyfillScreenPlugin();
                 const listener = plugin["Browser.newContext:before"];
                 const args = listener([{ screen: { width: 42, height: 43 } }]);
 
@@ -82,7 +82,7 @@ describe("plugins/polyfill/screen.js", () => {
 
         describe("Browser.newPage", () => {
             it("should support no option", () => {
-                const plugin = screenPlugin();
+                const plugin = polyfillScreenPlugin();
                 const listener = plugin["Browser.newPage:before"];
                 const args = listener([]);
 
@@ -92,7 +92,7 @@ describe("plugins/polyfill/screen.js", () => {
             });
 
             it("should support option", () => {
-                const plugin = screenPlugin();
+                const plugin = polyfillScreenPlugin();
                 const listener = plugin["Browser.newPage:before"];
                 const args = listener([{ slowMo: 200 }]);
 
@@ -102,7 +102,7 @@ describe("plugins/polyfill/screen.js", () => {
             });
 
             it("should support 'screen' option", () => {
-                const plugin = screenPlugin();
+                const plugin = polyfillScreenPlugin();
                 const listener = plugin["Browser.newPage:before"];
                 const args = listener([{ screen: { width: 42, height: 43 } }]);
 

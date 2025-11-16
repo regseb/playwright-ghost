@@ -5,16 +5,16 @@
 
 import assert from "node:assert/strict";
 import { describe, it, mock } from "node:test";
-import headlessPlugin from "../../../../src/plugins/polyfill/headless.js";
+import polyfillHeadlessPlugin from "../../../../src/plugins/polyfill/headless.js";
 
 describe("plugins/polyfill/headless.js", () => {
-    describe("headlessPlugin()", () => {
+    describe("polyfillHeadlessPlugin()", () => {
         describe("BrowserType.launch:before", () => {
             it("should support no option", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = headlessPlugin();
+                const plugin = polyfillHeadlessPlugin();
                 const listener = plugin["BrowserType.launch:before"];
                 const args = listener([], { obj: browserType });
 
@@ -27,7 +27,7 @@ describe("plugins/polyfill/headless.js", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = headlessPlugin();
+                const plugin = polyfillHeadlessPlugin();
                 const listener = plugin["BrowserType.launch:before"];
                 const args = listener([{ slowMo: 200 }], {
                     obj: browserType,
@@ -42,7 +42,7 @@ describe("plugins/polyfill/headless.js", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = headlessPlugin();
+                const plugin = polyfillHeadlessPlugin();
                 const listener = plugin["BrowserType.launch:before"];
                 const args = listener([{ channel: "chrome" }], {
                     obj: browserType,
@@ -57,7 +57,7 @@ describe("plugins/polyfill/headless.js", () => {
                 const name = mock.fn(() => "firefox");
                 const browserType = { name };
 
-                const plugin = headlessPlugin();
+                const plugin = polyfillHeadlessPlugin();
                 const listener = plugin["BrowserType.launch:before"];
                 const args = listener([{ timeout: 1000 }], {
                     obj: browserType,
@@ -74,7 +74,7 @@ describe("plugins/polyfill/headless.js", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = headlessPlugin();
+                const plugin = polyfillHeadlessPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener(["./foo/"], { obj: browserType });
@@ -88,7 +88,7 @@ describe("plugins/polyfill/headless.js", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = headlessPlugin();
+                const plugin = polyfillHeadlessPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener(["./foo/", { slowMo: 200 }], {
@@ -107,7 +107,7 @@ describe("plugins/polyfill/headless.js", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = headlessPlugin();
+                const plugin = polyfillHeadlessPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener(["./foo/", { channel: "chrome" }], {
@@ -123,7 +123,7 @@ describe("plugins/polyfill/headless.js", () => {
                 const name = mock.fn(() => "firefox");
                 const browserType = { name };
 
-                const plugin = headlessPlugin();
+                const plugin = polyfillHeadlessPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener(["./foo/", { timeout: 1000 }], {

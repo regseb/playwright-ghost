@@ -5,16 +5,16 @@
 
 import assert from "node:assert/strict";
 import { describe, it, mock } from "node:test";
-import localePlugin from "../../../../src/plugins/utils/locale.js";
+import utilsLocalePlugin from "../../../../src/plugins/utils/locale.js";
 
 describe("plugins/utils/locale.js", () => {
-    describe("localePlugin()", () => {
+    describe("utilsLocalePlugin()", () => {
         describe("BrowserType.launch:before", () => {
             it("should throw error when not found", async () => {
                 const name = mock.fn(() => "iexplore");
                 const browserType = { name };
 
-                const plugin = localePlugin();
+                const plugin = utilsLocalePlugin();
                 const listener = plugin["BrowserType.launch:before"];
 
                 await assert.rejects(() => listener([], { obj: browserType }), {
@@ -31,7 +31,7 @@ describe("plugins/utils/locale.js", () => {
                 const name = mock.fn(() => "iexplore");
                 const browserType = { name };
 
-                const plugin = localePlugin();
+                const plugin = utilsLocalePlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
 

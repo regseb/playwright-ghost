@@ -6,13 +6,13 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import playwright from "../../../../src/index.js";
-import xvfbPlugin from "../../../../src/plugins/utils/xvfb.js";
+import utilsXvfbPlugin from "../../../../src/plugins/utils/xvfb.js";
 
 describe("Plugin: utils.xvfb", () => {
     it("should use screen size", async () => {
         const browser = await playwright.chromium.launch({
             headless: false,
-            plugins: [xvfbPlugin()],
+            plugins: [utilsXvfbPlugin()],
         });
         // Définir le viewport à `null` pour utiliser la taille de l'écran
         // virtuel.

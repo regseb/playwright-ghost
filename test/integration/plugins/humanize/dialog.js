@@ -6,12 +6,12 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import playwright from "../../../../src/index.js";
-import dialogPlugin from "../../../../src/plugins/humanize/dialog.js";
+import humanizeDialogPlugin from "../../../../src/plugins/humanize/dialog.js";
 
 describe("Plugin: humanize.dialog", () => {
     it("should close slowly dialog", async () => {
         const browser = await playwright.chromium.launch({
-            plugins: [dialogPlugin()],
+            plugins: [humanizeDialogPlugin()],
         });
         const context = await browser.newContext();
         try {

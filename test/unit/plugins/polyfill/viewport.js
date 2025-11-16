@@ -6,10 +6,10 @@
 import assert from "node:assert/strict";
 import crypto from "node:crypto";
 import { afterEach, describe, it, mock } from "node:test";
-import viewportPlugin from "../../../../src/plugins/polyfill/viewport.js";
+import polyfillViewportPlugin from "../../../../src/plugins/polyfill/viewport.js";
 
 describe("plugins/polyfill/viewport.js", () => {
-    describe("viewportPlugin()", () => {
+    describe("polyfillViewportPlugin()", () => {
         describe("BrowserType.launchPersistentContext:before", () => {
             afterEach(() => {
                 mock.reset();
@@ -27,7 +27,7 @@ describe("plugins/polyfill/viewport.js", () => {
                     }
                 });
 
-                const plugin = viewportPlugin();
+                const plugin = polyfillViewportPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener(["./foo/"]);
@@ -57,7 +57,7 @@ describe("plugins/polyfill/viewport.js", () => {
                     }
                 });
 
-                const plugin = viewportPlugin({});
+                const plugin = polyfillViewportPlugin({});
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener(["./foo/"]);
@@ -87,7 +87,7 @@ describe("plugins/polyfill/viewport.js", () => {
                     }
                 });
 
-                const plugin = viewportPlugin();
+                const plugin = polyfillViewportPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener(["./foo/", { slowMo: 200 }]);
@@ -108,7 +108,7 @@ describe("plugins/polyfill/viewport.js", () => {
             it("should support 'viewport' option", () => {
                 const randomInt = mock.method(crypto, "randomInt", () => 0);
 
-                const plugin = viewportPlugin();
+                const plugin = polyfillViewportPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener([
@@ -141,7 +141,7 @@ describe("plugins/polyfill/viewport.js", () => {
                     }
                 });
 
-                const plugin = viewportPlugin({
+                const plugin = polyfillViewportPlugin({
                     width: { min: 300, max: 400 },
                     height: { min: 100, max: 200 },
                 });
@@ -177,7 +177,7 @@ describe("plugins/polyfill/viewport.js", () => {
                     }
                 });
 
-                const plugin = viewportPlugin();
+                const plugin = polyfillViewportPlugin();
                 const listener = plugin["Browser.newContext:before"];
                 const args = listener([]);
 
@@ -205,7 +205,7 @@ describe("plugins/polyfill/viewport.js", () => {
                     }
                 });
 
-                const plugin = viewportPlugin({});
+                const plugin = polyfillViewportPlugin({});
                 const listener = plugin["Browser.newContext:before"];
                 const args = listener([]);
 
@@ -233,7 +233,7 @@ describe("plugins/polyfill/viewport.js", () => {
                     }
                 });
 
-                const plugin = viewportPlugin();
+                const plugin = polyfillViewportPlugin();
                 const listener = plugin["Browser.newContext:before"];
                 const args = listener([{ slowMo: 200 }]);
 
@@ -252,7 +252,7 @@ describe("plugins/polyfill/viewport.js", () => {
             it("should support 'viewport' option", () => {
                 const randomInt = mock.method(crypto, "randomInt", () => 0);
 
-                const plugin = viewportPlugin();
+                const plugin = polyfillViewportPlugin();
                 const listener = plugin["Browser.newContext:before"];
                 const args = listener([
                     { viewport: { width: 1600, height: 700 } },
@@ -282,7 +282,7 @@ describe("plugins/polyfill/viewport.js", () => {
                     }
                 });
 
-                const plugin = viewportPlugin({
+                const plugin = polyfillViewportPlugin({
                     width: { min: 300, max: 400 },
                     height: { min: 100, max: 200 },
                 });
@@ -316,7 +316,7 @@ describe("plugins/polyfill/viewport.js", () => {
                     }
                 });
 
-                const plugin = viewportPlugin();
+                const plugin = polyfillViewportPlugin();
                 const listener = plugin["Browser.newPage:before"];
                 const args = listener([]);
 
@@ -344,7 +344,7 @@ describe("plugins/polyfill/viewport.js", () => {
                     }
                 });
 
-                const plugin = viewportPlugin({});
+                const plugin = polyfillViewportPlugin({});
                 const listener = plugin["Browser.newPage:before"];
                 const args = listener([]);
 
@@ -372,7 +372,7 @@ describe("plugins/polyfill/viewport.js", () => {
                     }
                 });
 
-                const plugin = viewportPlugin();
+                const plugin = polyfillViewportPlugin();
                 const listener = plugin["Browser.newPage:before"];
                 const args = listener([{ slowMo: 200 }]);
 
@@ -391,7 +391,7 @@ describe("plugins/polyfill/viewport.js", () => {
             it("should support 'viewport' option", () => {
                 const randomInt = mock.method(crypto, "randomInt", () => 0);
 
-                const plugin = viewportPlugin();
+                const plugin = polyfillViewportPlugin();
                 const listener = plugin["Browser.newPage:before"];
                 const args = listener([
                     { viewport: { width: 1600, height: 700 } },
@@ -421,7 +421,7 @@ describe("plugins/polyfill/viewport.js", () => {
                     }
                 });
 
-                const plugin = viewportPlugin({
+                const plugin = polyfillViewportPlugin({
                     width: { min: 300, max: 400 },
                     height: { min: 100, max: 200 },
                 });

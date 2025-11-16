@@ -39,14 +39,44 @@ describe("Anti-bot: Fingerprint-Scan", () => {
             try {
                 await page.goto("https://fingerprint-scan.com/");
 
-                const score = await page
-                    .locator("#fingerprintScore")
+                // Ne pas vérifier le fingerprintScore, car l'API
+                // https://fingerprint-scan.com/api/score retourne une erreur
+                // 400.
+                const webDriver = await page
+                    .locator("tr:has(.property-name)", {
+                        has: page.getByText("WebDriver"),
+                    })
+                    .locator(".property-value")
+                    .first()
                     .textContent();
-                const value = Number(
-                    score?.slice(score.indexOf(": ") + 2, score.indexOf("/")),
-                );
+                assert.equal(webDriver, "false", "WebDriver");
 
-                assert.ok(10 >= value, `10 >= ${value}`);
+                const isSeleniumChrome = await page
+                    .locator("tr:has(.property-name)", {
+                        has: page.getByText("Is Selenium Chrome"),
+                    })
+                    .locator(".property-value")
+                    .first()
+                    .textContent();
+                assert.equal(isSeleniumChrome, "false", "Is Selenium Chrome");
+
+                const cdpCheck = await page
+                    .locator("tr:has(.property-name)", {
+                        has: page.getByText("CDP Check"),
+                    })
+                    .locator(".property-value")
+                    .first()
+                    .textContent();
+                assert.equal(cdpCheck, "false", "CDP Check");
+
+                const isPlaywright = await page
+                    .locator("tr:has(.property-name)", {
+                        has: page.getByText("Is Playwright"),
+                    })
+                    .locator(".property-value")
+                    .first()
+                    .textContent();
+                assert.equal(isPlaywright, "false", "Is Playwright");
             } finally {
                 await page.screenshot({
                     path: "./log/fingerprintscan-cr.png",

@@ -3,7 +3,7 @@
 
 !/runConfigurations/
 !/.gitignore
-!/playwright-ghost.iml
 !/icon.svg
 !/modules.xml
+!/playwright-ghost.iml
 !/vcs.xml

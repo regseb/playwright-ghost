@@ -6,12 +6,12 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import playwright from "../../../../src/index.js";
-import userAgentPlugin from "../../../../src/plugins/polyfill/useragent.js";
+import polyfillUserAgentPlugin from "../../../../src/plugins/polyfill/useragent.js";
 
 describe("Plugin: polyfill.userAgent", () => {
     it("should return new user agent", async () => {
         const browser = await playwright.chromium.launch({
-            plugins: [userAgentPlugin({ userAgent: "foo" })],
+            plugins: [polyfillUserAgentPlugin({ userAgent: "foo" })],
         });
         const context = await browser.newContext();
         try {

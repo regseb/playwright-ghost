@@ -5,16 +5,16 @@
 
 import assert from "node:assert/strict";
 import { describe, it, mock } from "node:test";
-import webdriverPlugin from "../../../../src/plugins/polyfill/webdriver.js";
+import polyfillWebdriverPlugin from "../../../../src/plugins/polyfill/webdriver.js";
 
 describe("plugins/polyfill/webdriver.js", () => {
-    describe("webdriver()", () => {
+    describe("polyfillWebdriverPlugin()", () => {
         describe("BrowserType.launch:before", () => {
             it("should support no option", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = webdriverPlugin();
+                const plugin = polyfillWebdriverPlugin();
                 const listener = plugin["BrowserType.launch:before"];
                 const args = listener([], { obj: browserType });
 
@@ -29,7 +29,7 @@ describe("plugins/polyfill/webdriver.js", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = webdriverPlugin();
+                const plugin = polyfillWebdriverPlugin();
                 const listener = plugin["BrowserType.launch:before"];
                 const args = listener([{ slowMo: 200 }], { obj: browserType });
 
@@ -47,7 +47,7 @@ describe("plugins/polyfill/webdriver.js", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = webdriverPlugin();
+                const plugin = polyfillWebdriverPlugin();
                 const listener = plugin["BrowserType.launch:before"];
                 const args = listener([{ args: ["--disable-gpu"] }], {
                     obj: browserType,
@@ -69,7 +69,7 @@ describe("plugins/polyfill/webdriver.js", () => {
                 const name = mock.fn(() => "firefox");
                 const browserType = { name };
 
-                const plugin = webdriverPlugin();
+                const plugin = polyfillWebdriverPlugin();
                 const listener = plugin["BrowserType.launch:before"];
                 const args = listener([{ timeout: 1000 }], {
                     obj: browserType,
@@ -86,7 +86,7 @@ describe("plugins/polyfill/webdriver.js", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = webdriverPlugin();
+                const plugin = polyfillWebdriverPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener(["./foo/"], { obj: browserType });
@@ -103,7 +103,7 @@ describe("plugins/polyfill/webdriver.js", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = webdriverPlugin();
+                const plugin = polyfillWebdriverPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener(["./foo/", { slowMo: 200 }], {
@@ -125,7 +125,7 @@ describe("plugins/polyfill/webdriver.js", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = webdriverPlugin();
+                const plugin = polyfillWebdriverPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener(["./foo/", { args: ["--disable-gpu"] }], {
@@ -149,7 +149,7 @@ describe("plugins/polyfill/webdriver.js", () => {
                 const name = mock.fn(() => "firefox");
                 const browserType = { name };
 
-                const plugin = webdriverPlugin();
+                const plugin = polyfillWebdriverPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener(["./foo/", { timeout: 1000 }], {

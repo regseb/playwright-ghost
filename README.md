@@ -2,7 +2,7 @@
 
 <!-- Utiliser du HTML (avec l'attribut "align" obsolète) pour faire flotter
      l'image à droite. -->
-<!-- markdownlint-disable-next-line no-inline-html-->
+<!-- markdownlint-disable-next-line no-inline-html -->
 <img src="asset/logo.svg" align="right" width="100" height="100" alt="">
 
 [![npm][img-npm]][link-npm] [![build][img-build]][link-build]
@@ -110,7 +110,7 @@ const browser = await chromium.launch({
 
 ### Polyfill
 
-<!-- markdownlint-disable no-inline-html-->
+<!-- markdownlint-disable no-inline-html -->
 <table>
   <tr>
     <td>⭐️</td>
@@ -193,7 +193,7 @@ const browser = await chromium.launch({
 
 ### Humanize
 
-<!-- markdownlint-disable no-inline-html-->
+<!-- markdownlint-disable no-inline-html -->
 <table>
   <tr>
     <td>⭐️</td>
@@ -235,7 +235,7 @@ const browser = await chromium.launch({
 
 ### Utils
 
-<!-- markdownlint-disable no-inline-html-->
+<!-- markdownlint-disable no-inline-html -->
 <table>
   <tr>
     <td>⭐️</td>
@@ -297,7 +297,7 @@ const browser = await chromium.launch({
 
 ### Debug
 
-<!-- markdownlint-disable no-inline-html-->
+<!-- markdownlint-disable no-inline-html -->
 <table>
   <tr>
     <td>⭐️</td>
@@ -368,7 +368,7 @@ To find out which plugins are used, see the
 
 This 3 anti-bots detect Playwright-ghost:
 
-- [CreepJS](https://abrahamjuliot.github.io/creepjs/): _F_
+- [CreepJS](https://abrahamjuliot.github.io/creepjs/): _44% like headless_
 - [rebrowser-bot-detector](https://bot-detector.rebrowser.net/):
   _mainWorldExecution_, _pwInitScripts_ and _useragent_
 - [Score detector (reCAPTCHA v3)](https://antcpt.com/score_detector/): _0.3_

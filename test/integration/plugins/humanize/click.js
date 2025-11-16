@@ -6,12 +6,12 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import playwright from "../../../../src/index.js";
-import clickPlugin from "../../../../src/plugins/humanize/click.js";
+import humanizeClickPlugin from "../../../../src/plugins/humanize/click.js";
 
 describe("Plugin: humanize.click", () => {
     it("should click slowly", async () => {
         const browser = await playwright.chromium.launch({
-            plugins: [clickPlugin()],
+            plugins: [humanizeClickPlugin()],
         });
         const context = await browser.newContext();
         try {

@@ -5,16 +5,16 @@
 
 import assert from "node:assert/strict";
 import { describe, it, mock } from "node:test";
-import webGLPlugin from "../../../../src/plugins/polyfill/webgl.js";
+import polyfillWebGLPlugin from "../../../../src/plugins/polyfill/webgl.js";
 
 describe("plugins/polyfill/webgl.js", () => {
-    describe("webgl()", () => {
+    describe("polyfillWebGLPlugin()", () => {
         describe("BrowserType.launch:before", () => {
             it("should support no option", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = webGLPlugin();
+                const plugin = polyfillWebGLPlugin();
                 const listener = plugin["BrowserType.launch:before"];
                 const args = listener([], { obj: browserType });
 
@@ -27,7 +27,7 @@ describe("plugins/polyfill/webgl.js", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = webGLPlugin();
+                const plugin = polyfillWebGLPlugin();
                 const listener = plugin["BrowserType.launch:before"];
                 const args = listener([{ slowMo: 200 }], { obj: browserType });
 
@@ -42,7 +42,7 @@ describe("plugins/polyfill/webgl.js", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = webGLPlugin();
+                const plugin = polyfillWebGLPlugin();
                 const listener = plugin["BrowserType.launch:before"];
                 const args = listener([{ args: ["--disable-gpu"] }], {
                     obj: browserType,
@@ -59,7 +59,7 @@ describe("plugins/polyfill/webgl.js", () => {
                 const name = mock.fn(() => "firefox");
                 const browserType = { name };
 
-                const plugin = webGLPlugin();
+                const plugin = polyfillWebGLPlugin();
                 const listener = plugin["BrowserType.launch:before"];
                 const args = listener([{ timeout: 1000 }], {
                     obj: browserType,
@@ -76,7 +76,7 @@ describe("plugins/polyfill/webgl.js", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = webGLPlugin();
+                const plugin = polyfillWebGLPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener(["./foo/"], { obj: browserType });
@@ -90,7 +90,7 @@ describe("plugins/polyfill/webgl.js", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = webGLPlugin();
+                const plugin = polyfillWebGLPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener(["./foo/", { slowMo: 200 }], {
@@ -109,7 +109,7 @@ describe("plugins/polyfill/webgl.js", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = webGLPlugin();
+                const plugin = polyfillWebGLPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener(["./foo/", { args: ["--disable-gpu"] }], {
@@ -128,7 +128,7 @@ describe("plugins/polyfill/webgl.js", () => {
                 const name = mock.fn(() => "firefox");
                 const browserType = { name };
 
-                const plugin = webGLPlugin();
+                const plugin = polyfillWebGLPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener(["./foo/", { timeout: 1000 }], {

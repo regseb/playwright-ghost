@@ -63,7 +63,6 @@ describe("Anti-bot: rebrowser-bot-detector", () => {
                     // eslint-disable-next-line no-undef, unicorn/prefer-query-selector
                     document.getElementsByClassName("div");
                 });
-                delete process.env.REBROWSER_PATCHES_RUNTIME_FIX_MODE;
 
                 // "You're using unpatched Playwright and method
                 // `page.exposeFunction()`. No fix available."

@@ -5,16 +5,16 @@
 
 import assert from "node:assert/strict";
 import { describe, it, mock } from "node:test";
-import userAgentPlugin from "../../../../src/plugins/polyfill/useragent.js";
+import polyfillUserAgentPlugin from "../../../../src/plugins/polyfill/useragent.js";
 
 describe("plugins/polyfill/useragent.js", () => {
-    describe("userAgentPlugin()", () => {
+    describe("polyfillUserAgentPlugin()", () => {
         describe("BrowserType.launch:before", () => {
             it("should support no option", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = userAgentPlugin({ userAgent: "foo" });
+                const plugin = polyfillUserAgentPlugin({ userAgent: "foo" });
                 const listener = plugin["BrowserType.launch:before"];
                 const args = listener([], { obj: browserType, prop: "launch" });
 
@@ -27,7 +27,7 @@ describe("plugins/polyfill/useragent.js", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = userAgentPlugin({ userAgent: "foo" });
+                const plugin = polyfillUserAgentPlugin({ userAgent: "foo" });
                 const listener = plugin["BrowserType.launch:before"];
                 const args = listener([{ slowMo: 200 }], {
                     obj: browserType,
@@ -45,7 +45,7 @@ describe("plugins/polyfill/useragent.js", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = userAgentPlugin({ userAgent: "foo" });
+                const plugin = polyfillUserAgentPlugin({ userAgent: "foo" });
                 const listener = plugin["BrowserType.launch:before"];
                 const args = listener([{ args: ["--disable-gpu"] }], {
                     obj: browserType,
@@ -63,7 +63,7 @@ describe("plugins/polyfill/useragent.js", () => {
                 const name = mock.fn(() => "firefox");
                 const browserType = { name };
 
-                const plugin = userAgentPlugin({ userAgent: "foo" });
+                const plugin = polyfillUserAgentPlugin({ userAgent: "foo" });
                 const listener = plugin["BrowserType.launch:before"];
                 const args = listener([{ timeout: 1000 }], {
                     obj: browserType,
@@ -81,7 +81,7 @@ describe("plugins/polyfill/useragent.js", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = userAgentPlugin({ userAgent: "foo" });
+                const plugin = polyfillUserAgentPlugin({ userAgent: "foo" });
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener(["./bar/"], {
@@ -101,7 +101,7 @@ describe("plugins/polyfill/useragent.js", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = userAgentPlugin({ userAgent: "foo" });
+                const plugin = polyfillUserAgentPlugin({ userAgent: "foo" });
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener(["./bar/", { slowMo: 200 }], {
@@ -121,7 +121,7 @@ describe("plugins/polyfill/useragent.js", () => {
                 const name = mock.fn(() => "chromium");
                 const browserType = { name };
 
-                const plugin = userAgentPlugin({ userAgent: "foo" });
+                const plugin = polyfillUserAgentPlugin({ userAgent: "foo" });
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener(["./bar/", { args: ["--disable-gpu"] }], {
@@ -141,7 +141,7 @@ describe("plugins/polyfill/useragent.js", () => {
                 const name = mock.fn(() => "firefox");
                 const browserType = { name };
 
-                const plugin = userAgentPlugin({ userAgent: "foo" });
+                const plugin = polyfillUserAgentPlugin({ userAgent: "foo" });
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener(["./bar/", { timeout: 1000 }], {
@@ -163,7 +163,7 @@ describe("plugins/polyfill/useragent.js", () => {
                 const name = mock.fn(() => "firefox");
                 const browser = { browserType: () => ({ name }) };
 
-                const plugin = userAgentPlugin({ userAgent: "foo" });
+                const plugin = polyfillUserAgentPlugin({ userAgent: "foo" });
                 const listener = plugin["Browser.newContext:before"];
                 const args = listener([], { obj: browser });
 
@@ -176,7 +176,7 @@ describe("plugins/polyfill/useragent.js", () => {
                 const name = mock.fn(() => "firefox");
                 const browser = { browserType: () => ({ name }) };
 
-                const plugin = userAgentPlugin({ userAgent: "foo" });
+                const plugin = polyfillUserAgentPlugin({ userAgent: "foo" });
                 const listener = plugin["Browser.newContext:before"];
                 const args = listener([{ acceptDownloads: true }], {
                     obj: browser,
@@ -193,7 +193,7 @@ describe("plugins/polyfill/useragent.js", () => {
                 const name = mock.fn(() => "firefox");
                 const browser = { browserType: () => ({ name }) };
 
-                const plugin = userAgentPlugin({ userAgent: "foo" });
+                const plugin = polyfillUserAgentPlugin({ userAgent: "foo" });
                 const listener = plugin["Browser.newContext:before"];
                 const args = listener([{ userAgent: "bar" }], { obj: browser });
 
@@ -206,7 +206,7 @@ describe("plugins/polyfill/useragent.js", () => {
                 const name = mock.fn(() => "chromium");
                 const browser = { browserType: () => ({ name }) };
 
-                const plugin = userAgentPlugin({ userAgent: "foo" });
+                const plugin = polyfillUserAgentPlugin({ userAgent: "foo" });
                 const listener = plugin["Browser.newContext:before"];
                 const args = listener([{ colorScheme: "dark" }], {
                     obj: browser,
@@ -223,7 +223,7 @@ describe("plugins/polyfill/useragent.js", () => {
                 const name = mock.fn(() => "firefox");
                 const browser = { browserType: () => ({ name }) };
 
-                const plugin = userAgentPlugin({ userAgent: "foo" });
+                const plugin = polyfillUserAgentPlugin({ userAgent: "foo" });
                 const listener = plugin["Browser.newPage:before"];
                 const args = listener([], { obj: browser });
 
@@ -236,7 +236,7 @@ describe("plugins/polyfill/useragent.js", () => {
                 const name = mock.fn(() => "firefox");
                 const browser = { browserType: () => ({ name }) };
 
-                const plugin = userAgentPlugin({ userAgent: "foo" });
+                const plugin = polyfillUserAgentPlugin({ userAgent: "foo" });
                 const listener = plugin["Browser.newPage:before"];
                 const args = listener([{ forcedColors: "active" }], {
                     obj: browser,
@@ -253,7 +253,7 @@ describe("plugins/polyfill/useragent.js", () => {
                 const name = mock.fn(() => "firefox");
                 const browser = { browserType: () => ({ name }) };
 
-                const plugin = userAgentPlugin({ userAgent: "foo" });
+                const plugin = polyfillUserAgentPlugin({ userAgent: "foo" });
                 const listener = plugin["Browser.newPage:before"];
                 const args = listener([{ userAgent: "bar" }], { obj: browser });
 
@@ -266,7 +266,7 @@ describe("plugins/polyfill/useragent.js", () => {
                 const name = mock.fn(() => "chromium");
                 const browser = { browserType: () => ({ name }) };
 
-                const plugin = userAgentPlugin({ userAgent: "foo" });
+                const plugin = polyfillUserAgentPlugin({ userAgent: "foo" });
                 const listener = plugin["Browser.newPage:before"];
                 const args = listener([{ hasTouch: true }], { obj: browser });
 

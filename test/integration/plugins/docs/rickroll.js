@@ -6,7 +6,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import playwright from "../../../../src/index.js";
-import plugins from "../../../../src/plugins/index.js";
 
 /**
  * @import { BrowserType } from "playwright"
@@ -94,7 +93,7 @@ const rickrollPlugin = (options) => {
 describe("Plugin: docs.rickroll", () => {
     it("should rick roll", async () => {
         const browser = await playwright.chromium.launch({
-            plugins: [rickrollPlugin(), plugins.utils.debug()],
+            plugins: [rickrollPlugin()],
         });
         const context = await browser.newContext();
         try {

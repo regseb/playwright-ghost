@@ -6,12 +6,12 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import playwright from "../../../../src/index.js";
-import cursorPlugin from "../../../../src/plugins/humanize/cursor.js";
+import humanizeCursorPlugin from "../../../../src/plugins/humanize/cursor.js";
 
 describe("Plugin: humanize.cursor", () => {
     it("should not move in the same position", async () => {
         const browser = await playwright.chromium.launch({
-            plugins: [cursorPlugin()],
+            plugins: [humanizeCursorPlugin()],
         });
         const context = await browser.newContext();
         try {

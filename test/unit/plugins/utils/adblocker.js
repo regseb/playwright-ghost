@@ -5,10 +5,10 @@
 
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import adblockerPlugin from "../../../../src/plugins/utils/adblocker.js";
+import utilsAdblockerPlugin from "../../../../src/plugins/utils/adblocker.js";
 
 describe("plugins/utils/adblocker.js", () => {
-    describe("adblockerPlugin()", () => {
+    describe("utilsAdblockerPlugin()", () => {
         describe("Page:new", () => {
             // Ajouter des tests quand l'import de module pourra être mocké.
             // https://nodejs.org/api/test.html#mockmodulespecifier-options
@@ -16,7 +16,8 @@ describe("plugins/utils/adblocker.js", () => {
             it("should reject invalide mode", async () => {
                 await assert.rejects(
                     // @ts-expect-error -- Le mode n'existe pas volontairement.
-                    () => adblockerPlugin({ mode: "fromNonexistentMethod" }),
+                    () =>
+                        utilsAdblockerPlugin({ mode: "fromNonexistentMethod" }),
                     {
                         name: "TypeError",
                         message: "invalid mode",

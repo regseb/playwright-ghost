@@ -23,9 +23,7 @@ const getUserAgent = async () => {
     return userAgent.replace("Headless", "");
 };
 
-// Désactiver le test, car le site ne fonctionne plus.
-// https://github.com/TecharoHQ/anubis/issues/1170
-describe.skip("Anti-bot: Anubis", () => {
+describe("Anti-bot: Anubis", () => {
     describe("chromium", () => {
         it("should be redirect to home", async () => {
             const browser = await playwright.chromium.launch({

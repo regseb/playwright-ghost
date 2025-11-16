@@ -42,6 +42,7 @@ export default {
                 "prettier_javascript",
                 "eslint",
                 "eslint_node",
+                "biomejs__js-api",
             ],
             overrides: [
                 {
@@ -57,10 +58,20 @@ export default {
         {
             patterns: "*.md",
             linters: ["prettier", "markdownlint"],
+            overrides: {
+                patterns: "/.github/ISSUE_TEMPLATE/**",
+                linters: {
+                    wrapper: "markdownlint",
+                    options: {
+                        // eslint-disable-next-line camelcase
+                        "heading-increment": { front_matter_title: "" },
+                    },
+                },
+            },
         },
         {
             patterns: "*.json",
-            linters: ["prettier", "prantlf__jsonlint"],
+            linters: ["prettier", "prantlf__jsonlint", "biomejs__js-api"],
             overrides: {
                 patterns: "/package.json",
                 linters: ["npm-package-json-lint", "publint"],

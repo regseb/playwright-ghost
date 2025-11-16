@@ -6,10 +6,10 @@
 import assert from "node:assert/strict";
 import crypto from "node:crypto";
 import { afterEach, describe, it, mock } from "node:test";
-import clickPlugin from "../../../../src/plugins/humanize/click.js";
+import humanizeClickPlugin from "../../../../src/plugins/humanize/click.js";
 
 describe("plugins/humanize/click.js", () => {
-    describe("clickPlugin()", () => {
+    describe("humanizeClickPlugin()", () => {
         describe("Locator.click:before", () => {
             afterEach(() => {
                 mock.reset();
@@ -18,7 +18,7 @@ describe("plugins/humanize/click.js", () => {
             it("should support no option", () => {
                 const randomInt = mock.method(crypto, "randomInt", () => 200);
 
-                const plugin = clickPlugin();
+                const plugin = humanizeClickPlugin();
                 const listener = plugin["Locator.click:before"];
                 const args = listener([]);
 
@@ -31,7 +31,7 @@ describe("plugins/humanize/click.js", () => {
             it("should support empty option", () => {
                 const randomInt = mock.method(crypto, "randomInt", () => 250);
 
-                const plugin = clickPlugin({});
+                const plugin = humanizeClickPlugin({});
                 const listener = plugin["Locator.click:before"];
                 const args = listener([]);
 
@@ -44,7 +44,7 @@ describe("plugins/humanize/click.js", () => {
             it("should support option", () => {
                 const randomInt = mock.method(crypto, "randomInt", () => 300);
 
-                const plugin = clickPlugin();
+                const plugin = humanizeClickPlugin();
                 const listener = plugin["Locator.click:before"];
                 const args = listener([{ button: "right" }]);
 
@@ -57,7 +57,7 @@ describe("plugins/humanize/click.js", () => {
             it("should support 'delay' option", () => {
                 const randomInt = mock.method(crypto, "randomInt", () => 350);
 
-                const plugin = clickPlugin();
+                const plugin = humanizeClickPlugin();
                 const listener = plugin["Locator.click:before"];
                 const args = listener([{ button: "middle", delay: 1000 }]);
 
@@ -75,7 +75,7 @@ describe("plugins/humanize/click.js", () => {
             it("should support no option", () => {
                 const randomInt = mock.method(crypto, "randomInt", () => 200);
 
-                const plugin = clickPlugin();
+                const plugin = humanizeClickPlugin();
                 const listener = plugin["Locator.dblclick:before"];
                 const args = listener([]);
 
@@ -88,7 +88,7 @@ describe("plugins/humanize/click.js", () => {
             it("should support empty option", () => {
                 const randomInt = mock.method(crypto, "randomInt", () => 250);
 
-                const plugin = clickPlugin({});
+                const plugin = humanizeClickPlugin({});
                 const listener = plugin["Locator.dblclick:before"];
                 const args = listener([]);
 
@@ -101,7 +101,7 @@ describe("plugins/humanize/click.js", () => {
             it("should support option", () => {
                 const randomInt = mock.method(crypto, "randomInt", () => 300);
 
-                const plugin = clickPlugin();
+                const plugin = humanizeClickPlugin();
                 const listener = plugin["Locator.dblclick:before"];
                 const args = listener([{ button: "right" }]);
 
@@ -114,7 +114,7 @@ describe("plugins/humanize/click.js", () => {
             it("should support 'delay' option", () => {
                 const randomInt = mock.method(crypto, "randomInt", () => 350);
 
-                const plugin = clickPlugin();
+                const plugin = humanizeClickPlugin();
                 const listener = plugin["Locator.dblclick:before"];
                 const args = listener([{ button: "middle", delay: 1000 }]);
 
@@ -132,7 +132,7 @@ describe("plugins/humanize/click.js", () => {
             it("should support no option", () => {
                 const randomInt = mock.method(crypto, "randomInt", () => 200);
 
-                const plugin = clickPlugin();
+                const plugin = humanizeClickPlugin();
                 const listener = plugin["Mouse.click:before"];
                 const args = listener([42, 43]);
 
@@ -145,7 +145,7 @@ describe("plugins/humanize/click.js", () => {
             it("should support empty option", () => {
                 const randomInt = mock.method(crypto, "randomInt", () => 250);
 
-                const plugin = clickPlugin({});
+                const plugin = humanizeClickPlugin({});
                 const listener = plugin["Mouse.click:before"];
                 const args = listener([42, 43]);
 
@@ -158,7 +158,7 @@ describe("plugins/humanize/click.js", () => {
             it("should support option", () => {
                 const randomInt = mock.method(crypto, "randomInt", () => 300);
 
-                const plugin = clickPlugin();
+                const plugin = humanizeClickPlugin();
                 const listener = plugin["Mouse.click:before"];
                 const args = listener([42, 43, { button: "right" }]);
 
@@ -175,7 +175,7 @@ describe("plugins/humanize/click.js", () => {
             it("should support 'delay' option", () => {
                 const randomInt = mock.method(crypto, "randomInt", () => 350);
 
-                const plugin = clickPlugin();
+                const plugin = humanizeClickPlugin();
                 const listener = plugin["Mouse.click:before"];
                 const args = listener([
                     42,
@@ -201,7 +201,7 @@ describe("plugins/humanize/click.js", () => {
             it("should support no option", () => {
                 const randomInt = mock.method(crypto, "randomInt", () => 200);
 
-                const plugin = clickPlugin();
+                const plugin = humanizeClickPlugin();
                 const listener = plugin["Mouse.dblclick:before"];
                 const args = listener([42, 43]);
 
@@ -214,7 +214,7 @@ describe("plugins/humanize/click.js", () => {
             it("should support empty option", () => {
                 const randomInt = mock.method(crypto, "randomInt", () => 250);
 
-                const plugin = clickPlugin({});
+                const plugin = humanizeClickPlugin({});
                 const listener = plugin["Mouse.dblclick:before"];
                 const args = listener([42, 43]);
 
@@ -227,7 +227,7 @@ describe("plugins/humanize/click.js", () => {
             it("should support option", () => {
                 const randomInt = mock.method(crypto, "randomInt", () => 300);
 
-                const plugin = clickPlugin();
+                const plugin = humanizeClickPlugin();
                 const listener = plugin["Mouse.dblclick:before"];
                 const args = listener([42, 43, { button: "right" }]);
 
@@ -244,7 +244,7 @@ describe("plugins/humanize/click.js", () => {
             it("should support 'delay' option", () => {
                 const randomInt = mock.method(crypto, "randomInt", () => 350);
 
-                const plugin = clickPlugin();
+                const plugin = humanizeClickPlugin();
                 const listener = plugin["Mouse.dblclick:before"];
                 const args = listener([
                     42,

@@ -25,7 +25,7 @@ const getUserAgent = async () => {
 
 describe("Anti-bot: CreepJS", () => {
     describe("chromium", () => {
-        it("should get a B (or A) grade", async () => {
+        it("should get low ratings", async () => {
             const browser = await playwright.chromium.launch({
                 plugins: [
                     ...plugins.recommended(),
@@ -43,15 +43,40 @@ describe("Anti-bot: CreepJS", () => {
             try {
                 await page.goto("https://abrahamjuliot.github.io/creepjs/");
                 await page.waitForTimeout(5000);
-                const grade = /** @type {string} */ (
-                    await page
-                        .getByText("trust score")
-                        .locator('span[class^="scale-"]')
-                        .textContent()
+
+                // Ne plus vérifier le trust score.
+                // https://github.com/abrahamjuliot/creepjs/issues/292
+                const stealthRating = /** @type {string} */ (
+                    await page.locator(".stealth-rating").textContent()
                 );
-                if (!grade.startsWith("A") && !grade.startsWith("B")) {
-                    assert.fail(grade);
-                }
+                assert.equal(
+                    "0",
+                    stealthRating.slice(0, stealthRating.indexOf("%")),
+                    stealthRating,
+                );
+
+                const headlessRating = /** @type {string} */ (
+                    await page.locator(".headless-rating").textContent()
+                );
+                assert.equal(
+                    "0",
+                    headlessRating.slice(0, headlessRating.indexOf("%")),
+                    headlessRating,
+                );
+
+                const likeHeadlessRating = /** @type {string} */ (
+                    await page.locator(".like-headless-rating").textContent()
+                );
+                assert.ok(
+                    40 >
+                        Number(
+                            likeHeadlessRating.slice(
+                                0,
+                                likeHeadlessRating.indexOf("%"),
+                            ),
+                        ),
+                    likeHeadlessRating,
+                );
             } finally {
                 await page.screenshot({
                     path: "./log/creepjs-cr.png",

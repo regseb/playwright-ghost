@@ -4,7 +4,6 @@
  * @author Sébastien Règne
  */
 
-import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { describe, it } from "node:test";
 import patchright from "../../../src/patchright.js";
@@ -48,12 +47,9 @@ describe("Anti-bot: Cloudflare turnstile demo", () => {
                     page.frame({ url: "https://challenges.cloudflare.com/**" })
                 );
                 await frame.locator('input[type="checkbox"]').check();
-                // Attendre que la vérification commence et se termine.
-                const verifying = frame.locator("#verifying");
-                await verifying.waitFor({ state: "visible" });
-                await verifying.waitFor({ state: "hidden" });
 
-                assert.ok(await frame.locator("#success").isVisible());
+                const success = await frame.locator("#success");
+                await success.waitFor({ state: "visible" });
             } finally {
                 await page.screenshot({
                     path: "./log/turnstile_managed-cr.png",
@@ -90,12 +86,9 @@ describe("Anti-bot: Cloudflare turnstile demo", () => {
                 const frame = /** @type {Frame} */ (
                     page.frame({ url: "https://challenges.cloudflare.com/**" })
                 );
-                // Attendre que la vérification commence et se termine.
-                const verifying = frame.locator("#verifying");
-                await verifying.waitFor({ state: "visible" });
-                await verifying.waitFor({ state: "hidden" });
 
-                assert.ok(await frame.locator("#success").isVisible());
+                const success = await frame.locator("#success");
+                await success.waitFor({ state: "visible" });
             } finally {
                 await page.screenshot({
                     path: "./log/turnstile_noninteractive-cr.png",

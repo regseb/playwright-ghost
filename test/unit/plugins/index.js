@@ -10,6 +10,8 @@ import plugins from "../../../src/plugins/index.js";
 describe("plugins/index.js", () => {
     describe("plugins.polyfill", () => {
         it("should export polyfill plugins", () => {
+            assert.equal(Object.keys(plugins.polyfill).length, 8);
+            assert.equal(typeof plugins.polyfill.recommended, "function");
             assert.equal(typeof plugins.polyfill.automation, "function");
             assert.equal(typeof plugins.polyfill.headless, "function");
             assert.equal(typeof plugins.polyfill.screen, "function");
@@ -75,6 +77,8 @@ describe("plugins/index.js", () => {
 
     describe("plugins.humanize", () => {
         it("should export humanize plugins", () => {
+            assert.equal(Object.keys(plugins.humanize).length, 4);
+            assert.equal(typeof plugins.humanize.recommended, "function");
             assert.equal(typeof plugins.humanize.click, "function");
             assert.equal(typeof plugins.humanize.cursor, "function");
             assert.equal(typeof plugins.humanize.dialog, "function");
@@ -135,7 +139,9 @@ describe("plugins/index.js", () => {
 
     describe("plugins.utils", () => {
         it("should export utils plugins", () => {
+            assert.equal(Object.keys(plugins.utils).length, 7);
             assert.equal(typeof plugins.utils.adblocker, "function");
+            assert.equal(typeof plugins.utils.camoufox, "function");
             assert.equal(typeof plugins.utils.debug, "function");
             assert.equal(typeof plugins.utils.fingerprint, "function");
             assert.equal(typeof plugins.utils.locale, "function");
@@ -146,6 +152,7 @@ describe("plugins/index.js", () => {
 
     describe("plugins.debug", () => {
         it("should export debug plugins", () => {
+            assert.equal(Object.keys(plugins.debug).length, 3);
             assert.equal(typeof plugins.debug.console, "function");
             assert.equal(typeof plugins.debug.cursor, "function");
             assert.equal(typeof plugins.debug.sniffer, "function");
