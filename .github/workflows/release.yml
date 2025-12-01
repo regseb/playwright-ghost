@@ -26,7 +26,7 @@ jobs:
       # https://github.com/googleapis/release-please/issues/1802
       - name: Checkout repository
         if: ${{ steps.release.outputs.pr }}
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           ref: ${{ fromJSON(steps.release.outputs.pr).headBranchName }}
           # Récupérer deux commits sinon la réparation du commit (pour le
@@ -65,7 +65,7 @@ jobs:
       # Si la release a été créée : publier le paquet dans npm et JSR.
       - name: Checkout repository
         if: ${{ steps.release.outputs.release_created }}
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup Node.js
         if: ${{ steps.release.outputs.release_created }}
