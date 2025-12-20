@@ -4,8 +4,8 @@
  * @author Sébastien Règne
  */
 
-import crypto from "node:crypto";
 import timers from "node:timers/promises";
+import Random from "../../utils/random.js";
 
 /**
  * @import { Page } from "playwright"
@@ -43,7 +43,7 @@ export default function humanizeDialogPlugin(options) {
          */
         "Page:new": (page) => {
             page.on("dialog", async (dialog) => {
-                await timers.setTimeout(crypto.randomInt(delay.min, delay.max));
+                await timers.setTimeout(Random.int(delay.min, delay.max));
                 await dialog.accept();
             });
             return page;

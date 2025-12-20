@@ -4,7 +4,7 @@
  * @author Sébastien Règne
  */
 
-import crypto from "node:crypto";
+import Random from "../../utils/random.js";
 
 /**
  * Ajoute un délai entre le `mousedown` et `mouseup` d'un clic.
@@ -20,7 +20,7 @@ import crypto from "node:crypto";
 const setDelay = (options, delay) => {
     return {
         ...options,
-        delay: options?.delay ?? crypto.randomInt(delay.min, delay.max + 1),
+        delay: options?.delay ?? Random.int(delay.min, delay.max),
     };
 };
 

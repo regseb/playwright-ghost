@@ -4,9 +4,9 @@
  */
 
 import assert from "node:assert/strict";
-import crypto from "node:crypto";
 import { afterEach, describe, it, mock } from "node:test";
 import humanizeCursorPlugin from "../../../../src/plugins/humanize/cursor.js";
+import Random from "../../../../src/utils/random.js";
 
 const LocatorMock = class {
     check = mock.fn();
@@ -29,7 +29,7 @@ describe("plugins/humanize/cursor.js", () => {
             });
 
             it("should support no option", () => {
-                const randomInt = mock.method(crypto, "randomInt", () => {
+                const randomInt = mock.method(Random, "int", () => {
                     switch (randomInt.mock.callCount()) {
                         case 0:
                             return 200;
@@ -63,7 +63,7 @@ describe("plugins/humanize/cursor.js", () => {
             });
 
             it("should support empty option", () => {
-                const randomInt = mock.method(crypto, "randomInt", () => {
+                const randomInt = mock.method(Random, "int", () => {
                     switch (randomInt.mock.callCount()) {
                         case 0:
                             return 200;
@@ -97,7 +97,7 @@ describe("plugins/humanize/cursor.js", () => {
             });
 
             it("should support option", () => {
-                const randomInt = mock.method(crypto, "randomInt");
+                const randomInt = mock.method(Random, "int");
 
                 const page = {
                     viewportSize: () => ({ width: 123, height: 456 }),

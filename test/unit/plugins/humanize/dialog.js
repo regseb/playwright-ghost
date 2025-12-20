@@ -4,9 +4,9 @@
  */
 
 import assert from "node:assert/strict";
-import crypto from "node:crypto";
 import { afterEach, describe, it, mock } from "node:test";
 import humanizeDialogPlugin from "../../../../src/plugins/humanize/dialog.js";
+import Random from "../../../../src/utils/random.js";
 
 /**
  * Passe au prochain cycle de la boucle d'événements.
@@ -56,7 +56,7 @@ describe("plugins/humanize/dialog.js", () => {
 
             it("should support no option", async () => {
                 mock.timers.enable({ apis: ["setTimeout"] });
-                const randomInt = mock.method(crypto, "randomInt", () => 2000);
+                const randomInt = mock.method(Random, "int", () => 2000);
                 const accept = mock.fn(() => Promise.resolve());
                 const page = new PageMock();
 
@@ -83,7 +83,7 @@ describe("plugins/humanize/dialog.js", () => {
 
             it("should support empty option", async () => {
                 mock.timers.enable({ apis: ["setTimeout"] });
-                const randomInt = mock.method(crypto, "randomInt", () => 3000);
+                const randomInt = mock.method(Random, "int", () => 3000);
                 const accept = mock.fn(() => Promise.resolve());
                 const page = new PageMock();
 
@@ -110,7 +110,7 @@ describe("plugins/humanize/dialog.js", () => {
 
             it("should support option", async () => {
                 mock.timers.enable({ apis: ["setTimeout"] });
-                const randomInt = mock.method(crypto, "randomInt", () => 40);
+                const randomInt = mock.method(Random, "int", () => 40);
                 const accept = mock.fn(() => Promise.resolve());
                 const page = new PageMock();
 

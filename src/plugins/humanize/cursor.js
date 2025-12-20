@@ -5,12 +5,12 @@
  * @author Sébastien Règne
  */
 
-import crypto from "node:crypto";
 import timers from "node:timers/promises";
 // Ajouter la dépendance "puppeteer" dans le package.json, car l'import de
 // "ghost-cursor" a besoin des types de Puppeteer.
 // https://github.com/Xetera/ghost-cursor/pull/171
 import ghostCursor from "ghost-cursor";
+import Random from "../../utils/random.js";
 
 /**
  * @import { Locator, Mouse, Page } from "playwright"
@@ -76,8 +76,8 @@ const moveCursor = async (locator, options) => {
     // points proches du centre (ce n'est pas la racine carrée de rho qui est
     // utilisée contrairement à la réponse :
     // https://stackoverflow.com/a/5529199).
-    const phi = Math.random() * 2 * Math.PI;
-    const rho = Math.random();
+    const phi = Random.number(0, 2 * Math.PI);
+    const rho = Random.random();
     const position = options?.position ?? {
         x: (rho * Math.cos(phi) * box.width) / 2 + box.width / 2,
         y: (rho * Math.sin(phi) * box.height) / 2 + box.height / 2,
@@ -130,8 +130,8 @@ export default function humanizeCursorPlugin(options) {
             const viewportSize = page.viewportSize();
             // eslint-disable-next-line no-param-reassign
             page.mouse[CURSOR_SYMBOL] = {
-                x: start.x ?? crypto.randomInt(0, viewportSize?.width ?? 0),
-                y: start.y ?? crypto.randomInt(0, viewportSize?.height ?? 0),
+                x: start.x ?? Random.int(0, viewportSize?.width ?? 0),
+                y: start.y ?? Random.int(0, viewportSize?.height ?? 0),
             };
             return page;
         },
