@@ -158,6 +158,19 @@ describe("plugins/humanize/cursor.js", () => {
                 assert.deepEqual(argsAltered, [{ trial: true }]);
                 assert.equal(locator.click.mock.callCount(), 0);
             });
+
+            it("should do nothing when 'steps'", async () => {
+                const locator = new LocatorMock();
+
+                const plugin = humanizeCursorPlugin();
+                const listener = plugin["Locator.click:before"];
+                const argsAltered = await listener([{ steps: 42 }], {
+                    obj: locator,
+                });
+
+                assert.deepEqual(argsAltered, [{ steps: 42 }]);
+                assert.equal(locator.click.mock.callCount(), 0);
+            });
         });
 
         describe("Locator.dblclick:before", () => {
@@ -175,6 +188,19 @@ describe("plugins/humanize/cursor.js", () => {
                 });
 
                 assert.deepEqual(argsAltered, [{ trial: true }]);
+                assert.equal(locator.dblclick.mock.callCount(), 0);
+            });
+
+            it("should do nothing when 'steps'", async () => {
+                const locator = new LocatorMock();
+
+                const plugin = humanizeCursorPlugin();
+                const listener = plugin["Locator.dblclick:before"];
+                const argsAltered = await listener([{ steps: 1 }], {
+                    obj: locator,
+                });
+
+                assert.deepEqual(argsAltered, [{ steps: 1 }]);
                 assert.equal(locator.dblclick.mock.callCount(), 0);
             });
         });

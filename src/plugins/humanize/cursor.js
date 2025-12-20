@@ -161,7 +161,7 @@ export default function humanizeCursorPlugin(options) {
          *                           paramètres.
          */
         "Locator.click:before": async (args, { obj: locator }) => {
-            if (args[0]?.trial) {
+            if (args[0]?.trial || undefined !== args[0]?.steps) {
                 return args;
             }
             await locator.click({ ...args[0], trial: true });
@@ -177,7 +177,7 @@ export default function humanizeCursorPlugin(options) {
          *                           paramètres.
          */
         "Locator.dblclick:before": async (args, { obj: locator }) => {
-            if (args[0]?.trial) {
+            if (args[0]?.trial || undefined !== args[0]?.steps) {
                 return args;
             }
             await locator.dblclick({ ...args[0], trial: true });
