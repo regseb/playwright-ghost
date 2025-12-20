@@ -65,6 +65,9 @@ export default function utilsDebugPlugin(options) {
                         cursor.style.borderRadius = "50%";
                         cursor.style.height = "24px";
                         cursor.style.opacity = "50%";
+                        // Ignorer les événements du curseur pour ne pas bloquer
+                        // les interactions avec les éléments sous le div.
+                        cursor.style.pointerEvents = "none";
                         cursor.style.position = "fixed";
                         cursor.style.transform = "translate(-50%, -50%)";
                         cursor.style.transition =
