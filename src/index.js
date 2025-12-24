@@ -19,13 +19,10 @@ import Ghost from "./ghost.js";
  * @typedef {import("playwright").BrowserType} BrowserType
  * @typedef {import("playwright").CDPSession} CDPSession
  * @typedef {import("playwright").WebSocketRoute} WebSocketRoute
- * @typedef {import("playwright").Accessibility} Accessibility
  * @typedef {import("playwright").ElectronApplication} ElectronApplication
  * @typedef {import("playwright").AndroidElementInfo} AndroidElementInfo
  * @typedef {import("playwright").AndroidSelector} AndroidSelector
  * @typedef {import("playwright").AndroidKey} AndroidKey
- * @typedef {import("playwright")._bidiChromium} _bidiChromium
- * @typedef {import("playwright")._bidiFirefox} _bidiFirefox
  * @typedef {import("playwright").Android} Android
  * @typedef {import("playwright").AndroidDevice} AndroidDevice
  * @typedef {import("playwright").AndroidInput} AndroidInput
