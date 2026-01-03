@@ -5,10 +5,27 @@
  */
 
 import { WebSocketServer } from "ws";
+import "../../polyfills/map.js";
 
 /**
+ * @import { Buffer } from "node:buffer"
  * @import { Page } from "playwright"
  */
+
+/**
+ * Contourne la
+ * [Content Security Policy (CSP)](https://developer.mozilla.org/Web/HTTP/Guides/CSP).
+ *
+ * @param {Record<string, any>|undefined} options Les options de création
+ *                                                d'un contexte.
+ * @returns {Record<string, any>} Les nouvelles options.
+ */
+const setBypassCSP = (options) => {
+    return {
+        bypassCSP: true,
+        ...options,
+    };
+};
 
 /**
  * Crée un script pour surveiller l'utilisation des propriétés de la page. Cette
@@ -24,6 +41,8 @@ const initScript = async (port) => {
         socket.addEventListener("error", (err) => reject(err));
     });
 
+    // eslint-disable-next-line no-undef
+    const url = location.href;
     const wsSend = ws.send.bind(ws);
     const objectEntries = Object.entries;
     const objectGetOwnPropertyDescriptors = Object.getOwnPropertyDescriptors;
@@ -52,12 +71,84 @@ const initScript = async (port) => {
 
     const disabled = new Disabled();
 
-    const send = (path, value) =>
-        disabled.runIfEnabled(() =>
-            wsSend(`{ "key": "${path}", "value": "${value}" }`),
-        );
+    const send = (path) => wsSend(`{ "url": "${url}", "key": "${path}" }`);
 
-    const observe = (obj, pathParent = "") => {
+    const observe = (obj, prop, descriptor, path) => {
+        if (descriptor?.configurable) {
+            if (descriptor?.value) {
+                objectDefineProperty(obj, prop, {
+                    get() {
+                        disabled.runIfEnabled(() => {
+                            objectDefineProperty(obj, prop, descriptor);
+                            send(path);
+                        });
+                        return descriptor.value;
+                    },
+                    ...(descriptor.writable
+                        ? {
+                              set(value) {
+                                  disabled.runIfEnabled(() => {
+                                      objectDefineProperty(
+                                          obj,
+                                          prop,
+                                          descriptor,
+                                      );
+                                      send(path);
+                                  });
+                                  // eslint-disable-next-line no-param-reassign
+                                  descriptor.value = value;
+                              },
+                          }
+                        : {}),
+                    enumerable: descriptor.enumerable,
+                    configurable: descriptor.configurable,
+                });
+            } else if (descriptor?.get) {
+                objectDefineProperty(obj, prop, {
+                    ...(descriptor.get
+                        ? {
+                              get() {
+                                  disabled.runIfEnabled(() => {
+                                      objectDefineProperty(
+                                          obj,
+                                          prop,
+                                          descriptor,
+                                      );
+                                      send(path);
+                                  });
+                                  return disabled.runInDisabled(() =>
+                                      descriptor.get.call(this),
+                                  );
+                              },
+                          }
+                        : {}),
+                    ...(descriptor.set
+                        ? {
+                              set(value) {
+                                  disabled.runIfEnabled(() => {
+                                      objectDefineProperty(
+                                          obj,
+                                          prop,
+                                          descriptor,
+                                      );
+                                      send(path);
+                                  });
+                                  disabled.runInDisabled(() =>
+                                      descriptor.set.call(this, value),
+                                  );
+                              },
+                          }
+                        : {}),
+                    enumerable: descriptor.enumerable,
+                    configurable: descriptor.configurable,
+                });
+            }
+        }
+        // eslint-disable-next-line no-use-before-define
+        walk(descriptor.value, `${path}.`);
+    };
+
+    const walk = (obj, pathParent = "") => {
         if (
             null === obj ||
             ("object" !== typeof obj && "function" !== typeof obj) ||
@@ -70,57 +161,11 @@ const initScript = async (port) => {
         for (const [prop, descriptor] of objectEntries(
             objectGetOwnPropertyDescriptors(obj),
         )) {
-            const path = `${pathParent}${prop}`;
-            if (descriptor?.configurable) {
-                if (descriptor?.value) {
-                    objectDefineProperty(obj, prop, {
-                        get() {
-                            send(path, "get");
-                            return descriptor.value;
-                        },
-                        ...(descriptor.writable
-                            ? {
-                                  set(value) {
-                                      send(path, "set");
-                                      descriptor.value = value;
-                                  },
-                              }
-                            : {}),
-                        enumerable: descriptor.enumerable,
-                        configurable: descriptor.configurable,
-                    });
-                } else if (descriptor?.get) {
-                    objectDefineProperty(obj, prop, {
-                        ...(descriptor.get
-                            ? {
-                                  get() {
-                                      send(path, "get");
-                                      return disabled.runInDisabled(() =>
-                                          descriptor.get.call(this),
-                                      );
-                                  },
-                              }
-                            : {}),
-                        ...(descriptor.set
-                            ? {
-                                  set(value) {
-                                      send(path, "set");
-                                      disabled.runInDisabled(() =>
-                                          descriptor.set.call(this, value),
-                                      );
-                                  },
-                              }
-                            : {}),
-                        enumerable: descriptor.enumerable,
-                        configurable: descriptor.configurable,
-                    });
-                }
-            }
-            observe(descriptor.value, `${path}.`);
+            observe(obj, prop, descriptor, `${pathParent}${prop}`);
         }
     };
 
-    observe(globalThis);
+    walk(globalThis);
 };
 
 /**
@@ -130,6 +175,36 @@ const initScript = async (port) => {
  */
 export default function debugSnifferPlugin() {
     return {
+        /**
+         * Modifie les options de lancement d'un contexte (et du navigateur).
+         *
+         * @param {any[]} args Les paramètres de la méthode.
+         * @returns {any[]} Les nouveaux paramètres.
+         */
+        "BrowserType.launchPersistentContext:before": (args) => {
+            return [args[0], setBypassCSP(args[1])];
+        },
+
+        /**
+         * Modifie les options de création d'un contexte.
+         *
+         * @param {any[]} args Les paramètres de la méthode.
+         * @returns {any[]} Les nouveaux paramètres.
+         */
+        "Browser.newContext:before": (args) => {
+            return [setBypassCSP(args[0])];
+        },
+
+        /**
+         * Modifie les options de création d'un contexte d'une page.
+         *
+         * @param {any[]} args Les paramètres de la méthode.
+         * @returns {any[]} Les nouveaux paramètres.
+         */
+        "Browser.newPage:before": (args) => {
+            return [setBypassCSP(args[0])];
+        },
+
         /**
          * Ajoute un script qui surveiller l'utilisation des propriétés de la
          * page.
@@ -143,13 +218,13 @@ export default function debugSnifferPlugin() {
 
             const wss = new WebSocketServer({ port: 0 });
             wss.on("connection", (/** @type {WebSocket} */ ws) => {
-                ws.on("message", (data) => {
+                ws.on("message", (/** @type {Buffer} */ data) => {
                     const entry = JSON.parse(data.toString());
-                    if (map.has(entry.key)) {
-                        map.get(entry.key).add(entry.value);
-                    } else {
-                        map.set(entry.key, new Set([entry.value]));
-                    }
+                    const frame = map.getOrInsertComputed(
+                        entry.url,
+                        () => new Set(),
+                    );
+                    frame.add(entry.key);
                 });
             });
 
@@ -161,20 +236,20 @@ export default function debugSnifferPlugin() {
             // eslint-disable-next-line no-param-reassign
             page.sniffer = {
                 /**
-                 * Récupère les propriétés utilisées dans la page.
+                 * Récupère les propriétés utilisées pour chaque frame de la
+                 * page.
                  *
-                 * @returns {Record<string, string[]>} Les propriétés utilisées.
+                 * @returns {Record<string, string[]>} Les propriétés utilisées
+                 *                                     pour chaque frame.
                  */
                 get: () => {
                     return Object.fromEntries(
-                        Array.from(map.entries())
-                            .toSorted(([a], [b]) =>
+                        Array.from(map.entries(), ([key, value]) => [
+                            key,
+                            Array.from(value).toSorted((a, b) =>
                                 a.toLowerCase().localeCompare(b.toLowerCase()),
-                            )
-                            .map(([key, value]) => [
-                                key,
-                                Array.from(value).toSorted(),
-                            ]),
+                            ),
+                        ]),
                     );
                 },
 
