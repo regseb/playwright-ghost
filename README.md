@@ -338,7 +338,7 @@ const browser = await chromium.launch({
 
 ### Pass
 
-This 23 anti-bots don't detect Playwright-ghost:
+This 24 anti-bots don't detect Playwright-ghost:
 [Anubis](https://anubis.techaro.lol),
 [Bing](https://www.bing.com/turing/captcha/challenge),
 [bounty-nodejs](https://bounty-nodejs.datashield.co/),
@@ -359,6 +359,7 @@ This 23 anti-bots don't detect Playwright-ghost:
 [Check browser fingerprints (iphey)](https://iphey.com/),
 [OverpoweredJS Fingerprinting Demo](https://overpoweredjs.com/demo.html),
 [Pixelscan](https://pixelscan.net/fingerprint-check),
+[rebrowser-bot-detector](https://bot-detector.rebrowser.net/),
 [Antibot (Sannysoft)](https://bot.sannysoft.com/),
 [Simple Service Workers Fingerprinting Leaks Test](https://mihneamanolache.github.io/simple-sw-test/)
 and
@@ -369,11 +370,9 @@ To find out which plugins are used, see the
 
 ### Fail
 
-This 3 anti-bots detect Playwright-ghost:
+This 2 anti-bots detect Playwright-ghost:
 
 - [CreepJS](https://abrahamjuliot.github.io/creepjs/): _44% like headless_
-- [rebrowser-bot-detector](https://bot-detector.rebrowser.net/):
-  _mainWorldExecution_, _pwInitScripts_ and _useragent_
 - [Score detector (reCAPTCHA v3)](https://antcpt.com/score_detector/): _0.3_
 
 Contributions are welcome to fix these defects.

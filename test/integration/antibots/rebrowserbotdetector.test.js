@@ -7,56 +7,44 @@
 
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
-import process from "node:process";
 import { describe, it } from "node:test";
+import patchright from "../../../src/patchright.js";
 import plugins from "../../../src/plugins/index.js";
-import rebrowser from "../../../src/rebrowser.js";
-
-const getUserAgent = async () => {
-    const browser = await rebrowser.chromium.launch({
-        plugins: plugins.recommended(),
-    });
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const userAgent = await page.evaluate("navigator.userAgent");
-    await context.close();
-    await browser.close();
-    return userAgent.replace("Headless", "");
-};
 
 describe("Anti-bot: rebrowser-bot-detector", () => {
     describe("chromium", () => {
         it("should not be detected", async () => {
-            const browser = await rebrowser.chromium.launch({
-                plugins: [
-                    ...plugins.recommended(),
-                    plugins.polyfill.userAgent({
-                        userAgent: await getUserAgent(),
-                    }),
-                ],
+            const browser = await patchright.chromium.launch({
+                // Utiliser Chrome, car le test n'accepte pas Chromium.
+                channel: "chrome",
+                plugins: plugins.recommended(),
             });
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
-                // Contourner l'isolation des scripts.
                 // https://rebrowser.net/blog/how-to-access-main-context-objects-from-isolated-context-in-puppeteer-and-playwright-23741
                 await page.addInitScript(() => {
                     globalThis.addEventListener("message", (event) => {
                         if ("call" === event.data) {
-                            globalThis.dummyFn();
+                            // Ne pas exécuter la ligne suivante dans un
+                            // evaluate(), car la pile d'erreur contiendrait
+                            // UtilityScript.
                             // eslint-disable-next-line no-undef, unicorn/prefer-query-selector
                             document.getElementById("detections-json");
-                            // Ne pas exécuter la ligne suivante dans ce monde
-                            // pour ne pas être détecté.
-                            // document.getElementsByClassName("div");
                         }
                     });
                 });
 
                 await page.goto("https://bot-detector.rebrowser.net/");
 
-                process.env.REBROWSER_PATCHES_RUNTIME_FIX_MODE =
-                    "alwaysIsolated";
+                await page.evaluate(
+                    () => {
+                        globalThis.dummyFn();
+                    },
+                    [],
+                    false,
+                );
+
                 await page.evaluate(() => {
                     globalThis.postMessage("call");
                     // Exécuter la ligne suivante dans ce monde qui est isolé.
@@ -76,7 +64,10 @@ describe("Anti-bot: rebrowser-bot-detector", () => {
 
                 for (const result of JSON.parse(results)) {
                     // https://github.com/rebrowser/rebrowser-patches/issues/10#issuecomment-2397629630
-                    if ("mainWorldExecution" === result.type) {
+                    if (
+                        "mainWorldExecution" === result.type ||
+                        "exposeFunctionLeak" === result.type
+                    ) {
                         assert.equal(
                             result.rating,
                             0,
