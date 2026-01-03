@@ -9,7 +9,7 @@ import process from "node:process";
 
 /**
  * @import { ChildProcess } from "node:child_process"
- * @import { BrowserType } from "playwright"
+ * @import { BrowserContext, BrowserType } from "playwright"
  * @import { ContextBefore } from "../../hook.js"
  */
 
@@ -157,6 +157,7 @@ const setDisplay = (options, display, browserType) => {
  *                                                                              crochets
  *                                                                              du
  *                                                                              plugin.
+ * @see https://wayland.pages.freedesktop.org/weston/
  */
 export default function utilsWestonPlugin(options) {
     /**
@@ -204,7 +205,7 @@ export default function utilsWestonPlugin(options) {
         },
 
         /**
-         * Modifie les options de lancement du navigateur.
+         * Modifie les options de lancement du navigateur avec persistence.
          *
          * @param {any[]}                      args    Les paramètres de la
          *                                             méthode.
@@ -217,6 +218,23 @@ export default function utilsWestonPlugin(options) {
         ) => {
             const display = spawnWeston(westonArgs, keepalive);
             return [args[0], setDisplay(args[1], display, browserType)];
+        },
+
+        /**
+         * Écoute la fermeture du contexte pour arrêter éventuellement
+         * l'exécutable de `weston`.
+         *
+         * @param {BrowserContext} browserContext Le `BrowserContext` créé.
+         * @returns {BrowserContext} Le `BrowserContext` avec l'écouteur.
+         */
+        "BrowserType.launchPersistentContext:after": (browserContext) => {
+            // Ne pas utiliser "BrowserContext.close:after", car si le
+            // navigateur a été lancé avec launch(), il faut arrêter weston
+            // seulement à la fermeture du navigateur.
+            browserContext.on("close", () => {
+                killWeston(westonArgs);
+            });
+            return browserContext;
         },
 
         /**
