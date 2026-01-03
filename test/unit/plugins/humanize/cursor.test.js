@@ -5,6 +5,7 @@
 
 import assert from "node:assert/strict";
 import { afterEach, describe, it, mock } from "node:test";
+import ghostCursor from "ghost-cursor";
 import humanizeCursorPlugin from "../../../../src/plugins/humanize/cursor.js";
 import Random from "../../../../src/utils/random.js";
 
@@ -303,6 +304,162 @@ describe("plugins/humanize/cursor.js", () => {
         describe("Mouse.move:before", () => {
             afterEach(() => {
                 mock.reset();
+            });
+
+            it("should not move when same position", async () => {
+                const mouse = { move: mock.fn() };
+                const page = {
+                    viewportSize: () => null,
+                    mouse,
+                };
+
+                const plugin = humanizeCursorPlugin({
+                    start: { x: 42, y: 43 },
+                });
+                const pageListener = plugin["Page:new"];
+                pageListener(page);
+                const mouseListener = plugin["Mouse.move:before"];
+                const argsAltered = await mouseListener([42, 43], {
+                    obj: mouse,
+                });
+
+                assert.deepEqual(argsAltered, [42, 43]);
+                assert.equal(mouse.move.mock.callCount(), 0);
+            });
+
+            it("should move the cursor humanly", async () => {
+                const path = mock.method(ghostCursor, "path", () => {
+                    return [
+                        { x: 1, y: 2, timestamp: 946_681_200_000 },
+                        { x: 3.4, y: 5.6, timestamp: 946_681_200_001 },
+                        { x: 7.8, y: 9, timestamp: 946_681_200_003 },
+                        { x: 10, y: 11, timestamp: 946_681_200_006 },
+                    ];
+                });
+
+                const mouse = { move: mock.fn() };
+                const page = {
+                    viewportSize: () => null,
+                    mouse,
+                };
+
+                const plugin = humanizeCursorPlugin({
+                    start: { x: 1, y: 2 },
+                });
+                const pageListener = plugin["Page:new"];
+                pageListener(page);
+                const mouseListener = plugin["Mouse.move:before"];
+                const argsAltered = await mouseListener([10, 11], {
+                    obj: mouse,
+                });
+
+                assert.deepEqual(argsAltered, [10, 11]);
+                assert.equal(path.mock.callCount(), 1);
+                assert.deepEqual(path.mock.calls[0].arguments, [
+                    { x: 1, y: 2 },
+                    { x: 10, y: 11 },
+                    { useTimestamps: true },
+                ]);
+                assert.equal(mouse.move.mock.callCount(), 2);
+                assert.deepEqual(mouse.move.mock.calls[0].arguments, [
+                    3,
+                    6,
+                    { steps: 1 },
+                ]);
+                assert.deepEqual(mouse.move.mock.calls[1].arguments, [
+                    8,
+                    9,
+                    { steps: 1 },
+                ]);
+            });
+
+            it("should not move to same position", async () => {
+                const path = mock.method(ghostCursor, "path", () => {
+                    return [
+                        { x: 10, y: 20, timestamp: 946_681_200_000 },
+                        { x: 11.1, y: 21.2, timestamp: 946_681_200_001 },
+                        { x: 11.3, y: 21.4, timestamp: 946_681_200_003 },
+                        { x: 12, y: 22, timestamp: 946_681_200_006 },
+                    ];
+                });
+
+                const mouse = { move: mock.fn() };
+                const page = {
+                    viewportSize: () => null,
+                    mouse,
+                };
+
+                const plugin = humanizeCursorPlugin({
+                    start: { x: 10, y: 20 },
+                });
+                const pageListener = plugin["Page:new"];
+                pageListener(page);
+                const mouseListener = plugin["Mouse.move:before"];
+                const argsAltered = await mouseListener([12, 22], {
+                    obj: mouse,
+                });
+
+                assert.deepEqual(argsAltered, [12, 22]);
+                assert.equal(path.mock.callCount(), 1);
+                assert.deepEqual(path.mock.calls[0].arguments, [
+                    { x: 10, y: 20 },
+                    { x: 12, y: 22 },
+                    { useTimestamps: true },
+                ]);
+                assert.equal(mouse.move.mock.callCount(), 1);
+                assert.deepEqual(mouse.move.mock.calls[0].arguments, [
+                    11,
+                    21,
+                    { steps: 1 },
+                ]);
+            });
+
+            it("should start at previous end", async () => {
+                const path = mock.method(ghostCursor, "path", () => {
+                    switch (path.mock.callCount()) {
+                        case 0:
+                            return [
+                                { x: 42, y: 43, timestamp: 946_681_200_000 },
+                                { x: 44, y: 45, timestamp: 946_681_200_001 },
+                            ];
+                        case 1:
+                            return [
+                                { x: 44, y: 45, timestamp: 946_681_201_000 },
+                                { x: 46, y: 47, timestamp: 946_681_201_001 },
+                            ];
+                        default:
+                            return [];
+                    }
+                });
+
+                const page = {
+                    viewportSize: () => null,
+                    mouse: {},
+                };
+
+                const plugin = humanizeCursorPlugin({
+                    start: { x: 42, y: 43 },
+                });
+                const pageListener = plugin["Page:new"];
+                pageListener(page);
+                const mouseListener = plugin["Mouse.move:before"];
+                await mouseListener([44, 45], { obj: page.mouse });
+                const argsAltered = await mouseListener([46, 47], {
+                    obj: page.mouse,
+                });
+
+                assert.deepEqual(argsAltered, [46, 47]);
+                assert.equal(path.mock.callCount(), 2);
+                assert.deepEqual(path.mock.calls[0].arguments, [
+                    { x: 42, y: 43 },
+                    { x: 44, y: 45 },
+                    { useTimestamps: true },
+                ]);
+                assert.deepEqual(path.mock.calls[1].arguments, [
+                    { x: 44, y: 45 },
+                    { x: 46, y: 47 },
+                    { useTimestamps: true },
+                ]);
             });
 
             it("should do nothing when 'steps'", async () => {

@@ -6,9 +6,6 @@
  */
 
 import timers from "node:timers/promises";
-// Ajouter la dépendance "puppeteer" dans le package.json, car l'import de
-// "ghost-cursor" a besoin des types de Puppeteer.
-// https://github.com/Xetera/ghost-cursor/pull/171
 import ghostCursor from "ghost-cursor";
 import Random from "../../utils/random.js";
 
@@ -25,31 +22,54 @@ import Random from "../../utils/random.js";
 const CURSOR_SYMBOL = Symbol("cursor");
 
 /**
- * Déplace le curseur.
+ * Déplace le curseur à une position.
  *
  * @param {Object} to    La position où déplacer le curseur.
  * @param {number} to.x  La position _x_ où déplacer le curseur.
  * @param {number} to.y  La position _y_ où déplacer le curseur.
  * @param {Mouse}  mouse La souris de la page.
  */
-const move = async (to, mouse) => {
+const moveToPosition = async (to, mouse) => {
     // Vérifier que le curseur n'est pas déjà à la position demandée.
     // https://github.com/Xetera/ghost-cursor/issues/159
     if (mouse[CURSOR_SYMBOL].x === to.x && mouse[CURSOR_SYMBOL].y === to.y) {
         return;
     }
 
-    const path = ghostCursor.path(mouse[CURSOR_SYMBOL], to, {
-        useTimestamps: true,
-    });
+    const steps = ghostCursor
+        .path(mouse[CURSOR_SYMBOL], to, { useTimestamps: true })
+        // Arrondir les positions pour avoir des nombres entiers, car les
+        // positions de la souris (et les paramètres de la méthode
+        // Locator.move()) sont des entiers.
+        .map((point) => ({
+            ...point,
+            x: Math.round(point.x),
+            y: Math.round(point.y),
+        }))
+        // Enlever les positions en double (pour ne pas émettre deux évènements
+        // avec la même position). Cela peut arriver avec des petits
+        // déplacements et valeurs arrondies.
+        .filter(
+            (point, index, path) =>
+                path.findIndex((p) => point.x === p.x && point.y === p.y) ===
+                index,
+        )
+        // Convertir les horodatages en délai, car selon le temps d'exécution :
+        // l'horodatage peut être dans le passé.
+        .map((point, index, path) => ({
+            x: point.x,
+            y: point.y,
+            delay:
+                0 === index ? 0 : point.timestamp - path[index - 1].timestamp,
+        }));
 
     // Déplacer le curseur. Enlever le premier et le dernier élément du chemin
     // qui sont la position actuelle et la position finale du curseur.
-    for (const step of path.slice(1, -1)) {
+    for (const step of steps.slice(1, -1)) {
         // Forcer le nombre d'étapes à 1 pour utiliser la méthode native de
         // déplacement.
         await mouse.move(step.x, step.y, { steps: 1 });
-        await timers.setTimeout(step.timestamp - Date.now());
+        await timers.setTimeout(step.delay);
     }
 
     // Enregistrer la nouvelle position du curseur, pour l'utiliser comme point
@@ -59,17 +79,17 @@ const move = async (to, mouse) => {
 };
 
 /**
- * Déplace le curseur avant d'effectuer une action (par exemple cliquer).
+ * Déplace le curseur sur un élément.
  *
- * @param {Locator} locator            Le `Locator` de l'élément où l'action
- *                                     sera effectuée.
+ * @param {Locator} locator            Le `Locator` de l'élément.
  * @param {Object}  [options]          Les options de l'action.
  * @param {Object}  [options.position] La position où faire l'action.
  * @param {number}  options.position.x La position _x_ où faire l'action.
  * @param {number}  options.position.y La position _y_ où faire l'action.
- * @returns {Promise<Object>} Les nouvelles options de l'action.
+ * @returns {Promise<Object>} Les nouvelles options de l'action (avec la
+ *                            position où faire l'action).
  */
-const moveCursor = async (locator, options) => {
+const movetoLocator = async (locator, options) => {
     const box = await locator.boundingBox();
     // Déterminer où cliquer dans l'élément. Trouver un point aléatoire dans
     // l'ellipse (délimitée par le rectangle de l'élément) en favorisant les
@@ -89,7 +109,7 @@ const moveCursor = async (locator, options) => {
 
     // Déplacer le curseur entre la position actuelle et le point dans
     // l'élément.
-    await move(to, locator.page().mouse);
+    await moveToPosition(to, locator.page().mouse);
 
     return {
         ...options,
@@ -149,7 +169,7 @@ export default function humanizeCursorPlugin(options) {
                 return args;
             }
             await locator.check({ ...args[0], trial: true });
-            return [await moveCursor(locator, args[0])];
+            return [await movetoLocator(locator, args[0])];
         },
 
         /**
@@ -165,7 +185,7 @@ export default function humanizeCursorPlugin(options) {
                 return args;
             }
             await locator.click({ ...args[0], trial: true });
-            return [await moveCursor(locator, args[0])];
+            return [await movetoLocator(locator, args[0])];
         },
 
         /**
@@ -181,7 +201,7 @@ export default function humanizeCursorPlugin(options) {
                 return args;
             }
             await locator.dblclick({ ...args[0], trial: true });
-            return [await moveCursor(locator, args[0])];
+            return [await movetoLocator(locator, args[0])];
         },
 
         /**
@@ -197,7 +217,7 @@ export default function humanizeCursorPlugin(options) {
                 return args;
             }
             await locator.hover({ ...args[0], trial: true });
-            return [await moveCursor(locator, args[0])];
+            return [await movetoLocator(locator, args[0])];
         },
 
         /**
@@ -213,7 +233,7 @@ export default function humanizeCursorPlugin(options) {
                 return args;
             }
             await locator.setChecked(args[0], { ...args[1], trial: true });
-            return [args[0], await moveCursor(locator, args[1])];
+            return [args[0], await movetoLocator(locator, args[1])];
         },
 
         /**
@@ -229,7 +249,7 @@ export default function humanizeCursorPlugin(options) {
                 return args;
             }
             await locator.uncheck({ ...args[0], trial: true });
-            return [await moveCursor(locator, args[0])];
+            return [await movetoLocator(locator, args[0])];
         },
 
         /**
@@ -241,7 +261,7 @@ export default function humanizeCursorPlugin(options) {
          */
         "Mouse.click:before": async (args, { obj: mouse }) => {
             if (undefined === args[2]?.steps) {
-                await move({ x: args[0], y: args[1] }, mouse);
+                await moveToPosition({ x: args[0], y: args[1] }, mouse);
             }
             return args;
         },
@@ -255,7 +275,7 @@ export default function humanizeCursorPlugin(options) {
          */
         "Mouse.dblclick:before": async (args, { obj: mouse }) => {
             if (undefined === args[2]?.steps) {
-                await move({ x: args[0], y: args[1] }, mouse);
+                await moveToPosition({ x: args[0], y: args[1] }, mouse);
             }
             return args;
         },
@@ -269,7 +289,7 @@ export default function humanizeCursorPlugin(options) {
          */
         "Mouse.move:before": async (args, { obj: mouse }) => {
             if (undefined === args[2]?.steps) {
-                await move({ x: args[0], y: args[1] }, mouse);
+                await moveToPosition({ x: args[0], y: args[1] }, mouse);
             }
             return args;
         },

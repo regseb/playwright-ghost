@@ -9,14 +9,14 @@ import playwright from "../../../../src/index.js";
 import humanizeCursorPlugin from "../../../../src/plugins/humanize/cursor.js";
 
 describe("Plugin: humanize.cursor", () => {
-    it("should not move in the same position", async () => {
+    it("should move to click on buttons", async () => {
         const browser = await playwright.chromium.launch({
             plugins: [humanizeCursorPlugin()],
         });
         const context = await browser.newContext();
         try {
             const page = await context.newPage();
-            await page.goto("https://example.com/");
+            await page.goto("https://camoufox.com/tests/buttonclick");
             await page.evaluate(() => {
                 globalThis.events = [];
                 // eslint-disable-next-line no-undef
@@ -28,7 +28,9 @@ describe("Plugin: humanize.cursor", () => {
                     });
                 });
             });
-            await page.locator("h1").click();
+            for (let i = 0; 10 > i; ++i) {
+                await page.locator("button").click();
+            }
 
             const events = await page.evaluate(() => globalThis.events);
             for (let i = 1; i < events.length; i++) {
