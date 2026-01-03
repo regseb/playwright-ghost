@@ -9,7 +9,7 @@ import playwright from "../../../../src/index.js";
 import utilsXvfbPlugin from "../../../../src/plugins/utils/xvfb.js";
 
 describe("Plugin: utils.xvfb", () => {
-    it("should use screen size", async () => {
+    it("should use screen size with launch()", async () => {
         const browser = await playwright.chromium.launch({
             headless: false,
             plugins: [utilsXvfbPlugin()],
@@ -30,6 +30,29 @@ describe("Plugin: utils.xvfb", () => {
         } finally {
             await context.close();
             await browser.close();
+        }
+    });
+
+    it("should use screen size with launchPersistentContext()", async () => {
+        const context = await playwright.chromium.launchPersistentContext("", {
+            headless: false,
+            // Définir le viewport à `null` pour utiliser la taille de l'écran
+            // virtuel.
+            viewport: null,
+            plugins: [utilsXvfbPlugin()],
+        });
+        try {
+            const page = await context.newPage();
+            await page.goto("https://example.com/");
+
+            const screen = await page.evaluate(() => ({
+                width: screen.width,
+                height: screen.height,
+            }));
+            assert.equal(screen.width, 1920);
+            assert.equal(screen.height, 1080);
+        } finally {
+            await context.close();
         }
     });
 });

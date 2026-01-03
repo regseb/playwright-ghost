@@ -10,7 +10,7 @@ import process from "node:process";
 
 /**
  * @import { ChildProcess } from "node:child_process"
- * @import { BrowserType } from "playwright"
+ * @import { BrowserContext, BrowserType } from "playwright"
  * @import { ContextBefore } from "../../hook.js"
  */
 
@@ -158,6 +158,7 @@ const setDisplay = (options, display, browserType) => {
  *                                                                              crochets
  *                                                                              du
  *                                                                              plugin.
+ * @see https://www.x.org/archive/X11R7.7/doc/man/man1/Xvfb.1.xhtml
  */
 export default function utilsXvfbPlugin(options) {
     /**
@@ -206,7 +207,7 @@ export default function utilsXvfbPlugin(options) {
         },
 
         /**
-         * Modifie les options de lancement du navigateur.
+         * Modifie les options de lancement du navigateur avec persistence.
          *
          * @param {any[]}                      args    Les paramètres de la
          *                                             méthode.
@@ -220,6 +221,23 @@ export default function utilsXvfbPlugin(options) {
         ) => {
             const display = await spawnXvfb(xvfbArgs, keepalive);
             return [args[0], setDisplay(args[1], display, browserType)];
+        },
+
+        /**
+         * Écoute la fermeture du contexte pour arrêter éventuellement
+         * l'exécutable de `Xvfb`.
+         *
+         * @param {BrowserContext} browserContext Le `BrowserContext` créé.
+         * @returns {BrowserContext} Le `BrowserContext` avec l'écouteur.
+         */
+        "BrowserType.launchPersistentContext:after": (browserContext) => {
+            // Ne pas utiliser "BrowserContext.close:after", car si le
+            // navigateur a été lancé avec launch(), il faut arrêter Xvfb
+            // seulement à la fermeture du navigateur.
+            browserContext.on("close", () => {
+                killXvfb(xvfbArgs);
+            });
+            return browserContext;
         },
 
         /**
