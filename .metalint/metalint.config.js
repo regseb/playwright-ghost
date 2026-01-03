@@ -30,7 +30,6 @@ export default {
         // Ignorer les fichiers temporaires de Vim.
         "!*.swp",
         // Ignorer les autres lockfiles.
-        "!/bun.lockb",
         "!/pnpm-lock.yaml",
         "!/yarn.lock",
     ],

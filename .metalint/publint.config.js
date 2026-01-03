@@ -3,4 +3,6 @@
  * @author Sébastien Règne
  */
 
-export default {};
+export default {
+    pack: "npm",
+};
