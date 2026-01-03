@@ -19,6 +19,6 @@ export default {
     tempDirName: ".stryker/tmp/",
     testRunner: "tap",
     tap: {
-        testFiles: ["test/unit/**/*.js"],
+        testFiles: ["test/unit/**/*.test.js"],
     },
 };
