@@ -17,7 +17,11 @@ import Hooker from "./hooker.js";
  * @type {Pointers}
  */
 const POINTERS = {
-    create: ["BrowserType.launch:after"],
+    create: [
+        "BrowserType.connect:after",
+        "BrowserType.connectOverCDP:after",
+        "BrowserType.launch:after",
+    ],
     getter: ["BrowserContext.browser:after"],
 };
 

@@ -9,6 +9,45 @@ import Ghost from "../../src/ghost.js";
 
 describe("ghost.js", () => {
     describe("Ghost", () => {
+        describe("connect()", () => {
+            it("should return browser", async () => {
+                const connect = mock.fn(() => Promise.resolve({ foo: "bar" }));
+                // @ts-expect-error -- Seule la méthode `connect` est testée.
+                const browserType = new Ghost({ connect });
+
+                const browser = await browserType.connect("ws://localhost/");
+
+                assert.equal(browser.foo, "bar");
+
+                assert.equal(connect.mock.callCount(), 1);
+                assert.deepEqual(connect.mock.calls[0].arguments, [
+                    "ws://localhost/",
+                    undefined,
+                ]);
+            });
+        });
+
+        describe("connectOverCDP()", () => {
+            it("should return browser", async () => {
+                const connectOverCDP = mock.fn(() =>
+                    Promise.resolve({ foo: "bar" }),
+                );
+                // @ts-expect-error -- Seule la méthode `connect` est testée.
+                const browserType = new Ghost({ connectOverCDP });
+
+                const browser =
+                    await browserType.connectOverCDP("ws://localhost/");
+
+                assert.equal(browser.foo, "bar");
+
+                assert.equal(connectOverCDP.mock.callCount(), 1);
+                assert.deepEqual(connectOverCDP.mock.calls[0].arguments, [
+                    "ws://localhost/",
+                    undefined,
+                ]);
+            });
+        });
+
         describe("executablePath()", () => {
             it("should return executable path", () => {
                 const executablePath = mock.fn(() => "/usr/bin/firefox");
@@ -40,7 +79,7 @@ describe("ghost.js", () => {
         });
 
         describe("launchPersistentContext()", () => {
-            it("should return browser", async () => {
+            it("should return context", async () => {
                 const launchPersistentContext = mock.fn(() =>
                     Promise.resolve({
                         pages: () => [],

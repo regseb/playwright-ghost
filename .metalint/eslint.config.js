@@ -474,7 +474,10 @@ export default {
         "import/no-named-default": "error",
         "import/no-named-export": "off",
         "import/no-namespace": "off",
-        "import/no-unassigned-import": "error",
+        "import/no-unassigned-import": [
+            "error",
+            { allow: ["**/polyfills/**"] },
+        ],
         "import/order": [
             "error",
             {

@@ -12,7 +12,11 @@ describe("hookers/browser.js", () => {
         describe("PRESETS", () => {
             it("should have presets", () => {
                 const pointers = Object.keys(BrowserHooker.PRESETS);
-                assert.deepEqual(pointers, ["BrowserType.launch:after"]);
+                assert.deepEqual(pointers, [
+                    "BrowserType.connect:after",
+                    "BrowserType.connectOverCDP:after",
+                    "BrowserType.launch:after",
+                ]);
 
                 const listeners = Object.values(BrowserHooker.PRESETS);
                 for (const listener of listeners) {
@@ -28,6 +32,8 @@ describe("hookers/browser.js", () => {
 
                 const pointers = Object.keys(first);
                 assert.deepEqual(pointers, [
+                    "BrowserType.connect:after",
+                    "BrowserType.connectOverCDP:after",
                     "BrowserType.launch:after",
                     "BrowserContext.browser:after",
                 ]);
@@ -43,7 +49,11 @@ describe("hookers/browser.js", () => {
                 const last = browser.last();
 
                 const pointers = Object.keys(last);
-                assert.deepEqual(pointers, ["BrowserType.launch:after"]);
+                assert.deepEqual(pointers, [
+                    "BrowserType.connect:after",
+                    "BrowserType.connectOverCDP:after",
+                    "BrowserType.launch:after",
+                ]);
 
                 const listeners = Object.values(last);
                 for (const listener of listeners) {
