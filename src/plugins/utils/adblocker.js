@@ -1,7 +1,6 @@
 /**
  * @module
  * @license MIT
- * @see https://github.com/ghostery/adblocker
  * @author Sébastien Règne
  */
 
@@ -67,6 +66,7 @@ import { PlaywrightBlocker } from "@ghostery/adblocker-playwright";
  *                                          `utils.adblocker`.
  * @returns {Promise<Record<string, Function>>} Une promesse contenant le
  *                                              crochet du plugin.
+ * @see https://github.com/ghostery/adblocker
  */
 export default async function utilsAdblockerPlugin(options) {
     let blocker;
@@ -110,10 +110,11 @@ export default async function utilsAdblockerPlugin(options) {
          * Ajoute le bloqueur de publicités dans la page.
          *
          * @param {Page} page La page nouvellement créée.
-         * @returns {Page} La page avec le bloqueur.
+         * @returns {Promise<Page>} Une promesse contenant la page avec le
+         *                          bloqueur.
          */
-        "Page:new": (page) => {
-            blocker.enableBlockingInPage(page);
+        "Page:new": async (page) => {
+            await blocker.enableBlockingInPage(page);
             return page;
         },
     };
