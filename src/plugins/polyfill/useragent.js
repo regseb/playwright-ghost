@@ -105,7 +105,7 @@ export default function polyfillUserAgentPlugin(options) {
         },
 
         /**
-         * Modifie les options de lancement du navigateur.
+         * Modifie les options de lancement du navigateur avec persistence.
          *
          * @param {any[]}                      args    Les paramètres de la
          *                                             méthode.
@@ -128,6 +128,28 @@ export default function polyfillUserAgentPlugin(options) {
         },
 
         /**
+         * Modifie les options de lancement du serveur.
+         *
+         * @param {any[]}                      args    Les paramètres de la
+         *                                             méthode.
+         * @param {ContextBefore<BrowserType>} context Le contexte du crochet.
+         * @returns {any[]} Les nouveaux paramètres.
+         */
+        "BrowserType.launchServer:before": (
+            args,
+            { obj: browserType, prop: functionName },
+        ) => {
+            return [
+                changeUserAgentFromBrowserType(
+                    args[0],
+                    userAgent,
+                    browserType,
+                    functionName,
+                ),
+            ];
+        },
+
+        /**
          * Modifie les options de création d'un context.
          *
          * @param {any[]}                  args    Les paramètres de la méthode.
@@ -139,7 +161,7 @@ export default function polyfillUserAgentPlugin(options) {
         },
 
         /**
-         * Modifie les options de création d'une page.
+         * Modifie les options de création d'un contexte d'une page.
          *
          * @param {any[]}                  args    Les paramètres de la méthode.
          * @param {ContextBefore<Browser>} context Le contexte du crochet.

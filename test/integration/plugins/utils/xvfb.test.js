@@ -55,4 +55,30 @@ describe("Plugin: utils.xvfb", () => {
             await context.close();
         }
     });
+
+    it("should use screen size with launchServer()", async () => {
+        const server = await playwright.chromium.launchServer({
+            headless: false,
+            plugins: [utilsXvfbPlugin()],
+        });
+        const browser = await playwright.chromium.connect(server.wsEndpoint());
+        // Définir le viewport à `null` pour utiliser la taille de l'écran
+        // virtuel.
+        const context = await browser.newContext({ viewport: null });
+        try {
+            const page = await context.newPage();
+            await page.goto("https://example.com/");
+
+            const screen = await page.evaluate(() => ({
+                width: screen.width,
+                height: screen.height,
+            }));
+            assert.equal(screen.width, 1920);
+            assert.equal(screen.height, 1080);
+        } finally {
+            await context.close();
+            await browser.close();
+            await server.close();
+        }
+    });
 });

@@ -238,6 +238,19 @@ export default function utilsWestonPlugin(options) {
         },
 
         /**
+         * Modifie les options de lancement du serveur.
+         *
+         * @param {any[]}                      args    Les paramètres de la
+         *                                             méthode.
+         * @param {ContextBefore<BrowserType>} context Le contexte du crochet.
+         * @returns {any[]} Les nouveaux paramètres.
+         */
+        "BrowserType.launchServer:before": (args, { obj: browserType }) => {
+            const display = spawnWeston(westonArgs, keepalive);
+            return [setDisplay(args[0], display, browserType)];
+        },
+
+        /**
          * Arrête éventuellement l'exécutable de `weston` à la fermeture du
          * navigateur.
          *
@@ -254,6 +267,45 @@ export default function utilsWestonPlugin(options) {
                 /**
                  * Arrête éventuellement l'exécutable de `weston` à la fermeture
                  * automatique du navigateur.
+                 *
+                 * @param {any} returnValue _Void_
+                 * @returns {any} _Void_
+                 */
+                after: (returnValue) => {
+                    killWeston(westonArgs);
+                    return returnValue;
+                },
+            },
+        },
+
+        /**
+         * Arrête éventuellement l'exécutable de `weston` à la fermeture du
+         * serveur.
+         *
+         * @param {any} returnValue _Void_
+         * @returns {any} _Void_
+         */
+        "BrowserServer.close:after": (returnValue) => {
+            killWeston(westonArgs);
+            return returnValue;
+        },
+
+        /**
+         * Arrête éventuellement l'exécutable de `weston` à l'arrêt du serveur.
+         *
+         * @param {any} returnValue _Void_
+         * @returns {any} _Void_
+         */
+        "BrowserServer.kill:after": (returnValue) => {
+            killWeston(westonArgs);
+            return returnValue;
+        },
+
+        BrowserServer: {
+            [Symbol.asyncDispose]: {
+                /**
+                 * Arrête éventuellement l'exécutable de `weston` à la fermeture
+                 * automatique du serveur.
                  *
                  * @param {any} returnValue _Void_
                  * @returns {any} _Void_

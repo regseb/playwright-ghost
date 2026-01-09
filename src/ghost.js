@@ -7,6 +7,7 @@
 import hook from "./hook.js";
 import BrowserHooker from "./hookers/browser.js";
 import BrowserContextHooker from "./hookers/browsercontext.js";
+import BrowserServerHooker from "./hookers/browserserver.js";
 import FrameHooker from "./hookers/frame.js";
 import FrameLocatorHooker from "./hookers/framelocator.js";
 import LocatorHooker from "./hookers/locator.js";
@@ -16,7 +17,15 @@ import "./polyfills/map.js";
 import flatAwait from "./utils/flatawait.js";
 
 /**
- * @import { Browser, BrowserContext, BrowserType, ConnectOptions, ConnectOverCDPOptions, LaunchOptions } from "playwright"
+ * @import {
+ *     Browser,
+ *     BrowserContext,
+ *     BrowserServer,
+ *     BrowserType,
+ *     ConnectOptions,
+ *     ConnectOverCDPOptions,
+ *     LaunchOptions,
+ * } from "playwright"
  * @import { Listener } from "./hook.js"
  */
 
@@ -30,6 +39,13 @@ import flatAwait from "./utils/flatawait.js";
  */
 
 /**
+ * Créer un type pour les options de la méthode `BrowserType.launchServer()`,
+ * car ce paramètre n'a pas de type.
+ *
+ * @typedef {Parameters<BrowserType["launchServer"]>[0]} LaunchServerOptions
+ */
+
+/**
  * @typedef {Object} OptionPlugins Option pour les plugins qui sera ajouté aux
  *                                 options des méthodes.
  * @prop {(Object|Promise<Object>)[]} [plugins] Liste des plugins.
@@ -40,6 +56,7 @@ const REGEXP = /^(?<obj>\w+)\.(?<prop>\w+):(?<temporality>after|before)$/v;
 const PRESETS = {
     "Browser:new": Object.entries(BrowserHooker.PRESETS),
     "BrowserContext:new": Object.entries(BrowserContextHooker.PRESETS),
+    "BrowserServer:new": Object.entries(BrowserServerHooker.PRESETS),
     "Page:new": Object.entries(PageHooker.PRESETS),
     "Frame:new": Object.entries(FrameHooker.PRESETS),
     "Locator:new": Object.entries(LocatorHooker.PRESETS),
@@ -112,6 +129,49 @@ export default class Ghost {
     }
 
     /**
+     * Fusionne les plugins avec les crocheteurs et les intègre au
+     * `BrowserType`.
+     *
+     * @param {(Object|Promise<Object>)[]} [plugins] Liste des plugins.
+     * @returns {Promise<BrowserType>} `BrowserType` avec les plugins et
+     *                                 crocheteurs.
+     */
+    async #hookize(plugins = []) {
+        const listeners = new Map();
+        const browser = new BrowserHooker(listeners);
+        const browserContext = new BrowserContextHooker(listeners);
+        const browserServer = new BrowserServerHooker(listeners);
+        const page = new PageHooker(listeners);
+        const frame = new FrameHooker(listeners);
+        const locator = new LocatorHooker(listeners);
+        const frameLocator = new FrameLocatorHooker(listeners);
+        const mouse = new MouseHooker(listeners);
+        dispatch(
+            [
+                browser.first(),
+                browserContext.first(),
+                browserServer.first(),
+                page.first(),
+                frame.first(),
+                locator.first(),
+                frameLocator.first(),
+                mouse.first(),
+                ...(await flatAwait(plugins)),
+                mouse.last(),
+                frameLocator.last(),
+                locator.last(),
+                frame.last(),
+                page.last(),
+                browserServer.last(),
+                browserContext.last(),
+                browser.last(),
+            ],
+            listeners,
+        );
+        return hook(this.#browserType, listeners.get("BrowserType"));
+    }
+
+    /**
      * Associe un `Browser` fantôme à une instance de navigateur créée via
      * `BrowserType.launchServer()`.
      *
@@ -124,37 +184,8 @@ export default class Ghost {
      * @see https://playwright.dev/docs/api/class-browsertype#browser-type-connect
      */
     async connect(wsEndpoint, options) {
-        const listeners = new Map();
-        const browser = new BrowserHooker(listeners);
-        const browserContext = new BrowserContextHooker(listeners);
-        const page = new PageHooker(listeners);
-        const frame = new FrameHooker(listeners);
-        const locator = new LocatorHooker(listeners);
-        const frameLocator = new FrameLocatorHooker(listeners);
-        const mouse = new MouseHooker(listeners);
-        dispatch(
-            [
-                browser.first(),
-                browserContext.first(),
-                page.first(),
-                frame.first(),
-                locator.first(),
-                frameLocator.first(),
-                mouse.first(),
-                ...(await flatAwait(options?.plugins ?? [])),
-                mouse.last(),
-                frameLocator.last(),
-                locator.last(),
-                frame.last(),
-                page.last(),
-                browserContext.last(),
-                browser.last(),
-            ],
-            listeners,
-        );
-
-        const hooked = hook(this.#browserType, listeners.get("BrowserType"));
-        return hooked.connect(wsEndpoint, options);
+        const hooked = await this.#hookize(options?.plugins);
+        return await hooked.connect(wsEndpoint, options);
     }
 
     /**
@@ -174,37 +205,8 @@ export default class Ghost {
      * @see https://playwright.dev/docs/api/class-browsertype#browser-type-connect-over-cdp
      */
     async connectOverCDP(wsEndpoint, options) {
-        const listeners = new Map();
-        const browser = new BrowserHooker(listeners);
-        const browserContext = new BrowserContextHooker(listeners);
-        const page = new PageHooker(listeners);
-        const frame = new FrameHooker(listeners);
-        const locator = new LocatorHooker(listeners);
-        const frameLocator = new FrameLocatorHooker(listeners);
-        const mouse = new MouseHooker(listeners);
-        dispatch(
-            [
-                browser.first(),
-                browserContext.first(),
-                page.first(),
-                frame.first(),
-                locator.first(),
-                frameLocator.first(),
-                mouse.first(),
-                ...(await flatAwait(options?.plugins ?? [])),
-                mouse.last(),
-                frameLocator.last(),
-                locator.last(),
-                frame.last(),
-                page.last(),
-                browserContext.last(),
-                browser.last(),
-            ],
-            listeners,
-        );
-
-        const hooked = hook(this.#browserType, listeners.get("BrowserType"));
-        return hooked.connectOverCDP(wsEndpoint, options);
+        const hooked = await this.#hookize(options?.plugins);
+        return await hooked.connectOverCDP(wsEndpoint, options);
     }
 
     /**
@@ -227,37 +229,8 @@ export default class Ghost {
      * @see https://playwright.dev/docs/api/class-browsertype#browser-type-launch
      */
     async launch(options) {
-        const listeners = new Map();
-        const browser = new BrowserHooker(listeners);
-        const browserContext = new BrowserContextHooker(listeners);
-        const page = new PageHooker(listeners);
-        const frame = new FrameHooker(listeners);
-        const locator = new LocatorHooker(listeners);
-        const frameLocator = new FrameLocatorHooker(listeners);
-        const mouse = new MouseHooker(listeners);
-        dispatch(
-            [
-                browser.first(),
-                browserContext.first(),
-                page.first(),
-                frame.first(),
-                locator.first(),
-                frameLocator.first(),
-                mouse.first(),
-                ...(await flatAwait(options?.plugins ?? [])),
-                mouse.last(),
-                frameLocator.last(),
-                locator.last(),
-                frame.last(),
-                page.last(),
-                browserContext.last(),
-                browser.last(),
-            ],
-            listeners,
-        );
-
-        const hooked = hook(this.#browserType, listeners.get("BrowserType"));
-        return hooked.launch(options);
+        const hooked = await this.#hookize(options?.plugins);
+        return await hooked.launch(options);
     }
 
     /**
@@ -283,37 +256,23 @@ export default class Ghost {
      * @see https://playwright.dev/docs/api/class-browsertype#browser-type-launch-persistent-context
      */
     async launchPersistentContext(userDataDir, options) {
-        const listeners = new Map();
-        const browser = new BrowserHooker(listeners);
-        const browserContext = new BrowserContextHooker(listeners);
-        const page = new PageHooker(listeners);
-        const frame = new FrameHooker(listeners);
-        const locator = new LocatorHooker(listeners);
-        const frameLocator = new FrameLocatorHooker(listeners);
-        const mouse = new MouseHooker(listeners);
-        dispatch(
-            [
-                browser.first(),
-                browserContext.first(),
-                page.first(),
-                frame.first(),
-                locator.first(),
-                frameLocator.first(),
-                mouse.first(),
-                ...(await flatAwait(options?.plugins ?? [])),
-                mouse.last(),
-                frameLocator.last(),
-                locator.last(),
-                frame.last(),
-                page.last(),
-                browserContext.last(),
-                browser.last(),
-            ],
-            listeners,
-        );
+        const hooked = await this.#hookize(options?.plugins);
+        return await hooked.launchPersistentContext(userDataDir, options);
+    }
 
-        const hooked = hook(this.#browserType, listeners.get("BrowserType"));
-        return hooked.launchPersistentContext(userDataDir, options);
+    /**
+     * Lance un serveur fantôme de Playwright.
+     *
+     * @param {LaunchServerOptions&OptionPlugins} [options] Options de création
+     *                                                      d'un
+     *                                                      `BrowserServer`.
+     * @returns {Promise<BrowserServer>} Promesse contenant la version fantôme
+     *                                   du `BrowserServer`.
+     * @see https://playwright.dev/docs/api/class-browsertype#browser-type-launch-server
+     */
+    async launchServer(options) {
+        const hooked = await this.#hookize(options?.plugins);
+        return await hooked.launchServer(options);
     }
 
     /**

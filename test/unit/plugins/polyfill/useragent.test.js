@@ -158,6 +158,73 @@ describe("plugins/polyfill/useragent.js", () => {
             });
         });
 
+        describe("BrowserType.launchServer:before", () => {
+            it("should support no option", () => {
+                const name = mock.fn(() => "chromium");
+                const browserType = { name };
+
+                const plugin = polyfillUserAgentPlugin({ userAgent: "foo" });
+                const listener = plugin["BrowserType.launchServer:before"];
+                const args = listener([], { obj: browserType, prop: "launch" });
+
+                assert.deepEqual(args, [{ args: ["--user-agent=foo"] }]);
+
+                assert.equal(name.mock.callCount(), 1);
+            });
+
+            it("should support option", () => {
+                const name = mock.fn(() => "chromium");
+                const browserType = { name };
+
+                const plugin = polyfillUserAgentPlugin({ userAgent: "foo" });
+                const listener = plugin["BrowserType.launchServer:before"];
+                const args = listener([{ slowMo: 200 }], {
+                    obj: browserType,
+                    prop: "launch",
+                });
+
+                assert.deepEqual(args, [
+                    { slowMo: 200, args: ["--user-agent=foo"] },
+                ]);
+
+                assert.equal(name.mock.callCount(), 1);
+            });
+
+            it("should support 'args' option", () => {
+                const name = mock.fn(() => "chromium");
+                const browserType = { name };
+
+                const plugin = polyfillUserAgentPlugin({ userAgent: "foo" });
+                const listener = plugin["BrowserType.launchServer:before"];
+                const args = listener([{ args: ["--disable-gpu"] }], {
+                    obj: browserType,
+                    prop: "launch",
+                });
+
+                assert.deepEqual(args, [
+                    { args: ["--user-agent=foo", "--disable-gpu"] },
+                ]);
+
+                assert.equal(name.mock.callCount(), 1);
+            });
+
+            it("should ignore Firefox", () => {
+                const name = mock.fn(() => "firefox");
+                const browserType = { name };
+
+                const plugin = polyfillUserAgentPlugin({ userAgent: "foo" });
+                const listener = plugin["BrowserType.launchServer:before"];
+                const args = listener([{ timeout: 1000 }], {
+                    obj: browserType,
+                    prop: "launch",
+                });
+
+                assert.deepEqual(args, [{ timeout: 1000 }]);
+
+                assert.equal(name.mock.callCount(), 1);
+            });
+        });
+
         describe("Browser.newContext:before", () => {
             it("should support no option", () => {
                 const name = mock.fn(() => "firefox");

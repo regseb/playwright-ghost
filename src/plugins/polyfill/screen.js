@@ -60,7 +60,7 @@ export default function polyfillScreenPlugin(options) {
         },
 
         /**
-         * Modifie les options de création d'une page (et de son contexte).
+         * Modifie les options de création d'un contexte d'une page.
          *
          * @param {any[]} args Les paramètres de la méthode.
          * @returns {any[]} Les nouveaux paramètres.

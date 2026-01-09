@@ -1,7 +1,6 @@
 /**
  * @module
  * @license MIT
- * @see https://github.com/apify/camoufox-js
  * @author Sébastien Règne
  */
 
@@ -48,6 +47,7 @@ const override = (options, camoufoxOptions, browserType) => {
  *                                         `utils.camoufox`.
  * @returns {Promise<Record<string, Function>>} Une promesse contenant le
  *                                              crochet du plugin.
+ * @see https://github.com/apify/camoufox-js
  */
 export default async function camoufoxPlugin(options) {
     const camoufoxOptions = await launchOptions(options ?? {});
@@ -55,6 +55,18 @@ export default async function camoufoxPlugin(options) {
     return {
         /**
          * Modifie les options de lancement du navigateur.
+         *
+         * @param {any[]}                      args    Les paramètres de la
+         *                                             méthode.
+         * @param {ContextBefore<BrowserType>} context Le contexte du crochet.
+         * @returns {any[]} Les nouveaux paramètres.
+         */
+        "BrowserType.launch:before": (args, { obj: browserType }) => {
+            return [override(args[0], camoufoxOptions, browserType)];
+        },
+
+        /**
+         * Modifie les options de lancement du navigateur avec persistence.
          *
          * @param {any[]}                      args    Les paramètres de la
          *                                             méthode.
@@ -69,14 +81,14 @@ export default async function camoufoxPlugin(options) {
         },
 
         /**
-         * Modifie les options de création d'un contexte.
+         * Modifie les options de lancement du serveur.
          *
          * @param {any[]}                      args    Les paramètres de la
          *                                             méthode.
          * @param {ContextBefore<BrowserType>} context Le contexte du crochet.
          * @returns {any[]} Les nouveaux paramètres.
          */
-        "BrowserType.launch:before": (args, { obj: browserType }) => {
+        "BrowserType.launchServer:before": (args, { obj: browserType }) => {
             return [override(args[0], camoufoxOptions, browserType)];
         },
     };

@@ -50,7 +50,7 @@ export default function polyfillHeadlessPlugin() {
         },
 
         /**
-         * Modifie les options de lancement du navigateur.
+         * Modifie les options de lancement du navigateur avec persistence.
          *
          * @param {any[]}                      args    Les paramètres de la
          *                                             méthode.
@@ -62,6 +62,18 @@ export default function polyfillHeadlessPlugin() {
             { obj: browserType },
         ) => {
             return [args[0], changeChannel(args[1], browserType)];
+        },
+
+        /**
+         * Modifie les options de lancement du serveur.
+         *
+         * @param {any[]}                      args    Les paramètres de la
+         *                                             méthode.
+         * @param {ContextBefore<BrowserType>} context Le contexte du crochet.
+         * @returns {any[]} Les nouveaux paramètres.
+         */
+        "BrowserType.launchServer:before": (args, { obj: browserType }) => {
+            return [changeChannel(args[0], browserType)];
         },
     };
 }

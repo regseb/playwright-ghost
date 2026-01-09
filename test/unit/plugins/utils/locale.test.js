@@ -46,5 +46,22 @@ describe("plugins/utils/locale.js", () => {
                 assert.equal(name.mock.callCount(), 1);
             });
         });
+
+        describe("BrowserType.launchServer:before", () => {
+            it("should throw error when not found", async () => {
+                const name = mock.fn(() => "iexplore");
+                const browserType = { name };
+
+                const plugin = utilsLocalePlugin();
+                const listener = plugin["BrowserType.launchServer:before"];
+
+                await assert.rejects(() => listener([], { obj: browserType }), {
+                    name: "Error",
+                    message: "iexplore not found",
+                });
+
+                assert.equal(name.mock.callCount(), 1);
+            });
+        });
     });
 });

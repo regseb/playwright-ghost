@@ -140,5 +140,67 @@ describe("plugins/polyfill/webgl.js", () => {
                 assert.equal(name.mock.callCount(), 1);
             });
         });
+
+        describe("BrowserType.launchServer:before", () => {
+            it("should support no option", () => {
+                const name = mock.fn(() => "chromium");
+                const browserType = { name };
+
+                const plugin = polyfillWebGLPlugin();
+                const listener = plugin["BrowserType.launchServer:before"];
+                const args = listener([], { obj: browserType });
+
+                assert.deepEqual(args, [{ args: ["--use-angle"] }]);
+
+                assert.equal(name.mock.callCount(), 1);
+            });
+
+            it("should support option", () => {
+                const name = mock.fn(() => "chromium");
+                const browserType = { name };
+
+                const plugin = polyfillWebGLPlugin();
+                const listener = plugin["BrowserType.launchServer:before"];
+                const args = listener([{ slowMo: 200 }], { obj: browserType });
+
+                assert.deepEqual(args, [
+                    { slowMo: 200, args: ["--use-angle"] },
+                ]);
+
+                assert.equal(name.mock.callCount(), 1);
+            });
+
+            it("should support 'args' option", () => {
+                const name = mock.fn(() => "chromium");
+                const browserType = { name };
+
+                const plugin = polyfillWebGLPlugin();
+                const listener = plugin["BrowserType.launchServer:before"];
+                const args = listener([{ args: ["--disable-gpu"] }], {
+                    obj: browserType,
+                });
+
+                assert.deepEqual(args, [
+                    { args: ["--use-angle", "--disable-gpu"] },
+                ]);
+
+                assert.equal(name.mock.callCount(), 1);
+            });
+
+            it("should ignore Firefox", () => {
+                const name = mock.fn(() => "firefox");
+                const browserType = { name };
+
+                const plugin = polyfillWebGLPlugin();
+                const listener = plugin["BrowserType.launchServer:before"];
+                const args = listener([{ timeout: 1000 }], {
+                    obj: browserType,
+                });
+
+                assert.deepEqual(args, [{ timeout: 1000 }]);
+
+                assert.equal(name.mock.callCount(), 1);
+            });
+        });
     });
 });

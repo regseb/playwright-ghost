@@ -163,5 +163,77 @@ describe("plugins/polyfill/automation.js", () => {
                 assert.equal(name.mock.callCount(), 1);
             });
         });
+
+        describe("BrowserType.launchServer:before", () => {
+            it("should support no option", () => {
+                const name = mock.fn(() => "chromium");
+                const browserType = { name };
+
+                const plugin = polyfillAutomationPlugin();
+                const listener = plugin["BrowserType.launchServer:before"];
+                const args = listener([], { obj: browserType });
+
+                assert.deepEqual(args, [
+                    { ignoreDefaultArgs: ["--enable-automation"] },
+                ]);
+
+                assert.equal(name.mock.callCount(), 1);
+            });
+
+            it("should support option", () => {
+                const name = mock.fn(() => "chromium");
+                const browserType = { name };
+
+                const plugin = polyfillAutomationPlugin();
+                const listener = plugin["BrowserType.launchServer:before"];
+                const args = listener([{ slowMo: 200 }], {
+                    obj: browserType,
+                });
+
+                assert.deepEqual(args, [
+                    { slowMo: 200, ignoreDefaultArgs: ["--enable-automation"] },
+                ]);
+
+                assert.equal(name.mock.callCount(), 1);
+            });
+
+            it("should support 'ignoreDefaultArgs' option", () => {
+                const name = mock.fn(() => "chromium");
+                const browserType = { name };
+
+                const plugin = polyfillAutomationPlugin();
+                const listener = plugin["BrowserType.launchServer:before"];
+                const args = listener(
+                    [{ ignoreDefaultArgs: ["--mute-audio"] }],
+                    { obj: browserType },
+                );
+
+                assert.deepEqual(args, [
+                    {
+                        ignoreDefaultArgs: [
+                            "--enable-automation",
+                            "--mute-audio",
+                        ],
+                    },
+                ]);
+
+                assert.equal(name.mock.callCount(), 1);
+            });
+
+            it("should ignore Firefox", () => {
+                const name = mock.fn(() => "firefox");
+                const browserType = { name };
+
+                const plugin = polyfillAutomationPlugin();
+                const listener = plugin["BrowserType.launchServer:before"];
+                const args = listener([{ timeout: 1000 }], {
+                    obj: browserType,
+                });
+
+                assert.deepEqual(args, [{ timeout: 1000 }]);
+
+                assert.equal(name.mock.callCount(), 1);
+            });
+        });
     });
 });

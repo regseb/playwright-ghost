@@ -241,6 +241,23 @@ export default function utilsXvfbPlugin(options) {
         },
 
         /**
+         * Modifie les options de lancement du serveur.
+         *
+         * @param {any[]}                      args    Les paramètres de la
+         *                                             méthode.
+         * @param {ContextBefore<BrowserType>} context Le contexte du crochet.
+         * @returns {Promise<any[]>} Une promesse contenant les nouveaux
+         *                           paramètres.
+         */
+        "BrowserType.launchServer:before": async (
+            args,
+            { obj: browserType },
+        ) => {
+            const display = await spawnXvfb(xvfbArgs, keepalive);
+            return [setDisplay(args[0], display, browserType)];
+        },
+
+        /**
          * Arrête éventuellement l'exécutable de `Xvfb` à la fermeture du
          * navigateur.
          *
@@ -257,6 +274,45 @@ export default function utilsXvfbPlugin(options) {
                 /**
                  * Arrête éventuellement l'exécutable de `Xvfb` à la fermeture
                  * automatique du navigateur.
+                 *
+                 * @param {any} returnValue _Void_
+                 * @returns {any} _Void_
+                 */
+                after: (returnValue) => {
+                    killXvfb(xvfbArgs);
+                    return returnValue;
+                },
+            },
+        },
+
+        /**
+         * Arrête éventuellement l'exécutable de `Xvfb` à la fermeture du
+         * serveur.
+         *
+         * @param {any} returnValue _Void_
+         * @returns {any} _Void_
+         */
+        "BrowserServer.close:after": (returnValue) => {
+            killXvfb(xvfbArgs);
+            return returnValue;
+        },
+
+        /**
+         * Arrête éventuellement l'exécutable de `Xvfb` à l'arrêt du serveur.
+         *
+         * @param {any} returnValue _Void_
+         * @returns {any} _Void_
+         */
+        "BrowserServer.kill:after": (returnValue) => {
+            killXvfb(xvfbArgs);
+            return returnValue;
+        },
+
+        BrowserServer: {
+            [Symbol.asyncDispose]: {
+                /**
+                 * Arrête éventuellement l'exécutable de `Xvfb` à la fermeture
+                 * automatique du serveur.
                  *
                  * @param {any} returnValue _Void_
                  * @returns {any} _Void_

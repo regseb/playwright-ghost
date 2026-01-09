@@ -80,8 +80,8 @@ The plugin hooks
 to add a script to the page. But it's also possible to create a page using
 [`Browser.newPage()`](https://playwright.dev/docs/api/class-browser#browser-new-page).
 Playwright-ghost provides shortcuts for modifying objects: `"Browser:new"`,
-`"BrowserContext:new"`, `"Page:new"`, `"Frame:new"`, `"Locator:new"`,
-`"FrameLocator:new"` and `"Mouse:new"`.
+`"BrowserContext:new"`, `"BrowserServer:new"`, `"Page:new"`, `"Frame:new"`,
+`"Locator:new"`, `"FrameLocator:new"` and `"Mouse:new"`.
 
 We'll use `"Page:new"` to add a script to all the pages we create.
 

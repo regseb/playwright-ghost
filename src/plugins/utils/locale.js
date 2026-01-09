@@ -69,7 +69,7 @@ export default function utilsLocalePlugin(options) {
         },
 
         /**
-         * Modifie les options de lancement du navigateur.
+         * Modifie les options de lancement du navigateur avec persistence.
          *
          * @param {any[]}                      args    Les paramètres de la
          *                                             méthode.
@@ -84,6 +84,23 @@ export default function utilsLocalePlugin(options) {
             return [
                 args[0],
                 await setExecutablePath(args[1], name ?? browserType.name()),
+            ];
+        },
+
+        /**
+         * Modifie les options de lancement du serveur.
+         *
+         * @param {any[]}                      args    Les paramètres de la
+         *                                             méthode.
+         * @param {ContextBefore<BrowserType>} context Le contexte du crochet.
+         * @returns {any[]} Les nouveaux paramètres.
+         */
+        "BrowserType.launchServer:before": async (
+            args,
+            { obj: browserType },
+        ) => {
+            return [
+                await setExecutablePath(args[0], name ?? browserType.name()),
             ];
         },
     };

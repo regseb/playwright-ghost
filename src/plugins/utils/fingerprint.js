@@ -1,7 +1,6 @@
 /**
  * @module
  * @license MIT
- * @see https://github.com/apify/fingerprint-suite
  * @author Sébastien Règne
  */
 
@@ -23,7 +22,7 @@ import { FingerprintInjector } from "fingerprint-injector";
  *
  * @param {Record<string, any>|undefined} options                Les options de
  *                                                               création d'un
- *                                                               `BrowserContext`.
+ *                                                               contexte.
  * @param {BrowserFingerprintWithHeaders} fingerprintWithHeaders Le
  *                                                               _fingerprint_
  *                                                               et les entêtes.
@@ -74,6 +73,7 @@ const setFingerprint = (options, { fingerprint, headers }) => {
  * @param {UtilsFingerprintOptions} [options] Les éventuelles options du plugin
  *                                            `utils.fingerprint`.
  * @returns {Record<string, Function>} Les crochets du plugin.
+ * @see https://github.com/apify/fingerprint-suite
  */
 export default function utilsFingerprintPlugin(options) {
     const fingerprint = options?.fingerprint;
@@ -89,7 +89,7 @@ export default function utilsFingerprintPlugin(options) {
 
     return {
         /**
-         * Modifie les options de lancement du navigateur.
+         * Modifie les options de lancement d'un contexte (et du navigateur).
          *
          * @param {any[]}                      args    Les paramètres de la
          *                                             méthode.
