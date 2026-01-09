@@ -10,7 +10,7 @@ import patchright from "../../../src/patchright.js";
 import plugins from "../../../src/plugins/index.js";
 
 /**
- * @import { Frame } from "playwright";
+ * @import { Frame } from "patchright";
  */
 
 const getUserAgent = async () => {
@@ -48,8 +48,7 @@ describe("Anti-bot: Cloudflare turnstile demo", () => {
                 );
                 await frame.locator('input[type="checkbox"]').check();
 
-                const success = await frame.locator("#success");
-                await success.waitFor({ state: "visible" });
+                await frame.locator("#success").waitFor({ state: "visible" });
             } finally {
                 await page.screenshot({
                     path: "./log/turnstile_managed-cr.png",
@@ -87,8 +86,7 @@ describe("Anti-bot: Cloudflare turnstile demo", () => {
                     page.frame({ url: "https://challenges.cloudflare.com/**" })
                 );
 
-                const success = await frame.locator("#success");
-                await success.waitFor({ state: "visible" });
+                await frame.locator("#success").waitFor({ state: "visible" });
             } finally {
                 await page.screenshot({
                     path: "./log/turnstile_noninteractive-cr.png",

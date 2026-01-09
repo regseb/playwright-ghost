@@ -3,6 +3,9 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   release-please:
     runs-on: ubuntu-latest
@@ -14,7 +17,7 @@ jobs:
       id-token: write
     steps:
       - name: Run Release Please
-        uses: googleapis/release-please-action@v4
+        uses: googleapis/release-please-action@16a9c90856f42705d54a6fda1823352bdc62cf38 # v4.4.0
         id: release
         with:
           config-file: .release-please/config.json
@@ -26,7 +29,7 @@ jobs:
       # https://github.com/googleapis/release-please/issues/1802
       - name: Checkout repository
         if: ${{ steps.release.outputs.pr }}
-        uses: actions/checkout@v5
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           ref: ${{ fromJSON(steps.release.outputs.pr).headBranchName }}
           # Récupérer deux commits sinon la réparation du commit (pour le
@@ -42,9 +45,9 @@ jobs:
 
       - name: Setup Node.js
         if: ${{ steps.release.outputs.pr }}
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
         with:
-          node-version: 22
+          node-version: 24
 
       - name: Install dependencies
         if: ${{ steps.release.outputs.pr }}
@@ -65,19 +68,14 @@ jobs:
       # Si la release a été créée : publier le paquet dans npm et JSR.
       - name: Checkout repository
         if: ${{ steps.release.outputs.release_created }}
-        uses: actions/checkout@v5
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
       - name: Setup Node.js
         if: ${{ steps.release.outputs.release_created }}
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
         with:
-          node-version: 22
+          node-version: 24
           registry-url: https://registry.npmjs.org
-
-      # Mettre à jour npm pour avoir a minima la version 11.5.1.
-      # https://docs.npmjs.com/trusted-publishers
-      - name: Update npm
-        run: npm install -g npm@latest
 
       - name: Install dependencies and build declaration files (d.ts)
         if: ${{ steps.release.outputs.release_created }}
@@ -99,13 +97,13 @@ jobs:
         # https://github.com/npm/cli/issues/5508
         run: echo "NPM_NAME=$(npm pkg get name | tr -d \")" >> $GITHUB_ENV
 
-      - name: Wait for the npm package to be published
-        if: ${{ steps.release.outputs.release_created }}
-        run: node .script/wait.js
-
       - name: Download tarball from npm
         if: ${{ steps.release.outputs.release_created }}
-        run: npm pack ${{ env.NPM_NAME }}@${{ steps.release.outputs.tag_name }}
+        # Essayer de télécharger le paquet pendant cinq minutes (en essayant
+        # toutes les minutes).
+        run:
+          node .script/retry.js 5 60000 "npm pack ${{ env.NPM_NAME }}@${{
+          steps.release.outputs.tag_name }}"
 
       - name: Upload tarball to release
         if: ${{ steps.release.outputs.release_created }}

@@ -39,12 +39,11 @@ describe("Anti-bot: Pixelscan", () => {
                 await page.goto("https://pixelscan.net/fingerprint-check");
 
                 const result = await page
-                    .locator("pxlscn-bot-detection span")
+                    .locator("pxlscn-bot-detection p", {
+                        hasNotText: "Collecting Data...",
+                    })
                     .textContent();
-                assert.equal(
-                    result?.trim(),
-                    "No automation framework detected",
-                );
+                assert.equal(result, "No automated behavior detected");
             } finally {
                 await page.screenshot({
                     path: "./log/pixelscan-cr.png",
@@ -75,12 +74,11 @@ describe("Anti-bot: Pixelscan", () => {
                 await page.goto("https://pixelscan.net/fingerprint-check");
 
                 const result = await page
-                    .locator("pxlscn-bot-detection span")
+                    .locator("pxlscn-bot-detection p", {
+                        hasNotText: "Collecting Data...",
+                    })
                     .textContent();
-                assert.equal(
-                    result?.trim(),
-                    "No automation framework detected",
-                );
+                assert.equal(result, "No automated behavior detected");
             } finally {
                 await page.screenshot({
                     path: "./log/pixelscan-fx.png",

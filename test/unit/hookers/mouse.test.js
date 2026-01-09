@@ -8,6 +8,10 @@ import { afterEach, describe, it, mock } from "node:test";
 import Hooker from "../../../src/hookers/hooker.js";
 import MouseHooker from "../../../src/hookers/mouse.js";
 
+/**
+ * @import { Page } from "playwright"
+ */
+
 describe("hookers/mouse.js", () => {
     describe("MouseHooker", () => {
         describe("PRESETS", () => {
@@ -120,7 +124,7 @@ describe("hookers/mouse.js", () => {
             it("should hook 'Browser.newPage:after' in first", () => {
                 const mouse = new MouseHooker(new Map());
                 const listener = mouse.first()["Browser.newPage:after"];
-                const page = { mouse: {} };
+                const page = /** @type {Page} */ ({ mouse: {} });
                 const pageAltered = listener(page);
                 assert.equal(pageAltered, page);
 
@@ -134,7 +138,7 @@ describe("hookers/mouse.js", () => {
             it("should hook 'BrowserContext.newPage:after' in first", () => {
                 const mouse = new MouseHooker(new Map());
                 const listener = mouse.first()["BrowserContext.newPage:after"];
-                const page = { mouse: {} };
+                const page = /** @type {Page} */ ({ mouse: {} });
                 const pageAltered = listener(page);
                 assert.equal(pageAltered, page);
 
@@ -148,7 +152,7 @@ describe("hookers/mouse.js", () => {
             it("should hook 'Browser.newPage:after' in last", () => {
                 const mouse = new MouseHooker(new Map());
                 const firstListener = mouse.first()["Browser.newPage:after"];
-                const page = { mouse: {} };
+                const page = /** @type {Page} */ ({ mouse: {} });
                 const pageAltered = firstListener(page);
 
                 const lastListener = mouse.last()["Browser.newPage:after"];
@@ -163,7 +167,7 @@ describe("hookers/mouse.js", () => {
                 const mouse = new MouseHooker(new Map());
                 const firstListener =
                     mouse.first()["BrowserContext.newPage:after"];
-                const page = { mouse: {} };
+                const page = /** @type {Page} */ ({ mouse: {} });
                 const pageAltered = firstListener(page);
 
                 const lastListener =

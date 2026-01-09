@@ -16,7 +16,7 @@ export default async function flatAwait(value) {
         return [v];
     }
 
-    return v.reduce(async (flatten, cur) => {
+    return await v.reduce(async (flatten, cur) => {
         const f = await flatten;
         return f.concat(await flatAwait(cur));
     }, Promise.resolve([]));

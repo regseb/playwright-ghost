@@ -23,7 +23,7 @@ const getUserAgent = async () => {
     return userAgent.replace("Headless", "");
 };
 
-describe("Anti-bot: Deviceandbrowserinfo", () => {
+describe("Anti-bot: Device and browser info", () => {
     describe("chromium", () => {
         it("should be human", async () => {
             const browser = await patchright.chromium.launch({

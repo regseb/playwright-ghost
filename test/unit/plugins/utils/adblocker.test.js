@@ -15,8 +15,8 @@ describe("plugins/utils/adblocker.js", () => {
 
             it("should reject invalide mode", async () => {
                 await assert.rejects(
-                    // @ts-expect-error -- Le mode n'existe pas volontairement.
                     () =>
+                        // @ts-expect-error -- Tester un mode qui n'existe pas.
                         utilsAdblockerPlugin({ mode: "fromNonexistentMethod" }),
                     {
                         name: "TypeError",

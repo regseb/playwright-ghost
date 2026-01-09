@@ -11,34 +11,24 @@ import { describe, it } from "node:test";
 import playwright from "../../../src/index.js";
 import plugins from "../../../src/plugins/index.js";
 
-const getUserAgent = async () => {
-    const browser = await playwright.chromium.launch({
-        plugins: plugins.recommended(),
-        channel: "chrome",
-    });
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const userAgent = await page.evaluate("navigator.userAgent");
-    await context.close();
-    await browser.close();
-    return userAgent.replace("Headless", "");
-};
-
 describe("Anti-bot: OverpoweredJS Fingerprinting Demo", () => {
     describe("chromium", () => {
         it("should be probably a human", async () => {
-            const browser = await playwright.chromium.launch({
-                // Utiliser Chrome, car OverpoweredJS détecte que c'est un bot
-                // quand Playwright est utilisé avec le navigateur Chromium.
-                channel: "chrome",
-                plugins: [
-                    ...plugins.recommended(),
-                    plugins.polyfill.userAgent({
-                        userAgent: await getUserAgent(),
-                    }),
-                ],
-            });
-            const context = await browser.newContext();
+            // Utiliser launchPersistentContext(), car OverpoweredJS considère
+            // que c'est une navigation incognito avec launch().
+            const context = await playwright.chromium.launchPersistentContext(
+                "",
+                {
+                    headless: false,
+                    plugins: [
+                        ...plugins.recommended(),
+                        // Utiliser weston, car OverpoweredJS détecte que c'est
+                        // un bot avec Xvfb. Il doit peut-être détecter une
+                        // incohérence : Chrome utilise Wayland dans Ubuntu.
+                        plugins.utils.weston(),
+                    ],
+                },
+            );
             const page = await context.newPage();
             try {
                 await page.goto("https://overpoweredjs.com/demo.html");
@@ -59,7 +49,6 @@ describe("Anti-bot: OverpoweredJS Fingerprinting Demo", () => {
                 );
 
                 await context.close();
-                await browser.close();
             }
         });
     });

@@ -6,6 +6,15 @@ Change the browser fingerprint with
 and [`fingerprint-injector`](https://www.npmjs.com/package/fingerprint-injector)
 packages).
 
+Fingerprint isn't added with
+[`Browser.newPage()`](https://playwright.dev/docs/api/class-browser#browser-new-page).
+You must use
+[`Browser.newContext()`](https://playwright.dev/docs/api/class-browser#browser-new-context)
+(after
+[`BrowserType.launch()`](https://playwright.dev/docs/api/class-browsertype#browser-type-launch))
+or
+[`BrowserType.launchPersistentContext()`](https://playwright.dev/docs/api/class-browsertype#browser-type-launch-persistent-context).
+
 ## Options
 
 This plugin supports the following option:

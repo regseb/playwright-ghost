@@ -50,8 +50,7 @@ describe("Anti-bot: Bing", () => {
                 );
                 await frame.locator('input[type="checkbox"]').check();
 
-                const success = await frame.locator("#success");
-                await success.waitFor({ state: "visible" });
+                await frame.locator("#success").waitFor({ state: "visible" });
             } finally {
                 await page.screenshot({
                     path: "./log/bing-cr.png",

@@ -130,10 +130,7 @@ describe("plugins/utils/debug.js", () => {
                 const listener = plugin["Page:new"];
                 const pageAltered = await listener(page);
 
-                assert.equal(
-                    page.mock.listeners().get("pageerrore"),
-                    undefined,
-                );
+                assert.equal(page.mock.listeners().get("pageerror"), undefined);
                 // Vérifier que la page retournée est la même instance que celle
                 // en paramètre.
                 assert.equal(pageAltered, page);

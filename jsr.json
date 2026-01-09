@@ -28,7 +28,12 @@
     "./plugins/utils/debug": "./src/plugins/utils/debug.js",
     "./plugins/utils/fingerprint": "./src/plugins/utils/fingerprint.js",
     "./plugins/utils/locale": "./src/plugins/utils/locale.js",
-    "./plugins/utils/xvfb": "./src/plugins/utils/xvfb.js"
+    "./plugins/utils/weston": "./src/plugins/utils/weston.js",
+    "./plugins/utils/xvfb": "./src/plugins/utils/xvfb.js",
+    "./plugins/debug": "./src/plugins/utils/index.js",
+    "./plugins/debug/console": "./src/plugins/debug/console.js",
+    "./plugins/debug/cursor": "./src/plugins/debug/cursor.js",
+    "./plugins/debug/sniffer": "./src/plugins/debug/sniffer.js"
   },
   "publish": {
     "include": ["src/", "types/", "LICENSE", "README.md", "package.json"]

@@ -1,4 +1,4 @@
-# `polyfill.webgl`
+# `polyfill.webGL`
 
 > [!NOTE]
 >
