@@ -1,5 +1,35 @@
 # Changelog
 
+## [0.17.0](https://github.com/regseb/playwright-ghost/compare/v0.16.0...v0.17.0) (2026-01-09)
+
+### Features
+
+- Add support to BrowserType.connect and BrowserType.connectOverCDP.
+  ([480b31c](https://github.com/regseb/playwright-ghost/commit/480b31c1c1cadcf801df7a935e170d401231d999))
+- Add support to BrowserType.launchServer.
+  ([95810a1](https://github.com/regseb/playwright-ghost/commit/95810a1a05ad827a3a0bc6ea10eb28e436e5ee73))
+- Support "steps" in plugin humanize.cursor.
+  ([1d038fe](https://github.com/regseb/playwright-ghost/commit/1d038fe232f4aafc29e52e1a95a323108f1b71c7))
+- Support Bun.
+  ([8ab2cc9](https://github.com/regseb/playwright-ghost/commit/8ab2cc9ccb8ccb18173486dfa0ed4d87f1a650a6))
+
+### Bug Fixes
+
+- Do not re-export types that no longer exist.
+  ([cff3293](https://github.com/regseb/playwright-ghost/commit/cff3293878a401ccd58454286c7ceea9adfbf475))
+- **plugin/adblocker:** Wait blocking enable.
+  ([dcc4e2c](https://github.com/regseb/playwright-ghost/commit/dcc4e2c2c98b6508a8df7278b71eaec9f300577b))
+- **plugin/humanize/cursor:** Fix negative delay.
+  ([cf23a2c](https://github.com/regseb/playwright-ghost/commit/cf23a2cf96aa4ed4fe5c67ecce1ff546cb1066e0))
+- **plugin/sniffer:** Bypass CSP and optimize.
+  ([0f5766c](https://github.com/regseb/playwright-ghost/commit/0f5766c01095443cb7152a45d3a91771a110f5d2))
+- **plugin/weston:** Kill weston when persistent context is closed.
+  ([0f8496d](https://github.com/regseb/playwright-ghost/commit/0f8496dcf7c71fd92ad918789f7253373c7fb685))
+- **plugin/xvfb:** Kill Xvfb when persistent context is closed.
+  ([8fa48d9](https://github.com/regseb/playwright-ghost/commit/8fa48d99434c3c9ce68659ffda85b569707b46dc))
+- Support click in plugin debug.cursor.
+  ([37366ed](https://github.com/regseb/playwright-ghost/commit/37366edf20b840aa077277b69cebb0e68c45dd9c))
+
 ## [0.16.0](https://github.com/regseb/playwright-ghost/compare/v0.15.0...v0.16.0) (2025-11-16)
 
 ### Features
