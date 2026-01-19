@@ -179,7 +179,7 @@
     "camoufox-js": "^0.8.5",
     "fingerprint-generator": "^2.1.79",
     "fingerprint-injector": "^2.1.79",
-    "ghost-cursor": "1.4.1",
+    "ghost-cursor": "1.4.2",
     "ws": "8.19.0"
   },
   "devDependencies": {
