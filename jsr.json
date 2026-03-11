@@ -5,7 +5,6 @@
   "exports": {
     ".": "./src/index.js",
     "./patchright": "./src/patchright.js",
-    "./rebrowser": "./src/rebrowser.js",
     "./plugins": "./src/plugins/index.js",
     "./plugins/recommended": "./src/plugins/recommended.js",
     "./plugins/polyfill": "./src/plugins/polyfill/index.js",

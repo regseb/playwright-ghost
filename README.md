@@ -38,12 +38,10 @@ npm install playwright playwright-ghost
 ```
 
 `playwright-ghost` can also be used with
-[`patchright`](https://www.npmjs.com/package/patchright) or
-[`rebrowser-playwright`](https://www.npmjs.com/package/rebrowser-playwright).
+[`patchright`](https://www.npmjs.com/package/patchright).
 
 ```shell
 npm install patchright playwright-ghost
-npm install rebrowser-playwright playwright-ghost
 ```
 
 ## Use
@@ -52,9 +50,8 @@ Here's an example with the recommended plugins.
 
 ```javascript
 import { chromium } from "playwright-ghost";
-// Or to use patchright or rebrowser-playwright:
+// Or to use patchright:
 // import { chromium } from "playwright-ghost/patchright";
-// import { chromium } from "playwright-ghost/rebrowser";
 import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
