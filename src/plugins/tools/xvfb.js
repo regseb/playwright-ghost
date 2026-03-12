@@ -16,18 +16,19 @@ import process from "node:process";
 
 /**
  * @typedef {Object} InstanceXvfb Le type d'une instance de `Xvfb`.
- * @prop {ChildProcess} process   Le processus exécutant `Xvfb`.
- * @prop {string}       display   Le `DISPLAY` du serveur de `Xvfb` (par
- *                                exemple : `:99`).
- * @prop {number}       count     Le nombre de navigateurs utilisant l'instance.
- * @prop {boolean}      keepalive La marque pour ne pas arrêter l'exécutable de
- *                                `Xvfb` après la fermeture du navigateur.
+ * @prop {ChildProcess} process Le processus exécutant `Xvfb`.
+ * @prop {string}       display Le `DISPLAY` du serveur de `Xvfb` (par
+ *                              exemple : `:99`).
+ * @prop {number}       count   Le nombre de navigateurs utilisant l'instance ;
+ *                              ou l'infini s'il ne faut pas arrêter
+ *                              l'exécutable de `Xvfb` après la fermeture du
+ *                              navigateur.
  */
 
 /**
  * Instances de `Xvfb`.
  *
- * @type {Map<string[], InstanceXvfb>}
+ * @type {Map<string, InstanceXvfb>}
  */
 const xvfbs = new Map();
 
@@ -57,10 +58,12 @@ const exists = async (path) => {
  *                            `:99`).
  */
 const spawnXvfb = async (args, keepalive) => {
-    const xvfb = xvfbs.get(args);
+    const key = JSON.stringify(args);
+    const xvfb = xvfbs.get(key);
     if (undefined !== xvfb) {
-        ++xvfb.count;
-        xvfb.keepalive ||= keepalive;
+        // Utiliser l'infini pour que le compteur ne puisse plus redescendre et
+        // ne pas arrêter l'exécutable de `Xvfb`.
+        xvfb.count += keepalive ? Infinity : 1;
         return xvfb.display;
     }
 
@@ -72,11 +75,12 @@ const spawnXvfb = async (args, keepalive) => {
     }
     const display = `:${serverNumber}`;
 
-    xvfbs.set(args, {
+    xvfbs.set(key, {
         process: spawn("Xvfb", [display, ...args], { stdio: "inherit" }),
         display,
-        count: 1,
-        keepalive,
+        // Utiliser l'infini pour que le compteur ne puisse pas redescendre et
+        // ne pas arrêter l'exécutable de `Xvfb`.
+        count: keepalive ? Infinity : 1,
     });
     return display;
 };
@@ -85,17 +89,17 @@ const spawnXvfb = async (args, keepalive) => {
  * Arrête éventuellement l'exécutable de `Xvfb` si l'option `keepalive` n'est
  * pas activée et si plus aucun navigateur ne l'utilise.
  *
- * @param {string[]} args Les arguments passés à l'exécutable `Xvfb` (pour
- *                        retrouver son instance).
+ * @param {string[]} args    Les arguments passés à l'exécutable `Xvfb` (pour
+ *                           retrouver son instance).
+ * @param {boolean}  [force] Force l'arrêt même si l'option `keepalive` est
+ *                           activée ou si des navigateurs l'utilisent encore.
  */
-const killXvfb = (args) => {
-    const xvfb = xvfbs.get(args);
-    if (undefined !== xvfb) {
-        --xvfb.count;
-        if (!xvfb.keepalive && 0 === xvfb.count) {
-            xvfb.process.kill();
-            xvfbs.delete(args);
-        }
+const killXvfb = (args, force = false) => {
+    const key = JSON.stringify(args);
+    const xvfb = xvfbs.get(key);
+    if (undefined !== xvfb && (force || 0 === --xvfb.count)) {
+        xvfb.process.kill();
+        xvfbs.delete(key);
     }
 };
 
@@ -182,13 +186,9 @@ export default function toolsXvfbPlugin(options) {
 
     if (undefined !== options?.signal) {
         // Écouter le signal pour tuer l'exécutable de `Xvfb`.
-        options.signal.addEventListener("abort", () => {
-            const xvfb = xvfbs.get(xvfbArgs);
-            if (undefined !== xvfb) {
-                xvfb.process.kill();
-                xvfbs.delete(xvfbArgs);
-            }
-        });
+        options.signal.addEventListener("abort", () =>
+            killXvfb(xvfbArgs, true),
+        );
     }
 
     return {
@@ -234,9 +234,7 @@ export default function toolsXvfbPlugin(options) {
             // Ne pas utiliser "BrowserContext.close:after", car si le
             // navigateur a été lancé avec launch(), il faut arrêter Xvfb
             // seulement à la fermeture du navigateur.
-            browserContext.on("close", () => {
-                killXvfb(xvfbArgs);
-            });
+            browserContext.on("close", () => killXvfb(xvfbArgs));
             return browserContext;
         },
 
