@@ -15,23 +15,24 @@ import process from "node:process";
 
 /**
  * @typedef {Object} InstanceWeston Le type d'une instance de `weston`.
- * @prop {ChildProcess} process   Le processus exécutant `weston`.
- * @prop {string}       display   Le `WAYLAND_DISPLAY` du socket de `weston`.
- * @prop {number}       count     Le nombre de navigateurs utilisant l'instance.
- * @prop {boolean}      keepalive La marque pour ne pas arrêter l'exécutable de
- *                                `weston` après la fermeture du navigateur.
+ * @prop {ChildProcess} process Le processus exécutant `weston`.
+ * @prop {string}       display Le `WAYLAND_DISPLAY` du socket de `weston`.
+ * @prop {number}       count   Le nombre de navigateurs utilisant l'instance ;
+ *                              ou l'infini s'il ne faut pas arrêter
+ *                              l'exécutable de `weston` après la fermeture du
+ *                              navigateur.
  */
 
 /**
- * Instance de `weston`.
+ * Instances de `weston`.
  *
- * @type {Map<string[], InstanceWeston>}
+ * @type {Map<string, InstanceWeston>}
  */
 const westons = new Map();
 
 /**
- * Hache des arguments pour avoir une valeur à mettre dans le _display_ /
- * _socket_ de `weston`.
+ * Hache des arguments pour avoir une valeur à mettre dans le display /
+ * socket de `weston`.
  *
  * @param {string[]} args Les arguments passés à l'exécutable `weston`.
  * @returns {string} Le hachage des arguments.
@@ -53,16 +54,19 @@ const hashCode = (args) => {
  * @returns {string} Le `WAYLAND_DISPLAY` du socket de `weston`.
  */
 const spawnWeston = (args, keepalive) => {
-    const weston = westons.get(args);
+    const key = hashCode(args);
+    const weston = westons.get(key);
     if (undefined !== weston) {
-        ++weston.count;
-        weston.keepalive ||= keepalive;
+        // Utiliser l'infini pour que le compteur ne puisse plus redescendre et
+        // ne pas arrêter l'exécutable de `weston`.
+        weston.count += keepalive ? Infinity : 1;
         return weston.display;
     }
 
-    // Ajouter le hachage des arguments pour avoir un display / socket unique.
-    const display = `playwright-ghost-${hashCode(args)}`;
-    westons.set(args, {
+    // Ajouter la clé (formée à partir des arguments) pour avoir un display /
+    // socket unique.
+    const display = `playwright-ghost-${key}`;
+    westons.set(key, {
         process: spawn(
             "weston",
             [
@@ -74,8 +78,9 @@ const spawnWeston = (args, keepalive) => {
             { stdio: "inherit" },
         ),
         display,
-        count: 1,
-        keepalive,
+        // Utiliser l'infini pour que le compteur ne puisse pas redescendre et
+        // ne pas arrêter l'exécutable de `weston`.
+        count: keepalive ? Infinity : 1,
     });
     return display;
 };
@@ -84,29 +89,28 @@ const spawnWeston = (args, keepalive) => {
  * Arrête éventuellement l'exécutable de `weston` si l'option `keepalive` n'est
  * pas activée et si plus aucun navigateur ne l'utilise.
  *
- * @param {string[]} args Les arguments passés à l'exécutable `weston` (pour
- *                        retrouver son instance).
+ * @param {string[]} args    Les arguments passés à l'exécutable `weston` (pour
+ *                           retrouver son instance).
+ * @param {boolean}  [force] Force l'arrêt même si l'option `keepalive` est
+ *                           activée ou si des navigateurs l'utilisent encore.
  */
-const killWeston = (args) => {
-    const weston = westons.get(args);
-    if (undefined !== weston) {
-        --weston.count;
-        if (!weston.keepalive && 0 === weston.count) {
-            weston.process.kill();
-            westons.delete(args);
-        }
+const killWeston = (args, force = false) => {
+    const key = hashCode(args);
+    const weston = westons.get(key);
+    if (undefined !== weston && (force || 0 === --weston.count)) {
+        weston.process.kill();
+        westons.delete(key);
     }
 };
 
 /**
- * Définit le `DISPLAY` (du serveur de `weston`) dans les options de création
- * d'un `Browser`.
+ * Définit le `WAYLAND_DISPLAY` (du socket de `weston`) dans les options de
+ * création d'un `Browser`.
  *
  * @param {Record<string, any>|undefined} options     Les options de création
  *                                                    d'un `Browser`.
- * @param {string}                        display     Le `DISPLAY` du serveur de
- *                                                    `weston` (par exemple :
- *                                                    `:0`).
+ * @param {string}                        display     Le `WAYLAND_DISPLAY` du
+ *                                                    socket de `weston`.
  * @param {BrowserType}                   browserType Le type de navigateur.
  * @returns {Record<string, any>} Les nouvelles options.
  */
@@ -181,13 +185,9 @@ export default function toolsWestonPlugin(options) {
 
     if (undefined !== options?.signal) {
         // Écouter le signal pour tuer l'exécutable de `weston`.
-        options.signal.addEventListener("abort", () => {
-            const weston = westons.get(westonArgs);
-            if (undefined !== weston) {
-                weston.process.kill();
-                westons.delete(westonArgs);
-            }
-        });
+        options.signal.addEventListener("abort", () =>
+            killWeston(westonArgs, true),
+        );
     }
 
     return {
@@ -231,9 +231,7 @@ export default function toolsWestonPlugin(options) {
             // Ne pas utiliser "BrowserContext.close:after", car si le
             // navigateur a été lancé avec launch(), il faut arrêter weston
             // seulement à la fermeture du navigateur.
-            browserContext.on("close", () => {
-                killWeston(westonArgs);
-            });
+            browserContext.on("close", () => killWeston(westonArgs));
             return browserContext;
         },
 
