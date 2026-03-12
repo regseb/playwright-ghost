@@ -31,10 +31,10 @@ If you want to import only this plugin, you can use the
 
 ```javascript
 import { chromium } from "playwright-ghost";
-import cursorPlugin from "playwright-ghost/plugins/debug/cursor";
+import debugCursorPlugin from "playwright-ghost/plugins/debug/cursor";
 
 const browser = await chromium.launch({
-  plugins: [cursorPlugin()],
+  plugins: [debugCursorPlugin()],
 });
 // ...
 ```

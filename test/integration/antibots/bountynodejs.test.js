@@ -9,13 +9,14 @@ import fs from "node:fs/promises";
 import { describe, it } from "node:test";
 import patchright from "../../../src/patchright.js";
 import plugins from "../../../src/plugins/index.js";
+import toolsXvfbPlugin from "../../../src/plugins/tools/xvfb.js";
 
 describe("Anti-bot: bounty-nodejs", () => {
     describe("chromium", () => {
         it("should be scrappable", async () => {
             const browser = await patchright.chromium.launch({
                 headless: false,
-                plugins: [...plugins.recommended(), plugins.utils.xvfb()],
+                plugins: [...plugins.recommended(), toolsXvfbPlugin()],
             });
             const context = await browser.newContext();
             const page = await context.newPage();

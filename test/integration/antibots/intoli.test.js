@@ -9,6 +9,7 @@ import fs from "node:fs/promises";
 import { describe, it } from "node:test";
 import playwright from "../../../src/index.js";
 import plugins from "../../../src/plugins/index.js";
+import toolsCamoufoxPlugin from "../../../src/plugins/tools/camoufox.js";
 
 const getUserAgent = async () => {
     const browser = await playwright.chromium.launch({
@@ -82,7 +83,7 @@ describe("Anti-bot: Chrome Headless Detection (Intoli)", () => {
             const browser = await playwright.firefox.launch({
                 plugins: [
                     ...plugins.recommended(),
-                    plugins.utils.camoufox({ headless: true }),
+                    toolsCamoufoxPlugin({ headless: true }),
                 ],
             });
             const context = await browser.newContext();

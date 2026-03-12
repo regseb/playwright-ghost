@@ -140,7 +140,7 @@ const setDisplay = (options, display, browserType) => {
 };
 
 /**
- * @typedef {Object} UtilsWestonOptions Les options du plugin `utils.weston`.
+ * @typedef {Object} ToolsWestonOptions Les options du plugin `tools.weston`.
  * @prop {string[]}    [args]      Les arguments passés de l'exécutable
  *                                 `weston`.
  * @prop {boolean}     [keepalive] La marque pour ne pas arrêter l'exécutable de
@@ -151,15 +151,15 @@ const setDisplay = (options, display, browserType) => {
 /**
  * Crée un plugin pour exécuter le navigateur avec `weston`.
  *
- * @param {UtilsWestonOptions} [options] Les éventuelles options du plugin
- *                                       `utils.weston`.
+ * @param {ToolsWestonOptions} [options] Les éventuelles options du plugin
+ *                                       `tools.weston`.
  * @returns {Record<string, Function|Record<symbol, Record<string, Function>>>} Les
  *                                                                              crochets
  *                                                                              du
  *                                                                              plugin.
  * @see https://wayland.pages.freedesktop.org/weston/
  */
-export default function utilsWestonPlugin(options) {
+export default function toolsWestonPlugin(options) {
     /**
      * Arguments passés à l'exécutable `weston`.
      *

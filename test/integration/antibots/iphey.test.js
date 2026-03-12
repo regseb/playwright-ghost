@@ -10,6 +10,7 @@ import fs from "node:fs/promises";
 import { describe, it } from "node:test";
 import playwright from "../../../src/index.js";
 import plugins from "../../../src/plugins/index.js";
+import toolsCamoufoxPlugin from "../../../src/plugins/tools/camoufox.js";
 
 describe("Anti-bot: Check browser fingerprints (iphey)", () => {
     describe("chromium", () => {
@@ -52,7 +53,10 @@ describe("Anti-bot: Check browser fingerprints (iphey)", () => {
     describe("firefox", () => {
         it("should be Trustworthy", async () => {
             const browser = await playwright.firefox.launch({
-                plugins: [...plugins.recommended(), plugins.utils.camoufox()],
+                plugins: [
+                    ...plugins.recommended(),
+                    toolsCamoufoxPlugin({ headless: true }),
+                ],
                 headless: true,
             });
             const context = await browser.newContext();

@@ -51,10 +51,10 @@ If you want to import only this plugin, you can use the
 
 ```javascript
 import { chromium } from "playwright-ghost";
-import dialogPlugin from "playwright-ghost/plugins/humanize/dialog";
+import humanizeDialogPlugin from "playwright-ghost/plugins/humanize/dialog";
 
 const browser = await chromium.launch({
-  plugins: [dialogPlugin()],
+  plugins: [humanizeDialogPlugin()],
 });
 // ...
 ```

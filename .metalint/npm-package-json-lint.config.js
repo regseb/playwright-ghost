@@ -99,17 +99,7 @@ export default {
         // Ne pas activer cette règle, car la règle
         // prefer-absolute-version-dependencies oblige les versions absolues.
         "no-tilde-version-dependencies": "off",
-        "prefer-absolute-version-dependencies": [
-            "error",
-            {
-                exceptions: [
-                    "@ghostery/adblocker-playwright",
-                    "camoufox-js",
-                    "fingerprint-generator",
-                    "fingerprint-injector",
-                ],
-            },
-        ],
+        "prefer-absolute-version-dependencies": "error",
         "prefer-alphabetical-dependencies": "error",
         "prefer-caret-version-dependencies": "off",
         "prefer-no-version-zero-dependencies": "off",

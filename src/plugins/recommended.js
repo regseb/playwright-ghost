@@ -70,7 +70,7 @@ const initPlugins = (plugins, options) => {
  * @returns {Record<string, Function>[]} Les crochets des plugins
  *                                       recommandés.
  */
-export default function recommended(options) {
+export default function recommendedPlugins(options) {
     return [
         ...initPlugins(polyfillRecommendedPlugins, options?.polyfill),
         ...initPlugins(humanizeRecommendedPlugins, options?.humanize),

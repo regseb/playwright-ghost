@@ -1,4 +1,4 @@
-# `utils.weston`
+# `tools.weston`
 
 > [!IMPORTANT]
 >
@@ -31,11 +31,11 @@ Use the plugin with default options.
 
 ```javascript
 import { chromium } from "playwright-ghost";
-import plugins from "playwright-ghost/plugins";
+import toolsWestonPlugin from "playwright-ghost/plugins/tools/weston";
 
 const browser = await chromium.launch({
   headless: false,
-  plugins: [plugins.utils.weston()],
+  plugins: [toolsWestonPlugin()],
 });
 // ...
 ```
@@ -44,12 +44,12 @@ Use the plugin and specify arguments for a 2K screen.
 
 ```javascript
 import { chromium } from "playwright-ghost";
-import plugins from "playwright-ghost/plugins";
+import toolsWestonPlugin from "playwright-ghost/plugins/tools/weston";
 
 const browser = await chromium.launch({
   headless: false,
   plugins: [
-    plugins.utils.weston({ args: ["--width", "2560", "--height", "1440"] }),
+    toolsWestonPlugin({ args: ["--width", "2560", "--height", "1440"] }),
   ],
 });
 // ...
@@ -59,19 +59,14 @@ Use the plugin with `keepalive` and `signal`.
 
 ```javascript
 import { chromium } from "playwright-ghost";
-import plugins from "playwright-ghost/plugins";
+import toolsWestonPlugin from "playwright-ghost/plugins/tools/weston";
 
 const controller = new AbortController();
 
 // Launch a browser and start weston.
 const browser = await chromium.launch({
   headless: false,
-  plugins: [
-    plugins.utils.weston({
-      keepalive: true,
-      signal: controller.signal,
-    }),
-  ],
+  plugins: [toolsWestonPlugin({ keepalive: true, signal: controller.signal })],
 });
 // ...
 // Close the browser, but don't stop weston.
@@ -80,12 +75,7 @@ browser.close();
 // Launch an other browser and reuse weston.
 const otherBrowser = await chromium.launch({
   headless: false,
-  plugins: [
-    plugins.utils.weston({
-      keepalive: true,
-      signal: controller.signal,
-    }),
-  ],
+  plugins: [toolsWestonPlugin({ keepalive: true, signal: controller.signal })],
 });
 // ...
 // Close the other browser, but don't stop weston.
@@ -93,22 +83,4 @@ otherBrowser.close();
 
 // Stop weston.
 controller.abort();
-```
-
-## Advanced
-
-### Import
-
-If you want to import only this plugin, you can use the
-`"playwright-ghost/plugins/utils/weston"` path in the import.
-
-```javascript
-import { chromium } from "playwright-ghost";
-import westonPlugin from "playwright-ghost/plugins/utils/weston";
-
-const browser = await chromium.launch({
-  headless: false,
-  plugins: [westonPlugin()],
-});
-// ...
 ```

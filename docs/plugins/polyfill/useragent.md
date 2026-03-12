@@ -64,11 +64,11 @@ If you want to import only this plugin, you can use the
 
 ```javascript
 import { chromium } from "playwright-ghost";
-import userAgentPlugin from "playwright-ghost/plugins/polyfill/useragent";
+import polyfillUserAgentPlugin from "playwright-ghost/plugins/polyfill/useragent";
 
 const browser = await chromium.launch({
   plugins: [
-    userAgentPlugin(
+    polyfillUserAgentPlugin(
       "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like" +
         " Gecko) Chrome/138.0.7204.64 Mobile Safari/537.36",
     ),

@@ -37,17 +37,9 @@
       "types": "./types/plugins/index.d.ts",
       "default": "./src/plugins/index.js"
     },
-    "./plugins/recommended": {
-      "types": "./types/plugins/recommended.d.ts",
-      "default": "./src/plugins/recommended.js"
-    },
     "./plugins/polyfill": {
       "types": "./types/plugins/polyfill/index.d.ts",
       "default": "./src/plugins/polyfill/index.js"
-    },
-    "./plugins/polyfill/recommended": {
-      "types": "./types/plugins/polyfill/recommended.d.ts",
-      "default": "./src/plugins/polyfill/recommended.js"
     },
     "./plugins/polyfill/automation": {
       "types": "./types/plugins/polyfill/automation.d.ts",
@@ -77,13 +69,13 @@
       "types": "./types/plugins/polyfill/webgl.d.ts",
       "default": "./src/plugins/polyfill/webgl.js"
     },
+    "./plugins/polyfill/recommended": {
+      "types": "./types/plugins/polyfill/recommended.d.ts",
+      "default": "./src/plugins/polyfill/recommended.js"
+    },
     "./plugins/humanize": {
       "types": "./types/plugins/humanize/index.d.ts",
       "default": "./src/plugins/humanize/index.js"
-    },
-    "./plugins/humanize/recommended": {
-      "types": "./types/plugins/humanize/recommended.d.ts",
-      "default": "./src/plugins/humanize/recommended.js"
     },
     "./plugins/humanize/click": {
       "types": "./types/plugins/humanize/click.d.ts",
@@ -97,37 +89,17 @@
       "types": "./types/plugins/humanize/dialog.d.ts",
       "default": "./src/plugins/humanize/dialog.js"
     },
+    "./plugins/humanize/recommended": {
+      "types": "./types/plugins/humanize/recommended.d.ts",
+      "default": "./src/plugins/humanize/recommended.js"
+    },
     "./plugins/utils": {
       "types": "./types/plugins/utils/index.d.ts",
       "default": "./src/plugins/utils/index.js"
     },
-    "./plugins/utils/adblocker": {
-      "types": "./types/plugins/utils/adblocker.d.ts",
-      "default": "./src/plugins/utils/adblocker.js"
-    },
-    "./plugins/utils/camoufox": {
-      "types": "./types/plugins/utils/camoufox.d.ts",
-      "default": "./src/plugins/utils/camoufox.js"
-    },
-    "./plugins/utils/debug": {
-      "types": "./types/plugins/utils/debug.d.ts",
-      "default": "./src/plugins/utils/debug.js"
-    },
-    "./plugins/utils/fingerprint": {
-      "types": "./types/plugins/utils/fingerprint.d.ts",
-      "default": "./src/plugins/utils/fingerprint.js"
-    },
     "./plugins/utils/locale": {
       "types": "./types/plugins/utils/locale.d.ts",
       "default": "./src/plugins/utils/locale.js"
-    },
-    "./plugins/utils/weston": {
-      "types": "./types/plugins/utils/weston.d.ts",
-      "default": "./src/plugins/utils/weston.js"
-    },
-    "./plugins/utils/xvfb": {
-      "types": "./types/plugins/utils/xvfb.d.ts",
-      "default": "./src/plugins/utils/xvfb.js"
     },
     "./plugins/debug": {
       "types": "./types/plugins/debug/index.d.ts",
@@ -144,6 +116,30 @@
     "./plugins/debug/sniffer": {
       "types": "./types/plugins/debug/sniffer.d.ts",
       "default": "./src/plugins/debug/sniffer.js"
+    },
+    "./plugins/tools/adblocker": {
+      "types": "./types/plugins/tools/adblocker.d.ts",
+      "default": "./src/plugins/tools/adblocker.js"
+    },
+    "./plugins/tools/camoufox": {
+      "types": "./types/plugins/tools/camoufox.d.ts",
+      "default": "./src/plugins/tools/camoufox.js"
+    },
+    "./plugins/tools/fingerprint": {
+      "types": "./types/plugins/tools/fingerprint.d.ts",
+      "default": "./src/plugins/tools/fingerprint.js"
+    },
+    "./plugins/tools/weston": {
+      "types": "./types/plugins/tools/weston.d.ts",
+      "default": "./src/plugins/tools/weston.js"
+    },
+    "./plugins/tools/xvfb": {
+      "types": "./types/plugins/tools/xvfb.d.ts",
+      "default": "./src/plugins/tools/xvfb.js"
+    },
+    "./plugins/recommended": {
+      "types": "./types/plugins/recommended.d.ts",
+      "default": "./src/plugins/recommended.js"
     },
     "./package.json": "./package.json"
   },
@@ -171,16 +167,13 @@
     "clean": "node .script/clean.js"
   },
   "dependencies": {
-    "@ghostery/adblocker-playwright": "^2.13.3",
-    "camoufox-js": "^0.8.5",
-    "fingerprint-generator": "^2.1.79",
-    "fingerprint-injector": "^2.1.79",
     "ghost-cursor": "1.4.1",
     "ws": "8.19.0"
   },
   "devDependencies": {
     "@biomejs/js-api": "4.0.0",
     "@biomejs/wasm-nodejs": "2.3.11",
+    "@ghostery/adblocker-playwright": "2.14.1",
     "@prantlf/jsonlint": "17.0.0",
     "@prettier/plugin-xml": "3.4.2",
     "@secretlint/secretlint-rule-github": "11.2.5",
@@ -190,6 +183,7 @@
     "@types/bun": "1.3.5",
     "@types/node": "25.0.3",
     "@types/ws": "8.18.1",
+    "camoufox-js": "0.9.1",
     "eslint": "9.39.2",
     "eslint-plugin-array-func": "5.1.0",
     "eslint-plugin-eslint-comments": "3.2.0",
@@ -201,6 +195,8 @@
     "eslint-plugin-promise": "7.2.1",
     "eslint-plugin-regexp": "2.10.0",
     "eslint-plugin-unicorn": "62.0.0",
+    "fingerprint-generator": "2.1.81",
+    "fingerprint-injector": "2.1.81",
     "globals": "17.0.0",
     "jsr": "0.13.5",
     "markdownlint": "0.40.0",
@@ -217,10 +213,26 @@
     "yaml-lint": "1.7.0"
   },
   "peerDependencies": {
+    "@ghostery/adblocker-playwright": ">=2.14.1",
+    "camoufox-js": ">=0.9.1",
+    "fingerprint-generator": ">=2.1.81",
+    "fingerprint-injector": ">=2.1.81",
     "patchright": ">=1.50.0",
     "playwright": ">=1.50.0"
   },
   "peerDependenciesMeta": {
+    "@ghostery/adblocker-playwright": {
+      "optional": true
+    },
+    "camoufox-js": {
+      "optional": true
+    },
+    "fingerprint-generator": {
+      "optional": true
+    },
+    "fingerprint-injector": {
+      "optional": true
+    },
     "patchright": {
       "optional": true
     },

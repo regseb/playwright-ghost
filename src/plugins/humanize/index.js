@@ -19,10 +19,11 @@ import humanizeRecommendedPlugins from "./recommended.js";
 /**
  * Les plugins pour humaniser les actions.
  */
-export default {
+const humanizePlugins = {
     click: humanizeClickPlugin,
     cursor: humanizeCursorPlugin,
     dialog: humanizeDialogPlugin,
 
     recommended: humanizeRecommendedPlugins,
 };
+export default humanizePlugins;

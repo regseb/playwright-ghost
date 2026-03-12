@@ -57,10 +57,10 @@ If you want to import only this plugin, you can use the
 
 ```javascript
 import { chromium } from "playwright-ghost";
-import clickPlugin from "playwright-ghost/plugins/humanize/click";
+import humanizeClickPlugin from "playwright-ghost/plugins/humanize/click";
 
 const browser = await chromium.launch({
-  plugins: [clickPlugin()],
+  plugins: [humanizeClickPlugin()],
 });
 // ...
 ```

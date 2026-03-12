@@ -33,7 +33,7 @@ const setFingerprint = (options, { fingerprint, headers }) => {
     // pas utiliser cette fonction, car elle remplace la méthode
     // Browser.newContext(). Les plugins permettent seulement de modifier les
     // arguments et la valeur de retour.
-    // https://github.com/apify/fingerprint-suite/blob/v2.1.69/packages/fingerprint-injector/src/fingerprint-injector.ts#L331
+    // https://github.com/apify/fingerprint-suite/blob/v2.1.81/packages/fingerprint-injector/src/fingerprint-injector.ts#L331
     return {
         userAgent: fingerprint.navigator.userAgent,
         colorScheme: "dark",
@@ -51,8 +51,8 @@ const setFingerprint = (options, { fingerprint, headers }) => {
 };
 
 /**
- * @typedef {Object} UtilsFingerprintOptions Les options du plugin
- *                                           `utils.fingerprint`.
+ * @typedef {Object} ToolsFingerprintOptions Les options du plugin
+ *                                           `tools.fingerprint`.
  * @prop {BrowserFingerprintWithHeaders}        [fingerprint]        La
  *                                                                   propriété
  *                                                                   `fingerprint`
@@ -70,12 +70,12 @@ const setFingerprint = (options, { fingerprint, headers }) => {
 /**
  * Crée un plugin pour modifier le _fingerprint_ du navigateur.
  *
- * @param {UtilsFingerprintOptions} [options] Les éventuelles options du plugin
- *                                            `utils.fingerprint`.
+ * @param {ToolsFingerprintOptions} [options] Les éventuelles options du plugin
+ *                                            `tools.fingerprint`.
  * @returns {Record<string, Function>} Les crochets du plugin.
  * @see https://github.com/apify/fingerprint-suite
  */
-export default function utilsFingerprintPlugin(options) {
+export default function toolsFingerprintPlugin(options) {
     const fingerprint = options?.fingerprint;
     const fingerprintOptions = options?.fingerprintOptions;
 

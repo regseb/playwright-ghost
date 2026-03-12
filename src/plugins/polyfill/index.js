@@ -24,7 +24,7 @@ import polyfillWebGLPlugin from "./webgl.js";
  * Les plugins pour gommer des différences entre un navigateur utilisé par un
  * être humain et un navigateur _headless_ contrôlé par un programme.
  */
-export default {
+const polyfillPlugins = {
     automation: polyfillAutomationPlugin,
     headless: polyfillHeadlessPlugin,
     screen: polyfillScreenPlugin,
@@ -35,3 +35,4 @@ export default {
 
     recommended: polyfillRecommendedPlugins,
 };
+export default polyfillPlugins;

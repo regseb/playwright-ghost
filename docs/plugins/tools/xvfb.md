@@ -1,4 +1,4 @@
-# `utils.xvfb`
+# `tools.xvfb`
 
 > [!IMPORTANT]
 >
@@ -33,11 +33,11 @@ Use the plugin with default options.
 
 ```javascript
 import { chromium } from "playwright-ghost";
-import plugins from "playwright-ghost/plugins";
+import toolsXvfbPlugin from "playwright-ghost/plugins/tools/xvfb";
 
 const browser = await chromium.launch({
   headless: false,
-  plugins: [plugins.utils.xvfb()],
+  plugins: [toolsXvfbPlugin()],
 });
 // ...
 ```
@@ -46,11 +46,11 @@ Use the plugin and specify arguments for a 2K screen.
 
 ```javascript
 import { chromium } from "playwright-ghost";
-import plugins from "playwright-ghost/plugins";
+import toolsXvfbPlugin from "playwright-ghost/plugins/tools/xvfb";
 
 const browser = await chromium.launch({
   headless: false,
-  plugins: [plugins.utils.xvfb({ args: ["-screen", "0", "2560x1440x24"] })],
+  plugins: [toolsXvfbPlugin({ args: ["-screen", "0", "2560x1440x24"] })],
 });
 // ...
 ```
@@ -59,19 +59,14 @@ Use the plugin with `keepalive` and `signal`.
 
 ```javascript
 import { chromium } from "playwright-ghost";
-import plugins from "playwright-ghost/plugins";
+import toolsXvfbPlugin from "playwright-ghost/plugins/tools/xvfb";
 
 const controller = new AbortController();
 
 // Launch a browser and start Xvfb.
 const browser = await chromium.launch({
   headless: false,
-  plugins: [
-    plugins.utils.xvfb({
-      keepalive: true,
-      signal: controller.signal,
-    }),
-  ],
+  plugins: [toolsXvfbPlugin({ keepalive: true, signal: controller.signal })],
 });
 // ...
 // Close the browser, but don't stop Xvfb.
@@ -80,12 +75,7 @@ browser.close();
 // Launch an other browser and reuse Xvfb.
 const otherBrowser = await chromium.launch({
   headless: false,
-  plugins: [
-    plugins.utils.xvfb({
-      keepalive: true,
-      signal: controller.signal,
-    }),
-  ],
+  plugins: [toolsXvfbPlugin({ keepalive: true, signal: controller.signal })],
 });
 // ...
 // Close the other browser, but don't stop Xvfb.
@@ -93,22 +83,4 @@ otherBrowser.close();
 
 // Stop Xvfb.
 controller.abort();
-```
-
-## Advanced
-
-### Import
-
-If you want to import only this plugin, you can use the
-`"playwright-ghost/plugins/utils/xvfb"` path in the import.
-
-```javascript
-import { chromium } from "playwright-ghost";
-import xvfbPlugin from "playwright-ghost/plugins/utils/xvfb";
-
-const browser = await chromium.launch({
-  headless: false,
-  plugins: [xvfbPlugin()],
-});
-// ...
 ```

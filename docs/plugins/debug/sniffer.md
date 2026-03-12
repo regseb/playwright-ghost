@@ -40,10 +40,10 @@ If you want to import only this plugin, you can use the
 
 ```javascript
 import { chromium } from "playwright-ghost";
-import snifferPlugin from "playwright-ghost/plugins/debug/sniffer";
+import debugSnifferPlugin from "playwright-ghost/plugins/debug/sniffer";
 
 const browser = await chromium.launch({
-  plugins: [snifferPlugin()],
+  plugins: [debugSnifferPlugin()],
 });
 // ...
 ```

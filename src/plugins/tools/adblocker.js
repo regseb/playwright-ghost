@@ -52,23 +52,23 @@ import { PlaywrightBlocker } from "@ghostery/adblocker-playwright";
  */
 
 /**
- * @typedef {ParseOptions | FromListsOptions | FromPrebuiltOptions} UtilsAdblockerOptions Les
+ * @typedef {ParseOptions | FromListsOptions | FromPrebuiltOptions} ToolsAdblockerOptions Les
  *                                                                                        options
  *                                                                                        du
  *                                                                                        plugin
- *                                                                                        `utils.adblocker`.
+ *                                                                                        `tools.adblocker`.
  */
 
 /**
  * Crée un plugin pour ajouter un bloqueur de publicités dans le navigateur.
  *
- * @param {UtilsAdblockerOptions} [options] Les éventuelles options du plugin
- *                                          `utils.adblocker`.
+ * @param {ToolsAdblockerOptions} [options] Les éventuelles options du plugin
+ *                                          `tools.adblocker`.
  * @returns {Promise<Record<string, Function>>} Une promesse contenant le
  *                                              crochet du plugin.
  * @see https://github.com/ghostery/adblocker
  */
-export default async function utilsAdblockerPlugin(options) {
+export default async function toolsAdblockerPlugin(options) {
     let blocker;
     switch (options?.mode) {
         case "parse":

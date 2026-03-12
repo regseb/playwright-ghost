@@ -37,10 +37,10 @@ If you want to import only this plugin, you can use the
 
 ```javascript
 import { chromium } from "playwright-ghost";
-import webdriverPlugin from "playwright-ghost/plugins/polyfill/webdriver";
+import polyfillWebdriverPlugin from "playwright-ghost/plugins/polyfill/webdriver";
 
 const browser = await chromium.launch({
-  plugins: [webdriverPlugin()],
+  plugins: [polyfillWebdriverPlugin()],
 });
 // ...
 ```

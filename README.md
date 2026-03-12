@@ -72,7 +72,7 @@ In this other example, three plugins are added:
 
 - `polyfill.headless` has no options;
 - `polyfill.screen` sets other values for screen size;
-- `utils.adblocker` uses default options.
+- `debug.console` uses default options.
 
 ```javascript
 import { chromium } from "playwright-ghost";
@@ -82,7 +82,7 @@ const browser = await chromium.launch({
   plugins: [
     plugins.polyfill.headless(),
     plugins.polyfill.screen({ width: 2560, height: 1440 }),
-    plugins.utils.adblocker(),
+    plugins.debug.console(),
   ],
 });
 // ...
@@ -242,53 +242,11 @@ const browser = await chromium.launch({
   </tr>
   <tr>
     <td></td>
-    <td>️⚙️</td>
-    <td>
-      <a href="docs/plugins/utils/adblocker.md"><code>utils.adblocker</code></a>
-    </td>
-    <td>Add Ghostery adblocker.</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td>️⚙️</td>
-    <td>
-      <a href="docs/plugins/utils/camoufox.md"><code>utils.camoufox</code></a>
-    </td>
-    <td>Replace Firefox by Camoufox.</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td>⚙️</td>
-    <td>
-      <a href="docs/plugins/utils/fingerprint.md">
-        <code>utils.fingerprint</code>
-      </a>
-    </td>
-    <td>Change the browser fingerprint.</td>
-  </tr>
-  <tr>
-    <td></td>
     <td>⚙️</td>
     <td>
       <a href="docs/plugins/utils/locale.md"><code>utils.locale</code></a>
     </td>
     <td>Use the locally installed browser.</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td>⚙️</td>
-    <td>
-      <a href="docs/plugins/utils/weston.md"><code>utils.weston</code></a>
-    </td>
-    <td>Run browser in <code>weston</code> (a Wayland compositor).</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td>⚙️</td>
-    <td>
-      <a href="docs/plugins/utils/xvfb.md"><code>utils.xvfb</code></a>
-    </td>
-    <td>Run browser in <code>Xvfb</code> (<em>X Virtual Frame Buffer</em>).</td>
   </tr>
 </table>
 
@@ -328,6 +286,70 @@ const browser = await chromium.launch({
       <a href="docs/plugins/debug/sniffer.md"><code>debug.sniffer</code></a>
     </td>
     <td>Monitor all JavaScript properties used in a page.</td>
+  </tr>
+</table>
+
+### Tools
+
+These plugins are not exported with the other plugins because they require
+external tools (npm dependencies or executables). They must be imported
+individually:
+
+```javascript
+import { chromium } from "playwright-ghost";
+import plugins from "playwright-ghost/plugins";
+// Import the plugin specifically for the Foo tool.
+import toolsFooPlugin from "playwright-ghost/plugins/tools/foo";
+
+const browser = await chromium.launch({
+  plugins: [...plugins.recommended(), toolsFooPlugin()],
+});
+// ...
+```
+
+<!-- markdownlint-disable no-inline-html -->
+<table>
+  <tr>
+    <td>⚙️</td>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>️⚙️</td>
+    <td>
+      <a href="docs/plugins/tools/adblocker.md"><code>tools.adblocker</code></a>
+    </td>
+    <td>Add Ghostery adblocker.</td>
+  </tr>
+  <tr>
+    <td>️⚙️</td>
+    <td>
+      <a href="docs/plugins/tools/camoufox.md"><code>tools.camoufox</code></a>
+    </td>
+    <td>Replace Firefox by Camoufox.</td>
+  </tr>
+  <tr>
+    <td>⚙️</td>
+    <td>
+      <a href="docs/plugins/tools/fingerprint.md">
+        <code>tools.fingerprint</code>
+      </a>
+    </td>
+    <td>Change the browser fingerprint.</td>
+  </tr>
+  <tr>
+    <td>⚙️</td>
+    <td>
+      <a href="docs/plugins/tools/weston.md"><code>tools.weston</code></a>
+    </td>
+    <td>Run browser in <code>weston</code> (a Wayland compositor).</td>
+  </tr>
+  <tr>
+    <td>⚙️</td>
+    <td>
+      <a href="docs/plugins/tools/xvfb.md"><code>tools.xvfb</code></a>
+    </td>
+    <td>Run browser in <code>Xvfb</code> (<em>X Virtual Frame Buffer</em>).</td>
   </tr>
 </table>
 

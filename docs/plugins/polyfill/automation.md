@@ -37,10 +37,10 @@ If you want to import only this plugin, you can use the
 
 ```javascript
 import { chromium } from "playwright-ghost";
-import automationPlugin from "playwright-ghost/plugins/polyfill/automation";
+import polyfillAutomationPlugin from "playwright-ghost/plugins/polyfill/automation";
 
 const browser = await chromium.launch({
-  plugins: [automationPlugin()],
+  plugins: [polyfillAutomationPlugin()],
 });
 // ...
 ```

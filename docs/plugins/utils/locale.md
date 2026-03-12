@@ -45,10 +45,10 @@ If you want to import only this plugin, you can use the
 
 ```javascript
 import { chromium } from "playwright-ghost";
-import localePlugin from "playwright-ghost/plugins/utils/locale";
+import utilsLocalePlugin from "playwright-ghost/plugins/utils/locale";
 
 const browser = await chromium.launch({
-  plugins: [localePlugin()],
+  plugins: [utilsLocalePlugin()],
 });
 // ...
 ```

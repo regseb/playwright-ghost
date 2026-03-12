@@ -15,8 +15,9 @@ import debugSnifferPlugin from "./sniffer.js";
 /**
  * Les plugins de débogage.
  */
-export default {
+const debugPlugins = {
     console: debugConsolePlugin,
     cursor: debugCursorPlugin,
     sniffer: debugSnifferPlugin,
 };
+export default debugPlugins;

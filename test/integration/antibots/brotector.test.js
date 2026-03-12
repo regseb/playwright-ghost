@@ -11,6 +11,7 @@ import { describe, it } from "node:test";
 import playwright from "../../../src/index.js";
 import patchright from "../../../src/patchright.js";
 import plugins from "../../../src/plugins/index.js";
+import toolsCamoufoxPlugin from "../../../src/plugins/tools/camoufox.js";
 
 describe("Anti-bot: Brotector", () => {
     describe("chromium", () => {
@@ -47,7 +48,7 @@ describe("Anti-bot: Brotector", () => {
             const browser = await playwright.firefox.launch({
                 plugins: [
                     ...plugins.recommended(),
-                    plugins.utils.camoufox({ headless: true }),
+                    toolsCamoufoxPlugin({ headless: true }),
                 ],
             });
             const context = await browser.newContext();

@@ -49,10 +49,10 @@ If you want to import only this plugin, you can use the
 
 ```javascript
 import { chromium } from "playwright-ghost";
-import consolePlugin from "playwright-ghost/plugins/debug/console";
+import debugConsolePlugin from "playwright-ghost/plugins/debug/console";
 
 const browser = await chromium.launch({
-  plugins: [consolePlugin()],
+  plugins: [debugConsolePlugin()],
 });
 // ...
 ```

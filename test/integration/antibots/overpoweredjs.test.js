@@ -10,6 +10,7 @@ import fs from "node:fs/promises";
 import { describe, it } from "node:test";
 import playwright from "../../../src/index.js";
 import plugins from "../../../src/plugins/index.js";
+import toolsWestonPlugin from "../../../src/plugins/tools/weston.js";
 
 describe("Anti-bot: OverpoweredJS Fingerprinting Demo", () => {
     describe("chromium", () => {
@@ -25,7 +26,7 @@ describe("Anti-bot: OverpoweredJS Fingerprinting Demo", () => {
                         // Utiliser weston, car OverpoweredJS détecte que c'est
                         // un bot avec Xvfb. Il doit peut-être détecter une
                         // incohérence : Chrome utilise Wayland dans Ubuntu.
-                        plugins.utils.weston(),
+                        toolsWestonPlugin(),
                     ],
                 },
             );

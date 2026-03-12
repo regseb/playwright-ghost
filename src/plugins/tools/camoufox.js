@@ -7,8 +7,8 @@
 import { launchOptions } from "camoufox-js";
 
 /**
- * @import { BrowserType } from "playwright"
  * @import { LaunchOptions } from "camoufox-js"
+ * @import { BrowserType } from "playwright"
  * @import { ContextBefore } from "../../hook.js"
  */
 
@@ -33,8 +33,8 @@ const override = (options, camoufoxOptions, browserType) => {
 };
 
 /**
- * @typedef {LaunchOptions} UtilsCamoufoxOptions Les options du plugin
- *                                               `utils.camoufox` qui sont les
+ * @typedef {LaunchOptions} ToolsCamoufoxOptions Les options du plugin
+ *                                               `tools.camoufox` qui sont les
  *                                               options de Camoufox (passées à
  *                                               la fonction `launchOptions()`).
  */
@@ -43,13 +43,13 @@ const override = (options, camoufoxOptions, browserType) => {
  * Crée un plugin pour surcharger les options de création d'un `Browser` avec
  * celles générées par Camoufox.
  *
- * @param {UtilsCamoufoxOptions} [options] Les éventuelles options du plugin
- *                                         `utils.camoufox`.
+ * @param {ToolsCamoufoxOptions} [options] Les éventuelles options du plugin
+ *                                         `tools.camoufox`.
  * @returns {Promise<Record<string, Function>>} Une promesse contenant le
  *                                              crochet du plugin.
  * @see https://github.com/apify/camoufox-js
  */
-export default async function camoufoxPlugin(options) {
+export default async function toolsCamoufoxPlugin(options) {
     const camoufoxOptions = await launchOptions(options ?? {});
 
     return {

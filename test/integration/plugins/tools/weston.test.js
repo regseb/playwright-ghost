@@ -6,13 +6,13 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import playwright from "../../../../src/index.js";
-import utilsXvfbPlugin from "../../../../src/plugins/utils/xvfb.js";
+import toolsWestonPlugin from "../../../../src/plugins/tools/weston.js";
 
-describe("Plugin: utils.xvfb", () => {
+describe("Plugin: tools.weston", () => {
     it("should use screen size with launch()", async () => {
         const browser = await playwright.chromium.launch({
             headless: false,
-            plugins: [utilsXvfbPlugin()],
+            plugins: [toolsWestonPlugin()],
         });
         // Définir le viewport à `null` pour utiliser la taille de l'écran
         // virtuel.
@@ -39,7 +39,7 @@ describe("Plugin: utils.xvfb", () => {
             // Définir le viewport à `null` pour utiliser la taille de l'écran
             // virtuel.
             viewport: null,
-            plugins: [utilsXvfbPlugin()],
+            plugins: [toolsWestonPlugin()],
         });
         try {
             const page = await context.newPage();
@@ -59,7 +59,7 @@ describe("Plugin: utils.xvfb", () => {
     it("should use screen size with launchServer()", async () => {
         const server = await playwright.chromium.launchServer({
             headless: false,
-            plugins: [utilsXvfbPlugin()],
+            plugins: [toolsWestonPlugin()],
         });
         const browser = await playwright.chromium.connect(server.wsEndpoint());
         // Définir le viewport à `null` pour utiliser la taille de l'écran

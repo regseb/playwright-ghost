@@ -57,10 +57,10 @@ If you want to import only this plugin, you can use the
 
 ```javascript
 import { chromium } from "playwright-ghost";
-import viewportPlugin from "playwright-ghost/plugins/polyfill/viewport";
+import polyfillViewportPlugin from "playwright-ghost/plugins/polyfill/viewport";
 
 const browser = await chromium.launch({
-  plugins: [viewportPlugin()],
+  plugins: [polyfillViewportPlugin()],
 });
 // ...
 ```

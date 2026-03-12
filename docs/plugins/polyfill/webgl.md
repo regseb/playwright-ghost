@@ -33,10 +33,10 @@ If you want to import only this plugin, you can use the
 
 ```javascript
 import { chromium } from "playwright-ghost";
-import webGLPlugin from "playwright-ghost/plugins/polyfill/webgl";
+import polyfillWebGLPlugin from "playwright-ghost/plugins/polyfill/webgl";
 
 const browser = await chromium.launch({
-  plugins: [webGLPlugin()],
+  plugins: [polyfillWebGLPlugin()],
 });
 // ...
 ```

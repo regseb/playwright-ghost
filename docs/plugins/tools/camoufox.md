@@ -1,7 +1,11 @@
-# `utils.camoufox`
+# `tools.camoufox`
 
-Replace Firefox by [Camoufox](https://camoufox.com/) (using
-[`camoufox-js`](https://www.npmjs.com/package/camoufox-js) package).
+> [!IMPORTANT]
+>
+> You need to add [`camoufox-js`](https://www.npmjs.com/package/camoufox-js)
+> package to your npm dependencies.
+
+Replace Firefox by [Camoufox](https://camoufox.com/).
 
 ## Options
 
@@ -33,10 +37,10 @@ Use the plugin with default options.
 
 ```javascript
 import { firefox } from "playwright-ghost";
-import { plugins } from "playwright-ghost/plugins";
+import toolsCamoufoxPlugin from "playwright-ghost/plugins/tools/camoufox";
 
 const browser = await firefox.launch({
-  plugins: [plugins.utils.camoufox()],
+  plugins: [toolsCamoufoxPlugin()],
 });
 // ...
 ```
@@ -46,49 +50,10 @@ of OS.
 
 ```javascript
 import { firefox } from "playwright-ghost";
-import { plugins } from "playwright-ghost/plugins";
+import toolsCamoufoxPlugin from "playwright-ghost/plugins/tools/camoufox";
 
 const browser = await firefox.launch({
-  plugins: [plugins.utils.camoufox({ os: ["macos", "linux"] })],
+  plugins: [toolsCamoufoxPlugin({ os: ["macos", "linux"] })],
 });
 // ...
-```
-
-## Advanced
-
-### Import
-
-If you want to import only this plugin, you can use the
-`"playwright-ghost/plugins/utils/camoufox"` path in the import.
-
-```javascript
-import { firefox } from "playwright-ghost";
-import camoufoxPlugin from "playwright-ghost/plugins/utils/camoufox";
-
-const browser = await firefox.launch({
-  plugins: [camoufoxPlugin()],
-});
-// ...
-```
-
-### Version
-
-If you want to use a specific version of
-[`camoufox-js`](https://www.npmjs.com/package/camoufox-js), you can use the
-[`overrides`](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#overrides)
-property in your _package.json_. In this example, the dependency version is set
-to `0.6.1`.
-
-```json
-{
-  "name": "your-awesome-project",
-  "dependencies": {
-    "playwright-ghost": "0.14.0"
-  },
-  "overrides": {
-    "playwright-ghost": {
-      "camoufox-js": "0.6.1"
-    }
-  }
-}
 ```

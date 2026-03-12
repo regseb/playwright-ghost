@@ -5,13 +5,13 @@
 
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import utilsFingerprintPlugin from "../../../../src/plugins/utils/fingerprint.js";
+import toolsFingerprintPlugin from "../../../../src/plugins/tools/fingerprint.js";
 
-describe("plugins/utils/fingerprint.js", () => {
-    describe("utilsFingerprintPlugin()", () => {
+describe("plugins/tools/fingerprint.js", () => {
+    describe("toolsFingerprintPlugin()", () => {
         describe("BrowserType.launchPersistentContext:before", () => {
             it("should generate fingerprint", async () => {
-                const plugin = await utilsFingerprintPlugin();
+                const plugin = await toolsFingerprintPlugin();
                 const listener =
                     plugin["BrowserType.launchPersistentContext:before"];
                 const id = 42;
@@ -31,7 +31,7 @@ describe("plugins/utils/fingerprint.js", () => {
 
         describe("Browser.newContext:before", () => {
             it("should add fingerprint in options", async () => {
-                const plugin = await utilsFingerprintPlugin();
+                const plugin = await toolsFingerprintPlugin();
                 const listener = plugin["Browser.newContext:before"];
                 const id = 42;
                 const argsAltered = listener([], { id });

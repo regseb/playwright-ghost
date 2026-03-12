@@ -13,11 +13,12 @@ import utilsPlugins from "./utils/index.js";
 /**
  * La liste de tous les plugins regroupés par catégorie.
  */
-export default {
-    debug: debugPlugins,
+const plugins = {
     polyfill: polyfillPlugins,
     humanize: humanizePlugins,
     utils: utilsPlugins,
+    debug: debugPlugins,
 
     recommended: recommendedPlugins,
 };
+export default plugins;

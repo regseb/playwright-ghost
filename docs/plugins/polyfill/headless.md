@@ -38,10 +38,10 @@ If you want to import only this plugin, you can use the
 
 ```javascript
 import { chromium } from "playwright-ghost";
-import headlessPlugin from "playwright-ghost/plugins/polyfill/headless";
+import polyfillHeadlessPlugin from "playwright-ghost/plugins/polyfill/headless";
 
 const browser = await chromium.launch({
-  plugins: [headlessPlugin()],
+  plugins: [polyfillHeadlessPlugin()],
 });
 // ...
 ```

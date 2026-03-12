@@ -48,10 +48,10 @@ If you want to import only this plugin, you can use the
 
 ```javascript
 import { chromium } from "playwright-ghost";
-import screenPlugin from "playwright-ghost/plugins/polyfill/screen";
+import polyfillScreenPlugin from "playwright-ghost/plugins/polyfill/screen";
 
 const browser = await chromium.launch({
-  plugins: [screenPlugin()],
+  plugins: [polyfillScreenPlugin()],
 });
 // ...
 ```
