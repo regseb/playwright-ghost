@@ -5,8 +5,12 @@
  * @author Sébastien Règne
  */
 
-import playwright from "patchright";
+import patchright from "patchright";
 import Ghost from "./ghost.js";
+
+/**
+ * @import { OptionPlugins } from "./ghost.js"
+ */
 
 /**
  * @typedef {import("patchright").Page} Page
@@ -17,7 +21,6 @@ import Ghost from "./ghost.js";
  * @typedef {import("patchright").JSHandle} JSHandle
  * @typedef {import("patchright").ElementHandle} ElementHandle
  * @typedef {import("patchright").Locator} Locator
- * @typedef {import("patchright").BrowserType} BrowserType
  * @typedef {import("patchright").CDPSession} CDPSession
  * @typedef {import("patchright").WebSocketRoute} WebSocketRoute
  * @typedef {import("patchright").ElectronApplication} ElectronApplication
@@ -53,9 +56,6 @@ import Ghost from "./ghost.js";
  * @typedef {import("patchright").Video} Video
  * @typedef {import("patchright").WebError} WebError
  * @typedef {import("patchright").WebSocket} WebSocket
- * @typedef {import("patchright").LaunchOptions} LaunchOptions
- * @typedef {import("patchright").ConnectOverCDPOptions} ConnectOverCDPOptions
- * @typedef {import("patchright").ConnectOptions} ConnectOptions
  * @typedef {import("patchright").LocatorScreenshotOptions} LocatorScreenshotOptions
  * @typedef {import("patchright").BrowserContextOptions} BrowserContextOptions
  * @typedef {import("patchright").ViewportSize} ViewportSize
@@ -70,20 +70,43 @@ import Ghost from "./ghost.js";
  * @typedef {import("patchright").ChromiumCoverage} ChromiumCoverage
  */
 
-export const chromium = new Ghost(playwright.chromium);
-export const firefox = new Ghost(playwright.firefox);
-export const webkit = new Ghost(playwright.webkit);
-export const selectors = playwright.selectors;
-export const devices = playwright.devices;
-export const errors = playwright.errors;
-export const request = playwright.request;
+/**
+ * @typedef {Ghost<import("patchright").BrowserType>} BrowserType
+ */
+
+/**
+ * @typedef {import("patchright").LaunchOptions & OptionPlugins} LaunchOptions
+ * @typedef {import("patchright").ConnectOverCDPOptions & OptionPlugins} ConnectOverCDPOptions
+ * @typedef {import("patchright").ConnectOptions & OptionPlugins} ConnectOptions
+ */
+
+/**
+ * @type {BrowserType}
+ */
+export const chromium = new Ghost(patchright.chromium);
+
+/**
+ * @type {BrowserType}
+ */
+export const firefox = new Ghost(patchright.firefox);
+
+/**
+ * @type {BrowserType}
+ */
+export const webkit = new Ghost(patchright.webkit);
+
+export const selectors = patchright.selectors;
+export const devices = patchright.devices;
+export const errors = patchright.errors;
+export const request = patchright.request;
 // eslint-disable-next-line no-underscore-dangle
-export const _electron = playwright._electron;
+export const _electron = patchright._electron;
 // eslint-disable-next-line no-underscore-dangle
-export const _android = playwright._android;
-export default {
-    ...playwright,
+export const _android = patchright._android;
+const playwright = {
+    ...patchright,
     chromium,
     firefox,
     webkit,
 };
+export default playwright;

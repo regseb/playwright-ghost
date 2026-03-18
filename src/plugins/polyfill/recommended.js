@@ -22,34 +22,37 @@ import polyfillWebdriverPlugin from "./webdriver.js";
  *                                              utilisé par un être humain et un
  *                                              navigateur _headless_ contrôlé
  *                                              par un programme.
- * @prop {boolean}                         [automation] Un booléen pour
- *                                                      activer / désactiver le
- *                                                      plugin.
- * @prop {boolean}                         [headless]   Un booléen pour
- *                                                      activer / désactiver le
- *                                                      plugin.
- * @prop {PolyfillScreenOptions|boolean}   [screen]     Les éventuelles options
- *                                                      du plugin de la taille
- *                                                      de l'écran ; ou un
- *                                                      booléen pour activer /
- *                                                      déactiver le plugin.
- * @prop {PolyfillViewportOptions|boolean} [viewport]   Les éventuelles options
- *                                                      du plugin de la taille
- *                                                      de la fenêtre du
- *                                                      navigateur ; ou un
- *                                                      booléen pour activer /
- *                                                      désactiver le plugin.
- * @prop {boolean}                         [webdriver]  Un booléen pour
- *                                                      activer / désactiver le
- *                                                      plugin.
+ * @prop {boolean}                           [automation] Un booléen pour
+ *                                                        activer / désactiver
+ *                                                        le plugin.
+ * @prop {boolean}                           [headless]   Un booléen pour
+ *                                                        activer / désactiver
+ *                                                        le plugin.
+ * @prop {PolyfillScreenOptions | boolean}   [screen]     Les éventuelles
+ *                                                        options du plugin de
+ *                                                        la taille de l'écran ;
+ *                                                        ou un booléen pour
+ *                                                        activer / déactiver le
+ *                                                        plugin.
+ * @prop {PolyfillViewportOptions | boolean} [viewport]   Les éventuelles
+ *                                                        options du plugin de
+ *                                                        la taille de la
+ *                                                        fenêtre du
+ *                                                        navigateur ; ou un
+ *                                                        booléen pour activer /
+ *                                                        désactiver le plugin.
+ * @prop {boolean}                           [webdriver]  Un booléen pour
+ *                                                        activer / désactiver
+ *                                                        le plugin.
  */
 
 /**
  * Initialise un plugin sauf s'il est désactivé.
  *
- * @param {Function}       plugin    La fonction pour créer le plugin.
- * @param {Object|boolean} [options] Les éventuelles options du plugin ; ou un
- *                                   booléen pour activer / déactiver le plugin.
+ * @param {Function}         plugin    La fonction pour créer le plugin.
+ * @param {Object | boolean} [options] Les éventuelles options du plugin ; ou un
+ *                                     booléen pour activer / déactiver le
+ *                                     plugin.
  * @returns {Record<string, Function>} Les crochets du plugin ; ou un objet vide
  *                                     si le plugin est désactivé.
  */

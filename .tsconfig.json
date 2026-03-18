@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "module": "nodenext",
     "allowJs": true
   },
   "include": ["**/*", "**/.*", "**/.*/**/*", "**/.*/**/.*"],

@@ -9,7 +9,7 @@ import process from "node:process";
 
 /**
  * @import { ChildProcess } from "node:child_process"
- * @import { BrowserContext, BrowserType } from "playwright"
+ * @import { BrowserContext, BrowserType } from "playwright-core"
  * @import { ContextBefore } from "../../hook.js"
  */
 
@@ -107,11 +107,11 @@ const killWeston = (args, force = false) => {
  * Définit le `WAYLAND_DISPLAY` (du socket de `weston`) dans les options de
  * création d'un `Browser`.
  *
- * @param {Record<string, any>|undefined} options     Les options de création
- *                                                    d'un `Browser`.
- * @param {string}                        display     Le `WAYLAND_DISPLAY` du
- *                                                    socket de `weston`.
- * @param {BrowserType}                   browserType Le type de navigateur.
+ * @param {Record<string, any> | undefined} options     Les options de création
+ *                                                      d'un `Browser`.
+ * @param {string}                          display     Le `WAYLAND_DISPLAY` du
+ *                                                      socket de `weston`.
+ * @param {BrowserType}                     browserType Le type de navigateur.
  * @returns {Record<string, any>} Les nouvelles options.
  */
 const setDisplay = (options, display, browserType) => {
@@ -157,10 +157,10 @@ const setDisplay = (options, display, browserType) => {
  *
  * @param {ToolsWestonOptions} [options] Les éventuelles options du plugin
  *                                       `tools.weston`.
- * @returns {Record<string, Function|Record<symbol, Record<string, Function>>>} Les
- *                                                                              crochets
- *                                                                              du
- *                                                                              plugin.
+ * @returns {Record<string, Function | Record<symbol, Record<string, Function>>>} Les
+ *                                                                                crochets
+ *                                                                                du
+ *                                                                                plugin.
  * @see https://wayland.pages.freedesktop.org/weston/
  */
 export default function toolsWestonPlugin(options) {

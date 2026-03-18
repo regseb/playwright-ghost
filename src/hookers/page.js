@@ -7,7 +7,7 @@
 import Hooker from "./hooker.js";
 
 /**
- * @import { BrowserContext, BrowserType } from "playwright"
+ * @import { BrowserContext, BrowserType } from "playwright-core"
  * @import { ContextAfter, Listener } from "../hook.js"
  * @import { Pointers } from "./hooker.js"
  */

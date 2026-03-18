@@ -9,15 +9,15 @@ import "../../polyfills/map.js";
 
 /**
  * @import { Buffer } from "node:buffer"
- * @import { Page } from "playwright"
+ * @import { Page } from "playwright-core"
  */
 
 /**
  * Contourne la
  * [Content Security Policy (CSP)](https://developer.mozilla.org/Web/HTTP/Guides/CSP).
  *
- * @param {Record<string, any>|undefined} options Les options de création
- *                                                d'un contexte.
+ * @param {Record<string, any> | undefined} options Les options de création
+ *                                                  d'un contexte.
  * @returns {Record<string, any>} Les nouvelles options.
  */
 const setBypassCSP = (options) => {
@@ -217,7 +217,7 @@ export default function debugSnifferPlugin() {
             const map = new Map();
 
             const wss = new WebSocketServer({ port: 0 });
-            wss.on("connection", (/** @type {WebSocket} */ ws) => {
+            wss.on("connection", (ws) => {
                 ws.on("message", (/** @type {Buffer} */ data) => {
                     const entry = JSON.parse(data.toString());
                     const frame = map.getOrInsertComputed(

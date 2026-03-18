@@ -60,7 +60,6 @@ const handler = {
  * @see https://nodejs.org/api/test.html#mockfnoriginal-implementation-options
  */
 mockNode.fn = (implementation) => {
-    // @ts-expect-error
     return new Proxy(mockBun(implementation), handler);
 };
 
@@ -87,7 +86,6 @@ mockNode.fn = (implementation) => {
  * @see https://nodejs.org/api/test.html#mockmethodobject-methodname-implementation-options
  */
 mockNode.method = (object, methodName, implementation) => {
-    // @ts-expect-error
     return new Proxy(
         spyOn(object, methodName).mockImplementation(implementation),
         handler,

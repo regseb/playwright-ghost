@@ -8,6 +8,10 @@ import { afterEach, describe, it, mock } from "node:test";
 import Hooker from "../../../src/hookers/hooker.js";
 import PageHooker from "../../../src/hookers/page.js";
 
+/**
+ * @import { BrowserContext, Page } from "playwright-core"
+ */
+
 describe("hookers/page.js", () => {
     describe("PageHooker", () => {
         describe("PRESETS", () => {
@@ -104,7 +108,9 @@ describe("hookers/page.js", () => {
                     pageHooker.first()[
                         "BrowserType.launchPersistentContext:after"
                     ];
-                const browserContext = { pages: () => [] };
+                const browserContext = /** @type {BrowserContext} */ ({
+                    pages: () => /** @type {Page[]} */ ([]),
+                });
                 const browserContextAltered = listener(browserContext);
                 assert.equal(browserContextAltered, browserContext);
 
@@ -123,7 +129,9 @@ describe("hookers/page.js", () => {
                     pageHooker.first()[
                         "BrowserType.launchPersistentContext:after"
                     ];
-                const browserContext = { pages: () => [] };
+                const browserContext = /** @type {BrowserContext} */ ({
+                    pages: () => /** @type {Page[]} */ ([]),
+                });
                 const browserContextAltered = firstListener(browserContext);
 
                 const lastListener =

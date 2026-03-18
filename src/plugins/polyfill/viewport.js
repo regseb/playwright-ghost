@@ -9,21 +9,21 @@ import Random from "../../utils/random.js";
 /**
  * Modifie la taille de la zone d'affichage du navigateur.
  *
- * @param {Record<string, any>|undefined} options    Les options de création
- *                                                   d'un contexte ou d'une
- *                                                   page.
- * @param {Object}                        width      La largeur de la zone
- *                                                   d'affichage.
- * @param {number}                        width.min  La largeur minimum de la
- *                                                   zone d'affichage.
- * @param {number}                        width.max  La largeur maximum de la
- *                                                   zone d'affichage.
- * @param {Object}                        height     La hauteur de la zone
- *                                                   d'affichage.
- * @param {number}                        height.min La hauteur minimum de la
- *                                                   zone d'affichage.
- * @param {number}                        height.max La hauteur maximum de la
- *                                                   zone d'affichage.
+ * @param {Record<string, any> | undefined} options    Les options de création
+ *                                                     d'un contexte ou d'une
+ *                                                     page.
+ * @param {Object}                          width      La largeur de la zone
+ *                                                     d'affichage.
+ * @param {number}                          width.min  La largeur minimum de la
+ *                                                     zone d'affichage.
+ * @param {number}                          width.max  La largeur maximum de la
+ *                                                     zone d'affichage.
+ * @param {Object}                          height     La hauteur de la zone
+ *                                                     d'affichage.
+ * @param {number}                          height.min La hauteur minimum de la
+ *                                                     zone d'affichage.
+ * @param {number}                          height.max La hauteur maximum de la
+ *                                                     zone d'affichage.
  * @returns {Record<string, any>} Les nouvelles options.
  */
 const setViewport = (options, width, height) => {

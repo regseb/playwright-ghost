@@ -7,7 +7,7 @@
 import which from "../../utils/which.js";
 
 /**
- * @import { BrowserType } from "playwright"
+ * @import { BrowserType } from "playwright-core"
  * @import { ContextBefore } from "../../hook.js"
  */
 
@@ -21,9 +21,9 @@ const cache = new Map();
 /**
  * Définit le chemin de l'exécutable du navigateur installé localement.
  *
- * @param {Record<string, any>|undefined} options Les options de création d'un
- *                                                `Browser`.
- * @param {string}                        name    Le nom du navigateur.
+ * @param {Record<string, any> | undefined} options Les options de création d'un
+ *                                                  `Browser`.
+ * @param {string}                          name    Le nom du navigateur.
  * @returns {Promise<Record<string, any>>} Les nouvelles options.
  */
 const setExecutablePath = async (options, name) => {
@@ -93,7 +93,7 @@ export default function utilsLocalePlugin(options) {
          * @param {any[]}                      args    Les paramètres de la
          *                                             méthode.
          * @param {ContextBefore<BrowserType>} context Le contexte du crochet.
-         * @returns {any[]} Les nouveaux paramètres.
+         * @returns {Promise<any[]>} Les nouveaux paramètres.
          */
         "BrowserType.launchServer:before": async (
             args,

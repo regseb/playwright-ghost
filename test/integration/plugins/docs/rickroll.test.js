@@ -8,17 +8,17 @@ import { describe, it } from "node:test";
 import playwright from "../../../../src/index.js";
 
 /**
- * @import { BrowserType } from "playwright"
+ * @import { BrowserType } from "playwright-core"
  * @import { ContextBefore } from "../../../../src/hook.js"
  */
 
 /**
  * Ajoute l'option `--disable-volume-adjust-sound` dans Chromium.
  *
- * @param {Record<string, any>|undefined} options     Les options de création
- *                                                    d'un `Browser`.
- * @param {BrowserType}                   browserType Le type de navigateur.
- * @returns {Record<string, any>|undefined} Les nouvelles options.
+ * @param {Record<string, any> | undefined} options     Les options de création
+ *                                                      d'un `Browser`.
+ * @param {BrowserType}                     browserType Le type de navigateur.
+ * @returns {Record<string, any> | undefined} Les nouvelles options.
  */
 const disableVolumeAdjustSound = (options, browserType) => {
     if ("chromium" === browserType.name()) {

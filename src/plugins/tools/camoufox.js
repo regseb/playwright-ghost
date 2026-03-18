@@ -8,22 +8,23 @@ import { launchOptions } from "camoufox-js";
 
 /**
  * @import { LaunchOptions } from "camoufox-js"
- * @import { BrowserType } from "playwright"
+ * @import { BrowserType } from "playwright-core"
  * @import { ContextBefore } from "../../hook.js"
  */
 
 /**
  * Surcharge les options avec celles générées par Camoufox.
  *
- * @param {Record<string, any>|undefined} options         Les options de
- *                                                        création d'un
- *                                                        `Browser`.
- * @param {Record<string, any>}           camoufoxOptions Les options, générées
- *                                                        par Camoufox, de
- *                                                        création d'un
- *                                                        `Browser`.
- * @param {BrowserType}                   browserType     Le type de navigateur.
- * @returns {Record<string, any>|undefined} Les nouvelles options.
+ * @param {Record<string, any> | undefined} options         Les options de
+ *                                                          création d'un
+ *                                                          `Browser`.
+ * @param {Record<string, any>}             camoufoxOptions Les options,
+ *                                                          générées par
+ *                                                          Camoufox, de
+ *                                                          création d'un
+ *                                                          `Browser`.
+ * @param {BrowserType}                     browserType     Le type de navigateur.
+ * @returns {Record<string, any> | undefined} Les nouvelles options.
  */
 const override = (options, camoufoxOptions, browserType) => {
     if ("firefox" === browserType.name()) {
@@ -33,10 +34,9 @@ const override = (options, camoufoxOptions, browserType) => {
 };
 
 /**
- * @typedef {LaunchOptions} ToolsCamoufoxOptions Les options du plugin
- *                                               `tools.camoufox` qui sont les
- *                                               options de Camoufox (passées à
- *                                               la fonction `launchOptions()`).
+ * @typedef {Omit<LaunchOptions, "headless"> & { headless?: boolean }} ToolsCamoufoxOptions
+ *          Les options du plugin `tools.camoufox` qui sont les options de
+ *          Camoufox (passées à la fonction `launchOptions()`).
  */
 
 /**

@@ -5,17 +5,17 @@
  */
 
 /**
- * @import { BrowserType } from "playwright"
+ * @import { BrowserType } from "playwright-core"
  * @import { ContextBefore } from "../../hook.js"
  */
 
 /**
  * Utilise _Angle_ pour _WebGL_ dans Chromium.
  *
- * @param {Record<string, any>|undefined} options     Les options de création
- *                                                    d'un `Browser`.
- * @param {BrowserType}                   browserType Le type de navigateur.
- * @returns {Record<string, any>|undefined} Les nouvelles options.
+ * @param {Record<string, any> | undefined} options     Les options de création
+ *                                                      d'un `Browser`.
+ * @param {BrowserType}                     browserType Le type de navigateur.
+ * @returns {Record<string, any> | undefined} Les nouvelles options.
  */
 const useAngle = (options, browserType) => {
     if ("chromium" === browserType.name() && (options?.headless ?? true)) {

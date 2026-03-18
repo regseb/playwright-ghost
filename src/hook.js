@@ -18,13 +18,13 @@
  * @template {Object} T Le type de l'objet.
  * @typedef {Object} ContextAfter Le contexte pour un crochetage après l'appel
  *                                d'une méthode ou d'un getter.
- * @prop {T}               obj  L'objet crocheté.
- * @prop {string}          prop La méthode crochetée.
- * @prop {any[]|undefined} args Les paramètres de la méthode crochetée ou
- *                              possiblement `undefined` pour les getters.
- * @prop {string}          id   L'identifiant de l'exécution d'un crochet. Cette
- *                              valeur est identique dans les crochets d'avant
- *                              et d'après.
+ * @prop {T}                 obj  L'objet crocheté.
+ * @prop {string}            prop La méthode crochetée.
+ * @prop {any[] | undefined} args Les paramètres de la méthode crochetée ou
+ *                                possiblement `undefined` pour les getters.
+ * @prop {string}            id   L'identifiant de l'exécution d'un crochet.
+ *                                Cette valeur est identique dans les crochets
+ *                                d'avant et d'après.
  */
 
 /**
@@ -66,15 +66,15 @@ const reduce = (fns, value, context) => {
  * Accroche des écouteurs à un objet.
  *
  * @template {Object} T Le type de l'objet.
- * @param {T}                            obj       L'objet qui sera crocheté.
- * @param {Map<string|symbol, Listener>} listeners Les écouteurs à accrocher à
- *                                                 l'objet.
+ * @param {T}                              obj       L'objet qui sera crocheté.
+ * @param {Map<string | symbol, Listener>} listeners Les écouteurs à accrocher à
+ *                                                   l'objet.
  * @returns {T} L'objet crocheté.
  */
 export default function hook(obj, listeners) {
     return new Proxy(obj, {
         get: (target, prop, receiver) => {
-            const value = /** @type {any} */ (target[prop]);
+            const value = target[prop];
             if (!listeners.has(prop)) {
                 return "function" === typeof value ? value.bind(target) : value;
             }

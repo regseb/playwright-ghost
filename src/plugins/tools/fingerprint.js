@@ -12,7 +12,7 @@ import { FingerprintInjector } from "fingerprint-injector";
  *     BrowserFingerprintWithHeaders,
  *     FingerprintGeneratorOptions,
  * } from "fingerprint-generator"
- * @import { Browser, BrowserContext, BrowserType } from "playwright"
+ * @import { Browser, BrowserContext, BrowserType } from "playwright-core"
  * @import { ContextAfter, ContextBefore } from "../../hook.js"
  */
 
@@ -20,12 +20,14 @@ import { FingerprintInjector } from "fingerprint-injector";
  * Modifie les informations dans les options pour le _fingerprint_ et les
  * entêtes.
  *
- * @param {Record<string, any>|undefined} options                Les options de
- *                                                               création d'un
- *                                                               contexte.
- * @param {BrowserFingerprintWithHeaders} fingerprintWithHeaders Le
- *                                                               _fingerprint_
- *                                                               et les entêtes.
+ * @param {Record<string, any> | undefined} options                Les options
+ *                                                                 de création
+ *                                                                 d'un
+ *                                                                 contexte.
+ * @param {BrowserFingerprintWithHeaders}   fingerprintWithHeaders Le
+ *                                                                 _fingerprint_
+ *                                                                 et les
+ *                                                                 entêtes.
  * @returns {Record<string, any>} Les nouvelles options.
  */
 const setFingerprint = (options, { fingerprint, headers }) => {

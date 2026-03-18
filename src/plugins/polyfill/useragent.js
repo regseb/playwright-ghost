@@ -5,21 +5,21 @@
  */
 
 /**
- * @import { Browser, BrowserType } from "playwright"
+ * @import { Browser, BrowserType } from "playwright-core"
  * @import { ContextBefore } from "../../hook.js"
  */
 
 /**
  * Modifie l'agent utilisateur (_user agent_) du navigateur.
  *
- * @param {Record<string, any>|undefined} options      Les options de création
- *                                                     d'un `Browser`.
- * @param {string}                        userAgent    L'agent utilisateur à
- *                                                     utiliser.
- * @param {BrowserType}                   browserType  Le type de navigateur.
- * @param {string}                        functionName Le nom de la fonction
- *                                                     appellée.
- * @returns {Record<string, any>|undefined} Les nouvelles options.
+ * @param {Record<string, any> | undefined} options      Les options de création
+ *                                                       d'un `Browser`.
+ * @param {string}                          userAgent    L'agent utilisateur à
+ *                                                       utiliser.
+ * @param {BrowserType}                     browserType  Le type de navigateur.
+ * @param {string}                          functionName Le nom de la fonction
+ *                                                       appellée.
+ * @returns {Record<string, any> | undefined} Les nouvelles options.
  */
 const changeUserAgentFromBrowserType = (
     options,
@@ -47,12 +47,12 @@ const changeUserAgentFromBrowserType = (
 /**
  * Modifie l'agent utilisateur (_user agent_) du navigateur.
  *
- * @param {Record<string, any>|undefined} options   Les options de création d'un
- *                                                  `BrowserContext`.
- * @param {string}                        userAgent L'agent utilisateur à
- *                                                  utiliser.
- * @param {Browser}                       browser   Le navigateur.
- * @returns {Record<string, any>|undefined} Les nouvelles options.
+ * @param {Record<string, any> | undefined} options   Les options de création
+ *                                                    d'un `BrowserContext`.
+ * @param {string}                          userAgent L'agent utilisateur à
+ *                                                    utiliser.
+ * @param {Browser}                         browser   Le navigateur.
+ * @returns {Record<string, any> | undefined} Les nouvelles options.
  */
 const changeUserAgentFromBrowser = (options, userAgent, browser) => {
     if ("chromium" !== browser.browserType().name()) {

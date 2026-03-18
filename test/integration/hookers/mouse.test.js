@@ -8,7 +8,7 @@ import { describe, it } from "node:test";
 import vanilla from "../../../src/index.js";
 
 /**
- * @import { Mouse } from "playwright";
+ * @import { Mouse } from "playwright-core";
  */
 
 describe("Hooker: mouse", () => {

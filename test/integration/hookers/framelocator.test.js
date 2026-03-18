@@ -8,7 +8,7 @@ import { describe, it } from "node:test";
 import vanilla from "../../../src/index.js";
 
 /**
- * @import { FrameLocator } from "playwright";
+ * @import { FrameLocator } from "playwright-core";
  */
 
 describe("Hooker: frameLocator", () => {

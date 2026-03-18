@@ -8,7 +8,7 @@ import { describe, it } from "node:test";
 import vanilla from "../../../src/index.js";
 
 /**
- * @import { BrowserContext } from "playwright";
+ * @import { BrowserContext } from "playwright-core";
  */
 
 describe("Hooker: browserContext", () => {

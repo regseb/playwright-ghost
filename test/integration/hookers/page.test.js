@@ -8,7 +8,7 @@ import { describe, it } from "node:test";
 import vanilla from "../../../src/index.js";
 
 /**
- * @import { Page } from "playwright";
+ * @import { Page } from "playwright-core";
  */
 
 describe("Hooker: page", () => {

@@ -8,7 +8,7 @@ import { describe, it } from "node:test";
 import vanilla from "../../../src/index.js";
 
 /**
- * @import { Browser } from "playwright";
+ * @import { Browser } from "playwright-core";
  */
 
 describe("Hooker: browser", () => {

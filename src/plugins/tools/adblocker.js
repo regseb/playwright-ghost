@@ -8,7 +8,7 @@ import { PlaywrightBlocker } from "@ghostery/adblocker-playwright";
 
 /**
  * @import { Caching, Config } from "@ghostery/adblocker-playwright"
- * @import { Page } from "playwright"
+ * @import { Page } from "playwright-core"
  */
 
 /**
@@ -52,11 +52,8 @@ import { PlaywrightBlocker } from "@ghostery/adblocker-playwright";
  */
 
 /**
- * @typedef {ParseOptions | FromListsOptions | FromPrebuiltOptions} ToolsAdblockerOptions Les
- *                                                                                        options
- *                                                                                        du
- *                                                                                        plugin
- *                                                                                        `tools.adblocker`.
+ * @typedef {ParseOptions | FromListsOptions | FromPrebuiltOptions} ToolsAdblockerOptions
+ *          Les options du plugin `tools.adblocker`.
  */
 
 /**

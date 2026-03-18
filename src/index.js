@@ -4,8 +4,13 @@
  * @author Sébastien Règne
  */
 
-import playwright from "playwright";
+// Utiliser le `pw` afin de garder le nom `playwright` pour l'export par défaut.
+import pw from "playwright";
 import Ghost from "./ghost.js";
+
+/**
+ * @import { OptionPlugins } from "./ghost.js"
+ */
 
 /**
  * @typedef {import("playwright").Page} Page
@@ -16,7 +21,6 @@ import Ghost from "./ghost.js";
  * @typedef {import("playwright").JSHandle} JSHandle
  * @typedef {import("playwright").ElementHandle} ElementHandle
  * @typedef {import("playwright").Locator} Locator
- * @typedef {import("playwright").BrowserType} BrowserType
  * @typedef {import("playwright").CDPSession} CDPSession
  * @typedef {import("playwright").WebSocketRoute} WebSocketRoute
  * @typedef {import("playwright").ElectronApplication} ElectronApplication
@@ -52,9 +56,6 @@ import Ghost from "./ghost.js";
  * @typedef {import("playwright").Video} Video
  * @typedef {import("playwright").WebError} WebError
  * @typedef {import("playwright").WebSocket} WebSocket
- * @typedef {import("playwright").LaunchOptions} LaunchOptions
- * @typedef {import("playwright").ConnectOverCDPOptions} ConnectOverCDPOptions
- * @typedef {import("playwright").ConnectOptions} ConnectOptions
  * @typedef {import("playwright").LocatorScreenshotOptions} LocatorScreenshotOptions
  * @typedef {import("playwright").BrowserContextOptions} BrowserContextOptions
  * @typedef {import("playwright").ViewportSize} ViewportSize
@@ -69,20 +70,43 @@ import Ghost from "./ghost.js";
  * @typedef {import("playwright").ChromiumCoverage} ChromiumCoverage
  */
 
-export const chromium = new Ghost(playwright.chromium);
-export const firefox = new Ghost(playwright.firefox);
-export const webkit = new Ghost(playwright.webkit);
-export const selectors = playwright.selectors;
-export const devices = playwright.devices;
-export const errors = playwright.errors;
-export const request = playwright.request;
+/**
+ * @typedef {Ghost<import("playwright").BrowserType>} BrowserType
+ */
+
+/**
+ * @typedef {import("playwright").LaunchOptions & OptionPlugins} LaunchOptions
+ * @typedef {import("playwright").ConnectOverCDPOptions & OptionPlugins} ConnectOverCDPOptions
+ * @typedef {import("playwright").ConnectOptions & OptionPlugins} ConnectOptions
+ */
+
+/**
+ * @type {BrowserType}
+ */
+export const chromium = new Ghost(pw.chromium);
+
+/**
+ * @type {BrowserType}
+ */
+export const firefox = new Ghost(pw.firefox);
+
+/**
+ * @type {BrowserType}
+ */
+export const webkit = new Ghost(pw.webkit);
+
+export const selectors = pw.selectors;
+export const devices = pw.devices;
+export const errors = pw.errors;
+export const request = pw.request;
 // eslint-disable-next-line no-underscore-dangle
-export const _electron = playwright._electron;
+export const _electron = pw._electron;
 // eslint-disable-next-line no-underscore-dangle
-export const _android = playwright._android;
-export default {
-    ...playwright,
+export const _android = pw._android;
+const playwright = {
+    ...pw,
     chromium,
     firefox,
     webkit,
 };
+export default playwright;

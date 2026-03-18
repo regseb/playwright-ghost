@@ -5,17 +5,17 @@
  */
 
 /**
- * @import { BrowserType } from "playwright"
+ * @import { BrowserType } from "playwright-core"
  * @import { ContextBefore } from "../../hook.js"
  */
 
 /**
  * Modifie le `channel` du navigateur Chromium.
  *
- * @param {Record<string, any>|undefined} options     Les options de création
- *                                                    d'un `Browser`.
- * @param {BrowserType}                   browserType Le type de navigateur.
- * @returns {Record<string, any>|undefined} Les nouvelles options.
+ * @param {Record<string, any> | undefined} options     Les options de création
+ *                                                      d'un `Browser`.
+ * @param {BrowserType}                     browserType Le type de navigateur.
+ * @returns {Record<string, any> | undefined} Les nouvelles options.
  * @see https://playwright.dev/docs/browsers#opt-in-to-new-headless-mode
  */
 const changeChannel = (options, browserType) => {

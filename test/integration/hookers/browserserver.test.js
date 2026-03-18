@@ -8,7 +8,7 @@ import { describe, it } from "node:test";
 import vanilla from "../../../src/index.js";
 
 /**
- * @import { BrowserServer } from "playwright";
+ * @import { BrowserServer } from "playwright-core";
  */
 
 describe("Hooker: browserServer", () => {

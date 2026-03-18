@@ -9,12 +9,12 @@ import Random from "../../utils/random.js";
 /**
  * Ajoute un délai entre le `mousedown` et `mouseup` d'un clic.
  *
- * @param {Record<string, any>|undefined} options   Les options du clic.
- * @param {Object}                        delay     Le délai.
- * @param {number}                        delay.min Le délai minimum en
- *                                                  millisecondes.
- * @param {number}                        delay.max Le délai maximum en
- *                                                  millisecondes.
+ * @param {Record<string, any> | undefined} options   Les options du clic.
+ * @param {Object}                          delay     Le délai.
+ * @param {number}                          delay.min Le délai minimum en
+ *                                                    millisecondes.
+ * @param {number}                          delay.max Le délai maximum en
+ *                                                    millisecondes.
  * @returns {Record<string, any>} Les nouvelles options.
  */
 const setDelay = (options, delay) => {

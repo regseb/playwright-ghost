@@ -9,7 +9,7 @@ import Hooker from "../../../src/hookers/hooker.js";
 import MouseHooker from "../../../src/hookers/mouse.js";
 
 /**
- * @import { Page } from "playwright"
+ * @import { Page } from "playwright-core"
  */
 
 describe("hookers/mouse.js", () => {

@@ -10,7 +10,7 @@ import ghostCursor from "ghost-cursor";
 import Random from "../../utils/random.js";
 
 /**
- * @import { Locator, Mouse, Page } from "playwright"
+ * @import { Locator, Mouse, Page } from "playwright-core"
  * @import { ContextBefore } from "../../hook.js"
  */
 

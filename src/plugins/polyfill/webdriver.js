@@ -5,7 +5,7 @@
  */
 
 /**
- * @import { BrowserType } from "playwright"
+ * @import { BrowserType } from "playwright-core"
  * @import { ContextBefore } from "../../hook.js"
  */
 
@@ -14,10 +14,10 @@
  * navigateur sera toujours controllable par Playwright, mais la variable
  * `navigator.webdriver` sera `false`.
  *
- * @param {Record<string, any>|undefined} options     Les options de création
- *                                                    d'un `Browser`.
- * @param {BrowserType}                   browserType Le type de navigateur.
- * @returns {Record<string, any>|undefined} Les nouvelles options.
+ * @param {Record<string, any> | undefined} options     Les options de création
+ *                                                      d'un `Browser`.
+ * @param {BrowserType}                     browserType Le type de navigateur.
+ * @returns {Record<string, any> | undefined} Les nouvelles options.
  */
 const disable = (options, browserType) => {
     if ("chromium" === browserType.name()) {

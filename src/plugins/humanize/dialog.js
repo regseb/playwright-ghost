@@ -8,7 +8,7 @@ import timers from "node:timers/promises";
 import Random from "../../utils/random.js";
 
 /**
- * @import { Page } from "playwright"
+ * @import { Page } from "playwright-core"
  */
 
 /**

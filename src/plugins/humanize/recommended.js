@@ -17,27 +17,28 @@ import humanizeDialogPlugin from "./dialog.js";
 /**
  * @typedef {Object} HumanizeRecommendedOptions Les éventuelles options des
  *                                              plugins humanisant recommandés.
- * @prop {HumanizeClickOptions|boolean}  [click]  Les éventuelles options du
- *                                                plugin des clics ; ou un
- *                                                booléen pour activer /
- *                                                désactiver le plugin.
- * @prop {HumanizeCursorOptions|boolean} [cursor] Les éventuelles options du
- *                                                plugin du curseur ; ou un
- *                                                booléen pour activer /
- *                                                désactiver le plugin.
- * @prop {HumanizeDialogOptions|boolean} [dialog] Les éventuelles options du
- *                                                plugin des boîtes de
- *                                                dialogues ; ou un booléen pour
- *                                                activer / désactiver le
- *                                                plugin.
+ * @prop {HumanizeClickOptions | boolean}  [click]  Les éventuelles options du
+ *                                                  plugin des clics ; ou un
+ *                                                  booléen pour activer /
+ *                                                  désactiver le plugin.
+ * @prop {HumanizeCursorOptions | boolean} [cursor] Les éventuelles options du
+ *                                                  plugin du curseur ; ou un
+ *                                                  booléen pour activer /
+ *                                                  désactiver le plugin.
+ * @prop {HumanizeDialogOptions | boolean} [dialog] Les éventuelles options du
+ *                                                  plugin des boîtes de
+ *                                                  dialogues ; ou un booléen
+ *                                                  pour activer / désactiver le
+ *                                                  plugin.
  */
 
 /**
  * Initialise un plugin sauf s'il est désactivé.
  *
- * @param {Function}       plugin    La fonction pour créer le plugin.
- * @param {Object|boolean} [options] Les éventuelles options du plugin ; ou un
- *                                   booléen pour activer / déactiver le plugin.
+ * @param {Function}         plugin    La fonction pour créer le plugin.
+ * @param {Object | boolean} [options] Les éventuelles options du plugin ; ou un
+ *                                     booléen pour activer / déactiver le
+ *                                     plugin.
  * @returns {Record<string, Function>} Les crochets du plugin ; ou un objet vide
  *                                     si le plugin est désactivé.
  */

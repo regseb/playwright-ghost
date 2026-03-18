@@ -10,7 +10,7 @@ import process from "node:process";
 
 /**
  * @import { ChildProcess } from "node:child_process"
- * @import { BrowserContext, BrowserType } from "playwright"
+ * @import { BrowserContext, BrowserType } from "playwright-core"
  * @import { ContextBefore } from "../../hook.js"
  */
 
@@ -107,12 +107,12 @@ const killXvfb = (args, force = false) => {
  * Définit le `DISPLAY` (du serveur de `Xvfb`) dans les options de création d'un
  * `Browser`.
  *
- * @param {Record<string, any>|undefined} options     Les options de création
- *                                                    d'un `Browser`.
- * @param {string}                        display     Le `DISPLAY` du serveur de
- *                                                    `Xvfb` (par exemple :
- *                                                    `:99`).
- * @param {BrowserType}                   browserType Le type de navigateur.
+ * @param {Record<string, any> | undefined} options     Les options de création
+ *                                                      d'un `Browser`.
+ * @param {string}                          display     Le `DISPLAY` du serveur
+ *                                                      de `Xvfb` (par exemple :
+ *                                                      `:99`).
+ * @param {BrowserType}                     browserType Le type de navigateur.
  * @returns {Record<string, any>} Les nouvelles options.
  */
 const setDisplay = (options, display, browserType) => {
@@ -158,10 +158,10 @@ const setDisplay = (options, display, browserType) => {
  *
  * @param {ToolsXvfbOptions} [options] Les éventuelles options du plugin
  *                                     `tools.xvfb`.
- * @returns {Record<string, Function|Record<symbol, Record<string, Function>>>} Les
- *                                                                              crochets
- *                                                                              du
- *                                                                              plugin.
+ * @returns {Record<string, Function | Record<symbol, Record<string, Function>>>} Les
+ *                                                                                crochets
+ *                                                                                du
+ *                                                                                plugin.
  * @see https://www.x.org/archive/X11R7.7/doc/man/man1/Xvfb.1.xhtml
  */
 export default function toolsXvfbPlugin(options) {

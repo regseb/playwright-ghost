@@ -7,10 +7,10 @@
 /**
  * Modifie la taille de l'écran.
  *
- * @param {Record<string, any>|undefined} options Les options de création d'un
- *                                                `Browser`.
- * @param {number}                        width   La largeur de l'écran.
- * @param {number}                        height  La hauteur de l'écran.
+ * @param {Record<string, any> | undefined} options Les options de création d'un
+ *                                                  `Browser`.
+ * @param {number}                          width   La largeur de l'écran.
+ * @param {number}                          height  La hauteur de l'écran.
  * @returns {Record<string, any>} Les nouvelles options.
  */
 const setScreen = (options, width, height) => {

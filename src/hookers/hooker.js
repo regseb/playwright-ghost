@@ -49,7 +49,7 @@ export default class Hooker {
         /**
          * Fonction qui modifie un objet.
          *
-         * @template {any|any[]} T Le type de l'objet.
+         * @template {any | any[]} T Le type de l'objet.
          * @param {T}                 objs    L'objet ou liste d'objets à
          *                                    modifier.
          * @param {ContextAfter<any>} context Le contexte d'exécution de
@@ -133,9 +133,9 @@ export default class Hooker {
     /**
      * Prépare un objet ou des objets vanilles pour les crocheter.
      *
-     * @param {any|any[]} vanillas Objet ou liste d'objets vanilles à préparer
-     *                             pour les crocheter.
-     * @returns {any|any[]} Objet ou liste d'objets crochetables.
+     * @param {any | any[]} vanillas Objet ou liste d'objets vanilles à préparer
+     *                               pour les crocheter.
+     * @returns {any | any[]} Objet ou liste d'objets crochetables.
      */
     prepare(vanillas) {
         return mapArrayOrScalar(vanillas, (/** @type {any} */ vanilla) => {
@@ -155,8 +155,8 @@ export default class Hooker {
     /**
      * Finalise l'objet ou les objets crochetés.
      *
-     * @param {any|any[]} hookeds Objet ou liste d'objets crochetés.
-     * @returns {any|any[]} Objet ou liste d'objets crochetés.
+     * @param {any | any[]} hookeds Objet ou liste d'objets crochetés.
+     * @returns {any | any[]} Objet ou liste d'objets crochetés.
      */
     finalize(hookeds) {
         return mapArrayOrScalar(hookeds, (/** @type {any} */ hooked) => {
@@ -175,9 +175,9 @@ export default class Hooker {
     /**
      * Récupère l'objet ou les objets crochetés à partir des objets vanilles.
      *
-     * @param {any|any[]} vanillas Objet ou liste d'objets vanilles.
-     * @returns {any|any[]} Objet ou liste d'objets crochetés associés à la
-     *                      vanille.
+     * @param {any | any[]} vanillas Objet ou liste d'objets vanilles.
+     * @returns {any | any[]} Objet ou liste d'objets crochetés associés à la
+     *                        vanille.
      */
     get(vanillas) {
         return mapArrayOrScalar(vanillas, (/** @type {any} */ vanilla) => {

@@ -8,7 +8,7 @@ import { describe, it } from "node:test";
 import vanilla from "../../../src/index.js";
 
 /**
- * @import { Locator } from "playwright";
+ * @import { Locator } from "playwright-core";
  */
 
 describe("Hooker: locator", () => {
