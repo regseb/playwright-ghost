@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.18.0](https://github.com/regseb/playwright-ghost/compare/v0.17.0...v0.18.0) (2026-03-28)
+
+### Features
+
+- Improve dependencies of plugins.
+  ([3e089a1](https://github.com/regseb/playwright-ghost/commit/3e089a1e64da13d7344ceebd768747b845bf2365))
+- Support Lightpanda.
+  ([4d92b2f](https://github.com/regseb/playwright-ghost/commit/4d92b2f0b7b869ed2e34aedf9d7c7e2137937138))
+
+### Bug Fixes
+
+- Don't create duplicate weston.
+  ([8cde4ad](https://github.com/regseb/playwright-ghost/commit/8cde4ad5521acedeaa71d0f0f225120ef1ba7e57))
+- Don't create duplicate Xvfb.
+  ([6ffb816](https://github.com/regseb/playwright-ghost/commit/6ffb8160d6dddb2d71acb0ed2fc243e27fb286ff))
+- Improve types.
+  ([104fa14](https://github.com/regseb/playwright-ghost/commit/104fa147afeb8ee3abe8745dc9dd71883c4ad5f6))
+- Remove Rebrowser.
+  ([0acf22f](https://github.com/regseb/playwright-ghost/commit/0acf22fa70b146310e6cc0024ce1b7035b653bd0))
+
 ## [0.17.0](https://github.com/regseb/playwright-ghost/compare/v0.16.0...v0.17.0) (2026-01-09)
 
 ### Features
