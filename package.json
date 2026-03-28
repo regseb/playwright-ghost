@@ -176,6 +176,7 @@
     "@biomejs/wasm-nodejs": "2.3.11",
     "@ghostery/adblocker-playwright": "2.14.1",
     "@prantlf/jsonlint": "17.0.0",
+    "@lightpanda/browser": "1.2.0",
     "@prettier/plugin-xml": "3.4.2",
     "@secretlint/secretlint-rule-github": "11.2.5",
     "@secretlint/secretlint-rule-npm": "11.2.5",
@@ -216,6 +217,7 @@
   "peerDependencies": {
     "@ghostery/adblocker-playwright": ">=2.14.1",
     "camoufox-js": ">=0.9.1",
+    "@lightpanda/browser": ">=1.2.0",
     "fingerprint-generator": ">=2.1.81",
     "fingerprint-injector": ">=2.1.81",
     "patchright": ">=1.58.0",
@@ -223,6 +225,9 @@
   },
   "peerDependenciesMeta": {
     "@ghostery/adblocker-playwright": {
+      "optional": true
+    },
+    "@lightpanda/browser": {
       "optional": true
     },
     "camoufox-js": {

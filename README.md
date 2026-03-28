@@ -340,6 +340,15 @@ const browser = await chromium.launch({
   <tr>
     <td>⚙️</td>
     <td>
+      <a href="docs/plugins/tools/lightpanda.md">
+        <code>tools.lightpanda</code>
+      </a>
+    </td>
+    <td>Start an instance of Lightpanda and connect to this browser.
+  </tr>
+  <tr>
+    <td>⚙️</td>
+    <td>
       <a href="docs/plugins/tools/weston.md"><code>tools.weston</code></a>
     </td>
     <td>Run browser in <code>weston</code> (a Wayland compositor).</td>
