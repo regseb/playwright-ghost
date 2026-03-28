@@ -2,6 +2,80 @@
 
 ## [0.18.0](https://github.com/regseb/playwright-ghost/compare/v0.17.0...v0.18.0) (2026-03-28)
 
+### ⚠ BREAKING CHANGES
+
+#### `tools` plugin group
+
+Plugins that use external tools ([`adblocker`](docs/plugins/tools/adblocker.md),
+[`camoufox`](docs/plugins/tools/camoufox.md),
+[`fingerprint`](docs/plugins/tools/fingerprint.md),
+[`weston`](docs/plugins/tools/weston.md), [`xvfb`](docs/plugins/tools/xvfb.md))
+have been moved to the `tools` group. This new group is not exported along with
+the other plugins; you must import the desired plugin individually.
+
+- Before `<=0.17.0`: (example for [`xvfb`](docs/plugins/tools/xvfb.md))
+
+  ```javascript
+  import { chromium } from "playwright-ghost";
+  import plugins from "playwright-ghost/plugins";
+
+  const browser = await chromium.launch({
+    plugins: [...plugins.recommended(), plugins.utils.xvfb()],
+  });
+  // ...
+  ```
+
+- After `>=0.18.0`:
+
+  ```javascript
+  import { chromium } from "playwright-ghost";
+  import plugins from "playwright-ghost/plugins";
+  import toolsXvfbPlugin from "playwright-ghost/plugins/tools/xvfb";
+
+  const browser = await chromium.launch({
+    plugins: [...plugins.recommended(), toolsXvfbPlugin()],
+  });
+  // ...
+  ```
+
+#### `tools` plugin with npm dependencies
+
+The npm dependencies for the tools plugins
+([`adblocker`](docs/plugins/tools/adblocker.md),
+[`camoufox`](docs/plugins/tools/camoufox.md),
+[`fingerprint`](docs/plugins/tools/fingerprint.md)) are no longer included in
+Playwright-ghost. You must add them to your dependencies.
+
+- Before `<=0.17.0`: (example for [`camoufox`](docs/plugins/tools/camoufox.md))
+
+  ```json
+  {
+    "dependencies": {
+      "playwright": "1.58.2",
+      "playwright-ghost": "0.17.0"
+    }
+  }
+  ```
+
+- After `>=0.18.0`:
+
+  ```json
+  {
+    "dependencies": {
+      "camoufox-js": "0.9.3",
+      "playwright": "1.58.2",
+      "playwright-ghost": "0.18.0"
+    }
+  }
+  ```
+
+#### `playwright` (and alternatives)
+
+The minimum version of [`playwright`](https://www.npmjs.com/package/playwright)
+(and [`patchright`](https://www.npmjs.com/package/patchright)) is `1.58.0`.
+[`rebrowser-playwright`](https://www.npmjs.com/package/rebrowser-playwright) is
+no longer supported (the project appears to have been abandoned).
+
 ### Features
 
 - Improve dependencies of plugins.
@@ -116,8 +190,8 @@ Plugin import has changed:
   ```
 
 npm dependencies of plugins
-([`utils.adblocker`](docs/plugins/utils/adblocker.md) and
-[`utils.fingerprint`](docs/plugins/utils/fingerprint.md)) are now integrated
+([`utils.adblocker`](docs/plugins/tools/adblocker.md) and
+[`utils.fingerprint`](docs/plugins/tools/fingerprint.md)) are now integrated
 into Playwright-ghost. You no longer need to add them
 ([`@ghostery/adblocker-playwright`](https://www.npmjs.com/package/@ghostery/adblocker-playwright),
 [`fingerprint-generator`](https://www.npmjs.com/package/fingerprint-generator)
@@ -125,7 +199,7 @@ or [`fingerprint-injector`](https://www.npmjs.com/package/fingerprint-injector))
 to your dependencies.
 
 You can now import just one plugin. For example, with
-[`utils.camoufox`](docs/plugins/utils/camoufox.md):
+[`utils.camoufox`](docs/plugins/tools/camoufox.md):
 
 ```javascript
 import { chromium } from "playwright-ghost";
