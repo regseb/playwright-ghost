@@ -7,6 +7,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { describe, it } from "node:test";
+import timers from "node:timers/promises";
 import playwright from "../../../src/index.js";
 import plugins from "../../../src/plugins/index.js";
 
@@ -37,7 +38,7 @@ describe("Anti-bot: Device Info", () => {
             const page = await context.newPage();
             try {
                 await page.goto("https://www.deviceinfo.me/");
-                await page.waitForTimeout(5000);
+                await timers.setTimeout(5000);
 
                 const spoofed = await page.getByText("(Spoofed)").all();
                 assert.deepEqual(spoofed, []);

@@ -7,6 +7,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { describe, it } from "node:test";
+import timers from "node:timers/promises";
 import playwright from "../../../src/index.js";
 import patchright from "../../../src/patchright.js";
 import plugins from "../../../src/plugins/index.js";
@@ -39,7 +40,7 @@ describe("Anti-bot: BrowserScan", () => {
             const page = await context.newPage();
             try {
                 await page.goto("https://www.browserscan.net/bot-detection");
-                await page.waitForTimeout(5000);
+                await timers.setTimeout(5000);
                 const result = await page
                     .getByText("Test Results:", { exact: true })
                     .evaluate(
@@ -77,7 +78,7 @@ describe("Anti-bot: BrowserScan", () => {
             const page = await context.newPage();
             try {
                 await page.goto("https://www.browserscan.net/bot-detection");
-                await page.waitForTimeout(5000);
+                await timers.setTimeout(5000);
                 const result = await page
                     .getByText("Test Results:", { exact: true })
                     .evaluate(

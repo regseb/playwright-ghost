@@ -8,8 +8,10 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { describe, it } from "node:test";
+import timers from "node:timers/promises";
 import playwright from "../../../src/index.js";
 import plugins from "../../../src/plugins/index.js";
+import toolsCamoufoxPlugin from "../../../src/plugins/tools/camoufox.js";
 
 describe("Anti-bot: Simple Service Workers Fingerprinting Leaks Test", () => {
     describe("chromium", () => {
@@ -23,7 +25,7 @@ describe("Anti-bot: Simple Service Workers Fingerprinting Leaks Test", () => {
                 await page.goto(
                     "https://mihneamanolache.github.io/simple-sw-test/",
                 );
-                await page.waitForTimeout(2000);
+                await timers.setTimeout(2000);
 
                 const consistent = await page
                     .locator("#consisency")
@@ -49,7 +51,10 @@ describe("Anti-bot: Simple Service Workers Fingerprinting Leaks Test", () => {
     describe("firefox", () => {
         it("should not be detected", async () => {
             const browser = await playwright.firefox.launch({
-                plugins: plugins.recommended(),
+                plugins: [
+                    ...plugins.recommended(),
+                    toolsCamoufoxPlugin({ headless: true }),
+                ],
             });
             const context = await browser.newContext();
             const page = await context.newPage();
@@ -57,7 +62,7 @@ describe("Anti-bot: Simple Service Workers Fingerprinting Leaks Test", () => {
                 await page.goto(
                     "https://mihneamanolache.github.io/simple-sw-test/",
                 );
-                await page.waitForTimeout(2000);
+                await timers.setTimeout(2000);
 
                 const consistent = await page
                     .locator("#consisency")

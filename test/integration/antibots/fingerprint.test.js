@@ -7,6 +7,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { describe, it } from "node:test";
+import timers from "node:timers/promises";
 import playwright from "../../../src/index.js";
 import plugins from "../../../src/plugins/index.js";
 import toolsCamoufoxPlugin from "../../../src/plugins/tools/camoufox.js";
@@ -38,9 +39,12 @@ describe("Anti-bot: Fingerprint", () => {
             const page = await context.newPage();
             try {
                 await page.goto("https://demo.fingerprint.com/playground");
+                // Attendre que la page s'affiche, car les éléments sont
+                // affichés progressivement pour donner un effet.
+                await timers.setTimeout(5000);
 
                 const result = await page
-                    .locator('div[data-test-property-name="botd"]')
+                    .locator('div[data-test-property-name="bot"]')
                     .textContent();
 
                 assert.equal(result, "Not detected");
@@ -50,7 +54,7 @@ describe("Anti-bot: Fingerprint", () => {
                     fullPage: true,
                 });
                 await fs.writeFile(
-                    "./log/fingerprintplayground-cr.html",
+                    "./log/fingerprint-cr.html",
                     await page.content(),
                 );
 
@@ -72,9 +76,12 @@ describe("Anti-bot: Fingerprint", () => {
             const page = await context.newPage();
             try {
                 await page.goto("https://demo.fingerprint.com/playground");
+                // Attendre que la page s'affiche, car les éléments sont
+                // affichés progressivement pour donner un effet.
+                await timers.setTimeout(5000);
 
                 const result = await page
-                    .locator('div[data-test-property-name="botd"]')
+                    .locator('div[data-test-property-name="bot"]')
                     .textContent();
 
                 assert.equal(result, "Not detected");
@@ -84,7 +91,7 @@ describe("Anti-bot: Fingerprint", () => {
                     fullPage: true,
                 });
                 await fs.writeFile(
-                    "./log/fingerprintplayground-fx.html",
+                    "./log/fingerprint-fx.html",
                     await page.content(),
                 );
 

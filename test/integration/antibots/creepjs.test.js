@@ -8,6 +8,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { describe, it } from "node:test";
+import timers from "node:timers/promises";
 import playwright from "../../../src/index.js";
 import plugins from "../../../src/plugins/index.js";
 
@@ -42,7 +43,7 @@ describe("Anti-bot: CreepJS", () => {
             const page = await context.newPage();
             try {
                 await page.goto("https://abrahamjuliot.github.io/creepjs/");
-                await page.waitForTimeout(5000);
+                await timers.setTimeout(5000);
 
                 // Ne plus vérifier le trust score.
                 // https://github.com/abrahamjuliot/creepjs/issues/292

@@ -1,13 +1,14 @@
 /**
  * @license MIT
- * @see https://kaliiiiiiiiii.github.io/brotector/
- * @see https://github.com/kaliiiiiiiiii/brotector
+ * @see https://ttlns.github.io/brotector/
+ * @see https://github.com/ttlns/brotector
  * @author Sébastien Règne
  */
 
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { describe, it } from "node:test";
+import timers from "node:timers/promises";
 import playwright from "../../../src/index.js";
 import patchright from "../../../src/patchright.js";
 import plugins from "../../../src/plugins/index.js";
@@ -22,9 +23,9 @@ describe("Anti-bot: Brotector", () => {
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
-                await page.goto("https://kaliiiiiiiiii.github.io/brotector/");
+                await page.goto("https://ttlns.github.io/brotector/");
                 await page.locator("#clickHere").click();
-                await page.waitForTimeout(1000);
+                await timers.setTimeout(1000);
                 const score = await page.locator("#avg-score").textContent();
                 assert.equal(score, "0");
             } finally {
@@ -54,9 +55,9 @@ describe("Anti-bot: Brotector", () => {
             const context = await browser.newContext();
             const page = await context.newPage();
             try {
-                await page.goto("https://kaliiiiiiiiii.github.io/brotector/");
+                await page.goto("https://ttlns.github.io/brotector/");
                 await page.locator("#clickHere").click();
-                await page.waitForTimeout(1000);
+                await timers.setTimeout(1000);
                 const score = await page.locator("#avg-score").textContent();
                 assert.equal(score, "0");
             } finally {

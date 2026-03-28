@@ -8,6 +8,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { describe, it } from "node:test";
+import timers from "node:timers/promises";
 import playwright from "../../../src/index.js";
 import patchright from "../../../src/patchright.js";
 import plugins from "../../../src/plugins/index.js";
@@ -23,7 +24,7 @@ describe("Anti-bot: Disable-devtool", () => {
             try {
                 await page.goto("https://theajack.github.io/disable-devtool/");
                 // Attendre que Disable-devtool soit activé.
-                await page.waitForTimeout(10_000);
+                await timers.setTimeout(10_000);
 
                 await page.locator("#md5_key").fill("foo");
                 await page.getByRole("button", { name: "Generate" }).click();
@@ -55,7 +56,7 @@ describe("Anti-bot: Disable-devtool", () => {
             try {
                 await page.goto("https://theajack.github.io/disable-devtool/");
                 // Attendre que Disable-devtool soit activé.
-                await page.waitForTimeout(10_000);
+                await timers.setTimeout(10_000);
 
                 await page.locator("#md5_key").fill("foo");
                 await page.getByRole("button", { name: "Generate" }).click();
