@@ -7,11 +7,12 @@
 
 import { mock as mockNode } from "node:test";
 import timers from "node:timers/promises";
+// @ts-expect-error -- TypeScript ne trouve pas les types de module bun.
 // eslint-disable-next-line n/no-missing-import, import/no-unresolved
 import { mock as mockBun, setSystemTime, spyOn } from "bun:test";
 
 /**
- * @import { Mock } from "node:test"
+ * @import { Mock, MockPropertyContext } from "node:test"
  */
 
 /**
@@ -35,8 +36,9 @@ const handler = {
         }
         return {
             callCount: () =>
-                target.mock.results.filter((r) => "incomplete" !== r.type)
-                    .length,
+                target.mock.results.filter(
+                    (/** @type {any} */ r) => "incomplete" !== r.type,
+                ).length,
 
             get calls() {
                 const calls = [];
@@ -92,38 +94,116 @@ mockNode.method = (object, methodName, implementation) => {
     );
 };
 
+/**
+ * @typedef {Object} PropertyMock Information d'une propriété mockée.
+ * @prop {any}                      object       Objet mocké.
+ * @prop {string | number | symbol} propertyName Propriété mocké.
+ * @prop {any}                      value        Valeur d'origine.
+ */
+
+/**
+ * Liste des propriétés mockées.
+ *
+ * @type {PropertyMock[]}
+ */
 const properties = [];
 
+/**
+ * Crée un mock pour une propriété d'un objet.
+ *
+ * @template {Object}             MockedObject Le type de l'objet.
+ * @template {keyof MockedObject} PropertyName Le type de l'objet.
+ * @param {MockedObject}               object       L'objet contenant la
+ *                                                  propriété à mocker.
+ * @param {PropertyName}               propertyName Le nom de la propriété à
+ *                                                  mocker.
+ * @param {MockedObject[PropertyName]} value        La valeur de la propriété
+ *                                                  mockée.
+ * @returns {MockedObject & { mock: MockPropertyContext<MockedObject[PropertyName]> }} L'objet mocké.
+ * @see https://nodejs.org/api/test.html#mockpropertyobject-propertyname-value
+ */
 mockNode.property = (object, propertyName, value) => {
     properties.push({ object, propertyName, value: object[propertyName] });
     // eslint-disable-next-line no-param-reassign
     object[propertyName] = value;
+    return /** @type {MockedObject & { mock: MockPropertyContext<MockedObject[PropertyName]> }} */ (
+        object
+    );
 };
 
+/**
+ * @typedef {Object} TimerMock Information d'une timer mocké.
+ * @prop {Function} fn     Fonction qui sera appelée.
+ * @prop {number}   date   Horodatage quand la fonction sera appellé.
+ * @prop {any[]}    args   Arguments qui seront passés ) la fonction.
+ * @prop {boolean}  active Marque indiquant si le mock est actif.
+ */
+
+/**
+ * Liste des timers mockés.
+ *
+ * @type {TimerMock[]}
+ */
 const timeouts = [];
 
+// @ts-expect-error
 mockNode.timers = {
+    /**
+     * Active un mock sur les timers.
+     *
+     * @param {Object} options     Options du mock.
+     * @param {number} options.now Horodatage mocké.
+     * @see https://nodejs.org/api/test.html#timersenableenableoptions
+     */
     enable(options) {
-        mockNode.method(globalThis, "setTimeout", (fn, ms, ...args) => {
-            timeouts.push({ fn, date: Date.now() + ms, args, active: true });
-            return timeouts.length - 1;
-        });
-        mockNode.method(globalThis, "clearTimeout", (timeoutID) => {
-            timeouts[timeoutID].active = false;
-        });
-        mockNode.method(timers, "setTimeout", (delay, value) => {
-            return new Promise((resolve) => {
+        mockNode.method(
+            globalThis,
+            "setTimeout",
+            (
+                /** @type {Function} */ fn,
+                /** @type {number} */ ms,
+                /** @type {any[]} */ ...args
+            ) => {
                 timeouts.push({
-                    fn: resolve,
-                    date: Date.now() + delay,
-                    args: [value],
+                    fn,
+                    date: Date.now() + ms,
+                    args,
                     active: true,
                 });
-            });
-        });
+                return timeouts.length - 1;
+            },
+        );
+        mockNode.method(
+            globalThis,
+            "clearTimeout",
+            (/** @type {number} */ timeoutID) => {
+                timeouts[timeoutID].active = false;
+            },
+        );
+        mockNode.method(
+            timers,
+            "setTimeout",
+            (/** @type {number} */ delay, /** @type {any} */ value) => {
+                return new Promise((resolve) => {
+                    timeouts.push({
+                        fn: resolve,
+                        date: Date.now() + delay,
+                        args: [value],
+                        active: true,
+                    });
+                });
+            },
+        );
         setSystemTime(options.now);
     },
 
+    /**
+     * Avance dans le temps mocké.
+     *
+     * @param {number} [milliseconds] Nombre de millisecondes à avancer. `1` par
+     *                                défaut.
+     * @see https://nodejs.org/api/test.html#timerstickmilliseconds
+     */
     tick(milliseconds = 1) {
         setSystemTime(Date.now() + milliseconds);
         for (const timeout of timeouts) {

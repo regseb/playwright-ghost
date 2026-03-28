@@ -2,7 +2,7 @@
 
 Show cursor in page.
 
-This plugin isn't recommended for use in production.
+This plugin is not recommended for use in production.
 
 ## Options
 
@@ -17,7 +17,7 @@ import { chromium } from "playwright-ghost";
 import plugins from "playwright-ghost/plugins";
 
 const browser = await chromium.launch({
-  plugins: [plugins.debug.cursor],
+  plugins: [plugins.debug.cursor()],
 });
 // ...
 ```

@@ -31,12 +31,12 @@ assignees: ""
 
 ### Environment
 
-- Playwright-ghost version<!-- e.g. 0.17.0 -->:
+- Playwright-ghost version<!-- e.g. 0.18.0 -->:
 - Dependencies version:
-  - Playwright (or fork)<!-- e.g. 1.57.0, patchright 1.57.0 -->:
-  - others (if appropriate)<!-- e.g. @ghostery/adblocker-playwright 2.13.3 -->:
-- Node version<!-- e.g. v24.12.0 -->:
-- npm version<!-- e.g. 11.6.2 -->:
+  - Playwright (or fork)<!-- e.g. 1.58.2, patchright 1.58.2 -->:
+  - others (if appropriate)<!-- e.g. @ghostery/adblocker-playwright 2.14.1 -->:
+- Node version<!-- e.g. v24.14.1 -->:
+- npm version<!-- e.g. 11.11.0 -->:
 
 ### Additional context
 

@@ -19,8 +19,8 @@ This plugin supports the following option:
   to the executable
   [`weston`](https://manpages.debian.org/weston/weston.1.en.html).
 - `keepalive` (default `false`): Keep the `weston` instance alive after the
-  browser is closed. If this option is enabled, it's advisable to also provide a
-  `signal` to stop the `weston` executable manually.
+  browser is closed. If this option is enabled, it is advisable to also provide
+  a `signal` to stop the `weston` executable manually.
 - `signal`: Signal to stop the `weston` instance. Works in the same way as the
   [`signal`](https://developer.mozilla.org/Web/API/RequestInit#signal) parameter
   of [`fetch()`](https://developer.mozilla.org/Web/API/Window/fetch).

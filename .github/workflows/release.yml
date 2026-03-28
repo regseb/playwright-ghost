@@ -29,7 +29,7 @@ jobs:
       # https://github.com/googleapis/release-please/issues/1802
       - name: Checkout repository
         if: ${{ steps.release.outputs.pr }}
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           ref: ${{ fromJSON(steps.release.outputs.pr).headBranchName }}
           # Récupérer deux commits sinon la réparation du commit (pour le
@@ -45,7 +45,7 @@ jobs:
 
       - name: Setup Node.js
         if: ${{ steps.release.outputs.pr }}
-        uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version: 24
 
@@ -68,14 +68,19 @@ jobs:
       # Si la release a été créée : publier le paquet dans npm et JSR.
       - name: Checkout repository
         if: ${{ steps.release.outputs.release_created }}
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Setup Node.js
         if: ${{ steps.release.outputs.release_created }}
-        uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org
+
+      # Mettre à jour npm pour avoir a minima la version 11.11.1.
+      # https://github.com/npm/cli/pull/9045
+      - name: Update npm
+        run: npm install -g npm@latest
 
       - name: Install dependencies and build declaration files (d.ts)
         if: ${{ steps.release.outputs.release_created }}
@@ -99,11 +104,7 @@ jobs:
 
       - name: Download tarball from npm
         if: ${{ steps.release.outputs.release_created }}
-        # Essayer de télécharger le paquet pendant cinq minutes (en essayant
-        # toutes les minutes).
-        run:
-          node .script/retry.js 5 60000 "npm pack ${{ env.NPM_NAME }}@${{
-          steps.release.outputs.tag_name }}"
+        run: npm pack ${{ env.NPM_NAME }}@${{ steps.release.outputs.tag_name }}
 
       - name: Upload tarball to release
         if: ${{ steps.release.outputs.release_created }}

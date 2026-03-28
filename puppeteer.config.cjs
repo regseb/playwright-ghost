@@ -12,6 +12,6 @@
 // https://github.com/puppeteer/puppeteer/issues/14268
 module.exports = {
     // Ne pas télécharger les navigateurs, car la dépendance Puppeteer est
-    // utilisé seulement pour ses types.
+    // utilisée seulement pour ses types.
     skipDownload: true,
-}
+};

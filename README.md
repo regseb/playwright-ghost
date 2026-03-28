@@ -5,8 +5,9 @@
 <!-- markdownlint-disable-next-line no-inline-html -->
 <img src="asset/logo.svg" align="right" width="100" height="100" alt="">
 
-[![npm][img-npm]][link-npm] [![build][img-build]][link-build]
-[![coverage][img-coverage]][link-coverage] [![semver][img-semver]][link-semver]
+[![npm][img-npm]][link-npm] [![jsr][img-jsr]][link-jsr]
+![compatibility][img-compatibility][![node.js][img-node]][link-node][![bun][img-bun]][link-bun]
+[![build][img-build]][link-build] [![coverage][img-coverage]][link-coverage]
 
 Playwright-ghost is an overlay on [Playwright](https://playwright.dev/), adding
 plugins to conceal the differences between a browser used by a human being and a
@@ -14,11 +15,14 @@ plugins to conceal the differences between a browser used by a human being and a
 a program.
 
 The Playwright-ghost API is identical to that of Playwright, except for the
-addition of the `plugins` option to the
-[`BrowserType.launch([options])`](https://playwright.dev/docs/api/class-browsertype#browser-type-launch)
-and
-[`BrowserType.launchPersistentContext(userDataDir, [options])`](https://playwright.dev/docs/api/class-browsertype#browser-type-launch-persistent-context)
-methods.
+addition of the `plugins` option to the methods of the
+[`BrowserType`](https://playwright.dev/docs/api/class-browsertype) class:
+
+- [`connect(wsEndpoint, [options])`](https://playwright.dev/docs/api/class-browsertype#browser-type-connect)
+- [`connectOverCDP(wsEndpoint, [options])`](https://playwright.dev/docs/api/class-browsertype#browser-type-connect-over-cdp)
+- [`launch([options])`](https://playwright.dev/docs/api/class-browsertype#browser-type-launch)
+- [`launchPersistentContext(userDataDir, [options])`](https://playwright.dev/docs/api/class-browsertype#browser-type-launch-persistent-context)
+- [`launchServer([options])`](https://playwright.dev/docs/api/class-browsertype#browser-type-launch-server)
 
 The `plugins` property is an array containing the plugins to be added.
 
@@ -471,21 +475,29 @@ const browser = await chromium.launch({
 // ...
 ```
 
-This plugin isn't perfect, so
+This plugin is not perfect, so
 [let's see how we can improve it](docs/customize.md) (and also discover other
 features).
 
 [img-npm]:
-  https://img.shields.io/npm/dm/playwright-ghost?label=npm&logo=npm&logoColor=whitesmoke
+  https://img.shields.io/npm/dw/playwright-ghost?style=flat-square&label=npm&logo=npm
+[img-jsr]:
+  https://jsr.io/badges/@regseb/playwright-ghost/weekly-downloads?style=flat-square&labelColor=grey&label=jsr&logoColor=whitesmoke&color=4c1
+[img-compatibility]:
+  https://img.shields.io/badge/compatibility-grey?style=flat-square&logo=data:image/svg%2bxml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEyIDBBMTIgMTIgMCAwIDAgMCAxMmExMiAxMiAwIDAgMCAxMiAxMiAxMiAxMiAwIDAgMCAxMi0xMkExMiAxMiAwIDAgMCAxMiAwbTYuNSA2LjVhMS41IDEuNSAwIDAgMSAxLjA2LjQ0IDEuNSAxLjUgMCAwIDEgMCAyLjEybC05IDlhMS41IDEuNSAwIDAgMS0yLjEyIDBsLTUtNWExLjUgMS41IDAgMCAxIDAtMi4xMiAxLjUgMS41IDAgMCAxIDIuMTIgMGwzLjk0IDMuOTM5IDcuOTQtNy45NEExLjUgMS41IDAgMCAxIDE4LjUgNi41IiBmaWxsPSJ3aGl0ZXNtb2tlIi8+PC9zdmc+
+[img-node]:
+  https://img.shields.io/badge/-blue?style=flat-square&logo=node.js&logoColor=whitesmoke
+[img-bun]:
+  https://img.shields.io/badge/-blue?style=flat-square&logo=bun&logoColor=whitesmoke
 [img-build]:
-  https://img.shields.io/github/actions/workflow/status/regseb/playwright-ghost/ci.yml?branch=main&logo=github&logoColor=whitesmoke
+  https://img.shields.io/github/actions/workflow/status/regseb/playwright-ghost/ci.yml?branch=main&style=flat-square&logo=github&logoColor=whitesmoke
 [img-coverage]:
-  https://img.shields.io/endpoint?label=coverage&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fregseb%2Fplaywright-ghost%2Fmain
-[img-semver]:
-  https://img.shields.io/badge/semver-2.0.0-blue?logo=semver&logoColor=whitesmoke
+  https://img.shields.io/endpoint?url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fregseb%2Fplaywright-ghost%2Fmain&style=flat-square&label=coverage
 [link-npm]: https://www.npmjs.com/package/playwright-ghost
+[link-jsr]: https://jsr.io/@regseb/playwright-ghost
+[link-node]: https://nodejs.org/
+[link-bun]: https://bun.com/
 [link-build]:
   https://github.com/regseb/playwright-ghost/actions/workflows/ci.yml?query=branch%3Amain
 [link-coverage]:
   https://dashboard.stryker-mutator.io/reports/github.com/regseb/playwright-ghost/main
-[link-semver]: https://semver.org/spec/v2.0.0.html "Semantic Versioning 2.0.0"

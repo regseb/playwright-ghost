@@ -7,7 +7,7 @@ two methods:
 - `get()`: get the list of properties;
 - `reset()`: reset the list.
 
-This plugin isn't recommended for use in production.
+This plugin is not recommended for use in production.
 
 ## Options
 

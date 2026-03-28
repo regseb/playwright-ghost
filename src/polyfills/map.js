@@ -17,6 +17,7 @@ if (undefined === Map.prototype.getOrInsert) {
      * @returns {T} La valeur associée à la clé.
      * @see https://developer.mozilla.org/Web/JavaScript/Reference/Global_Objects/Map/getOrInsert
      */
+    // @ts-expect-error
     // eslint-disable-next-line no-extend-native
     Map.prototype.getOrInsert = function getOrInsert(key, defaultValue) {
         if (this.has(key)) {
@@ -42,6 +43,7 @@ if (undefined === Map.prototype.getOrInsertComputed) {
      * @returns {V} La valeur associée à la clé.
      * @see https://developer.mozilla.org/Web/JavaScript/Reference/Global_Objects/Map/getOrInsert
      */
+    // @ts-expect-error
     // eslint-disable-next-line no-extend-native
     Map.prototype.getOrInsertComputed = function getOrInsertComputed(
         key,

@@ -1,6 +1,7 @@
 # Customize
 
-The plugin in the README has some problems. Let's see how to correct them.
+The plugin in the [README](../README.md#customize) has some problems. Let's see
+how to correct them.
 
 ```javascript
 /// rickrollPlugin.js
@@ -77,7 +78,7 @@ export default function rickrollPlugin() {
 
 The plugin hooks
 [`BrowserContext.newPage()`](https://playwright.dev/docs/api/class-browsercontext#browser-context-new-page)
-to add a script to the page. But it's also possible to create a page using
+to add a script to the page. But it is also possible to create a page using
 [`Browser.newPage()`](https://playwright.dev/docs/api/class-browser#browser-new-page).
 Playwright-ghost provides shortcuts for modifying objects: `"Browser:new"`,
 `"BrowserContext:new"`, `"BrowserServer:new"`, `"Page:new"`, `"Frame:new"`,

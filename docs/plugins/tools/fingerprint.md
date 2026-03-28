@@ -11,7 +11,7 @@
 Change the browser fingerprint with
 [Fingerprint Suite](https://github.com/apify/fingerprint-suite#readme).
 
-Fingerprint isn't added with
+Fingerprint is not added with
 [`Browser.newPage()`](https://playwright.dev/docs/api/class-browser#browser-new-page).
 You must use
 [`Browser.newContext()`](https://playwright.dev/docs/api/class-browser#browser-new-context)

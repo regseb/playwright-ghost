@@ -5,7 +5,7 @@ Display
 and [error](https://playwright.dev/docs/api/class-page#page-event-page-error)
 from the browser in the program console.
 
-This plugin isn't recommended for use in production.
+This plugin is not recommended for use in production.
 
 ## Options
 

@@ -21,8 +21,8 @@ This plugin supports the following option:
   executable
   [`Xvfb`](https://www.x.org/archive/X11R7.7/doc/man/man1/Xvfb.1.xhtml).
 - `keepalive` (default `false`): Keep the `Xvfb` instance alive after the
-  browser is closed. If this option is enabled, it's advisable to also provide a
-  `signal` to stop the `Xvfb` executable manually.
+  browser is closed. If this option is enabled, it is advisable to also provide
+  a `signal` to stop the `Xvfb` executable manually.
 - `signal`: Signal to stop the `Xvfb` instance. Works in the same way as the
   [`signal`](https://developer.mozilla.org/Web/API/RequestInit#signal) parameter
   of [`fetch()`](https://developer.mozilla.org/Web/API/Window/fetch).
