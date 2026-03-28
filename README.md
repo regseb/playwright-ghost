@@ -357,7 +357,7 @@ const browser = await chromium.launch({
 
 ### Pass
 
-This 26 anti-bots don't detect Playwright-ghost:
+This 27 anti-bots don't detect Playwright-ghost:
 [Anubis](https://anubis.techaro.lol),
 [Bing](https://www.bing.com/turing/captcha/challenge),
 [bounty-nodejs](https://bounty-nodejs.datashield.co/),
@@ -374,6 +374,7 @@ This 26 anti-bots don't detect Playwright-ghost:
 [Fingerprint](https://fingerprint.com/products/bot-detection/),
 [Fingerprint Pro Playground](https://demo.fingerprint.com/playground),
 [Fingerprint-Scan](https://fingerprint-scan.com/),
+[FPScanner](https://fpscanner.com/demo/),
 [HeadlessDetectJS](https://github.com/LouisKlimek/HeadlessDetectJS),
 [infosimples](https://infosimples.github.io/detect-headless/),
 [Chrome Headless Detection (Intoli)](https://intoli.com/blog/not-possible-to-block-chrome-headless/chrome-headless-test.html),
