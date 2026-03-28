@@ -357,13 +357,14 @@ const browser = await chromium.launch({
 
 ### Pass
 
-This 24 anti-bots don't detect Playwright-ghost:
+This 25 anti-bots don't detect Playwright-ghost:
 [Anubis](https://anubis.techaro.lol),
 [Bing](https://www.bing.com/turing/captcha/challenge),
 [bounty-nodejs](https://bounty-nodejs.datashield.co/),
 [Brotector](https://kaliiiiiiiiii.github.io/brotector/),
 [BrowserScan](https://www.browserscan.net/bot-detection),
 [Chromedriver Detector](https://hmaker.github.io/selenium-detector/),
+[CSSWAF](https://github.com/yzqzss/csswaf),
 [Detect CDP](https://bypassantibot.github.io/detectCDP/),
 [detectIncognito](https://detectincognito.com/),
 [Deviceandbrowserinfo](https://deviceandbrowserinfo.com/are_you_a_bot),
