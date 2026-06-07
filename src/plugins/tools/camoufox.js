@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/tools/camoufox.d.ts" */
+
 import { launchOptions } from "camoufox-js";
 
 /**

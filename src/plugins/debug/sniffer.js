@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/debug/sniffer.d.ts" */
+
 import { WebSocketServer } from "ws";
 import "../../polyfills/map.js";
 

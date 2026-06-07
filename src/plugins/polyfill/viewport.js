@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/polyfill/viewport.d.ts" */
+
 import Random from "../../utils/random.js";
 
 /**

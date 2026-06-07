@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/utils/index.d.ts" */
+
 import utilsLocalePlugin from "./locale.js";
 
 /**

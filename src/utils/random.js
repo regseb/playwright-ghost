@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../types/utils/random.d.ts" */
+
 import crypto from "node:crypto";
 
 /**

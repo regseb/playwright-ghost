@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/tools/adblocker.d.ts" */
+
 import { PlaywrightBlocker } from "@ghostery/adblocker-playwright";
 
 /**

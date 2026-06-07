@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../types/plugins/recommended.d.ts" */
+
 import humanizeRecommendedPlugins from "./humanize/recommended.js";
 import polyfillRecommendedPlugins from "./polyfill/recommended.js";
 

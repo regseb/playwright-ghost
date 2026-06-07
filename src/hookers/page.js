@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../types/hookers/page.d.ts" */
+
 import Hooker from "./hooker.js";
 
 /**

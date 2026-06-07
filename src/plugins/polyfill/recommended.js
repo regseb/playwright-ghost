@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/polyfill/recommended.d.ts" */
+
 import polyfillAutomationPlugin from "./automation.js";
 import polyfillHeadlessPlugin from "./headless.js";
 import polyfillScreenPlugin from "./screen.js";

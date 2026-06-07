@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../types/index.d.ts" */
+
 // Utiliser le `pw` afin de garder le nom `playwright` pour l'export par défaut.
 import pw from "playwright";
 import Ghost from "./ghost.js";

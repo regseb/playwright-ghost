@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/humanize/dialog.d.ts" */
+
 import timers from "node:timers/promises";
 import Random from "../../utils/random.js";
 

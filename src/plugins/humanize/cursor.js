@@ -5,6 +5,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/humanize/cursor.d.ts" */
+
 import timers from "node:timers/promises";
 import ghostCursor from "ghost-cursor";
 import Random from "../../utils/random.js";

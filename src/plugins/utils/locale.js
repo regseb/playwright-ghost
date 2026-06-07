@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/utils/locale.d.ts" */
+
 import which from "../../utils/which.js";
 
 /**

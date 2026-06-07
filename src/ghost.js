@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../types/ghost.d.ts" */
+
 import hook from "./hook.js";
 import BrowserHooker from "./hookers/browser.js";
 import BrowserContextHooker from "./hookers/browsercontext.js";

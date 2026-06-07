@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../types/polyfills/map.d.ts" */
+
 // @ts-expect-error
 if (undefined === Map.prototype.getOrInsert) {
     /**

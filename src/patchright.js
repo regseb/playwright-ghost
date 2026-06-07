@@ -5,6 +5,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../types/patchright.d.ts" */
+
 import patchright from "patchright";
 import Ghost from "./ghost.js";
 

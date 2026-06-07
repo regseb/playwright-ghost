@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/polyfill/screen.d.ts" */
+
 /**
  * Modifie la taille de l'écran.
  *

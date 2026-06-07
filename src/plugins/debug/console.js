@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/debug/console.d.ts" */
+
 /**
  * @import { Page } from "playwright-core"
  */

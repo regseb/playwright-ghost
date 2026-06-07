@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../types/hook.d.ts" */
+
 /**
  * @template {Object} T Le type de l'objet.
  * @typedef {Object} ContextBefore Le contexte pour un crochetage avant l'appel

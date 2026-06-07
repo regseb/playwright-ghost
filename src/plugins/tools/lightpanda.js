@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/tools/lightpanda.d.ts" */
+
 import { lightpanda as Lightpanda } from "@lightpanda/browser";
 
 /**

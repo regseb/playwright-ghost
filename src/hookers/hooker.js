@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../types/hookers/hooker.d.ts" */
+
 import hook from "../hook.js";
 import mapArrayOrScalar from "../utils/maparrayorscalar.js";
 

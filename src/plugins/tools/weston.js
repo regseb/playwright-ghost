@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/tools/weston.d.ts" */
+
 import { spawn } from "node:child_process";
 import process from "node:process";
 

@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/tools/fingerprint.d.ts" */
+
 import { FingerprintGenerator } from "fingerprint-generator";
 import { FingerprintInjector } from "fingerprint-injector";
 

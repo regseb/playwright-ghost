@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/polyfill/webdriver.d.ts" */
+
 /**
  * @import { BrowserType } from "playwright-core"
  * @import { ContextBefore } from "../../hook.js"
