@@ -40,7 +40,9 @@ const setExecutablePath = async (options, name) => {
 };
 
 /**
- * @typedef {Object} UtilsLocaleOptions Les options du plugin `utils.locale`.
+ * Les options du plugin `utils.locale`.
+ *
+ * @typedef {Object} UtilsLocaleOptions
  * @prop {string} [name] Le nom du navigateur.
  */
 

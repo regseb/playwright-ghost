@@ -11,7 +11,9 @@
  */
 
 /**
- * @typedef {Object} DebugConsoleOptions Les options du plugin `debug.console`.
+ * Les options du plugin `debug.console`.
+ *
+ * @typedef {Object} DebugConsoleOptions
  * @prop {boolean} [console]   La marque indiquant si les messages de la console
  *                             du navigateur sont transférés dans la console de
  *                             Playwright-ghost. `true` par défaut.

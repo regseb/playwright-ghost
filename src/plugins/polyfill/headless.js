@@ -18,7 +18,7 @@
  *                                                      d'un `Browser`.
  * @param {BrowserType}                     browserType Le type de navigateur.
  * @returns {Record<string, any> | undefined} Les nouvelles options.
- * @see https://playwright.dev/docs/browsers#opt-in-to-new-headless-mode
+ * @see https://playwright.dev/docs/browsers#chromium-new-headless-mode
  */
 const changeChannel = (options, browserType) => {
     if ("chromium" === browserType.name()) {
@@ -32,7 +32,7 @@ const changeChannel = (options, browserType) => {
 
 /**
  * Crée le plugin pour corriger de nombreuses différences dans les APIs
- * JavaScript avec le nouveau mode _headless_ de Chromium.
+ * JavaScript grâce au nouveau mode _headless_ de Chromium.
  *
  * @returns {Record<string, Function>} Les crochets du plugin.
  * @see https://developer.chrome.com/articles/new-headless/

@@ -34,8 +34,9 @@ import flatAwait from "./utils/flatawait.js";
  */
 
 /**
- * @typedef {Object} OptionPlugins Option pour les plugins qui sera ajouté aux
- *                                 options des méthodes.
+ * Option pour les plugins qui sera ajouté aux options des méthodes.
+ *
+ * @typedef {Object} OptionPlugins
  * @prop {(Object | Promise<Object>)[]} [plugins] Liste des plugins.
  */
 

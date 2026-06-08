@@ -14,14 +14,18 @@ import { PlaywrightBlocker } from "@ghostery/adblocker-playwright";
  */
 
 /**
- * @typedef {Object} ParseOptions Les options du mode `"parse"`.
+ * Les options du mode `"parse"`.
+ *
+ * @typedef {Object} ParseOptions
  * @prop {'parse'}         mode     Le mode de chargement des règles.
  * @prop {string}          filters  Les filtres.
  * @prop {Partial<Config>} [config] L'éventuelle configuration.
  */
 
 /**
- * @typedef {Object} FromListsOptions Les options du mode `"fromLists"`.
+ * Les options du mode `"fromLists"`.
+ *
+ * @typedef {Object} FromListsOptions
  * @prop {'fromLists'}     mode      Le mode de chargement des règles.
  * @prop {string[]}        urls      Les URLs.
  * @prop {typeof fetch}    [fetch]   L'éventuelle fonction pour faire des
@@ -31,10 +35,10 @@ import { PlaywrightBlocker } from "@ghostery/adblocker-playwright";
  */
 
 /**
- * @typedef {Object} FromPrebuiltOptions Les options des modes
- *                                       `"fromPrebuiltAdsOnly"`,
- *                                       `"fromPrebuiltAdsAndTracking"` et
- *                                       `"fromPrebuiltFull"`.
+ * Les options des modes `"fromPrebuiltAdsOnly"`, `"fromPrebuiltAdsAndTracking"`
+ * et `"fromPrebuiltFull"`.
+ *
+ * @typedef {Object} FromPrebuiltOptions
  * @prop {'fromPrebuiltAdsOnly' | 'fromPrebuiltAdsAndTracking' | 'fromPrebuiltFull'} mode      Le
  *                                                                                             mode
  *                                                                                             de
@@ -54,8 +58,9 @@ import { PlaywrightBlocker } from "@ghostery/adblocker-playwright";
  */
 
 /**
+ * Les options du plugin `tools.adblocker`.
+ *
  * @typedef {ParseOptions | FromListsOptions | FromPrebuiltOptions} ToolsAdblockerOptions
- *          Les options du plugin `tools.adblocker`.
  */
 
 /**

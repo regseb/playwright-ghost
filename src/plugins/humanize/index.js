@@ -19,7 +19,7 @@ import humanizeRecommendedPlugins from "./recommended.js";
  */
 
 /**
- * Les plugins pour humaniser les actions.
+ * Les plugins pour humaniser les actions de navigation.
  */
 const humanizePlugins = {
     click: humanizeClickPlugin,

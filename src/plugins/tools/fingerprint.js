@@ -55,8 +55,9 @@ const setFingerprint = (options, { fingerprint, headers }) => {
 };
 
 /**
- * @typedef {Object} ToolsFingerprintOptions Les options du plugin
- *                                           `tools.fingerprint`.
+ * Les options du plugin `tools.fingerprint`.
+ *
+ * @typedef {Object} ToolsFingerprintOptions
  * @prop {BrowserFingerprintWithHeaders}        [fingerprint]        La
  *                                                                   propriété
  *                                                                   `fingerprint`

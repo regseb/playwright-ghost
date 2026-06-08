@@ -17,8 +17,10 @@ import mapArrayOrScalar from "../utils/maparrayorscalar.js";
  * Type des pointeurs vers les méthodes créant ou récupérant un objet.
  *
  * @typedef {Object} Pointers
- * @prop {string[]} create Liste des pointeurs vers les méthodes créant un objet.
- * @prop {string[]} getter Liste des pointers vers les méthodes récupérant un objet.
+ * @prop {string[]} create Liste des pointeurs vers les méthodes créant un
+ *                         objet.
+ * @prop {string[]} getter Liste des pointers vers les méthodes récupérant un
+ *                         objet.
  */
 
 /**

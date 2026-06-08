@@ -67,8 +67,9 @@ const changeUserAgentFromBrowser = (options, userAgent, browser) => {
 };
 
 /**
- * @typedef {Object} PolyfillUserAgentOptions Les options du plugin
- *                                            `polyfill.userAgent`.
+ * Les options du plugin `polyfill.userAgent`.
+ *
+ * @typedef {Object} PolyfillUserAgentOptions
  * @prop {string} userAgent Le _user agent_ à utiliser.
  */
 

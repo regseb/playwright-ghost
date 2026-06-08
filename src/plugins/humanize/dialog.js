@@ -14,8 +14,9 @@ import Random from "../../utils/random.js";
  */
 
 /**
- * @typedef {Object} HumanizeDialogOptions Les options du plugin
- *                                         `humanize.dialog`.
+ * Les options du plugin `humanize.dialog`.
+ *
+ * @typedef {Object} HumanizeDialogOptions
  * @prop {Object} [delay]     Le délai avant la fermeture.
  * @prop {number} [delay.min] Le délai minimum en millisecondes.
  * @prop {number} [delay.max] Le délai maximum en millisecondes.
