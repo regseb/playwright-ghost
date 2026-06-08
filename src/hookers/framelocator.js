@@ -50,6 +50,6 @@ export default class FrameLocatorHooker extends Hooker {
      *                                                       temporalité.
      */
     constructor(listeners) {
-        super(POINTERS, listeners);
+        super(POINTERS, listeners, "FrameLocator");
     }
 }

@@ -88,6 +88,6 @@ export default class LocatorHooker extends Hooker {
      *                                                       temporalité.
      */
     constructor(listeners) {
-        super(POINTERS, listeners);
+        super(POINTERS, listeners, "Locator");
     }
 }

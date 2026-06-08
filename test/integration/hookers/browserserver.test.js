@@ -27,8 +27,6 @@ describe("Hooker: browserServer", () => {
             ],
         });
         try {
-            // Vérifier que le type de l'instance a été maquillé.
-            assert.equal(browserServer.constructor.name, "BrowserServer");
             assert.equal(browserServer.foo, "bar");
         } finally {
             await browserServer.close();

@@ -49,6 +49,6 @@ export default class BrowserHooker extends Hooker {
      *                                                       temporalité.
      */
     constructor(listeners) {
-        super(POINTERS, listeners);
+        super(POINTERS, listeners, "Browser");
     }
 }

@@ -73,7 +73,7 @@ export default class PageHooker extends Hooker {
      *                                                       temporalité.
      */
     constructor(listeners) {
-        super(POINTERS, listeners);
+        super(POINTERS, listeners, "Page");
     }
 
     first() {

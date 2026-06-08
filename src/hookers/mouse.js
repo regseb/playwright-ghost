@@ -83,7 +83,7 @@ export default class MouseHooker extends Hooker {
      *                                                       temporalité.
      */
     constructor(listeners) {
-        super(POINTERS, listeners);
+        super(POINTERS, listeners, "Mouse");
     }
 
     first() {

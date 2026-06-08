@@ -46,41 +46,6 @@ export default class BrowserServerHooker extends Hooker {
      *                                                       temporalité.
      */
     constructor(listeners) {
-        super(POINTERS, listeners);
-    }
-
-    /**
-     * Retourne les crochets à exécuter en premier.
-     *
-     * @returns {Record<string, Function>} Crochets.
-     */
-    first() {
-        return {
-            ...super.first(),
-
-            /**
-             * Maquille le retour de la méthode (qui est un `EventEmitter`) en
-             * `BrowserServer`. Sans ce maquillage, les écouteurs ne peuvent pas
-             * s'accrocher à l'objet.
-             *
-             * @param {Object} eventEmitter Le `EventEmitter` créé.
-             * @returns {BrowserServer} Le `EvenEmitter` maquillé en
-             *                          `BrowserServer` et crochetable.
-             */
-            "BrowserType.launchServer:after": (eventEmitter) => {
-                const browserServer = new Proxy(eventEmitter, {
-                    get(target, prop, receiver) {
-                        if ("constructor" === prop) {
-                            return {
-                                ...Reflect.get(target, prop, receiver),
-                                name: "BrowserServer",
-                            };
-                        }
-                        return Reflect.get(target, prop, receiver);
-                    },
-                });
-                return super.prepare(browserServer);
-            },
-        };
+        super(POINTERS, listeners, "BrowserServer");
     }
 }
