@@ -159,9 +159,11 @@
     "test:unit": "npm run test:unit:node",
     "test:unit:node": "node --test 'test/unit/**/*.test.js'",
     "test:unit:bun": "bun test --preload ./test/polyfills/bun.js test/unit/",
+    "test:unit:deno": "deno test --no-check --allow-read --allow-net --allow-env --allow-sys --import ./test/polyfills/deno.js test/unit/",
     "test:integration": "npm run test:integration:node",
     "test:integration:node": "node --test --test-concurrency 1 'test/integration/**/*.test.js'",
     "test:integration:bun": "bun test --timeout 60000 --max-concurrency 1 --preload ./test/polyfills/bun.js test/integration/",
+    "test:integration:deno": "deno test --no-check --allow-read --allow-net --allow-env --allow-sys test/integration/",
     "test:coverage": "stryker run",
     "jsdocs": "typedoc --tsconfig .tsconfig_jsdocs.json",
     "clean": "node .script/clean.js"

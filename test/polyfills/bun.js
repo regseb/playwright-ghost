@@ -155,8 +155,8 @@ mockNode.timers = {
     /**
      * Active un mock sur les timers.
      *
-     * @param {Object} options     Options du mock.
-     * @param {number} options.now Horodatage mocké.
+     * @param {Object} [options]     Options du mock.
+     * @param {number} [options.now] Horodatage mocké.
      * @see https://nodejs.org/api/test.html#timersenableenableoptions
      */
     enable(options) {
@@ -198,7 +198,7 @@ mockNode.timers = {
                 });
             },
         );
-        setSystemTime(options.now);
+        setSystemTime(options?.now);
     },
 
     /**
