@@ -23,7 +23,7 @@ const useAngle = (options, browserType) => {
     if ("chromium" === browserType.name() && (options?.headless ?? true)) {
         return {
             ...options,
-            args: ["--use-angle", ...(options?.args ?? [])],
+            args: ["--use-angle=default", ...(options?.args ?? [])],
         };
     }
     return options;
