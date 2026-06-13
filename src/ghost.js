@@ -79,7 +79,7 @@ const dispatch = (hooks, listeners) => {
             return [key, value];
         })
         .forEach(([obj, propTemporalityListener]) => {
-            // @ts-expect-error
+            // @ts-expect-error -- Utiliser la prothèse `getOrInsertComputed`.
             const listenersByObj = listeners.getOrInsertComputed(
                 obj,
                 () => new Map(),

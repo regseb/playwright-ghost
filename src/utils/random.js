@@ -15,7 +15,7 @@ import crypto from "node:crypto";
  *
  * @see https://github.com/tc39/proposal-random-functions
  */
-const random = {
+const Random = {
     /**
      * Génère un nombre flottant aléatoire entre 0 (inclus) et 1 (exclus).
      *
@@ -50,4 +50,4 @@ const random = {
         return crypto.randomInt(lo, hi + 1);
     },
 };
-export default random;
+export default Random;

@@ -13,5 +13,6 @@
 *.swp
 
 # Ignorer les autres lockfiles.
+/bun.lock
 /pnpm-lock.yaml
 /yarn.lock

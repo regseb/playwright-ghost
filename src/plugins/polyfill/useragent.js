@@ -34,6 +34,8 @@ const changeUserAgentFromBrowserType = (
             ...options,
             // Ne pas utiliser l'option "userAgent" des contextes, car elle ne
             // modifie pas l'agent utilisateur des workers.
+            // https://github.com/microsoft/playwright/issues/5237
+            // https://issues.chromium.org/40236995
             args: [`--user-agent=${userAgent}`, ...(options?.args ?? [])],
         };
     }

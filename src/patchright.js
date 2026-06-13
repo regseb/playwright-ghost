@@ -25,15 +25,11 @@ import Ghost from "./ghost.js";
  * @typedef {import("patchright").Locator} Locator
  * @typedef {import("patchright").CDPSession} CDPSession
  * @typedef {import("patchright").WebSocketRoute} WebSocketRoute
+ * @typedef {import("patchright").Screencast} Screencast
  * @typedef {import("patchright").ElectronApplication} ElectronApplication
  * @typedef {import("patchright").AndroidElementInfo} AndroidElementInfo
  * @typedef {import("patchright").AndroidSelector} AndroidSelector
  * @typedef {import("patchright").AndroidKey} AndroidKey
- * @typedef {import("patchright").Android} Android
- * @typedef {import("patchright").AndroidDevice} AndroidDevice
- * @typedef {import("patchright").AndroidInput} AndroidInput
- * @typedef {import("patchright").AndroidSocket} AndroidSocket
- * @typedef {import("patchright").AndroidWebView} AndroidWebView
  * @typedef {import("patchright").APIRequest} APIRequest
  * @typedef {import("patchright").APIRequestContext} APIRequestContext
  * @typedef {import("patchright").APIResponse} APIResponse
@@ -41,9 +37,10 @@ import Ghost from "./ghost.js";
  * @typedef {import("patchright").Clock} Clock
  * @typedef {import("patchright").ConsoleMessage} ConsoleMessage
  * @typedef {import("patchright").Coverage} Coverage
+ * @typedef {import("patchright").Debugger} Debugger
  * @typedef {import("patchright").Dialog} Dialog
+ * @typedef {import("patchright").Disposable} Disposable
  * @typedef {import("patchright").Download} Download
- * @typedef {import("patchright").Electron} Electron
  * @typedef {import("patchright").FileChooser} FileChooser
  * @typedef {import("patchright").FrameLocator} FrameLocator
  * @typedef {import("patchright").Keyboard} Keyboard
@@ -58,6 +55,12 @@ import Ghost from "./ghost.js";
  * @typedef {import("patchright").Video} Video
  * @typedef {import("patchright").WebError} WebError
  * @typedef {import("patchright").WebSocket} WebSocket
+ * @typedef {import("patchright").Electron} Electron
+ * @typedef {import("patchright").Android} Android
+ * @typedef {import("patchright").AndroidDevice} AndroidDevice
+ * @typedef {import("patchright").AndroidInput} AndroidInput
+ * @typedef {import("patchright").AndroidSocket} AndroidSocket
+ * @typedef {import("patchright").AndroidWebView} AndroidWebView
  * @typedef {import("patchright").LocatorScreenshotOptions} LocatorScreenshotOptions
  * @typedef {import("patchright").BrowserContextOptions} BrowserContextOptions
  * @typedef {import("patchright").ViewportSize} ViewportSize

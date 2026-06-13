@@ -7,6 +7,7 @@
  * @see https://github.com/gajus/eslint-plugin-jsdoc#rules
  * @see https://github.com/mozilla/eslint-plugin-no-unsanitized#rule-details
  * @see https://github.com/eslint-community/eslint-plugin-promise#rules
+ * @see https://github.com/eslint-community/eslint-plugin-security#rules
  * @see https://ota-meshi.github.io/eslint-plugin-regexp/rules/
  * @see https://github.com/sindresorhus/eslint-plugin-unicorn#rules
  * @author Sébastien Règne
@@ -24,6 +25,7 @@ import noUnsanitized from "eslint-plugin-no-unsanitized";
 // @ts-expect-error -- Le plugin promise ne fournit pas de types.
 import promise from "eslint-plugin-promise";
 import regexp from "eslint-plugin-regexp";
+import security from "eslint-plugin-security";
 import unicorn from "eslint-plugin-unicorn";
 import globals from "globals";
 
@@ -51,6 +53,7 @@ export default {
         noUnsanitized,
         promise,
         regexp,
+        security,
         unicorn,
     },
 
@@ -699,17 +702,36 @@ export default {
         "regexp/unicode-escape": "error",
         "regexp/unicode-property": "error",
 
+        // Plugin eslint-plugin-security.
+        "security/detect-bidi-characters": "error",
+        "security/detect-buffer-noassert": "error",
+        "security/detect-child-process": "error",
+        "security/detect-disable-mustache-escape": "error",
+        "security/detect-eval-with-expression": "error",
+        "security/detect-new-buffer": "error",
+        "security/detect-no-csrf-before-method-override": "error",
+        "security/detect-non-literal-fs-filename": "error",
+        "security/detect-non-literal-regexp": "off",
+        "security/detect-non-literal-require": "error",
+        "security/detect-object-injection": "off",
+        "security/detect-possible-timing-attacks": "error",
+        "security/detect-pseudoRandomBytes": "error",
+        "security/detect-unsafe-regex": "error",
+
         // Plugin eslint-plugin-unicorn.
-        "unicorn/better-regex": "error",
+        "unicorn/better-dom-traversing": "error",
         "unicorn/catch-error-name": ["error", { ignore: [/^err$/v, /^e$/v] }],
         "unicorn/consistent-assert": "error",
+        "unicorn/consistent-compound-words": "error",
         "unicorn/consistent-date-clone": "error",
         "unicorn/consistent-destructuring": "error",
         "unicorn/consistent-empty-array-spread": "error",
         "unicorn/consistent-existence-index-check": "error",
         "unicorn/consistent-function-scoping": "error",
+        "unicorn/consistent-json-file-read": "error",
         "unicorn/consistent-template-literal-escape": "error",
         "unicorn/custom-error-definition": "error",
+        "unicorn/dom-node-dataset": "error",
         // Laisser Prettier gérer cette règle.
         "unicorn/empty-brace-spaces": "off",
         "unicorn/error-message": "error",
@@ -724,25 +746,37 @@ export default {
         "unicorn/no-accessor-recursion": "error",
         "unicorn/no-anonymous-default-export": "error",
         "unicorn/no-array-callback-reference": "off",
+        "unicorn/no-array-fill-with-reference-type": "error",
         "unicorn/no-array-for-each": "off",
+        "unicorn/no-array-from-fill": "error",
         "unicorn/no-array-method-this-argument": "error",
         "unicorn/no-array-reduce": "off",
         "unicorn/no-array-reverse": "error",
         "unicorn/no-array-sort": "error",
         "unicorn/no-await-expression-member": "error",
         "unicorn/no-await-in-promise-methods": "error",
+        "unicorn/no-blob-to-file": "error",
+        "unicorn/no-canvas-to-image": "error",
+        "unicorn/no-confusing-array-splice": "error",
         "unicorn/no-console-spaces": "error",
         "unicorn/no-document-cookie": "error",
-        "unicorn/no-empty-file": "error",
+        "unicorn/no-duplicate-set-values": "error",
+        // Autoriser les fichiers avec seulement des définitions de types JSDoc.
+        "unicorn/no-empty-file": ["error", { allowComments: true }],
+        "unicorn/no-exports-in-scripts": "error",
         "unicorn/no-for-loop": "error",
         "unicorn/no-hex-escape": "error",
         "unicorn/no-immediate-mutation": "error",
+        "unicorn/no-incorrect-query-selector": "error",
         "unicorn/no-instanceof-builtins": "error",
         "unicorn/no-invalid-fetch-options": "error",
+        "unicorn/no-invalid-file-input-accept": "error",
         "unicorn/no-invalid-remove-event-listener": "error",
         "unicorn/no-keyword-prefix": "error",
+        "unicorn/no-late-current-target-access": "error",
         "unicorn/no-lonely-if": "error",
         "unicorn/no-magic-array-flat-depth": "error",
+        "unicorn/no-manually-wrapped-comments": "off",
         "unicorn/no-named-default": "error",
         // Utiliser la règle no-negated-condition d'ESLint, car celle d'unicorn
         // apporte seulement la correction automatique.
@@ -758,6 +792,7 @@ export default {
         "unicorn/no-static-only-class": "error",
         "unicorn/no-thenable": "error",
         "unicorn/no-this-assignment": "error",
+        "unicorn/no-this-outside-of-class": "off",
         "unicorn/no-typeof-undefined": [
             "error",
             { checkGlobalVariables: true },
@@ -765,10 +800,12 @@ export default {
         "unicorn/no-unnecessary-array-flat-depth": "error",
         "unicorn/no-unnecessary-array-splice-count": "error",
         "unicorn/no-unnecessary-await": "error",
+        "unicorn/no-unnecessary-nested-ternary": "error",
         "unicorn/no-unnecessary-polyfills": "error",
         "unicorn/no-unnecessary-slice-end": "error",
         "unicorn/no-unreadable-array-destructuring": "error",
         "unicorn/no-unreadable-iife": "error",
+        "unicorn/no-unused-array-method-return": "error",
         "unicorn/no-unused-properties": "error",
         "unicorn/no-useless-collection-argument": "error",
         "unicorn/no-useless-error-capture-stack-trace": "error",
@@ -788,6 +825,7 @@ export default {
         "unicorn/prefer-array-flat": "error",
         "unicorn/prefer-array-flat-map": "error",
         "unicorn/prefer-array-index-of": "error",
+        "unicorn/prefer-array-last-methods": "error",
         "unicorn/prefer-array-some": "error",
         "unicorn/prefer-at": "error",
         "unicorn/prefer-bigint-literals": "error",
@@ -798,17 +836,22 @@ export default {
         "unicorn/prefer-date-now": "error",
         "unicorn/prefer-default-parameters": "error",
         "unicorn/prefer-dom-node-append": "error",
-        "unicorn/prefer-dom-node-dataset": "error",
         "unicorn/prefer-dom-node-remove": "error",
         "unicorn/prefer-dom-node-text-content": "error",
         "unicorn/prefer-event-target": "error",
-        "unicorn/prefer-export-from": ["error", { ignoreUsedVariables: true }],
+        "unicorn/prefer-export-from": ["error", { checkUsedVariables: false }],
+        "unicorn/prefer-get-or-insert-computed": "error",
         "unicorn/prefer-global-this": "error",
+        "unicorn/prefer-https": "error",
         "unicorn/prefer-import-meta-properties": "error",
         "unicorn/prefer-includes": "error",
+        "unicorn/prefer-includes-over-repeated-comparisons": "error",
+        "unicorn/prefer-iterator-concat": "error",
+        "unicorn/prefer-iterator-to-array-at-end": "error",
         "unicorn/prefer-json-parse-buffer": "off",
         "unicorn/prefer-keyboard-event-key": "error",
         "unicorn/prefer-logical-operator-over-ternary": "error",
+        "unicorn/prefer-math-abs": "error",
         "unicorn/prefer-math-min-max": "error",
         "unicorn/prefer-math-trunc": "error",
         "unicorn/prefer-modern-dom-apis": "error",
@@ -823,6 +866,7 @@ export default {
         "unicorn/prefer-optional-catch-binding": "error",
         "unicorn/prefer-prototype-methods": "error",
         "unicorn/prefer-query-selector": "error",
+        "unicorn/prefer-queue-microtask": "error",
         "unicorn/prefer-reflect-apply": "error",
         "unicorn/prefer-regexp-test": "error",
         "unicorn/prefer-response-static-json": "error",
@@ -830,8 +874,12 @@ export default {
         "unicorn/prefer-set-size": "error",
         "unicorn/prefer-simple-condition-first": "error",
         "unicorn/prefer-single-call": "error",
+        "unicorn/prefer-split-limit": "error",
         "unicorn/prefer-spread": "off",
+        "unicorn/prefer-string-match-all": "error",
+        "unicorn/prefer-string-pad-start-end": "error",
         "unicorn/prefer-string-raw": "error",
+        "unicorn/prefer-string-repeat": "error",
         "unicorn/prefer-string-replace-all": "error",
         "unicorn/prefer-string-slice": "error",
         "unicorn/prefer-string-starts-ends-with": "error",
@@ -844,9 +892,11 @@ export default {
         "unicorn/prevent-abbreviations": "off",
         "unicorn/relative-url-style": "error",
         "unicorn/require-array-join-separator": "off",
+        "unicorn/require-css-escape": "error",
         "unicorn/require-module-attributes": "error",
         "unicorn/require-module-specifiers": "error",
         "unicorn/require-number-to-fixed-digits-argument": "off",
+        "unicorn/require-passive-events": "error",
         // Désactiver cette règle, car il y a des faux-positifs avec d'autres
         // méthodes postMessage().
         // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/require-post-message-target-origin.md
@@ -867,6 +917,7 @@ export default {
         ],
         "unicorn/text-encoding-identifier-case": "error",
         "unicorn/throw-new-error": "error",
+        "unicorn/try-complexity": "off",
     },
 
     settings: {

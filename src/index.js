@@ -6,7 +6,7 @@
 
 /* @ts-self-types="../types/index.d.ts" */
 
-// Utiliser le `pw` afin de garder le nom `playwright` pour l'export par défaut.
+// Utiliser `pw` afin de garder le nom `playwright` pour l'export par défaut.
 import pw from "playwright";
 import Ghost from "./ghost.js";
 
@@ -25,15 +25,11 @@ import Ghost from "./ghost.js";
  * @typedef {import("playwright").Locator} Locator
  * @typedef {import("playwright").CDPSession} CDPSession
  * @typedef {import("playwright").WebSocketRoute} WebSocketRoute
+ * @typedef {import("playwright").Screencast} Screencast
  * @typedef {import("playwright").ElectronApplication} ElectronApplication
  * @typedef {import("playwright").AndroidElementInfo} AndroidElementInfo
  * @typedef {import("playwright").AndroidSelector} AndroidSelector
  * @typedef {import("playwright").AndroidKey} AndroidKey
- * @typedef {import("playwright").Android} Android
- * @typedef {import("playwright").AndroidDevice} AndroidDevice
- * @typedef {import("playwright").AndroidInput} AndroidInput
- * @typedef {import("playwright").AndroidSocket} AndroidSocket
- * @typedef {import("playwright").AndroidWebView} AndroidWebView
  * @typedef {import("playwright").APIRequest} APIRequest
  * @typedef {import("playwright").APIRequestContext} APIRequestContext
  * @typedef {import("playwright").APIResponse} APIResponse
@@ -41,9 +37,10 @@ import Ghost from "./ghost.js";
  * @typedef {import("playwright").Clock} Clock
  * @typedef {import("playwright").ConsoleMessage} ConsoleMessage
  * @typedef {import("playwright").Coverage} Coverage
+ * @typedef {import("playwright").Debugger} Debugger
  * @typedef {import("playwright").Dialog} Dialog
+ * @typedef {import("playwright").Disposable} Disposable
  * @typedef {import("playwright").Download} Download
- * @typedef {import("playwright").Electron} Electron
  * @typedef {import("playwright").FileChooser} FileChooser
  * @typedef {import("playwright").FrameLocator} FrameLocator
  * @typedef {import("playwright").Keyboard} Keyboard
@@ -58,6 +55,12 @@ import Ghost from "./ghost.js";
  * @typedef {import("playwright").Video} Video
  * @typedef {import("playwright").WebError} WebError
  * @typedef {import("playwright").WebSocket} WebSocket
+ * @typedef {import("playwright").Electron} Electron
+ * @typedef {import("playwright").Android} Android
+ * @typedef {import("playwright").AndroidDevice} AndroidDevice
+ * @typedef {import("playwright").AndroidInput} AndroidInput
+ * @typedef {import("playwright").AndroidSocket} AndroidSocket
+ * @typedef {import("playwright").AndroidWebView} AndroidWebView
  * @typedef {import("playwright").LocatorScreenshotOptions} LocatorScreenshotOptions
  * @typedef {import("playwright").BrowserContextOptions} BrowserContextOptions
  * @typedef {import("playwright").ViewportSize} ViewportSize

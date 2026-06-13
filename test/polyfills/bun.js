@@ -150,7 +150,7 @@ mockNode.property = (object, propertyName, value) => {
  */
 const timeouts = [];
 
-// @ts-expect-error
+// @ts-expect-error -- Ajouter une prothèse dans le namespace mock.
 mockNode.timers = {
     /**
      * Active un mock sur les timers.

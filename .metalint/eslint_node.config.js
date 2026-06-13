@@ -75,6 +75,7 @@ export default {
                 // Ignorer les vérifications de test.mock.timers qui est en
                 // expérimental dans Node v22.
                 ignores: [
+                    "test.mock.property",
                     "test.mock.timers",
                     "test.mock.timers.tick",
                     "test.mock.timers.enable",

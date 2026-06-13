@@ -121,9 +121,9 @@ describe("Anti-bot: infosimples", () => {
                     // Ignorer les tests Chrome, Broken Image et Connection Rtt
                     // qui échouent même avec le vrai Firefox.
                     if (
-                        "Chrome" === result.name ||
-                        "Broken Image" === result.name ||
-                        "Connection Rtt" === result.name
+                        ["Chrome", "Broken Image", "Connection Rtt"].includes(
+                            result.name,
+                        )
                     ) {
                         continue;
                     }

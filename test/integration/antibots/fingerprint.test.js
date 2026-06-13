@@ -50,7 +50,7 @@ describe("Anti-bot: Fingerprint", () => {
                 assert.equal(result, "Not detected");
             } finally {
                 await page.screenshot({
-                    path: "./log/fingerprintplayground-cr.png",
+                    path: "./log/fingerprint-cr.png",
                     fullPage: true,
                 });
                 await fs.writeFile(
@@ -87,7 +87,7 @@ describe("Anti-bot: Fingerprint", () => {
                 assert.equal(result, "Not detected");
             } finally {
                 await page.screenshot({
-                    path: "./log/fingerprintplayground-fx.png",
+                    path: "./log/fingerprint-fx.png",
                     fullPage: true,
                 });
                 await fs.writeFile(

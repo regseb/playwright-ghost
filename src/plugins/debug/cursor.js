@@ -18,31 +18,32 @@ const initScript = () => {
     /* eslint-disable no-undef */
     document.addEventListener("DOMContentLoaded", () => {
         const cursor = document.createElement("div");
-        cursor.style.backgroundColor = "black";
-        cursor.style.border = "2px solid white";
-        cursor.style.borderRadius = "50%";
-        cursor.style.height = "24px";
-        cursor.style.opacity = "50%";
+        cursor.style.position = "fixed";
+        cursor.style.zIndex = "2147483647";
+        cursor.style.inlineSize = "24px";
+        cursor.style.blockSize = "24px";
         // Ignorer les événements du curseur pour ne pas bloquer les
         // interactions avec les éléments sous le div.
         cursor.style.pointerEvents = "none";
-        cursor.style.position = "fixed";
+        cursor.style.backgroundColor = "black";
+        cursor.style.border = "2px solid white";
+        cursor.style.borderRadius = "50%";
+        cursor.style.opacity = "50%";
         cursor.style.transform = "translate(-50%, -50%)";
-        cursor.style.transition = "width 0.1s ease-out, height 0.1s ease-out";
-        cursor.style.width = "24px";
-        cursor.style.zIndex = "2147483647";
+        cursor.style.transition =
+            "inline-size 0.1s ease-out, block-size 0.1s ease-out";
 
         document.addEventListener("mousemove", (event) => {
-            cursor.style.left = `${event.pageX}px`;
-            cursor.style.top = `${event.pageY}px`;
+            cursor.style.insetBlockStart = `${event.pageY}px`;
+            cursor.style.insetInlineStart = `${event.pageX}px`;
         });
         document.addEventListener("mousedown", () => {
-            cursor.style.height = "48px";
-            cursor.style.width = "48px";
+            cursor.style.inlineSize = "48px";
+            cursor.style.blockSize = "48px";
         });
         document.addEventListener("mouseup", () => {
-            cursor.style.height = "24px";
-            cursor.style.width = "24px";
+            cursor.style.inlineSize = "24px";
+            cursor.style.blockSize = "24px";
         });
         document.body.appendChild(cursor);
     });
