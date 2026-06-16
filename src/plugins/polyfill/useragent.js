@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/polyfill/useragent.d.ts" */
+
 /**
  * @import { Browser, BrowserType } from "playwright-core"
  * @import { ContextBefore } from "../../hook.js"
@@ -32,6 +34,8 @@ const changeUserAgentFromBrowserType = (
             ...options,
             // Ne pas utiliser l'option "userAgent" des contextes, car elle ne
             // modifie pas l'agent utilisateur des workers.
+            // https://github.com/microsoft/playwright/issues/5237
+            // https://issues.chromium.org/40236995
             args: [`--user-agent=${userAgent}`, ...(options?.args ?? [])],
         };
     }
@@ -65,8 +69,9 @@ const changeUserAgentFromBrowser = (options, userAgent, browser) => {
 };
 
 /**
- * @typedef {Object} PolyfillUserAgentOptions Les options du plugin
- *                                            `polyfill.userAgent`.
+ * Les options du plugin `polyfill.userAgent`.
+ *
+ * @typedef {Object} PolyfillUserAgentOptions
  * @prop {string} userAgent Le _user agent_ à utiliser.
  */
 

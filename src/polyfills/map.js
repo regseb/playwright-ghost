@@ -4,8 +4,9 @@
  * @author Sébastien Règne
  */
 
-// @ts-expect-error
-if (undefined === Map.prototype.getOrInsert) {
+/* @ts-self-types="../../types/polyfills/map.d.ts" */
+
+if (!("getOrInsert" in Map.prototype)) {
     /**
      * Renvoie la valeur associée à la clé. Si la clé n'est pas présente, une
      * nouvelle entrée est insérée avec la clé et la valeur par défaut donnée,
@@ -17,7 +18,7 @@ if (undefined === Map.prototype.getOrInsert) {
      * @returns {T} La valeur associée à la clé.
      * @see https://developer.mozilla.org/Web/JavaScript/Reference/Global_Objects/Map/getOrInsert
      */
-    // @ts-expect-error
+    // @ts-expect-error -- Ajouter une prothèse dans la classe Map.
     // eslint-disable-next-line no-extend-native
     Map.prototype.getOrInsert = function getOrInsert(key, defaultValue) {
         if (this.has(key)) {
@@ -28,8 +29,7 @@ if (undefined === Map.prototype.getOrInsert) {
     };
 }
 
-// @ts-expect-error
-if (undefined === Map.prototype.getOrInsertComputed) {
+if (!("getOrInsertComputed" in Map.prototype)) {
     /**
      * Renvoie la valeur associée à la clé. Si la clé n'est pas présente, une
      * nouvelle entrée est insérée avec la clé et la valeur par défaut calculée,
@@ -43,7 +43,7 @@ if (undefined === Map.prototype.getOrInsertComputed) {
      * @returns {V} La valeur associée à la clé.
      * @see https://developer.mozilla.org/Web/JavaScript/Reference/Global_Objects/Map/getOrInsert
      */
-    // @ts-expect-error
+    // @ts-expect-error -- Ajouter une prothèse dans la classe Map.
     // eslint-disable-next-line no-extend-native
     Map.prototype.getOrInsertComputed = function getOrInsertComputed(
         key,

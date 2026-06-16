@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../types/plugins/index.d.ts" */
+
 import debugPlugins from "./debug/index.js";
 import humanizePlugins from "./humanize/index.js";
 import polyfillPlugins from "./polyfill/index.js";

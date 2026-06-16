@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/tools/xvfb.d.ts" */
+
 import { spawn } from "node:child_process";
 import fs from "node:fs/promises";
 import process from "node:process";
@@ -15,7 +17,9 @@ import process from "node:process";
  */
 
 /**
- * @typedef {Object} InstanceXvfb Le type d'une instance de `Xvfb`.
+ * Le type d'une instance de `Xvfb`.
+ *
+ * @typedef {Object} InstanceXvfb
  * @prop {ChildProcess} process Le processus exécutant `Xvfb`.
  * @prop {string}       display Le `DISPLAY` du serveur de `Xvfb` (par
  *                              exemple : `:99`).
@@ -146,7 +150,9 @@ const setDisplay = (options, display, browserType) => {
 };
 
 /**
- * @typedef {Object} ToolsXvfbOptions Les options du plugin `tools.xvfb`.
+ * Les options du plugin `tools.xvfb`.
+ *
+ * @typedef {Object} ToolsXvfbOptions
  * @prop {string[]}    [args]      Les arguments passés de l'exécutable `Xvfb`.
  * @prop {boolean}     [keepalive] La marque pour ne pas arrêter l'exécutable de
  *                                 `Xvfb` après la fermeture du navigateur.

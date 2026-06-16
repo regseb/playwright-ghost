@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/humanize/index.d.ts" */
+
 import humanizeClickPlugin from "./click.js";
 import humanizeCursorPlugin from "./cursor.js";
 import humanizeDialogPlugin from "./dialog.js";
@@ -17,7 +19,7 @@ import humanizeRecommendedPlugins from "./recommended.js";
  */
 
 /**
- * Les plugins pour humaniser les actions.
+ * Les plugins pour humaniser les actions de navigation.
  */
 const humanizePlugins = {
     click: humanizeClickPlugin,

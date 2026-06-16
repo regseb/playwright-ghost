@@ -5,6 +5,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/humanize/cursor.d.ts" */
+
 import timers from "node:timers/promises";
 import ghostCursor from "ghost-cursor";
 import Random from "../../utils/random.js";
@@ -118,8 +120,9 @@ const movetoLocator = async (locator, options) => {
 };
 
 /**
- * @typedef {Object} HumanizeCursorOptions Les options du plugin
- *                                         `humanize.cursor`.
+ * Les options du plugin `humanize.cursor`.
+ *
+ * @typedef {Object} HumanizeCursorOptions
  * @prop {Object} [start]   La position de départ du curseur.
  * @prop {number} [start.x] La position _x_ de départ du curseur.
  * @prop {number} [start.y] La position _y_ de départ du curseur.

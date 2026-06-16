@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/tools/weston.d.ts" */
+
 import { spawn } from "node:child_process";
 import process from "node:process";
 
@@ -14,7 +16,9 @@ import process from "node:process";
  */
 
 /**
- * @typedef {Object} InstanceWeston Le type d'une instance de `weston`.
+ * Le type d'une instance de `weston`.
+ *
+ * @typedef {Object} InstanceWeston
  * @prop {ChildProcess} process Le processus exécutant `weston`.
  * @prop {string}       display Le `WAYLAND_DISPLAY` du socket de `weston`.
  * @prop {number}       count   Le nombre de navigateurs utilisant l'instance ;
@@ -144,7 +148,9 @@ const setDisplay = (options, display, browserType) => {
 };
 
 /**
- * @typedef {Object} ToolsWestonOptions Les options du plugin `tools.weston`.
+ * Les options du plugin `tools.weston`.
+ *
+ * @typedef {Object} ToolsWestonOptions
  * @prop {string[]}    [args]      Les arguments passés de l'exécutable
  *                                 `weston`.
  * @prop {boolean}     [keepalive] La marque pour ne pas arrêter l'exécutable de

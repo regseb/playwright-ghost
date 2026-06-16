@@ -18,7 +18,7 @@ describe("plugins/polyfill/webgl.js", () => {
                 const listener = plugin["BrowserType.launch:before"];
                 const args = listener([], { obj: browserType });
 
-                assert.deepEqual(args, [{ args: ["--use-angle"] }]);
+                assert.deepEqual(args, [{ args: ["--use-angle=default"] }]);
 
                 assert.equal(name.mock.callCount(), 1);
             });
@@ -32,7 +32,7 @@ describe("plugins/polyfill/webgl.js", () => {
                 const args = listener([{ slowMo: 200 }], { obj: browserType });
 
                 assert.deepEqual(args, [
-                    { slowMo: 200, args: ["--use-angle"] },
+                    { slowMo: 200, args: ["--use-angle=default"] },
                 ]);
 
                 assert.equal(name.mock.callCount(), 1);
@@ -49,7 +49,7 @@ describe("plugins/polyfill/webgl.js", () => {
                 });
 
                 assert.deepEqual(args, [
-                    { args: ["--use-angle", "--disable-gpu"] },
+                    { args: ["--use-angle=default", "--disable-gpu"] },
                 ]);
 
                 assert.equal(name.mock.callCount(), 1);
@@ -81,7 +81,10 @@ describe("plugins/polyfill/webgl.js", () => {
                     plugin["BrowserType.launchPersistentContext:before"];
                 const args = listener(["./foo/"], { obj: browserType });
 
-                assert.deepEqual(args, ["./foo/", { args: ["--use-angle"] }]);
+                assert.deepEqual(args, [
+                    "./foo/",
+                    { args: ["--use-angle=default"] },
+                ]);
 
                 assert.equal(name.mock.callCount(), 1);
             });
@@ -99,7 +102,7 @@ describe("plugins/polyfill/webgl.js", () => {
 
                 assert.deepEqual(args, [
                     "./foo/",
-                    { slowMo: 200, args: ["--use-angle"] },
+                    { slowMo: 200, args: ["--use-angle=default"] },
                 ]);
 
                 assert.equal(name.mock.callCount(), 1);
@@ -118,7 +121,7 @@ describe("plugins/polyfill/webgl.js", () => {
 
                 assert.deepEqual(args, [
                     "./foo/",
-                    { args: ["--use-angle", "--disable-gpu"] },
+                    { args: ["--use-angle=default", "--disable-gpu"] },
                 ]);
 
                 assert.equal(name.mock.callCount(), 1);
@@ -150,7 +153,7 @@ describe("plugins/polyfill/webgl.js", () => {
                 const listener = plugin["BrowserType.launchServer:before"];
                 const args = listener([], { obj: browserType });
 
-                assert.deepEqual(args, [{ args: ["--use-angle"] }]);
+                assert.deepEqual(args, [{ args: ["--use-angle=default"] }]);
 
                 assert.equal(name.mock.callCount(), 1);
             });
@@ -164,7 +167,7 @@ describe("plugins/polyfill/webgl.js", () => {
                 const args = listener([{ slowMo: 200 }], { obj: browserType });
 
                 assert.deepEqual(args, [
-                    { slowMo: 200, args: ["--use-angle"] },
+                    { slowMo: 200, args: ["--use-angle=default"] },
                 ]);
 
                 assert.equal(name.mock.callCount(), 1);
@@ -181,7 +184,7 @@ describe("plugins/polyfill/webgl.js", () => {
                 });
 
                 assert.deepEqual(args, [
-                    { args: ["--use-angle", "--disable-gpu"] },
+                    { args: ["--use-angle=default", "--disable-gpu"] },
                 ]);
 
                 assert.equal(name.mock.callCount(), 1);

@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../types/hookers/hooker.d.ts" */
+
 import hook from "../hook.js";
 import mapArrayOrScalar from "../utils/maparrayorscalar.js";
 
@@ -15,8 +17,10 @@ import mapArrayOrScalar from "../utils/maparrayorscalar.js";
  * Type des pointeurs vers les méthodes créant ou récupérant un objet.
  *
  * @typedef {Object} Pointers
- * @prop {string[]} create Liste des pointeurs vers les méthodes créant un objet.
- * @prop {string[]} getter Liste des pointers vers les méthodes récupérant un objet.
+ * @prop {string[]} create Liste des pointeurs vers les méthodes créant un
+ *                         objet.
+ * @prop {string[]} getter Liste des pointers vers les méthodes récupérant un
+ *                         objet.
  */
 
 /**
@@ -49,12 +53,12 @@ export default class Hooker {
         /**
          * Fonction qui modifie un objet.
          *
-         * @template {any | any[]} T Le type de l'objet.
-         * @param {T}                 objs    L'objet ou liste d'objets à
+         * @template {any | any[]} T Type de l'objet.
+         * @param {T}                 objs    Objet ou liste d'objets à
          *                                    modifier.
-         * @param {ContextAfter<any>} context Le contexte d'exécution de
+         * @param {ContextAfter<any>} context Contexte d'exécution de
          *                                    l'écouteur.
-         * @returns {T} L'objet ou liste d'objets modifiés.
+         * @returns {T} Objet ou liste d'objets modifiés.
          */
         return (objs, context) => {
             return mapArrayOrScalar(objs, (/** @type {any} */ obj) =>
@@ -80,11 +84,16 @@ export default class Hooker {
     #pointers;
 
     /**
-     * Les écouteurs regroupés par objet, propriété et temporalité.
+     * Écouteurs regroupés par objet, propriété et temporalité.
      *
      * @type {Map<string, Map<string, Listener>>}
      */
     #listeners;
+
+    /**
+     * Nom du type de l'objet crocheté
+     */
+    #name;
 
     /**
      * Crée un crocheteur pour un type d'objet.
@@ -93,14 +102,23 @@ export default class Hooker {
      *                                                       méthodes créant ou
      *                                                       récupérant un
      *                                                       objet.
-     * @param {Map<string, Map<string, Listener>>} listeners Les écouteurs
-     *                                                       regroupés par
-     *                                                       objet, propriété et
+     * @param {Map<string, Map<string, Listener>>} listeners Écouteurs regroupés
+     *                                                       par objet,
+     *                                                       propriété et
      *                                                       temporalité.
+     * @param {string}                             name      Nom du type de
+     *                                                       l'objet crocheté.
      */
-    constructor(pointers, listeners) {
+    constructor(pointers, listeners, name) {
         this.#pointers = pointers;
+        // Ne pas filtrer maintenant sur les écouteurs, car la liste est
+        // renseignée après l'appel au constructeur (cf. Ghost.#hookize()).
         this.#listeners = listeners;
+        // Spécifier le nom de l'objet et ne pas utiliser le nom de la classe
+        // (par son contructeur), car les noms peuvent changer selon les
+        // versions de Playwright et leur nom est différent de ceux indiqués
+        // dans la documentation (`Browser2`, `_BrowserContext`, `_Page`...).
+        this.#name = name;
     }
 
     /**
@@ -131,10 +149,13 @@ export default class Hooker {
     }
 
     /**
-     * Prépare un objet ou des objets vanilles pour les crocheter.
+     * Prépare un objet ou des objets vanilles pour les crocheter. Cette méthode
+     * doit être associée à un crochet ayant la temporalité "after".
      *
      * @param {any | any[]} vanillas Objet ou liste d'objets vanilles à préparer
-     *                               pour les crocheter.
+     *                               pour les crocheter. Ce paramètre sera
+     *                               renseigné avec le retour de la méthode
+     *                               crochetée.
      * @returns {any | any[]} Objet ou liste d'objets crochetables.
      */
     prepare(vanillas) {
@@ -145,7 +166,7 @@ export default class Hooker {
 
             const hooked = hook(
                 vanilla,
-                this.#listeners.get(vanilla.constructor.name) ?? new Map(),
+                this.#listeners.get(this.#name) ?? new Map(),
             );
             hooked[VANILLA_SYMBOL] = vanilla;
             return hooked;

@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../types/hookers/browser.d.ts" */
+
 import Hooker from "./hooker.js";
 
 /**
@@ -47,6 +49,6 @@ export default class BrowserHooker extends Hooker {
      *                                                       temporalité.
      */
     constructor(listeners) {
-        super(POINTERS, listeners);
+        super(POINTERS, listeners, "Browser");
     }
 }

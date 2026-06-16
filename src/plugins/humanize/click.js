@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/humanize/click.d.ts" */
+
 import Random from "../../utils/random.js";
 
 /**
@@ -25,7 +27,9 @@ const setDelay = (options, delay) => {
 };
 
 /**
- * @typedef {Object} HumanizeClickOptions Les options du plugin `humanize.click`.
+ * Les options du plugin `humanize.click`.
+ *
+ * @typedef {Object} HumanizeClickOptions
  * @prop {Object} [delay]     Le délai entre `mousedown` et `mouseup`.
  * @prop {number} [delay.min] Le délai minimum en millisecondes.
  * @prop {number} [delay.max] Le délai maximum en millisecondes.

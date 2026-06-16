@@ -6,7 +6,7 @@
 <img src="asset/logo.svg" align="right" width="100" height="100" alt="">
 
 [![npm][img-npm]][link-npm] [![jsr][img-jsr]][link-jsr]
-![compatibility][img-compatibility][![node.js][img-node]][link-node][![bun][img-bun]][link-bun]
+![compatibility][img-compatibility][![node.js][img-node]][link-node][![bun][img-bun]][link-bun][![deno][img-deno]][link-deno]
 [![build][img-build]][link-build] [![coverage][img-coverage]][link-coverage]
 
 Playwright-ghost is an overlay on [Playwright](https://playwright.dev/), adding
@@ -489,6 +489,8 @@ features).
   https://img.shields.io/badge/-blue?style=flat-square&logo=node.js&logoColor=whitesmoke
 [img-bun]:
   https://img.shields.io/badge/-blue?style=flat-square&logo=bun&logoColor=whitesmoke
+[img-deno]:
+  https://img.shields.io/badge/-blue?style=flat-square&logo=deno&logoColor=whitesmoke
 [img-build]:
   https://img.shields.io/github/actions/workflow/status/regseb/playwright-ghost/ci.yml?branch=main&style=flat-square&logo=github&logoColor=whitesmoke
 [img-coverage]:
@@ -497,6 +499,7 @@ features).
 [link-jsr]: https://jsr.io/@regseb/playwright-ghost
 [link-node]: https://nodejs.org/
 [link-bun]: https://bun.com/
+[link-deno]: https://deno.com/
 [link-build]:
   https://github.com/regseb/playwright-ghost/actions/workflows/ci.yml?query=branch%3Amain
 [link-coverage]:

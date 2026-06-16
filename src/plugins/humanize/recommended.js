@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/humanize/recommended.d.ts" */
+
 import humanizeClickPlugin from "./click.js";
 import humanizeCursorPlugin from "./cursor.js";
 import humanizeDialogPlugin from "./dialog.js";
@@ -15,8 +17,9 @@ import humanizeDialogPlugin from "./dialog.js";
  */
 
 /**
- * @typedef {Object} HumanizeRecommendedOptions Les éventuelles options des
- *                                              plugins humanisant recommandés.
+ * Les options des plugins recommandés pour humaniser les actions de navigation.
+ *
+ * @typedef {Object} HumanizeRecommendedOptions
  * @prop {HumanizeClickOptions | boolean}  [click]  Les éventuelles options du
  *                                                  plugin des clics ; ou un
  *                                                  booléen pour activer /
@@ -51,10 +54,12 @@ const initPlugin = (plugin, options) => {
 };
 
 /**
- * Crée les plugins recommandés humanisant.
+ * Crée les plugins recommandés pour humaniser les actions de navigation.
  *
  * @param {HumanizeRecommendedOptions} [options] Les éventuelles options des
- *                                               plugins humanisant recommandés.
+ *                                               plugins recommandés pour
+ *                                               humaniser les actions de
+ *                                               navigation.
  * @returns {Record<string, Function>[]} Les crochets des plugins recommandés.
  */
 export default function humanizeRecommendedPlugins(options) {

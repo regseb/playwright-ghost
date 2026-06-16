@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/polyfill/viewport.d.ts" */
+
 import Random from "../../utils/random.js";
 
 /**
@@ -38,8 +40,9 @@ const setViewport = (options, width, height) => {
 };
 
 /**
- * @typedef {Object} PolyfillViewportOptions Les options du plugin
- *                                           `polyfill.viewport`.
+ * Les options du plugin `polyfill.viewport`.
+ *
+ * @typedef {Object} PolyfillViewportOptions
  * @prop {Object} [width]      La largeur de la zone d'affichage.
  * @prop {number} [width.min]  La largeur minimum de la zone d'affichage.
  * @prop {number} [width.max]  La largeur maximum de la zone d'affichage.

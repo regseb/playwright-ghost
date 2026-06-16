@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../types/hookers/frame.d.ts" */
+
 import Hooker from "./hooker.js";
 
 /**
@@ -43,6 +45,6 @@ export default class FrameHooker extends Hooker {
      *                                                       temporalité.
      */
     constructor(listeners) {
-        super(POINTERS, listeners);
+        super(POINTERS, listeners, "Frame");
     }
 }

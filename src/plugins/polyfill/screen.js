@@ -4,11 +4,13 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/polyfill/screen.d.ts" */
+
 /**
  * Modifie la taille de l'écran.
  *
  * @param {Record<string, any> | undefined} options Les options de création d'un
- *                                                  `Browser`.
+ *                                                  `BrowserContext`.
  * @param {number}                          width   La largeur de l'écran.
  * @param {number}                          height  La hauteur de l'écran.
  * @returns {Record<string, any>} Les nouvelles options.
@@ -21,7 +23,9 @@ const setScreen = (options, width, height) => {
 };
 
 /**
- * @typedef {Object} PolyfillScreenOptions Les options du plugin `polyfill.screen`.
+ * Les options du plugin `polyfill.screen`.
+ *
+ * @typedef {Object} PolyfillScreenOptions
  * @prop {number} [width]  La largeur de l'écran.
  * @prop {number} [height] La hauteur de l'écran.
  */

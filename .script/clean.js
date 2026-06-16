@@ -19,6 +19,7 @@ const PATHS = [
     "stryker.log",
     "types/",
     // Supprimer les autres lockfiles.
+    "bun.lock",
     "pnpm-lock.yaml",
     "yarn.lock",
 ];

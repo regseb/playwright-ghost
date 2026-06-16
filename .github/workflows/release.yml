@@ -3,6 +3,10 @@ on:
   push:
     branches: [main]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
@@ -17,7 +21,7 @@ jobs:
       id-token: write
     steps:
       - name: Run Release Please
-        uses: googleapis/release-please-action@16a9c90856f42705d54a6fda1823352bdc62cf38 # v4.4.0
+        uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
         id: release
         with:
           config-file: .release-please/config.json
@@ -29,7 +33,7 @@ jobs:
       # https://github.com/googleapis/release-please/issues/1802
       - name: Checkout repository
         if: ${{ steps.release.outputs.pr }}
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           ref: ${{ fromJSON(steps.release.outputs.pr).headBranchName }}
           # Récupérer deux commits sinon la réparation du commit (pour le
@@ -45,9 +49,9 @@ jobs:
 
       - name: Setup Node.js
         if: ${{ steps.release.outputs.pr }}
-        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
-          node-version: 24
+          node-version: 26
 
       - name: Install dependencies
         if: ${{ steps.release.outputs.pr }}
@@ -68,19 +72,14 @@ jobs:
       # Si la release a été créée : publier le paquet dans npm et JSR.
       - name: Checkout repository
         if: ${{ steps.release.outputs.release_created }}
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Setup Node.js
         if: ${{ steps.release.outputs.release_created }}
-        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
-          node-version: 24
+          node-version: 26
           registry-url: https://registry.npmjs.org
-
-      # Mettre à jour npm pour avoir a minima la version 11.11.1.
-      # https://github.com/npm/cli/pull/9045
-      - name: Update npm
-        run: npm install -g npm@latest
 
       - name: Install dependencies and build declaration files (d.ts)
         if: ${{ steps.release.outputs.release_created }}
@@ -88,9 +87,7 @@ jobs:
 
       - name: Publish in npm
         if: ${{ steps.release.outputs.release_created }}
-        # Forcer l'accès public, car la valeur par défaut n'est pas utilisée.
-        # https://github.com/npm/cli/issues/7706
-        run: npm publish --access public
+        run: npm publish
 
       - name: Publish in JSR
         if: ${{ steps.release.outputs.release_created }}

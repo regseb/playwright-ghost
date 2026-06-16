@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../types/ghost.d.ts" */
+
 import hook from "./hook.js";
 import BrowserHooker from "./hookers/browser.js";
 import BrowserContextHooker from "./hookers/browsercontext.js";
@@ -32,8 +34,9 @@ import flatAwait from "./utils/flatawait.js";
  */
 
 /**
- * @typedef {Object} OptionPlugins Option pour les plugins qui sera ajouté aux
- *                                 options des méthodes.
+ * Option pour les plugins qui sera ajouté aux options des méthodes.
+ *
+ * @typedef {Object} OptionPlugins
  * @prop {(Object | Promise<Object>)[]} [plugins] Liste des plugins.
  */
 
@@ -76,7 +79,7 @@ const dispatch = (hooks, listeners) => {
             return [key, value];
         })
         .forEach(([obj, propTemporalityListener]) => {
-            // @ts-expect-error
+            // @ts-expect-error -- Utiliser la prothèse `getOrInsertComputed`.
             const listenersByObj = listeners.getOrInsertComputed(
                 obj,
                 () => new Map(),

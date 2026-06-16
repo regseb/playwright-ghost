@@ -4,10 +4,13 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../types/hook.d.ts" */
+
 /**
+ * Le contexte pour un crochetage avant l'appel d'une méthode ou d'un getter.
+ *
  * @template {Object} T Le type de l'objet.
- * @typedef {Object} ContextBefore Le contexte pour un crochetage avant l'appel
- *                                 d'une méthode ou d'un getter.
+ * @typedef {Object} ContextBefore
  * @prop {T}      obj  L'objet crocheté.
  * @prop {string} prop La méthode crochetée.
  * @prop {string} id   L'identifiant de l'exécution d'un crochet. Cette valeur
@@ -15,9 +18,10 @@
  */
 
 /**
+ * Le contexte pour un crochetage après l'appel d'une méthode ou d'un getter.
+ *
  * @template {Object} T Le type de l'objet.
- * @typedef {Object} ContextAfter Le contexte pour un crochetage après l'appel
- *                                d'une méthode ou d'un getter.
+ * @typedef {Object} ContextAfter
  * @prop {T}                 obj  L'objet crocheté.
  * @prop {string}            prop La méthode crochetée.
  * @prop {any[] | undefined} args Les paramètres de la méthode crochetée ou
@@ -28,7 +32,9 @@
  */
 
 /**
- * @typedef {Object} Listener Un écouteur à accrocher à une méthode d'un objet.
+ * Un écouteur à accrocher à une méthode d'un objet.
+ *
+ * @typedef {Object} Listener
  * @prop {Function[]} before Les fonctions à exécuter avant l'appel de la
  *                           méthode.
  * @prop {Function[]} after  Les fonctions à exécuter après l'appel de la

@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../types/hookers/mouse.d.ts" */
+
 import Hooker from "./hooker.js";
 
 /**
@@ -81,7 +83,7 @@ export default class MouseHooker extends Hooker {
      *                                                       temporalité.
      */
     constructor(listeners) {
-        super(POINTERS, listeners);
+        super(POINTERS, listeners, "Mouse");
     }
 
     first() {

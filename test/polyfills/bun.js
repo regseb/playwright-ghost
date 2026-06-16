@@ -95,7 +95,9 @@ mockNode.method = (object, methodName, implementation) => {
 };
 
 /**
- * @typedef {Object} PropertyMock Information d'une propriété mockée.
+ * Information d'une propriété mockée.
+ *
+ * @typedef {Object} PropertyMock
  * @prop {any}                      object       Objet mocké.
  * @prop {string | number | symbol} propertyName Propriété mocké.
  * @prop {any}                      value        Valeur d'origine.
@@ -132,7 +134,9 @@ mockNode.property = (object, propertyName, value) => {
 };
 
 /**
- * @typedef {Object} TimerMock Information d'une timer mocké.
+ * Information d'une timer mocké.
+ *
+ * @typedef {Object} TimerMock
  * @prop {Function} fn     Fonction qui sera appelée.
  * @prop {number}   date   Horodatage quand la fonction sera appellé.
  * @prop {any[]}    args   Arguments qui seront passés ) la fonction.
@@ -146,13 +150,13 @@ mockNode.property = (object, propertyName, value) => {
  */
 const timeouts = [];
 
-// @ts-expect-error
+// @ts-expect-error -- Ajouter une prothèse dans le namespace mock.
 mockNode.timers = {
     /**
      * Active un mock sur les timers.
      *
-     * @param {Object} options     Options du mock.
-     * @param {number} options.now Horodatage mocké.
+     * @param {Object} [options]     Options du mock.
+     * @param {number} [options.now] Horodatage mocké.
      * @see https://nodejs.org/api/test.html#timersenableenableoptions
      */
     enable(options) {
@@ -194,7 +198,7 @@ mockNode.timers = {
                 });
             },
         );
-        setSystemTime(options.now);
+        setSystemTime(options?.now);
     },
 
     /**

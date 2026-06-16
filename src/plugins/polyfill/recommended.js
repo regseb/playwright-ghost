@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/polyfill/recommended.d.ts" */
+
 import polyfillAutomationPlugin from "./automation.js";
 import polyfillHeadlessPlugin from "./headless.js";
 import polyfillScreenPlugin from "./screen.js";
@@ -16,12 +18,11 @@ import polyfillWebdriverPlugin from "./webdriver.js";
  */
 
 /**
- * @typedef {Object} PolyfillRecommendedOptions Les options des plugins
- *                                              recommandés pour gommer les
- *                                              différences entre un navigateur
- *                                              utilisé par un être humain et un
- *                                              navigateur _headless_ contrôlé
- *                                              par un programme.
+ * Les options des plugins recommandés pour gommer les différences entre un
+ * navigateur utilisé par un être humain et un navigateur _headless_ contrôlé
+ * par un programme.
+ *
+ * @typedef {Object} PolyfillRecommendedOptions
  * @prop {boolean}                           [automation] Un booléen pour
  *                                                        activer / désactiver
  *                                                        le plugin.
@@ -65,9 +66,9 @@ const initPlugin = (plugin, options) => {
 };
 
 /**
- * Crée les plugins recommandés qui gomment les différences entre un
- * navigateur utilisé par un être humain et un navigateur _headless_
- * contrôlé par un programme.
+ * Crée les plugins recommandés pour gommer les différences entre un navigateur
+ * utilisé par un être humain et un navigateur _headless_ contrôlé par un
+ * programme.
  *
  * @param {PolyfillRecommendedOptions} [options] Les éventuelles options des
  *                                               plugins récommandés pour gommer

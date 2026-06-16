@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/tools/camoufox.d.ts" */
+
 import { launchOptions } from "camoufox-js";
 
 /**
@@ -23,7 +25,8 @@ import { launchOptions } from "camoufox-js";
  *                                                          Camoufox, de
  *                                                          création d'un
  *                                                          `Browser`.
- * @param {BrowserType}                     browserType     Le type de navigateur.
+ * @param {BrowserType}                     browserType     Le type de
+ *                                                          navigateur.
  * @returns {Record<string, any> | undefined} Les nouvelles options.
  */
 const override = (options, camoufoxOptions, browserType) => {
@@ -34,9 +37,10 @@ const override = (options, camoufoxOptions, browserType) => {
 };
 
 /**
+ * Les options du plugin `tools.camoufox` qui sont les options de Camoufox
+ * (passées à la fonction `launchOptions()`).
+ *
  * @typedef {Omit<LaunchOptions, "headless"> & { headless?: boolean }} ToolsCamoufoxOptions
- *          Les options du plugin `tools.camoufox` qui sont les options de
- *          Camoufox (passées à la fonction `launchOptions()`).
  */
 
 /**

@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../types/hookers/browsercontext.d.ts" */
+
 import Hooker from "./hooker.js";
 
 /**
@@ -46,6 +48,6 @@ export default class BrowserContextHooker extends Hooker {
      *                                                       temporalité.
      */
     constructor(listeners) {
-        super(POINTERS, listeners);
+        super(POINTERS, listeners, "BrowserContext");
     }
 }

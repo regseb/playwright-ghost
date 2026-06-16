@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../types/hookers/locator.d.ts" */
+
 import Hooker from "./hooker.js";
 
 /**
@@ -26,6 +28,7 @@ const POINTERS = {
         "Page.getByText:after",
         "Page.getByTitle:after",
         "Page.locator:after",
+        "Page.pickLocator:after",
         "Frame.getByAltText:after",
         "Frame.getByLabel:after",
         "Frame.getByPlaceholder:after",
@@ -48,6 +51,7 @@ const POINTERS = {
         "Locator.getByTitle:after",
         "Locator.last:after",
         "Locator.locator:after",
+        "Locator.normalize:after",
         "Locator.nth:after",
         "Locator.or:after",
         "FrameLocator.getByAltText:after",
@@ -84,6 +88,6 @@ export default class LocatorHooker extends Hooker {
      *                                                       temporalité.
      */
     constructor(listeners) {
-        super(POINTERS, listeners);
+        super(POINTERS, listeners, "Locator");
     }
 }

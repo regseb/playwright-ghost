@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/debug/index.d.ts" */
+
 import debugConsolePlugin from "./console.js";
 import debugCursorPlugin from "./cursor.js";
 import debugSnifferPlugin from "./sniffer.js";

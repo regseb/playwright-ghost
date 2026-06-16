@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../types/utils/maparrayorscalar.d.ts" */
+
 /**
  * Exécute une fonction sur un élément ou une liste d'éléments.
  *

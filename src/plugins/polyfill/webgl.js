@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/polyfill/webgl.d.ts" */
+
 /**
  * @import { BrowserType } from "playwright-core"
  * @import { ContextBefore } from "../../hook.js"
@@ -21,7 +23,7 @@ const useAngle = (options, browserType) => {
     if ("chromium" === browserType.name() && (options?.headless ?? true)) {
         return {
             ...options,
-            args: ["--use-angle", ...(options?.args ?? [])],
+            args: ["--use-angle=default", ...(options?.args ?? [])],
         };
     }
     return options;

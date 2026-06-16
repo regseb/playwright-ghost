@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../../types/plugins/tools/lightpanda.d.ts" */
+
 import { lightpanda as Lightpanda } from "@lightpanda/browser";
 
 /**
@@ -12,7 +14,9 @@ import { lightpanda as Lightpanda } from "@lightpanda/browser";
  */
 
 /**
- * @typedef {Object} InstanceLightpanda Le type d'une instance de _lightpanda_.
+ * Le type d'une instance de _lightpanda_.
+ *
+ * @typedef {Object} InstanceLightpanda
  * @prop {ChildProcess} process    Le processus exécutant _lightpanda_.
  * @prop {string}       wsEndpoint L'URL du serveur de _lightpanda_.
  * @prop {number}       count      Le nombre de navigateurs utilisant
@@ -81,8 +85,9 @@ const killLightpanda = (options, force = false) => {
 };
 
 /**
- * @typedef {Object} ToolsLightpandaOptions Les options du plugin
- *                                          `tools.lightpanda`.
+ * Les options du plugin `tools.lightpanda`.
+ *
+ * @typedef {Object} ToolsLightpandaOptions
  * @prop {LightpandaServeOptions} [serveOptions] Les options de la fonction
  *                                               `serve` de _lightpanda_.
  * @prop {boolean}                [keepalive]    La marque pour ne pas arrêter

@@ -4,6 +4,8 @@
  * @author Sébastien Règne
  */
 
+/* @ts-self-types="../../types/utils/flatawait.d.ts" */
+
 /**
  * Aplatit une valeur en un tableau.
  *
