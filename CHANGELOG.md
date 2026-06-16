@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.19.0](https://github.com/regseb/playwright-ghost/compare/v0.18.0...v0.19.0) (2026-06-16)
+
+### Features
+
+- Support Deno.
+  ([d5f34dc](https://github.com/regseb/playwright-ghost/commit/d5f34dc315f022cd7586286a36548d6b22d4fb78))
+- Support new methods Page.pickLocator() ans Locator.normalize().
+  ([ce1ef7a](https://github.com/regseb/playwright-ghost/commit/ce1ef7aa6498992fa979c6973082a22eefba64be))
+
+### Bug Fixes
+
+- Link source and types (JSR "slow types").
+  ([79d07b1](https://github.com/regseb/playwright-ghost/commit/79d07b14328968fb335874bc69ab65e2b001c640))
+- **plugin/webGL:** Support recent versions of Chromium.
+  ([97a6eb3](https://github.com/regseb/playwright-ghost/commit/97a6eb341f7b757bf1d372a76d9af876e749201e))
+- Support Playwright 1.60.
+  ([6f42ac5](https://github.com/regseb/playwright-ghost/commit/6f42ac5c7a5373e1b93e1b56bdf4bb1cee0f26d8))
+
 ## [0.18.0](https://github.com/regseb/playwright-ghost/compare/v0.17.0...v0.18.0) (2026-03-28)
 
 ### ⚠ BREAKING CHANGES
