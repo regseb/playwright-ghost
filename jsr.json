@@ -1,6 +1,6 @@
 {
   "name": "@regseb/playwright-ghost",
-  "version": "0.18.0",
+  "version": "0.19.0",
   "license": "MIT",
   "exports": {
     ".": "./src/index.js",
