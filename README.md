@@ -482,7 +482,7 @@ features).
 [img-npm]:
   https://img.shields.io/npm/dw/playwright-ghost?style=flat-square&label=npm&logo=npm
 [img-jsr]:
-  https://jsr.io/badges/@regseb/playwright-ghost/weekly-downloads?style=flat-square&labelColor=grey&label=jsr&logoColor=whitesmoke&color=4c1
+  https://jsr.io/badges/@regseb/playwright-ghost/weekly-downloads?style=flat-square&labelColor=grey&label=jsr&logoColor=whitesmoke&color=4b0
 [img-compatibility]:
   https://img.shields.io/badge/compatibility-grey?style=flat-square&logo=data:image/svg%2bxml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEyIDBBMTIgMTIgMCAwIDAgMCAxMmExMiAxMiAwIDAgMCAxMiAxMiAxMiAxMiAwIDAgMCAxMi0xMkExMiAxMiAwIDAgMCAxMiAwbTYuNSA2LjVhMS41IDEuNSAwIDAgMSAxLjA2LjQ0IDEuNSAxLjUgMCAwIDEgMCAyLjEybC05IDlhMS41IDEuNSAwIDAgMS0yLjEyIDBsLTUtNWExLjUgMS41IDAgMCAxIDAtMi4xMiAxLjUgMS41IDAgMCAxIDIuMTIgMGwzLjk0IDMuOTM5IDcuOTQtNy45NEExLjUgMS41IDAgMCAxIDE4LjUgNi41IiBmaWxsPSJ3aGl0ZXNtb2tlIi8+PC9zdmc+
 [img-node]:
