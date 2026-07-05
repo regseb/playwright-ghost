@@ -6,11 +6,9 @@
 
 /* @ts-self-types="../../../types/plugins/debug/sniffer.d.ts" */
 
-import { WebSocketServer } from "ws";
 import "../../polyfills/map.js";
 
 /**
- * @import { Buffer } from "node:buffer"
  * @import { Page } from "playwright-core"
  */
 
@@ -34,11 +32,11 @@ const setBypassCSP = (options) => {
  * fonction est exécutée dans le navigateur. Elle communique, avec le programme
  * Node.js, en passant par une WebSocket.
  *
- * @param {number} port Le port de la WebSocket.
+ * @param {string} uuid L'UUID (utilisé comme nom de domaine) de la WebSocket.
  */
-const initScript = async (port) => {
+const initScript = async (uuid) => {
     const ws = await new Promise((resolve, reject) => {
-        const socket = new WebSocket(`ws://localhost:${port}/`);
+        const socket = new WebSocket(`wss://${uuid}/`);
         socket.addEventListener("open", () => resolve(socket));
         socket.addEventListener("error", (err) => reject(err));
     });
@@ -218,10 +216,10 @@ export default function debugSnifferPlugin() {
         "Page:new": async (page) => {
             const map = new Map();
 
-            const wss = new WebSocketServer({ port: 0 });
-            wss.on("connection", (ws) => {
-                ws.on("message", (/** @type {Buffer} */ data) => {
-                    const entry = JSON.parse(data.toString());
+            const uuid = crypto.randomUUID();
+            await page.routeWebSocket(`wss://${uuid}/`, (ws) => {
+                ws.onMessage((message) => {
+                    const entry = JSON.parse(message);
                     const frame = map.getOrInsertComputed(
                         entry.url,
                         () => new Set(),
@@ -229,11 +227,7 @@ export default function debugSnifferPlugin() {
                     frame.add(entry.key);
                 });
             });
-
-            // Ajouter le init script dans la page et non dans le contexte, car
-            // il est possible de créer une page "sans" contexte (cf.
-            // Browser.newPage()).
-            await page.addInitScript(initScript, wss.address().port);
+            await page.addInitScript(initScript, uuid);
 
             // eslint-disable-next-line no-param-reassign
             page.sniffer = {
@@ -257,11 +251,6 @@ export default function debugSnifferPlugin() {
 
                 reset: () => map.clear(),
             };
-
-            // Arrêter le serveur à la fermeture de la page.
-            page.on("close", () => {
-                wss.close();
-            });
 
             return page;
         },

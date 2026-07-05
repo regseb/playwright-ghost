@@ -72,29 +72,41 @@ describe("plugins/debug/sniffer.js", () => {
 
         describe("Page:new", () => {
             it("should add init script", async () => {
+                const randomUUID = mock.method(
+                    crypto,
+                    "randomUUID",
+                    () => "123e4567-e89b-12d3-a456-426614174000",
+                );
+                const routeWebSocket = mock.fn();
                 const addInitScript = mock.fn(() => Promise.resolve());
-                const on = mock.fn();
-                const page = { addInitScript, on };
+                const page = { addInitScript, routeWebSocket };
 
                 const plugin = debugSnifferPlugin();
                 const listener = plugin["Page:new"];
                 const pageAltered = await listener(page);
 
+                assert.equal(randomUUID.mock.callCount(), 1);
+                assert.equal(routeWebSocket.mock.callCount(), 1);
+                assert.equal(
+                    routeWebSocket.mock.calls[0].arguments[0],
+                    "wss://123e4567-e89b-12d3-a456-426614174000/",
+                );
+                assert.equal(
+                    typeof routeWebSocket.mock.calls[0].arguments[1],
+                    "function",
+                );
                 assert.equal(addInitScript.mock.callCount(), 1);
                 assert.equal(
                     typeof addInitScript.mock.calls[0].arguments[0],
                     "function",
                 );
-                assert.equal(on.mock.callCount(), 1);
-                const args = on.mock.calls[0].arguments;
-                assert.equal(args[0], "close");
-                assert.equal(typeof args[1], "function");
+                assert.equal(
+                    addInitScript.mock.calls[0].arguments[1],
+                    "123e4567-e89b-12d3-a456-426614174000",
+                );
                 // Vérifier que la page retournée est la même instance que celle
                 // en paramètre.
                 assert.equal(pageAltered, page);
-
-                // Simuler la fermeture de la page pour fermer la WebSocket.
-                args[1]();
             });
         });
     });

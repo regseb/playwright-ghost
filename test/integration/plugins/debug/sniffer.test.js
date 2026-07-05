@@ -20,10 +20,10 @@ describe("Plugin: debug.sniffer", () => {
             // d'exécution).
             await page.route("**/*", (route) => {
                 const resourceType = route.request().resourceType();
-                if (["image", "stylesheet", "font"].includes(resourceType)) {
-                    route.abort();
-                } else {
+                if (["document", "script"].includes(resourceType)) {
                     route.continue();
+                } else {
+                    route.abort();
                 }
             });
             await page.goto("https://planet.debian.org/");
@@ -31,12 +31,58 @@ describe("Plugin: debug.sniffer", () => {
             const used = page.sniffer.get();
             assert.deepEqual(used, {
                 "https://planet.debian.org/": [
+                    "__playwright__binding__",
+                    "__playwright__binding__controller__",
+                    "__playwright__binding__controller__._bindings",
+                    "__playwright__binding__controller__._global",
+                    "__playwright__binding__controller__._globalBindingName",
+                    "Array",
+                    "Array.isArray",
+                    "Array.prototype.constructor",
+                    "Array.prototype.push",
+                    "Array.prototype.slice",
+                    "ArrayBuffer",
+                    "BigInt64Array.name",
+                    "BigUint64Array.name",
+                    "Blob",
+                    "Date",
+                    "Document",
                     "Document.prototype.cookie",
                     "Document.prototype.write",
+                    "Error",
+                    "eval",
+                    "Float32Array.name",
+                    "Float64Array.name",
+                    "Function.prototype.call",
+                    "globalThis",
+                    "Int16Array.name",
+                    "Int32Array.name",
+                    "Int8Array.name",
+                    "JSON",
+                    "JSON.stringify",
+                    "Map",
+                    "Map.prototype.delete",
+                    "Map.prototype.get",
+                    "Map.prototype.set",
+                    "Node",
+                    "Object",
+                    "Object.entries",
+                    "Object.getPrototypeOf",
+                    "Object.is",
+                    "Object.keys",
+                    "Object.prototype.toString",
                     "onload",
+                    "Promise",
+                    "RegExp",
                     "String.prototype.charAt",
                     "String.prototype.indexOf",
                     "String.prototype.split",
+                    "Uint16Array.name",
+                    "Uint32Array.name",
+                    "Uint8Array.name",
+                    "Uint8ClampedArray.name",
+                    "URL",
+                    "Window",
                 ],
             });
         } finally {
