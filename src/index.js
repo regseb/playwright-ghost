@@ -23,6 +23,7 @@ import Ghost from "./ghost.js";
  * @typedef {import("playwright").JSHandle} JSHandle
  * @typedef {import("playwright").ElementHandle} ElementHandle
  * @typedef {import("playwright").Locator} Locator
+ * @typedef {import("playwright").ConnectOverCDPTransport} ConnectOverCDPTransport
  * @typedef {import("playwright").CDPSession} CDPSession
  * @typedef {import("playwright").WebSocketRoute} WebSocketRoute
  * @typedef {import("playwright").Screencast} Screencast
@@ -37,6 +38,7 @@ import Ghost from "./ghost.js";
  * @typedef {import("playwright").Clock} Clock
  * @typedef {import("playwright").ConsoleMessage} ConsoleMessage
  * @typedef {import("playwright").Coverage} Coverage
+ * @typedef {import("playwright").Credentials} Credentials
  * @typedef {import("playwright").Debugger} Debugger
  * @typedef {import("playwright").Dialog} Dialog
  * @typedef {import("playwright").Disposable} Disposable
@@ -55,6 +57,7 @@ import Ghost from "./ghost.js";
  * @typedef {import("playwright").Video} Video
  * @typedef {import("playwright").WebError} WebError
  * @typedef {import("playwright").WebSocket} WebSocket
+ * @typedef {import("playwright").WebStorage} WebStorage
  * @typedef {import("playwright").Electron} Electron
  * @typedef {import("playwright").Android} Android
  * @typedef {import("playwright").AndroidDevice} AndroidDevice
