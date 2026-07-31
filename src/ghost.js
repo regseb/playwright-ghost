@@ -40,7 +40,7 @@ import flatAwait from "./utils/flatawait.js";
  * @prop {(Object | Promise<Object>)[]} [plugins] Liste des plugins.
  */
 
-const REGEXP = /^(?<obj>\w+)\.(?<prop>\w+):(?<temporality>after|before)$/v;
+const REGEXP = /^(?<obj>\w+)\.(?<prop>[\w$]+):(?<temporality>after|before)$/v;
 
 const PRESETS = {
     "Browser:new": Object.entries(BrowserHooker.PRESETS),
