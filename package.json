@@ -170,8 +170,8 @@
   },
   "dependencies": {
     "ghost-cursor": "1.4.2",
-    "playwright-core": "1.60.0",
-    "ws": "8.21.0"
+    "playwright-core": "1.62.0",
+    "ws": "8.21.1"
   },
   "devDependencies": {
     "@biomejs/js-api": "4.0.0",
