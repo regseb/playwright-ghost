@@ -172,9 +172,9 @@ export default class Ghost {
      *
      * @param {string}                                                wsEndpoint Point de terminaison WebSocket de l'instance du navigateur.
      * @param {Parameters<BrowserType["connect"]>[1] & OptionPlugins} [options]  Options de connexion.
-     * @returns {Promise<ReturnType<BrowserType["connect"]>>} Promesse contenant
-     *                                                        la version fantôme
-     *                                                        du `Browser`.
+     * @returns {ReturnType<BrowserType["connect"]>} Promesse contenant la
+     *                                               version fantôme du
+     *                                               `Browser`.
      * @see https://playwright.dev/docs/api/class-browsertype#browser-type-connect
      */
     async connect(wsEndpoint, options) {
@@ -188,11 +188,9 @@ export default class Ghost {
      *
      * @param {string}                                                       wsEndpoint Point de terminaison CDP WebSocket ou URL HTTP de l'instance du navigateur.
      * @param {Parameters<BrowserType["connectOverCDP"]>[1] & OptionPlugins} [options]  Options de connexion.
-     * @returns {Promise<ReturnType<BrowserType["connectOverCDP"]>>} Promesse
-     *                                                               contenant
-     *                                                               la version
-     *                                                               fantôme du
-     *                                                               `Browser`.
+     * @returns {ReturnType<BrowserType["connectOverCDP"]>} Promesse contenant
+     *                                                      la version fantôme
+     *                                                      du `Browser`.
      * @see https://playwright.dev/docs/api/class-browsertype#browser-type-connect-over-cdp
      */
     async connectOverCDP(wsEndpoint, options) {
@@ -214,9 +212,9 @@ export default class Ghost {
      * Lance une version fantôme d'un `Browser` de Playwright.
      *
      * @param {Parameters<BrowserType["launch"]>[0] & OptionPlugins} [options] Options de création d'un `Browser`.
-     * @returns {Promise<ReturnType<BrowserType["launch"]>>} Promesse contenant
-     *                                                       la version fantôme
-     *                                                       du `Browser`.
+     * @returns {ReturnType<BrowserType["launch"]>} Promesse contenant la
+     *                                              version fantôme du
+     *                                              `Browser`.
      * @see https://playwright.dev/docs/api/class-browsertype#browser-type-launch
      */
     async launch(options) {
@@ -229,13 +227,11 @@ export default class Ghost {
      *
      * @param {string}                                                                userDataDir Chemin vers le répertoire des données de session.
      * @param {Parameters<BrowserType["launchPersistentContext"]>[1] & OptionPlugins} [options]   Options de création d'un `Browser` et de son `BrowserContext`.
-     * @returns {Promise<ReturnType<BrowserType["launchPersistentContext"]>>} Promesse
-     *                                                                        contenant
-     *                                                                        la
-     *                                                                        version
-     *                                                                        fantôme
-     *                                                                        du
-     *                                                                        `BrowserContext`.
+     * @returns {ReturnType<BrowserType["launchPersistentContext"]>} Promesse
+     *                                                               contenant
+     *                                                               la version
+     *                                                               fantôme du
+     *                                                               `BrowserContext`.
      * @see https://playwright.dev/docs/api/class-browsertype#browser-type-launch-persistent-context
      */
     async launchPersistentContext(userDataDir, options) {
@@ -247,12 +243,9 @@ export default class Ghost {
      * Lance un serveur fantôme de Playwright.
      *
      * @param {Parameters<BrowserType["launchServer"]>[0] & OptionPlugins} [options] Options de création d'un `BrowserServer`.
-     * @returns {Promise<ReturnType<BrowserType["launchServer"]>>} Promesse
-     *                                                             contenant la
-     *                                                             version
-     *                                                             fantôme
-     *                                                             du
-     *                                                             `BrowserServer`.
+     * @returns {ReturnType<BrowserType["launchServer"]>} Promesse contenant la
+     *                                                    version fantôme du
+     *                                                    `BrowserServer`.
      * @see https://playwright.dev/docs/api/class-browsertype#browser-type-launch-server
      */
     async launchServer(options) {
