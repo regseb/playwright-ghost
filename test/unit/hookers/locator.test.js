@@ -16,6 +16,7 @@ describe("hookers/locator.js", () => {
                     "Page.getByAltText:after",
                     "Page.getByLabel:after",
                     "Page.getByPlaceholder:after",
+                    "Page.getByRef:after",
                     "Page.getByRole:after",
                     "Page.getByTestId:after",
                     "Page.getByText:after",
@@ -47,6 +48,7 @@ describe("hookers/locator.js", () => {
                     "Locator.normalize:after",
                     "Locator.nth:after",
                     "Locator.or:after",
+                    "Locator.within:after",
                     "FrameLocator.getByAltText:after",
                     "FrameLocator.getByLabel:after",
                     "FrameLocator.getByPlaceholder:after",
@@ -66,14 +68,15 @@ describe("hookers/locator.js", () => {
 
         describe("constructor", () => {
             it("should add hooks in first", () => {
-                const locator = new LocatorHooker(new Map());
-                const first = locator.first();
+                const locatorHooker = new LocatorHooker(new Map());
+                const first = locatorHooker.first();
 
                 const pointers = Object.keys(first);
                 assert.deepEqual(pointers, [
                     "Page.getByAltText:after",
                     "Page.getByLabel:after",
                     "Page.getByPlaceholder:after",
+                    "Page.getByRef:after",
                     "Page.getByRole:after",
                     "Page.getByTestId:after",
                     "Page.getByText:after",
@@ -105,6 +108,7 @@ describe("hookers/locator.js", () => {
                     "Locator.normalize:after",
                     "Locator.nth:after",
                     "Locator.or:after",
+                    "Locator.within:after",
                     "FrameLocator.getByAltText:after",
                     "FrameLocator.getByLabel:after",
                     "FrameLocator.getByPlaceholder:after",
@@ -122,14 +126,15 @@ describe("hookers/locator.js", () => {
             });
 
             it("should add hook in last", () => {
-                const locator = new LocatorHooker(new Map());
-                const last = locator.last();
+                const locatorHooker = new LocatorHooker(new Map());
+                const last = locatorHooker.last();
 
                 const pointers = Object.keys(last);
                 assert.deepEqual(pointers, [
                     "Page.getByAltText:after",
                     "Page.getByLabel:after",
                     "Page.getByPlaceholder:after",
+                    "Page.getByRef:after",
                     "Page.getByRole:after",
                     "Page.getByTestId:after",
                     "Page.getByText:after",
@@ -161,6 +166,7 @@ describe("hookers/locator.js", () => {
                     "Locator.normalize:after",
                     "Locator.nth:after",
                     "Locator.or:after",
+                    "Locator.within:after",
                     "FrameLocator.getByAltText:after",
                     "FrameLocator.getByLabel:after",
                     "FrameLocator.getByPlaceholder:after",
@@ -175,6 +181,24 @@ describe("hookers/locator.js", () => {
                 for (const listener of listeners) {
                     assert.equal(typeof listener, "function");
                 }
+            });
+
+            it("should add listener in prepare", () => {
+                const listeners = new Map([
+                    [
+                        "Locator",
+                        new Map([
+                            ["foo", { before: [], after: [() => "bar"] }],
+                        ]),
+                    ],
+                ]);
+                const vanilla = { foo: () => "baz" };
+
+                const locatorHooker = new LocatorHooker(listeners);
+                const hooked = locatorHooker.prepare(vanilla);
+
+                assert.notEqual(hooked, vanilla);
+                assert.equal(hooked.foo(), "bar");
             });
         });
     });
