@@ -21,6 +21,7 @@ import Ghost from "./ghost.js";
  * @typedef {import("patchright").Browser} Browser
  * @typedef {import("patchright").Worker} Worker
  * @typedef {import("patchright").JSHandle} JSHandle
+ * @typedef {import("patchright").APIResponse} APIResponse
  * @typedef {import("patchright").ElementHandle} ElementHandle
  * @typedef {import("patchright").Locator} Locator
  * @typedef {import("patchright").ConnectOverCDPTransport} ConnectOverCDPTransport
@@ -33,7 +34,6 @@ import Ghost from "./ghost.js";
  * @typedef {import("patchright").AndroidKey} AndroidKey
  * @typedef {import("patchright").APIRequest} APIRequest
  * @typedef {import("patchright").APIRequestContext} APIRequestContext
- * @typedef {import("patchright").APIResponse} APIResponse
  * @typedef {import("patchright").BrowserServer} BrowserServer
  * @typedef {import("patchright").Clock} Clock
  * @typedef {import("patchright").ConsoleMessage} ConsoleMessage
@@ -56,6 +56,7 @@ import Ghost from "./ghost.js";
  * @typedef {import("patchright").Tracing} Tracing
  * @typedef {import("patchright").Video} Video
  * @typedef {import("patchright").WebError} WebError
+ * @typedef {import("patchright").WebMCP} WebMCP
  * @typedef {import("patchright").WebSocket} WebSocket
  * @typedef {import("patchright").WebStorage} WebStorage
  * @typedef {import("patchright").Electron} Electron
