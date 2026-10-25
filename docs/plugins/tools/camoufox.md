@@ -2,34 +2,16 @@
 
 > [!IMPORTANT]
 >
-> You need to add [`camoufox-js`](https://www.npmjs.com/package/camoufox-js)
-> package to your npm dependencies.
+> You need to add [`camoufox`](https://www.npmjs.com/package/camoufox) package
+> to your npm dependencies.
 
 Replace Firefox by [Camoufox](https://camoufox.com/).
 
 ## Options
 
-This plugin supports the following option (from Camoufox):
-
-- Device Rotation: [`os`](https://camoufox.com/python/usage/#os),
-  [`fonts`](https://camoufox.com/python/usage/#fonts),
-  [`screen`](https://camoufox.com/python/usage/#screen),
-  [`webgl_config`](https://camoufox.com/python/usage/#webgl_config),
-  [`config`](https://camoufox.com/python/usage/#config);
-- Configuration: [`humanize`](https://camoufox.com/python/usage/#humanize),
-  [`headless`](https://camoufox.com/python/usage/#headless),
-  [`addons`](https://camoufox.com/python/usage/#addons),
-  [`exclude_addons`](https://camoufox.com/python/usage/#exclude_addons),
-  [`window`](https://camoufox.com/python/usage/#window),
-  [`main_world_eval`](https://camoufox.com/python/usage/#main_world_eval),
-  [`enable_cache`](https://camoufox.com/python/usage/#enable_cache),
-  [`persistent_context`](https://camoufox.com/python/usage/#persistent_context);
-- Location & Language: [`geoip`](https://camoufox.com/python/usage/#geoip),
-  [`locale`](https://camoufox.com/python/usage/#locale);
-- Toggles: [`block_images`](https://camoufox.com/python/usage/#block_images),
-  [`block_webrtc`](https://camoufox.com/python/usage/#block_webrtc),
-  [`block_webgl`](https://camoufox.com/python/usage/#block_webgl),
-  [`disable_coop`](https://camoufox.com/python/usage/#disble_coop).
+This plugin supports the
+[Camoufox's options](https://github.com/daijro/camoufox/tree/main/typescript#launch-options)
+(`os`, `headless`, `gpu`, `require_gpu`, `proxy`...).
 
 ## Examples
 

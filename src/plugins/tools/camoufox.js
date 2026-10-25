@@ -6,10 +6,10 @@
 
 /* @ts-self-types="../../../types/plugins/tools/camoufox.d.ts" */
 
-import { launchOptions } from "camoufox-js";
+import { launchOptions } from "camoufox";
 
 /**
- * @import { LaunchOptions } from "camoufox-js"
+ * @import { LaunchOptions } from "camoufox"
  * @import { BrowserType } from "playwright-core"
  * @import { ContextBefore } from "../../hook.js"
  */
@@ -51,7 +51,7 @@ const override = (options, camoufoxOptions, browserType) => {
  *                                         `tools.camoufox`.
  * @returns {Promise<Record<string, Function>>} Une promesse contenant le
  *                                              crochet du plugin.
- * @see https://github.com/apify/camoufox-js
+ * @see https://github.com/daijro/camoufox/tree/HEAD/typescript
  */
 export default async function toolsCamoufoxPlugin(options) {
     const camoufoxOptions = await launchOptions(options ?? {});
