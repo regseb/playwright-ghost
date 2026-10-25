@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.20.0](https://github.com/regseb/playwright-ghost/compare/v0.19.0...v0.20.0) (2026-10-25)
+
+### Features
+
+- Export new types `ConnectOverCDPTransport`, `Credentials` and `WebStorage`.
+  ([03a1d26](https://github.com/regseb/playwright-ghost/commit/03a1d26f9e72af31811e66bb19ce4b0cabedbeb9))
+- re-export new type `WebMCP`.
+  ([e6e0957](https://github.com/regseb/playwright-ghost/commit/e6e095709a6decc727ad5395012ecd45145ed3bb))
+- Replace camoufox-js by official camoufox.
+  ([1dcd0bf](https://github.com/regseb/playwright-ghost/commit/1dcd0bfbd7885d4ba8d5bb1a8255d94649412d60))
+- Support new `Page.getbyRef()` and `Locator.within()`.
+  ([bcac3c7](https://github.com/regseb/playwright-ghost/commit/bcac3c725d80822033883dfa30213320cecf06fc))
+
+### Bug Fixes
+
+- Fix return-types of `BrowserType`.
+  ([bc63917](https://github.com/regseb/playwright-ghost/commit/bc63917f852d1c042892e1bd532738426d3d27c4))
+- **plugin/viewport:** Do not use a very small viewport.
+  ([5ea5b89](https://github.com/regseb/playwright-ghost/commit/5ea5b89f4373a021cea58d3e301f046cc0a6a558))
+- **plugin:** Fix `debug.sniffer` in recent Playwright.
+  ([4eaa9bd](https://github.com/regseb/playwright-ghost/commit/4eaa9bdf760981406b7f60e9849c13f347cafea3))
+- Support hooker with method contains "$"".
+  ([d12f20d](https://github.com/regseb/playwright-ghost/commit/d12f20d710249cb4cea1439ac4ce35a736450b69))
+
 ## [0.19.0](https://github.com/regseb/playwright-ghost/compare/v0.18.0...v0.19.0) (2026-06-16)
 
 ### Features
