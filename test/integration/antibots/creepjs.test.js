@@ -85,7 +85,7 @@ describe("Anti-bot: CreepJS", () => {
                 });
                 await fs.writeFile(
                     "./log/creepjs-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

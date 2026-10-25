@@ -22,8 +22,8 @@ describe("Plugin: tools.xvfb", () => {
             await page.goto("https://example.com/");
 
             const screen = await page.evaluate(() => ({
-                width: screen.width,
-                height: screen.height,
+                width: globalThis.screen.width,
+                height: globalThis.screen.height,
             }));
             assert.equal(screen.width, 1920);
             assert.equal(screen.height, 1080);
@@ -46,8 +46,8 @@ describe("Plugin: tools.xvfb", () => {
             await page.goto("https://example.com/");
 
             const screen = await page.evaluate(() => ({
-                width: screen.width,
-                height: screen.height,
+                width: globalThis.screen.width,
+                height: globalThis.screen.height,
             }));
             assert.equal(screen.width, 1920);
             assert.equal(screen.height, 1080);
@@ -70,8 +70,8 @@ describe("Plugin: tools.xvfb", () => {
             await page.goto("https://example.com/");
 
             const screen = await page.evaluate(() => ({
-                width: screen.width,
-                height: screen.height,
+                width: globalThis.screen.width,
+                height: globalThis.screen.height,
             }));
             assert.equal(screen.width, 1920);
             assert.equal(screen.height, 1080);

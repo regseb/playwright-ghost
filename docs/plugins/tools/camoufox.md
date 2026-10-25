@@ -3,7 +3,12 @@
 > [!IMPORTANT]
 >
 > You need to add [`camoufox`](https://www.npmjs.com/package/camoufox) package
-> to your npm dependencies.
+> to your npm dependencies and download Camoufox browser.
+>
+> ```shell
+> npm install camoufox
+> npx camoufox fetch
+> ```
 
 Replace Firefox by [Camoufox](https://camoufox.com/).
 

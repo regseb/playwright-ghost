@@ -89,8 +89,8 @@ describe("hookers/mouse.js", () => {
 
         describe("constructor", () => {
             it("should add hooks in first", () => {
-                const mouse = new MouseHooker(new Map());
-                const first = mouse.first();
+                const mouseHooker = new MouseHooker(new Map());
+                const first = mouseHooker.first();
 
                 const pointers = Object.keys(first);
                 assert.deepEqual(pointers, [
@@ -106,8 +106,8 @@ describe("hookers/mouse.js", () => {
             });
 
             it("should add hook in last", () => {
-                const mouse = new MouseHooker(new Map());
-                const last = mouse.last();
+                const mouseHooker = new MouseHooker(new Map());
+                const last = mouseHooker.last();
 
                 const pointers = Object.keys(last);
                 assert.deepEqual(pointers, [
@@ -122,8 +122,8 @@ describe("hookers/mouse.js", () => {
             });
 
             it("should hook 'Browser.newPage:after' in first", () => {
-                const mouse = new MouseHooker(new Map());
-                const listener = mouse.first()["Browser.newPage:after"];
+                const mouseHooker = new MouseHooker(new Map());
+                const listener = mouseHooker.first()["Browser.newPage:after"];
                 const page = /** @type {Page} */ ({ mouse: {} });
                 const pageAltered = listener(page);
                 assert.equal(pageAltered, page);
@@ -136,8 +136,9 @@ describe("hookers/mouse.js", () => {
             });
 
             it("should hook 'BrowserContext.newPage:after' in first", () => {
-                const mouse = new MouseHooker(new Map());
-                const listener = mouse.first()["BrowserContext.newPage:after"];
+                const mouseHooker = new MouseHooker(new Map());
+                const listener =
+                    mouseHooker.first()["BrowserContext.newPage:after"];
                 const page = /** @type {Page} */ ({ mouse: {} });
                 const pageAltered = listener(page);
                 assert.equal(pageAltered, page);
@@ -150,12 +151,14 @@ describe("hookers/mouse.js", () => {
             });
 
             it("should hook 'Browser.newPage:after' in last", () => {
-                const mouse = new MouseHooker(new Map());
-                const firstListener = mouse.first()["Browser.newPage:after"];
+                const mouseHooker = new MouseHooker(new Map());
+                const firstListener =
+                    mouseHooker.first()["Browser.newPage:after"];
                 const page = /** @type {Page} */ ({ mouse: {} });
                 const pageAltered = firstListener(page);
 
-                const lastListener = mouse.last()["Browser.newPage:after"];
+                const lastListener =
+                    mouseHooker.last()["Browser.newPage:after"];
                 const pageRealtered = lastListener(page);
                 assert.equal(pageRealtered, page);
 
@@ -164,19 +167,37 @@ describe("hookers/mouse.js", () => {
             });
 
             it("should hook 'BrowserContext.newPage:after' in last", () => {
-                const mouse = new MouseHooker(new Map());
+                const mouseHooker = new MouseHooker(new Map());
                 const firstListener =
-                    mouse.first()["BrowserContext.newPage:after"];
+                    mouseHooker.first()["BrowserContext.newPage:after"];
                 const page = /** @type {Page} */ ({ mouse: {} });
                 const pageAltered = firstListener(page);
 
                 const lastListener =
-                    mouse.last()["BrowserContext.newPage:after"];
+                    mouseHooker.last()["BrowserContext.newPage:after"];
                 const pageRealtered = lastListener(pageAltered);
                 assert.equal(pageRealtered, page);
 
                 const symbols = Object.getOwnPropertySymbols(pageAltered);
                 assert.equal(symbols.length, 0);
+            });
+
+            it("should add listener in prepare", () => {
+                const listeners = new Map([
+                    [
+                        "Mouse",
+                        new Map([
+                            ["foo", { before: [], after: [() => "bar"] }],
+                        ]),
+                    ],
+                ]);
+                const vanilla = { foo: () => "baz" };
+
+                const mouseHooker = new MouseHooker(listeners);
+                const hooked = mouseHooker.prepare(vanilla);
+
+                assert.notEqual(hooked, vanilla);
+                assert.equal(hooked.foo(), "bar");
             });
         });
     });

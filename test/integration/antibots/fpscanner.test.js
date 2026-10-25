@@ -26,7 +26,7 @@ const getUserAgent = async () => {
 };
 
 describe("Anti-bot: FPScanner", () => {
-    describe.skip("chromium", () => {
+    describe("chromium", () => {
         it("should not be detected", async () => {
             const browser = await patchright.chromium.launch({
                 plugins: [
@@ -67,7 +67,7 @@ describe("Anti-bot: FPScanner", () => {
                 });
                 await fs.writeFile(
                     "./log/fpscanner-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();
@@ -113,7 +113,7 @@ describe("Anti-bot: FPScanner", () => {
                 });
                 await fs.writeFile(
                     "./log/fpscanner-fx.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

@@ -7,6 +7,10 @@
 > and
 > [`fingerprint-injector`](https://www.npmjs.com/package/fingerprint-injector)
 > packages to your npm dependencies.
+>
+> ```shell
+> npm install fingerprint-generator fingerprint-injector
+> ```
 
 Change the browser fingerprint with
 [Fingerprint Suite](https://github.com/apify/fingerprint-suite#readme).

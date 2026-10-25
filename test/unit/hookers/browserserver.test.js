@@ -23,8 +23,8 @@ describe("hookers/browserserver.js", () => {
 
         describe("constructor", () => {
             it("should add hooks in first", () => {
-                const browserServer = new BrowserServerHooker(new Map());
-                const first = browserServer.first();
+                const browserServerHooker = new BrowserServerHooker(new Map());
+                const first = browserServerHooker.first();
 
                 const pointers = Object.keys(first);
                 assert.deepEqual(pointers, ["BrowserType.launchServer:after"]);
@@ -36,8 +36,8 @@ describe("hookers/browserserver.js", () => {
             });
 
             it("should add hook in last", () => {
-                const browserServer = new BrowserServerHooker(new Map());
-                const last = browserServer.last();
+                const browserServerHooker = new BrowserServerHooker(new Map());
+                const last = browserServerHooker.last();
 
                 const pointers = Object.keys(last);
                 assert.deepEqual(pointers, ["BrowserType.launchServer:after"]);
@@ -46,6 +46,24 @@ describe("hookers/browserserver.js", () => {
                 for (const listener of listeners) {
                     assert.equal(typeof listener, "function");
                 }
+            });
+
+            it("should add listener in prepare", () => {
+                const listeners = new Map([
+                    [
+                        "BrowserServer",
+                        new Map([
+                            ["foo", { before: [], after: [() => "bar"] }],
+                        ]),
+                    ],
+                ]);
+                const vanilla = { foo: () => "baz" };
+
+                const browserServerHooker = new BrowserServerHooker(listeners);
+                const hooked = browserServerHooker.prepare(vanilla);
+
+                assert.notEqual(hooked, vanilla);
+                assert.equal(hooked.foo(), "bar");
             });
         });
     });

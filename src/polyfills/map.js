@@ -19,7 +19,7 @@ if (!("getOrInsert" in Map.prototype)) {
      * @see https://developer.mozilla.org/Web/JavaScript/Reference/Global_Objects/Map/getOrInsert
      */
     // @ts-expect-error -- Ajouter une prothèse dans la classe Map.
-    // eslint-disable-next-line no-extend-native
+    // eslint-disable-next-line no-extend-native, unicorn/consistent-function-style
     Map.prototype.getOrInsert = function getOrInsert(key, defaultValue) {
         if (this.has(key)) {
             return this.get(key);
@@ -44,7 +44,7 @@ if (!("getOrInsertComputed" in Map.prototype)) {
      * @see https://developer.mozilla.org/Web/JavaScript/Reference/Global_Objects/Map/getOrInsert
      */
     // @ts-expect-error -- Ajouter une prothèse dans la classe Map.
-    // eslint-disable-next-line no-extend-native
+    // eslint-disable-next-line no-extend-native, unicorn/consistent-function-style
     Map.prototype.getOrInsertComputed = function getOrInsertComputed(
         key,
         callback,

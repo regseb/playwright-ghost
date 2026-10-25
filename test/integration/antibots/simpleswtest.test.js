@@ -39,7 +39,7 @@ describe("Anti-bot: Simple Service Workers Fingerprinting Leaks Test", () => {
                 });
                 await fs.writeFile(
                     "./log/simpleswtest-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();
@@ -76,7 +76,7 @@ describe("Anti-bot: Simple Service Workers Fingerprinting Leaks Test", () => {
                 });
                 await fs.writeFile(
                     "./log/simpleswtest-fx.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

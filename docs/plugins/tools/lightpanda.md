@@ -4,7 +4,12 @@
 >
 > You need to add
 > [`@lightpanda/browser`](https://www.npmjs.com/package/@lightpanda/browser)
-> package to your npm dependencies.
+> package to your npm dependencies and download Lightpanda browser.
+>
+> ```shell
+> npm install @lightpanda/browser
+> npx @lightpanda/browser install
+> ```
 
 Start an instance of [Lightpanda](https://lightpanda.io/) and connect to this
 browser.

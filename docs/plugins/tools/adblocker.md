@@ -5,6 +5,10 @@
 > You need to add
 > [`@ghostery/adblocker-playwright`](https://www.npmjs.com/package/@ghostery/adblocker-playwright)
 > package to your npm dependencies.
+>
+> ```shell
+> npm install @ghostery/adblocker-playwright
+> ```
 
 Add
 [Ghostery adblocker](https://github.com/ghostery/adblocker/tree/master/packages/adblocker-playwright#readme)

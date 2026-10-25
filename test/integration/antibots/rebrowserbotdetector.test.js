@@ -42,6 +42,7 @@ describe("Anti-bot: rebrowser-bot-detector", () => {
                         globalThis.dummyFn();
                     },
                     [],
+                    {},
                     false,
                 );
 
@@ -88,7 +89,7 @@ describe("Anti-bot: rebrowser-bot-detector", () => {
                 });
                 await fs.writeFile(
                     "./log/rebrowserbotdetector-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

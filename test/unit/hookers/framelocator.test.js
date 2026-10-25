@@ -28,8 +28,8 @@ describe("hookers/framelocator.js", () => {
 
         describe("constructor", () => {
             it("should add hooks in first", () => {
-                const frameLocator = new FrameLocatorHooker(new Map());
-                const first = frameLocator.first();
+                const frameLocatorHooker = new FrameLocatorHooker(new Map());
+                const first = frameLocatorHooker.first();
 
                 const pointers = Object.keys(first);
                 assert.deepEqual(pointers, [
@@ -46,8 +46,8 @@ describe("hookers/framelocator.js", () => {
             });
 
             it("should add hook in last", () => {
-                const frameLocator = new FrameLocatorHooker(new Map());
-                const last = frameLocator.last();
+                const frameLocatorHooker = new FrameLocatorHooker(new Map());
+                const last = frameLocatorHooker.last();
 
                 const pointers = Object.keys(last);
                 assert.deepEqual(pointers, [
@@ -61,6 +61,24 @@ describe("hookers/framelocator.js", () => {
                 for (const listener of listeners) {
                     assert.equal(typeof listener, "function");
                 }
+            });
+
+            it("should add listener in prepare", () => {
+                const listeners = new Map([
+                    [
+                        "FrameLocator",
+                        new Map([
+                            ["foo", { before: [], after: [() => "bar"] }],
+                        ]),
+                    ],
+                ]);
+                const vanilla = { foo: () => "baz" };
+
+                const frameLocatorHooker = new FrameLocatorHooker(listeners);
+                const hooked = frameLocatorHooker.prepare(vanilla);
+
+                assert.notEqual(hooked, vanilla);
+                assert.equal(hooked.foo(), "bar");
             });
         });
     });

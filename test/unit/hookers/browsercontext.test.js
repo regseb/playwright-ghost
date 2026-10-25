@@ -26,8 +26,10 @@ describe("hookers/browsercontext.js", () => {
 
         describe("constructor", () => {
             it("should add hooks in first", () => {
-                const browserContext = new BrowserContextHooker(new Map());
-                const first = browserContext.first();
+                const browserContextHooker = new BrowserContextHooker(
+                    new Map(),
+                );
+                const first = browserContextHooker.first();
 
                 const pointers = Object.keys(first);
                 assert.deepEqual(pointers, [
@@ -44,8 +46,10 @@ describe("hookers/browsercontext.js", () => {
             });
 
             it("should add hook in last", () => {
-                const browserContext = new BrowserContextHooker(new Map());
-                const last = browserContext.last();
+                const browserContextHooker = new BrowserContextHooker(
+                    new Map(),
+                );
+                const last = browserContextHooker.last();
 
                 const pointers = Object.keys(last);
                 assert.deepEqual(pointers, [
@@ -57,6 +61,26 @@ describe("hookers/browsercontext.js", () => {
                 for (const listener of listeners) {
                     assert.equal(typeof listener, "function");
                 }
+            });
+
+            it("should add listener in prepare", () => {
+                const listeners = new Map([
+                    [
+                        "BrowserContext",
+                        new Map([
+                            ["foo", { before: [], after: [() => "bar"] }],
+                        ]),
+                    ],
+                ]);
+                const vanilla = { foo: () => "baz" };
+
+                const browserContextHooker = new BrowserContextHooker(
+                    listeners,
+                );
+                const hooked = browserContextHooker.prepare(vanilla);
+
+                assert.notEqual(hooked, vanilla);
+                assert.equal(hooked.foo(), "bar");
             });
         });
     });

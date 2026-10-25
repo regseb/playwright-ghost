@@ -49,7 +49,7 @@ describe("Anti-bot: Anubis", () => {
                 });
                 await fs.writeFile(
                     "./log/anubis-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();
@@ -78,7 +78,7 @@ describe("Anti-bot: Anubis", () => {
                 });
                 await fs.writeFile(
                     "./log/anubis-fx.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

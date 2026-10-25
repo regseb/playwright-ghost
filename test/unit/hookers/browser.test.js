@@ -27,8 +27,8 @@ describe("hookers/browser.js", () => {
 
         describe("constructor", () => {
             it("should add hooks in first", () => {
-                const browser = new BrowserHooker(new Map());
-                const first = browser.first();
+                const browserHooker = new BrowserHooker(new Map());
+                const first = browserHooker.first();
 
                 const pointers = Object.keys(first);
                 assert.deepEqual(pointers, [
@@ -45,8 +45,8 @@ describe("hookers/browser.js", () => {
             });
 
             it("should add hook in last", () => {
-                const browser = new BrowserHooker(new Map());
-                const last = browser.last();
+                const browserHooker = new BrowserHooker(new Map());
+                const last = browserHooker.last();
 
                 const pointers = Object.keys(last);
                 assert.deepEqual(pointers, [
@@ -59,6 +59,24 @@ describe("hookers/browser.js", () => {
                 for (const listener of listeners) {
                     assert.equal(typeof listener, "function");
                 }
+            });
+
+            it("should add listener in prepare", () => {
+                const listeners = new Map([
+                    [
+                        "Browser",
+                        new Map([
+                            ["foo", { before: [], after: [() => "bar"] }],
+                        ]),
+                    ],
+                ]);
+                const vanilla = { foo: () => "baz" };
+
+                const browserHooker = new BrowserHooker(listeners);
+                const hooked = browserHooker.prepare(vanilla);
+
+                assert.notEqual(hooked, vanilla);
+                assert.equal(hooked.foo(), "bar");
             });
         });
     });

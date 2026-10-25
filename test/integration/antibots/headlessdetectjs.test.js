@@ -62,7 +62,7 @@ describe("Anti-bot: HeadlessDetectJS", () => {
                 });
                 await fs.writeFile(
                     "./log/headlessdetectjs-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();
@@ -107,7 +107,7 @@ describe("Anti-bot: HeadlessDetectJS", () => {
                 });
                 await fs.writeFile(
                     "./log/headlessdetectjs-fx.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

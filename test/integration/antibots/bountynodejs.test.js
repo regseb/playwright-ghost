@@ -34,7 +34,7 @@ describe("Anti-bot: bounty-nodejs", () => {
                 });
                 await fs.writeFile(
                     "./log/bountynodejs-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

@@ -46,6 +46,7 @@ describe("Anti-bot: Chromedriver Detector", () => {
                         asyncToken: await globalThis.getAsyncToken(),
                     }),
                     [],
+                    {},
                     false,
                 );
 
@@ -64,7 +65,7 @@ describe("Anti-bot: Chromedriver Detector", () => {
                 });
                 await fs.writeFile(
                     "./log/chromedriverdetector-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();
@@ -103,7 +104,7 @@ describe("Anti-bot: Chromedriver Detector", () => {
                 });
                 await fs.writeFile(
                     "./log/chromedriverdetector-fx.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

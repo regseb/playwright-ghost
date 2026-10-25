@@ -55,7 +55,7 @@ describe("Anti-bot: Fingerprint", () => {
                 });
                 await fs.writeFile(
                     "./log/fingerprint-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();
@@ -92,7 +92,7 @@ describe("Anti-bot: Fingerprint", () => {
                 });
                 await fs.writeFile(
                     "./log/fingerprint-fx.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

@@ -7,6 +7,7 @@
 
 /* @ts-self-types="../types/patchright.d.ts" */
 
+// eslint-disable-next-line importX/no-rename-default
 import patchright from "patchright";
 import Ghost from "./ghost.js";
 
@@ -112,10 +113,6 @@ export const request = patchright.request;
 export const _electron = patchright._electron;
 // eslint-disable-next-line no-underscore-dangle
 export const _android = patchright._android;
-const playwright = {
-    ...patchright,
-    chromium,
-    firefox,
-    webkit,
-};
+
+const playwright = { ...patchright, chromium, firefox, webkit };
 export default playwright;

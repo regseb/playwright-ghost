@@ -57,7 +57,7 @@ describe("Anti-bot: BrowserScan", () => {
                 });
                 await fs.writeFile(
                     "./log/browserscan-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();
@@ -95,7 +95,7 @@ describe("Anti-bot: BrowserScan", () => {
                 });
                 await fs.writeFile(
                     "./log/browserscan-fx.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

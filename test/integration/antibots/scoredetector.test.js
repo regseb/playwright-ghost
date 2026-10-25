@@ -41,7 +41,7 @@ describe("Anti-bot: Score detector (reCAPTCHA v3)", () => {
                 const results = await page
                     .locator('big:has-text("Your score is:")')
                     .textContent();
-                const score = Number.parseFloat(results.trim().slice(15));
+                const score = Number(results.trim().slice(15));
 
                 assert.ok(0.7 <= score, `0.7 <= ${score}`);
             } finally {
@@ -51,7 +51,7 @@ describe("Anti-bot: Score detector (reCAPTCHA v3)", () => {
                 });
                 await fs.writeFile(
                     "./log/scoredetector-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

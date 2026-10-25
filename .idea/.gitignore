@@ -5,6 +5,7 @@
 !/runConfigurations/
 !/.gitignore
 !/icon.svg
+!/jsonSchemas.xml
 !/modules.xml
 !/playwright-ghost.iml
 !/vcs.xml

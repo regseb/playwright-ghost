@@ -23,8 +23,13 @@ describe("Anti-bot: detectIncognito", () => {
             try {
                 await page.goto("https://detectincognito.com/");
 
-                const answer = await page.locator("#answer b").textContent();
-                assert.equal(answer, "No");
+                const answer = await page
+                    .locator("section", { hasText: "Am I in Incognito Mode?" })
+                    .locator("span.font-bold")
+                    .textContent();
+                // Ne fonctionne plus depuis la v1.8.0.
+                // https://github.com/Joe12387/detectIncognito/pull/66
+                assert.equal(answer, "No.");
             } finally {
                 await page.screenshot({
                     path: "./log/detectincognito-cr.png",
@@ -32,7 +37,7 @@ describe("Anti-bot: detectIncognito", () => {
                 });
                 await fs.writeFile(
                     "./log/detectincognito-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();
@@ -50,8 +55,11 @@ describe("Anti-bot: detectIncognito", () => {
             try {
                 await page.goto("https://detectincognito.com/");
 
-                const answer = await page.locator("#answer b").textContent();
-                assert.equal(answer, "No");
+                const answer = await page
+                    .locator("section", { hasText: "Am I in Incognito Mode?" })
+                    .locator("span.font-bold")
+                    .textContent();
+                assert.equal(answer, "No.");
             } finally {
                 await page.screenshot({
                     path: "./log/detectincognito-fx.png",
@@ -59,7 +67,7 @@ describe("Anti-bot: detectIncognito", () => {
                 });
                 await fs.writeFile(
                     "./log/detectincognito-fx.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

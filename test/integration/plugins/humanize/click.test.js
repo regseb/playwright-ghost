@@ -28,7 +28,7 @@ describe("Plugin: humanize.click", () => {
                     globalThis.events.push({ timeStamp: event.timeStamp });
                 });
             });
-            await page.locator("h1").click();
+            await page.locator('p[lang="en"]').click();
 
             const events = await page.evaluate(() => globalThis.events);
             assert.equal(events.length, 2);

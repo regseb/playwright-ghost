@@ -77,7 +77,7 @@ describe("Anti-bot: infosimples", () => {
                 });
                 await fs.writeFile(
                     "./log/infosimples-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();
@@ -140,7 +140,7 @@ describe("Anti-bot: infosimples", () => {
                 });
                 await fs.writeFile(
                     "./log/infosimples-fx.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

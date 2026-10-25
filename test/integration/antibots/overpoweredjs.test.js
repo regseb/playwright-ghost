@@ -45,7 +45,7 @@ describe("Anti-bot: OverpoweredJS Fingerprinting Demo", () => {
                 });
                 await fs.writeFile(
                     "./log/overpoweredjs-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();
@@ -79,7 +79,7 @@ describe("Anti-bot: OverpoweredJS Fingerprinting Demo", () => {
                 });
                 await fs.writeFile(
                     "./log/overpoweredjs-fx.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

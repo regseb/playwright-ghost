@@ -37,7 +37,7 @@ describe("Anti-bot: Disable-devtool", () => {
                 });
                 await fs.writeFile(
                     "./log/disabledevtool-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();
@@ -69,7 +69,7 @@ describe("Anti-bot: Disable-devtool", () => {
                 });
                 await fs.writeFile(
                     "./log/disabledevtool-fx.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

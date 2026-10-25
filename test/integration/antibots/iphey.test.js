@@ -9,12 +9,13 @@ import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { describe, it } from "node:test";
 import playwright from "../../../src/index.js";
+import patchright from "../../../src/patchright.js";
 import plugins from "../../../src/plugins/index.js";
 
 describe("Anti-bot: Check browser fingerprints (iphey)", () => {
     describe("chromium", () => {
         it("should be Trustworthy", async () => {
-            const browser = await playwright.chromium.launch({
+            const browser = await patchright.chromium.launch({
                 plugins: plugins.recommended(),
             });
             const context = await browser.newContext();
@@ -33,7 +34,10 @@ describe("Anti-bot: Check browser fingerprints (iphey)", () => {
                     path: "./log/iphey-cr.png",
                     fullPage: true,
                 });
-                await fs.writeFile("./log/iphey-cr.html", await page.content());
+                await fs.writeFile(
+                    "./log/iphey-cr.html",
+                    await page.content({ includeShadow: true }),
+                );
 
                 await context.close();
                 await browser.close();
@@ -62,7 +66,10 @@ describe("Anti-bot: Check browser fingerprints (iphey)", () => {
                     path: "./log/iphey-fx.png",
                     fullPage: true,
                 });
-                await fs.writeFile("./log/iphey-fx.html", await page.content());
+                await fs.writeFile(
+                    "./log/iphey-fx.html",
+                    await page.content({ includeShadow: true }),
+                );
 
                 await context.close();
                 await browser.close();

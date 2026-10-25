@@ -18,7 +18,8 @@ import process from "node:process";
  *                            programme.
  */
 export default async function which(programname) {
-    for (const directory of process.env.PATH?.split(path.delimiter) ?? []) {
+    const directories = process.env.PATH?.split(path.delimiter) ?? [];
+    for (const directory of directories) {
         const file = path.join(directory, programname);
         try {
             await fs.access(file, fs.constants.X_OK);

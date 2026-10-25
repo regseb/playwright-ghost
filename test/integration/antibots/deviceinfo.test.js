@@ -49,7 +49,7 @@ describe("Anti-bot: Device Info", () => {
                 });
                 await fs.writeFile(
                     "./log/deviceinfo-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

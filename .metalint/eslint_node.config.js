@@ -1,7 +1,6 @@
 /**
  * @license MIT
- * @see https://eslint.org/docs/latest/rules/
- * @see https://github.com/import-js/eslint-plugin-import#rules
+ * @see https://github.com/un-ts/eslint-plugin-import-x#rules
  * @see https://github.com/eslint-community/eslint-plugin-n#-rules
  * @see https://github.com/sindresorhus/eslint-plugin-unicorn#rules
  * @author Sébastien Règne
@@ -20,34 +19,9 @@ export default {
     plugins: { n },
 
     rules: {
-        // Suggestions.
-        "no-restricted-properties": [
-            "error",
-            {
-                object: "assert",
-                property: "deepStrictEqual",
-                message: "Use assert.deepEqual instead.",
-            },
-            {
-                object: "assert",
-                property: "notDeepStrictEqual",
-                message: "Use assert.notDeepEqual instead.",
-            },
-            {
-                object: "assert",
-                property: "notStrictEqual",
-                message: "Use assert.notEqual instead.",
-            },
-            {
-                object: "assert",
-                property: "strictEqual",
-                message: "Use assert.equal instead.",
-            },
-        ],
-
-        // Plugin eslint-plugin-import.
+        // Plugin eslint-plugin-import-x.
         // Module systems.
-        "import/no-nodejs-modules": "off",
+        "importX/no-nodejs-modules": "off",
 
         // Plugin eslint-plugin-n.
         // Possible Errors.
@@ -72,14 +46,10 @@ export default {
         "n/no-unsupported-features/node-builtins": [
             "error",
             {
-                // Ignorer les vérifications de test.mock.timers qui est en
-                // expérimental dans Node v22.
-                ignores: [
-                    "test.mock.property",
-                    "test.mock.timers",
-                    "test.mock.timers.tick",
-                    "test.mock.timers.enable",
-                ],
+                allowExperimental: true,
+                // Ignorer mock.property() qui n'existe pas dans Node.js 23,
+                // mais cette fonction est seulement utilisée dans les tests.
+                ignores: ["test.mock.property"],
             },
         ],
         "n/process-exit-as-throw": "error",
@@ -94,10 +64,8 @@ export default {
         "n/global-require": "off",
         "n/no-mixed-requires": "error",
         "n/no-process-env": "off",
-        // Interdire l'import "node:assert" (et préférer "node:assert/strict").
-        // https://github.com/eslint-community/eslint-plugin-n/issues/59
-        "n/no-restricted-import": ["error", ["node:assert"]],
-        "n/no-restricted-require": "error",
+        "n/no-restricted-import": "off",
+        "n/no-restricted-require": "off",
         "n/no-sync": "error",
         "n/no-top-level-await": "off",
         "n/prefer-global/buffer": ["error", "never"],
@@ -109,6 +77,7 @@ export default {
         "n/prefer-global/timers": "error",
         "n/prefer-global/url": "error",
         "n/prefer-global/url-search-params": "error",
+        "n/prefer-import/assert-strict": "error",
         "n/prefer-node-protocol": "error",
         "n/prefer-promises/dns": "error",
         "n/prefer-promises/fs": "error",

@@ -34,7 +34,7 @@ describe("plugins/index.js", () => {
     });
 
     describe("plugins.polyfill.recommended()", () => {
-        it("should support no options", () => {
+        it("should export recommended polyfill function", () => {
             const recommended = plugins.polyfill.recommended();
 
             assert.equal(recommended.length, 5);
@@ -44,45 +44,6 @@ describe("plugins/index.js", () => {
                     assert.equal(typeof listener, "function");
                 }
             }
-        });
-
-        it("should support empty options", () => {
-            const recommended = plugins.polyfill.recommended({});
-
-            assert.equal(recommended.length, 5);
-            for (const plugin of recommended) {
-                assert.equal(typeof plugin, "object");
-                for (const listener of Object.values(plugin)) {
-                    assert.equal(typeof listener, "function");
-                }
-            }
-        });
-
-        it("should support empty option", () => {
-            const recommended = plugins.polyfill.recommended({
-                screen: {},
-                viewport: {},
-            });
-
-            assert.equal(recommended.length, 5);
-            for (const plugin of recommended) {
-                assert.equal(typeof plugin, "object");
-                for (const listener of Object.values(plugin)) {
-                    assert.equal(typeof listener, "function");
-                }
-            }
-        });
-
-        it("should disable plugins", () => {
-            const recommended = plugins.polyfill.recommended({
-                automation: false,
-                headless: false,
-                screen: false,
-                viewport: false,
-                webdriver: false,
-            });
-
-            assert.deepEqual(recommended, [{}, {}, {}, {}, {}]);
         });
     });
 
@@ -97,7 +58,7 @@ describe("plugins/index.js", () => {
     });
 
     describe("plugins.humanize.recommended()", () => {
-        it("should support no options", () => {
+        it("should export recommended humanize function", () => {
             const recommended = plugins.humanize.recommended();
 
             assert.equal(recommended.length, 3);
@@ -107,44 +68,6 @@ describe("plugins/index.js", () => {
                     assert.equal(typeof listener, "function");
                 }
             }
-        });
-
-        it("should support empty options", () => {
-            const recommended = plugins.humanize.recommended({});
-
-            assert.equal(recommended.length, 3);
-            for (const plugin of recommended) {
-                assert.equal(typeof plugin, "object");
-                for (const listener of Object.values(plugin)) {
-                    assert.equal(typeof listener, "function");
-                }
-            }
-        });
-
-        it("should support empty option", () => {
-            const recommended = plugins.humanize.recommended({
-                click: {},
-                cursor: {},
-                dialog: {},
-            });
-
-            assert.equal(recommended.length, 3);
-            for (const plugin of recommended) {
-                assert.equal(typeof plugin, "object");
-                for (const listener of Object.values(plugin)) {
-                    assert.equal(typeof listener, "function");
-                }
-            }
-        });
-
-        it("should disable plugins", () => {
-            const recommended = plugins.humanize.recommended({
-                click: false,
-                cursor: false,
-                dialog: false,
-            });
-
-            assert.deepEqual(recommended, [{}, {}, {}]);
         });
     });
 
@@ -165,7 +88,7 @@ describe("plugins/index.js", () => {
     });
 
     describe("plugins.recommended()", () => {
-        it("should support no options", () => {
+        it("should export recommended function", () => {
             const recommended = plugins.recommended();
 
             assert.equal(recommended.length, 8);
@@ -175,42 +98,6 @@ describe("plugins/index.js", () => {
                     assert.equal(typeof listener, "function");
                 }
             }
-        });
-
-        it("should support empty options", () => {
-            const recommended = plugins.recommended({});
-
-            assert.equal(recommended.length, 8);
-            for (const plugin of recommended) {
-                assert.equal(typeof plugin, "object");
-                for (const listener of Object.values(plugin)) {
-                    assert.equal(typeof listener, "function");
-                }
-            }
-        });
-
-        it("should support empty option", () => {
-            const recommended = plugins.recommended({
-                polyfill: {},
-                humanize: {},
-            });
-
-            assert.equal(recommended.length, 8);
-            for (const plugin of recommended) {
-                assert.equal(typeof plugin, "object");
-                for (const listener of Object.values(plugin)) {
-                    assert.equal(typeof listener, "function");
-                }
-            }
-        });
-
-        it("should disable plugins", () => {
-            const recommended = plugins.recommended({
-                polyfill: false,
-                humanize: false,
-            });
-
-            assert.deepEqual(recommended, []);
         });
     });
 });

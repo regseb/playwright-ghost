@@ -8,7 +8,7 @@ import { describe, it } from "node:test";
 import playwright from "../../../../src/index.js";
 
 /**
- * @import { BrowserType } from "playwright-core"
+ * @import { BrowserType, Page } from "playwright-core"
  * @import { ContextBefore } from "../../../../src/hook.js"
  */
 
@@ -68,9 +68,16 @@ const rickrollPlugin = (options) => {
             return [args[0], disableVolumeAdjustSound(args[1], browserType)];
         },
 
-        "Page:new": (page) => {
+        /**
+         * Ajoute un script qui insert un `iframe` dans chaque page créée.
+         *
+         * @param {Page} page La page nouvellement créée.
+         * @returns {Promise<Page>} Une promesse contenant la page avec le
+         *                          script.
+         */
+        "Page:new": async (page) => {
             // eslint-disable-next-line no-shadow
-            page.addInitScript((video) => {
+            await page.addInitScript((video) => {
                 // Execute script only in main frame.
                 // eslint-disable-next-line no-undef, unicorn/prefer-global-this
                 if (window !== top) {

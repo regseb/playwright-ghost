@@ -39,44 +39,14 @@ describe("Anti-bot: Fingerprint-Scan", () => {
             try {
                 await page.goto("https://fingerprint-scan.com/");
 
-                // Ne pas vérifier le fingerprintScore, car l'API
-                // https://fingerprint-scan.com/api/score retourne une erreur
-                // 400.
-                const webDriver = await page
-                    .locator("tr:has(.property-name)", {
-                        has: page.getByText("WebDriver"),
-                    })
-                    .locator(".property-value")
-                    .first()
-                    .textContent();
-                assert.equal(webDriver, "false", "WebDriver");
+                await page
+                    .getByText("Fingerprint collected successfully")
+                    .waitFor();
 
-                const isSeleniumChrome = await page
-                    .locator("tr:has(.property-name)", {
-                        has: page.getByText("Is Selenium Chrome"),
-                    })
-                    .locator(".property-value")
-                    .first()
-                    .textContent();
-                assert.equal(isSeleniumChrome, "false", "Is Selenium Chrome");
-
-                const cdpCheck = await page
-                    .locator("tr:has(.property-name)", {
-                        has: page.getByText("CDP Check"),
-                    })
-                    .locator(".property-value")
-                    .first()
-                    .textContent();
-                assert.equal(cdpCheck, "false", "CDP Check");
-
-                const isPlaywright = await page
-                    .locator("tr:has(.property-name)", {
-                        has: page.getByText("Is Playwright"),
-                    })
-                    .locator(".property-value")
-                    .first()
-                    .textContent();
-                assert.equal(isPlaywright, "false", "Is Playwright");
+                const result = await page.getByText("Bot score ").textContent();
+                const score = Number(result.slice(10, result.indexOf("/")));
+                // Comparer avec la valeur obtenue sur un navigateur normal.
+                assert.ok(26 >= score, `26 >= ${score}`);
             } finally {
                 await page.screenshot({
                     path: "./log/fingerprintscan-cr.png",
@@ -84,7 +54,7 @@ describe("Anti-bot: Fingerprint-Scan", () => {
                 });
                 await fs.writeFile(
                     "./log/fingerprintscan-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

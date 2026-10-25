@@ -35,7 +35,7 @@ describe("Anti-bot: Brotector", () => {
                 });
                 await fs.writeFile(
                     "./log/brotector-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();
@@ -67,7 +67,7 @@ describe("Anti-bot: Brotector", () => {
                 });
                 await fs.writeFile(
                     "./log/brotector-fx.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

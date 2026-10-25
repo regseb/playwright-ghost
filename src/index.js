@@ -7,6 +7,7 @@
 /* @ts-self-types="../types/index.d.ts" */
 
 // Utiliser `pw` afin de garder le nom `playwright` pour l'export par défaut.
+// eslint-disable-next-line importX/no-rename-default
 import pw from "playwright";
 import Ghost from "./ghost.js";
 
@@ -112,10 +113,6 @@ export const request = pw.request;
 export const _electron = pw._electron;
 // eslint-disable-next-line no-underscore-dangle
 export const _android = pw._android;
-const playwright = {
-    ...pw,
-    chromium,
-    firefox,
-    webkit,
-};
+
+const playwright = { ...pw, chromium, firefox, webkit };
 export default playwright;

@@ -69,7 +69,7 @@ describe("Anti-bot: Chrome Headless Detection (Intoli)", () => {
                 });
                 await fs.writeFile(
                     "./log/intoli-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();
@@ -126,7 +126,7 @@ describe("Anti-bot: Chrome Headless Detection (Intoli)", () => {
                 });
                 await fs.writeFile(
                     "./log/intoli-fx.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

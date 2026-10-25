@@ -15,14 +15,16 @@ describe("ghost.js", () => {
                 // @ts-expect-error -- Seule la méthode `connect` est testée.
                 const browserType = new Ghost({ connect });
 
-                const browser = await browserType.connect("ws://localhost/");
+                const browser = await browserType.connect("ws://localhost/", {
+                    slowMo: true,
+                });
 
                 assert.equal(browser.foo, "bar");
 
                 assert.equal(connect.mock.callCount(), 1);
                 assert.deepEqual(connect.mock.calls[0].arguments, [
                     "ws://localhost/",
-                    undefined,
+                    { slowMo: true },
                 ]);
             });
         });
@@ -32,18 +34,21 @@ describe("ghost.js", () => {
                 const connectOverCDP = mock.fn(() =>
                     Promise.resolve({ foo: "bar" }),
                 );
-                // @ts-expect-error -- Seule la méthode `connect` est testée.
+                // @ts-expect-error -- Seule la méthode `connectOverCDP` est
+                //                     testée.
                 const browserType = new Ghost({ connectOverCDP });
 
-                const browser =
-                    await browserType.connectOverCDP("ws://localhost/");
+                const browser = await browserType.connectOverCDP(
+                    "ws://localhost/",
+                    { timeout: 42 },
+                );
 
                 assert.equal(browser.foo, "bar");
 
                 assert.equal(connectOverCDP.mock.callCount(), 1);
                 assert.deepEqual(connectOverCDP.mock.calls[0].arguments, [
                     "ws://localhost/",
-                    undefined,
+                    { timeout: 42 },
                 ]);
             });
         });
@@ -69,12 +74,14 @@ describe("ghost.js", () => {
                 // @ts-expect-error -- Seule la méthode `launch` est testée.
                 const browserType = new Ghost({ launch });
 
-                const browser = await browserType.launch();
+                const browser = await browserType.launch({ slowMo: 42 });
 
                 assert.equal(browser.foo, "bar");
 
                 assert.equal(launch.mock.callCount(), 1);
-                assert.deepEqual(launch.mock.calls[0].arguments, [undefined]);
+                assert.deepEqual(launch.mock.calls[0].arguments, [
+                    { slowMo: 42 },
+                ]);
             });
         });
 
@@ -90,16 +97,40 @@ describe("ghost.js", () => {
                 //                     `launchPersistentContext` est testée.
                 const browserType = new Ghost({ launchPersistentContext });
 
-                const browser =
-                    await browserType.launchPersistentContext("/tmp/userdir/");
+                const browser = await browserType.launchPersistentContext(
+                    "/tmp/userdir/",
+                    { acceptDownloads: true },
+                );
 
                 assert.equal(browser.foo, "bar");
 
                 assert.equal(launchPersistentContext.mock.callCount(), 1);
                 assert.deepEqual(
                     launchPersistentContext.mock.calls[0].arguments,
-                    ["/tmp/userdir/", undefined],
+                    ["/tmp/userdir/", { acceptDownloads: true }],
                 );
+            });
+        });
+
+        describe("launchServer()", () => {
+            it("should return server", async () => {
+                const launchServer = mock.fn(() =>
+                    Promise.resolve({ foo: "bar" }),
+                );
+                // @ts-expect-error -- Seule la méthode `launchServer` est
+                //                     testée.
+                const browserType = new Ghost({ launchServer });
+
+                const server = await browserType.launchServer({
+                    channel: "chrome",
+                });
+
+                assert.equal(server.foo, "bar");
+
+                assert.equal(launchServer.mock.callCount(), 1);
+                assert.deepEqual(launchServer.mock.calls[0].arguments, [
+                    { channel: "chrome" },
+                ]);
             });
         });
 

@@ -155,72 +155,72 @@
     "lint": "metalint",
     "lint:fix": "metalint --fix",
     "lint:types": "tsc --project .tsconfig_lint.json",
+    "lint:npm": "npm pack --dry-run --quiet",
+    "lint:jsr": "npx jsr publish --dry-run",
     "test": "npm run test:coverage",
     "test:unit": "npm run test:unit:node",
-    "test:unit:node": "node --test 'test/unit/**/*.test.js'",
-    "test:unit:bun": "bun test --preload ./test/polyfills/bun.js test/unit/",
-    "test:unit:deno": "deno test --no-check --allow-read --allow-net --allow-env --allow-sys --import ./test/polyfills/deno.js test/unit/",
+    "test:unit:node": "node --test \"test/unit/**/*.test.js\"",
+    "test:unit:bun": "bun test test/unit/",
+    "test:unit:deno": "deno test --allow-all --no-check test/unit/",
     "test:integration": "npm run test:integration:node",
-    "test:integration:node": "node --test --test-concurrency 1 'test/integration/**/*.test.js'",
+    "test:integration:node": "node --test --test-concurrency 1 \"test/integration/**/*.test.js\"",
     "test:integration:bun": "bun test --timeout 60000 --max-concurrency 1 --preload ./test/polyfills/bun.js test/integration/",
-    "test:integration:deno": "deno test --no-check --allow-read --allow-net --allow-env --allow-sys test/integration/",
+    "test:integration:deno": "deno test --allow-all --no-check test/integration/",
     "test:coverage": "stryker run",
     "jsdocs": "typedoc --tsconfig .tsconfig_jsdocs.json",
     "clean": "node .script/clean.js"
   },
   "dependencies": {
     "ghost-cursor": "1.4.2",
-    "playwright-core": "1.61.1"
+    "playwright-core": "1.64.1"
   },
   "devDependencies": {
-    "@biomejs/js-api": "4.0.0",
-    "@biomejs/wasm-nodejs": "2.4.16",
-    "@eslint-community/eslint-plugin-eslint-comments": "4.7.2",
-    "@ghostery/adblocker-playwright": "2.18.0",
-    "@lightpanda/browser": "1.2.0",
+    "@biomejs/js-api": "6.0.0",
+    "@biomejs/wasm-nodejs": "2.5.15",
+    "@eslint-community/eslint-plugin-eslint-comments": "4.8.1",
+    "@ghostery/adblocker-playwright": "2.20.1",
+    "@lightpanda/browser": "1.6.0",
     "@prantlf/jsonlint": "17.0.1",
     "@prettier/plugin-xml": "3.4.2",
-    "@secretlint/secretlint-rule-github": "13.0.2",
-    "@secretlint/secretlint-rule-npm": "13.0.2",
-    "@std/testing": "npm:@jsr/std__testing@1.0.19",
-    "@stryker-mutator/core": "9.6.1",
-    "@stryker-mutator/tap-runner": "9.6.1",
-    "@types/bun": "1.3.14",
-    "@types/eslint-plugin-security": "3.0.1",
-    "@types/node": "25.9.2",
-    "@types/ws": "8.18.1",
-    "camoufox-js": "0.11.0",
-    "eslint": "9.39.3",
+    "@secretlint/secretlint-rule-github": "13.0.7",
+    "@secretlint/secretlint-rule-npm": "13.0.7",
+    "@stryker-mutator/core": "10.0.0",
+    "@stryker-mutator/tap-runner": "10.0.0",
+    "@types/node": "26.6.5",
+    "@typescript-eslint/utils": "8.71.2",
+    "camoufox": "0.5.8",
+    "eslint": "10.13.0",
     "eslint-plugin-array-func": "5.1.1",
-    "eslint-plugin-import": "2.32.0",
-    "eslint-plugin-jsdoc": "63.0.2",
-    "eslint-plugin-n": "18.1.0",
+    "eslint-plugin-import-x": "4.17.1",
+    "eslint-plugin-jsdoc": "65.3.11",
+    "eslint-plugin-n": "18.5.0",
     "eslint-plugin-no-unsanitized": "4.1.5",
+    "eslint-plugin-playwright": "2.12.1",
     "eslint-plugin-promise": "7.3.0",
-    "eslint-plugin-regexp": "3.1.0",
-    "eslint-plugin-security": "4.0.0",
-    "eslint-plugin-unicorn": "65.0.1",
-    "fingerprint-generator": "2.1.82",
-    "fingerprint-injector": "2.1.82",
-    "globals": "17.6.0",
+    "eslint-plugin-regexp": "3.3.1",
+    "eslint-plugin-security": "4.2.0",
+    "eslint-plugin-unicorn": "78.0.0",
+    "fingerprint-generator": "2.1.89",
+    "fingerprint-injector": "2.1.89",
+    "globals": "17.13.0",
     "jsr": "0.14.3",
-    "markdownlint": "0.40.0",
-    "metalint": "0.21.2",
-    "npm-package-json-lint": "10.4.0",
-    "patchright": "1.60.2",
-    "playwright": "1.60.0",
-    "prettier": "3.8.4",
-    "publint": "0.3.21",
-    "puppeteer": "25.1.0",
-    "secretlint": "13.0.2",
-    "typedoc": "0.28.19",
+    "markdownlint": "0.42.0",
+    "metalint": "0.22.1",
+    "npm-package-json-lint": "11.0.0",
+    "patchright": "1.64.1",
+    "playwright": "1.64.1",
+    "prettier": "3.9.10",
+    "publint": "0.3.25",
+    "puppeteer": "25.14.0",
+    "secretlint": "13.0.7",
+    "typedoc": "0.28.20",
     "typescript": "6.0.3",
     "yaml-lint": "1.7.0"
   },
   "peerDependencies": {
     "@ghostery/adblocker-playwright": ">=2.14.1",
     "@lightpanda/browser": ">=1.2.0",
-    "camoufox-js": ">=0.9.3",
+    "camoufox": ">=0.5.8",
     "fingerprint-generator": ">=2.1.81",
     "fingerprint-injector": ">=2.1.81",
     "patchright": ">=1.58.0",
@@ -233,7 +233,7 @@
     "@lightpanda/browser": {
       "optional": true
     },
-    "camoufox-js": {
+    "camoufox": {
       "optional": true
     },
     "fingerprint-generator": {
@@ -249,13 +249,17 @@
       "optional": true
     }
   },
+  "overrides": {
+    "camoufox": {
+      "playwright-core": "1.64.1"
+    }
+  },
   "engines": {
     "node": ">=22.20.0"
   },
   "allowScripts": {
-    "@lightpanda/browser@1.2.0": true,
-    "better-sqlite3@12.10.0": true,
-    "impit@0.13.1": true,
-    "puppeteer@25.1.0": false
+    "better-sqlite3@13.0.3": true,
+    "puppeteer@25.14.0": false,
+    "unrs-resolver@1.12.2": true
   }
 }

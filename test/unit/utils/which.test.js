@@ -17,7 +17,10 @@ import which from "../../../src/utils/which.js";
  * @returns {string} Le `PATH` au format de la machine (Windows ou POSIX).
  */
 const localize = (PATH) => {
-    return PATH.replaceAll(":", path.delimiter).replaceAll("/", path.sep);
+    return PATH.replaceAll(":", () => path.delimiter).replaceAll(
+        "/",
+        () => path.sep,
+    );
 };
 
 describe("utils/which.js", () => {

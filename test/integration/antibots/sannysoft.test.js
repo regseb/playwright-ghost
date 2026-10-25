@@ -73,7 +73,7 @@ describe("Anti-bot: Antibot (Sannysoft)", () => {
                 });
                 await fs.writeFile(
                     "./log/sannysoft-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();
@@ -133,7 +133,7 @@ describe("Anti-bot: Antibot (Sannysoft)", () => {
                 });
                 await fs.writeFile(
                     "./log/sannysoft-fx.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

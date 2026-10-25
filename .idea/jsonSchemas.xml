@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project version="4">
+  <component name="JsonSchemaMappingsProjectConfiguration">
+    <state>
+      <map>
+        <entry key="dependabot-v2.json">
+          <value>
+            <SchemaInfo>
+              <option name="name" value="dependabot-v2.json" />
+              <option
+                name="relativePathToSchema"
+                value="https://www.schemastore.org/dependabot-2.0.json"
+              />
+              <option name="applicationDefined" value="true" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="path" value=".github/dependabot.yml" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
+        <entry key="GitHub Funding">
+          <value>
+            <SchemaInfo>
+              <option name="name" value="GitHub Funding" />
+              <option
+                name="relativePathToSchema"
+                value="https://www.schemastore.org/github-funding.json"
+              />
+              <option name="applicationDefined" value="true" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="path" value=".github/FUNDING.yml" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
+        <entry key="GitHub Issue Template configuration">
+          <value>
+            <SchemaInfo>
+              <option name="name" value="GitHub Issue Template configuration" />
+              <option
+                name="relativePathToSchema"
+                value="https://www.schemastore.org/github-issue-config.json"
+              />
+              <option name="applicationDefined" value="true" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option
+                      name="path"
+                      value=".github/ISSUE_TEMPLATE/config.yml"
+                    />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
+        <entry key="JSR configuration file">
+          <value>
+            <SchemaInfo>
+              <option name="name" value="JSR configuration file" />
+              <option
+                name="relativePathToSchema"
+                value="https://jsr.io/schema/config-file.v1.json"
+              />
+              <option name="applicationDefined" value="true" />
+              <option name="patterns">
+                <list>
+                  <Item><option name="path" value="jsr.json" /></Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
+        <entry key="NPM package.json files">
+          <value>
+            <SchemaInfo>
+              <option name="name" value="NPM package.json files" />
+              <option
+                name="relativePathToSchema"
+                value="https://www.schemastore.org/package.json"
+              />
+              <option name="applicationDefined" value="true" />
+              <option name="patterns">
+                <list>
+                  <Item><option name="path" value="package.json" /></Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
+        <entry key="release-please manifest config schema">
+          <value>
+            <SchemaInfo>
+              <option
+                name="name"
+                value="release-please manifest config schema"
+              />
+              <option
+                name="relativePathToSchema"
+                value="https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"
+              />
+              <option name="applicationDefined" value="true" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="path" value=".release-please/config.json" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
+        <entry key="release-please manifest config versions">
+          <value>
+            <SchemaInfo>
+              <option
+                name="name"
+                value="release-please manifest config versions"
+              />
+              <option
+                name="relativePathToSchema"
+                value="https://raw.githubusercontent.com/googleapis/release-please/main/schemas/manifest.json"
+              />
+              <option name="applicationDefined" value="true" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="path" value=".release-please/manifest.json" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
+        <entry key="TypeScript compiler's configuration file">
+          <value>
+            <SchemaInfo>
+              <option
+                name="name"
+                value="TypeScript compiler's configuration file"
+              />
+              <option
+                name="relativePathToSchema"
+                value="https://www.schemastore.org/tsconfig.json"
+              />
+              <option name="applicationDefined" value="true" />
+              <option name="patterns">
+                <list>
+                  <Item><option name="path" value=".tsconfig.json" /></Item>
+                  <Item>
+                    <option name="path" value=".tsconfig_jsdocs.json" />
+                  </Item>
+                  <Item>
+                    <option name="path" value=".tsconfig_lint.json" />
+                  </Item>
+                  <Item>
+                    <option name="path" value=".tsconfig_types.json" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
+      </map>
+    </state>
+  </component>
+</project>

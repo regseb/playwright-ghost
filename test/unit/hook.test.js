@@ -65,7 +65,7 @@ describe("hook.js", () => {
             assert.deepEqual(args[0], ["three"]);
             assert.equal(args[1].obj, hooked);
             assert.equal(args[1].prop, "baz");
-            assert.equal(typeof args[1].id, "string");
+            assert.match(args[1].id, /^\d+$/v);
         });
 
         it("should support listener after function", async () => {
@@ -88,7 +88,7 @@ describe("hook.js", () => {
             assert.equal(args[1].obj, hooked);
             assert.equal(args[1].prop, "baz");
             assert.deepEqual(args[1].args, ["three"]);
-            assert.equal(typeof args[1].id, "string");
+            assert.match(args[1].id, /^\d+$/v);
         });
 
         it("should support listener before async function", async () => {
@@ -110,7 +110,7 @@ describe("hook.js", () => {
             assert.deepEqual(args[0], ["five", "six"]);
             assert.equal(args[1].obj, hooked);
             assert.equal(args[1].prop, "quux");
-            assert.equal(typeof args[1].id, "string");
+            assert.match(args[1].id, /^\d+$/v);
         });
 
         it("should support listener async before function", async () => {
@@ -132,7 +132,7 @@ describe("hook.js", () => {
             assert.deepEqual(args[0], ["five", "six"]);
             assert.equal(args[1].obj, hooked);
             assert.equal(args[1].prop, "quux");
-            assert.equal(typeof args[1].id, "string");
+            assert.match(args[1].id, /^\d+$/v);
         });
 
         it("should support listener after async function", async () => {
@@ -155,7 +155,7 @@ describe("hook.js", () => {
             assert.equal(args[1].obj, hooked);
             assert.equal(args[1].prop, "quux");
             assert.deepEqual(args[1].args, ["four", "five"]);
-            assert.equal(typeof args[1].id, "string");
+            assert.match(args[1].id, /^\d+$/v);
         });
 
         it("should support listener async after function", async () => {
@@ -178,7 +178,7 @@ describe("hook.js", () => {
             assert.equal(args[1].obj, hooked);
             assert.equal(args[1].prop, "quux");
             assert.deepEqual(args[1].args, ["four", "five"]);
-            assert.equal(typeof args[1].id, "string");
+            assert.match(args[1].id, /^\d+$/v);
         });
 
         it("should support listener before getter", async () => {
@@ -200,7 +200,7 @@ describe("hook.js", () => {
             assert.equal(args[0], undefined);
             assert.equal(args[1].obj, hooked);
             assert.equal(args[1].prop, "bar");
-            assert.equal(typeof args[1].id, "string");
+            assert.match(args[1].id, /^\d+$/v);
         });
 
         it("should support listener after getter", async () => {
@@ -223,7 +223,24 @@ describe("hook.js", () => {
             assert.equal(args[1].obj, hooked);
             assert.equal(args[1].prop, "bar");
             assert.equal(args[1].args, undefined);
-            assert.equal(typeof args[1].id, "string");
+            assert.match(args[1].id, /^\d+$/v);
+        });
+
+        it("should same id in before and after", () => {
+            const beforeListener = mock.fn((a) => a);
+            const afterListener = mock.fn((r) => r);
+            const listeners = new Map([
+                ["baz", { before: [beforeListener], after: [afterListener] }],
+            ]);
+            const foo = new Foo("one");
+
+            const hooked = hook(foo, listeners);
+
+            assert.equal(hooked.baz("two"), "one_TWO");
+
+            const beforeId = beforeListener.mock.calls[0].arguments[1].id;
+            const afterId = afterListener.mock.calls[0].arguments[1].id;
+            assert.equal(afterId, beforeId);
         });
     });
 });

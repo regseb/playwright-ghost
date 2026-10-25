@@ -38,7 +38,7 @@ export default class Hooker {
      * @returns {Record<string, Function>} Crochets qui appellent les écouteurs.
      */
     static presets(hooks) {
-        return Object.fromEntries(hooks.map((h) => [h, Hooker.modify]));
+        return Object.fromEntries(hooks.map((h) => [h, this.modify]));
     }
 
     /**

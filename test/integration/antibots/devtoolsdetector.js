@@ -36,7 +36,7 @@ describe("Anti-bot: devtools-detector", () => {
                 });
                 await fs.writeFile(
                     "./log/devtoolsdetector-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();
@@ -68,7 +68,7 @@ describe("Anti-bot: devtools-detector", () => {
                 });
                 await fs.writeFile(
                     "./log/devtoolsdetector-fx.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

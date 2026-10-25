@@ -50,7 +50,7 @@ const moveToPosition = async (to, mouse) => {
         }))
         // Enlever les positions en double (pour ne pas émettre deux évènements
         // avec la même position). Cela peut arriver avec des petits
-        // déplacements et valeurs arrondies.
+        // déplacements et les valeurs arrondies.
         .filter(
             (point, index, path) =>
                 path.findIndex((p) => point.x === p.x && point.y === p.y) ===
@@ -63,11 +63,13 @@ const moveToPosition = async (to, mouse) => {
             y: point.y,
             delay:
                 0 === index ? 0 : point.timestamp - path[index - 1].timestamp,
-        }));
+        }))
+        // Enlever le premier et le dernier élément du chemin qui sont la
+        // position actuelle et la position finale du curseur.
+        .slice(1, -1);
 
-    // Déplacer le curseur. Enlever le premier et le dernier élément du chemin
-    // qui sont la position actuelle et la position finale du curseur.
-    for (const step of steps.slice(1, -1)) {
+    // Déplacer le curseur.
+    for (const step of steps) {
         // Forcer le nombre d'étapes à 1 pour utiliser la méthode native de
         // déplacement.
         await mouse.move(step.x, step.y, { steps: 1 });

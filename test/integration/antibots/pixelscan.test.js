@@ -53,7 +53,7 @@ describe("Anti-bot: Pixelscan", () => {
                 });
                 await fs.writeFile(
                     "./log/pixelscan-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();
@@ -89,7 +89,7 @@ describe("Anti-bot: Pixelscan", () => {
                 });
                 await fs.writeFile(
                     "./log/pixelscan-fx.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

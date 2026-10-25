@@ -33,7 +33,7 @@ describe("Anti-bot: CSSWAF", () => {
                 });
                 await fs.writeFile(
                     "./log/csswaf-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();
@@ -58,12 +58,12 @@ describe("Anti-bot: CSSWAF", () => {
                 assert.equal(title, "Hello, world!");
             } finally {
                 await page.screenshot({
-                    path: "./log/csswaf-cr.png",
+                    path: "./log/csswaf-fx.png",
                     fullPage: true,
                 });
                 await fs.writeFile(
-                    "./log/csswaf-cr.html",
-                    await page.content(),
+                    "./log/csswaf-fx.html",
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

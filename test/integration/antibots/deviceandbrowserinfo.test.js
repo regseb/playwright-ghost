@@ -52,7 +52,7 @@ describe("Anti-bot: Device and browser info", () => {
                 });
                 await fs.writeFile(
                     "./log/deviceandbrowserinfo-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();
@@ -86,7 +86,7 @@ describe("Anti-bot: Device and browser info", () => {
                 });
                 await fs.writeFile(
                     "./log/deviceandbrowserinfo-fx.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

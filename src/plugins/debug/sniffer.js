@@ -84,61 +84,43 @@ const initScript = async (uuid) => {
                         });
                         return descriptor.value;
                     },
-                    ...(descriptor.writable
-                        ? {
-                              set(value) {
-                                  disabled.runIfEnabled(() => {
-                                      objectDefineProperty(
-                                          obj,
-                                          prop,
-                                          descriptor,
-                                      );
-                                      send(path);
-                                  });
-                                  // eslint-disable-next-line no-param-reassign
-                                  descriptor.value = value;
-                              },
-                          }
-                        : {}),
+                    ...(descriptor.writable && {
+                        set(value) {
+                            disabled.runIfEnabled(() => {
+                                objectDefineProperty(obj, prop, descriptor);
+                                send(path);
+                            });
+                            // eslint-disable-next-line no-param-reassign
+                            descriptor.value = value;
+                        },
+                    }),
                     enumerable: descriptor.enumerable,
                     configurable: descriptor.configurable,
                 });
             } else if (descriptor?.get) {
                 objectDefineProperty(obj, prop, {
-                    ...(descriptor.get
-                        ? {
-                              get() {
-                                  disabled.runIfEnabled(() => {
-                                      objectDefineProperty(
-                                          obj,
-                                          prop,
-                                          descriptor,
-                                      );
-                                      send(path);
-                                  });
-                                  return disabled.runInDisabled(() =>
-                                      descriptor.get.call(this),
-                                  );
-                              },
-                          }
-                        : {}),
-                    ...(descriptor.set
-                        ? {
-                              set(value) {
-                                  disabled.runIfEnabled(() => {
-                                      objectDefineProperty(
-                                          obj,
-                                          prop,
-                                          descriptor,
-                                      );
-                                      send(path);
-                                  });
-                                  disabled.runInDisabled(() =>
-                                      descriptor.set.call(this, value),
-                                  );
-                              },
-                          }
-                        : {}),
+                    ...(descriptor.get && {
+                        get() {
+                            disabled.runIfEnabled(() => {
+                                objectDefineProperty(obj, prop, descriptor);
+                                send(path);
+                            });
+                            return disabled.runInDisabled(() =>
+                                descriptor.get.call(this),
+                            );
+                        },
+                    }),
+                    ...(descriptor.set && {
+                        set(value) {
+                            disabled.runIfEnabled(() => {
+                                objectDefineProperty(obj, prop, descriptor);
+                                send(path);
+                            });
+                            disabled.runInDisabled(() =>
+                                descriptor.set.call(this, value),
+                            );
+                        },
+                    }),
                     enumerable: descriptor.enumerable,
                     configurable: descriptor.configurable,
                 });
@@ -158,9 +140,10 @@ const initScript = async (uuid) => {
         }
         handledAdd(obj);
 
-        for (const [prop, descriptor] of objectEntries(
+        const propDescriptors = objectEntries(
             objectGetOwnPropertyDescriptors(obj),
-        )) {
+        );
+        for (const [prop, descriptor] of propDescriptors) {
             observe(obj, prop, descriptor, `${pathParent}${prop}`);
         }
     };
@@ -240,7 +223,7 @@ export default function debugSnifferPlugin() {
                  */
                 get: () => {
                     return Object.fromEntries(
-                        Array.from(map.entries(), ([key, value]) => [
+                        Array.from(map, ([key, value]) => [
                             key,
                             Array.from(value).toSorted((a, b) =>
                                 a.toLowerCase().localeCompare(b.toLowerCase()),

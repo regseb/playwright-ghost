@@ -16,8 +16,8 @@ export default function rickrollPlugin() {
       ];
     },
 
-    "BrowserContext.newPage:after": (page) => {
-      page.addInitScript(() => {
+    "BrowserContext.newPage:after": async (page) => {
+      await page.addInitScript(() => {
         // Execute script only in main frame.
         if (window !== top) {
           return;
@@ -93,8 +93,8 @@ export default function rickrollPlugin() {
   return {
     /// ...
 
-    "Page:new": (page) => {
-      page.addInitScript(() => {
+    "Page:new": async (page) => {
+      await page.addInitScript(() => {
         // Execute script only in main frame.
         if (window !== top) {
           return;
@@ -207,8 +207,8 @@ export default function rickrollPlugin(options) {
   return {
     /// ...
 
-    "Page:new": (page) => {
-      page.addInitScript((video) => {
+    "Page:new": async (page) => {
+      await page.addInitScript((video) => {
         // Execute script only in main frame.
         if (window !== top) {
           return;
@@ -255,8 +255,8 @@ export default function rickrollPlugin(options) {
       return [args[0], disableVolumeAdjustSound(args[1], browserType)];
     },
 
-    "Page:new": (page) => {
-      page.addInitScript((video) => {
+    "Page:new": async (page) => {
+      await page.addInitScript((video) => {
         // Execute script only in main frame.
         if (window !== top) {
           return;

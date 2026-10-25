@@ -9,7 +9,6 @@
 import Hooker from "./hooker.js";
 
 /**
- * @import { BrowserServer } from "playwright-core";
  * @import { Listener } from "../hook.js"
  * @import { Pointers } from "./hooker.js"
  */

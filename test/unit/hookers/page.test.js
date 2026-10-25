@@ -148,6 +148,24 @@ describe("hookers/page.js", () => {
                 );
                 assert.equal(symbols.length, 0);
             });
+
+            it("should add listener in prepare", () => {
+                const listeners = new Map([
+                    [
+                        "Page",
+                        new Map([
+                            ["foo", { before: [], after: [() => "bar"] }],
+                        ]),
+                    ],
+                ]);
+                const vanilla = { foo: () => "baz" };
+
+                const pageHooker = new PageHooker(listeners);
+                const hooked = pageHooker.prepare(vanilla);
+
+                assert.notEqual(hooked, vanilla);
+                assert.equal(hooked.foo(), "bar");
+            });
         });
     });
 });

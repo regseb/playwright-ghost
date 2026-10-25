@@ -35,10 +35,11 @@ Playwright.
 
 [`playwright-ghost`](https://www.npmjs.com/package/playwright-ghost) doesn't
 provide [`playwright`](https://www.npmjs.com/package/playwright), so you need to
-add it to your dependencies.
+add it to your dependencies (and download browsers).
 
 ```shell
 npm install playwright playwright-ghost
+npx playwright install
 ```
 
 `playwright-ghost` can also be used with
@@ -46,6 +47,7 @@ npm install playwright playwright-ghost
 
 ```shell
 npm install patchright playwright-ghost
+npx patchright install chromium
 ```
 
 ## Use
@@ -370,7 +372,8 @@ const browser = await chromium.launch({
 
 ### Pass
 
-This 27 anti-bots don't detect Playwright-ghost:
+This 30 anti-bots don't detect Playwright-ghost:
+[2Captcha Cloudflare Turnstile demo](https://2captcha.com/demo/cloudflare-turnstile),
 [Anubis](https://anubis.techaro.lol),
 [Bing](https://www.bing.com/turing/captcha/challenge),
 [bounty-nodejs](https://bounty-nodejs.datashield.co/),
@@ -379,7 +382,6 @@ This 27 anti-bots don't detect Playwright-ghost:
 [Chromedriver Detector](https://hmaker.github.io/selenium-detector/),
 [CSSWAF](https://github.com/yzqzss/csswaf),
 [Detect CDP](https://bypassantibot.github.io/detectCDP/),
-[detectIncognito](https://detectincognito.com/),
 [Deviceandbrowserinfo](https://deviceandbrowserinfo.com/are_you_a_bot),
 [Device Info](https://www.deviceinfo.me/),
 [devtools-detector](https://blog.aepkill.com/demos/devtools-detector/),
@@ -396,8 +398,10 @@ This 27 anti-bots don't detect Playwright-ghost:
 [Pixelscan](https://pixelscan.net/fingerprint-check),
 [rebrowser-bot-detector](https://bot-detector.rebrowser.net/),
 [Antibot (Sannysoft)](https://bot.sannysoft.com/),
-[Simple Service Workers Fingerprinting Leaks Test](https://mihneamanolache.github.io/simple-sw-test/)
-and
+[Score detector (reCAPTCHA v3)](https://antcpt.com/score_detector/),
+[Simple Service Workers Fingerprinting Leaks Test](https://mihneamanolache.github.io/simple-sw-test/),
+[thumbmarkjs](https://www.thumbmarkjs.com/),
+[Turnstile Troubleshooter](https://browser-compat.turnstile.workers.dev/) and
 [Cloudflare turnstile demo](https://peet.ws/turnstile-test/non-interactive.html).
 
 To find out which plugins are used, see the
@@ -408,7 +412,8 @@ To find out which plugins are used, see the
 This 2 anti-bots detect Playwright-ghost:
 
 - [CreepJS](https://abrahamjuliot.github.io/creepjs/): _44% like headless_
-- [Score detector (reCAPTCHA v3)](https://antcpt.com/score_detector/): _0.3_
+- [detectIncognito](https://detectincognito.com/): _You are using Chrome in an
+  incognito Window._
 
 Contributions are welcome to fix these defects.
 
@@ -444,8 +449,8 @@ export default function rickrollPlugin() {
       ];
     },
 
-    "BrowserContext.newPage:after": (page) => {
-      page.addInitScript(() => {
+    "BrowserContext.newPage:after": async (page) => {
+      await page.addInitScript(() => {
         // Execute script only in main frame.
         if (window !== top) {
           return;

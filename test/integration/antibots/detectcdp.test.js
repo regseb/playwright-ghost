@@ -32,7 +32,7 @@ describe("Anti-bot: Detect CDP", () => {
                 });
                 await fs.writeFile(
                     "./log/detectcdp-cr.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();
@@ -60,7 +60,7 @@ describe("Anti-bot: Detect CDP", () => {
                 });
                 await fs.writeFile(
                     "./log/detectcdp-fx.html",
-                    await page.content(),
+                    await page.content({ includeShadow: true }),
                 );
 
                 await context.close();

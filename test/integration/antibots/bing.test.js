@@ -13,6 +13,13 @@ import plugins from "../../../src/plugins/index.js";
  * @import { Frame } from "patchright";
  */
 
+/**
+ * Chemin SVG de la coche de validation du challenge Cloudflare.
+ *
+ * @type {string}
+ */
+const CHECK_MARK_PATH = "m13,26l9.37,9l17.63,-18";
+
 const getUserAgent = async () => {
     const browser = await patchright.chromium.launch({
         plugins: plugins.recommended(),
@@ -50,13 +57,16 @@ describe("Anti-bot: Bing", () => {
                 );
                 await frame.locator('input[type="checkbox"]').check();
 
-                await frame.locator("#success").waitFor({ state: "visible" });
+                await frame.locator(`path[d="${CHECK_MARK_PATH}"]`).waitFor();
             } finally {
                 await page.screenshot({
                     path: "./log/bing-cr.png",
                     fullPage: true,
                 });
-                await fs.writeFile("./log/bing-cr.html", await page.content());
+                await fs.writeFile(
+                    "./log/bing-cr.html",
+                    await page.content({ includeShadow: true }),
+                );
 
                 await context.close();
                 await browser.close();
