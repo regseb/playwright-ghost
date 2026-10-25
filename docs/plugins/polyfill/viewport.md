@@ -4,14 +4,14 @@
 >
 > This plugin is enabled in the ⭐️ [`recommended`](../recommended.md).
 
-Vary viewport size with random values between 1000x500 and 1800x800.
+Vary viewport size with random values between 1100x500 and 1800x800.
 
 ## Options
 
 This plugin supports the following options:
 
 - `width`:
-  - `min` (default `1000`): Minimum viewport width.
+  - `min` (default `1100`): Minimum viewport width.
   - `max` (default `1800`): Maximum viewport width.
 - `height`:
   - `min` (default `500`): Minimum viewport height.

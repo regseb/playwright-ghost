@@ -54,7 +54,7 @@ const setViewport = (options, width, height) => {
 /**
  * Crée un plugin pour faire varier la taille de la zone d'affichage du
  * navigateur. Par défaut les valeurs sont prises aléatoirement entre
- * _1000x500_ et _1800x800_.
+ * _1100x500_ et _1800x800_.
  *
  * @param {PolyfillViewportOptions} [options] Les éventuelles options du plugin
  *                                            `polyfill.viewport`.
@@ -62,7 +62,7 @@ const setViewport = (options, width, height) => {
  */
 export default function polyfillViewportPlugin(options) {
     const width = {
-        min: options?.width?.min ?? 1000,
+        min: options?.width?.min ?? 1100,
         max: options?.width?.max ?? 1800,
     };
     const height = {

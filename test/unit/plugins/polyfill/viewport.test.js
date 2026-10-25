@@ -40,7 +40,7 @@ describe("plugins/polyfill/viewport.js", () => {
                 assert.equal(randomInt.mock.callCount(), 2);
                 assert.deepEqual(
                     randomInt.mock.calls[0].arguments,
-                    [1000, 1800],
+                    [1100, 1800],
                 );
                 assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 800]);
             });
@@ -70,7 +70,7 @@ describe("plugins/polyfill/viewport.js", () => {
                 assert.equal(randomInt.mock.callCount(), 2);
                 assert.deepEqual(
                     randomInt.mock.calls[0].arguments,
-                    [1000, 1800],
+                    [1100, 1800],
                 );
                 assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 800]);
             });
@@ -100,7 +100,7 @@ describe("plugins/polyfill/viewport.js", () => {
                 assert.equal(randomInt.mock.callCount(), 2);
                 assert.deepEqual(
                     randomInt.mock.calls[0].arguments,
-                    [1000, 1800],
+                    [1100, 1800],
                 );
                 assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 800]);
             });
@@ -124,7 +124,7 @@ describe("plugins/polyfill/viewport.js", () => {
                 assert.equal(randomInt.mock.callCount(), 2);
                 assert.deepEqual(
                     randomInt.mock.calls[0].arguments,
-                    [1000, 1800],
+                    [1100, 1800],
                 );
                 assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 800]);
             });
@@ -188,7 +188,7 @@ describe("plugins/polyfill/viewport.js", () => {
                 assert.equal(randomInt.mock.callCount(), 2);
                 assert.deepEqual(
                     randomInt.mock.calls[0].arguments,
-                    [1000, 1800],
+                    [1100, 1800],
                 );
                 assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 800]);
             });
@@ -216,7 +216,7 @@ describe("plugins/polyfill/viewport.js", () => {
                 assert.equal(randomInt.mock.callCount(), 2);
                 assert.deepEqual(
                     randomInt.mock.calls[0].arguments,
-                    [1000, 1800],
+                    [1100, 1800],
                 );
                 assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 800]);
             });
@@ -244,7 +244,7 @@ describe("plugins/polyfill/viewport.js", () => {
                 assert.equal(randomInt.mock.callCount(), 2);
                 assert.deepEqual(
                     randomInt.mock.calls[0].arguments,
-                    [1000, 1800],
+                    [1100, 1800],
                 );
                 assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 800]);
             });
@@ -265,7 +265,7 @@ describe("plugins/polyfill/viewport.js", () => {
                 assert.equal(randomInt.mock.callCount(), 2);
                 assert.deepEqual(
                     randomInt.mock.calls[0].arguments,
-                    [1000, 1800],
+                    [1100, 1800],
                 );
                 assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 800]);
             });
@@ -327,7 +327,7 @@ describe("plugins/polyfill/viewport.js", () => {
                 assert.equal(randomInt.mock.callCount(), 2);
                 assert.deepEqual(
                     randomInt.mock.calls[0].arguments,
-                    [1000, 1800],
+                    [1100, 1800],
                 );
                 assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 800]);
             });
@@ -355,7 +355,7 @@ describe("plugins/polyfill/viewport.js", () => {
                 assert.equal(randomInt.mock.callCount(), 2);
                 assert.deepEqual(
                     randomInt.mock.calls[0].arguments,
-                    [1000, 1800],
+                    [1100, 1800],
                 );
                 assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 800]);
             });
@@ -383,7 +383,7 @@ describe("plugins/polyfill/viewport.js", () => {
                 assert.equal(randomInt.mock.callCount(), 2);
                 assert.deepEqual(
                     randomInt.mock.calls[0].arguments,
-                    [1000, 1800],
+                    [1100, 1800],
                 );
                 assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 800]);
             });
@@ -404,7 +404,7 @@ describe("plugins/polyfill/viewport.js", () => {
                 assert.equal(randomInt.mock.callCount(), 2);
                 assert.deepEqual(
                     randomInt.mock.calls[0].arguments,
-                    [1000, 1800],
+                    [1100, 1800],
                 );
                 assert.deepEqual(randomInt.mock.calls[1].arguments, [500, 800]);
             });
